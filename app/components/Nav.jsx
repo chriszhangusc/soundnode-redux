@@ -6,9 +6,8 @@ const Nav = (props) => {
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li className="menu-text">React Time App</li>
-          <li><IndexLink to="/" activeClassName="active-link">Timer</IndexLink></li>
-          <li><IndexLink to="/countdown" activeClassName="active-link">Countdown</IndexLink></li>
+          <li className="menu-text">React Todo App</li>
+          <li><IndexLink to="/" activeClassName="active-link">Todo</IndexLink></li>
         </ul>
       </div>
       <div className="top-bar-right">
