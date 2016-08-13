@@ -17,7 +17,7 @@ const TodoList = React.createClass({
 
     return (
       <div>
-        { renderTodos() }
+          { renderTodos() }
       </div>
     );
   }
