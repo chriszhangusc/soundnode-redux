@@ -1,0 +1,31 @@
+.todo {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  padding: 1rem;
+  // Hover transition
+  transition: background .7s ease;
+
+  p, input {
+    margin: 0;
+  }
+  // Checkbox
+  > :first-child {
+    margin-right: 1rem;
+  }
+//  equals to .todo:hover
+  &:hover {
+    background: #f0f0f0;
+  }
+}
+
+.todo__subtext {
+  color: #999;
+}
+
+.todo-completed {
+  p, .todo-subtext {
+    color: $light-color;
+    text-decoration: line-through;
+  }
+}
