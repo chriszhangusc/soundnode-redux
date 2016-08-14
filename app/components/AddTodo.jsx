@@ -9,11 +9,10 @@ const AddTodo = React.createClass({
     const todoText = this.refs.todoText.value;
     if (todoText.length > 0) {
       this.refs.todoText.value = '';
-      this.props.handleAddTodo(text);
+      this.props.handleAddTodo(todoText);
     } else {
       this.refs.todoText.focus();
     }
-    this.props.handleAddTodo(todoText);
   },
   render: function () {
     return (
