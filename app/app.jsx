@@ -8,16 +8,22 @@ const actions = require('actions');
 const store = require('configureStore').configure();
 const { Provider } = require('react-redux');
 // Equals to var Route = require('react-router').Route ....
-const TodoAPI = require('TodoAPI');
-// Listen changes on our store
-store.subscribe(() => {
-  const state = store.getState();
-  console.log('New state', store.getState());
-  TodoAPI.setTodos(state.todos);
-});
+// const TodoAPI = require('TodoAPI');
 
-const initialTodos = TodoAPI.getTodos();
-store.dispatch(actions.addTodos(initialTodos));
+// import './../playground/firebase/index';
+
+// Listen changes on our store
+// store.subscribe(() => {
+//   const state = store.getState();
+//   console.log('New state', store.getState());
+//   TodoAPI.setTodos(state.todos);
+// });
+
+// const initialTodos = TodoAPI.getTodos();
+// store.dispatch(actions.addTodos(initialTodos));
+
+// Fetch data from firebase
+store.dispatch(actions.startAddTodos());
 
 // Load Foundation
 // style loader, css loader
