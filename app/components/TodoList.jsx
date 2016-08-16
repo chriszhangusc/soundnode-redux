@@ -1,19 +1,21 @@
 const React = require('react');
-const TodoItem = require('TodoItem');
-const TodoList = React.createClass({
-  propTypes: {
-    todos: React.PropTypes.array.isRequired,
-    onToggle: React.PropTypes.func.isRequired,
-  },
+// const TodoItem = require('TodoItem');
+import TodoItem from 'TodoItem';
+const { connect } = require('react-redux');
+const TodoAPI = require('TodoAPI');
+
+export const TodoList = React.createClass({
+
   render: function () {
-    const {todos, onToggle} = this.props;
+    const { todos, showCompleted, searchText } = this.props;
     const renderTodos = () => {
       if (todos.length === 0) {
         return <p className="container__message">Nothing to do</p>;
       }
-      return todos.map((todo) => {
+
+      return TodoAPI.filterTodos(todos, showCompleted, searchText).map((todo) => {
         return (
-          <TodoItem key={todo.id} todo={todo} onToggle={onToggle}/>
+          <TodoItem key={todo.id} {...todo} />
         );
       });
     };
@@ -26,4 +28,11 @@ const TodoList = React.createClass({
   }
 });
 
-module.exports = TodoList;
+const mapStateToProps = (state) => {
+  return state;
+}
+
+// Specify what data TodoList is going to need.
+export default connect(
+  mapStateToProps
+)(TodoList);

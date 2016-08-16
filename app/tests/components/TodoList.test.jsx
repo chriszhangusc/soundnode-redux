@@ -4,8 +4,8 @@ const TestUtils = require('react-addons-test-utils');
 const expect = require('expect');
 const $ = require('jQuery');
 
-const TodoList = require('TodoList');
-const TodoItem = require('TodoItem');
+const { TodoList } = require('TodoList');
+const { TodoItem } = require('TodoItem');
 
 describe('TodoList', () => {
   it('should exist', () => {

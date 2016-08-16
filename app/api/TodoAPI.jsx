@@ -27,10 +27,11 @@ module.exports = {
   },
 
   // Take a set of array filter it and return a subset of it.
+  // Should have add an argument to specify case sensetivity
   filterTodos: function (todos, showCompleted, searchText) {
 
     let filtered = todos.filter(function (todo) {
-      let match = todo.text.toLowerCase().includes(searchText);
+      let match = todo.text.toLowerCase().includes(searchText.toLowerCase());
 
       return showCompleted ? match : match && !todo.completed;
     });
