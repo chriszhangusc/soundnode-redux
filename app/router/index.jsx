@@ -3,7 +3,7 @@ import {Route, Router, IndexRoute, hashHistory} from 'react-router';
 const Main = require('Main');
 import TodoApp from 'TodoApp';
 import Login from 'Login';
-import firebase from 'firebase';
+import firebase from '../firebase/index.js';
 
 var requireLogin = (nextState, replace, next) => {
   if (!firebase.auth().currentUser) {

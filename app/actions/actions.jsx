@@ -1,4 +1,4 @@
-import firebase, {firebaseRef, githubProvider} from 'firebase';
+import firebase, {firebaseRef, githubProvider} from '../firebase/index.js';
 import moment from 'moment';
 
 

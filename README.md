@@ -5,4 +5,4 @@
 # In webpack.config.js modulesDirectories tells webpack to look for modules and create alias for those modules in these folders.
 
 
-use heroku config:set command to set all environment variables
+#use heroku 'config:set KEY=VALUE' command to set all environment variables
