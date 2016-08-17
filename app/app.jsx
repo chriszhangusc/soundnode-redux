@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const Main = require('Main');
+
 //ES6 destructuring
 const {hashHistory } = require('react-router');
 const actions = require('actions');
@@ -26,15 +26,18 @@ import router from 'app/router';
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // Logged in
+    store.dispatch(actions.login(user.uid));
+    store.dispatch(actions.startAddTodos());
     hashHistory.push('/todos');
   } else {
     // Logged out
+    store.dispatch(actions.logout());
     hashHistory.push('/');
   }
 });
 
 // Fetch data from firebase
-store.dispatch(actions.startAddTodos());
+// store.dispatch(actions.startAddTodos());
 
 // Load Foundation
 // style loader, css loader

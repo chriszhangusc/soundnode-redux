@@ -23,7 +23,8 @@ export const startAddTodos = () => {
     // 1. Send fetch all records async request to firebase
     // 2. If success, dispatch addTodos action
     let todos = [];
-    const todosRef = firebaseRef.child('todos');
+    var uid = getState().auth.uid;
+    const todosRef = firebaseRef.child(`users/${uid}/todos`);
     todosRef.once('value', (snapshot) => {
       snapshot.forEach((childSnapshot) => {
         let todo = {
@@ -50,6 +51,7 @@ export const addTodo = (todo) => {
 
 export const startAddTodo = (text) => {
   return (dispatch, getState) => {
+    var uid = getState().auth.uid;
     const todo = {
       text,
       completed: false,
@@ -57,7 +59,7 @@ export const startAddTodo = (text) => {
       completedAt: null,
     };
 
-    const todoRef = firebaseRef.child('todos').push(todo);
+    const todoRef = firebaseRef.child(`users/${uid}/todos`).push(todo);
     return todoRef.then(() => {
       dispatch(addTodo({
         ...todo,
@@ -83,8 +85,9 @@ export const updateTodo = (id, updates) => {
 
 // Async call thanks to thunk
 export const startToggleTodo = (id, completed) => {
+  var uid = getState().auth.uid;
   return (dispatch, getState) => {
-    const todoRef = firebaseRef.child(`todos/${id}`);
+    const todoRef = firebaseRef.child(`users/uid/todos/${id}`);
     const updates = {
       completed,
       completedAt: completed ? moment().unix() : null,
@@ -93,6 +96,19 @@ export const startToggleTodo = (id, completed) => {
     todoRef.update(updates).then(() => {
       dispatch(updateTodo(id, updates));
     });
+  };
+};
+
+export const login = (uid) => {
+  return {
+    type: 'LOGIN',
+    uid,
+  };
+};
+
+export const logout = () => {
+  return {
+    type: 'LOGOUT',
   };
 };
 
