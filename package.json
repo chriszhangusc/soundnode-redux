@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "npm run build && node server.js",
+    "build": "webpack",
     "test": "NODE_ENV=test karma start",
-    "build": "webpack"
   },
   "author": "AngryBugs",
   "license": "ISC",
