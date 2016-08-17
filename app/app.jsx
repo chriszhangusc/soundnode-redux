@@ -1,13 +1,13 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const Main = require('Main');
-const TodoApp = require('TodoApp');
-import Login from 'Login';
 //ES6 destructuring
-const { Route, Router, IndexRoute, hashHistory } = require('react-router');
+const {hashHistory } = require('react-router');
 const actions = require('actions');
 const store = require('configureStore').configure();
 const { Provider } = require('react-redux');
+import firebase from 'app/firebase';
+import router from 'app/router';
 // Equals to var Route = require('react-router').Route ....
 // const TodoAPI = require('TodoAPI');
 
@@ -23,6 +23,16 @@ const { Provider } = require('react-redux');
 // const initialTodos = TodoAPI.getTodos();
 // store.dispatch(actions.addTodos(initialTodos));
 
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    // Logged in
+    hashHistory.push('/todos');
+  } else {
+    // Logged out
+    hashHistory.push('/');
+  }
+});
+
 // Fetch data from firebase
 store.dispatch(actions.startAddTodos());
 
@@ -35,17 +45,13 @@ $(document).foundation();
 // App css
 require('style!css!sass!applicationStyles');
 
+
+
 // Use provider to provide our store down to the dom tree
 // so that it can be shared among all components.
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={hashHistory}>
-      <Route path="/" component={Main}>
-        <IndexRoute component={Login} />
-        <Route path="/todos" component={TodoApp} />
-      </Route>
-    </Router>
-  </Provider>
-
+<Provider store={store}>
+  {router}
+</Provider>
   , document.querySelector('#app')
 );

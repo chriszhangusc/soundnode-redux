@@ -4,7 +4,7 @@ try {
   // Initialize Firebase
   const config = {
     apiKey: process.env.API_KEY,
-    authDomain: process.env.AUTO_DOMAIN,
+    authDomain: process.env.AUTH_DOMAIN,
     databaseURL: process.env.DATABASE_URL,
     storageBucket: process.env.STORAGE_BUCKET,
   };
@@ -13,6 +13,8 @@ try {
 } catch (e) {
 
 }
+
+export var githubProvider = new firebase.auth.GithubAuthProvider();
 
 export const firebaseRef = firebase.database().ref();
 export default firebase;

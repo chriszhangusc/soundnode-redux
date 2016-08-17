@@ -3,7 +3,7 @@ var path = require('path');
 var envFile = require('node-env-file');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
+console.log(process.env.NODE_ENV);
 try {
   // load env
   envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV + '.env'));
