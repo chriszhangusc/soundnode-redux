@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const Main = require('Main');
 const TodoApp = require('TodoApp');
+import Login from 'Login';
 //ES6 destructuring
 const { Route, Router, IndexRoute, hashHistory } = require('react-router');
 const actions = require('actions');
@@ -40,7 +41,8 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={Main}>
-        <IndexRoute component={TodoApp} />
+        <IndexRoute component={Login} />
+        <Route path="/todos" component={TodoApp} />
       </Route>
     </Router>
   </Provider>
