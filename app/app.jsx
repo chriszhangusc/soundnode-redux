@@ -6,8 +6,8 @@ const {hashHistory } = require('react-router');
 const actions = require('actions');
 const store = require('configureStore').configure();
 const { Provider } = require('react-redux');
-import firebase from 'app/firebase';
-import router from 'app/router';
+import firebase from './firebase';
+import router from './router';
 // Equals to var Route = require('react-router').Route ....
 // const TodoAPI = require('TodoAPI');
 
