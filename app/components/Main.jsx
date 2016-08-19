@@ -1,12 +1,14 @@
-const React = require('react');
-const Nav = require('Nav');
+import React from 'react';
+import Nav from 'Nav';
+
 const Main = (props) => {
   return (
     <div>
       <Nav />
-      {props.children}
+      <p>React Redux Boilerplate Project</p>
+      { props.children }
     </div>
   );
 };
 
-module.exports = Main;
+export default Main;

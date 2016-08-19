@@ -1,5 +1,5 @@
-const React = require('react');
-const { Link, IndexLink } = require('react-router');
+import React from 'react';
+import { Link, IndexLink } from 'react-router';
 
 const Nav = (props) => {
   return (
@@ -17,6 +17,6 @@ const Nav = (props) => {
       </div>
     </div>
   );
-}
+};
 
-module.exports = Nav;
+export default Nav;

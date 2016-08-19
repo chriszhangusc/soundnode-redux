@@ -1,9 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
 var envFile = require('node-env-file');
-
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-console.log(process.env.NODE_ENV);
+
 try {
   // load env
   envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV + '.env'));
@@ -17,6 +16,10 @@ module.exports = {
     'script!foundation-sites/dist/foundation.min.js',
     './app/app.jsx'
   ],
+  output: {
+    path: __dirname,
+    filename: 'public/bundle.js'
+  },
   externals: {
     jquery: 'jQuery'
   },
@@ -40,10 +43,7 @@ module.exports = {
       }
     })
   ],
-  output: {
-    path: __dirname,
-    filename: 'public/bundle.js'
-  },
+
   resolve: {
     root: __dirname,
     modulesDirectories: [
@@ -69,6 +69,10 @@ module.exports = {
         },
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
       }
     ]
   },

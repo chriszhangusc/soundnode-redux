@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-todo-app",
+  "name": "react-redux-boilerplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple react redux boilerplate",
   "main": "index.js",
   "scripts": {
     "start": "npm run build && node server.js",
@@ -47,6 +47,7 @@
     "karma-mocha-reporter": "^2.1.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
-    "mocha": "^3.0.2"
+    "mocha": "^3.0.2",
+    "webpack-dev-server": "^1.14.1"
   }
 }
