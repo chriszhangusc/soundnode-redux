@@ -4,8 +4,8 @@
   "description": "Simple react redux boilerplate",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node server.js",
-    "build": "webpack",
+    "start": "npm run build && nodemon server.js",
+    "build": "webpack -w",
     "test": "NODE_ENV=test karma start"
   },
   "author": "AngryBugs",

@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Nav from 'Nav';
 
-const Main = (props) => {
-  return (
-    <div>
-      <Nav />
-      <p>React Redux Boilerplate Project</p>
-      { props.children }
-    </div>
-  );
-};
+class Main extends Component {
+  render () {
+    return (
+      <div>
+        <Nav />
+      </div>
+    );
+  }
+}
 
 export default Main;

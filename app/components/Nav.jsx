@@ -1,22 +1,22 @@
-import React from 'react';
-import { Link, IndexLink } from 'react-router';
-
-const Nav = (props) => {
-  return (
-    <div className="top-bar">
-      <div className="top-bar-left">
-        <ul className="menu">
-          <li className="menu-text">React Todo App</li>
-          <li><IndexLink to="/" activeClassName="active-link">Todo</IndexLink></li>
-        </ul>
+import React, {Component} from 'react';
+import { Link } from 'react-router';
+class Nav extends Component{
+  render () {
+    return (
+      <div className="nav">
+        <div className="container">
+          <div className="nav-nav">
+            <div className="nav-logo">
+              <i className="icon ion-radio-waves" />
+            </div>
+            <div className="nav-nav-item">
+                <a className="nav-nav-item-link active" href="/">SoundRedux</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="top-bar-right">
-        <ul className="menu">
-          <li className="menu-text">Created by <a href="#/" target="_blank">Huachao Zhang</a></li>
-        </ul>
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Nav;

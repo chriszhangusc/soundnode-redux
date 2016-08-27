@@ -8,17 +8,11 @@ import { Provider } from 'react-redux';
 
 require('applicationStyles');
 
-
-$(document).foundation();
-
 // Use provider to provide our store down to the dom tree
 // so that it can be shared among all components.
 ReactDOM.render(
 <Provider store={store}>
-  <Router history={hashHistory}>
-    <Route path="/" component={Main}>
-    </Route>
-  </Router>
+  <Main />
 </Provider>
   , document.querySelector('#app')
 );

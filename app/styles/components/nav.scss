@@ -1,0 +1,39 @@
+.nav {
+  background-color: #3a3f41;
+  height: 50px;
+}
+
+.nav-logo {
+    display: inline-block;
+    padding: 11px 0;
+    color: #fff;
+    font-size: 20px;
+    float: left;
+}
+
+.nav-nav {
+    display: table;
+    height: 100%;
+}
+
+.nav-nav-item {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.nav-nav-item-link {
+    display: inline-block;
+    margin: 10px 30px;
+    color: rgba(255,255,255, 0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &.active {
+        color: #fff;
+        text-decoration: none;
+    }
+}
