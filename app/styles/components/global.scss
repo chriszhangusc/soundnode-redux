@@ -3,9 +3,12 @@
     padding: 0;
 }
 
-.container {
-    width: 1170px;
-    margin: 0 auto;
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
 }
 
 body {
@@ -13,4 +16,32 @@ body {
     font-family: 'Open Sans';
     font-size: 14px;
     background-color: #f4f4f4;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+}
+
+* html .clearfix {
+    height: 1%;
+}
+
+.clearfix {
+    display: block;
+}
+
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
