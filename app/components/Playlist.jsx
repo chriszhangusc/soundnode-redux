@@ -1,20 +1,18 @@
 import React, {Component} from 'react';
 import Toolbar from 'Toolbar';
-import Spinner from 'Spinner';
+import SongCards from 'SongCards';
 
-class Songs extends Component {
+class Playlist extends Component {
   render () {
     return (
       <div className="songs">
         <Toolbar />
         <div className="container">
-          <div className="content">
-            <Spinner />
-          </div>
+          <SongCards />
         </div>
       </div>
     );
   }
 }
 
-export default Songs;
+export default Playlist;

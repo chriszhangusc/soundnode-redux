@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import Nav from 'Nav';
-import Songs from 'Songs';
+import Playlist from 'Playlist';
 
 class Main extends Component {
   render () {
     return (
       <div>
         <Nav />
-        <Songs />
+        <Playlist />
       </div>
     );
   }
