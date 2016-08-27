@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import Nav from 'Nav';
-import Toolbar from 'Toolbar';
+import Songs from 'Songs';
+
 class Main extends Component {
   render () {
     return (
       <div>
         <Nav />
-        <Toolbar />
+        <Songs />
       </div>
     );
   }
