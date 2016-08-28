@@ -14,7 +14,7 @@ module.exports = {
   entry: [
     'script!jquery/dist/jquery.min.js',
     'script!foundation-sites/dist/foundation.min.js',
-    './app/app.jsx'
+    './scripts/index.jsx'
   ],
   output: {
     path: __dirname,
@@ -48,15 +48,16 @@ module.exports = {
     root: __dirname,
     modulesDirectories: [
       'node_modules',
-      './app/components',
-      './app/containers',
-      './app/api',
-      './app/actions',
-      './app/reducers',
-      './app/store'
+      './scripts/components',
+      './scripts/containers',
+      './scripts/constants',
+      './scripts/api',
+      './scripts/actions',
+      './scripts/reducers',
+      './scripts/store'
     ],
     alias: {
-      applicationStyles: 'app/styles/app.scss',
+      applicationStyles: 'scripts/styles/app.scss',
     },
     extensions: ['', '.js', '.jsx', 'stage-0']
   },

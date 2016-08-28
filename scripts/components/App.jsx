@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import Nav from 'Nav';
-import Playlist from 'Playlist';
 
-class Main extends Component {
+class App extends Component {
   render () {
     return (
       <div>
         <Nav />
-        <Playlist />
+        {this.props.children}
       </div>
     );
   }
 }
 
-export default Main;
+export default App;
