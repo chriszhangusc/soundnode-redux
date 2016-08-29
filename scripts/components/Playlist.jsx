@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {GENRES} from '../constants/SongConstants';
 import Spinner from './Spinner';
 import {fetchSongsByGenre} from '../actions/playlists.js';
+
 // Container
 class Playlist extends Component {
 
@@ -26,21 +27,18 @@ class Playlist extends Component {
     }
   }
 
-  // handleOnClick(genre) {
-  //   // Fire an action to change the current genre and fetch songs related to that genre
-  //   const {dispatch, playlists} = this.props;
-  //   dispatch(fetchSongsByGenre(this.props.params.genre));
-  // }
-
   renderPlaylist() {
     const { playlists } = this.props;
     const genre = this.props.params.genre;
-    if ((genre in playlists) && playlists[genre].isFetching) {
+    if (!(genre in playlists)) {
+      return;
+    }
+    if (playlists[genre].isFetching) {
       return <Spinner />;
     } else {
       return (
         <div className="container">
-          <SongCards />
+          <SongCards playlists={playlists} genre={genre}/>
         </div>
       );
     }

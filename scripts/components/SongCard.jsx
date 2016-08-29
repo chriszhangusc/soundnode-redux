@@ -5,22 +5,25 @@ class SongCard extends Component {
   }
 
   render() {
-    let image = 'https://i1.sndcdn.com/artworks-000086872057-k6h2xo-t300x300.jpg';
+    const {song} = this.props;
+    console.log(song.artwork_url);
+    let imageUrl = song.artwork_url ? song.artwork_url.replace('large', 't300x300') : '';
+
     return (
       <div className="card song-card">
-        <div className="song-card-image" style={{ backgroundImage: `url(${image})` }}>
+        <div className="song-card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
         </div>
         <div className="song-card-user clearfix">
           <img
             className="song-card-user-image"
-            src={"https://i1.sndcdn.com/avatars-000199251026-3etsd7-large.jpg"}
+            src={song.avatar_url}
           />
           <div className="song-card-details">
             <a className="song-card-title">
-              Fight
+              {song.title}
             </a>
             <a className="song-card-user-username">
-              Monster Cat
+              {song.user.username}
             </a>
           </div>
         </div>
