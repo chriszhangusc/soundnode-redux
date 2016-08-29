@@ -15,7 +15,7 @@ class SongCard extends Component {
         <div className="song-card-user clearfix">
           <img
             className="song-card-user-image"
-            src={song.avatar_url}
+            src={song.user.avatar_url}
           />
           <div className="song-card-details">
             <a className="song-card-title">
