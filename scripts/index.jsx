@@ -5,7 +5,6 @@ import App from 'App';
 import {Router, Route, IndexRoute, hashHistory } from 'react-router';
 const store = require('configureStore').configure();
 import { Provider } from 'react-redux';
-import Playlist from 'Playlist';
 import routes from './router/index';
 require('applicationStyles');
 

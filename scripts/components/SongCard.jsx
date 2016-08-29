@@ -6,7 +6,6 @@ class SongCard extends Component {
 
   render() {
     const {song} = this.props;
-    console.log(song.artwork_url);
     let imageUrl = song.artwork_url ? song.artwork_url.replace('large', 't300x300') : '';
 
     return (

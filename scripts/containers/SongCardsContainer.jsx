@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import Toolbar from 'Toolbar';
-import SongCards from 'SongCards';
+import Toolbar from '../components/Toolbar';
+import SongCards from '../components/SongCards';
 import {connect} from 'react-redux';
 import {GENRES} from '../constants/SongConstants';
-import Spinner from './Spinner';
-import {fetchSongsByGenre} from '../actions/playlists.js';
+import Spinner from '../components/Spinner';
+import {fetchSongsByGenre} from '../actions/playlists';
 
-// Container
-class Playlist extends Component {
+// Main container
+class SongCardsContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -60,4 +60,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Playlist);
+export default connect(mapStateToProps)(SongCardsContainer);

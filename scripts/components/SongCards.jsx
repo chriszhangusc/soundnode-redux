@@ -10,15 +10,31 @@ class SongCards extends Component {
 
   renderSongCards() {
     const {genre, playlists} = this.props;
+    let rows = [];
     if (genre in playlists) {
-      return playlists[genre].songs.map((song, i) => {
-        return (
-          <div className="col-1-5 clearfix" key={i}>
-              <SongCard song={song} />
+      // Five cols a row
+      const COLS = 5;
+      const songs = playlists[genre].songs;
+
+      for (let i = 0; i < songs.length; i += COLS) {
+        let rowItems = songs.slice(i, i + COLS);
+        let row = (
+          <div className="songs-row grid" key={i}>
+            {
+              rowItems.map((song, i) => {
+                return (
+                  <div className="col-1-5 clearfix" key={i}>
+                    <SongCard song={song} key={song.id}/>
+                  </div>
+                );
+              })
+            }
           </div>
         );
-      });
+        rows.push(row);
+      }
     }
+    return rows;
   }
 
   render() {
@@ -26,9 +42,7 @@ class SongCards extends Component {
 
     return (
       <div className="content">
-        <div className="songs-row grid">
-          {this.renderSongCards()}
-        </div>
+        {this.renderSongCards()}
       </div>
     );
   }
