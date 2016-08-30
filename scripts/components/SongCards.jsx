@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SongCard from '../components/SongCard';
-import Spinner from 'Spinner';
+import Spinner from './Spinner';
+import infiniteScroll from './InfiniteScroll';
 
 class SongCards extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class SongCards extends Component {
   renderSongCards() {
     const {genre, playlists} = this.props;
     let rows = [];
-    if (genre in playlists) {
+
       // Five cols a row
       const COLS = 5;
       const songs = playlists[genre].songs;
@@ -33,7 +34,6 @@ class SongCards extends Component {
         );
         rows.push(row);
       }
-    }
     return rows;
   }
 
@@ -48,4 +48,4 @@ class SongCards extends Component {
   }
 }
 
-export default SongCards;
+export default infiniteScroll(SongCards);

@@ -5,14 +5,14 @@ import App from 'App';
 import {Router, Route, IndexRoute, hashHistory } from 'react-router';
 const store = require('configureStore').configure();
 import { Provider } from 'react-redux';
-import routes from './router/index';
+import configureRoutes from './router/index';
 require('applicationStyles');
 
 // Use provider to provide our store down to the dom tree
 // so that it can be shared among all components.
 ReactDOM.render(
 <Provider store={store}>
-  {routes}
+  {configureRoutes(store)}
 </Provider>
   , document.querySelector('#app')
 );

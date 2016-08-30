@@ -1,20 +1,42 @@
 import axios from 'axios';
 import * as types from '../constants/ActionTypes';
+import {generateFetchUrl} from '../api/SongAPIs';
 
-export const fetchSongsByGenre = (genre) => {
-  const TEST_URL = `https://api.soundcloud.com/tracks?tags=${genre}&linked_partitioning=1&client_id=f4323c6f7c0cd73d2d786a2b1cdae80c&offset=5&limit=50`;
+export const fetchSongsIfNeeded = (genre, playlists) => {
   return (dispatch, getState) => {
-    // Start fetching
-    dispatch(requestSongs(genre));
-
-    axios.get(TEST_URL).then((response) => {
-
-      // We got something as response.data
-      dispatch(receiveSongs(genre, response.data.collection));
-    }).catch((error) => {
-      console.log(error);
-    });
+    // Initial fetch genre not cached yet so our playlists cache will not have property genre
+    if (shouldFetchSongs(genre, playlists)) {
+        const url = playlists.nextUrl || generateFetchUrl(genre);
+        console.log(url);
+      // Start fetching
+      dispatch(requestSongs(genre));
+      axios.get(url).then((response) => {
+        // We got something as response.data
+        dispatch(receiveSongs(genre, response.data.collection, response.data.next_href));
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
   };
+};
+
+// Come back at you later bitch
+// const fetchSongsByGenre = (genre) => {
+//     const url = generateFetchUrl(genre);
+//     // Start fetching
+//     dispatch(requestSongs(genre));
+//     axios.get(url).then((response) => {
+//       // We got something as response.data
+//       dispatch(receiveSongs(genre, response.data.collection));
+//     }).catch((error) => {
+//       console.log(error);
+//     });
+// };
+
+const shouldFetchSongs = (genre, playlists) => {
+  // 1. If there is no songs of this genre cached in store, go ahead and fetch data.
+  // 2. Fetch if current genre is not fetching and nextUrl is valid
+  return !(genre in playlists) || (!playlists[genre].isFetching);
 };
 
 export const requestSongs = (genre) => {
@@ -24,10 +46,11 @@ export const requestSongs = (genre) => {
   };
 };
 
-export const receiveSongs = (genre, songs) => {
+export const receiveSongs = (genre, songs, nextUrl) => {
   return {
     type: types.RECEIVE_SONGS,
     genre,
     songs,
+    nextUrl,
   };
 };

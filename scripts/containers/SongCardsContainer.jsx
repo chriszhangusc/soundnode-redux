@@ -4,7 +4,7 @@ import SongCards from '../components/SongCards';
 import {connect} from 'react-redux';
 import {GENRES} from '../constants/SongConstants';
 import Spinner from '../components/Spinner';
-import {fetchSongsByGenre} from '../actions/playlists';
+import {fetchSongsIfNeeded} from '../actions/playlists';
 
 // Main container
 class SongCardsContainer extends Component {
@@ -14,21 +14,8 @@ class SongCardsContainer extends Component {
     this.renderPlaylist = this.renderPlaylist.bind(this);
   }
 
-  componentWillMount() {
-    const {dispatch, playlists} = this.props;
-    dispatch(fetchSongsByGenre(this.props.params.genre));
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const genre = nextProps.params.genre;
-    const {dispatch, playlists} = this.props;
-    if (!(genre in playlists)) {
-        dispatch(fetchSongsByGenre(genre));
-    }
-  }
-
   renderPlaylist() {
-    const { playlists } = this.props;
+    const { playlists, dispatch } = this.props;
     const genre = this.props.params.genre;
     if (!(genre in playlists)) {
       return;
@@ -38,7 +25,10 @@ class SongCardsContainer extends Component {
     } else {
       return (
         <div className="container">
-          <SongCards playlists={playlists} genre={genre}/>
+          <SongCards playlists={playlists} genre={genre} dispatch={dispatch} scrollFunc={() => {
+              dispatch(fetchSongsIfNeeded(genre, playlists));
+              console.log('bottom reached');
+            }}/>
         </div>
       );
     }

@@ -4,6 +4,7 @@ import * as types from '../constants/ActionTypes';
 const PLAYLIST_INITIAL_STATE = {
   isFetching: false,
   songs: [],
+  nextUrl: null,
 };
 
 const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
@@ -17,6 +18,7 @@ const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
+        nextUrl: action.nextUrl, 
         songs: [...state.songs, ...action.songs],
       };
     default:
