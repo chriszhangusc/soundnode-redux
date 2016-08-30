@@ -26,7 +26,8 @@ class SongCardsContainer extends Component {
       return (
         <div className="container">
           <SongCards playlists={playlists} genre={genre} dispatch={dispatch} scrollFunc={() => {
-              dispatch(fetchSongsIfNeeded(genre, playlists));
+              // console.log(playlists);
+              // dispatch(fetchSongsIfNeeded(genre, playlists));
               console.log('bottom reached');
             }}/>
         </div>

@@ -6,8 +6,14 @@ export const fetchSongsIfNeeded = (genre, playlists) => {
   return (dispatch, getState) => {
     // Initial fetch genre not cached yet so our playlists cache will not have property genre
     if (shouldFetchSongs(genre, playlists)) {
-        const url = playlists.nextUrl || generateFetchUrl(genre);
-        console.log(url);
+      let url = '';
+      if (genre in playlists && playlists[genre].nextUrl === null) {
+        url = playlists[genre].nextUrl
+      } else {
+        url = generateFetchUrl(genre);
+      }
+
+      // console.log(url);
       // Start fetching
       dispatch(requestSongs(genre));
       axios.get(url).then((response) => {
@@ -36,7 +42,7 @@ export const fetchSongsIfNeeded = (genre, playlists) => {
 const shouldFetchSongs = (genre, playlists) => {
   // 1. If there is no songs of this genre cached in store, go ahead and fetch data.
   // 2. Fetch if current genre is not fetching and nextUrl is valid
-  return !(genre in playlists) || (!playlists[genre].isFetching);
+  return !(genre in playlists);
 };
 
 export const requestSongs = (genre) => {
