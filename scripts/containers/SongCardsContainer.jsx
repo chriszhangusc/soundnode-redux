@@ -19,16 +19,14 @@ class SongCardsContainer extends Component {
   renderPlaylist() {
     const { playlists, dispatch } = this.props;
     const genre = this.props.params.genre;
-    if (playlists[genre].isFetching) {
-      return <Spinner />;
-    } else {
-      // Bind function params
-      return (
-        <div className="container">
-          <SongCards playlists={playlists} genre={genre} dispatch={dispatch} scrollFunc={fetchSongsOnScroll.bind(null, genre, playlists)} />
-        </div>
-      );
-    }
+    const isFetching = playlists[genre].isFetching;
+    return (
+      <div className="container">
+        <SongCards playlists={playlists} genre={genre} dispatch={dispatch} scrollFunc={fetchSongsOnScroll.bind(null, genre, playlists)} />
+        {isFetching ? <Spinner /> : null}
+    </div>
+
+    );
   }
 
   render () {
