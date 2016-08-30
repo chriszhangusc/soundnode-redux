@@ -3,14 +3,14 @@ import {Route, Router, IndexRoute, IndexRedirect, hashHistory} from 'react-route
 import App from 'App';
 import SongCardsContainer from '../containers/SongCardsContainer';
 import {GENRES, DEFAULT_GENRE} from '../constants/SongConstants';
-import {fetchSongsIfNeeded} from '../actions/playlists';
+import {fetchSongsOnLoad} from '../actions/playlists';
 
 const configureRoutes = (store) => {
 
   const onEnterHandler = (nextState) => {
     const genre = nextState.params.genre;
     const playlists = store.getState().playlists;
-    store.dispatch(fetchSongsIfNeeded(genre, playlists));
+    store.dispatch(fetchSongsOnLoad(genre, playlists));
   };
 
   return (

@@ -19,8 +19,7 @@ export default function (InnerComponent) {
     onScroll() {
       if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight) + 50) {
         const { dispatch, scrollFunc } = this.props;
-        // dispatch(scrollFunc());
-        scrollFunc();
+        dispatch(scrollFunc());
       }
     }
 

@@ -18,7 +18,7 @@ const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
-        nextUrl: action.nextUrl, 
+        nextUrl: action.nextUrl,
         songs: [...state.songs, ...action.songs],
       };
     default:

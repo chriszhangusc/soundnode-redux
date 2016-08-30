@@ -11,6 +11,9 @@ class SongCard extends Component {
     return (
       <div className="card song-card">
         <div className="song-card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
+          <div className="toggle-play-button" >
+            <i className="toggle-play-button-icon ion-ios-play" />
+        </div>
         </div>
         <div className="song-card-user clearfix">
           <img

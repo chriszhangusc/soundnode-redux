@@ -2,17 +2,13 @@ import axios from 'axios';
 import * as types from '../constants/ActionTypes';
 import {generateFetchUrl} from '../api/SongAPIs';
 
-export const fetchSongsIfNeeded = (genre, playlists) => {
+// Responsible for initial fetching of a genre
+export const fetchSongsOnLoad = (genre, playlists) => {
   return (dispatch, getState) => {
     // Initial fetch genre not cached yet so our playlists cache will not have property genre
     if (shouldFetchSongs(genre, playlists)) {
-      let url = '';
-      if (genre in playlists && playlists[genre].nextUrl === null) {
-        url = playlists[genre].nextUrl
-      } else {
-        url = generateFetchUrl(genre);
-      }
 
+      const url = generateFetchUrl(genre);
       // console.log(url);
       // Start fetching
       dispatch(requestSongs(genre));
@@ -25,6 +21,24 @@ export const fetchSongsIfNeeded = (genre, playlists) => {
     }
   };
 };
+
+// Responsible for fetching songs on scrolling page to the bottom
+export const fetchSongsOnScroll = (genre, playlists) => {
+  return (dispatch, getState) => {
+    
+    if (genre in playlists && !playlists[genre].isFetching && playlists[genre].nextUrl !== null) {
+      const url = playlists[genre].nextUrl;
+
+      dispatch(requestSongs(genre));
+      axios.get(url).then((response) => {
+        // We got something as response.data
+        dispatch(receiveSongs(genre, response.data.collection, response.data.next_href));
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+  };
+}
 
 // Come back at you later bitch
 // const fetchSongsByGenre = (genre) => {
