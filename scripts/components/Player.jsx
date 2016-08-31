@@ -1,6 +1,33 @@
 import React, {Component} from 'react';
-
+import ReactDOM from 'react-dom';
+import {CLIENT_ID} from '../constants/Config';
+import {playSong, pauseSong} from '../actions/activeSong';
 class Player extends Component {
+
+  constructor(props) {
+    super(props);
+    this.renderDurationBar = this.renderDurationBar.bind(this);
+    this.play = this.play.bind(this);
+    this.renderPlayPauseButton = this.renderPlayPauseButton.bind(this);
+  }
+
+  componentDidMount () {
+    const {activeSong} = this.props;
+    if (activeSong.isPlaying) {
+        this.play();
+    } else {
+      this.pause();
+    }
+  }
+
+  componentDidUpdate () {
+    const {activeSong} = this.props;
+    if (activeSong.isPlaying) {
+        this.play();
+    } else {
+      this.pause();
+    }
+  }
 
   renderDurationBar () {
     let width = 40;
@@ -11,10 +38,37 @@ class Player extends Component {
     );
   }
 
+  renderPlayPauseButton () {
+    const {activeSong, playSong, pauseSong} = this.props;
+    return (
+      <div className="player-button">
+        <i
+          className={activeSong.isPlaying ? 'icon ion-ios-pause' : 'icon ion-ios-play'}
+          onClick={activeSong.isPlaying ? pauseSong : playSong}
+          />
+      </div>
+    );
+  }
+
+  pause() {
+    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+    audioElement.pause();
+  }
+
+  play() {
+    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+    audioElement.play();
+  }
+
   render () {
+
+    // Currently playing song
+    const {activeSong} = this.props;
+
+    const streamUrl = `${activeSong.song.stream_url}?client_id=${CLIENT_ID}`;
     return (
       <div className="player">
-        <audio id="audio" ref="audio" />
+        <audio id="audio" ref="audio" src={streamUrl}/>
         <div className="container">
           <div className="player-main">
             <div className="player-section player-info">
@@ -24,9 +78,7 @@ class Player extends Component {
               <div className="player-button">
                 <i className="icon ion-ios-rewind" />
               </div>
-              <div className="player-button">
-                <i className="icon ion-ios-play" />
-              </div>
+              {this.renderPlayPauseButton()}
               <div className="player-button" >
                 <i className="icon ion-ios-fastforward" />
               </div>

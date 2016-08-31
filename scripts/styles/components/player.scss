@@ -1,4 +1,5 @@
 .player {
+    // Fix it on bottom left.
     position: fixed;
     left: 0;
     bottom: 0;
@@ -8,7 +9,7 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    z-index: 999;
+    z-index: 999; // Make sure it is always on top
 
     .song-card-details {
         overflow: hidden;

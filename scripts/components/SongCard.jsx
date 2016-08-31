@@ -1,10 +1,16 @@
 import React, { Component} from 'react';
 
 class SongCard extends Component {
+
+  constructor (props) {
+    super(props);
+    this.renderTogglePlayButton = this.renderTogglePlayButton.bind(this);
+  }
+
   renderTogglePlayButton() {
-    const {playSong} = this.props;
+    const {handlePlaySong, song} = this.props;
     return (
-      <div className="toggle-play-button" onClick={playSong}>
+      <div className="toggle-play-button" onClick={handlePlaySong.bind(null, song)}>
         <i className="toggle-play-button-icon ion-ios-play" />
       </div>
     );
