@@ -10,7 +10,7 @@ class SongCards extends Component {
   }
 
   renderSongCards() {
-    const {genre, playlists, handlePlaySong} = this.props;
+    const {genre, playlists, handlePlaySong, handlePauseSong, activeSong} = this.props;
     let rows = [];
 
       // Five cols a row
@@ -25,7 +25,7 @@ class SongCards extends Component {
               rowItems.map((song, i) => {
                 return (
                   <div className="col-1-5 clearfix" key={i}>
-                    <SongCard song={song} handlePlaySong={handlePlaySong} key={song.id}/>
+                    <SongCard song={song} handlePlaySong={handlePlaySong} handlePauseSong={handlePauseSong} activeSong={activeSong} key={song.id}/>
                   </div>
                 );
               })

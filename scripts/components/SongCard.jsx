@@ -7,13 +7,21 @@ class SongCard extends Component {
     this.renderTogglePlayButton = this.renderTogglePlayButton.bind(this);
   }
 
-  renderTogglePlayButton() {
-    const {handlePlaySong, song} = this.props;
-    return (
-      <div className="toggle-play-button" onClick={handlePlaySong.bind(null, song)}>
-        <i className="toggle-play-button-icon ion-ios-play" />
-      </div>
-    );
+  renderTogglePlayButton () {
+    const {handlePlaySong, handlePauseSong, song, activeSong} = this.props;
+    if (activeSong.song !== null && activeSong.song.id === song.id && activeSong.isPlaying) {
+      return (
+        <div className="toggle-play-button" onClick={handlePauseSong}>
+          <i className="toggle-play-button-icon ion-ios-pause" />
+        </div>
+      );
+    } else {
+      return (
+        <div className="toggle-play-button" onClick={handlePlaySong.bind(null, song)}>
+          <i className="toggle-play-button-icon ion-ios-play" />
+        </div>
+      );
+    }
   }
 
   render() {
