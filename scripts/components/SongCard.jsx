@@ -2,6 +2,12 @@ import React, { Component} from 'react';
 
 class SongCard extends Component {
   renderTogglePlayButton() {
+    const {playSong} = this.props;
+    return (
+      <div className="toggle-play-button" onClick={playSong}>
+        <i className="toggle-play-button-icon ion-ios-play" />
+      </div>
+    );
   }
 
   render() {
@@ -11,9 +17,7 @@ class SongCard extends Component {
     return (
       <div className="card song-card">
         <div className="song-card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
-          <div className="toggle-play-button" >
-            <i className="toggle-play-button-icon ion-ios-play" />
-        </div>
+          {this.renderTogglePlayButton()}
         </div>
         <div className="song-card-user clearfix">
           <img

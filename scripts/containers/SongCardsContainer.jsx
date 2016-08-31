@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {GENRES} from '../constants/SongConstants';
 import Spinner from '../components/Spinner';
 import {fetchSongsOnScroll} from '../actions/playlists';
-
+import Player from '../components/Player';
 // Main container
 class SongCardsContainer extends Component {
 
@@ -32,8 +32,10 @@ class SongCardsContainer extends Component {
   render () {
     return (
       <div className="songs">
+        <Player />
         <Toolbar />
         {this.renderPlaylist()}
+
       </div>
     );
   }
