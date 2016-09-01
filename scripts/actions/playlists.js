@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as types from '../constants/ActionTypes';
-import {generateFetchUrl} from '../api/SongAPIs';
+import {generateFetchUrl} from '../utils/SongUtils';
 
 // Responsible for initial fetching of a genre
 export const fetchSongsOnLoad = (genre, playlists) => {
@@ -25,7 +25,7 @@ export const fetchSongsOnLoad = (genre, playlists) => {
 // Responsible for fetching songs on scrolling page to the bottom
 export const fetchSongsOnScroll = (genre, playlists) => {
   return (dispatch, getState) => {
-    
+
     if (genre in playlists && !playlists[genre].isFetching && playlists[genre].nextUrl !== null) {
       const url = playlists[genre].nextUrl;
 

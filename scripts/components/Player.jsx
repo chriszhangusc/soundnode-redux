@@ -26,7 +26,7 @@ class Player extends Component {
 
   componentDidMount () {
     const { handleTimeUpdate, player } = this.props;
-    
+
     const audioElement = ReactDOM.findDOMNode(this.refs.audio);
 
     audioElement.addEventListener('loadedmetadata', () => {
@@ -106,7 +106,6 @@ class Player extends Component {
     // Currently playing song
     const {player} = this.props;
     // Not sure if we should write this logic here
-    if (player.song === null) return null;
 
     const streamUrl = `${player.song.stream_url}?client_id=${CLIENT_ID}`;
     return (

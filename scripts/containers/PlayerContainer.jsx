@@ -11,6 +11,7 @@ class PlayerContainer extends Component {
 
   render () {
     // Should we do this in player or here
+    const {player} = this.props;
     return player.song === null ? null :
     <Player {...this.props} />;
   }

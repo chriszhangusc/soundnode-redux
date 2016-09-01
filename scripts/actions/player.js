@@ -17,9 +17,6 @@ export const handleTimeUpdate = (e) => {
     let currentTime = Math.floor(audioElement.currentTime);
     let duration = Math.floor(audioElement.duration);
 
-    console.log(currentTime);
-    console.log(player.currentTime);
-
     if (currentTime !== player.currentTime) {
       dispatch(updateTime(currentTime));
     }
