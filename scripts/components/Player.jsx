@@ -7,6 +7,7 @@ class Player extends Component {
     super(props);
     this.renderDurationBar = this.renderDurationBar.bind(this);
     this.play = this.play.bind(this);
+    this.pause = this.pause.bind(this);
     this.renderPlayPauseButton = this.renderPlayPauseButton.bind(this);
   }
 
@@ -32,8 +33,8 @@ class Player extends Component {
     audioElement.addEventListener('timeupdate', () => {
       var currentTime = Math.floor(audioElement.currentTime).toString();
       var duration = Math.floor(audioElement.duration).toString();
-      console.log(this.formatSecondsAsTime(currentTime));
-      console.log(this.formatSecondsAsTime(duration));
+      // console.log(this.formatSecondsAsTime(currentTime));
+      // console.log(this.formatSecondsAsTime(duration));
     });
 
     const {player} = this.props;
@@ -68,7 +69,7 @@ class Player extends Component {
       <div className="player-button">
         <i
           className={player.isPlaying ? 'icon ion-ios-pause' : 'icon ion-ios-play'}
-          onClick={player.isPlaying ? pauseSong : playSong}
+          onClick={player.isPlaying ? pauseSong : playSong.bind(null, player.song)}
           />
       </div>
     );
@@ -85,9 +86,10 @@ class Player extends Component {
   }
 
   render () {
-
     // Currently playing song
     const {player} = this.props;
+    // Not sure if we should write this logic here
+    if (player.song === null) return null;
 
     const streamUrl = `${player.song.stream_url}?client_id=${CLIENT_ID}`;
     return (

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Player from '../components/Player';
 import {connect} from 'react-redux';
-import {pauseSong, playSong} from '../actions/player';
-import { bindActionCreators } from 'redux';
+import {playSong, pauseSong} from '../actions/player';
+
 class PlayerContainer extends Component {
 
   constructor (props) {
@@ -10,12 +10,10 @@ class PlayerContainer extends Component {
   }
 
   render () {
-    const { player, dispatch } = this.props;
+    const { player } = this.props;
     // Should we do this in player or here
     return player.song === null ? null :
-    <Player player={player}
-          pauseSong={() => { dispatch(pauseSong()) }}
-          playSong={() => { dispatch(playSong(player.song))}} />;
+    <Player {...this.props} />;
   }
 
 }
@@ -26,4 +24,11 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps)(PlayerContainer);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    playSong: (song) => { dispatch(playSong(song)); },
+    pauseSong: () => { dispatch(pauseSong()); }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer);
