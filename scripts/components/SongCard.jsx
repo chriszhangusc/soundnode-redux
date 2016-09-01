@@ -8,8 +8,8 @@ class SongCard extends Component {
   }
 
   renderTogglePlayButton () {
-    const {handlePlaySong, handlePauseSong, song, activeSong} = this.props;
-    if (activeSong.song !== null && activeSong.song.id === song.id && activeSong.isPlaying) {
+    const {handlePlaySong, handlePauseSong, song, player} = this.props;
+    if (player.song !== null && player.song.id === song.id && player.isPlaying) {
       return (
         <div className="toggle-play-button" onClick={handlePauseSong}>
           <i className="toggle-play-button-icon ion-ios-pause" />

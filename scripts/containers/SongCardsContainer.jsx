@@ -6,7 +6,7 @@ import {GENRES} from '../constants/SongConstants';
 import Spinner from '../components/Spinner';
 import {fetchSongsOnScroll} from '../actions/playlists';
 import PlayerContainer from './PlayerContainer';
-import {playSong, pauseSong} from '../actions/activeSong';
+import {playSong, pauseSong} from '../actions/player';
 // Main container
 class SongCardsContainer extends Component {
 
@@ -30,7 +30,7 @@ class SongCardsContainer extends Component {
   }
 
   renderSongCards () {
-    const { playlists, dispatch, activeSong } = this.props;
+    const { playlists, dispatch, player } = this.props;
     const genre = this.props.params.genre;
     const isFetching = playlists[genre].isFetching;
     return (
@@ -42,7 +42,7 @@ class SongCardsContainer extends Component {
           genre={genre}
           dispatch={dispatch}
           scrollFunc={fetchSongsOnScroll.bind(null, genre, playlists)}
-          activeSong={activeSong}
+          player={player}
           />
         {isFetching ? <Spinner /> : null}
       </div>
@@ -63,7 +63,7 @@ class SongCardsContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     playlists: state.playlists,
-    activeSong: state.activeSong, 
+    player: state.player,
   };
 };
 

@@ -1,9 +1,10 @@
 import playlists from './playlists';
-import activeSong from './activeSong';
+import player from './player';
 import {combineReducers} from 'redux';
+
 const rootReducer = combineReducers({
   playlists,
-  activeSong,
+  player,
 });
 
 export default rootReducer;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Player from '../components/Player';
 import {connect} from 'react-redux';
-import * as playerActions from '../actions/activeSong';
+import {pauseSong, playSong} from '../actions/player';
 import { bindActionCreators } from 'redux';
 class PlayerContainer extends Component {
 
@@ -10,19 +10,19 @@ class PlayerContainer extends Component {
   }
 
   render () {
-    const { activeSong, pauseSong, playSong, dispatch } = this.props;
+    const { player, dispatch } = this.props;
     // Should we do this in player or here
-    return activeSong.song === null ? null :
-    <Player activeSong={activeSong}
-          pauseSong={() => {dispatch(playerActions.pauseSong())}}
-          playSong={() => { dispatch(playerActions.playSong(activeSong.song))}} />;
+    return player.song === null ? null :
+    <Player player={player}
+          pauseSong={() => { dispatch(pauseSong()) }}
+          playSong={() => { dispatch(playSong(player.song))}} />;
   }
 
 }
 
 const mapStateToProps = (state) => {
   return {
-    activeSong: state.activeSong,
+    player: state.player,
   };
 }
 

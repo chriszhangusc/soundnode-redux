@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {CLIENT_ID} from '../constants/Config';
-import {playSong, pauseSong} from '../actions/activeSong';
 class Player extends Component {
 
   constructor(props) {
@@ -11,18 +10,43 @@ class Player extends Component {
     this.renderPlayPauseButton = this.renderPlayPauseButton.bind(this);
   }
 
+  formatSecondsAsTime(secs, format) {
+    var hr  = Math.floor(secs / 3600);
+    var min = Math.floor((secs - (hr * 3600))/60);
+    var sec = Math.floor(secs - (hr * 3600) -  (min * 60));
+    if (min < 10){
+      min = "0" + min;
+    }
+    if (sec < 10){
+      sec  = "0" + sec;
+    }
+    return min + ':' + sec;
+  }
+
   componentDidMount () {
-    const {activeSong} = this.props;
-    if (activeSong.isPlaying) {
-        this.play();
+    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+    audioElement.addEventListener('loadedmetadata', () => {
+      console.log(`Playing for ${audioElement.duration} seconds`);
+    });
+
+    audioElement.addEventListener('timeupdate', () => {
+      var currentTime = Math.floor(audioElement.currentTime).toString();
+      var duration = Math.floor(audioElement.duration).toString();
+      console.log(this.formatSecondsAsTime(currentTime));
+      console.log(this.formatSecondsAsTime(duration));
+    });
+
+    const {player} = this.props;
+    if (player.isPlaying) {
+      this.play();
     } else {
       this.pause();
     }
   }
 
   componentDidUpdate () {
-    const {activeSong} = this.props;
-    if (activeSong.isPlaying) {
+    const {player} = this.props;
+    if (player.isPlaying) {
         this.play();
     } else {
       this.pause();
@@ -39,12 +63,12 @@ class Player extends Component {
   }
 
   renderPlayPauseButton () {
-    const {activeSong, playSong, pauseSong} = this.props;
+    const {player, playSong, pauseSong} = this.props;
     return (
       <div className="player-button">
         <i
-          className={activeSong.isPlaying ? 'icon ion-ios-pause' : 'icon ion-ios-play'}
-          onClick={activeSong.isPlaying ? pauseSong : playSong}
+          className={player.isPlaying ? 'icon ion-ios-pause' : 'icon ion-ios-play'}
+          onClick={player.isPlaying ? pauseSong : playSong}
           />
       </div>
     );
@@ -63,9 +87,9 @@ class Player extends Component {
   render () {
 
     // Currently playing song
-    const {activeSong} = this.props;
+    const {player} = this.props;
 
-    const streamUrl = `${activeSong.song.stream_url}?client_id=${CLIENT_ID}`;
+    const streamUrl = `${player.song.stream_url}?client_id=${CLIENT_ID}`;
     return (
       <div className="player">
         <audio id="audio" ref="audio" src={streamUrl}/>
