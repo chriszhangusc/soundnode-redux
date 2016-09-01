@@ -2,7 +2,6 @@ import {PLAY_SONG, PAUSE_SONG, UPDATE_TIME} from '../constants/ActionTypes';
 
 const INITIAL_STATE = {
   currentTime: 0,
-  duration: 0,
   volume: 50,
   song: null,
   isPlaying: false,

@@ -25,19 +25,16 @@ class Player extends Component {
   }
 
   componentDidMount () {
+    const { handleTimeUpdate, player } = this.props;
+    
     const audioElement = ReactDOM.findDOMNode(this.refs.audio);
+
     audioElement.addEventListener('loadedmetadata', () => {
       console.log(`Playing for ${audioElement.duration} seconds`);
     });
 
-    audioElement.addEventListener('timeupdate', () => {
-      var currentTime = Math.floor(audioElement.currentTime).toString();
-      var duration = Math.floor(audioElement.duration).toString();
-      // console.log(this.formatSecondsAsTime(currentTime));
-      // console.log(this.formatSecondsAsTime(duration));
-    });
+    audioElement.addEventListener('timeupdate', handleTimeUpdate);
 
-    const {player} = this.props;
     if (player.isPlaying) {
       this.play();
     } else {
@@ -57,8 +54,28 @@ class Player extends Component {
   renderDurationBar () {
     let width = 40;
     return (
-      <div className="player-seek-duration-bar" style={{ width: `${width}%` }} >
-        <div className="player-seek-handle" />
+      <div className="player-seek-bar-wrap">
+        <div className="player-seek-bar" ref="seekBar">
+          <div className="player-seek-duration-bar" style={{ width: `${width}%` }} >
+            <div className="player-seek-handle" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderPlayTime () {
+    const {player} = this.props;
+    let {currentTime} = player;
+    let {duration} = player.song;
+    let durationStr = this.formatSecondsAsTime(duration / 1000.0);
+    let currentTimeStr = this.formatSecondsAsTime(currentTime);
+
+    return (
+      <div className="player-time">
+        <span>{currentTimeStr}</span>
+        <span className="player-time-divider">/</span>
+        <span>{durationStr}</span>
       </div>
     );
   }
@@ -111,16 +128,8 @@ class Player extends Component {
             </div>
 
             <div className="player-section player-seek">
-              <div className="player-seek-bar-wrap">
-                <div className="player-seek-bar" ref="seekBar">
-                  {this.renderDurationBar()}
-                </div>
-              </div>
-              <div className="player-time">
-                <span>2:12</span>
-                <span className="player-time-divider">/</span>
-                <span>5:30</span>
-              </div>
+              { this.renderDurationBar() }
+              { this.renderPlayTime() }
             </div>
 
             <div className="player-section">
