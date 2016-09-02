@@ -4,12 +4,14 @@ import App from 'App';
 import SongCardsContainer from '../containers/SongCardsContainer';
 import {GENRES, DEFAULT_GENRE} from '../constants/SongConstants';
 import {fetchSongsOnLoad} from '../actions/playlists';
+import {loadPlaylist} from '../actions/player';
 
 const configureRoutes = (store) => {
 
   const onEnterHandler = (nextState) => {
     const genre = nextState.params.genre;
     const playlists = store.getState().playlists;
+    store.dispatch(loadPlaylist(genre));
     store.dispatch(fetchSongsOnLoad(genre, playlists));
   };
 

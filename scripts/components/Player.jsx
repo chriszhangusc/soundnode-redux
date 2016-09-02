@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {CLIENT_ID} from '../constants/Config';
+
+import {formatSecondsAsTime} from '../utils/FormatUtils';
+
 class Player extends Component {
 
   constructor(props) {
@@ -9,19 +12,8 @@ class Player extends Component {
     this.play = this.play.bind(this);
     this.pause = this.pause.bind(this);
     this.renderPlayPauseButton = this.renderPlayPauseButton.bind(this);
-  }
-
-  formatSecondsAsTime(secs, format) {
-    var hr  = Math.floor(secs / 3600);
-    var min = Math.floor((secs - (hr * 3600))/60);
-    var sec = Math.floor(secs - (hr * 3600) -  (min * 60));
-    if (min < 10){
-      min = "0" + min;
-    }
-    if (sec < 10){
-      sec  = "0" + sec;
-    }
-    return min + ':' + sec;
+    this.renderForwardButton = this.renderForwardButton.bind(this);
+    this.renderBackwardButton = this.renderBackwardButton.bind(this);
   }
 
   componentDidMount () {
@@ -65,11 +57,12 @@ class Player extends Component {
   }
 
   renderPlayTime () {
+
     const {player} = this.props;
     let {currentTime} = player;
     let {duration} = player.song;
-    let durationStr = this.formatSecondsAsTime(duration / 1000.0);
-    let currentTimeStr = this.formatSecondsAsTime(currentTime);
+    let durationStr = formatSecondsAsTime(duration / 1000.0);
+    let currentTimeStr = formatSecondsAsTime(currentTime);
 
     return (
       <div className="player-time">
@@ -92,6 +85,24 @@ class Player extends Component {
     );
   }
 
+  renderForwardButton () {
+    const {handleNext} = this.props;
+    return (
+      <div className="player-button" onClick={handleNext}>
+        <i className="icon ion-ios-fastforward" />
+      </div>
+    );
+  }
+
+  renderBackwardButton () {
+      const {handlePrev} = this.props;
+      return (
+        <div className="player-button" onClick={handlePrev}>
+          <i className="icon ion-ios-rewind" />
+        </div>
+      );
+  }
+
   pause() {
     const audioElement = ReactDOM.findDOMNode(this.refs.audio);
     audioElement.pause();
@@ -106,6 +117,7 @@ class Player extends Component {
     // Currently playing song
     const {player} = this.props;
     // Not sure if we should write this logic here
+    const currentSong = player.song;
 
     const streamUrl = `${player.song.stream_url}?client_id=${CLIENT_ID}`;
     return (
@@ -114,16 +126,12 @@ class Player extends Component {
         <div className="container">
           <div className="player-main">
             <div className="player-section player-info">
-              <img className="player-image" src="https://i1.sndcdn.com/artworks-000119040504-0va9pb-large.jpg" />
+              <img className="player-image" src={currentSong.artwork_url} />
             </div>
             <div className="player-section">
-              <div className="player-button">
-                <i className="icon ion-ios-rewind" />
-              </div>
+              {this.renderBackwardButton()}
               {this.renderPlayPauseButton()}
-              <div className="player-button" >
-                <i className="icon ion-ios-fastforward" />
-              </div>
+              {this.renderForwardButton()}
             </div>
 
             <div className="player-section player-seek">

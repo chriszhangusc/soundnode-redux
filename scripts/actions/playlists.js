@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as types from '../constants/ActionTypes';
 import {generateFetchUrl} from '../utils/SongUtils';
-
+import {loadPlaylist} from '../actions/player';
 // Responsible for initial fetching of a genre
 export const fetchSongsOnLoad = (genre, playlists) => {
   return (dispatch, getState) => {
@@ -15,6 +15,7 @@ export const fetchSongsOnLoad = (genre, playlists) => {
       axios.get(url).then((response) => {
         // We got something as response.data
         dispatch(receiveSongs(genre, response.data.collection, response.data.next_href));
+        
       }).catch((error) => {
         console.log(error);
       });
