@@ -17,6 +17,11 @@ class Player extends Component {
     this.onSeekMouseUp = this.onSeekMouseUp.bind(this);
     this.onPauseClick = this.onPauseClick.bind(this);
     this.onPlayClick = this.onPlayClick.bind(this);
+    this.onTimeUpdate = this.onTimeUpdate.bind(this);
+    // this.removeEventListeners = this.removeEventListeners.bind(this);
+    this.onEnded = this.onEnded.bind(this);
+    this.onDurationBarClick = this.onDurationBarClick.bind(this);
+    this.seek = this.seek.bind(this);
   }
 
   onPauseClick() {
@@ -37,14 +42,31 @@ class Player extends Component {
     const audioElement = ReactDOM.findDOMNode(this.refs.audio);
 
     audioElement.addEventListener('loadedmetadata', () => {
-      console.log(`Playing for ${audioElement.duration} seconds`);
+      // console.log(`Playing for ${audioElement.duration} seconds`);
     });
+    audioElement.addEventListener('timeupdate', this.onTimeUpdate);
+    audioElement.addEventListener('ended', this.onEnded);
+    if (player.isPlaying) {
+      audioElement.play();
+    } else {
+      audioElement.pause();
+    }
+  }
 
-    audioElement.addEventListener('timeupdate', (e) => {
-      handleTimeUpdate(e.target.currentTime);
-    });
+  componentWillUnmount () {
+    // this.removeEventListeners();
+  }
 
-    this.refs.audio.play();
+  onTimeUpdate (e) {
+    const {handleTimeUpdate} = this.props;
+    handleTimeUpdate(e.target.currentTime);
+  }
+
+  onEnded (e) {
+    const {player} = this.props;
+    // Check the current playing type (Repeat / Shuffle / (default)In order)
+    let audioElement = this.refs.audio;
+
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -60,25 +82,6 @@ class Player extends Component {
     }
   }
 
-  onSeekMouseMove (e) {
-    const clientX = e.clientX;
-    const seekBar = this.refs.seekBar;
-    let offset = e.clientX - seekBar.offsetLeft;
-    const width = seekBar.offsetWidth;
-    const {currentTime} = this.props.player;
-    const duration = this.props.player.song.duration / 1000.0;
-    // compute new currentTime
-    if (offset < 0) {
-      offset = 0;
-    } else if (offset > width) {
-      offset = width;
-    }
-    const cursorPercent = offset / width;
-    const newTime = Math.floor(duration * cursorPercent);
-    const {handleSeekTimeUpdate} = this.props;
-
-    handleSeekTimeUpdate(newTime);
-  }
 
   onSeekMouseDown () {
     const {toggleSeek} = this.props;
@@ -98,16 +101,42 @@ class Player extends Component {
     this.refs.audio.currentTime = player.currentTime;
   }
 
+  seek (e, updateTime) {
+    const {player, handleSeekTimeUpdate} = this.props;
+    const seekBar = this.refs.seekBar;
+    let offset = e.clientX - seekBar.offsetLeft;
+    let width = seekBar.offsetWidth;
+    const cursorPercent = offset * 1.0 / width;
+    const {currentTime} = this.props.player;
+    const duration = this.props.player.song.duration / 1000.0;
+    // compute new currentTime
+    offset = offset < 0 ? 0 : width;
+    const newTime = Math.floor(duration * cursorPercent);
+    // ONLY UPDATE currenttime in STATE!
+    handleSeekTimeUpdate(newTime);
+    if (updateTime) this.refs.audio.currentTime = newTime;
+  }
+
+  onSeekMouseMove (e) {
+    this.seek(e, false);
+  }
+
+  onDurationBarClick (e) {
+    this.seek(e, true);
+  }
+
+  /* Rendering functions */
+
   renderDurationBar () {
     const {player} = this.props;
     let {currentTime} = player;
     let {duration} = player.song;
-    let widthPercentage = currentTime * 100.0 / (duration / 1000.0);
+    let percent = currentTime * 100.0 / (duration / 1000.0);
 
     return (
-      <div className="player-seek-bar-wrap">
+      <div className="player-seek-bar-wrap" onClick={this.onDurationBarClick}>
         <div className="player-seek-bar" ref="seekBar">
-          <div className="player-seek-duration-bar" style={{ width: `${widthPercentage}%` }} >
+          <div className="player-seek-duration-bar" style={{ width: `${percent}%` }} >
             <div className="player-seek-handle" onMouseDown={ this.onSeekMouseDown } />
           </div>
         </div>

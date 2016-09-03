@@ -25,7 +25,7 @@ class SongCards extends Component {
               rowItems.map((song, i) => {
                 return (
                   <div className="col-1-5 clearfix" key={i}>
-                    <SongCard song={song} handlePlaySong={handlePlaySong} handlePauseSong={handlePauseSong} player={player} key={song.id}/>
+                    <SongCard song={song} handlePlaySong={handlePlaySong} handlePauseSong={handlePauseSong} isActive={player.song ? player.song.id === song.id : false} player={player} key={song.id}/>
                   </div>
                 );
               })

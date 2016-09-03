@@ -8,16 +8,16 @@ class SongCard extends Component {
   }
 
   renderTogglePlayButton () {
-    const {handlePlaySong, handlePauseSong, song, player} = this.props;
+    const {song, player, isActive, handlePlaySong, handlePauseSong} = this.props;
     if (player.song !== null && player.song.id === song.id && player.isPlaying) {
       return (
-        <div className="toggle-play-button" onClick={handlePauseSong}>
+        <div className={`toggle-play-button ${(isActive ? 'active' : '')}`} onClick={handlePauseSong}>
           <i className="toggle-play-button-icon ion-ios-pause" />
         </div>
       );
     } else {
       return (
-        <div className="toggle-play-button" onClick={handlePlaySong.bind(null, song)}>
+        <div className={`toggle-play-button ${(isActive ? 'active' : '')}`} onClick={handlePlaySong.bind(null, song)}>
           <i className="toggle-play-button-icon ion-ios-play" />
         </div>
       );
@@ -25,11 +25,11 @@ class SongCard extends Component {
   }
 
   render() {
-    const {song} = this.props;
+    const {song, player, isActive} = this.props;
     let imageUrl = song.artwork_url ? song.artwork_url.replace('large', 't300x300') : '';
 
     return (
-      <div className="card song-card">
+      <div className={`card song-card ${(isActive ? 'active' : '')}`}>
         <div className="song-card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
           {this.renderTogglePlayButton()}
         </div>

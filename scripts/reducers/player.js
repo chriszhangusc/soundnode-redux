@@ -1,4 +1,5 @@
 import {PLAY_SONG, PAUSE_SONG, UPDATE_TIME, LOAD_PLAYLIST, TOGGLE_SEEK} from '../constants/ActionTypes';
+import {SHUFFLE, REPEAT, SEQUENCIAL, LOOP} from '../constants/PlayerConstants';
 
 const INITIAL_STATE = {
   currentTime: 0,
@@ -7,6 +8,7 @@ const INITIAL_STATE = {
   isPlaying: false,
   playlist: null, // which playlist we are currently playing
   isSeeking: false,
+  mode: SEQUENCIAL,
 };
 
 const player = (state = INITIAL_STATE, action) => {
