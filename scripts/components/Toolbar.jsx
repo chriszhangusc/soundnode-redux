@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { GENRES, DEFAULT_GENRE } from 'SongConstants';
+import { GENRES, DEFAULT_GENRE } from '../constants/SongConstants';
 import {Link, IndexLink} from 'react-router';
 
 class Toolbar extends Component {

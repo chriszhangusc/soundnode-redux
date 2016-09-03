@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import NavSearch from 'NavSearch';
+import NavSearch from './NavSearch';
 
 class Nav extends Component{
   render () {

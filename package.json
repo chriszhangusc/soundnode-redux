@@ -1,12 +1,15 @@
 {
-  "name": "react-redux-boilerplate",
+  "name": "my-redux-sound",
   "version": "1.0.0",
   "description": "Simple react redux boilerplate",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && nodemon server.js",
-    "build": "webpack -w",
-    "test": "NODE_ENV=test karma start"
+    "build": "NODE_ENV=production webpack -p --config ./webpack.prod.config.js",
+    "lint": "eslint scripts",
+    "start": "webpack-dev-server --progress --colors --hot --content-base ./server/public --config ./webpack.config.js",
+    "test": "mocha --compilers js:babel-core/register --recursive -r mock-local-storage",
+    "prebuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_PROD:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js",
+    "postbuild": "sed -i.bak \"s/'.*'/'${SOUND_REDUX_DEV:-f4323c6f7c0cd73d2d786a2b1cdae80c}'/\" ./scripts/constants/Config.js && rm ./scripts/constants/Config.js.bak"
   },
   "author": "AngryBugs",
   "license": "ISC",
@@ -49,6 +52,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
     "mocha": "^3.0.2",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "react-hot-loader": "^1.3.0"
   }
 }

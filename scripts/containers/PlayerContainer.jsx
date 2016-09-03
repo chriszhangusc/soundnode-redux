@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Player from '../components/Player';
 import {connect} from 'react-redux';
-import {playSong, pauseSong, handleTimeUpdate, playNextSong, playPrevSong} from '../actions/player';
+import {playSong, pauseSong, handleTimeUpdate, handleSeekTimeUpdate, playNextSong, playPrevSong, toggleSeek} from '../actions/player';
 
 class PlayerContainer extends Component {
 
@@ -27,11 +27,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
   return {
+    dispatch,
     playSong: (song) => { dispatch(playSong(song)); },
     pauseSong: () => { dispatch(pauseSong()); },
-    handleTimeUpdate: (e) => { dispatch(handleTimeUpdate(e)) },
+    handleTimeUpdate: (newTime) => { dispatch(handleTimeUpdate(newTime)) },
+    handleSeekTimeUpdate: (newTime) => { dispatch(handleSeekTimeUpdate(newTime)) },
     handlePrev: () => {dispatch(playPrevSong())},
     handleNext: () => {dispatch(playNextSong())},
+    toggleSeek: () => {dispatch(toggleSeek())},
   }
 }
 

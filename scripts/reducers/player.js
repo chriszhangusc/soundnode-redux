@@ -1,4 +1,4 @@
-import {PLAY_SONG, PAUSE_SONG, UPDATE_TIME, LOAD_PLAYLIST} from '../constants/ActionTypes';
+import {PLAY_SONG, PAUSE_SONG, UPDATE_TIME, LOAD_PLAYLIST, TOGGLE_SEEK} from '../constants/ActionTypes';
 
 const INITIAL_STATE = {
   currentTime: 0,
@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   song: null,
   isPlaying: false,
   playlist: null, // which playlist we are currently playing
+  isSeeking: false,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -36,6 +37,12 @@ const player = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentTime: action.currentTime,
+      };
+
+    case TOGGLE_SEEK:
+      return {
+        ...state,
+        isSeeking: !state.isSeeking,
       };
 
     default:

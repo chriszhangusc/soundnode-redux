@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Router, IndexRoute, IndexRedirect, hashHistory} from 'react-router';
-import App from 'App';
+import App from '../components/App';
 import SongCardsContainer from '../containers/SongCardsContainer';
 import {GENRES, DEFAULT_GENRE} from '../constants/SongConstants';
 import {fetchSongsOnLoad} from '../actions/playlists';

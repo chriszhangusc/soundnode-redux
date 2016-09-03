@@ -9,14 +9,31 @@ class Player extends Component {
   constructor(props) {
     super(props);
     this.renderDurationBar = this.renderDurationBar.bind(this);
-    this.play = this.play.bind(this);
-    this.pause = this.pause.bind(this);
     this.renderPlayPauseButton = this.renderPlayPauseButton.bind(this);
     this.renderForwardButton = this.renderForwardButton.bind(this);
     this.renderBackwardButton = this.renderBackwardButton.bind(this);
+
+    this.onSeekMouseMove = this.onSeekMouseMove.bind(this);
+    this.onSeekMouseDown = this.onSeekMouseDown.bind(this);
+    this.onSeekMouseUp = this.onSeekMouseUp.bind(this);
+    this.onPauseClick = this.onPauseClick.bind(this);
+    this.onPlayClick = this.onPlayClick.bind(this);
+  }
+
+  onPauseClick() {
+    const {pauseSong} = this.props;
+    pauseSong();
+    this.refs.audio.pause();
+  }
+
+  onPlayClick() {
+    const {playSong, player} = this.props;
+    playSong(player.song);
+    this.refs.audio.play();
   }
 
   componentDidMount () {
+    // Props here will be its initial value!! Not actual value!!
     const { handleTimeUpdate, player } = this.props;
 
     const audioElement = ReactDOM.findDOMNode(this.refs.audio);
@@ -25,31 +42,68 @@ class Player extends Component {
       console.log(`Playing for ${audioElement.duration} seconds`);
     });
 
-    audioElement.addEventListener('timeupdate', handleTimeUpdate);
+    audioElement.addEventListener('timeupdate', (e) => {
+      handleTimeUpdate(e.target.currentTime);
+    });
 
-    if (player.isPlaying) {
-      this.play();
-    } else {
-      this.pause();
-    }
+    this.refs.audio.play();
   }
 
-  componentDidUpdate () {
-    const {player} = this.props;
-    if (player.isPlaying) {
-        this.play();
-    } else {
-      this.pause();
+  componentDidUpdate (prevProps) {
+    const {song} = this.props.player;
+    if (prevProps.player.song.id === song.id) return ;
+    this.refs.audio.play();
+  }
+
+  onSeekMouseMove (e) {
+    const clientX = e.clientX;
+    const seekBar = this.refs.seekBar;
+    let offset = e.clientX - seekBar.offsetLeft;
+    const width = seekBar.offsetWidth;
+    const {currentTime} = this.props.player;
+    const duration = this.props.player.song.duration / 1000.0;
+    // compute new currentTime
+    if (offset < 0) {
+      offset = 0;
+    } else if (offset > width) {
+      offset = width;
     }
+    const cursorPercent = offset / width;
+    const newTime = Math.floor(duration * cursorPercent);
+    const {handleSeekTimeUpdate} = this.props;
+
+    handleSeekTimeUpdate(newTime);
+  }
+
+  onSeekMouseDown () {
+    const {toggleSeek} = this.props;
+    toggleSeek();
+    document.addEventListener('mousemove', this.onSeekMouseMove);
+    document.addEventListener('mouseup', this.onSeekMouseUp);
+  }
+
+  // We have to put mouseup event listener to document to handle user release mouse on any point of the page.
+  onSeekMouseUp () {
+    const {toggleSeek, player} = this.props;
+    if (!player.isSeeking) return ;
+    toggleSeek();
+    document.removeEventListener('mousemove', this.onSeekMouseMove);
+    document.removeEventListener('mouseup', this.onSeekMouseUp);
+    // set new time to audio dom
+    this.refs.audio.currentTime = player.currentTime;
   }
 
   renderDurationBar () {
-    let width = 40;
+    const {player} = this.props;
+    let {currentTime} = player;
+    let {duration} = player.song;
+    let widthPercentage = currentTime * 100.0 / (duration / 1000.0);
+
     return (
       <div className="player-seek-bar-wrap">
         <div className="player-seek-bar" ref="seekBar">
-          <div className="player-seek-duration-bar" style={{ width: `${width}%` }} >
-            <div className="player-seek-handle" />
+          <div className="player-seek-duration-bar" style={{ width: `${widthPercentage}%` }} >
+            <div className="player-seek-handle" onMouseDown={ this.onSeekMouseDown } />
           </div>
         </div>
       </div>
@@ -73,13 +127,15 @@ class Player extends Component {
     );
   }
 
+
+
   renderPlayPauseButton () {
     const {player, playSong, pauseSong} = this.props;
     return (
       <div className="player-button">
         <i
           className={player.isPlaying ? 'icon ion-ios-pause' : 'icon ion-ios-play'}
-          onClick={player.isPlaying ? pauseSong : playSong.bind(null, player.song)}
+          onClick={player.isPlaying ? this.onPauseClick : this.onPlayClick}
           />
       </div>
     );
@@ -103,16 +159,6 @@ class Player extends Component {
       );
   }
 
-  pause() {
-    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
-    audioElement.pause();
-  }
-
-  play() {
-    const audioElement = ReactDOM.findDOMNode(this.refs.audio);
-    audioElement.play();
-  }
-
   render () {
     // Currently playing song
     const {player} = this.props;
@@ -128,6 +174,7 @@ class Player extends Component {
             <div className="player-section player-info">
               <img className="player-image" src={currentSong.artwork_url} />
             </div>
+
             <div className="player-section">
               {this.renderBackwardButton()}
               {this.renderPlayPauseButton()}
