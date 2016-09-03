@@ -11,30 +11,20 @@ module.exports = {
   },
 
   output: {
-    path: __dirname,
-    filename: 'public/bundle.js'
-  },
-
-  output: {
     publicPath: 'http://localhost:3000/',
     filename: '/js/[name].js'
   },
 
   devServer: {
       host: '0.0.0.0',
-      port: 3000, 
-      proxy: {
-          '/api/*': 'http://localhost:3001',
-      }
+      port: 3000,
   },
 
   resolve: {
     root: __dirname,
-    alias: {
-      applicationStyles: 'scripts/styles/app.scss',
-    },
     extensions: ['', '.js', '.jsx', 'stage-0']
   },
+
   module: {
     loaders: [
       {

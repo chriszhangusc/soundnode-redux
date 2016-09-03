@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-//ES6 destructuring
 import {Router, Route, IndexRoute, hashHistory } from 'react-router';
-
 import {configure} from './store/configureStore';
-
 import { Provider } from 'react-redux';
 import configureRoutes from './router/index';
-require('applicationStyles');
+// Import stylesheets(inline)
+import '../styles/app.scss';
 
 const store = configure();
 

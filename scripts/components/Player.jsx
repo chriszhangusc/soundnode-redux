@@ -12,7 +12,6 @@ class Player extends Component {
     this.renderPlayPauseButton = this.renderPlayPauseButton.bind(this);
     this.renderForwardButton = this.renderForwardButton.bind(this);
     this.renderBackwardButton = this.renderBackwardButton.bind(this);
-
     this.onSeekMouseMove = this.onSeekMouseMove.bind(this);
     this.onSeekMouseDown = this.onSeekMouseDown.bind(this);
     this.onSeekMouseUp = this.onSeekMouseUp.bind(this);
@@ -29,7 +28,7 @@ class Player extends Component {
   onPlayClick() {
     const {playSong, player} = this.props;
     playSong(player.song);
-    this.refs.audio.play();
+    this.refs.audio.play(player.song);
   }
 
   componentDidMount () {
