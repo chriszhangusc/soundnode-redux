@@ -42,7 +42,7 @@
 }
 
 .toggle-play-button-icon {
-    color: #A6D2A5;
+    color: $theme-color;
     font-size: 28px;
     opacity: 0;
     transition: opacity 0.2s ease-in-out;

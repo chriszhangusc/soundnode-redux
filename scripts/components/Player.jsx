@@ -34,7 +34,6 @@ class Player extends Component {
   componentDidMount () {
     // Props here will be its initial value!! Not actual value!!
     const { handleTimeUpdate, player } = this.props;
-
     const audioElement = ReactDOM.findDOMNode(this.refs.audio);
 
     audioElement.addEventListener('loadedmetadata', () => {
@@ -48,10 +47,17 @@ class Player extends Component {
     this.refs.audio.play();
   }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    return true;
+  }
+
   componentDidUpdate (prevProps) {
-    const {song} = this.props.player;
-    if (prevProps.player.song.id === song.id) return ;
-    this.refs.audio.play();
+    const {player} = this.props;
+    const audioElement = this.refs.audio;
+    if (audioElement.paused === player.isPlaying) {
+      // Inconcistance happened, need to toggle play state
+      audioElement.paused ? audioElement.play(): audioElement.pause();
+    }
   }
 
   onSeekMouseMove (e) {
