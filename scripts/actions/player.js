@@ -74,6 +74,29 @@ export const handleSeekTimeUpdate = (newTime) => {
   };
 }
 
+// This should be moved to util functions
+const computeNewTimeOnSeek = (mouseEvent, seekBar, duration) => {
+
+  let offset = mouseEvent.clientX - seekBar.offsetLeft;
+  let width = seekBar.offsetWidth;
+  if (offset < 0) offset = 0;
+  else if (offset > width) offset = width;
+  let percent = offset * 1.0 / width;
+  return Math.floor(duration * percent);
+};
+
+/**
+ * duration: song duration in seconds
+ */
+export const seek = (mouseEvent, seekBar, audioElement, shouldUpdatePlayer) => {
+  return (dispatch, getState) => {
+    const newTime = computeNewTimeOnSeek(mouseEvent, seekBar, audioElement.duration);
+    // ONLY UPDATE currenttime in STATE!
+    dispatch(handleSeekTimeUpdate(newTime));
+    if (shouldUpdatePlayer) audioElement.currentTime = newTime;
+  };
+};
+
 
 /**
  * Change current song in player to newSong
@@ -83,7 +106,7 @@ export const changeSong = (newSong) => {
     type: CHANGE_SONG,
     song: newSong,
   };
-}
+};
 
 /**
  * Toggle the playing status of currently playing song in player
@@ -94,10 +117,11 @@ export const togglePlay = () => {
   }
 }
 
-export const changeSongAndPlay = (newSong) => {
+export const changeSongAndPlay = (newSong, audioElement) => {
   return (dispatch, getState) => {
     dispatch(changeSong(newSong));
     dispatch(playSong());
+    if (audioElement) audioElement.play();
   };
 };
 
