@@ -6,3 +6,5 @@ export const PAUSE_SONG = 'PAUSE_SONG';
 export const UPDATE_TIME = 'UPDATE_TIME';
 export const LOAD_PLAYLIST = 'LOAD_PLAYLIST';
 export const TOGGLE_SEEK = 'TOGGLE_SEEK';
+export const TOGGLE_PLAY = 'TOGGLE_PLAY';
+export const CHANGE_SONG = 'CHANGE_SONG';

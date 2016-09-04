@@ -46,11 +46,28 @@ class Player extends Component {
     });
     audioElement.addEventListener('timeupdate', this.onTimeUpdate);
     audioElement.addEventListener('ended', this.onEnded);
-    if (player.isPlaying) {
+    if (audioElement.paused && player.isPlaying) {
       audioElement.play();
-    } else {
-      audioElement.pause();
     }
+  }
+
+  componentDidUpdate (prevProps) {
+    const {player} = this.props;
+    const audioElement = this.refs.audio;
+    const prevSong = prevProps.player.song;
+    const newSong = player.song;
+
+    // This is for changing song in main song card.
+    if (prevSong.id !== newSong.id) {
+      audioElement.play();
+    }
+
+    
+    if (audioElement.paused === player.isPlaying) {
+      audioElement.paused ? audioElement.play(): audioElement.pause();
+    }
+
+    // ReactDOM.findDOMNode(this.refs.audio).play();
   }
 
   componentWillUnmount () {
@@ -63,25 +80,17 @@ class Player extends Component {
   }
 
   onEnded (e) {
-    const {player} = this.props;
-    // Check the current playing type (Repeat / Shuffle / (default)In order)
-    let audioElement = this.refs.audio;
+    const {player, handleSongEnded, handleNext} = this.props;
 
+    // Check the current playing type (Repeat / Shuffle / (default)In order)
+    // handleSongEnded();
+    handleNext();
+    this.refs.audio.play();
   }
 
   shouldComponentUpdate (nextProps, nextState) {
     return true;
   }
-
-  componentDidUpdate (prevProps) {
-    const {player} = this.props;
-    const audioElement = this.refs.audio;
-    if (audioElement.paused === player.isPlaying) {
-      // Inconcistance happened, need to toggle play state
-      audioElement.paused ? audioElement.play(): audioElement.pause();
-    }
-  }
-
 
   onSeekMouseDown () {
     const {toggleSeek} = this.props;
@@ -106,11 +115,17 @@ class Player extends Component {
     const seekBar = this.refs.seekBar;
     let offset = e.clientX - seekBar.offsetLeft;
     let width = seekBar.offsetWidth;
+    if (offset < 0) {
+      offset = 0;
+    } else if (offset > width) {
+      offset = width;
+    }
+
     const cursorPercent = offset * 1.0 / width;
     const {currentTime} = this.props.player;
     const duration = this.props.player.song.duration / 1000.0;
     // compute new currentTime
-    offset = offset < 0 ? 0 : width;
+
     const newTime = Math.floor(duration * cursorPercent);
     // ONLY UPDATE currenttime in STATE!
     handleSeekTimeUpdate(newTime);
@@ -132,7 +147,8 @@ class Player extends Component {
     let {currentTime} = player;
     let {duration} = player.song;
     let percent = currentTime * 100.0 / (duration / 1000.0);
-
+    if (percent > 100) percent = 100;
+    else if (percent < 0) percent = 0;
     return (
       <div className="player-seek-bar-wrap" onClick={this.onDurationBarClick}>
         <div className="player-seek-bar" ref="seekBar">
@@ -185,12 +201,12 @@ class Player extends Component {
   }
 
   renderBackwardButton () {
-      const {handlePrev} = this.props;
-      return (
-        <div className="player-button" onClick={handlePrev}>
-          <i className="icon ion-ios-rewind" />
-        </div>
-      );
+    const {handlePrev} = this.props;
+    return (
+      <div className="player-button" onClick={handlePrev}>
+        <i className="icon ion-ios-rewind" />
+      </div>
+    );
   }
 
   render () {

@@ -6,7 +6,7 @@ import {GENRES} from '../constants/SongConstants';
 import Spinner from '../components/Spinner';
 import {fetchSongsOnScroll} from '../actions/playlists';
 import PlayerContainer from './PlayerContainer';
-import {playSong, pauseSong} from '../actions/player';
+import {pauseSong, changeSong, changeSongAndPlay} from '../actions/player';
 // Main container
 class SongCardsContainer extends Component {
 
@@ -14,19 +14,6 @@ class SongCardsContainer extends Component {
     super(props);
     // First param passed into bind will be bound as 'this' inside renderPlaylist
     // Bind: creates a copy of function and tells it what this is.
-    this.renderSongCards = this.renderSongCards.bind(this);
-    this.handlePlaySong = this.handlePlaySong.bind(this);
-    this.handlePauseSong = this.handlePauseSong.bind(this);
-  }
-
-  handlePlaySong (song) {
-    const {dispatch} = this.props;
-    dispatch(playSong(song));
-  };
-
-  handlePauseSong() {
-    const {dispatch} = this.props;
-    dispatch(pauseSong());
   }
 
   renderSongCards () {
@@ -37,12 +24,11 @@ class SongCardsContainer extends Component {
       <div className="container">
         <SongCards
           playlists={playlists}
-          handlePlaySong={this.handlePlaySong}
-          handlePauseSong={this.handlePauseSong}
           genre={genre}
           dispatch={dispatch}
           scrollFunc={fetchSongsOnScroll.bind(null, genre, playlists)}
           player={player}
+          {...this.props}
           />
         {isFetching ? <Spinner /> : null}
       </div>
@@ -67,4 +53,18 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(SongCardsContainer);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // We need to match dispatch only because InfiniteScroll relies on it.
+    dispatch,
+    handleChangeSong: (newSong) => {
+      dispatch(changeSongAndPlay(newSong));
+    },
+
+    handlePauseSong: () => {
+      dispatch(pauseSong());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongCardsContainer);

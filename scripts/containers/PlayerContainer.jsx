@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Player from '../components/Player';
 import {connect} from 'react-redux';
-import {playSong, pauseSong, handleTimeUpdate, handleSeekTimeUpdate, playNextSong, playPrevSong, toggleSeek} from '../actions/player';
+import {playSong, pauseSong, changeSongAndPlay, handleTimeUpdate, handleSeekTimeUpdate, playNextSong, playPrevSong, toggleSeek, handleSongEnded} from '../actions/player';
 
 class PlayerContainer extends Component {
 
@@ -10,10 +10,14 @@ class PlayerContainer extends Component {
   }
 
   render () {
-    // Should we do this in player or here
+    // Should we do this in player or here: YES
     const {player} = this.props;
-    return player.song === null ? null :
-    <Player {...this.props} />;
+
+    if (player.song === null) {
+      return null;
+    } else {
+      return <Player {...this.props}/>;
+    }
   }
 
 }
@@ -28,13 +32,14 @@ const mapDispatchToProps = (dispatch) => {
 
   return {
     dispatch,
-    playSong: (song) => { dispatch(playSong(song)); },
+    playSong: (song) => { dispatch(changeSongAndPlay(song)); },
     pauseSong: () => { dispatch(pauseSong()); },
     handleTimeUpdate: (newTime) => { dispatch(handleTimeUpdate(newTime)) },
     handleSeekTimeUpdate: (newTime) => { dispatch(handleSeekTimeUpdate(newTime)) },
     handlePrev: () => {dispatch(playPrevSong())},
     handleNext: () => {dispatch(playNextSong())},
     toggleSeek: () => {dispatch(toggleSeek())},
+    handleSongEnded: () => {dispatch(handleSongEnded())},
   }
 }
 

@@ -8,7 +8,12 @@ class SongCard extends Component {
   }
 
   renderTogglePlayButton () {
-    const {song, player, isActive, handlePlaySong, handlePauseSong} = this.props;
+    const {song, player, isActive, handlePauseSong, handleChangeSong} = this.props;
+
+    // If current song is the active playing/paused song, toggling only change the playing state in player.
+    // If current song is not the active playing song, except for toggling isPlaying state,
+    // we also need to get the actual dom and call play()/pause()
+
     if (player.song !== null && player.song.id === song.id && player.isPlaying) {
       return (
         <div className={`toggle-play-button ${(isActive ? 'active' : '')}`} onClick={handlePauseSong}>
@@ -17,7 +22,7 @@ class SongCard extends Component {
       );
     } else {
       return (
-        <div className={`toggle-play-button ${(isActive ? 'active' : '')}`} onClick={handlePlaySong.bind(null, song)}>
+        <div className={`toggle-play-button ${(isActive ? 'active' : '')}`} onClick={handleChangeSong.bind(null, song)}>
           <i className="toggle-play-button-icon ion-ios-play" />
         </div>
       );
