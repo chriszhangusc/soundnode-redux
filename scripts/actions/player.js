@@ -1,8 +1,8 @@
-import {UPDATE_TIME, PLAY_SONG, PAUSE_SONG, LOAD_PLAYLIST, TOGGLE_SEEK, CHANGE_SONG} from '../constants/ActionTypes';
+import {UPDATE_TIME, PLAY_SONG, PAUSE_SONG, LOAD_PLAYLIST, TOGGLE_SEEK, CHANGE_DURATION, BEGIN_SEEK, END_SEEK, CHANGE_SONG} from '../constants/ActionTypes';
 import {getPrevSong, getNextSong} from '../utils/SongUtils';
 import {SEQUENCIAL, LOOP, REPEAT, SHUFFLE} from '../constants/PlayerConstants'
 
-export const handleSongEnded = () => {
+export const onEnded = () => {
   return (dispatch, getState) => {
     const {player, playlists} = getState();
     switch (player.mode) {
@@ -11,7 +11,6 @@ export const handleSongEnded = () => {
     }
   };
 };
-
 
 export const playNextSong = () => {
   return (dispatch, getState) => {
@@ -42,6 +41,18 @@ export const toggleSeek = () => {
   };
 }
 
+export const beginSeek = () => {
+  return {
+    type: BEGIN_SEEK,
+  };
+};
+
+export const endSeek = () => {
+  return {
+    type: END_SEEK,
+  };
+};
+
 export const updateTime = (currentTime) => {
   return {
     type: UPDATE_TIME,
@@ -49,7 +60,7 @@ export const updateTime = (currentTime) => {
   };
 };
 
-export const handleTimeUpdate = (newTime) => {
+export const onTimeUpdate = (newTime) => {
   return (dispatch, getState) => {
     const {player} = getState();
     // Do not update time normally if the user is playing with duration bar
@@ -63,7 +74,7 @@ export const handleTimeUpdate = (newTime) => {
   };
 };
 
-export const handleSeekTimeUpdate = (newTime) => {
+export const onSeekTimeUpdate = (newTime) => {
   return (dispatch, getState) => {
     const {player} = getState();
     // Do not update time normally if the user is playing with duration bar
@@ -72,31 +83,35 @@ export const handleSeekTimeUpdate = (newTime) => {
       dispatch(updateTime(newTime));
     }
   };
-}
+};
 
-// This should be moved to util functions
-const computeNewTimeOnSeek = (mouseEvent, seekBar, duration) => {
+export const seekOnClick = (newTime) => {
+  return (dispatch, getState) => {
+    dispatch(beginSeek());
 
-  let offset = mouseEvent.clientX - seekBar.offsetLeft;
-  let width = seekBar.offsetWidth;
-  if (offset < 0) offset = 0;
-  else if (offset > width) offset = width;
-  let percent = offset * 1.0 / width;
-  return Math.floor(duration * percent);
+    dispatch(onSeekTimeUpdate(newTime));
+
+    dispatch(endSeek());
+  };
 };
 
 /**
  * duration: song duration in seconds
  */
-export const seek = (mouseEvent, seekBar, audioElement, shouldUpdatePlayer) => {
-  return (dispatch, getState) => {
-    const newTime = computeNewTimeOnSeek(mouseEvent, seekBar, audioElement.duration);
-    // ONLY UPDATE currenttime in STATE!
-    dispatch(handleSeekTimeUpdate(newTime));
-    if (shouldUpdatePlayer) audioElement.currentTime = newTime;
-  };
-};
+// export const seek = (mouseEvent, seekBar, duration) => {
+//   return (dispatch, getState) => {
+//     const newTime = computeNewTimeOnSeek(mouseEvent, seekBar, duration);
+//     // ONLY UPDATE currenttime in STATE!
+//     dispatch(onSeekTimeUpdate(newTime));
+//   };
+// };
 
+export const changeDuration = (duration) => {
+  return {
+    type: CHANGE_DURATION,
+    duration,
+  }
+};
 
 /**
  * Change current song in player to newSong
@@ -117,11 +132,10 @@ export const togglePlay = () => {
   }
 }
 
-export const changeSongAndPlay = (newSong, audioElement) => {
+export const changeSongAndPlay = (newSong) => {
   return (dispatch, getState) => {
     dispatch(changeSong(newSong));
     dispatch(playSong());
-    if (audioElement) audioElement.play();
   };
 };
 

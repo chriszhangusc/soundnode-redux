@@ -8,3 +8,6 @@ export const LOAD_PLAYLIST = 'LOAD_PLAYLIST';
 export const TOGGLE_SEEK = 'TOGGLE_SEEK';
 export const TOGGLE_PLAY = 'TOGGLE_PLAY';
 export const CHANGE_SONG = 'CHANGE_SONG';
+export const BEGIN_SEEK = 'BEGIN_SEEK';
+export const END_SEEK = 'END_SEEK';
+export const CHANGE_DURATION = 'CHANGE_DURATION';

@@ -7,48 +7,51 @@ class PlayerDurationBar extends Component {
     this.renderPlayTime = this.renderPlayTime.bind(this);
     this.handleSeekMouseMove = this.handleSeekMouseMove.bind(this);
     this.handleDurationBarClick = this.handleDurationBarClick.bind(this);
-    this.handleSeekMouseUp = this.handleSeekMouseUp.bind(this);
+    this.handleDurationBarMouseUp = this.handleDurationBarMouseUp.bind(this);
   }
 
   handleDurationBarClick (e) {
-    const {player, audio, onDurationBarClick} = this.props;
-    onDurationBarClick(e, this._seekBar, audio);
+    const {player, onDurationBarClick} = this.props;
+    onDurationBarClick(e, this.seekBarElement, player.duration);
   }
 
   handleSeekMouseMove (e) {
-    const {player, audio, onSeekMouseMove} = this.props;
-    onSeekMouseMove(e, this._seekBar, audio);
+    const {player, onSeekMouseMove} = this.props;
+    onSeekMouseMove(e, this.seekBarElement, player.duration);
   }
 
-  handleSeekMouseUp (e) {
-    const {player, audio, onSeekMouseUp} = this.props;
-    onSeekMouseUp(audio, player.currentTime);
+  handleDurationBarMouseUp (e) {
+    const {player, onDurationBarMouseUp} = this.props;
+    onDurationBarMouseUp(e, this.seekBarElement, player.duration);
   }
 
   componentDidUpdate () {
-    const {player, audio} = this.props;
-    const {onSeekMouseMove, onSeekMouseUp} = this.props;
+    const {player} = this.props;
+    const {onSeekMouseUp} = this.props;
 
+    // This will be excuted many times!!!! Fix it!!
     if (player.isSeeking) {
       document.addEventListener('mousemove', this.handleSeekMouseMove);
-      document.addEventListener('mouseup', this.handleSeekMouseUp);
+      document.addEventListener('mouseup', onSeekMouseUp);
     } else {
       document.removeEventListener('mousemove', this.handleSeekMouseMove);
-      document.removeEventListener('mouseup', this.handleSeekMouseUp);
+      document.removeEventListener('mouseup', onSeekMouseUp);
     }
 
   }
 
   renderDurationBar () {
-    const {player, onDurationBarClick, onSeekMouseDown, audio} = this.props;
+    const {player, onDurationBarClick, onSeekMouseDown} = this.props;
     let {currentTime} = player;
     let {duration} = player.song;
+    // Move these code!!!
     let percent = currentTime * 100.0 / (duration / 1000.0);
     if (percent > 100) percent = 100;
     else if (percent < 0) percent = 0;
+
     return (
-      <div className="player-seek-bar-wrap" onClick={this.handleDurationBarClick}>
-        <div className="player-seek-bar" ref={seekBar => this._seekBar = seekBar}>
+      <div className="player-seek-bar-wrap" onMouseDown={onSeekMouseDown} onMouseUp={this.handleDurationBarMouseUp}>
+        <div className="player-seek-bar" ref={seekBar => this.seekBarElement = seekBar}>
           <div className="player-seek-duration-bar" style={{ width: `${percent}%` }} >
             <div className="player-seek-handle" onMouseDown={ onSeekMouseDown } />
           </div>

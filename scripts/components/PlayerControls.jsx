@@ -22,18 +22,18 @@ class PlayerControls extends Component {
   }
 
   renderForwardButton () {
-    const {playNextSong} = this.props;
+    const {onNextClick} = this.props;
     return (
-      <div className="player-button" onClick={playNextSong}>
+      <div className="player-button" onClick={onNextClick}>
         <i className="icon ion-ios-fastforward" />
       </div>
     );
   }
 
   renderBackwardButton () {
-    const {playPrevSong} = this.props;
+    const {onPrevClick} = this.props;
     return (
-      <div className="player-button" onClick={playPrevSong}>
+      <div className="player-button" onClick={onPrevClick}>
         <i className="icon ion-ios-rewind" />
       </div>
     );
@@ -52,8 +52,8 @@ class PlayerControls extends Component {
 
 const propTypes = {
   isPlaying: PropTypes.bool.isRequired,
-  playNextSong: PropTypes.func.isRequired,
-  playPrevSong: PropTypes.func.isRequired,
+  onNextClick: PropTypes.func.isRequired,
+  onPrevClick: PropTypes.func.isRequired,
   onPauseClick: PropTypes.func.isRequired,
   onPlayClick: PropTypes.func.isRequired,
   // currentSong: PropTypes.object.isRequired,

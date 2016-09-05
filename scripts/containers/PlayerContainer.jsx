@@ -1,58 +1,80 @@
 import React, {Component} from 'react';
-import Player from '../components/Player';
 import {connect} from 'react-redux';
-import {seek, playSong, pauseSong, changeSongAndPlay, handleTimeUpdate, handleSeekTimeUpdate, playNextSong, playPrevSong, toggleSeek, handleSongEnded} from '../actions/player';
+import {CLIENT_ID} from '../constants/Config';
+import * as PlayerActions from '../actions/player';
+
+import Player from '../components/Player';
+import PlayerAudio from '../components/PlayerAudio';
+import {computeNewTimeOnSeek} from '../utils/PlayerUtils';
 
 class PlayerContainer extends Component {
 
   constructor (props) {
     super(props);
+  }
+
+  componentDidMount () {
 
   }
 
   render () {
     // Should we do this in player or here: YES
-    const {player} = this.props;
+    const {player, onTimeUpdate, onEnded, onLoadedMetadata} = this.props;
 
-    if (player.song === null) {
-      return null;
-    } else {
-      return <Player {...this.props}/>;
-    }
+    if (player.song === null) return null;
+
+    // Put this in a util function
+    const streamUrl = `${player.song.stream_url}?client_id=${CLIENT_ID}`;
+
+    return (
+      <div>
+        <PlayerAudio
+          player={player}
+          src={streamUrl}
+          onTimeUpdate={onTimeUpdate}
+          onEnded={onEnded}
+          onLoadedMetadata={onLoadedMetadata}
+          />
+        <Player {...this.props} />
+      </div>
+    );
   }
 
 }
 
-
-
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     player: state.player,
   };
 };
 
-
-
-const mapDispatchToProps = (dispatch) => {
+// mapDispatchToProps will be re-invoked whenever the component receives new props.
+const mapDispatchToProps = (dispatch, ownProps) => {
 
   return {
     dispatch,
-    handleTimeUpdate: (newTime) => { dispatch(handleTimeUpdate(newTime)) },
-    handleSeekTimeUpdate: (newTime) => { dispatch(handleSeekTimeUpdate(newTime)) },
-    playPrevSong: () => {dispatch(playPrevSong())},
-    playNextSong: () => {dispatch(playNextSong())},
-    toggleSeek: () => {dispatch(toggleSeek())},
-    handleSongEnded: () => {dispatch(handleSongEnded())},
-    onPauseClick: (audioElement) => { dispatch(pauseSong()); audioElement.pause();},
-    onPlayClick: (song, audioElement) => { dispatch(changeSongAndPlay(song, audioElement)); },
+    // PlayerAudio functions:
+    onTimeUpdate: (e) => { dispatch(PlayerActions.onTimeUpdate(e.target.currentTime)) },
+    onEnded: () => { dispatch(PlayerActions.onEnded()) },
+    onLoadedMetadata: (duration) => { dispatch(PlayerActions.changeDuration(Math.floor(duration))) },
+    // PlayerControls functions:
+    onPlayClick: () => { dispatch(PlayerActions.playSong()); },
+    onPauseClick: () => { dispatch(PlayerActions.pauseSong());},
+    onNextClick: () => {dispatch(PlayerActions.playNextSong())},
+    onPrevClick: () => {dispatch(PlayerActions.playPrevSong())},
 
-    // Durating bar functions
-    onSeekMouseDown: () => { dispatch(toggleSeek()); },
-    onSeekMouseUp: (audioElement, newTime) => { dispatch(toggleSeek()); audioElement.currentTime = newTime; },
-    onSeekMouseMove: (e, seekBar, audioElement) => { dispatch(seek(e, seekBar, audioElement, false)); },
-    onDurationBarClick: (e, seekBar, audioElement) => { dispatch(seek(e, seekBar, audioElement, true)); },
-
-  }
+    // PlayerDurationBar functions
+    onSeekMouseDown: () => { dispatch(PlayerActions.beginSeek()); },
+    onSeekMouseUp: () => { dispatch(PlayerActions.endSeek()); },
+    onSeekMouseMove: (e, seekBar, duration) => {
+      let newTime = computeNewTimeOnSeek(e, seekBar, duration);
+      dispatch(PlayerActions.onSeekTimeUpdate(newTime));
+    },
+    onDurationBarMouseUp: (e, seekBar, duration) => {
+      let newTime = computeNewTimeOnSeek(e, seekBar, duration);
+      dispatch(PlayerActions.onSeekTimeUpdate(newTime));
+    },
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer);
