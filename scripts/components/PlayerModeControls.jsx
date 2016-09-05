@@ -8,11 +8,13 @@ class PlayerModeControls extends Component {
   render () {
     return (
       <div className="player-section">
-        <div className={`player-button ${(false ? ' active' : '')}`}>
+        <div className={`player-button active tooltip`}>
+          <span className="tooltiptext">Single Repeat</span>
           <i className="icon ion-loop" />
         </div>
 
-        <div className={`player-button ${(true ? ' active' : '')}`}>
+        <div className={`player-button } tooltip`}>
+          <span className="tooltiptext">Shuffle</span>
           <i className="icon ion-shuffle" />
         </div>
       </div>

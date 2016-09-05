@@ -1,12 +1,18 @@
 import {SEED_FETCH_URL} from '../constants/SongConstants';
+import {CLIENT_ID} from '../constants/Config';
+
 export const generateFetchUrl = (genre) => {
-  // make sure genre is valid
-  // concat fetch url
   // const url = `${SEED_FETCH_URL}&tags=${genre}`;
   const url = `${SEED_FETCH_URL}&genres=${genre}`;
   return url;
 };
 
+export const generateStreamUrl = (song) => {
+  let streamUrl = null;
+  if (song.stream_url)
+    streamUrl = `${song.stream_url}?client_id=${CLIENT_ID}`;
+  return streamUrl;
+}
 
 export const getPrevSong = (currentSong, playlist) => {
   let prevSong = null;

@@ -6,15 +6,11 @@ import * as PlayerActions from '../actions/player';
 import Player from '../components/Player';
 import PlayerAudio from '../components/PlayerAudio';
 import {computeNewTimeOnSeek} from '../utils/PlayerUtils';
-
+import {generateStreamUrl} from '../utils/SongUtils';
 class PlayerContainer extends Component {
 
   constructor (props) {
     super(props);
-  }
-
-  componentDidMount () {
-
   }
 
   render () {
@@ -24,7 +20,7 @@ class PlayerContainer extends Component {
     if (player.song === null) return null;
 
     // Put this in a util function
-    const streamUrl = `${player.song.stream_url}?client_id=${CLIENT_ID}`;
+    const streamUrl = generateStreamUrl(player.song);
 
     return (
       <div>
@@ -56,7 +52,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     // PlayerAudio functions:
     onTimeUpdate: (e) => { dispatch(PlayerActions.onTimeUpdate(e.target.currentTime)) },
     onEnded: () => { dispatch(PlayerActions.onEnded()) },
-    onLoadedMetadata: (duration) => { dispatch(PlayerActions.changeDuration(Math.floor(duration))) },
+    onLoadedMetadata: (audioElement) => { dispatch(PlayerActions.changeDuration(Math.floor(audio.duration))) },
     // PlayerControls functions:
     onPlayClick: () => { dispatch(PlayerActions.playSong()); },
     onPauseClick: () => { dispatch(PlayerActions.pauseSong());},
@@ -66,14 +62,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     // PlayerDurationBar functions
     onSeekMouseDown: () => { dispatch(PlayerActions.beginSeek()); },
     onSeekMouseUp: () => { dispatch(PlayerActions.endSeek()); },
-    onSeekMouseMove: (e, seekBar, duration) => {
-      let newTime = computeNewTimeOnSeek(e, seekBar, duration);
-      dispatch(PlayerActions.onSeekTimeUpdate(newTime));
-    },
-    onDurationBarMouseUp: (e, seekBar, duration) => {
-      let newTime = computeNewTimeOnSeek(e, seekBar, duration);
-      dispatch(PlayerActions.onSeekTimeUpdate(newTime));
-    },
+    onSeekMouseMove: (e, seekBar, duration) => { dispatch(PlayerActions.seek(e, seekBar, duration)); },
+    onDurationBarMouseUp: (e, seekBar, duration) => { dispatch(PlayerActions.seek(e, seekBar, duration)); },
   };
 };
 

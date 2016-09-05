@@ -1,6 +1,7 @@
-import {UPDATE_TIME, PLAY_SONG, PAUSE_SONG, LOAD_PLAYLIST, TOGGLE_SEEK, CHANGE_DURATION, BEGIN_SEEK, END_SEEK, CHANGE_SONG} from '../constants/ActionTypes';
+import * as ActionTypes from '../constants/ActionTypes';
 import {getPrevSong, getNextSong} from '../utils/SongUtils';
-import {SEQUENCIAL, LOOP, REPEAT, SHUFFLE} from '../constants/PlayerConstants'
+import {SEQUENCIAL, LOOP, REPEAT, SHUFFLE} from '../constants/PlayerConstants';
+import {computeNewTimeOnSeek} from '../utils/PlayerUtils';
 
 export const onEnded = () => {
   return (dispatch, getState) => {
@@ -37,25 +38,25 @@ export const playPrevSong = () => {
 
 export const toggleSeek = () => {
   return {
-    type: TOGGLE_SEEK,
+    type: ActionTypes.TOGGLE_SEEK,
   };
 }
 
 export const beginSeek = () => {
   return {
-    type: BEGIN_SEEK,
+    type: ActionTypes.BEGIN_SEEK,
   };
 };
 
 export const endSeek = () => {
   return {
-    type: END_SEEK,
+    type: ActionTypes.END_SEEK,
   };
 };
 
 export const updateTime = (currentTime) => {
   return {
-    type: UPDATE_TIME,
+    type: ActionTypes.UPDATE_TIME,
     currentTime,
   };
 };
@@ -98,17 +99,17 @@ export const seekOnClick = (newTime) => {
 /**
  * duration: song duration in seconds
  */
-// export const seek = (mouseEvent, seekBar, duration) => {
-//   return (dispatch, getState) => {
-//     const newTime = computeNewTimeOnSeek(mouseEvent, seekBar, duration);
-//     // ONLY UPDATE currenttime in STATE!
-//     dispatch(onSeekTimeUpdate(newTime));
-//   };
-// };
+export const seek = (mouseEvent, seekBar, duration) => {
+  return (dispatch, getState) => {
+    const newTime = computeNewTimeOnSeek(mouseEvent, seekBar, duration);
+    // ONLY UPDATE currenttime in STATE!
+    dispatch(onSeekTimeUpdate(newTime));
+  };
+};
 
 export const changeDuration = (duration) => {
   return {
-    type: CHANGE_DURATION,
+    type: ActionTypes.CHANGE_DURATION,
     duration,
   }
 };
@@ -118,7 +119,7 @@ export const changeDuration = (duration) => {
  */
 export const changeSong = (newSong) => {
   return {
-    type: CHANGE_SONG,
+    type: ActionTypes.CHANGE_SONG,
     song: newSong,
   };
 };
@@ -128,7 +129,7 @@ export const changeSong = (newSong) => {
  */
 export const togglePlay = () => {
   return {
-    type: TOGGLE_PLAY,
+    type: ActionTypes.TOGGLE_PLAY,
   }
 }
 
@@ -141,20 +142,20 @@ export const changeSongAndPlay = (newSong) => {
 
 export const playSong = () => {
   return {
-    type: PLAY_SONG,
+    type: ActionTypes.PLAY_SONG,
   };
 };
 
 // Pause currently playing song
 export const pauseSong = () => {
   return {
-    type: PAUSE_SONG,
+    type: ActionTypes.PAUSE_SONG,
   };
 };
 
 export const loadPlaylist = (genre) => {
   return {
-    type: LOAD_PLAYLIST,
+    type: ActionTypes.LOAD_PLAYLIST,
     playlist: genre,
   };
 };

@@ -7,3 +7,11 @@ export const computeNewTimeOnSeek = (mouseEvent, seekBar, duration) => {
   let percent = offset * 1.0 / width;
   return Math.floor(duration * percent);
 };
+
+
+export const computeCurrentPercent = (currentTime, duration) => {
+  let percent = currentTime * 100/ duration;
+  percent = percent > 100 ? 100 : percent;
+  percent = percent < 0 ? 0 : percent;
+  return percent;
+};

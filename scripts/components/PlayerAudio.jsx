@@ -3,19 +3,33 @@ import React, { PropTypes, Component } from 'react';
 class PlayerAudio extends Component {
   constructor(props) {
     super(props);
+    this.bindEventListeners = this.bindEventListeners.bind(this);
+    this.removeEventListeners = this.removeEventListeners.bind(this);
   }
 
-
-  componentDidMount () {
+  bindEventListeners () {
     const audio = this.audioElement;
-    const {onTimeUpdate, onEnded, onPlay, onPause, onDurationChange, onLoadedMetadata} = this.props;
+    const {onTimeUpdate, onEnded, onLoadedMetadata} = this.props;
     audio.addEventListener('timeupdate', onTimeUpdate);
     audio.addEventListener('ended', onEnded);
+    audio.addEventListener('loadedmetadata', onLoadedMetadata.bind(audio));
+  }
 
-    audio.addEventListener('loadedmetadata', () => {onLoadedMetadata(audio.duration)});
-    audio.addEventListener('play', () => console.log('play!!'));
-    audio.addEventListener('pause', () => console.log('pause!!'));
+  removeEventListeners () {
+    const audio = this.audioElement;
+    const {onTimeUpdate, onEnded, onLoadedMetadata} = this.props;
+    audio.removeEventListener('timeupdate', onTimeUpdate);
+    audio.removeEventListener('ended', onEnded);
+    audio.removeEventListener('loadedmetadata', onLoadedMetadata);
+  }
+
+  componentDidMount () {
+    this.bindEventListeners();
     audio.play();
+  }
+
+  componentWillUnmount () {
+    this.removeEventListeners();
   }
 
   componentDidUpdate (prevProps) {

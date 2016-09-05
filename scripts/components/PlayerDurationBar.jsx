@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {formatSecondsAsTime} from '../utils/FormatUtils';
+import {computeCurrentPercent} from '../utils/PlayerUtils';
+
 class PlayerDurationBar extends Component {
   constructor (props) {
     super(props);
@@ -25,15 +27,17 @@ class PlayerDurationBar extends Component {
     onDurationBarMouseUp(e, this.seekBarElement, player.duration);
   }
 
-  componentDidUpdate () {
+  componentDidUpdate (prevProps) {
     const {player} = this.props;
     const {onSeekMouseUp} = this.props;
+    const prevIsSeeking = prevProps.player.isSeeking;
 
-    // This will be excuted many times!!!! Fix it!!
-    if (player.isSeeking) {
+    if (!prevIsSeeking && player.isSeeking) {
+      // Listen to event only when we start seeking
       document.addEventListener('mousemove', this.handleSeekMouseMove);
       document.addEventListener('mouseup', onSeekMouseUp);
-    } else {
+    } else if (prevIsSeeking && !player.isSeeking) {
+      // Remove them only when we finish seeking
       document.removeEventListener('mousemove', this.handleSeekMouseMove);
       document.removeEventListener('mouseup', onSeekMouseUp);
     }
@@ -43,14 +47,14 @@ class PlayerDurationBar extends Component {
   renderDurationBar () {
     const {player, onDurationBarClick, onSeekMouseDown} = this.props;
     let {currentTime} = player;
-    let {duration} = player.song;
+    let duration = player.song.duration / 1000.0;
     // Move these code!!!
-    let percent = currentTime * 100.0 / (duration / 1000.0);
-    if (percent > 100) percent = 100;
-    else if (percent < 0) percent = 0;
+    let percent = computeCurrentPercent(currentTime, duration);
 
     return (
-      <div className="player-seek-bar-wrap" onMouseDown={onSeekMouseDown} onMouseUp={this.handleDurationBarMouseUp}>
+      <div className="player-seek-bar-wrap"
+        onMouseDown={onSeekMouseDown}
+        onMouseUp={this.handleDurationBarMouseUp}>
         <div className="player-seek-bar" ref={seekBar => this.seekBarElement = seekBar}>
           <div className="player-seek-duration-bar" style={{ width: `${percent}%` }} >
             <div className="player-seek-handle" onMouseDown={ onSeekMouseDown } />
