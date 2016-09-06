@@ -1,13 +1,14 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import {SHUFFLE, REPEAT, SEQUENCIAL, LOOP} from '../constants/PlayerConstants';
+import {SHUFFLE, REPEAT, SEQUENCIAL, LOOP, INITIAL_VOLUME} from '../constants/PlayerConstants';
 
 const INITIAL_STATE = {
   currentTime: 0,
-  volume: 1,
+  volume: INITIAL_VOLUME,
   song: null,
   isPlaying: false,
   playlist: null, // which playlist we are currently playing
   isSeeking: false,
+  volumeIsSeeking: false,
   duration: 0,
   mode: SEQUENCIAL,
 };
@@ -79,6 +80,16 @@ const player = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         volume: action.volume,
+      };
+    case ActionTypes.BEGIN_VOLUME_SEEK:
+      return {
+        ...state,
+        volumeIsSeeking: true,
+      };
+    case ActionTypes.END_VOLUME_SEEK:
+      return {
+        ...state,
+        volumeIsSeeking: false,
       };
     default:
       return state;

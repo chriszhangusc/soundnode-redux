@@ -7,57 +7,47 @@ class PlayerDurationBar extends Component {
     super(props);
     this.renderDurationBar = this.renderDurationBar.bind(this);
     this.renderPlayTime = this.renderPlayTime.bind(this);
-    this.handleSeekMouseMove = this.handleSeekMouseMove.bind(this);
-    this.handleDurationBarClick = this.handleDurationBarClick.bind(this);
-    this.handleDurationBarMouseUp = this.handleDurationBarMouseUp.bind(this);
+    this.handleDurationHandleMouseMove = this.handleDurationHandleMouseMove.bind(this);
   }
 
-  handleDurationBarClick (e) {
-    const {player, onDurationBarClick} = this.props;
-    onDurationBarClick(e, this.seekBarElement, player.duration);
-  }
-
-  handleSeekMouseMove (e) {
-    const {player, onSeekMouseMove} = this.props;
-    onSeekMouseMove(e, this.seekBarElement, player.duration);
-  }
-
-  handleDurationBarMouseUp (e) {
-    const {player, onDurationBarMouseUp} = this.props;
-    onDurationBarMouseUp(e, this.seekBarElement, player.duration);
+  // Can not use bind because it will fail when removing listener.
+  handleDurationHandleMouseMove (e) {
+    const {player, onDurationHandleMouseMove} = this.props;
+    onDurationHandleMouseMove(this.seekBarElement, player.duration, e);
   }
 
   componentDidUpdate (prevProps) {
     const {player} = this.props;
-    const {onSeekMouseUp} = this.props;
+    const {onDurationHandleMouseUp} = this.props;
     const prevIsSeeking = prevProps.player.isSeeking;
 
     if (!prevIsSeeking && player.isSeeking) {
       // Listen to event only when we start seeking
-      document.addEventListener('mousemove', this.handleSeekMouseMove);
-      document.addEventListener('mouseup', onSeekMouseUp);
+      document.addEventListener('mousemove', this.handleDurationHandleMouseMove);
+      document.addEventListener('mouseup', onDurationHandleMouseUp);
     } else if (prevIsSeeking && !player.isSeeking) {
       // Remove them only when we finish seeking
-      document.removeEventListener('mousemove', this.handleSeekMouseMove);
-      document.removeEventListener('mouseup', onSeekMouseUp);
+      document.removeEventListener('mousemove', this.handleDurationHandleMouseMove);
+      document.removeEventListener('mouseup', onDurationHandleMouseUp);
     }
 
   }
 
   renderDurationBar () {
-    const {player, onDurationBarClick, onSeekMouseDown} = this.props;
+    const {player, onDurationBarMouseUp, onDurationBarMouseDown, onDurationHandleMouseDown } = this.props;
     let {currentTime} = player;
+    // Use Reselect here?
     let duration = player.song.duration / 1000.0;
-    // Move these code!!!
+
     let percent = computeSeekBarPercent(currentTime, duration);
 
     return (
       <div className="player-seek-bar-wrap"
-        onMouseDown={onSeekMouseDown}
-        onMouseUp={this.handleDurationBarMouseUp}>
+        onMouseDown={onDurationBarMouseDown}
+        onMouseUp={onDurationBarMouseUp.bind(null, this.seekBarElement, player.duration)}>
         <div className="player-seek-bar" ref={seekBar => this.seekBarElement = seekBar}>
           <div className="player-seek-duration-bar" style={{ width: `${percent}%` }} >
-            <div className="player-seek-handle" onMouseDown={ onSeekMouseDown } />
+            <div className="player-seek-handle" onMouseDown={ onDurationHandleMouseDown } />
           </div>
         </div>
       </div>

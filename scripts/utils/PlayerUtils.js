@@ -8,7 +8,7 @@ const computeSeekPercent = (clientX, offsetLeft, offsetWidth) => {
 // This should be moved to util functions
 export const computeNewTimeOnSeek = (mouseEvent, seekBar, duration) => {
   let percent = computeSeekPercent(mouseEvent.clientX, seekBar.offsetLeft, seekBar.offsetWidth);
-  return Math.floor(percent * duration);
+  return percent * duration;
 };
 
 export const computeNewVolumeOnSeek = (mouseEvent, volumeBar) => {

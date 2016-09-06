@@ -23,8 +23,8 @@ class Player extends Component {
     // Currently playing song
     const {onTimeUpdate} = this.props;
     const {player, onNextClick, onPrevClick, onPlayClick, onPauseClick} = this.props;
-    const {onSeekMouseDown, onSeekMouseMove, onSeekMouseUp, onDurationBarClick, onDurationBarMouseUp} = this.props;
-    const {onVolumeBarClick} = this.props;
+    const {onDurationHandleMouseDown, onDurationHandleMouseMove, onDurationHandleMouseUp, onDurationBarMouseDown, onDurationBarMouseUp} = this.props;
+    const {onVolumeBarMouseUp, onVolumeBarMouseDown, onVolumeHandleMouseDown, onVolumeHandleMouseMove, onVolumeHandleMouseUp} = this.props;
     // Not sure if we should write this logic here
     const currentSong = player.song;
 
@@ -44,12 +44,11 @@ class Player extends Component {
               />
 
             <PlayerDurationBar
-              audio={this._audio}
               player={player}
-              onSeekMouseDown={onSeekMouseDown}
-              onSeekMouseMove={onSeekMouseMove}
-              onSeekMouseUp={onSeekMouseUp}
-              onDurationBarClick={onDurationBarClick}
+              onDurationHandleMouseDown={onDurationHandleMouseDown}
+              onDurationHandleMouseMove={onDurationHandleMouseMove}
+              onDurationHandleMouseUp={onDurationHandleMouseUp}
+              onDurationBarMouseDown={onDurationBarMouseDown}
               onDurationBarMouseUp={onDurationBarMouseUp}
               />
 
@@ -57,7 +56,12 @@ class Player extends Component {
 
             <PlayerVolumeControls
               volume={player.volume}
-              onVolumeBarClick={onVolumeBarClick}
+              player={player}
+              onVolumeBarMouseDown={onVolumeBarMouseDown}
+              onVolumeBarMouseUp={onVolumeBarMouseUp}
+              onVolumeHandleMouseDown={onVolumeHandleMouseDown}
+              onVolumeHandleMouseMove={onVolumeHandleMouseMove}
+              onVolumeHandleMouseUp={onVolumeHandleMouseUp}
               />
 
           </div>

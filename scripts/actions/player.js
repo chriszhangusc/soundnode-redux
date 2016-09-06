@@ -99,11 +99,11 @@ export const seekOnClick = (newTime) => {
 /**
  * duration: song duration in seconds
  */
-export const seek = (mouseEvent, seekBar, duration) => {
+export const updateTimeOnSeek = (mouseEvent, seekBar, duration) => {
   return (dispatch, getState) => {
-    const newTime = computeNewTimeOnSeek(mouseEvent, seekBar, duration);
+    let newTime = computeNewTimeOnSeek(mouseEvent, seekBar, duration);
     // ONLY UPDATE currenttime in STATE!
-    dispatch(onSeekTimeUpdate(newTime));
+    dispatch(onSeekTimeUpdate(Math.floor(newTime)));
   };
 };
 
@@ -167,9 +167,21 @@ export const changeVolume = (volume) => {
   };
 };
 
-export const onVolumeBarClick = (e, volumeBar) => {
+export const updateVolumeOnSeek = (e, volumeBar) => {
   return (dispatch, getState) => {
     let newVolume = computeNewVolumeOnSeek(e, volumeBar);
     dispatch(changeVolume(newVolume));
+  };
+};
+
+export const beginVolumeSeek = () => {
+  return {
+    type: ActionTypes.BEGIN_VOLUME_SEEK,
+  };
+};
+
+export const endVolumeSeek = () => {
+  return {
+    type: ActionTypes.END_VOLUME_SEEK,
   };
 };

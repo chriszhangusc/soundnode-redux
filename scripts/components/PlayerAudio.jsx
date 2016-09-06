@@ -43,6 +43,8 @@ class PlayerAudio extends Component {
     const currentTime = player.currentTime;
     const prevVolume = prevProps.player.volume;
     const currVolume = this.props.player.volume;
+    const prevVolumeSeek = prevProps.player.volumeIsSeeking;
+    const currVolumeSeek = this.props.player.volumeIsSeeking;
     // If seeking status changed from true to false, then we should update time in our audioElement
     if (prevSeek && !currentSeek) {
       audioElement.currentTime = currentTime;
@@ -57,8 +59,7 @@ class PlayerAudio extends Component {
       audioElement.paused ? audioElement.play(): audioElement.pause();
     }
 
-    // If there is a change in volume, update volume
-    if (prevVolume != currVolume) {
+    if (prevVolumeSeek && !currVolumeSeek) {
       audioElement.volume = currVolume;
     }
 

@@ -12,3 +12,5 @@ export const BEGIN_SEEK = 'BEGIN_SEEK';
 export const END_SEEK = 'END_SEEK';
 export const CHANGE_DURATION = 'CHANGE_DURATION';
 export const CHANGE_VOLUME = 'CHANGE_VOLUME';
+export const BEGIN_VOLUME_SEEK = 'BEGIN_VOLUME_SEEK';
+export const END_VOLUME_SEEK = 'END_VOLUME_SEEK';
