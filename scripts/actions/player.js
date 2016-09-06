@@ -1,7 +1,7 @@
 import * as ActionTypes from '../constants/ActionTypes';
 import {getPrevSong, getNextSong} from '../utils/SongUtils';
 import {SEQUENCIAL, LOOP, REPEAT, SHUFFLE} from '../constants/PlayerConstants';
-import {computeNewTimeOnSeek} from '../utils/PlayerUtils';
+import {computeNewTimeOnSeek, computeNewVolumeOnSeek} from '../utils/PlayerUtils';
 
 export const onEnded = () => {
   return (dispatch, getState) => {
@@ -157,5 +157,19 @@ export const loadPlaylist = (genre) => {
   return {
     type: ActionTypes.LOAD_PLAYLIST,
     playlist: genre,
+  };
+};
+
+export const changeVolume = (volume) => {
+  return {
+    type: ActionTypes.CHANGE_VOLUME,
+    volume,
+  };
+};
+
+export const onVolumeBarClick = (e, volumeBar) => {
+  return (dispatch, getState) => {
+    let newVolume = computeNewVolumeOnSeek(e, volumeBar);
+    dispatch(changeVolume(newVolume));
   };
 };

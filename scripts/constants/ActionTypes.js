@@ -11,3 +11,4 @@ export const CHANGE_SONG = 'CHANGE_SONG';
 export const BEGIN_SEEK = 'BEGIN_SEEK';
 export const END_SEEK = 'END_SEEK';
 export const CHANGE_DURATION = 'CHANGE_DURATION';
+export const CHANGE_VOLUME = 'CHANGE_VOLUME';

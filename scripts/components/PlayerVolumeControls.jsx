@@ -3,9 +3,18 @@ import React, { PropTypes, Component } from 'react';
 class PlayerVolumeControls extends Component {
   constructor(props) {
     super(props);
+    this.handleVolumeBarClick = this.handleVolumeBarClick.bind(this);
+  }
+
+  handleVolumeBarClick (e) {
+    const {onVolumeBarClick} = this.props;
+    onVolumeBarClick(e, this.volumeBar);
   }
 
   render () {
+
+    const {onVolumeBarClick} = this.props;
+    const {volume} = this.props;
     return (
       <div className="player-section">
         <div className="player-button player-volume-button" >
@@ -15,10 +24,10 @@ class PlayerVolumeControls extends Component {
           </div>
         </div>
         <div className="player-volume">
-          <div className="player-seek-bar-wrap">
-            <div className="player-seek-bar" ref="volumeBar">
-              <div className="player-seek-duration-bar" style={{ width: `50%` }} >
-                <div className="player-seek-handle"></div>
+          <div className="player-seek-bar-wrap" onClick={this.handleVolumeBarClick}>
+            <div className="player-seek-bar" ref={ref => this.volumeBar = ref}>
+              <div className="player-seek-duration-bar" style={{ width: `${volume * 100}%` }} >
+                <div className="player-seek-handle" />
               </div>
             </div>
           </div>
@@ -29,7 +38,9 @@ class PlayerVolumeControls extends Component {
 
 }
 
-PlayerVolumeControls.PropTypes = {
+PlayerVolumeControls.propTypes = {
+  onVolumeBarClick: PropTypes.func.isRequired,
+  // onVolumeHandleMouseDown: PropTypes.func.isRequired,
 
 };
 

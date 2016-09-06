@@ -54,16 +54,20 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onEnded: () => { dispatch(PlayerActions.onEnded()) },
     onLoadedMetadata: (audioElement) => { dispatch(PlayerActions.changeDuration(Math.floor(audio.duration))) },
     // PlayerControls functions:
-    onPlayClick: () => { dispatch(PlayerActions.playSong()); },
-    onPauseClick: () => { dispatch(PlayerActions.pauseSong());},
-    onNextClick: () => {dispatch(PlayerActions.playNextSong())},
-    onPrevClick: () => {dispatch(PlayerActions.playPrevSong())},
-
+    onPlayClick: () => { dispatch(PlayerActions.playSong()) },
+    onPauseClick: () => { dispatch(PlayerActions.pauseSong()) },
+    onNextClick: () => { dispatch(PlayerActions.playNextSong()) },
+    onPrevClick: () => { dispatch(PlayerActions.playPrevSong()) },
     // PlayerDurationBar functions
-    onSeekMouseDown: () => { dispatch(PlayerActions.beginSeek()); },
-    onSeekMouseUp: () => { dispatch(PlayerActions.endSeek()); },
-    onSeekMouseMove: (e, seekBar, duration) => { dispatch(PlayerActions.seek(e, seekBar, duration)); },
-    onDurationBarMouseUp: (e, seekBar, duration) => { dispatch(PlayerActions.seek(e, seekBar, duration)); },
+    onSeekMouseDown: () => { dispatch(PlayerActions.beginSeek()) },
+    onSeekMouseUp: () => { dispatch(PlayerActions.endSeek()) },
+    onSeekMouseMove: (e, seekBar, duration) => { dispatch(PlayerActions.seek(e, seekBar, duration)) },
+    onDurationBarMouseUp: (e, seekBar, duration) => { dispatch(PlayerActions.seek(e, seekBar, duration)) },
+    // VolumeBar functions
+    onVolumeMouseDown: () => {  },
+    onVolumeMouseUp: () => {  },
+    onVolumeMouseMove: () => {  },
+    onVolumeBarClick: (e, volumeBar) => { dispatch(PlayerActions.onVolumeBarClick(e, volumeBar)) }, 
   };
 };
 

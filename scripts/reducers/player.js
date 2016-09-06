@@ -1,9 +1,9 @@
-import {PLAY_SONG, PAUSE_SONG, UPDATE_TIME, LOAD_PLAYLIST, TOGGLE_SEEK, BEGIN_SEEK, CHANGE_DURATION, END_SEEK, TOGGLE_PLAY, CHANGE_SONG} from '../constants/ActionTypes';
+import * as ActionTypes from '../constants/ActionTypes';
 import {SHUFFLE, REPEAT, SEQUENCIAL, LOOP} from '../constants/PlayerConstants';
 
 const INITIAL_STATE = {
   currentTime: 0,
-  volume: 50,
+  volume: 1,
   song: null,
   isPlaying: false,
   playlist: null, // which playlist we are currently playing
@@ -15,35 +15,35 @@ const INITIAL_STATE = {
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
 
-    case LOAD_PLAYLIST:
+    case ActionTypes.LOAD_PLAYLIST:
       return {
         ...state,
         playlist: action.playlist
       };
 
-    case TOGGLE_PLAY:
+    case ActionTypes.OGGLE_PLAY:
       return {
         ...state,
         isPlaying: !state.isPlaying
       };
 
-    case PLAY_SONG:
+    case ActionTypes.PLAY_SONG:
       return {
         ...state,
         isPlaying: true,
       };
 
-    case PAUSE_SONG:
+    case ActionTypes.PAUSE_SONG:
       return {
         ...state,
         isPlaying: false,
       };
-    case CHANGE_DURATION:
+    case ActionTypes.CHANGE_DURATION:
       return {
         ...state,
         duration: action.duration,
       };
-    case CHANGE_SONG:
+    case ActionTypes.CHANGE_SONG:
       return {
         ...state,
         song: {
@@ -51,30 +51,35 @@ const player = (state = INITIAL_STATE, action) => {
         },
       };
 
-    case UPDATE_TIME:
+    case ActionTypes.UPDATE_TIME:
       return {
         ...state,
         currentTime: action.currentTime,
       };
 
-    case TOGGLE_SEEK:
+    case ActionTypes.TOGGLE_SEEK:
       return {
         ...state,
         isSeeking: !state.isSeeking,
       };
 
-    case BEGIN_SEEK:
+    case ActionTypes.BEGIN_SEEK:
       return {
         ...state,
         isSeeking: true,
       };
 
-    case END_SEEK:
+    case ActionTypes.END_SEEK:
       return {
         ...state,
         isSeeking: false,
       };
 
+    case ActionTypes.CHANGE_VOLUME:
+      return {
+        ...state,
+        volume: action.volume,
+      };
     default:
       return state;
   }

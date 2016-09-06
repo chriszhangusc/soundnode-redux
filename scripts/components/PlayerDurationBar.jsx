@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {formatSecondsAsTime} from '../utils/FormatUtils';
-import {computeCurrentPercent} from '../utils/PlayerUtils';
+import {computeSeekBarPercent} from '../utils/PlayerUtils';
 
 class PlayerDurationBar extends Component {
   constructor (props) {
@@ -49,7 +49,7 @@ class PlayerDurationBar extends Component {
     let {currentTime} = player;
     let duration = player.song.duration / 1000.0;
     // Move these code!!!
-    let percent = computeCurrentPercent(currentTime, duration);
+    let percent = computeSeekBarPercent(currentTime, duration);
 
     return (
       <div className="player-seek-bar-wrap"
@@ -93,10 +93,7 @@ class PlayerDurationBar extends Component {
   }
 }
 
-const propTypes = {
-  audio: PropTypes.object,
+PlayerDurationBar.propTypes = {
 };
-
-PlayerDurationBar.propTypes = propTypes;
 
 export default PlayerDurationBar;

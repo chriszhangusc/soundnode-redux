@@ -25,6 +25,7 @@ class PlayerAudio extends Component {
 
   componentDidMount () {
     this.bindEventListeners();
+    const audio = this.audioElement;
     audio.play();
   }
 
@@ -40,6 +41,8 @@ class PlayerAudio extends Component {
     const prevSeek = prevProps.player.isSeeking;
     const currentSeek = player.isSeeking;
     const currentTime = player.currentTime;
+    const prevVolume = prevProps.player.volume;
+    const currVolume = this.props.player.volume;
     // If seeking status changed from true to false, then we should update time in our audioElement
     if (prevSeek && !currentSeek) {
       audioElement.currentTime = currentTime;
@@ -54,6 +57,11 @@ class PlayerAudio extends Component {
       audioElement.paused ? audioElement.play(): audioElement.pause();
     }
 
+    // If there is a change in volume, update volume
+    if (prevVolume != currVolume) {
+      audioElement.volume = currVolume;
+    }
+
   }
 
   componentWillUnmount () {
@@ -65,8 +73,10 @@ class PlayerAudio extends Component {
   render () {
     const {src, audioRef} = this.props;
     return (
-      <audio id="audio" preload
-        ref={ ref => this.audioElement = ref} src={src} />
+      <audio id="audio"
+        preload
+        ref={ ref => this.audioElement = ref}
+        src={src} />
     );
   }
 

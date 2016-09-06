@@ -24,10 +24,10 @@ class Player extends Component {
     const {onTimeUpdate} = this.props;
     const {player, onNextClick, onPrevClick, onPlayClick, onPauseClick} = this.props;
     const {onSeekMouseDown, onSeekMouseMove, onSeekMouseUp, onDurationBarClick, onDurationBarMouseUp} = this.props;
+    const {onVolumeBarClick} = this.props;
     // Not sure if we should write this logic here
     const currentSong = player.song;
 
-    const streamUrl = `${player.song.stream_url}?client_id=${CLIENT_ID}`;
     return (
       <div className="player">
         <div className="container">
@@ -55,7 +55,10 @@ class Player extends Component {
 
             <PlayerModeControls />
 
-            <PlayerVolumeControls />
+            <PlayerVolumeControls
+              volume={player.volume}
+              onVolumeBarClick={onVolumeBarClick}
+              />
 
           </div>
         </div>
