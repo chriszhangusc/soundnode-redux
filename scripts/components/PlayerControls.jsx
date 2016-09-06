@@ -10,7 +10,8 @@ class PlayerControls extends Component {
 
 
   renderPlayPauseButton () {
-    const {isPlaying, onPauseClick, onPlayClick} = this.props;
+    const {player, onPauseClick, onPlayClick} = this.props;
+    const isPlaying = player.isPlaying;
     return (
       <div className="player-button">
         <i
@@ -50,15 +51,8 @@ class PlayerControls extends Component {
   }
 }
 
-const propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-  onNextClick: PropTypes.func.isRequired,
-  onPrevClick: PropTypes.func.isRequired,
-  onPauseClick: PropTypes.func.isRequired,
-  onPlayClick: PropTypes.func.isRequired,
-  // currentSong: PropTypes.object.isRequired,
-};
+PlayerControls.propTypes = {
 
-PlayerControls.propTypes = propTypes;
+};
 
 export default PlayerControls;

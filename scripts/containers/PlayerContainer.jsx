@@ -1,12 +1,14 @@
+// Import React Redux
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {CLIENT_ID} from '../constants/Config';
+// Import Actions and Utils
 import * as PlayerActions from '../actions/player';
-
-import Player from '../components/Player';
-import PlayerAudio from '../components/PlayerAudio';
 import {computeNewTimeOnSeek} from '../utils/PlayerUtils';
 import {generateStreamUrl} from '../utils/SongUtils';
+// Import Components
+import Player from '../components/Player';
+import PlayerAudio from '../components/PlayerAudio';
+
 class PlayerContainer extends Component {
 
   constructor (props) {
@@ -14,22 +16,16 @@ class PlayerContainer extends Component {
   }
 
   render () {
-    // Should we do this in player or here: YES
-    const {player, onTimeUpdate, onEnded, onLoadedMetadata} = this.props;
-
+    const {player, ...others} = this.props;
     if (player.song === null) return null;
 
-    // Put this in a util function
     const streamUrl = generateStreamUrl(player.song);
-
     return (
       <div>
         <PlayerAudio
           player={player}
           src={streamUrl}
-          onTimeUpdate={onTimeUpdate}
-          onEnded={onEnded}
-          onLoadedMetadata={onLoadedMetadata}
+          {...others}
           />
         <Player {...this.props} />
       </div>
@@ -63,7 +59,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onDurationHandleMouseUp: () => { dispatch(PlayerActions.endSeek()) },
     onDurationHandleMouseMove: (seekBar, duration, e) => { dispatch(PlayerActions.updateTimeOnSeek(e, seekBar, duration)) },
     onDurationBarMouseUp: (seekBar, duration, e) => { dispatch(PlayerActions.updateTimeOnSeek(e, seekBar, duration)) },
-    onDurationBarMouseDown: () => { dispatch(PlayerActions.beginSeek()) }, 
+    onDurationBarMouseDown: () => { dispatch(PlayerActions.beginSeek()) },
     // VolumeBar functions
     onVolumeHandleMouseDown: () => { dispatch(PlayerActions.beginVolumeSeek()) },
     onVolumeHandleMouseUp: () => { dispatch(PlayerActions.endVolumeSeek()) },

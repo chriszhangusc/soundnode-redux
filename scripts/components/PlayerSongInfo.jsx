@@ -6,7 +6,8 @@ class PlayerSongInfo extends Component {
   }
 
   render () {
-    const {currentSong} = this.props;
+    const {player} = this.props;
+    const currentSong = player.song;
     const title = currentSong.title;
     const username = currentSong.user.username;
     return (
@@ -26,9 +27,6 @@ class PlayerSongInfo extends Component {
 }
 
 const propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-  currentSong: PropTypes.object.isRequired,
-
 };
 
 PlayerSongInfo.propTypes = propTypes;

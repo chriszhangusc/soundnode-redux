@@ -1,7 +1,101 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import {getPrevSong, getNextSong} from '../utils/SongUtils';
 import {SEQUENCIAL, LOOP, REPEAT, SHUFFLE} from '../constants/PlayerConstants';
+import {getPrevSong, getNextSong} from '../utils/SongUtils';
 import {computeNewTimeOnSeek, computeNewVolumeOnSeek} from '../utils/PlayerUtils';
+
+/* Pure functions */
+export const toggleSeek = () => {
+  return {
+    type: ActionTypes.TOGGLE_SEEK,
+  };
+}
+
+export const beginSeek = () => {
+  return {
+    type: ActionTypes.BEGIN_SEEK,
+  };
+};
+
+export const endSeek = () => {
+  return {
+    type: ActionTypes.END_SEEK,
+  };
+};
+
+export const updateTime = (currentTime) => {
+  return {
+    type: ActionTypes.UPDATE_TIME,
+    currentTime,
+  };
+};
+
+export const changeDuration = (duration) => {
+  return {
+    type: ActionTypes.CHANGE_DURATION,
+    duration,
+  }
+};
+
+/**
+ * Change current song in player to newSong
+ */
+export const changeSong = (newSong) => {
+  return {
+    type: ActionTypes.CHANGE_SONG,
+    song: newSong,
+  };
+};
+
+/**
+ * Toggle the playing status of currently playing song in player
+ */
+export const togglePlay = () => {
+  return {
+    type: ActionTypes.TOGGLE_PLAY,
+  }
+}
+
+export const playSong = () => {
+  return {
+    type: ActionTypes.PLAY_SONG,
+  };
+};
+
+// Pause currently playing song
+export const pauseSong = () => {
+  return {
+    type: ActionTypes.PAUSE_SONG,
+  };
+};
+
+export const loadPlaylist = (genre) => {
+  return {
+    type: ActionTypes.LOAD_PLAYLIST,
+    playlist: genre,
+  };
+};
+
+export const changeVolume = (volume) => {
+  return {
+    type: ActionTypes.CHANGE_VOLUME,
+    volume,
+  };
+};
+
+
+export const beginVolumeSeek = () => {
+  return {
+    type: ActionTypes.BEGIN_VOLUME_SEEK,
+  };
+};
+
+export const endVolumeSeek = () => {
+  return {
+    type: ActionTypes.END_VOLUME_SEEK,
+  };
+};
+
+/* Thunk Functions */
 
 export const onEnded = () => {
   return (dispatch, getState) => {
@@ -36,31 +130,6 @@ export const playPrevSong = () => {
   };
 };
 
-export const toggleSeek = () => {
-  return {
-    type: ActionTypes.TOGGLE_SEEK,
-  };
-}
-
-export const beginSeek = () => {
-  return {
-    type: ActionTypes.BEGIN_SEEK,
-  };
-};
-
-export const endSeek = () => {
-  return {
-    type: ActionTypes.END_SEEK,
-  };
-};
-
-export const updateTime = (currentTime) => {
-  return {
-    type: ActionTypes.UPDATE_TIME,
-    currentTime,
-  };
-};
-
 export const onTimeUpdate = (newTime) => {
   return (dispatch, getState) => {
     const {player} = getState();
@@ -86,16 +155,6 @@ export const onSeekTimeUpdate = (newTime) => {
   };
 };
 
-export const seekOnClick = (newTime) => {
-  return (dispatch, getState) => {
-    dispatch(beginSeek());
-
-    dispatch(onSeekTimeUpdate(newTime));
-
-    dispatch(endSeek());
-  };
-};
-
 /**
  * duration: song duration in seconds
  */
@@ -107,66 +166,6 @@ export const updateTimeOnSeek = (mouseEvent, seekBar, duration) => {
   };
 };
 
-export const changeDuration = (duration) => {
-  return {
-    type: ActionTypes.CHANGE_DURATION,
-    duration,
-  }
-};
-
-/**
- * Change current song in player to newSong
- */
-export const changeSong = (newSong) => {
-  return {
-    type: ActionTypes.CHANGE_SONG,
-    song: newSong,
-  };
-};
-
-/**
- * Toggle the playing status of currently playing song in player
- */
-export const togglePlay = () => {
-  return {
-    type: ActionTypes.TOGGLE_PLAY,
-  }
-}
-
-export const changeSongAndPlay = (newSong) => {
-  return (dispatch, getState) => {
-    dispatch(changeSong(newSong));
-    dispatch(playSong());
-  };
-};
-
-export const playSong = () => {
-  return {
-    type: ActionTypes.PLAY_SONG,
-  };
-};
-
-// Pause currently playing song
-export const pauseSong = () => {
-  return {
-    type: ActionTypes.PAUSE_SONG,
-  };
-};
-
-export const loadPlaylist = (genre) => {
-  return {
-    type: ActionTypes.LOAD_PLAYLIST,
-    playlist: genre,
-  };
-};
-
-export const changeVolume = (volume) => {
-  return {
-    type: ActionTypes.CHANGE_VOLUME,
-    volume,
-  };
-};
-
 export const updateVolumeOnSeek = (e, volumeBar) => {
   return (dispatch, getState) => {
     let newVolume = computeNewVolumeOnSeek(e, volumeBar);
@@ -174,14 +173,9 @@ export const updateVolumeOnSeek = (e, volumeBar) => {
   };
 };
 
-export const beginVolumeSeek = () => {
-  return {
-    type: ActionTypes.BEGIN_VOLUME_SEEK,
-  };
-};
-
-export const endVolumeSeek = () => {
-  return {
-    type: ActionTypes.END_VOLUME_SEEK,
+export const changeSongAndPlay = (newSong) => {
+  return (dispatch, getState) => {
+    dispatch(changeSong(newSong));
+    dispatch(playSong());
   };
 };

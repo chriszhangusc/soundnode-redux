@@ -28,16 +28,24 @@ class PlayerVolumeControls extends Component {
 
   }
 
+  renderVolumeIcon () {
+    const volume = this.props.player.volume;
+    // Render different icon depending on current volume.
+    return (
+      <i className="icon ion-volume-medium" />
+    );
+  }
+
   render () {
 
     const {onVolumeBarMouseDown, onVolumeHandleMouseDown, onVolumeBarMouseUp} = this.props;
-    const {volume} = this.props;
+    const {player} = this.props;
+    const volume = player.volume;
     return (
       <div className="player-section">
         <div className="player-button player-volume-button" >
           <div className="player-volume-button-wrap">
-            <i className="icon ion-android-volume-down" />
-            <i className="icon ion-android-volume-mute" />
+            {this.renderVolumeIcon()}
           </div>
         </div>
         <div className="player-volume">

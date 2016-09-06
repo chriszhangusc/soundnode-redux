@@ -22,7 +22,7 @@ const player = (state = INITIAL_STATE, action) => {
         playlist: action.playlist
       };
 
-    case ActionTypes.OGGLE_PLAY:
+    case ActionTypes.TOGGLE_PLAY:
       return {
         ...state,
         isPlaying: !state.isPlaying
