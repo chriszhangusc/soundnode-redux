@@ -48,7 +48,7 @@
     padding: 4px;
 
     & > i {
-        color: #ccc;
+        color: $player-button-color;
     }
 
     &.active {
@@ -142,6 +142,12 @@
 }
 
 .player-volume-button-wrap {
+
+    & > i {
+      font-size: 1.1rem;
+      color: $player-button-color;
+    }
+
     position: relative;
 
     .ion-android-volume-up, .ion-android-volume-down {

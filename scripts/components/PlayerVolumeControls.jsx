@@ -3,6 +3,7 @@ import React, { PropTypes, Component } from 'react';
 class PlayerVolumeControls extends Component {
   constructor(props) {
     super(props);
+    this.renderVolumeIcon = this.renderVolumeIcon.bind(this);
     this.handleVolumeMouseMove = this.handleVolumeMouseMove.bind(this);
   }
 
@@ -30,9 +31,20 @@ class PlayerVolumeControls extends Component {
 
   renderVolumeIcon () {
     const volume = this.props.player.volume;
+    const {onToggleMuteClick} = this.props;
     // Render different icon depending on current volume.
+    let icon = null;
+    if (volume <= 0) {
+      icon = 'ion-volume-mute';
+    } else if (volume > 0 && volume < 0.3) {
+      icon = 'ion-volume-low';
+    } else if (volume >= 0.3 && volume < 0.7) {
+      icon = 'ion-volume-medium';
+    } else {
+      icon = 'ion-volume-high';
+    }
     return (
-      <i className="icon ion-volume-medium" />
+      <i className={`icon ${icon}`} onClick={onToggleMuteClick}/>
     );
   }
 

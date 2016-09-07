@@ -16,6 +16,7 @@ class PlayerContainer extends Component {
   }
 
   render () {
+    // Extract props that we care, and pass the other props as others.
     const {player, ...others} = this.props;
     if (player.song === null) return null;
 
@@ -66,6 +67,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onVolumeHandleMouseMove: (volumeBar, e) => { dispatch(PlayerActions.updateVolumeOnSeek(e, volumeBar)) },
     onVolumeBarMouseDown: () => { dispatch(PlayerActions.beginVolumeSeek()) },
     onVolumeBarMouseUp: (volumeBar, e) => { dispatch(PlayerActions.updateVolumeOnSeek(e, volumeBar)) },
+    onToggleMuteClick: () => { dispatch(PlayerActions.toggleMute()) }, 
   };
 };
 

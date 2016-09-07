@@ -95,6 +95,22 @@ export const endVolumeSeek = () => {
   };
 };
 
+export const toggleMute = () => {
+  return (dispatch, getState) => {
+    const currVolume = getState().player.volume;
+    if (currVolume === 0) {
+      // Get previous volume from localstorage
+      let lastVolume = localStorage.getItem('lastVolume');
+
+      dispatch(changeVolume(lastVolume));
+    } else {
+      // Put current volume into localstorage and change current volume to 0
+      localStorage.setItem('lastVolume', currVolume);
+      dispatch(changeVolume(0));
+    }
+  };
+};
+
 /* Thunk Functions */
 
 export const onEnded = () => {
