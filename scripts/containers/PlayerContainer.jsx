@@ -8,6 +8,7 @@ import {generateStreamUrl} from '../utils/SongUtils';
 // Import Components
 import Player from '../components/Player';
 import PlayerAudio from '../components/PlayerAudio';
+import {LOOP, REPEAT, SHUFFLE} from '../constants/PlayerConstants';
 
 class PlayerContainer extends Component {
 
@@ -49,7 +50,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     // PlayerAudio functions:
     onTimeUpdate: (e) => { dispatch(PlayerActions.onTimeUpdate(e.target.currentTime)) },
     onEnded: () => { dispatch(PlayerActions.onEnded()) },
-    onLoadedMetadata: (audioElement) => { dispatch(PlayerActions.changeDuration(Math.floor(audio.duration))) },
+    onLoadedMetadata: (audioElement) => { dispatch(PlayerActions.changeDuration(Math.floor(audioElement.duration))) },
     // PlayerControls functions:
     onPlayClick: () => { dispatch(PlayerActions.playSong()) },
     onPauseClick: () => { dispatch(PlayerActions.pauseSong()) },
@@ -61,13 +62,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onDurationHandleMouseMove: (seekBar, duration, e) => { dispatch(PlayerActions.updateTimeOnSeek(e, seekBar, duration)) },
     onDurationBarMouseUp: (seekBar, duration, e) => { dispatch(PlayerActions.updateTimeOnSeek(e, seekBar, duration)) },
     onDurationBarMouseDown: () => { dispatch(PlayerActions.beginSeek()) },
+    // Player Mode Controls
+    onRepeatClick: () => { dispatch(PlayerActions.changePlayMode(REPEAT)) },
+    onShuffleClick: () => { dispatch(PlayerActions.changePlayMode(SHUFFLE)) },
     // VolumeBar functions
     onVolumeHandleMouseDown: () => { dispatch(PlayerActions.beginVolumeSeek()) },
     onVolumeHandleMouseUp: () => { dispatch(PlayerActions.endVolumeSeek()) },
     onVolumeHandleMouseMove: (volumeBar, e) => { dispatch(PlayerActions.updateVolumeOnSeek(e, volumeBar)) },
     onVolumeBarMouseDown: () => { dispatch(PlayerActions.beginVolumeSeek()) },
     onVolumeBarMouseUp: (volumeBar, e) => { dispatch(PlayerActions.updateVolumeOnSeek(e, volumeBar)) },
-    onToggleMuteClick: () => { dispatch(PlayerActions.toggleMute()) }, 
+    onToggleMuteClick: () => { dispatch(PlayerActions.toggleMute()) },
   };
 };
 

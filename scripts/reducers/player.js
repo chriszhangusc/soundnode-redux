@@ -1,5 +1,5 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import {SHUFFLE, REPEAT, SEQUENCIAL, LOOP, INITIAL_VOLUME} from '../constants/PlayerConstants';
+import {SHUFFLE, REPEAT, LOOP, INITIAL_VOLUME, DEFAULT_MODE} from '../constants/PlayerConstants';
 
 const INITIAL_STATE = {
   currentTime: 0,
@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   isSeeking: false,
   volumeIsSeeking: false,
   duration: 0,
-  mode: SEQUENCIAL,
+  mode: DEFAULT_MODE,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -90,6 +90,11 @@ const player = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         volumeIsSeeking: false,
+      };
+    case ActionTypes.SWITCH_MODE:
+      return {
+        ...state,
+        mode: action.mode,
       };
     default:
       return state;

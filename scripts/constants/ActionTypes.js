@@ -15,3 +15,4 @@ export const CHANGE_VOLUME = 'CHANGE_VOLUME';
 export const BEGIN_VOLUME_SEEK = 'BEGIN_VOLUME_SEEK';
 export const END_VOLUME_SEEK = 'END_VOLUME_SEEK';
 export const TOGGLE_MUTE = 'TOGGLE_MUTE';
+export const SWITCH_MODE = 'SWITCH_MODE';

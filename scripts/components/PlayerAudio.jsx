@@ -29,7 +29,9 @@ class PlayerAudio extends Component {
 
   // If seeking status changed from true to false, then we should update time in our audioElement
   updateTimeIfNeeded(prevProps, currProps) {
-    if (prevProps.player.isSeeking && !currProps.player.isSeeking) this.audioElement.currentTime = currProps.player.currentTime;
+    if (prevProps.player.isSeeking && !currProps.player.isSeeking) {
+      this.audioElement.currentTime = currProps.player.currentTime;
+    }
   }
 
   updateVolumeIfNeeded(prevProps, currProps) {

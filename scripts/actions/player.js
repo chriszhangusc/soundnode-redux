@@ -1,5 +1,5 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import {SEQUENCIAL, LOOP, REPEAT, SHUFFLE} from '../constants/PlayerConstants';
+import {LOOP, REPEAT, SHUFFLE, DEFAULT_MODE} from '../constants/PlayerConstants';
 import {getPrevSong, getNextSong} from '../utils/SongUtils';
 import {computeNewTimeOnSeek, computeNewVolumeOnSeek} from '../utils/PlayerUtils';
 
@@ -95,6 +95,13 @@ export const endVolumeSeek = () => {
   };
 };
 
+export const switchMode = (mode) => {
+  return {
+    type: ActionTypes.SWITCH_MODE,
+    mode,
+  }
+}
+
 export const toggleMute = () => {
   return (dispatch, getState) => {
     const currVolume = getState().player.volume;
@@ -112,6 +119,18 @@ export const toggleMute = () => {
 };
 
 /* Thunk Functions */
+
+export const changePlayMode = (mode) => {
+  return (dispatch, getState) => {
+    const currMode = getState().player.mode;
+    if (currMode === mode) {
+      dispatch(switchMode(DEFAULT_MODE));
+    } else {
+      dispatch(switchMode(mode));
+    }
+  };
+};
+
 
 export const onEnded = () => {
   return (dispatch, getState) => {
