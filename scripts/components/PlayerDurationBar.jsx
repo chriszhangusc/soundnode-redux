@@ -35,11 +35,10 @@ class PlayerDurationBar extends Component {
 
   renderDurationBar () {
     const {player, onDurationBarMouseUp, onDurationBarMouseDown, onDurationHandleMouseDown } = this.props;
-    let {currentTime} = player;
-    // Use Reselect here?
+
     let duration = player.song.duration / 1000.0;
 
-    let percent = computeSeekBarPercent(currentTime, duration);
+    let percent = computeSeekBarPercent(player.currentTime, player.duration);
 
     return (
       <div className="player-seek-bar-wrap"

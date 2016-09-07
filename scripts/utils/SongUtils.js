@@ -14,24 +14,28 @@ export const generateStreamUrl = (song) => {
   return streamUrl;
 }
 
-export const getPrevSong = (currentSong, playlist) => {
+export const getShuffledSong = () => {
+  
+}
+
+export const getPrevSong = (currentSong, songs, mode) => {
   let prevSong = null;
-  for (let i = 0; i < playlist.length; i++) {
-    if (playlist[i].id === currentSong.id && i !== 0) {
-      prevSong = playlist[i - 1];
+  for (let i = 0; i < songs.length; i++) {
+    if (songs[i].id === currentSong.id) {
+      if (i > 0) prevSong = songs[i - 1];
+      else prevSong = songs[songs.length - 1];
     }
   }
   return prevSong;
 }
 
-export const getNextSong = (currentSong, playlist) => {
+export const getNextSong = (currentSong, songs, mode) => {
   let nextSong = null;
-
-  for (let i = 0; i < playlist.length; i++) {
-    if (playlist[i].id === currentSong.id && i + 1 < playlist.length) {
-      nextSong = playlist[i + 1];
+  for (let i = 0; i < songs.length; i++) {
+    if (songs[i].id === currentSong.id) {
+      if (i + 1 < songs.length) nextSong = songs[i + 1];
+      else nextSong = songs[0];
     }
   }
-
   return nextSong;
 }

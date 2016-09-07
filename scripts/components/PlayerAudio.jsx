@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import {REPEAT} from '../constants/PlayerConstants';
 // Stateless functional component
 class PlayerAudio extends Component {
   constructor(props) {
@@ -54,7 +55,7 @@ class PlayerAudio extends Component {
     const {onTimeUpdate, onEnded, onLoadedMetadata} = this.props;
     audio.addEventListener('timeupdate', onTimeUpdate);
     audio.addEventListener('ended', onEnded);
-    audio.addEventListener('loadedmetadata', onLoadedMetadata.bind(audio));
+    audio.addEventListener('loadedmetadata', onLoadedMetadata.bind(null, audio));
   }
 
   removeEventListeners () {
@@ -68,10 +69,11 @@ class PlayerAudio extends Component {
 
 
   render () {
-    const {src} = this.props;
+    const {src, player} = this.props;
+
     return (
       <audio id="audio"
-        preload
+        loop={player.mode === REPEAT ? true : false}
         ref={ ref => this.audioElement = ref}
         src={src} />
     );

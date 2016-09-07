@@ -54,7 +54,7 @@
     &.active {
         &:hover {
             & i {
-                color: $button-hover-color;
+                color: $theme-color;
             }
         }
 
@@ -149,19 +149,6 @@
     }
 
     position: relative;
-
-    .ion-android-volume-up, .ion-android-volume-down {
-        z-index: 0;
-        color: $theme-color;
-    }
-
-    .ion-android-volume-mute {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        color: #ccc;
-    }
 }
 
 /* Tooltips */

@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     dispatch,
     // PlayerAudio functions:
     onTimeUpdate: (e) => { dispatch(PlayerActions.onTimeUpdate(e.target.currentTime)) },
-    onEnded: () => { dispatch(PlayerActions.onEnded()) },
+    onEnded: () => { dispatch(PlayerActions.playNextSongByCurrentMode()) },
     onLoadedMetadata: (audioElement) => { dispatch(PlayerActions.changeDuration(Math.floor(audioElement.duration))) },
     // PlayerControls functions:
     onPlayClick: () => { dispatch(PlayerActions.playSong()) },

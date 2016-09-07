@@ -130,25 +130,17 @@ export const changePlayMode = (mode) => {
     }
   };
 };
-
-
-export const onEnded = () => {
-  return (dispatch, getState) => {
-    const {player, playlists} = getState();
-    switch (player.mode) {
-      case SEQUENCIAL:
-        dispatch(playNextSong());
-    }
-  };
-};
-
+/**
+ * Play next song according to current playing mode.
+ */
 export const playNextSong = () => {
   return (dispatch, getState) => {
     const {player, playlists} = getState();
     const genre = player.playlist;
     const currentSong = player.song;
-    const playlist = playlists[genre].songs;
-    const nextSong = getNextSong(currentSong, playlist);
+    const playlistSongs = playlists[genre].songs;
+    const mode = player.mode;
+    const nextSong = getNextSong(currentSong, playlistSongs, mode);
     if (nextSong) dispatch(changeSongAndPlay(nextSong));
   };
 };
@@ -212,5 +204,26 @@ export const changeSongAndPlay = (newSong) => {
   return (dispatch, getState) => {
     dispatch(changeSong(newSong));
     dispatch(playSong());
+  };
+};
+
+/**
+ * Called in onEnded
+ */
+export const playNextSongByCurrentMode = () => {
+  return (dispatch, getState) => {
+    const currMode = getState().player.mode;
+    switch (currMode) {
+      case LOOP:
+        dispatch(playNextSong());
+        break;
+      case REPEAT:
+        console.log('Repeat is implemented by loop attribute in audio tag');
+        break;
+      case SHUFFLE:
+        break;
+      default:
+        break;
+    }
   };
 };
