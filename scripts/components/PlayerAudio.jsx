@@ -13,15 +13,13 @@ class PlayerAudio extends Component {
 
   componentDidMount () {
     this.bindEventListeners();
-    const audio = this.audioElement;
-    audio.play();
+    this.audioElement.play();
   }
 
   componentWillUnmount () {
     this.removeEventListeners();
   }
 
-  // Needs to be rewritten!
   componentDidUpdate (prevProps) {
     this.updateTimeIfNeeded(prevProps, this.props);
     this.updateVolumeIfNeeded(prevProps, this.props);
@@ -36,7 +34,7 @@ class PlayerAudio extends Component {
   }
 
   updateVolumeIfNeeded(prevProps, currProps) {
-    if (prevProps.player.volumeIsSeeking && !currProps.player.volumeIsSeeking || prevProps.player.volume !== this.props.player.volume) {
+    if (prevProps.player.volume !== this.props.player.volume) {
       this.audioElement.volume = currProps.player.volume;
     }
   }

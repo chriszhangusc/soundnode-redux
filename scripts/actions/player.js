@@ -134,6 +134,7 @@ export const changePlayMode = (mode) => {
  * Play next song according to current playing mode.
  */
 export const playNextSong = () => {
+
   return (dispatch, getState) => {
     const {player, playlists} = getState();
     const genre = player.playlist;
@@ -221,6 +222,7 @@ export const playNextSongByCurrentMode = () => {
         console.log('Repeat is implemented by loop attribute in audio tag');
         break;
       case SHUFFLE:
+        dispatch(playNextSong());
         break;
       default:
         break;
