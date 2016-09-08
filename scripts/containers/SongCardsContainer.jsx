@@ -19,7 +19,6 @@ class SongCardsContainer extends Component {
   renderSongCards () {
     const { playlists, dispatch, player } = this.props;
     const genre = this.props.params.genre;
-    const isFetching = playlists[genre].isFetching;
     return (
       <div className="container">
         <SongCards
@@ -30,7 +29,6 @@ class SongCardsContainer extends Component {
           player={player}
           {...this.props}
           />
-        {isFetching ? <Spinner /> : null}
       </div>
     );
   }

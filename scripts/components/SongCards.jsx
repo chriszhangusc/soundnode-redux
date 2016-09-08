@@ -45,10 +45,11 @@ class SongCards extends Component {
 
   render() {
     const {genre, playlists} = this.props;
-
+    const isFetching = playlists[genre].isFetching;
     return (
       <div className="content">
         {this.renderSongCards()}
+        {isFetching ? <Spinner /> : null}
       </div>
     );
   }
