@@ -1,41 +1,16 @@
-import {DEFAULT_GENRE} from '../constants/SongConstants';
-import * as types from '../constants/ActionTypes';
+import * as ActionTypes from '../constants/ActionTypes';
+import playlist from './playlist';
 
-const PLAYLIST_INITIAL_STATE = {
-  isFetching: false,
-  songs: [],
-  nextUrl: null,
-};
+const INITIAL_STATE = {};
 
-const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
+const playlists = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case types.REQUEST_SONGS:
-      return {
-        ...state,
-        isFetching: true,
-      };
-    case types.RECEIVE_SONGS:
-      return {
-        ...state,
-        isFetching: false,
-        nextUrl: action.nextUrl,
-        songs: [...state.songs, ...action.songs],
-      };
-    default:
-      return state;
-  }
-};
-
-const PLAYLISTS_INITIAL_STATE = {};
-
-const playlists = (state = PLAYLISTS_INITIAL_STATE, action) => {
-  switch (action.type) {
-    case types.REQUEST_SONGS:
+    case ActionTypes.REQUEST_SONGS:
       return {
         ...state,
         [action.genre]: playlist(state[action.genre], action),
       }
-    case types.RECEIVE_SONGS:
+    case ActionTypes.RECEIVE_SONGS:
       return {
         ...state,
         [action.genre]: playlist(state[action.genre], action)
