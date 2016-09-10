@@ -1,7 +1,23 @@
 import axios from 'axios';
-import * as types from '../constants/ActionTypes';
+import * as ActionTypes from '../constants/ActionTypes';
 import {generateFetchUrl} from '../utils/SongUtils';
 import {loadPlaylist} from '../actions/player';
+
+/* Pure Action Creators */
+export const requestSongs = (genre) => ({
+  type: ActionTypes.REQUEST_SONGS,
+  genre
+})
+
+export const receiveSongs = (genre, songs, nextUrl) => ({
+  type: ActionTypes.RECEIVE_SONGS,
+  genre,
+  songs,
+  nextUrl
+})
+
+/* Thunk Action Creators */
+
 // Responsible for initial fetching of a genre
 export const fetchSongsOnLoad = (genre, playlists) => {
   return (dispatch, getState) => {
@@ -15,7 +31,6 @@ export const fetchSongsOnLoad = (genre, playlists) => {
       axios.get(url).then((response) => {
         // We got something as response.data
         dispatch(receiveSongs(genre, response.data.collection, response.data.next_href));
-        
       }).catch((error) => {
         console.log(error);
       });
@@ -58,20 +73,4 @@ const shouldFetchSongs = (genre, playlists) => {
   // 1. If there is no songs of this genre cached in store, go ahead and fetch data.
   // 2. Fetch if current genre is not fetching and nextUrl is valid
   return !(genre in playlists);
-};
-
-export const requestSongs = (genre) => {
-  return {
-    type: types.REQUEST_SONGS,
-    genre,
-  };
-};
-
-export const receiveSongs = (genre, songs, nextUrl) => {
-  return {
-    type: types.RECEIVE_SONGS,
-    genre,
-    songs,
-    nextUrl,
-  };
 };

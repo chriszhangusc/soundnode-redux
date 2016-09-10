@@ -3,104 +3,61 @@ import {LOOP, REPEAT, SHUFFLE, DEFAULT_MODE} from '../constants/PlayerConstants'
 import {getPrevSong, getNextSong} from '../utils/SongUtils';
 import {computeNewTimeOnSeek, computeNewVolumeOnSeek} from '../utils/PlayerUtils';
 
-/* Pure functions */
-export const toggleSeek = () => {
-  return {
-    type: ActionTypes.TOGGLE_SEEK,
-  };
-}
+/* Pure actions */
+export const toggleSeek = () => ({ type: ActionTypes.TOGGLE_SEEK })
 
-export const beginSeek = () => {
-  return {
-    type: ActionTypes.BEGIN_SEEK,
-  };
-};
+export const beginSeek = () => ({ type: ActionTypes.BEGIN_SEEK })
 
-export const endSeek = () => {
-  return {
-    type: ActionTypes.END_SEEK,
-  };
-};
+export const endSeek = () => ({ type: ActionTypes.END_SEEK })
 
-export const updateTime = (currentTime) => {
-  return {
-    type: ActionTypes.UPDATE_TIME,
-    currentTime,
-  };
-};
+export const updateTime = (currentTime) => ({
+  type: ActionTypes.UPDATE_TIME,
+  currentTime
+})
 
-export const changeDuration = (duration) => {
-  return {
-    type: ActionTypes.CHANGE_DURATION,
-    duration,
-  }
-};
+export const changeDuration = (duration) => ({
+  type: ActionTypes.CHANGE_DURATION,
+  duration
+})
 
 /**
  * Change current song in player to newSong
  */
-export const changeSong = (newSong) => {
-  return {
-    type: ActionTypes.CHANGE_SONG,
-    song: newSong,
-  };
-};
+export const changeSong = (newSong) => ({
+  type: ActionTypes.CHANGE_SONG,
+  song: newSong
+})
 
 /**
  * Toggle the playing status of currently playing song in player
  */
-export const togglePlay = () => {
-  return {
-    type: ActionTypes.TOGGLE_PLAY,
-  }
-}
+export const togglePlay = () => ({ type: ActionTypes.TOGGLE_PLAY })
 
-export const playSong = () => {
-  return {
-    type: ActionTypes.PLAY_SONG,
-  };
-};
+export const playSong = () => ({ type: ActionTypes.PLAY_SONG })
 
 // Pause currently playing song
-export const pauseSong = () => {
-  return {
-    type: ActionTypes.PAUSE_SONG,
-  };
-};
+export const pauseSong = () => ({ type: ActionTypes.PAUSE_SONG })
 
-export const loadPlaylist = (genre) => {
-  return {
-    type: ActionTypes.LOAD_PLAYLIST,
-    playlist: genre,
-  };
-};
+export const loadPlaylist = (genre) => ({
+  type: ActionTypes.LOAD_PLAYLIST,
+  playlist: genre
+})
 
-export const changeVolume = (volume) => {
-  return {
-    type: ActionTypes.CHANGE_VOLUME,
-    volume,
-  };
-};
+export const changeVolume = (volume) => ({
+  type: ActionTypes.CHANGE_VOLUME,
+  volume
+})
 
+export const beginVolumeSeek = () => ({ type: ActionTypes.BEGIN_VOLUME_SEEK })
 
-export const beginVolumeSeek = () => {
-  return {
-    type: ActionTypes.BEGIN_VOLUME_SEEK,
-  };
-};
+export const endVolumeSeek = () => ({ type: ActionTypes.END_VOLUME_SEEK })
 
-export const endVolumeSeek = () => {
-  return {
-    type: ActionTypes.END_VOLUME_SEEK,
-  };
-};
+export const switchMode = (mode) => ({
+  type: ActionTypes.SWITCH_MODE,
+  mode
+})
 
-export const switchMode = (mode) => {
-  return {
-    type: ActionTypes.SWITCH_MODE,
-    mode,
-  }
-}
+/* Thunk actions */
 
 export const toggleMute = () => {
   return (dispatch, getState) => {
@@ -117,8 +74,6 @@ export const toggleMute = () => {
     }
   };
 };
-
-/* Thunk Functions */
 
 export const changePlayMode = (mode) => {
   return (dispatch, getState) => {
