@@ -1,4 +1,3 @@
-import {DEFAULT_GENRE} from '../constants/SongConstants';
 import * as ActionTypes from '../constants/ActionTypes';
 
 const PLAYLIST_INITIAL_STATE = {
