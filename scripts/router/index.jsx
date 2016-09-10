@@ -1,10 +1,12 @@
 import React from 'react';
-import {Route, Router, IndexRoute, IndexRedirect, hashHistory} from 'react-router';
+import {Route, Router, IndexRoute, IndexRedirect, browserHistory} from 'react-router';
 import App from '../components/App';
 import SongCardsContainer from '../containers/SongCardsContainer';
 import {GENRES, DEFAULT_GENRE} from '../constants/SongConstants';
 import {fetchSongsOnLoad} from '../actions/playlists';
 import {loadPlaylist} from '../actions/player';
+import Test from '../components/Test';
+import NotFound from '../components/NotFound';
 
 const configureRoutes = (store) => {
 
@@ -16,10 +18,11 @@ const configureRoutes = (store) => {
   };
 
   return (
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRedirect to={`songs/${DEFAULT_GENRE}`} />
         <Route path="songs/:genre" component={SongCardsContainer} onEnter={onEnterHandler}/>
+        <Route path="*" component={NotFound} />
       </Route>
     </Router>
   );
