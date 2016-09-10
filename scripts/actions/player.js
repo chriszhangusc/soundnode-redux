@@ -9,6 +9,18 @@ export const toggleSeek = () => ({ type: ActionTypes.TOGGLE_SEEK })
 export const beginSeek = () => ({ type: ActionTypes.BEGIN_SEEK })
 
 export const endSeek = () => ({ type: ActionTypes.END_SEEK })
+/**
+ * Toggle the playing status of currently playing song in player
+ */
+export const togglePlay = () => ({ type: ActionTypes.TOGGLE_PLAY })
+
+export const playSong = () => ({ type: ActionTypes.PLAY_SONG })
+// Pause currently playing song
+export const pauseSong = () => ({ type: ActionTypes.PAUSE_SONG })
+
+export const beginVolumeSeek = () => ({ type: ActionTypes.BEGIN_VOLUME_SEEK })
+
+export const endVolumeSeek = () => ({ type: ActionTypes.END_VOLUME_SEEK })
 
 export const updateTime = (currentTime) => ({
   type: ActionTypes.UPDATE_TIME,
@@ -19,7 +31,6 @@ export const changeDuration = (duration) => ({
   type: ActionTypes.CHANGE_DURATION,
   duration
 })
-
 /**
  * Change current song in player to newSong
  */
@@ -27,16 +38,6 @@ export const changeSong = (newSong) => ({
   type: ActionTypes.CHANGE_SONG,
   song: newSong
 })
-
-/**
- * Toggle the playing status of currently playing song in player
- */
-export const togglePlay = () => ({ type: ActionTypes.TOGGLE_PLAY })
-
-export const playSong = () => ({ type: ActionTypes.PLAY_SONG })
-
-// Pause currently playing song
-export const pauseSong = () => ({ type: ActionTypes.PAUSE_SONG })
 
 export const loadPlaylist = (genre) => ({
   type: ActionTypes.LOAD_PLAYLIST,
@@ -47,10 +48,6 @@ export const changeVolume = (volume) => ({
   type: ActionTypes.CHANGE_VOLUME,
   volume
 })
-
-export const beginVolumeSeek = () => ({ type: ActionTypes.BEGIN_VOLUME_SEEK })
-
-export const endVolumeSeek = () => ({ type: ActionTypes.END_VOLUME_SEEK })
 
 export const switchMode = (mode) => ({
   type: ActionTypes.SWITCH_MODE,

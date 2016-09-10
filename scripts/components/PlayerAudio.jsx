@@ -13,7 +13,7 @@ class PlayerAudio extends Component {
 
   componentDidMount () {
     this.bindEventListeners();
-    this.audioElement.play();
+    this.togglePlayIfNeeded(this.audioElement, this.props.player.isPlaying);
   }
 
   componentWillUnmount () {
@@ -23,7 +23,7 @@ class PlayerAudio extends Component {
   componentDidUpdate (prevProps) {
     this.updateTimeIfNeeded(prevProps, this.props);
     this.updateVolumeIfNeeded(prevProps, this.props);
-    this.togglePlayIfNeeded(prevProps, this.props);
+    this.togglePlayIfNeeded(this.audioElement, this.props.player.isPlaying);
   }
 
   // If seeking status changed from true to false, then we should update time in our audioElement
@@ -39,12 +39,10 @@ class PlayerAudio extends Component {
     }
   }
 
-  togglePlayIfNeeded(prevProps, currProps) {
-    if (prevProps.player.song.id !== currProps.player.song.id) {
-      this.audioElement.play();
-    }
-    if (this.audioElement.paused === currProps.player.isPlaying) {
-      this.audioElement.paused ? this.audioElement.play(): this.audioElement.pause();
+  togglePlayIfNeeded(audioElement, isPlaying) {
+    // This also covers change song and play logic
+    if (audioElement.paused === isPlaying) {
+      audioElement.paused ? audioElement.play(): audioElement.pause();
     }
   }
 
