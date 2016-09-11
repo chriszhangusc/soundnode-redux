@@ -10,3 +10,10 @@ export const formatSecondsAsTime = (secs, format) => {
   }
   return min + ':' + sec;
 };
+
+export const formatImageUrl = (imageUrl) => {
+  let formattedUrl = '';
+  if (imageUrl)
+    formattedUrl = imageUrl.replace('large', 't300x300');
+  return formattedUrl;
+};

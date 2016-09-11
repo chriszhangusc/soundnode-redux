@@ -10,8 +10,7 @@ class PlayerModeControls extends Component {
   }
 
   renderRepeat() {
-    const {onRepeatClick} = this.props;
-    const mode = this.props.player.mode;
+    const {onRepeatClick, mode} = this.props;
     return (
       <div className={`player-button tooltip ${(mode === REPEAT ? 'active' : '')}`}>
         <span className="tooltiptext">Repeat</span>
@@ -21,8 +20,7 @@ class PlayerModeControls extends Component {
   }
 
   renderShuffle() {
-    const {onShuffleClick} = this.props;
-    const mode = this.props.player.mode;
+    const {onShuffleClick, mode} = this.props;
     return (
       <div className={`player-button tooltip ${(mode === SHUFFLE ? 'active' : '')}`}>
         <span className="tooltiptext">Shuffle</span>

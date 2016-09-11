@@ -34,9 +34,9 @@ export const changeDuration = (duration) => ({
 /**
  * Change current song in player to newSong
  */
-export const changeSong = (newSong) => ({
+export const changeSong = (newSongId) => ({
   type: ActionTypes.CHANGE_SONG,
-  song: newSong
+  songId: newSongId,
 })
 
 export const loadPlaylist = (genre) => ({
@@ -94,7 +94,7 @@ export const playNextSong = () => {
     const playlistSongs = playlists[genre].songs;
     const mode = player.mode;
     const nextSong = getNextSong(currentSong, playlistSongs, mode);
-    if (nextSong) dispatch(changeSongAndPlay(nextSong));
+    if (nextSong) dispatch(changeSongAndPlay(nextSong.id));
   };
 };
 
@@ -105,7 +105,7 @@ export const playPrevSong = () => {
     const currentSong = player.song;
     const playlist = playlists[genre].songs;
     const prevSong = getPrevSong(currentSong, playlist);
-    if (prevSong) dispatch(changeSongAndPlay(prevSong));
+    if (prevSong) dispatch(changeSongAndPlay(prevSong.id));
 
   };
 };
@@ -153,9 +153,16 @@ export const updateVolumeOnSeek = (e, volumeBar) => {
   };
 };
 
-export const changeSongAndPlay = (newSong) => {
+export const updateVolumeOnClick = (e, volumeBar) => {
   return (dispatch, getState) => {
-    dispatch(changeSong(newSong));
+    let newVolume = computeNewVolumeOnSeek(e, volumeBar);
+    dispatch(changeVolume(newVolume));
+  };
+};
+
+export const changeSongAndPlay = (newSongId) => {
+  return (dispatch, getState) => {
+    dispatch(changeSong(newSongId));
     dispatch(playSong());
   };
 };

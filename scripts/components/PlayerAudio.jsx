@@ -13,7 +13,7 @@ class PlayerAudio extends Component {
 
   componentDidMount () {
     this.bindEventListeners();
-    this.togglePlayIfNeeded(this.audioElement, this.props.player.isPlaying);
+    this.togglePlayIfNeeded(this.audioElement, this.props.isPlaying);
   }
 
   componentWillUnmount () {
@@ -23,19 +23,19 @@ class PlayerAudio extends Component {
   componentDidUpdate (prevProps) {
     this.updateTimeIfNeeded(prevProps, this.props);
     this.updateVolumeIfNeeded(prevProps, this.props);
-    this.togglePlayIfNeeded(this.audioElement, this.props.player.isPlaying);
+    this.togglePlayIfNeeded(this.audioElement, this.props.isPlaying);
   }
 
   // If seeking status changed from true to false, then we should update time in our audioElement
   updateTimeIfNeeded(prevProps, currProps) {
-    if (prevProps.player.isSeeking && !currProps.player.isSeeking) {
-      this.audioElement.currentTime = currProps.player.currentTime;
+    if (prevProps.isSeeking && !currProps.isSeeking) {
+      this.audioElement.currentTime = currProps.currentTime;
     }
   }
 
   updateVolumeIfNeeded(prevProps, currProps) {
-    if (prevProps.player.volume !== this.props.player.volume) {
-      this.audioElement.volume = currProps.player.volume;
+    if (prevProps.volume !== this.props.volume) {
+      this.audioElement.volume = currProps.volume;
     }
   }
 
@@ -65,20 +65,20 @@ class PlayerAudio extends Component {
 
 
   render () {
-    const {src, player} = this.props;
+    const {streamUrl, mode} = this.props;
 
     return (
       <audio id="audio"
-        loop={player.mode === REPEAT ? true : false}
-        ref={ ref => this.audioElement = ref}
-        src={src} />
+        loop={mode === REPEAT ? true : false}
+        ref={ref => this.audioElement = ref}
+        src={streamUrl} />
     );
   }
 
 }
 
 PlayerAudio.PropTypes = {
-  src: PropTypes.string.isRequired,
+  streamUrl: PropTypes.string.isRequired,
   onTimeUpdate: PropTypes.func.isRequired,
   onEnded: PropTypes.func.isRequired,
   onLoadedMetadata: PropTypes.func.isRequired,

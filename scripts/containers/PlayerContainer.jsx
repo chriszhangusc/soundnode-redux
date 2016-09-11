@@ -4,12 +4,21 @@ import {connect} from 'react-redux';
 // Import Actions and Utils
 import * as PlayerActions from '../actions/player';
 import {computeNewTimeOnSeek} from '../utils/PlayerUtils';
-import {generateStreamUrl} from '../utils/SongUtils';
+
 // Import Components
 import Player from '../components/Player';
 import PlayerAudio from '../components/PlayerAudio';
 import {LOOP, REPEAT, SHUFFLE} from '../constants/PlayerConstants';
-
+import {
+  getPlayerState,
+  getCurrentSong,
+  getStreamUrl,
+  getDuration,
+  getSeekStatus,
+  getCurrentTime,
+  getVolumeSeekState,
+  getCurrentVolume
+} from '../reducers';
 class PlayerContainer extends Component {
 
   constructor (props) {
@@ -18,17 +27,13 @@ class PlayerContainer extends Component {
 
   render () {
     // Extract props that we care, and pass the other props as others.
-    const {player, ...others} = this.props;
-    if (player.song === null) return null;
+    const {currentSong} = this.props;
 
-    const streamUrl = generateStreamUrl(player.song);
+    if (!currentSong) return null;
+
     return (
       <div>
-        <PlayerAudio
-          player={player}
-          src={streamUrl}
-          {...others}
-          />
+        <PlayerAudio {...this.props} />
         <Player {...this.props} />
       </div>
     );
@@ -38,7 +43,14 @@ class PlayerContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    player: state.player,
+    isPlaying: getPlayerState(state),
+    duration: getDuration(state),
+    currentSong: getCurrentSong(state),
+    streamUrl: getStreamUrl(state),
+    currentTime: getCurrentTime(state),
+    isSeeking: getSeekStatus(state),
+    volume: getCurrentVolume(state),
+    volumeIsSeeking: getVolumeSeekState(state),
   };
 };
 
@@ -73,6 +85,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onVolumeBarMouseUp: (volumeBar, e) => { dispatch(PlayerActions.updateVolumeOnSeek(e, volumeBar)) },
     onToggleMuteClick: () => { dispatch(PlayerActions.toggleMute()) },
   };
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer);

@@ -10,8 +10,7 @@ class PlayerControls extends Component {
 
 
   renderPlayPauseButton () {
-    const {player, onPauseClick, onPlayClick} = this.props;
-    const isPlaying = player.isPlaying;
+    const {isPlaying, onPauseClick, onPlayClick} = this.props;
     return (
       <div className="player-button">
         <i

@@ -8,6 +8,7 @@ export const generateFetchUrl = (genre) => {
 };
 
 export const generateStreamUrl = (song) => {
+  if (!song) return null;
   let streamUrl = null;
   if (song.stream_url)
     streamUrl = `${song.stream_url}?client_id=${CLIENT_ID}`;

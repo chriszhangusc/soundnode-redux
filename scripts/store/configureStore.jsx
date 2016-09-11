@@ -11,7 +11,7 @@ const configureStore = () => {
 
   const store = redux.createStore(
     rootReducer,
-    persistedState,
+    // persistedState,
     redux.compose(
       redux.applyMiddleware(thunk),// making async API requests from actions?
       window.devToolsExtension && window.devToolsExtension()

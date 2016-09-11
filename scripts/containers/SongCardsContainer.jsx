@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import Toolbar from '../components/Toolbar';
 import SongCards from '../components/SongCards';
-import {connect} from 'react-redux';
-import {GENRES} from '../constants/SongConstants';
+import { connect } from 'react-redux';
+import { GENRES, DEFAULT_GENRE } from '../constants/SongConstants';
 import Spinner from '../components/Spinner';
-import {fetchSongsOnScroll} from '../actions/playlists';
+import { fetchSongsOnScroll } from '../actions/playlists';
 import PlayerContainer from './PlayerContainer';
-import {pauseSong, changeSong, changeSongAndPlay} from '../actions/player';
+import { pauseSong, changeSong, changeSongAndPlay } from '../actions/player';
+import { getSongsAsArray, getFetchState, getPlayerState, getCurrentSong } from '../reducers';
 // Main container
 class SongCardsContainer extends Component {
 
@@ -17,16 +19,11 @@ class SongCardsContainer extends Component {
   }
 
   renderSongCards () {
-    const { playlists, dispatch, player } = this.props;
-    const genre = this.props.params.genre;
+    const { dispatch, genre, isFetching, playlists } = this.props;
     return (
       <div className="container">
         <SongCards
-          playlists={playlists}
-          genre={genre}
-          dispatch={dispatch}
           scrollFunc={fetchSongsOnScroll.bind(null, genre, playlists)}
-          player={player}
           {...this.props}
           />
       </div>
@@ -44,25 +41,29 @@ class SongCardsContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    playlists: state.playlists,
-    player: state.player,
-  };
-};
+// Mapping everything is bad, use selector instead
+const mapStateToProps = (state, { params }) => ({
+  playlists: state.playlists,
+  genre: params.genre || DEFAULT_GENRE,
+  isFetching: getFetchState(state, params.genre),
+  isPlaying: getPlayerState(state),
+  songs: getSongsAsArray(state, params.genre), // may break on search
+  currentSong: getCurrentSong(state),
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    // We need to match dispatch only because InfiniteScroll relies on it.
-    dispatch,
-    handleChangeSong: (newSong) => {
-      dispatch(changeSongAndPlay(newSong));
-    },
+const mapDispatchToProps = (dispatch) => ({
+  // We need to match dispatch only because InfiniteScroll relies on it.
+  dispatch,
+  // Short hand version when writing functions inside
+  handleChangeSong (newSongId) { dispatch(changeSongAndPlay(newSongId)); },
+  handlePauseSong () { dispatch(pauseSong()); }
+})
 
-    handlePauseSong: () => {
-      dispatch(pauseSong());
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SongCardsContainer);
+// withRouter is handy when you need to inject params from the router into components that are deep down
+// so that we do not have to pass it all the way down.
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SongCardsContainer)
+);

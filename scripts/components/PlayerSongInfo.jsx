@@ -6,8 +6,7 @@ class PlayerSongInfo extends Component {
   }
 
   render () {
-    const {player} = this.props;
-    const currentSong = player.song;
+    const {currentSong} = this.props;
     const title = currentSong.title;
     const username = currentSong.user.username;
     return (

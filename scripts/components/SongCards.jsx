@@ -10,13 +10,12 @@ class SongCards extends Component {
   }
 
   renderSongCards() {
-    const {genre, playlists, handlePauseSong, handleChangeSong, player} = this.props;
+    const { currentSong, songs, genre, isPlaying } = this.props;
+    const { handlePauseSong, handleChangeSong } = this.props;
+    // These logic should be rewritten!
     let rows = [];
-
       // Five cols a row
       const COLS = 5;
-      const songs = playlists[genre].songs;
-
       for (let i = 0; i < songs.length; i += COLS) {
         let rowItems = songs.slice(i, i + COLS);
         let row = (
@@ -25,12 +24,12 @@ class SongCards extends Component {
               rowItems.map((song, i) => {
                 return (
                   <div className="col-1-5 clearfix" key={i}>
-                    <SongCard key={song.id}
+                    <SongCard
                       song={song}
-                      handleChangeSong={handleChangeSong}
+                      isPlaying={isPlaying}
+                      handleChangeSong={handleChangeSong.bind(null, song.id)}
                       handlePauseSong={handlePauseSong}
-                      isActive={player.song ? player.song.id === song.id : false}
-                      player={player}
+                      isActive={currentSong ? song.id === currentSong.id : false}
                       />
                   </div>
                 );
@@ -44,8 +43,7 @@ class SongCards extends Component {
   }
 
   render() {
-    const {genre, playlists} = this.props;
-    const isFetching = playlists[genre].isFetching;
+    const { isFetching } = this.props;
     return (
       <div className="content">
         {this.renderSongCards()}

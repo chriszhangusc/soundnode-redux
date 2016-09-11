@@ -13,10 +13,9 @@ class PlayerVolumeControls extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    const {player} = this.props;
-    const {onVolumeHandleMouseUp, onVolumeHandleMouseMove} = this.props;
-    const prevIsSeeking = prevProps.player.volumeIsSeeking;
-    const currIsSeeking = player.volumeIsSeeking;
+    const {volumeIsSeeking, onVolumeHandleMouseUp, onVolumeHandleMouseMove} = this.props;
+    const prevIsSeeking = prevProps.volumeIsSeeking;
+    const currIsSeeking = volumeIsSeeking;
     if (!prevIsSeeking && currIsSeeking) {
       // Listen to event only when we start seeking
       document.addEventListener('mousemove', this.handleVolumeMouseMove);
@@ -30,7 +29,7 @@ class PlayerVolumeControls extends Component {
   }
 
   renderVolumeIcon () {
-    const volume = this.props.player.volume;
+    const { volume } = this.props;
     const {onToggleMuteClick} = this.props;
     // Render different icon depending on current volume.
     let icon = null;
@@ -49,10 +48,9 @@ class PlayerVolumeControls extends Component {
   }
 
   render () {
-
+    const {volume} = this.props;
     const {onVolumeBarMouseDown, onVolumeHandleMouseDown, onVolumeBarMouseUp} = this.props;
-    const {player} = this.props;
-    const volume = player.volume;
+
     return (
       <div className="player-section">
         <div className="player-button player-volume-button" >
