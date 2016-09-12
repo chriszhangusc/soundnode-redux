@@ -1,5 +1,4 @@
 import * as ActionTypes from '../constants/ActionTypes';
-
 const PLAYLIST_INITIAL_STATE = {
   isFetching: false,
   songs: {},

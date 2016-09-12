@@ -5,7 +5,7 @@ import SongCardsContainer from '../containers/SongCardsContainer';
 import { DEFAULT_GENRE } from '../constants/SongConstants';
 import { fetchSongsOnLoad } from '../actions/playlists';
 import { loadPlaylist } from '../actions/player';
-import Test from '../components/Test';
+import Main from '../components/Main';
 import NotFound from '../components/NotFound';
 
 const configureRoutes = (store) => {
@@ -21,7 +21,7 @@ const configureRoutes = (store) => {
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRedirect to={`songs/${DEFAULT_GENRE}`} />
-        <Route path="songs/(:genre)" component={SongCardsContainer} onEnter={onEnterHandler}/>
+        <Route path="songs/(:genre)" component={Main} onEnter={onEnterHandler}/>
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

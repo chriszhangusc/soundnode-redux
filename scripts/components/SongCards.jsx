@@ -9,6 +9,18 @@ class SongCards extends Component {
     this.renderSongCards = this.renderSongCards.bind(this);
   }
 
+  render() {
+    console.log('render');
+    const { isFetching } = this.props;
+    return (
+      <div className="content">
+        {this.renderSongCards()}
+        {isFetching ? <Spinner /> : null}
+      </div>
+    );
+  }
+
+
   renderSongCards() {
     const { currentSong, songs, genre, isPlaying } = this.props;
     const { handlePauseSong, handleChangeSong } = this.props;
@@ -42,15 +54,7 @@ class SongCards extends Component {
     return rows;
   }
 
-  render() {
-    const { isFetching } = this.props;
-    return (
-      <div className="content">
-        {this.renderSongCards()}
-        {isFetching ? <Spinner /> : null}
-      </div>
-    );
-  }
+
 }
 
 export default infiniteScroll(SongCards);

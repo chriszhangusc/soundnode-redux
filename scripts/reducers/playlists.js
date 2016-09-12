@@ -1,5 +1,6 @@
 import * as ActionTypes from '../constants/ActionTypes';
 import playlist, { getSongsObj, getSongIds, getIsFetching } from './playlist';
+import { createSelector } from 'reselect';
 /* Reducers */
 
 const PLAYLISTS_INITIAL_STATE = {};
@@ -26,6 +27,7 @@ const playlists = (state = PLAYLISTS_INITIAL_STATE, action) => {
 export const getSongByIdAndPlaylist = (state, songId, playlist) => {
   return getSongsObj(state[playlist])[songId];
 }
+
 export const getSongsAsArray = (state, genre) => {
   const playlist = state[genre];
   const songIds = getSongIds(playlist);
@@ -33,9 +35,13 @@ export const getSongsAsArray = (state, genre) => {
   return songIds.map(id => songsObj[id]);
 };
 
-export const getFetchState = (state, genre) => {
+export const getFetchState = (state) => {
   const playlist = state[genre];
   return getIsFetching(playlist);
 }
+
+export const getFetchStateSelector = createSelector(
+  
+);
 
 export default playlists;

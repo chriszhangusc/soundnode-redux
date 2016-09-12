@@ -7,12 +7,14 @@ class Toolbar extends Component {
     super(props);
     this.renderGenres = this.renderGenres.bind(this);
   }
+
   renderGenres() {
     const { handleOnClick } = this.props;
-    return GENRES.map((genre) => {
-      return <Link className={`toolbar-item toolbar-genre`} activeClassName={'active'} to={`/songs/${genre}`} key={genre}>{genre}</Link>
-    });
+    return GENRES.map(genre =>
+      (<Link className={`toolbar-item toolbar-genre`} activeClassName={'active'} to={`/songs/${genre}`} key={genre}>{genre}</Link>)
+    );
   }
+
   render () {
     return (
       <div className="toolbar">

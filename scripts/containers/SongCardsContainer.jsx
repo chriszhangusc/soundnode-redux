@@ -6,9 +6,11 @@ import { connect } from 'react-redux';
 import { GENRES, DEFAULT_GENRE } from '../constants/SongConstants';
 import Spinner from '../components/Spinner';
 import { fetchSongsOnScroll } from '../actions/playlists';
-import PlayerContainer from './PlayerContainer';
 import { pauseSong, changeSong, changeSongAndPlay } from '../actions/player';
-import { getSongsAsArray, getFetchState, getPlayerState, getCurrentSong } from '../reducers';
+import { getPlayerState, getCurrentTime } from '../reducers';
+import { getSongsAsArray, getFetchState, getCurrentSong , getPlaylistName } from '../selectors';
+import { delay } from '../utils/DelayUtils';
+import { isEqual } from 'lodash';
 // Main container
 class SongCardsContainer extends Component {
 
@@ -16,6 +18,7 @@ class SongCardsContainer extends Component {
     super(props);
     // First param passed into bind will be bound as 'this' inside renderPlaylist
     // Bind: creates a copy of function and tells it what this is.
+    this.renderSongCards = this.renderSongCards.bind(this);
   }
 
   renderSongCards () {
@@ -30,31 +33,36 @@ class SongCardsContainer extends Component {
     );
   }
 
+  shouldComponentUpdate(nextProps) {
+    return true;
+  }
+
+
   render () {
+    console.log('SongCardsContainer Render');
     return (
-      <div className="songs">
-        <Toolbar />
-        {this.renderSongCards()}
-        <PlayerContainer />
-      </div>
+    <div>
+      {this.renderSongCards()}
+    </div>
     );
   }
+
 }
+
 
 // Mapping everything is bad, use selector instead
 const mapStateToProps = (state, { params }) => ({
-  playlists: state.playlists,
-  genre: params.genre || DEFAULT_GENRE,
-  isFetching: getFetchState(state, params.genre),
+  genre: getPlaylistName(state),
+  isFetching: getFetchState(state),
   isPlaying: getPlayerState(state),
-  songs: getSongsAsArray(state, params.genre), // may break on search
+  songs: getSongsAsArray(state), // may break on search
+  playlists: state.playlists,
   currentSong: getCurrentSong(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
   // We need to match dispatch only because InfiniteScroll relies on it.
   dispatch,
-  // Short hand version when writing functions inside
   handleChangeSong (newSongId) { dispatch(changeSongAndPlay(newSongId)); },
   handlePauseSong () { dispatch(pauseSong()); }
 })
