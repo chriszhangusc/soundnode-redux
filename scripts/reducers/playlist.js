@@ -8,6 +8,10 @@ const PLAYLIST_INITIAL_STATE = {
 
 const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
   switch (action.type) {
+    case ActionTypes.LOAD_PLAYLIST:
+      return {
+        ...state,
+      }
     case ActionTypes.REQUEST_SONGS:
       return {
         ...state,
@@ -25,11 +29,5 @@ const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
       return state;
   }
 };
-
-/* Playlist Selectors */
-// All states in func params are refered to as single playlist
-export const getSongIds = state => state.songIds
-export const getSongsObj = state => state.songs
-export const getIsFetching = state => state.isFetching
 
 export default playlist;

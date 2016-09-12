@@ -1,47 +1,29 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import playlist, { getSongsObj, getSongIds, getIsFetching } from './playlist';
+import playlist from './playlist';
 import { createSelector } from 'reselect';
-/* Reducers */
 
 const PLAYLISTS_INITIAL_STATE = {};
 
 const playlists = (state = PLAYLISTS_INITIAL_STATE, action) => {
   switch (action.type) {
+    case ActionTypes.LOAD_PLAYLIST:
+      return {
+        ...state,
+        [action.playlist]: playlist(state[action.playlist], action),
+      }
     case ActionTypes.REQUEST_SONGS:
       return {
         ...state,
-        [action.genre]: playlist(state[action.genre], action),
+        [action.playlist]: playlist(state[action.playlist], action),
       }
     case ActionTypes.RECEIVE_SONGS:
       return {
         ...state,
-        [action.genre]: playlist(state[action.genre], action),
+        [action.playlist]: playlist(state[action.playlist], action),
       }
     default:
       return state;
   }
 }
-
-/* Playlists Selectors */
-// All states in func params are refered to as playlists
-export const getSongByIdAndPlaylist = (state, songId, playlist) => {
-  return getSongsObj(state[playlist])[songId];
-}
-
-export const getSongsAsArray = (state, genre) => {
-  const playlist = state[genre];
-  const songIds = getSongIds(playlist);
-  const songsObj = getSongsObj(playlist);
-  return songIds.map(id => songsObj[id]);
-};
-
-export const getFetchState = (state) => {
-  const playlist = state[genre];
-  return getIsFetching(playlist);
-}
-
-export const getFetchStateSelector = createSelector(
-  
-);
 
 export default playlists;

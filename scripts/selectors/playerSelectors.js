@@ -1,42 +1,57 @@
 import {createSelector} from 'reselect';
 import {generateStreamUrl} from '../utils/SongUtils';
-import {currentPlaylistSongsSelector} from './songCardsSelectors';
-import _ from 'lodash';
-// Example code
-// import _ from 'lodash';
-// const postSelector = state => state.posts;
-// const selectedPostsSelector = state => state.selectedPostIds;
-//
-// const getPosts = (posts, selectedPostIds) {
-//   const selectedPosts = _.filter(
-//     posts,
-//     post => _.contains(selectedPostIds, post.id);
-//   );
-//   return selectedPosts;
-// };
-//
-// export default createSelector(
-//   postSelector,
-//   selectedPostsSelector,
-//   getPosts
-// );
+import * as fromReducers from '../reducers';
 
-const getCurrentSongId = state => state.player.currentSongId
+/* Composed memoized selectors for PlayerContainer */
+export const getPlayingState = createSelector(
+  [fromReducers.getPlayingState],
+  isPlaying => isPlaying
+);
 
-// Return the current active song object
 export const getCurrentSong = createSelector(
-  getCurrentSongId,
-  getCurrentSongsInPlaylist,
-  (id, songs) => {
-    const res = _.find(songs, {'id': id});
-    return res;
+  [fromReducers.getSongMap, fromReducers.getCurrentSongId],
+  (songsById, songId) => {
+    if (songId) return songsById[songId];
+    return null;
   }
 );
 
-// This is a 'Memoized' selector, which only recompute when the relevant state value change!
-export const srcSelector = createSelector(
-  currentSongSelector,
+export const getDuration = createSelector(
+  [getCurrentSong],
+  currentSong => currentSong ? currentSong.duration / 1000.0 : null
+);
+
+export const getStreamUrl = createSelector(
+  [getCurrentSong],
   currentSong => generateStreamUrl(currentSong)
 );
 
-export const durationSelector = c
+export const getCurrentTime = createSelector(
+  [fromReducers.getCurrentTime],
+  currentTime => currentTime
+);
+
+export const getSeekStatus = createSelector(
+  [fromReducers.getSeekStatus],
+  seekStatus => seekStatus
+);
+
+export const getCurrentVolume = createSelector(
+  [fromReducers.getCurrentVolume],
+  volume => volume
+);
+
+export const getVolumeSeekState = createSelector(
+  [fromReducers.getVolumeSeekState],
+  volumeIsSeeking => volumeIsSeeking
+);
+
+// Data needed to be prepared for PlayerContainer
+// isPlaying: getPlayingState(state),
+// duration: getDuration(state),
+// currentSong: getCurrentSong(state),
+// streamUrl: getStreamUrl(state),
+// currentTime: getCurrentTime(state),
+// isSeeking: getSeekStatus(state),
+// volume: getCurrentVolume(state),
+// volumeIsSeeking: getVolumeSeekState(state),

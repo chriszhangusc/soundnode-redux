@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 import Toolbar from '../components/Toolbar';
 import SongCards from '../components/SongCards';
 import { connect } from 'react-redux';
@@ -7,10 +6,8 @@ import { GENRES, DEFAULT_GENRE } from '../constants/SongConstants';
 import Spinner from '../components/Spinner';
 import { fetchSongsOnScroll } from '../actions/playlists';
 import { pauseSong, changeSong, changeSongAndPlay } from '../actions/player';
-import { getPlayerState, getCurrentTime } from '../reducers';
-import { getSongsAsArray, getFetchState, getCurrentSong , getPlaylistName } from '../selectors';
-import { delay } from '../utils/DelayUtils';
-import { isEqual } from 'lodash';
+// import { getPlayingState, getSongsAsArray, getFetchState, getCurrentSong , getPlaylistName } from '../reducers';
+import * as selectors from '../selectors/songCardsSelectors';
 // Main container
 class SongCardsContainer extends Component {
 
@@ -33,11 +30,6 @@ class SongCardsContainer extends Component {
     );
   }
 
-  shouldComponentUpdate(nextProps) {
-    return true;
-  }
-
-
   render () {
     console.log('SongCardsContainer Render');
     return (
@@ -51,13 +43,13 @@ class SongCardsContainer extends Component {
 
 
 // Mapping everything is bad, use selector instead
-const mapStateToProps = (state, { params }) => ({
-  genre: getPlaylistName(state),
-  isFetching: getFetchState(state),
-  isPlaying: getPlayerState(state),
-  songs: getSongsAsArray(state), // may break on search
+const mapStateToProps = (state) => ({
   playlists: state.playlists,
-  currentSong: getCurrentSong(state),
+  genre: selectors.getPlaylistName(state),
+  isFetching: selectors.getFetchState(state),
+  isPlaying: selectors.getPlayingState(state),
+  songs: selectors.getSongsAsArray(state), // may break on search
+  currentSong: selectors.getCurrentSong(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -69,9 +61,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 // withRouter is handy when you need to inject params from the router into components that are deep down
 // so that we do not have to pass it all the way down.
-export default withRouter(
-  connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(SongCardsContainer)
-);
+  )(SongCardsContainer);

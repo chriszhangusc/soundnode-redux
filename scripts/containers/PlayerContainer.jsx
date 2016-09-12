@@ -9,16 +9,8 @@ import {computeNewTimeOnSeek} from '../utils/PlayerUtils';
 import Player from '../components/Player';
 import PlayerAudio from '../components/PlayerAudio';
 import {LOOP, REPEAT, SHUFFLE} from '../constants/PlayerConstants';
-import {
-  getPlayerState,
-  getCurrentSong,
-  getStreamUrl,
-  getDuration,
-  getSeekStatus,
-  getCurrentTime,
-  getVolumeSeekState,
-  getCurrentVolume
-} from '../reducers';
+import * as selectors from '../selectors/playerSelectors';
+
 class PlayerContainer extends Component {
 
   constructor (props) {
@@ -28,7 +20,6 @@ class PlayerContainer extends Component {
   render () {
     // Extract props that we care, and pass the other props as others.
     const {currentSong} = this.props;
-
     if (!currentSong) return null;
 
     return (
@@ -43,14 +34,14 @@ class PlayerContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isPlaying: getPlayerState(state),
-    duration: getDuration(state),
-    currentSong: getCurrentSong(state),
-    streamUrl: getStreamUrl(state),
-    currentTime: getCurrentTime(state),
-    isSeeking: getSeekStatus(state),
-    volume: getCurrentVolume(state),
-    volumeIsSeeking: getVolumeSeekState(state),
+    isPlaying: selectors.getPlayingState(state),
+    duration: selectors.getDuration(state),
+    currentSong: selectors.getCurrentSong(state),
+    streamUrl: selectors.getStreamUrl(state),
+    currentTime: selectors.getCurrentTime(state),
+    isSeeking: selectors.getSeekStatus(state),
+    volume: selectors.getCurrentVolume(state),
+    volumeIsSeeking: selectors.getVolumeSeekState(state),
   };
 };
 

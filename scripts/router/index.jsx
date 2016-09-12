@@ -13,7 +13,6 @@ const configureRoutes = (store) => {
   const onEnterHandler = (nextState) => {
     const genre = nextState.params.genre;
     const playlists = store.getState().playlists;
-    store.dispatch(loadPlaylist(genre));
     store.dispatch(fetchSongsOnLoad(genre, playlists));
   };
 

@@ -108,8 +108,8 @@ const player = (state = INITIAL_STATE, action) => {
 
 /* Player Selectors */
 export const getCurrentSongId = state => state.songId
-export const getCurrentPlaylist = state => state.playlist
-export const getPlayerState = state => state.isPlaying
+export const getPlaylistName = state => state.playlist
+export const getPlayingState = state => state.isPlaying
 export const getCurrentTime = state => state.currentTime
 export const getSeekStatus = state => state.isSeeking
 export const getPlayerMode = state => state.mode

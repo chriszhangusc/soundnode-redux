@@ -7,12 +7,12 @@ import { arrayOfSongs } from './schema';
 /* Pure Action Creators */
 export const requestSongs = (genre) => ({
   type: ActionTypes.REQUEST_SONGS,
-  genre
+  playlist: genre
 })
 
 export const receiveSongs = (genre, songs, songIds, nextUrl) => ({
   type: ActionTypes.RECEIVE_SONGS,
-  genre,
+  playlist:genre,
   songs,
   songIds,
   nextUrl
@@ -30,6 +30,7 @@ const shouldFetchSongsOnLoad = (genre, playlists) => {
 // Responsible for initial fetching of a genre
 export const fetchSongsOnLoad = (genre, playlists) => {
   return (dispatch, getState) => {
+    dispatch(loadPlaylist(genre));
     // Initial fetch genre not cached yet so our playlists cache will not have property genre
     if (shouldFetchSongsOnLoad(genre, playlists)) {
       const url = generateFetchUrl(genre);

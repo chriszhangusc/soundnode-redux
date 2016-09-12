@@ -10,31 +10,42 @@ const rootReducer = combineReducers({
   playlists,
   player,
 });
+/* Pure state selectors */
 
-/* Combined Selectors */
-export const getSongsAsArray = (state, genre) => fromPlaylists.getSongsAsArray(state.playlists, genre)
-export const getFetchState = (state) => fromPlaylists.getFetchState(state.playlists, genre);
+/* From playlists */
+export const getPlaylists = state => state.playlists
 
-export const getCurrentSong = (state) => {
-  const currentPlaylist = fromPlayer.getCurrentPlaylist(state.player);
-  const currentSongId = fromPlayer.getCurrentSongId(state.player);
-  return fromPlaylists.getSongByIdAndPlaylist(state.playlists, currentSongId, currentPlaylist);
-};
+export const getCurrentPlaylist = (state) => {
+  const playlistName = getPlaylistName(state);
+  const playlists = getPlaylists(state);
+  if (playlists) return playlists[playlistName];
+  return null;
+}
 
-export const getStreamUrl = (state) => {
-  const currentSong = getCurrentSong(state);
-  return generateStreamUrl(currentSong);
-};
-export const getPlaylist = (state) => fromPlayer.getPlaylist(state.player);
-export const getPlayerState = (state) => fromPlayer.getPlayerState(state.player)
+export const getSongMap = state => {
+  const playlist = getCurrentPlaylist(state);
+  if (playlist) return playlist.songs;
+  return null;
+}
 
-export const getDuration = (state) => {
-  const currentSong = getCurrentSong(state);
-  let duration = null;
-  if (currentSong)
-    duration = currentSong.duration / 1000.0 // convert ms to s
-  return duration
-};
+export const getSongIds = state => {
+  const playlist = getCurrentPlaylist(state);
+  if (playlist) return playlist.songIds;
+  return null;
+}
+
+export const getFetchState = state => {
+  const playlist = getCurrentPlaylist(state);
+  if (playlist) return playlist.isFetching;
+  return null;
+}
+
+/* From players */
+export const getPlaylistName = (state) => fromPlayer.getPlaylistName(state.player)
+
+export const getCurrentSongId = state => fromPlayer.getCurrentSongId(state.player)
+
+export const getPlayingState = (state) => fromPlayer.getPlayingState(state.player)
 
 export const getCurrentVolume = (state) => fromPlayer.getCurrentVolume(state.player)
 
@@ -45,5 +56,6 @@ export const getCurrentTime = (state) => fromPlayer.getCurrentTime(state.player)
 export const getSeekStatus = (state) => fromPlayer.getSeekStatus(state.player)
 
 export const getPlayerMode = (state) => fromPlayer.getPlayerMode(state.player)
+
 
 export default rootReducer;
