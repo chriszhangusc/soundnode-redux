@@ -9,7 +9,7 @@ export const getPlayingState = createSelector(
 );
 
 export const getCurrentSong = createSelector(
-  [fromReducers.getSongMap, fromReducers.getCurrentSongId],
+  [fromReducers.getPlayerSongMap, fromReducers.getCurrentSongId],
   (songsById, songId) => {
     if (songId) return songsById[songId];
     return null;

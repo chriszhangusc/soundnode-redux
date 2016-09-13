@@ -4,6 +4,12 @@ import * as fromReducers from '../reducers';
 /*
  * Composing all memoized selectors (Reusing selectors in reducers) for SongCardsContainer
  */
+
+export const getVisiblePlaylistName = createSelector(
+  [fromReducers.getVisiblePlaylist],
+  playlist => playlist
+);
+
 export const getPlaylistName = createSelector(
   [fromReducers.getPlaylistName],
   playlist => playlist
@@ -19,11 +25,22 @@ export const getPlayingState = createSelector(
   isPlaying => isPlaying
 );
 
+// /*
+//  * Return the songs in current playlist as an array
+//  */
+// export const getSongsAsArray = createSelector(
+//   [fromReducers.getPlayerSongMap, fromReducers.getPlayerSongIds],
+//   (songsById, songIds) => {
+//     if (songIds) return songIds.map(id => songsById[id]);
+//     return [];
+//   }
+// );
+
 /*
- * Return the songs in current playlist as an array
+ * Return array of song objects according to visiblePlaylist
  */
-export const getSongsAsArray = createSelector(
-  [fromReducers.getSongMap, fromReducers.getSongIds],
+export const getVisibleSongsAsArray = createSelector(
+  [fromReducers.getVisibleSongMap, fromReducers.getVisibleSongIds],
   (songsById, songIds) => {
     if (songIds) return songIds.map(id => songsById[id]);
     return [];
@@ -31,10 +48,10 @@ export const getSongsAsArray = createSelector(
 );
 
 /*
- * Return the current active song object
+ * Return the currently active song in player. (Playing / Paused)
  */
 export const getCurrentSong = createSelector(
-  [fromReducers.getSongMap, fromReducers.getCurrentSongId],
+  [fromReducers.getPlayerSongMap, fromReducers.getCurrentSongId],
   (songsById, songId) => {
     if (songId) return songsById[songId];
     return null;

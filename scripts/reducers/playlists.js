@@ -26,4 +26,8 @@ const playlists = (state = PLAYLISTS_INITIAL_STATE, action) => {
   }
 }
 
+export const getPlaylist = (state, playlistName) => {
+  if (playlistName) return state[playlistName];
+  return null;
+}
 export default playlists;

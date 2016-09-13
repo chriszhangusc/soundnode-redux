@@ -30,4 +30,9 @@ const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
   }
 };
 
+export const getFetchState = state => state.isFetching
+export const getSongs = state => state.songs
+export const getSongIds = state => state.songIds
+export const getNextUrl = state => state.nextUrl
+
 export default playlist;

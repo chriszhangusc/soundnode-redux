@@ -6,7 +6,6 @@ import { GENRES, DEFAULT_GENRE } from '../constants/SongConstants';
 import Spinner from '../components/Spinner';
 import { fetchSongsOnScroll } from '../actions/playlists';
 import { pauseSong, changeSong, changeSongAndPlay } from '../actions/player';
-// import { getPlayingState, getSongsAsArray, getFetchState, getCurrentSong , getPlaylistName } from '../reducers';
 import * as selectors from '../selectors/songCardsSelectors';
 // Main container
 class SongCardsContainer extends Component {
@@ -19,7 +18,7 @@ class SongCardsContainer extends Component {
   }
 
   renderSongCards () {
-    const { dispatch, genre, isFetching, playlists } = this.props;
+    const { genre, playlists } = this.props;
     return (
       <div className="container">
         <SongCards
@@ -41,21 +40,19 @@ class SongCardsContainer extends Component {
 
 }
 
-
-// Mapping everything is bad, use selector instead
 const mapStateToProps = (state) => ({
   playlists: state.playlists,
-  genre: selectors.getPlaylistName(state),
+  genre: selectors.getVisiblePlaylistName(state),
+  songs: selectors.getVisibleSongsAsArray(state), // may break on search
   isFetching: selectors.getFetchState(state),
   isPlaying: selectors.getPlayingState(state),
-  songs: selectors.getSongsAsArray(state), // may break on search
   currentSong: selectors.getCurrentSong(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
   // We need to match dispatch only because InfiniteScroll relies on it.
   dispatch,
-  handleChangeSong (newSongId) { dispatch(changeSongAndPlay(newSongId)); },
+  handleChangeSong (newSongId, genre) { dispatch(changeSongAndPlay(newSongId, genre)); },
   handlePauseSong () { dispatch(pauseSong()); }
 })
 

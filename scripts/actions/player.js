@@ -39,9 +39,9 @@ export const changeSong = (newSongId) => ({
   songId: newSongId,
 })
 
-export const loadPlaylist = (genre) => ({
+export const loadPlaylist = (playlist) => ({
   type: ActionTypes.LOAD_PLAYLIST,
-  playlist: genre
+  playlist,
 })
 
 export const changeVolume = (volume) => ({
@@ -160,8 +160,20 @@ export const updateVolumeOnClick = (e, volumeBar) => {
   };
 };
 
+export const changePlaylistIfNeeded = (newPlaylistName) => {
+  return (dispatch, getState) => {
+    const currentPlaylistName = getState().player.playlist
+    if (currentPlaylistName !== newPlaylistName) {
+      dispatch(loadPlaylist(newPlaylistName));
+    }
+  };
+};
+
 export const changeSongAndPlay = (newSongId) => {
   return (dispatch, getState) => {
+    const visiblePlaylist = getState().visiblePlaylist;
+    // Initialize player playlist if needed
+    dispatch(loadPlaylist(visiblePlaylist));
     dispatch(changeSong(newSongId));
     dispatch(playSong());
   };

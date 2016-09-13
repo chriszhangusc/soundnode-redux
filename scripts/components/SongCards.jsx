@@ -10,7 +10,6 @@ class SongCards extends Component {
   }
 
   render() {
-    console.log('render');
     const { isFetching } = this.props;
     return (
       <div className="content">
@@ -39,7 +38,7 @@ class SongCards extends Component {
                     <SongCard
                       song={song}
                       isPlaying={isPlaying}
-                      handleChangeSong={handleChangeSong.bind(null, song.id)}
+                      handleChangeSong={handleChangeSong.bind(null, song.id, genre)}
                       handlePauseSong={handlePauseSong}
                       isActive={currentSong ? song.id === currentSong.id : false}
                       />

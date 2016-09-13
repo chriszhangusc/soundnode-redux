@@ -4,11 +4,12 @@ import {generateFetchUrl} from '../utils/SongUtils';
 import {loadPlaylist} from '../actions/player';
 import { normalize } from 'normalizr';
 import { arrayOfSongs } from './schema';
+import { changeVisiblePlaylist } from './visiblePlaylist';
 /* Pure Action Creators */
 export const requestSongs = (genre) => ({
   type: ActionTypes.REQUEST_SONGS,
   playlist: genre
-})
+});
 
 export const receiveSongs = (genre, songs, songIds, nextUrl) => ({
   type: ActionTypes.RECEIVE_SONGS,
@@ -16,8 +17,7 @@ export const receiveSongs = (genre, songs, songIds, nextUrl) => ({
   songs,
   songIds,
   nextUrl
-})
-
+});
 /* Thunk Action Creators */
 
 const shouldFetchSongsOnLoad = (genre, playlists) => {
@@ -30,7 +30,7 @@ const shouldFetchSongsOnLoad = (genre, playlists) => {
 // Responsible for initial fetching of a genre
 export const fetchSongsOnLoad = (genre, playlists) => {
   return (dispatch, getState) => {
-    dispatch(loadPlaylist(genre));
+    dispatch(changeVisiblePlaylist(genre));
     // Initial fetch genre not cached yet so our playlists cache will not have property genre
     if (shouldFetchSongsOnLoad(genre, playlists)) {
       const url = generateFetchUrl(genre);
