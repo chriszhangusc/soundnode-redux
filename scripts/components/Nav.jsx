@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import NavSearch from './NavSearch';
 
 const Nav = () => (
+
   <div className="nav">
     <div className="container clearfix">
       <div className="nav-logo">
@@ -20,6 +21,7 @@ const Nav = () => (
       </div>
     </div>
   </div>
+
 )
 
 export default Nav;

@@ -29,13 +29,13 @@ const shouldFetchSongsOnLoad = (genre, playlists) => {
 
 
 // Responsible for initial fetching of a genre
-export const fetchSongsOnLoad = (genre, playlists) => {
+export const fetchSongsOnLoad = (playlist, playlists) => {
   return (dispatch, getState) => {
-    dispatch(changeVisiblePlaylist(genre));
+    dispatch(changeVisiblePlaylist(playlist));
     // Initial fetch genre not cached yet so our playlists cache will not have property genre
-    if (shouldFetchSongsOnLoad(genre, playlists)) {
-      const url = generateFetchUrl(genre);
-      fetchAndReceiveSongs(url, genre, dispatch);
+    if (shouldFetchSongsOnLoad(playlist, playlists)) {
+      const url = generateFetchUrl(playlist);
+      fetchAndReceiveSongs(url, playlist, dispatch);
     }
   };
 };

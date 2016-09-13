@@ -1,9 +1,9 @@
 .song-card {
-    padding: 10px;
+  padding: 10px;
 
-    &.active {
-        border-color: $theme-color;
-    }
+  &.active {
+      border-color: $theme-color;
+  }
 }
 
 .song-card-image {

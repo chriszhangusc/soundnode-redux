@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { GENRES, DEFAULT_GENRE } from '../constants/SongConstants';
 import Spinner from '../components/Spinner';
 import { fetchSongsOnScroll } from '../actions/playlists';
-import { pauseSong, changeSong, changeSongAndPlay } from '../actions/player';
+import { pauseSong, changeSongAndPlay } from '../actions/player';
 import * as selectors from '../selectors/songCardsSelectors';
 // Main container
 class SongCardsContainer extends Component {
@@ -18,11 +18,9 @@ class SongCardsContainer extends Component {
   }
 
   renderSongCards () {
-    const { visiblePlaylistName, playlists, handleScroll } = this.props;
     return (
       <div className="container">
         <SongCards
-          scrollFunc={handleScroll}
           {...this.props}
           />
       </div>
@@ -30,17 +28,12 @@ class SongCardsContainer extends Component {
   }
 
   render () {
-    return (
-    <div>
-      {this.renderSongCards()}
-    </div>
-    );
+    return this.renderSongCards()
   }
 
 }
 
 const mapStateToProps = (state) => ({
-  playlists: state.playlists,
   visiblePlaylistName: selectors.getVisiblePlaylistName(state),
   songs: selectors.getVisibleSongsAsArray(state), // may break on search
   isFetching: selectors.getFetchState(state),
@@ -49,9 +42,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  handleChangeSong (newSongId, playlist) { dispatch(changeSongAndPlay(newSongId, playlist)); },
+  handleChangeSong (newSongId) { dispatch(changeSongAndPlay(newSongId)); },
   handlePauseSong () { dispatch(pauseSong()); },
-  handleScroll () { dispatch(fetchSongsOnScroll()); }
+  scrollFunc () { dispatch(fetchSongsOnScroll()); }
 })
 
 // withRouter is handy when you need to inject params from the router into components that are deep down

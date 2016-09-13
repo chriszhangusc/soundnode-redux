@@ -169,6 +169,7 @@ export const changePlaylistIfNeeded = (newPlaylistName) => {
   };
 };
 
+// Switch player playlist if needed.
 export const changeSongAndPlay = (newSongId) => {
   return (dispatch, getState) => {
     const visiblePlaylist = getState().visiblePlaylist;

@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { formatImageUrl } from '../utils/FormatUtils';
+
 class SongCard extends Component {
 
   constructor (props) {
@@ -31,15 +31,15 @@ class SongCard extends Component {
 
 
   render() {
-    const {song, player, isActive} = this.props;
+    const {song, player, isActive, imageUrl} = this.props;
 
-    const imageUrl = formatImageUrl(song.artwork_url);
     return (
       <div className={`card song-card ${(isActive ? 'active' : '')}`}>
         <div className="song-card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
           {this.renderTogglePlayButton()}
         </div>
         <div className="song-card-user clearfix">
+
           <img
             className="song-card-user-image"
             src={song.user.avatar_url}
