@@ -172,8 +172,10 @@ export const changePlaylistIfNeeded = (newPlaylistName) => {
 export const changeSongAndPlay = (newSongId) => {
   return (dispatch, getState) => {
     const visiblePlaylist = getState().visiblePlaylist;
+    const playerPlaylist = getState().player.playlist;
     // Initialize player playlist if needed
-    dispatch(loadPlaylist(visiblePlaylist));
+    if (visiblePlaylist !== playerPlaylist)
+      dispatch(loadPlaylist(visiblePlaylist));
     dispatch(changeSong(newSongId));
     dispatch(playSong());
   };
@@ -190,7 +192,6 @@ export const playNextSongByCurrentMode = () => {
         dispatch(playNextSong());
         break;
       case REPEAT:
-        console.log('Repeat is implemented by loop attribute in audio tag');
         break;
       case SHUFFLE:
         dispatch(playNextSong());

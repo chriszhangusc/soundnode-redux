@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-
+import { connect } from 'react-redux';
 // Higher order component
 export default function (InnerComponent) {
   class InfiniteScrollComponent extends Component {
@@ -18,8 +18,8 @@ export default function (InnerComponent) {
 
     onScroll() {
       if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight) + 50) {
-        const { dispatch, scrollFunc } = this.props;
-        dispatch(scrollFunc());
+        const { scrollFunc } = this.props;
+        scrollFunc();
       }
     }
 
@@ -29,9 +29,8 @@ export default function (InnerComponent) {
   }
 
   InfiniteScrollComponent.propTypes = {
-    dispatch: PropTypes.func.isRequired,
     scrollFunc: PropTypes.func.isRequired,
   };
-
+  // Connect to redux store only because we need dispatch!
   return InfiniteScrollComponent;
 }

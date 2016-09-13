@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SongCard from '../components/SongCard';
 import Spinner from './Spinner';
-import infiniteScroll from './InfiniteScroll';
+import infiniteScroll from './hocs/InfiniteScroll';
 
 class SongCards extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class SongCards extends Component {
 
 
   renderSongCards() {
-    const { currentSong, songs, genre, isPlaying } = this.props;
+    const { currentSong, songs, visiblePlaylistName, isPlaying } = this.props;
     const { handlePauseSong, handleChangeSong } = this.props;
     // These logic should be rewritten!
     let rows = [];
@@ -38,7 +38,7 @@ class SongCards extends Component {
                     <SongCard
                       song={song}
                       isPlaying={isPlaying}
-                      handleChangeSong={handleChangeSong.bind(null, song.id, genre)}
+                      handleChangeSong={handleChangeSong.bind(null, song.id, visiblePlaylistName)}
                       handlePauseSong={handlePauseSong}
                       isActive={currentSong ? song.id === currentSong.id : false}
                       />

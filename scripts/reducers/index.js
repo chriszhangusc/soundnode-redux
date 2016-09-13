@@ -21,6 +21,8 @@ export const getPlayerPlaylist = state => {
   return fromPlaylists.getPlaylist(state.playlists, playlistName);
 }
 
+export const getVisiblePlaylistName = state => state.visiblePlaylist
+
 export const getVisiblePlaylist = state => {
   const visiblePlaylist = state.visiblePlaylist;
   return fromPlaylists.getPlaylist(state.playlists, visiblePlaylist);
@@ -56,6 +58,11 @@ export const getFetchState = state => {
   return null;
 }
 
+export const getNextUrlOfVisiblePlaylist = state => {
+  const playlist = getVisiblePlaylist(state);
+  if (playlist) return fromPlaylist.getNextUrl(playlist);
+  return null;
+}
 
 /* From players */
 export const getPlaylistName = state => fromPlayer.getPlaylistName(state.player)

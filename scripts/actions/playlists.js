@@ -5,15 +5,16 @@ import {loadPlaylist} from '../actions/player';
 import { normalize } from 'normalizr';
 import { arrayOfSongs } from './schema';
 import { changeVisiblePlaylist } from './visiblePlaylist';
+import { getNextUrlOfVisiblePlaylist, getVisiblePlaylistName } from '../reducers';
 /* Pure Action Creators */
-export const requestSongs = (genre) => ({
+export const requestSongs = (playlist) => ({
   type: ActionTypes.REQUEST_SONGS,
-  playlist: genre
+  playlist,
 });
 
-export const receiveSongs = (genre, songs, songIds, nextUrl) => ({
+export const receiveSongs = (playlist, songs, songIds, nextUrl) => ({
   type: ActionTypes.RECEIVE_SONGS,
-  playlist:genre,
+  playlist,
   songs,
   songIds,
   nextUrl
@@ -39,29 +40,30 @@ export const fetchSongsOnLoad = (genre, playlists) => {
   };
 };
 
-const shouldFetchSongsOnScroll = (genre, playlists) => {
-  return genre in playlists && !playlists[genre].isFetching && playlists[genre].nextUrl !== null;
+const shouldFetchSongsOnScroll = (playlist, playlists) => {
+  return playlist in playlists && !playlists[playlist].isFetching && playlists[playlist].nextUrl !== null;
 }
 
 // Responsible for fetching songs on scrolling page to the bottom
-export const fetchSongsOnScroll = (genre, playlists) => {
+export const fetchSongsOnScroll = () => {
   return (dispatch, getState) => {
-
-    if (shouldFetchSongsOnScroll(genre, playlists)) {
-      const url = playlists[genre].nextUrl;
-      fetchAndReceiveSongs(url, genre, dispatch);
+    const state = getState();
+    const nextUrl = getNextUrlOfVisiblePlaylist(state);
+    const visiblePlaylistName = getVisiblePlaylistName(state);
+    if (shouldFetchSongsOnScroll(visiblePlaylistName, state.playlists)) {
+      fetchAndReceiveSongs(nextUrl, visiblePlaylistName, dispatch);
     }
   };
 }
 
-const fetchAndReceiveSongs = (url, genre, dispatch) => {
-  dispatch(requestSongs(genre));
+const fetchAndReceiveSongs = (url, playlist, dispatch) => {
+  dispatch(requestSongs(playlist));
   axios.get(url).then((response) => {
     // We got something as response.data
     const normalizedSongs = normalize(response.data.collection, arrayOfSongs);
     // console.log(normalizedSongs.entities.songs); songs lookup table
     // console.log(normalizedSongs.result);
-    dispatch(receiveSongs(genre, normalizedSongs.entities.songs, normalizedSongs.result, response.data.next_href));
+    dispatch(receiveSongs(playlist, normalizedSongs.entities.songs, normalizedSongs.result, response.data.next_href));
 
   });
 };

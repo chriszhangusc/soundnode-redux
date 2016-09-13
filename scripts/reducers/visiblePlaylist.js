@@ -9,6 +9,4 @@ const visiblePlaylist = (state = '', action) => {
   }
 };
 
-
-
 export default visiblePlaylist;

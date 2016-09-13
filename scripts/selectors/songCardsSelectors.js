@@ -6,8 +6,8 @@ import * as fromReducers from '../reducers';
  */
 
 export const getVisiblePlaylistName = createSelector(
-  [fromReducers.getVisiblePlaylist],
-  playlist => playlist
+  [fromReducers.getVisiblePlaylistName],
+  playlistName => playlistName
 );
 
 export const getPlaylistName = createSelector(

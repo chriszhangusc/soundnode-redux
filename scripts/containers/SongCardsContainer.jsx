@@ -18,11 +18,11 @@ class SongCardsContainer extends Component {
   }
 
   renderSongCards () {
-    const { genre, playlists } = this.props;
+    const { visiblePlaylistName, playlists, handleScroll } = this.props;
     return (
       <div className="container">
         <SongCards
-          scrollFunc={fetchSongsOnScroll.bind(null, genre, playlists)}
+          scrollFunc={handleScroll}
           {...this.props}
           />
       </div>
@@ -30,7 +30,6 @@ class SongCardsContainer extends Component {
   }
 
   render () {
-    console.log('SongCardsContainer Render');
     return (
     <div>
       {this.renderSongCards()}
@@ -42,7 +41,7 @@ class SongCardsContainer extends Component {
 
 const mapStateToProps = (state) => ({
   playlists: state.playlists,
-  genre: selectors.getVisiblePlaylistName(state),
+  visiblePlaylistName: selectors.getVisiblePlaylistName(state),
   songs: selectors.getVisibleSongsAsArray(state), // may break on search
   isFetching: selectors.getFetchState(state),
   isPlaying: selectors.getPlayingState(state),
@@ -50,10 +49,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  // We need to match dispatch only because InfiniteScroll relies on it.
-  dispatch,
-  handleChangeSong (newSongId, genre) { dispatch(changeSongAndPlay(newSongId, genre)); },
-  handlePauseSong () { dispatch(pauseSong()); }
+  handleChangeSong (newSongId, playlist) { dispatch(changeSongAndPlay(newSongId, playlist)); },
+  handlePauseSong () { dispatch(pauseSong()); },
+  handleScroll () { dispatch(fetchSongsOnScroll()); }
 })
 
 // withRouter is handy when you need to inject params from the router into components that are deep down
