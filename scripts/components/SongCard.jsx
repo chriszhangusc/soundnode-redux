@@ -1,17 +1,16 @@
 import React, { Component} from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class SongCard extends Component {
 
   constructor (props) {
     super(props);
     this.renderTogglePlayButton = this.renderTogglePlayButton.bind(this);
+    this.renderSongCardDetails = this.renderSongCardDetails.bind(this);
   }
 
   renderTogglePlayButton () {
     const {isPlaying, isActive, handlePauseSong, handleChangeSong} = this.props;
-
-    // If current song is the active playing/paused song, toggling only change the playing state in player.
-    // If current song is not the active playing song, except for toggling isPlaying state,
 
     if (isActive && isPlaying) {
       return (
@@ -28,13 +27,10 @@ class SongCard extends Component {
     }
   }
 
-
-
-  render() {
-    const {song, player, isActive, imageUrl} = this.props;
-
+  renderSongCardDetails() {
+    const {song, isActive, imageUrl} = this.props;
     return (
-      <div className={`card song-card ${(isActive ? 'active' : '')}`}>
+      <div ref="songCard" className={`card song-card ${(isActive ? 'active' : '')}`}>
         <div className="song-card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
           {this.renderTogglePlayButton()}
         </div>
@@ -55,6 +51,11 @@ class SongCard extends Component {
         </div>
       </div>
     );
+  }
+
+  render() {
+
+    return this.renderSongCardDetails();
   }
 }
 

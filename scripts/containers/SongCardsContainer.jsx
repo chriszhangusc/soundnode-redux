@@ -7,6 +7,7 @@ import Spinner from '../components/Spinner';
 import { fetchSongsOnScroll } from '../actions/playlists';
 import { pauseSong, changeSongAndPlay } from '../actions/player';
 import * as selectors from '../selectors/songCardsSelectors';
+
 // Main container
 class SongCardsContainer extends Component {
 
@@ -28,7 +29,7 @@ class SongCardsContainer extends Component {
   }
 
   render () {
-    return this.renderSongCards()
+    return this.renderSongCards();
   }
 
 }

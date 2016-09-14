@@ -3,6 +3,7 @@ import SongCard from '../components/SongCard';
 import Spinner from './Spinner';
 import infiniteScroll from './hocs/InfiniteScroll';
 import { formatImageUrl } from '../utils/FormatUtils';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class SongCards extends Component {
   constructor(props) {
@@ -13,10 +14,15 @@ class SongCards extends Component {
   render() {
     const { isFetching } = this.props;
     return (
-
       <div className="content">
+        <ReactCSSTransitionGroup
+          component="div"
+          transitionName="example"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}>
           {this.renderSongCards()}
-          {isFetching ? <Spinner /> : null}
+        </ReactCSSTransitionGroup>
+        {isFetching ? <Spinner /> : null}
       </div>
     );
   }
