@@ -1,33 +1,31 @@
-// Import React Redux
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-// Import Actions and Utils
-import * as PlayerActions from '../actions/player';
 import {computeNewTimeOnSeek} from '../utils/PlayerUtils';
-
-// Import Components
 import Player from '../components/Player';
 import PlayerAudio from '../components/PlayerAudio';
 import {LOOP, REPEAT, SHUFFLE} from '../constants/PlayerConstants';
 import * as selectors from '../selectors/playerSelectors';
+import * as PlayerActions from '../actions/player';
 
 class PlayerContainer extends Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
 
-  render () {
+  render() {
     // Extract props that we care, and pass the other props as others.
     const {currentSong} = this.props;
-    if (!currentSong) return null;
-
-    return (
-      <div>
-        <PlayerAudio {...this.props} />
-        <Player {...this.props} />
-      </div>
-    );
+    if (!currentSong) {
+      return null;
+    } else {
+      return (
+        <div>
+          <PlayerAudio {...this.props} />
+          <Player {...this.props} />
+        </div>
+      );
+    }
   }
 
 }
@@ -49,7 +47,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
 
   return {
-    dispatch,
     // PlayerAudio functions:
     onTimeUpdate: (e) => { dispatch(PlayerActions.onTimeUpdate(e.target.currentTime)) },
     onEnded: () => { dispatch(PlayerActions.playNextSongByCurrentMode()) },

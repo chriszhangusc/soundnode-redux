@@ -1,6 +1,6 @@
-import {SEED_FETCH_URL} from '../constants/SongConstants';
-import {CLIENT_ID} from '../constants/Config';
-
+import { SEED_FETCH_URL } from '../constants/SongConstants';
+import { CLIENT_ID } from '../constants/Config';
+import { LOOP, SHUFFLE, REPEAT, NEXT, PREV } from '../constants/PlayerConstants';
 export const generateFetchUrl = (genre) => {
   // const url = `${SEED_FETCH_URL}&tags=${genre}`;
   const url = `${SEED_FETCH_URL}&genres=${genre}`;
@@ -15,21 +15,6 @@ export const generateStreamUrl = (song) => {
   return streamUrl;
 }
 
-export const getShuffledSong = () => {
-
-}
-
-export const getPrevSong = (currentSong, songs, mode) => {
-  let prevSong = null;
-  for (let i = 0; i < songs.length; i++) {
-    if (songs[i].id === currentSong.id) {
-      if (i > 0) prevSong = songs[i - 1];
-      else prevSong = songs[songs.length - 1];
-    }
-  }
-  return prevSong;
-}
-
 const getRandomIntInclusive = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -37,24 +22,43 @@ const getRandomIntInclusive = (min, max) => {
   return res;
 }
 
-export const getNextSong = (currentSong, songs, mode) => {
-  let nextSong = null;
-  if (songs.length === 0) return nextSong;
-
-  if (mode === 'LOOP') {
-    for (let i = 0; i < songs.length; i++) {
-      if (songs[i].id === currentSong.id) {
-        if (i + 1 < songs.length) nextSong = songs[i + 1];
-        else nextSong = songs[0];
-      }
+const getLoopNext = (songId, songIds) => {
+  let nextSongId = null;
+  const firstId = songIds[0];
+  for (let i = 0; i < songIds.length; i++) {
+    if (songIds[i] === songId) {
+      nextSongId = i + 1 < songIds.length ? songIds[i + 1] : firstId;
+      break;
     }
-  } else if (mode === 'SHUFFLE') {
-    // Not really shuffle, this is random play.
-    let nextIdx = getRandomIntInclusive(0, songs.length - 1);
-    while (songs[nextIdx].id === currentSong.id) {
-      nextIdx = getRandomIntInclusive(0, songs.length - 1);
-    }
-    nextSong = songs[nextIdx];
   }
-  return nextSong;
+  return nextSongId;
+};
+
+const getLoopPrev = (songId, songIds) => {
+  let prevSongId = null;
+  const lastId = songIds[songIds.length - 1];
+  for (let i = 0; i < songIds.length; i++) {
+    if (songIds[i] === songId) {
+      prevSongId = i - 1 >= 0 ? songIds[i - 1] : lastId;
+      break;
+    }
+  }
+  return prevSongId;
+}
+
+const getShufflePrev = () => {}
+const getShuffleNext = () => {}
+
+export const getSongIdByMode = (songId, songIds, mode, method) => {
+  if (songIds.length === 0) return null;
+  switch (mode) {
+    case LOOP:
+      if (method === NEXT) return getLoopNext(songId, songIds);
+      if (method === PREV) return getLoopPrev(songId, songIds);
+    case SHUFFLE:
+      if (method === NEXT) return getShuffleNext(songId, songIds);
+      if (method === PREV) return getShufflePrev(songId, songIds);
+    default:
+      return null;
+  }
 }

@@ -1,8 +1,8 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import {LOOP, REPEAT, SHUFFLE, DEFAULT_MODE} from '../constants/PlayerConstants';
-import {getPrevSong, getNextSong} from '../utils/SongUtils';
+import { LOOP, REPEAT, SHUFFLE, DEFAULT_MODE, NEXT, PREV} from '../constants/PlayerConstants';
+import { getSongIdByMode } from '../utils/SongUtils';
 import {computeNewTimeOnSeek, computeNewVolumeOnSeek} from '../utils/PlayerUtils';
-
+import * as selectors from '../reducers';
 /* Pure actions */
 export const toggleSeek = () => ({ type: ActionTypes.TOGGLE_SEEK })
 
@@ -82,31 +82,27 @@ export const changePlayMode = (mode) => {
     }
   };
 };
-/**
- * Play next song according to current playing mode.
- */
-export const playNextSong = () => {
 
+
+export const playNextSong = () => {
   return (dispatch, getState) => {
-    const {player, playlists} = getState();
-    const genre = player.playlist;
-    const currentSong = player.song;
-    const playlistSongs = playlists[genre].songs;
-    const mode = player.mode;
-    const nextSong = getNextSong(currentSong, playlistSongs, mode);
-    if (nextSong) dispatch(changeSongAndPlay(nextSong.id));
+    const state = getState();
+    const mode = selectors.getPlayerMode(state);
+    const playlistSongIds = selectors.getPlayerSongIds(state);
+    const currentSongId = selectors.getCurrentSongId(state);
+    const nextSongId = getSongIdByMode(currentSongId, playlistSongIds, mode, NEXT);
+    dispatch(changeSongAndPlay(nextSongId));
   };
 };
 
 export const playPrevSong = () => {
   return (dispatch, getState) => {
-    const {player, playlists} = getState();
-    const genre = player.playlist;
-    const currentSong = player.song;
-    const playlist = playlists[genre].songs;
-    const prevSong = getPrevSong(currentSong, playlist);
-    if (prevSong) dispatch(changeSongAndPlay(prevSong.id));
-
+    const state = getState();
+    const mode = selectors.getPlayerMode(state);
+    const playlistSongIds = selectors.getPlayerSongIds(state);
+    const currentSongId = selectors.getCurrentSongId(state);
+    const prevSongId = getSongIdByMode(currentSongId, playlistSongIds, mode, PREV);
+    dispatch(changeSongAndPlay(prevSongId));
   };
 };
 
