@@ -1,4 +1,4 @@
-# My React Redux Boilerplate Project
+# Redux Music Forked from: https://github.com/andrewngu/sound-redux
 
 Just rewriting the sound-redux project for learning and fun purposes.
 
