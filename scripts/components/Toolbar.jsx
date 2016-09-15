@@ -1,6 +1,6 @@
 import React from 'react';
 import { GENRES } from '../constants/SongConstants';
-import {Link, IndexLink} from 'react-router';
+import { Link } from 'react-router';
 
 const renderGenres = (genres) => {
   return genres.map(genre =>
@@ -8,16 +8,14 @@ const renderGenres = (genres) => {
   );
 }
 
-const Toolbar = () => {
-  return (
-    <div className="toolbar">
-      <div className="container">
-        <div className="toolbar-items">
-          {renderGenres(GENRES)}
-        </div>
+const Toolbar = () => (
+  <div className="toolbar">
+    <div className="container">
+      <div className="toolbar-items">
+        {renderGenres(GENRES)}
       </div>
     </div>
-  );
-}
+  </div>
+)
 
 export default Toolbar;

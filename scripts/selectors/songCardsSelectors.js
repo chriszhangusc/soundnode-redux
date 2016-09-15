@@ -25,16 +25,12 @@ export const getPlayingState = createSelector(
   isPlaying => isPlaying
 );
 
-// /*
-//  * Return the songs in current playlist as an array
-//  */
-// export const getSongsAsArray = createSelector(
-//   [fromReducers.getPlayerSongMap, fromReducers.getPlayerSongIds],
-//   (songsById, songIds) => {
-//     if (songIds) return songIds.map(id => songsById[id]);
-//     return [];
-//   }
-// );
+
+// To memoize it we have to check out createSelector with param!
+export const getIsActive = (state, id) => {
+  const currentSongId = fromReducers.getCurrentSongId(state);
+  return currentSongId ? id === currentSongId : false;
+}
 
 /*
  * Return array of song objects according to visiblePlaylist
@@ -57,13 +53,3 @@ export const getCurrentSong = createSelector(
     return null;
   }
 );
-
-
-
-// Data needed by SongCardsContainer
-// genre: getPlaylistName(state),
-// isFetching: getFetchState(state),
-// isPlaying: getPlayingState(state),
-// songs: getSongsAsArray(state), // may break on search
-// playlists: state.playlists,
-// currentSong: getCurrentSong(state),
