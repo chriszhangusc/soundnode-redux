@@ -1,8 +1,9 @@
 import * as ActionTypes from '../constants/ActionTypes';
 import {SHUFFLE, REPEAT, LOOP, INITIAL_VOLUME, DEFAULT_MODE} from '../constants/PlayerConstants';
+import Immutable from 'immutable';
 
 /* Player Reducers */
-const INITIAL_STATE = {
+const INITIAL_STATE = Immutable.Map({
   currentTime: 0,
   volume: INITIAL_VOLUME,
   songId: null,
@@ -12,7 +13,7 @@ const INITIAL_STATE = {
   volumeIsSeeking: false,
   duration: 0,
   mode: DEFAULT_MODE,
-};
+});
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -22,6 +23,7 @@ const player = (state = INITIAL_STATE, action) => {
         ...state,
         playlist: action.playlist
       };
+      // return state.set('playlist', action.playlist);
 
     case ActionTypes.TOGGLE_PLAY:
       return {

@@ -1,31 +1,23 @@
-import React, {Component} from 'react';
-import { GENRES, DEFAULT_GENRE } from '../constants/SongConstants';
+import React from 'react';
+import { GENRES } from '../constants/SongConstants';
 import {Link, IndexLink} from 'react-router';
 
-class Toolbar extends Component {
-  constructor(props) {
-    super(props);
-    this.renderGenres = this.renderGenres.bind(this);
-  }
+const renderGenres = (genres) => {
+  return genres.map(genre =>
+  <Link className={`toolbar-item toolbar-genre`} activeClassName={'active'} to={`/songs/${genre}`} key={genre}>{genre}</Link>
+  );
+}
 
-  renderGenres() {
-    const { handleOnClick } = this.props;
-    return GENRES.map(genre =>
-      (<Link className={`toolbar-item toolbar-genre`} activeClassName={'active'} to={`/songs/${genre}`} key={genre}>{genre}</Link>)
-    );
-  }
-
-  render () {
-    return (
-      <div className="toolbar">
-        <div className="container">
-          <div className="toolbar-items">
-            {this.renderGenres()}
-          </div>
+const Toolbar = () => {
+  return (
+    <div className="toolbar">
+      <div className="container">
+        <div className="toolbar-items">
+          {renderGenres(GENRES)}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Toolbar;

@@ -13,6 +13,9 @@ const rootReducer = combineReducers({
   player,
   visiblePlaylist,
 });
+
+// The key requirement is that a reducer cannot modify an existing state object; it must produce a new object.
+
 /* Pure state selectors */
 
 /* From playlists */
