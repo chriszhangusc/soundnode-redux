@@ -3,19 +3,19 @@ const PLAYLIST_INITIAL_STATE = {
   isFetching: false,
   songs: {},
   songIds: [],
-  nextUrl: null,
+  nextUrl: null
 };
 
 const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
   switch (action.type) {
     case ActionTypes.LOAD_PLAYLIST:
       return {
-        ...state,
+        ...state
       }
     case ActionTypes.REQUEST_SONGS:
       return {
         ...state,
-        isFetching: true,
+        isFetching: true
       };
     case ActionTypes.RECEIVE_SONGS:
       return {

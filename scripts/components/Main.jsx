@@ -3,7 +3,7 @@ import Toolbar from './Toolbar';
 import VisibleSongCardList from '../containers/VisibleSongCardList';
 import PlayerContainer from '../containers/PlayerContainer'
 
-const Main = (props) => (
+const Main = () => (
   <div className='songs'>
     <Toolbar />
     <VisibleSongCardList />

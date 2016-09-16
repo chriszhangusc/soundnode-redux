@@ -4,7 +4,11 @@ import { Link } from 'react-router';
 
 const renderGenres = (genres) => {
   return genres.map(genre =>
-  <Link className={`toolbar-item toolbar-genre`} activeClassName={'active'} to={`/songs/${genre}`} key={genre}>{genre}</Link>
+  <Link
+    className={`toolbar-item toolbar-genre`}
+    activeClassName={'active'}
+    to={`/songs/${genre}`}
+    key={genre}>{genre}</Link>
   );
 }
 

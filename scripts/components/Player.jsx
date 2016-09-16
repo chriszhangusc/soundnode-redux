@@ -1,6 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import ReactDOM from 'react-dom';
-import PlayerAudio from './PlayerAudio';
 import PlayerSongInfo from './PlayerSongInfo';
 import PlayerControls from './PlayerControls';
 import PlayerDurationBar from './PlayerDurationBar';

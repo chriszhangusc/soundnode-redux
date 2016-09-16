@@ -1,3 +1,13 @@
 {
-  "extends": "rallycoding"
+  "extends": [ "eslint:recommended", "plugin:react/recommended" ],
+  "plugins": [ "react" ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "experimentalObjectRestSpread": true,
+      "jsx": true
+    }
+  }
 }

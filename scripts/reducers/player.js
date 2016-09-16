@@ -1,5 +1,5 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import {SHUFFLE, REPEAT, LOOP, INITIAL_VOLUME, DEFAULT_MODE} from '../constants/PlayerConstants';
+import { INITIAL_VOLUME, DEFAULT_MODE } from '../constants/PlayerConstants';
 import Immutable from 'immutable';
 
 /* Player Reducers */
@@ -12,7 +12,7 @@ const INITIAL_STATE = Immutable.Map({
   isSeeking: false,
   volumeIsSeeking: false,
   duration: 0,
-  mode: DEFAULT_MODE,
+  mode: DEFAULT_MODE
 });
 
 const player = (state = INITIAL_STATE, action) => {
@@ -34,73 +34,73 @@ const player = (state = INITIAL_STATE, action) => {
     case ActionTypes.PLAY_SONG:
       return {
         ...state,
-        isPlaying: true,
+        isPlaying: true
       };
 
     case ActionTypes.PAUSE_SONG:
       return {
         ...state,
-        isPlaying: false,
+        isPlaying: false
       };
 
     case ActionTypes.CHANGE_DURATION:
       return {
         ...state,
-        duration: action.duration,
+        duration: action.duration
       };
 
     case ActionTypes.CHANGE_SONG:
       return {
         ...state,
-        songId: action.songId,
+        songId: action.songId
       };
 
     case ActionTypes.UPDATE_TIME:
       return {
         ...state,
-        currentTime: action.currentTime,
+        currentTime: action.currentTime
       };
 
     case ActionTypes.TOGGLE_SEEK:
       return {
         ...state,
-        isSeeking: !state.isSeeking,
+        isSeeking: !state.isSeeking
       };
 
     case ActionTypes.BEGIN_SEEK:
       return {
         ...state,
-        isSeeking: true,
+        isSeeking: true
       };
 
     case ActionTypes.END_SEEK:
       return {
         ...state,
-        isSeeking: false,
+        isSeeking: false
       };
 
     case ActionTypes.CHANGE_VOLUME:
       return {
         ...state,
-        volume: action.volume,
+        volume: action.volume
       };
 
     case ActionTypes.BEGIN_VOLUME_SEEK:
       return {
         ...state,
-        volumeIsSeeking: true,
+        volumeIsSeeking: true
       };
 
     case ActionTypes.END_VOLUME_SEEK:
       return {
         ...state,
-        volumeIsSeeking: false,
+        volumeIsSeeking: false
       };
 
     case ActionTypes.SWITCH_MODE:
       return {
         ...state,
-        mode: action.mode,
+        mode: action.mode
       };
 
     default:

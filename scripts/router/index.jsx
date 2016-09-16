@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Router, IndexRoute, IndexRedirect, browserHistory } from 'react-router';
+import { Route, Router, IndexRedirect, browserHistory } from 'react-router';
 import App from '../components/App';
 import Main from '../components/Main';
 import NotFound from '../components/NotFound';

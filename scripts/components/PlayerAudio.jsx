@@ -1,4 +1,3 @@
-
 import React, { PropTypes, Component } from 'react';
 import {REPEAT} from '../constants/PlayerConstants';
 // Stateless functional component
@@ -43,7 +42,7 @@ class PlayerAudio extends Component {
   togglePlayIfNeeded(audioElement, isPlaying) {
     // This also covers change song and play logic
     if (audioElement.paused === isPlaying) {
-      audioElement.paused ? audioElement.play(): audioElement.pause();
+      audioElement.paused ? audioElement.play() : audioElement.pause();
     }
   }
 
@@ -82,7 +81,7 @@ PlayerAudio.PropTypes = {
   streamUrl: PropTypes.string.isRequired,
   onTimeUpdate: PropTypes.func.isRequired,
   onEnded: PropTypes.func.isRequired,
-  onLoadedMetadata: PropTypes.func.isRequired,
+  onLoadedMetadata: PropTypes.func.isRequired
 };
 
 export default PlayerAudio;

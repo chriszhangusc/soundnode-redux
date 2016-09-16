@@ -2,16 +2,14 @@ import playlists from './playlists';
 import player from './player';
 import visiblePlaylist from './visiblePlaylist';
 import { combineReducers } from 'redux';
-import { generateStreamUrl } from '../utils/SongUtils';
 import * as fromPlaylists from './playlists';
 import * as fromPlaylist from './playlist';
 import * as fromPlayer from './player';
-import { createSelector } from 'reselect';
 /* Reducers */
 const rootReducer = combineReducers({
   playlists,
   player,
-  visiblePlaylist,
+  visiblePlaylist
 });
 
 // The key requirement is that a reducer cannot modify an existing state object; it must produce a new object.
