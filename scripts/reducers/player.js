@@ -1,9 +1,8 @@
 import * as ActionTypes from '../constants/ActionTypes';
 import { INITIAL_VOLUME, DEFAULT_MODE } from '../constants/PlayerConstants';
-import Immutable from 'immutable';
 
 /* Player Reducers */
-const INITIAL_STATE = Immutable.Map({
+const INITIAL_STATE = {
   currentTime: 0,
   volume: INITIAL_VOLUME,
   songId: null,
@@ -13,7 +12,7 @@ const INITIAL_STATE = Immutable.Map({
   volumeIsSeeking: false,
   duration: 0,
   mode: DEFAULT_MODE
-});
+}
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -113,7 +112,7 @@ export const getCurrentSongId = state => state.songId
 export const getPlaylistName = state => state.playlist
 export const getPlayingState = state => state.isPlaying
 export const getCurrentTime = state => state.currentTime
-export const getSeekStatus = state => state.isSeeking
+export const getSeekState = state => state.isSeeking
 export const getPlayerMode = state => state.mode
 export const getVolumeSeekState = state => state.volumeIsSeeking
 export const getCurrentVolume = state => state.volume

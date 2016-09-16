@@ -8,6 +8,11 @@ export const getPlayingState = createSelector(
   isPlaying => isPlaying
 );
 
+export const getCurrentSongId = createSelector(
+  [fromReducers.getCurrentSongId],
+  songId => songId
+);
+
 export const getCurrentSong = createSelector(
   [fromReducers.getPlayerSongMap, fromReducers.getCurrentSongId],
   (songsById, songId) => {
@@ -31,8 +36,8 @@ export const getCurrentTime = createSelector(
   currentTime => currentTime
 );
 
-export const getSeekStatus = createSelector(
-  [fromReducers.getSeekStatus],
+export const getSeekState = createSelector(
+  [fromReducers.getSeekState],
   seekStatus => seekStatus
 );
 
@@ -46,12 +51,22 @@ export const getVolumeSeekState = createSelector(
   volumeIsSeeking => volumeIsSeeking
 );
 
-// Data needed to be prepared for PlayerContainer
-// isPlaying: getPlayingState(state),
-// duration: getDuration(state),
-// currentSong: getCurrentSong(state),
-// streamUrl: getStreamUrl(state),
-// currentTime: getCurrentTime(state),
-// isSeeking: getSeekStatus(state),
-// volume: getCurrentVolume(state),
-// volumeIsSeeking: getVolumeSeekState(state),
+export const getCurrentSongTitle = createSelector(
+  [getCurrentSong],
+  currentSong => currentSong.title
+);
+
+export const getCurrentSongUsername = createSelector(
+  [getCurrentSong],
+  currentSong => currentSong.user.username
+);
+
+export const getCurrentSongArtworkUrl = createSelector(
+  [getCurrentSong],
+  currentSong => currentSong.artwork_url
+);
+
+export const getPlayerMode = createSelector(
+  [fromReducers.getPlayerMode],
+  mode => mode
+);

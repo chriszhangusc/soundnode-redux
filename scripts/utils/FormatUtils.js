@@ -1,4 +1,5 @@
 export const formatSecondsAsTime = (secs) => {
+
   let hr  = Math.floor(secs / 3600);
   let min = Math.floor((secs - (hr * 3600)) / 60);
   let sec = Math.floor(secs - (hr * 3600) -  (min * 60));

@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import {REPEAT} from '../constants/PlayerConstants';
-// Stateless functional component
+
 class PlayerAudio extends Component {
   constructor(props) {
     super(props);
@@ -77,11 +77,14 @@ class PlayerAudio extends Component {
 
 }
 
-PlayerAudio.PropTypes = {
-  streamUrl: PropTypes.string.isRequired,
-  onTimeUpdate: PropTypes.func.isRequired,
-  onEnded: PropTypes.func.isRequired,
-  onLoadedMetadata: PropTypes.func.isRequired
+PlayerAudio.propTypes = {
+  isPlaying: PropTypes.bool,
+  volume: PropTypes.number,
+  mode: PropTypes.string,
+  streamUrl: PropTypes.string,
+  onTimeUpdate: PropTypes.func,
+  onEnded: PropTypes.func,
+  onLoadedMetadata: PropTypes.func
 };
 
 export default PlayerAudio;

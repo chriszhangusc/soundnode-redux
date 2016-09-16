@@ -78,7 +78,7 @@ export const getVolumeSeekState = state => fromPlayer.getVolumeSeekState(state.p
 
 export const getCurrentTime = state => fromPlayer.getCurrentTime(state.player)
 
-export const getSeekStatus = state => fromPlayer.getSeekStatus(state.player)
+export const getSeekState = state => fromPlayer.getSeekState(state.player)
 
 export const getPlayerMode = state => fromPlayer.getPlayerMode(state.player)
 

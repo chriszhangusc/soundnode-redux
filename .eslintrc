@@ -9,5 +9,12 @@
       "experimentalObjectRestSpread": true,
       "jsx": true
     }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules":{
+    "no-console":0
   }
 }

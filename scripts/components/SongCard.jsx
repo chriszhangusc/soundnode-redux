@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 
 const renderTogglePlayButton = (isPlaying, isActive, handlePauseSong, handleChangeSong) => {
-
   if (isActive && isPlaying) {
     return (
       <div className={`toggle-play-button ${(isActive ? 'active' : '')}`}

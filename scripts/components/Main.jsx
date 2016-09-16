@@ -1,13 +1,13 @@
 import React from 'react';
 import Toolbar from './Toolbar';
 import VisibleSongCardList from '../containers/VisibleSongCardList';
-import PlayerContainer from '../containers/PlayerContainer'
+import VisiblePlayer from '../containers/VisiblePlayer'
 
 const Main = () => (
   <div className='songs'>
     <Toolbar />
     <VisibleSongCardList />
-    <PlayerContainer />
+    <VisiblePlayer />
   </div>
 )
 

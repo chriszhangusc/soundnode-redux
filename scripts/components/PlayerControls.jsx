@@ -8,7 +8,6 @@ class PlayerControls extends Component {
     this.renderBackwardButton = this.renderBackwardButton.bind(this);
   }
 
-
   renderPlayPauseButton () {
     const {isPlaying, onPauseClick, onPlayClick} = this.props;
     return (
@@ -51,7 +50,11 @@ class PlayerControls extends Component {
 }
 
 PlayerControls.propTypes = {
-
+  isPlaying: PropTypes.bool,
+  onNextClick: PropTypes.func,
+  onPrevClick: PropTypes.func,
+  onPlayClick: PropTypes.func,
+  onPauseClick: PropTypes.func
 };
 
 export default PlayerControls;

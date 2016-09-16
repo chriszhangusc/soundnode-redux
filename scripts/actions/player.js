@@ -36,12 +36,12 @@ export const changeDuration = (duration) => ({
  */
 export const changeSong = (newSongId) => ({
   type: ActionTypes.CHANGE_SONG,
-  songId: newSongId,
+  songId: newSongId
 })
 
 export const loadPlaylist = (playlist) => ({
   type: ActionTypes.LOAD_PLAYLIST,
-  playlist,
+  playlist
 })
 
 export const changeVolume = (volume) => ({
@@ -134,23 +134,30 @@ export const onSeekTimeUpdate = (newTime) => {
 /**
  * duration: song duration in seconds
  */
-export const updateTimeOnSeek = (mouseEvent, seekBar, duration) => {
-  return (dispatch, getState) => {
+export const updateTimeOnSeek = (seekBar, duration, mouseEvent) => {
+  return (dispatch) => {
     let newTime = computeNewTimeOnSeek(mouseEvent, seekBar, duration);
-    // ONLY UPDATE currenttime in STATE!
-    dispatch(onSeekTimeUpdate(Math.floor(newTime)));
+    dispatch(onSeekTimeUpdate(newTime));
+  };
+};
+
+export const updateTimeAndEndSeeking = (seekBar, duration, mouseEvent) => {
+  return (dispatch) => {
+    let newTime = computeNewTimeOnSeek(mouseEvent, seekBar, duration);
+    dispatch(onSeekTimeUpdate(newTime));
+    dispatch(endSeek());
   };
 };
 
 export const updateVolumeOnSeek = (e, volumeBar) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     let newVolume = computeNewVolumeOnSeek(e, volumeBar);
     dispatch(changeVolume(newVolume));
   };
 };
 
 export const updateVolumeOnClick = (e, volumeBar) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     let newVolume = computeNewVolumeOnSeek(e, volumeBar);
     dispatch(changeVolume(newVolume));
   };

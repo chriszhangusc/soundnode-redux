@@ -1,17 +1,9 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 
-class PlayerSongInfo extends Component {
-  constructor (props) {
-    super(props);
-  }
-
-  render () {
-    const {currentSong} = this.props;
-    const title = currentSong.title;
-    const username = currentSong.user.username;
+const PlayerSongInfo = ({ username, title, artworkUrl }) => {
     return (
       <div className="player-section player-info">
-        <img className="player-image" src={currentSong.artwork_url} />
+        <img className="player-image" src={artworkUrl} />
         <div className="song-card-details">
           <a className="song-card-title">
             {title}
@@ -22,12 +14,13 @@ class PlayerSongInfo extends Component {
         </div>
       </div>
     );
-  }
-}
-
-const propTypes = {
 };
 
-PlayerSongInfo.propTypes = propTypes;
+PlayerSongInfo.propTypes = {
+  username: PropTypes.string,
+  title: PropTypes.string,
+  artworkUrl: PropTypes.string
+};
+
 
 export default PlayerSongInfo;

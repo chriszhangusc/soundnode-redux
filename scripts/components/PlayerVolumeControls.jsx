@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-// Stateless functional component
+
 class PlayerVolumeControls extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +13,7 @@ class PlayerVolumeControls extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    const {volumeIsSeeking, onVolumeHandleMouseUp, onVolumeHandleMouseMove} = this.props;
+    const {volumeIsSeeking, onVolumeHandleMouseUp} = this.props;
     const prevIsSeeking = prevProps.volumeIsSeeking;
     const currIsSeeking = volumeIsSeeking;
     if (!prevIsSeeking && currIsSeeking) {
@@ -73,10 +73,17 @@ class PlayerVolumeControls extends Component {
       </div>
     );
   }
-
 }
 
 PlayerVolumeControls.propTypes = {
+  volume: PropTypes.number,
+  volumeIsSeeking: PropTypes.bool,
+  onVolumeBarMouseDown: PropTypes.func,
+  onVolumeHandleMouseDown: PropTypes.func,
+  onVolumeBarMouseUp: PropTypes.func,
+  onToggleMuteClick: PropTypes.func,
+  onVolumeHandleMouseUp:PropTypes.func,
+  onVolumeHandleMouseMove: PropTypes.func
 };
 
 export default PlayerVolumeControls;

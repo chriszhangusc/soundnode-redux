@@ -40,8 +40,10 @@ class PlayerModeControls extends Component {
 
 }
 
-PlayerModeControls.PropTypes = {
-
+PlayerModeControls.propTypes = {
+  mode: PropTypes.string,
+  onRepeatClick: PropTypes.func,
+  onShuffleClick: PropTypes.func
 };
 
 export default PlayerModeControls;
