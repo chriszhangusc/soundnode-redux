@@ -12,10 +12,6 @@ const rootReducer = combineReducers({
   visiblePlaylist
 });
 
-// The key requirement is that a reducer cannot modify an existing state object; it must produce a new object.
-
-/* Pure state selectors */
-
 /* From playlists */
 export const getPlayerPlaylist = state => {
   const playlistName = fromPlayer.getPlaylistName(state.player);

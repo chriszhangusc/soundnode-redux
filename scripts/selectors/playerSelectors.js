@@ -53,17 +53,17 @@ export const getVolumeSeekState = createSelector(
 
 export const getCurrentSongTitle = createSelector(
   [getCurrentSong],
-  currentSong => currentSong.title
+  currentSong => currentSong ? currentSong.title : null
 );
 
 export const getCurrentSongUsername = createSelector(
   [getCurrentSong],
-  currentSong => currentSong.user.username
+  currentSong => currentSong ? currentSong.user.username : null
 );
 
 export const getCurrentSongArtworkUrl = createSelector(
   [getCurrentSong],
-  currentSong => currentSong.artwork_url
+  currentSong => currentSong ? currentSong.artwork_url : null
 );
 
 export const getPlayerMode = createSelector(

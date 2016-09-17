@@ -19,6 +19,7 @@ class VisiblePlayer extends Component {
     if (!currentSongId) {
       return null;
     } else {
+      console.log(currentSongId);
       return (
           <div className="player">
             <div className="container">

@@ -1,5 +1,5 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import { LOOP, REPEAT, SHUFFLE, DEFAULT_MODE, NEXT, PREV} from '../constants/PlayerConstants';
+import { DEFAULT_MODE, NEXT, PREV} from '../constants/PlayerConstants';
 import { getSongIdByMode } from '../utils/SongUtils';
 import {computeNewTimeOnSeek, computeNewVolumeOnSeek} from '../utils/PlayerUtils';
 import * as selectors from '../reducers';
@@ -9,13 +9,9 @@ export const toggleSeek = () => ({ type: ActionTypes.TOGGLE_SEEK })
 export const beginSeek = () => ({ type: ActionTypes.BEGIN_SEEK })
 
 export const endSeek = () => ({ type: ActionTypes.END_SEEK })
-/**
- * Toggle the playing status of currently playing song in player
- */
-export const togglePlay = () => ({ type: ActionTypes.TOGGLE_PLAY })
 
 export const playSong = () => ({ type: ActionTypes.PLAY_SONG })
-// Pause currently playing song
+
 export const pauseSong = () => ({ type: ActionTypes.PAUSE_SONG })
 
 export const beginVolumeSeek = () => ({ type: ActionTypes.BEGIN_VOLUME_SEEK })
@@ -31,9 +27,7 @@ export const changeDuration = (duration) => ({
   type: ActionTypes.CHANGE_DURATION,
   duration
 })
-/**
- * Change current song in player to newSong
- */
+
 export const changeSong = (newSongId) => ({
   type: ActionTypes.CHANGE_SONG,
   songId: newSongId
@@ -55,14 +49,11 @@ export const switchMode = (mode) => ({
 })
 
 /* Thunk actions */
-
 export const toggleMute = () => {
   return (dispatch, getState) => {
     const currVolume = getState().player.volume;
     if (currVolume === 0) {
-      // Get previous volume from localstorage
       let lastVolume = localStorage.getItem('lastVolume');
-
       dispatch(changeVolume(lastVolume));
     } else {
       // Put current volume into localstorage and change current volume to 0
@@ -83,7 +74,7 @@ export const changePlayMode = (mode) => {
   };
 };
 
-
+// Play next song in the player playlist by current mode
 export const playNextSong = () => {
   return (dispatch, getState) => {
     const state = getState();
@@ -109,14 +100,11 @@ export const playPrevSong = () => {
 export const onTimeUpdate = (newTime) => {
   return (dispatch, getState) => {
     const {player} = getState();
-    // Do not update time normally if the user is playing with duration bar
     if (player.isSeeking) return ;
-
     newTime = Math.floor(newTime);
     if (newTime !== player.currentTime) {
       dispatch(updateTime(newTime));
     }
-
   };
 };
 
@@ -131,9 +119,6 @@ export const onSeekTimeUpdate = (newTime) => {
   };
 };
 
-/**
- * duration: song duration in seconds
- */
 export const updateTimeOnSeek = (seekBar, duration, mouseEvent) => {
   return (dispatch) => {
     let newTime = computeNewTimeOnSeek(mouseEvent, seekBar, duration);
@@ -156,22 +141,6 @@ export const updateVolumeOnSeek = (e, volumeBar) => {
   };
 };
 
-export const updateVolumeOnClick = (e, volumeBar) => {
-  return (dispatch) => {
-    let newVolume = computeNewVolumeOnSeek(e, volumeBar);
-    dispatch(changeVolume(newVolume));
-  };
-};
-
-export const changePlaylistIfNeeded = (newPlaylistName) => {
-  return (dispatch, getState) => {
-    const currentPlaylistName = getState().player.playlist
-    if (currentPlaylistName !== newPlaylistName) {
-      dispatch(loadPlaylist(newPlaylistName));
-    }
-  };
-};
-
 // Switch player playlist if needed.
 export const changeSongAndPlay = (newSongId) => {
   return (dispatch, getState) => {
@@ -182,26 +151,5 @@ export const changeSongAndPlay = (newSongId) => {
       dispatch(loadPlaylist(visiblePlaylist));
     dispatch(changeSong(newSongId));
     dispatch(playSong());
-  };
-};
-
-/**
- * Called in onEnded
- */
-export const playNextSongByCurrentMode = () => {
-  return (dispatch, getState) => {
-    const currMode = getState().player.mode;
-    switch (currMode) {
-      case LOOP:
-        dispatch(playNextSong());
-        break;
-      case REPEAT:
-        break;
-      case SHUFFLE:
-        dispatch(playNextSong());
-        break;
-      default:
-        break;
-    }
   };
 };

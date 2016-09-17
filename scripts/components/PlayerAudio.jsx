@@ -66,7 +66,6 @@ class PlayerAudio extends Component {
 
   render () {
     const {streamUrl, mode} = this.props;
-
     return (
       <audio id="audio"
         loop={mode === REPEAT ? true : false}
@@ -74,7 +73,6 @@ class PlayerAudio extends Component {
         src={streamUrl} />
     );
   }
-
 }
 
 PlayerAudio.propTypes = {

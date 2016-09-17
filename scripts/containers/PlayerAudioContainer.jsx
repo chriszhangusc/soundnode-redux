@@ -10,7 +10,7 @@ import {
   getSeekState
 } from '../selectors/playerSelectors';
 
-import { onTimeUpdate, playNextSongByCurrentMode, changeDuration } from '../actions/player';
+import { onTimeUpdate, playNextSong, changeDuration } from '../actions/player';
 
 const mapStateToProps = (state) => ({
   isPlaying: getPlayingState(state),
@@ -24,7 +24,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   //Update time in store
   onTimeUpdate: (e) => { dispatch(onTimeUpdate(e.target.currentTime)) },
-  onEnded: () => { dispatch(playNextSongByCurrentMode()) },
+  onEnded: () => { dispatch(playNextSong()) },
   onLoadedMetadata: (audioElement) => {
     dispatch(changeDuration(Math.floor(audioElement.duration)))
   }

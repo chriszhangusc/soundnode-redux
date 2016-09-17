@@ -16,13 +16,11 @@ class PlayerDurationBar extends Component {
     const prevIsSeeking = prevProps.isSeeking;
 
     if (!prevIsSeeking && isSeeking) {
-      console.log('Begin Seeking');
       // Listen to event only when we start seeking
       document.addEventListener('mousemove', this.handleDurationHandleMouseMove);
       document.addEventListener('mouseup', onDurationHandleMouseUp);
     } else if (prevIsSeeking && !isSeeking) {
-      // Remove them only when we finish seeking
-      console.log('End Seeking');
+      // Remove listeners when we finish seeking
       document.removeEventListener('mousemove', this.handleDurationHandleMouseMove);
       document.removeEventListener('mouseup', onDurationHandleMouseUp);
     }
@@ -94,7 +92,6 @@ PlayerDurationBar.propTypes = {
   onDurationHandleMouseUp: PropTypes.func,
   onDurationBarMouseDown: PropTypes.func,
   onDurationBarMouseUp: PropTypes.func
-
 };
 
 export default PlayerDurationBar;

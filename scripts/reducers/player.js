@@ -51,6 +51,7 @@ const player = (state = INITIAL_STATE, action) => {
     case ActionTypes.CHANGE_SONG:
       return {
         ...state,
+        currentTime: 0,
         songId: action.songId
       };
 
