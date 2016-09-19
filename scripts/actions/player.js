@@ -1,7 +1,6 @@
 import * as ActionTypes from '../constants/ActionTypes';
 import { DEFAULT_MODE, NEXT, PREV} from '../constants/PlayerConstants';
 import { getSongIdByMode } from '../utils/SongUtils';
-import {computeNewTimeOnSeek, computeNewVolumeOnSeek} from '../utils/PlayerUtils';
 import * as selectors from '../reducers';
 /* Pure actions */
 export const toggleSeek = () => ({ type: ActionTypes.TOGGLE_SEEK })
@@ -33,9 +32,9 @@ export const changeSong = (newSongId) => ({
   songId: newSongId
 })
 
-export const loadPlaylist = (playlist) => ({
-  type: ActionTypes.LOAD_PLAYLIST,
-  playlist
+export const loadPlayerPlaylist = (playlist) => ({
+  type: ActionTypes.LOAD_PLAYER_PLAYLIST,
+  payload: playlist
 })
 
 export const changeVolume = (volume) => ({
@@ -97,59 +96,33 @@ export const playPrevSong = () => {
   };
 };
 
-export const onTimeUpdate = (newTime) => {
-  return (dispatch, getState) => {
-    const {player} = getState();
-    if (player.isSeeking) return ;
-    newTime = Math.floor(newTime);
-    if (newTime !== player.currentTime) {
-      dispatch(updateTime(newTime));
-    }
+
+
+export const onRegularTimeUpdate = (newTime) => {
+  return {
+    type: ActionTypes.UPDATE_TIME_ON_PLAY,
+    payload: newTime
   };
 };
 
 export const onSeekTimeUpdate = (newTime) => {
-  return (dispatch, getState) => {
-    const {player} = getState();
-    // Do not update time normally if the user is playing with duration bar
-    newTime = Math.floor(newTime);
-    if (newTime !== player.currentTime) {
-      dispatch(updateTime(newTime));
-    }
+  return {
+    type: ActionTypes.UPDATE_TIME_ON_SEEK,
+    payload: newTime
+  }
+}
+
+// Saga action
+export const updateTimeAndEndSeek = (newTime) => {
+  return {
+    type: ActionTypes.UPDATE_TIME_AND_END_SEEK,
+    payload: newTime
   };
 };
 
-export const updateTimeOnSeek = (seekBar, duration, mouseEvent) => {
-  return (dispatch) => {
-    let newTime = computeNewTimeOnSeek(mouseEvent, seekBar, duration);
-    dispatch(onSeekTimeUpdate(newTime));
-  };
-};
-
-export const updateTimeAndEndSeeking = (seekBar, duration, mouseEvent) => {
-  return (dispatch) => {
-    let newTime = computeNewTimeOnSeek(mouseEvent, seekBar, duration);
-    dispatch(onSeekTimeUpdate(newTime));
-    dispatch(endSeek());
-  };
-};
-
-export const updateVolumeOnSeek = (e, volumeBar) => {
-  return (dispatch) => {
-    let newVolume = computeNewVolumeOnSeek(e, volumeBar);
-    dispatch(changeVolume(newVolume));
-  };
-};
-
-// Switch player playlist if needed.
-export const changeSongAndPlay = (newSongId) => {
-  return (dispatch, getState) => {
-    const visiblePlaylist = getState().visiblePlaylist;
-    const playerPlaylist = getState().player.playlist;
-    // Initialize player playlist if needed
-    if (visiblePlaylist !== playerPlaylist)
-      dispatch(loadPlaylist(visiblePlaylist));
-    dispatch(changeSong(newSongId));
-    dispatch(playSong());
-  };
-};
+export const updateVolumeAndEndSeek = (newVolume) => {
+  return {
+    type: ActionTypes.UPDATE_VOLUME_AND_END_SEEK,
+    payload: newVolume
+  }
+}

@@ -5,6 +5,7 @@ class PlayerVolumeControls extends Component {
     super(props);
     this.renderVolumeIcon = this.renderVolumeIcon.bind(this);
     this.handleVolumeMouseMove = this.handleVolumeMouseMove.bind(this);
+    this.handleVolumeMouseUp = this.handleVolumeMouseUp.bind(this);
   }
 
   handleVolumeMouseMove (e) {
@@ -12,18 +13,23 @@ class PlayerVolumeControls extends Component {
     onVolumeHandleMouseMove(this.volumeBar, e);
   }
 
+  handleVolumeMouseUp(e) {
+    const {onVolumeMouseUp} = this.props;
+    onVolumeMouseUp(this.volumeBar, e);
+  }
+
   componentDidUpdate (prevProps) {
-    const {volumeIsSeeking, onVolumeHandleMouseUp} = this.props;
+    const {volumeIsSeeking} = this.props;
     const prevIsSeeking = prevProps.volumeIsSeeking;
     const currIsSeeking = volumeIsSeeking;
     if (!prevIsSeeking && currIsSeeking) {
       // Listen to event only when we start seeking
       document.addEventListener('mousemove', this.handleVolumeMouseMove);
-      document.addEventListener('mouseup', onVolumeHandleMouseUp);
+      document.addEventListener('mouseup', this.handleVolumeMouseUp);
     } else if (prevIsSeeking && !currIsSeeking) {
       // Remove them only when we finish seeking
       document.removeEventListener('mousemove', this.handleVolumeMouseMove);
-      document.removeEventListener('mouseup', onVolumeHandleMouseUp);
+      document.removeEventListener('mouseup', this.handleVolumeMouseUp);
     }
 
   }
@@ -49,7 +55,7 @@ class PlayerVolumeControls extends Component {
 
   render () {
     const {volume} = this.props;
-    const {onVolumeBarMouseDown, onVolumeHandleMouseDown, onVolumeBarMouseUp} = this.props;
+    const {onVolumeBarMouseDown, onVolumeHandleMouseDown} = this.props;
 
     return (
       <div className="player-section">
@@ -61,7 +67,7 @@ class PlayerVolumeControls extends Component {
         <div className="player-volume">
           <div className="player-seek-bar-wrap"
             onMouseDown={onVolumeBarMouseDown}
-            onMouseUp={onVolumeBarMouseUp.bind(null, this.volumeBar)}
+            onMouseUp={this.handleVolumeMouseUp}
             >
             <div className="player-seek-bar" ref={ref => this.volumeBar = ref}>
               <div className="player-seek-duration-bar" style={{ width: `${volume * 100}%` }} >
@@ -80,9 +86,8 @@ PlayerVolumeControls.propTypes = {
   volumeIsSeeking: PropTypes.bool,
   onVolumeBarMouseDown: PropTypes.func,
   onVolumeHandleMouseDown: PropTypes.func,
-  onVolumeBarMouseUp: PropTypes.func,
+  onVolumeMouseUp: PropTypes.func,
   onToggleMuteClick: PropTypes.func,
-  onVolumeHandleMouseUp:PropTypes.func,
   onVolumeHandleMouseMove: PropTypes.func
 };
 

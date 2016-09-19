@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import SongCard from '../components/SongCard';
-import { pauseSong, changeSongAndPlay } from '../actions/player';
+import { pauseSong } from '../actions/player';
+import { changeSongAndPlay } from '../actions';
 import * as selectors from '../selectors/songCardsSelectors';
 import { formatImageUrl, formatTitle } from '../utils/FormatUtils';
 

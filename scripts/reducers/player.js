@@ -17,10 +17,10 @@ const INITIAL_STATE = {
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
 
-    case ActionTypes.LOAD_PLAYLIST:
+    case ActionTypes.LOAD_PLAYER_PLAYLIST:
       return {
         ...state,
-        playlist: action.playlist
+        playlist: action.payload
       };
       // return state.set('playlist', action.playlist);
 
