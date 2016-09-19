@@ -4,45 +4,60 @@ import { generateFetchUrl } from '../utils/SongUtils';
 import axios from 'axios';
 import { normalize } from 'normalizr';
 import { arrayOfSongs } from '../actions/schema';
-import { receiveSongs } from '../actions/playlists';
+import { requestSongs, receiveSongs } from '../actions/playlists';
+import { changeVisiblePlaylist } from '../actions/visiblePlaylist';
+import { getPlaylists, getVisiblePlaylistName, getNextUrlOfVisiblePlaylist } from '../reducers';
 
-import { getPlaylists } from '../reducers';
+/******************************************************************************/
+/******************************* Subroutines **********************************/
+/******************************************************************************/
 
-export function* helloSaga() {
-  console.log('Hallo Saga!');
-  yield 'hello';
+function* doFetchSongs(playlist, url) {
+  yield put(requestSongs(playlist));
+  const response = yield call(axios.get, url);
+  const normalizedSongs = normalize(response.data.collection, arrayOfSongs);
+  yield put(receiveSongs(
+      playlist,
+      normalizedSongs.entities.songs,
+      normalizedSongs.result,
+      response.data.next_href));
 }
 
-// function doSomething(something) {
-//   console.log('something: ', something);
-// }
+/******************************************************************************/
+/******************************* WATCHERS *************************************/
+/******************************************************************************/
 
-// function* watchInitialLoadSongs() {
-//   while (true) {
-//     // Creates an Effect description that instructs the middleware to wait for
-//     //a specified action on the Store. The Generator is suspended until an action
-//     // that matches pattern is dispatched.
-//     // const {playlist} = yield take(ActionTypes.REQUEST_INITIAL_SONGS);
-//     // // Fetch is requested playlist is not yet cached
-//     // const playlists = yield select(getPlaylists);
-//     // console.log(playlist, playlists);
-//     // if (!(playlist in playlists)) {
-//     //   const url = yield call(generateFetchUrl, playlist);
-//     //   const response = yield call(axios.get, url);
-//     //   const normalizedSongs = normalize(response.data.collection, arrayOfSongs);
-//     //   yield put(
-//     //     receiveSongs(
-//     //       playlist,
-//     //       normalizedSongs.entities.songs,
-//     //       normalizedSongs.result,
-//     //       response.data.next_href)
-//     //   );
-//     // }
-//   }
-// }
+function* watchLoadSongCardsPage() {
+    while (true) {
+    const { payload } = yield take(ActionTypes.LOAD_SONG_CARDS_PAGE);
+    const playlist = payload;
+    // 1.Change visiblePlaylistName
+    yield put(changeVisiblePlaylist(playlist));
+    const playlists = yield select(getPlaylists);
+    // 2.Load songs if not cached
+    const url = yield call(generateFetchUrl, playlist);
+    if (!(playlist in playlists)) {
+      doFetchSongs(playlist, url);
+    }
+  }
+}
+
+function* watchLoadMoreSongsOnScroll() {
+  while (true) {
+    yield take(ActionTypes.LOAD_MORE_SONGS_ON_SCROLL);
+    const nextUrl = yield select(getNextUrlOfVisiblePlaylist);
+    const playlist = yield select(getVisiblePlaylistName);
+    const playlists = yield select(getPlaylists);
+    if ((playlist in playlists) && (!playlists[playlist].isFetching)
+     && (playlists[playlist].nextUrl !== null)) {
+       doFetchSongs(playlist, nextUrl);
+    }
+  }
+}
 
 export default function* rootSaga() {
   yield [
-    fork(helloSaga)
+    fork(watchLoadSongCardsPage),
+    fork(watchLoadMoreSongsOnScroll)
   ]
 }

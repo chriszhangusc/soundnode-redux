@@ -5,15 +5,14 @@ import Main from '../components/Main';
 import NotFound from '../components/NotFound';
 
 import { DEFAULT_GENRE } from '../constants/SongConstants';
-import { fetchSongsOnLoad } from '../actions/playlists';
+import { loadSongCardsPage } from '../actions';
 
 
 const configureRoutes = (store) => {
 
   const onEnterHandler = (nextState) => {
-    const genre = nextState.params.genre;
-    const playlists = store.getState().playlists;
-    store.dispatch(fetchSongsOnLoad(genre, playlists));
+    const playlist = nextState.params.genre;
+    store.dispatch(loadSongCardsPage(playlist));
   };
 
   return (

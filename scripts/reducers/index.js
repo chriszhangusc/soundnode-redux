@@ -13,6 +13,8 @@ const rootReducer = combineReducers({
 });
 
 /* From playlists */
+export const getPlaylists = state => state.playlists;
+
 export const getPlayerPlaylist = state => {
   const playlistName = fromPlayer.getPlaylistName(state.player);
   return fromPlaylists.getPlaylist(state.playlists, playlistName);
