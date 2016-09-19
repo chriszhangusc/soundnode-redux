@@ -3,6 +3,7 @@ node_modules
 config/
 scripts/constants/Config.js
 public/bundle.js
+playground
 *~
 *.pyc
 static
