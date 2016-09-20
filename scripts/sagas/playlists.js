@@ -7,17 +7,16 @@ import { normalize } from 'normalizr';
 import { arrayOfSongs } from '../actions/schema';
 import { requestSongs, receiveSongs } from '../actions/playlists';
 import { changeVisiblePlaylist } from '../actions/visiblePlaylist';
-import { changeSong, playSong, loadPlayerPlaylist } from '../actions/player';
+import { changeSong, playSong, loadPlayerPlaylist, updateTime } from '../actions/player';
 import {
   getPlaylists,
   getVisiblePlaylistName,
   getNextUrlOfVisiblePlaylist,
-  getPlayerPlaylistName,
-  getCurrentSongId
+  getPlayerPlaylistName
 } from '../reducers';
 
 /******************************************************************************/
-/******************************* Subroutines **********************************/
+/******************************* SUBROUTINES **********************************/
 /******************************************************************************/
 
 function* doFetchSongs(playlist, url) {
@@ -55,17 +54,16 @@ function* loadMoreSongsOnScroll() {
     }
 }
 
+// Change to new song or just play paused current song.
 function* changeSongAndPlay({ payload }) {
   const newSongId = payload;
   const visiblePlaylistName = yield select(getVisiblePlaylistName);
   const playerPlaylistName = yield select(getPlayerPlaylistName);
-  const currentSongId = yield select(getCurrentSongId);
   if (visiblePlaylistName !== playerPlaylistName) {
     yield put(loadPlayerPlaylist(visiblePlaylistName));
   }
-  if (currentSongId !== newSongId) {
-    yield put(changeSong(newSongId));
-  }
+  yield put(updateTime(0));
+  yield put(changeSong(newSongId));
   yield put(playSong());
 }
 

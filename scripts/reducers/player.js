@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   volumeIsSeeking: false,
   duration: 0,
   mode: DEFAULT_MODE
-}
+};
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -50,7 +50,6 @@ const player = (state = INITIAL_STATE, action) => {
     case ActionTypes.CHANGE_SONG:
       return {
         ...state,
-        currentTime: 0,
         songId: action.songId
       };
 
@@ -107,6 +106,9 @@ const player = (state = INITIAL_STATE, action) => {
   }
 };
 
+export default player;
+
+
 /* Player Selectors */
 export const getCurrentSongId = state => state.songId
 export const getPlaylistName = state => state.playlist
@@ -116,4 +118,3 @@ export const getSeekState = state => state.isSeeking
 export const getPlayerMode = state => state.mode
 export const getVolumeSeekState = state => state.volumeIsSeeking
 export const getCurrentVolume = state => state.volume
-export default player;

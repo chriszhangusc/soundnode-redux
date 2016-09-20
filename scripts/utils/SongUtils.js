@@ -55,9 +55,13 @@ export const getSongIdByMode = (songId, songIds, mode, method) => {
     case LOOP:
       if (method === NEXT) return getLoopNext(songId, songIds);
       if (method === PREV) return getLoopPrev(songId, songIds);
+      break;
     case SHUFFLE:
       if (method === NEXT) return getShuffleNext(songId, songIds);
       if (method === PREV) return getShufflePrev(songId, songIds);
+      break;
+    case REPEAT:
+      return songId;
     default:
       return null;
   }

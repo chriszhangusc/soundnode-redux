@@ -5,12 +5,17 @@ import { combineReducers } from 'redux';
 import * as fromPlaylists from './playlists';
 import * as fromPlaylist from './playlist';
 import * as fromPlayer from './player';
-/* Reducers */
+
 const rootReducer = combineReducers({
   playlists,
   player,
   visiblePlaylist
 });
+
+/******************************************************************************/
+/*********************** Reusable Selectors ***********************************/
+/******************************************************************************/
+/* Selectors are our reading API of our state, so it is recommended to colocate them with the reducers */
 
 /* From playlists */
 export const getPlaylists = state => state.playlists;

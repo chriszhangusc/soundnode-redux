@@ -1,6 +1,10 @@
 import React, { PropTypes } from 'react';
 
-const renderTogglePlayButton = (isPlaying, isActive, handlePauseSong, handleChangeSong) => {
+const renderTogglePlayButton = ({isPlaying,
+  isActive,
+   handlePauseSong,
+   handlePlaySong,
+   handleChangeSong}) => {
   if (isActive && isPlaying) {
     return (
       <div className={`toggle-play-button ${(isActive ? 'active' : '')}`}
@@ -11,7 +15,10 @@ const renderTogglePlayButton = (isPlaying, isActive, handlePauseSong, handleChan
   } else {
     return (
       <div className={`toggle-play-button ${(isActive ? 'active' : '')}`}
-        onClick={ handleChangeSong }>
+        onClick={() => {
+          if (isActive) handlePlaySong();
+          else handleChangeSong();
+        }}>
         <i className="toggle-play-button-icon ion-ios-play" />
       </div>
     );
@@ -24,17 +31,14 @@ const SongCard = (props) => {
     title,
     userImage,
     username,
-    isPlaying,
     isActive,
-    imageUrl,
-    handlePauseSong,
-    handleChangeSong
+    imageUrl
   } = props;
 
   return (
     <div className={`card song-card ${(isActive ? 'active' : '')}`}>
       <div className="song-card-image" style={{ backgroundImage: `url(${imageUrl})` }}>
-        {renderTogglePlayButton(isPlaying, isActive, handlePauseSong, handleChangeSong)}
+        {renderTogglePlayButton(props)}
       </div>
       <div className="song-card-user clearfix">
         <img
@@ -61,6 +65,7 @@ SongCard.propTypes = {
   isActive: PropTypes.bool,
   imageUrl: PropTypes.string,
   isPlaying: PropTypes.bool,
+  handlePlaySong: PropTypes.func,
   handlePauseSong: PropTypes.func,
   handleChangeSong: PropTypes.func
 };

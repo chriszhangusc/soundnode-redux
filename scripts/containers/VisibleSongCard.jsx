@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SongCard from '../components/SongCard';
-import { pauseSong } from '../actions/player';
+import { pauseSong, playSong } from '../actions/player';
 import { changeSongAndPlay } from '../actions';
 import * as selectors from '../selectors/songCardsSelectors';
 import { formatImageUrl, formatTitle } from '../utils/FormatUtils';
@@ -21,6 +21,9 @@ const mapStateToProps = (state, {song}) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
+  // Fire if the user click on a song card that is active
+  handlePlaySong() { dispatch(playSong()); },
+  // Fire if the user click on a song card that is not active
   handleChangeSong() { dispatch(changeSongAndPlay(ownProps.song.id)); },
   handlePauseSong() { dispatch(pauseSong()); }
 })

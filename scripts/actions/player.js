@@ -1,7 +1,6 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import { DEFAULT_MODE, NEXT, PREV} from '../constants/PlayerConstants';
-import { getSongIdByMode } from '../utils/SongUtils';
-import * as selectors from '../reducers';
+import { DEFAULT_MODE } from '../constants/PlayerConstants';
+
 /* Pure actions */
 export const toggleSeek = () => ({ type: ActionTypes.TOGGLE_SEEK })
 
@@ -53,55 +52,24 @@ export const toggleMute = () => {
   };
 };
 
-/* Thunk actions */
-// export const toggleMute = () => {
-//   return (dispatch, getState) => {
-//     const currVolume = getState().player.volume;
-//     if (currVolume === 0) {
-//       let lastVolume = parseFloat(localStorage.getItem('lastVolume'));
-//       dispatch(changeVolume(lastVolume));
-//     } else {
-//       // Put current volume into localstorage and change current volume to 0
-//       localStorage.setItem('lastVolume', currVolume);
-//       dispatch(changeVolume(0));
-//     }
-//   };
-// };
-
 export const changePlayMode = (mode) => {
-  return (dispatch, getState) => {
-    const currMode = getState().player.mode;
-    if (currMode === mode) {
-      dispatch(switchMode(DEFAULT_MODE));
-    } else {
-      dispatch(switchMode(mode));
-    }
+  return {
+    type: ActionTypes.CHANGE_PLAY_MODE,
+    payload: mode
   };
 };
 
-// Play next song in the player playlist by current mode
 export const playNextSong = () => {
-  return (dispatch, getState) => {
-    const state = getState();
-    const mode = selectors.getPlayerMode(state);
-    const playlistSongIds = selectors.getPlayerSongIds(state);
-    const currentSongId = selectors.getCurrentSongId(state);
-    const nextSongId = getSongIdByMode(currentSongId, playlistSongIds, mode, NEXT);
-    dispatch(changeSongAndPlay(nextSongId));
+  return {
+    type: ActionTypes.PLAY_NEXT_SONG
   };
 };
 
 export const playPrevSong = () => {
-  return (dispatch, getState) => {
-    const state = getState();
-    const mode = selectors.getPlayerMode(state);
-    const playlistSongIds = selectors.getPlayerSongIds(state);
-    const currentSongId = selectors.getCurrentSongId(state);
-    const prevSongId = getSongIdByMode(currentSongId, playlistSongIds, mode, PREV);
-    dispatch(changeSongAndPlay(prevSongId));
+  return {
+    type: ActionTypes.PLAY_PREV_SONG
   };
 };
-
 
 
 export const onRegularTimeUpdate = (newTime) => {

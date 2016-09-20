@@ -1,6 +1,5 @@
 import * as ActionTypes from '../constants/ActionTypes';
 
-/* Pure Action Creators */
 export const requestSongs = (playlist) => ({
   type: ActionTypes.REQUEST_SONGS,
   playlist

@@ -11,7 +11,10 @@ function* rootSaga() {
     fork(fromPlayer.watchSeekTimeUpdate),
     fork(fromPlayer.watchEndSeekTime),
     fork(fromPlayer.watchEndSeekVolume),
-    fork(fromPlayer.watchToggleMute)
+    fork(fromPlayer.watchToggleMute),
+    fork(fromPlayer.watchPlayNextSong),
+    fork(fromPlayer.watchPlayPrevSong),
+    fork(fromPlayer.watchChangePlayMode)
   ]
 }
 
