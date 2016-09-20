@@ -26,7 +26,8 @@ const mapDispatchToProps = (dispatch) => ({
   onTimeUpdate: (e) => { dispatch(onRegularTimeUpdate(e.target.currentTime)) },
   onEnded: () => { dispatch(playNextSong()) },
   onLoadedMetadata: (audioElement) => {
-    dispatch(changeDuration(Math.floor(audioElement.duration)))
+    const duration = Math.floor(audioElement.duration);
+    dispatch(changeDuration(duration));
   }
 });
 
