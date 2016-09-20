@@ -22,7 +22,6 @@ const player = (state = INITIAL_STATE, action) => {
         ...state,
         playlist: action.payload
       };
-      // return state.set('playlist', action.playlist);
 
     case ActionTypes.TOGGLE_PLAY:
       return {

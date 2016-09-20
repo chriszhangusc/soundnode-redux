@@ -1,3 +1,11 @@
+export const setLastVolume = (volume) => {
+  localStorage.setItem('lastVolume', JSON.stringify(volume));
+}
+
+export const getLastVolume = () => {
+  return JSON.parse(localStorage.getItem('lastVolume'));
+}
+
 export const loadState = () => {
   try {
       const serializedState = localStorage.getItem('state');

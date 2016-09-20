@@ -47,20 +47,26 @@ export const switchMode = (mode) => ({
   mode
 })
 
-/* Thunk actions */
 export const toggleMute = () => {
-  return (dispatch, getState) => {
-    const currVolume = getState().player.volume;
-    if (currVolume === 0) {
-      let lastVolume = localStorage.getItem('lastVolume');
-      dispatch(changeVolume(lastVolume));
-    } else {
-      // Put current volume into localstorage and change current volume to 0
-      localStorage.setItem('lastVolume', currVolume);
-      dispatch(changeVolume(0));
-    }
+  return {
+    type: ActionTypes.TOGGLE_MUTE
   };
 };
+
+/* Thunk actions */
+// export const toggleMute = () => {
+//   return (dispatch, getState) => {
+//     const currVolume = getState().player.volume;
+//     if (currVolume === 0) {
+//       let lastVolume = parseFloat(localStorage.getItem('lastVolume'));
+//       dispatch(changeVolume(lastVolume));
+//     } else {
+//       // Put current volume into localstorage and change current volume to 0
+//       localStorage.setItem('lastVolume', currVolume);
+//       dispatch(changeVolume(0));
+//     }
+//   };
+// };
 
 export const changePlayMode = (mode) => {
   return (dispatch, getState) => {
