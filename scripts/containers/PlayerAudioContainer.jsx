@@ -1,24 +1,17 @@
 import { connect } from 'react-redux';
 import PlayerAudio from '../components/PlayerAudio';
 
-import {
-  getPlayingState,
-  getStreamUrl,
-  getCurrentVolume,
-  getPlayerMode,
-  getCurrentTime,
-  getSeekState
-} from '../selectors/playerSelectors';
+import * as selectors from '../selectors/playerSelectors';
 
 import actions from '../actions';
 
 const mapStateToProps = (state) => ({
-  isPlaying: getPlayingState(state),
-  volume: getCurrentVolume(state),
-  mode: getPlayerMode(state),
-  streamUrl: getStreamUrl(state),
-  currentTime: getCurrentTime(state),
-  isSeeking: getSeekState(state)
+  isPlaying: selectors.getPlayingState(state),
+  volume: selectors.getCurrentVolume(state),
+  mode: selectors.getPlayerMode(state),
+  streamUrl: selectors.getStreamUrl(state),
+  currentTime: selectors.getCurrentTime(state),
+  isSeeking: selectors.getSeekState(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

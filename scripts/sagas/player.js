@@ -2,16 +2,8 @@ import { put, call, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import * as ActionTypes from '../constants/ActionTypes';
 import { getLastVolume, setLastVolume } from '../utils/LocalStorageUtils';
-import { updateTime, endSeek, changeVolume, endVolumeSeek, switchMode } from '../actions/player';
-import { changeSongAndPlay } from '../actions';
-import {
-  getCurrentTime,
-  getSeekState,
-  getCurrentVolume,
-  getPlayerSongIds,
-  getCurrentSongId,
-  getPlayerMode
-} from '../reducers';
+import actions from '../actions';
+import * as selectors from '../reducers';
 
 import { NEXT, PREV, DEFAULT_MODE } from '../constants/PlayerConstants';
 import { getSongIdByMode } from '../utils/SongUtils';
@@ -22,20 +14,18 @@ import { getSongIdByMode } from '../utils/SongUtils';
 
 function* convertAndUpdateTime(rawTime) {
   const newTime = yield call(Math.floor, rawTime); // Convert float to int
-  const currentTime = yield select(getCurrentTime);
+  const currentTime = yield select(selectors.getCurrentTime);
   if (newTime !== currentTime) {
-    yield put(updateTime(newTime));
+    yield put(actions.updateTime(newTime));
   }
 }
 
-
 function* updateTimeRegular({ payload }) {
-  const isSeeking = yield select(getSeekState);
+  const isSeeking = yield select(selectors.getSeekState);
   if (!isSeeking) {
       yield call(convertAndUpdateTime, payload);
   }
 }
-
 
 function* updateTimeSeek({ payload }) {
   yield call(convertAndUpdateTime,payload);
@@ -43,42 +33,57 @@ function* updateTimeSeek({ payload }) {
 
 function* updateTimeAndEndSeek({ payload }) {
   yield call(convertAndUpdateTime, payload);
-  yield put(endSeek());
+  yield put(actions.endSeek());
 }
 
 function* updateVolumeAndEndSeek({ payload }) {
-  yield put(changeVolume(payload));
-  yield put(endVolumeSeek());
+  yield put(actions.changeVolume(payload));
+  yield put(actions.endVolumeSeek());
 }
 
 function* toggleMute() {
-  const currVolume = yield select(getCurrentVolume);
+  const currVolume = yield select(selectors.getCurrentVolume);
   if (currVolume === 0) {
     const lastVolume = yield call(getLastVolume);
-    yield put(changeVolume(lastVolume));
+    yield put(actions.changeVolume(lastVolume));
   } else {
     yield call(setLastVolume, currVolume);
-    yield put(changeVolume(0));
+    yield put(actions.mute());
   }
 }
+
+// Change to new song or just play paused current song.
+function* changeSongAndPlay({ payload }) {
+  const newSongId = payload;
+  const visiblePlaylistName = yield select(selectors.getVisiblePlaylistName);
+  const playerPlaylistName = yield select(selectors.getPlayerPlaylistName);
+  if (visiblePlaylistName !== playerPlaylistName) {
+    yield put(actions.loadPlayerPlaylist(visiblePlaylistName));
+  }
+  yield put(actions.pauseSong());
+  yield put(actions.changeSong(newSongId));
+  yield put(actions.clearTime());
+  yield put(actions.playSong());
+}
+
 // action being NEXT or PREV
 function* playSong(action) {
-  const mode = yield select(getPlayerMode);
-  const playlistSongIds = yield select(getPlayerSongIds);
-  const currentSongId = yield select(getCurrentSongId);
+  const mode = yield select(selectors.getPlayerMode);
+  const playlistSongIds = yield select(selectors.getPlayerSongIds);
+  const currentSongId = yield select(selectors.getCurrentSongId);
   const nextSongId = yield call(getSongIdByMode, currentSongId, playlistSongIds, mode, action);
-  yield put(changeSongAndPlay(nextSongId));
+  yield put(actions.changeSongAndPlay(nextSongId));
 }
 
 function* changePlayMode({ payload }) {
-  const currMode = yield select(getPlayerMode);
+  const currMode = yield select(selectors.getPlayerMode);
   const newMode = payload;
   if (currMode === newMode) {
     // Toggle off
-    yield put(switchMode(DEFAULT_MODE));
+    yield put(actions.switchMode(DEFAULT_MODE));
   } else {
     // Toggle On
-    yield put(switchMode(newMode));
+    yield put(actions.switchMode(newMode));
   }
 }
 
@@ -116,4 +121,8 @@ export function* watchPlayPrevSong() {
 
 export function* watchChangePlayMode() {
   yield takeEvery(ActionTypes.CHANGE_PLAY_MODE, changePlayMode);
+}
+
+export function* watchChangeSongAndPlay() {
+  yield takeEvery(ActionTypes.CHANGE_SONG_AND_PLAY, changeSongAndPlay);
 }

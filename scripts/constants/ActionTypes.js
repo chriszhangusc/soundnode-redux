@@ -27,3 +27,5 @@ export const TOGGLE_MUTE = 'TOGGLE_MUTE';
 export const PLAY_NEXT_SONG = 'PLAY_NEXT_SONG';
 export const PLAY_PREV_SONG = 'PLAY_PREV_SONG';
 export const CHANGE_PLAY_MODE = 'CHANGE_PLAY_MODE';
+export const MUTE = 'MUTE';
+export const CLEAR_TIME = 'CLEAR_TIME';

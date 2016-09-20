@@ -6,7 +6,7 @@ function* rootSaga() {
   yield [
     fork(fromPlaylists.watchLoadSongCardsPage),
     fork(fromPlaylists.watchLoadMoreSongsOnScroll),
-    fork(fromPlaylists.watchChangeSongAndPlay),
+    fork(fromPlayer.watchChangeSongAndPlay),
     fork(fromPlayer.watchRegularTimeUpdate),
     fork(fromPlayer.watchSeekTimeUpdate),
     fork(fromPlayer.watchEndSeekTime),

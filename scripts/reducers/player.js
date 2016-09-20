@@ -23,12 +23,6 @@ const player = (state = INITIAL_STATE, action) => {
         playlist: action.payload
       };
 
-    case ActionTypes.TOGGLE_PLAY:
-      return {
-        ...state,
-        isPlaying: !state.isPlaying
-      };
-
     case ActionTypes.PLAY_SONG:
       return {
         ...state,
@@ -44,25 +38,19 @@ const player = (state = INITIAL_STATE, action) => {
     case ActionTypes.CHANGE_DURATION:
       return {
         ...state,
-        duration: action.duration
+        duration: action.payload
       };
 
     case ActionTypes.CHANGE_SONG:
       return {
         ...state,
-        songId: action.songId
+        songId: action.payload
       };
 
     case ActionTypes.UPDATE_TIME:
       return {
         ...state,
-        currentTime: action.currentTime
-      };
-
-    case ActionTypes.TOGGLE_SEEK:
-      return {
-        ...state,
-        isSeeking: !state.isSeeking
+        currentTime: action.payload
       };
 
     case ActionTypes.BEGIN_SEEK:
@@ -80,7 +68,7 @@ const player = (state = INITIAL_STATE, action) => {
     case ActionTypes.CHANGE_VOLUME:
       return {
         ...state,
-        volume: action.volume
+        volume: action.payload
       };
 
     case ActionTypes.BEGIN_VOLUME_SEEK:
@@ -98,8 +86,20 @@ const player = (state = INITIAL_STATE, action) => {
     case ActionTypes.SWITCH_MODE:
       return {
         ...state,
-        mode: action.mode
+        mode: action.payload
       };
+
+    case ActionTypes.MUTE:
+      return {
+        ...state,
+        volume: 0
+      };
+
+    case ActionTypes.CLEAR_TIME:
+      return {
+        ...state,
+        currentTime: 0
+      }
 
     default:
       return state;
