@@ -29,3 +29,8 @@ export const loadSongCardsPage = (playlist) => ({
 export const loadMoreSongsOnScroll = () => ({
   type: ActionTypes.LOAD_MORE_SONGS_ON_SCROLL
 });
+
+export const searchSongs = (searchText) => ({
+  type: ActionTypes.SEARCH_SONGS,
+  payload: searchText
+});

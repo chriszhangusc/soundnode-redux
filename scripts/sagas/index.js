@@ -4,6 +4,7 @@ import * as fromPlaylists from './playlists';
 
 function* rootSaga() {
   yield [
+    fork(fromPlaylists.watchSearchSongs),
     fork(fromPlaylists.watchLoadSongCardsPage),
     fork(fromPlaylists.watchLoadMoreSongsOnScroll),
     fork(fromPlayer.watchChangeSongAndPlay),

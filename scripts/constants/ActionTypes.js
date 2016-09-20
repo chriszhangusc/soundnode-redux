@@ -29,3 +29,4 @@ export const PLAY_PREV_SONG = 'PLAY_PREV_SONG';
 export const CHANGE_PLAY_MODE = 'CHANGE_PLAY_MODE';
 export const MUTE = 'MUTE';
 export const CLEAR_TIME = 'CLEAR_TIME';
+export const SEARCH_SONGS = 'SEARCH_SONGS';

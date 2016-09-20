@@ -23,7 +23,8 @@ function* doFetchSongs(playlist, url) {
       response.data.next_href));
 }
 
-// Initial loading
+
+// Initial loading and Nav bar searching
 function* loadSongCardsPage({ payload }) {
   const playlist = payload;
   // 1.Change visiblePlaylistName
@@ -56,4 +57,8 @@ export function* watchLoadSongCardsPage() {
 }
 export function* watchLoadMoreSongsOnScroll() {
   yield takeEvery(ActionTypes.LOAD_MORE_SONGS_ON_SCROLL, loadMoreSongsOnScroll);
+}
+
+export function* watchSearchSongs() {
+  yield takeEvery(ActionTypes.SEARCH_SONGS, loadSongCardsPage);
 }
