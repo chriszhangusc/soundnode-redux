@@ -31,6 +31,12 @@ class PlayerAudio extends Component {
     if (prevProps.isSeeking && !currProps.isSeeking) {
       this.audioElement.currentTime = currProps.currentTime;
     }
+    // Reason: In case of repeat mode, when user click next/prev song button,
+    // we will update currentTime to 0, so we need to force update the actual
+    // time of our player.
+    if (prevProps.currentTime !== 0 && currProps.currentTime === 0) {
+      this.audioElement.currentTime = currProps.currentTime;
+    }
   }
 
   updateVolumeIfNeeded(prevProps, currProps) {

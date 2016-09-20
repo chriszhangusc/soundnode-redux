@@ -1,6 +1,3 @@
-var webpack = require('webpack');
-var path = require('path');
-
 module.exports = {
   entry: {
     main: [
@@ -18,7 +15,7 @@ module.exports = {
   devServer: {
       historyApiFallback: true,
       contentBase: './server/public',
-      port: 3000,
+      port: 3000
   },
 
   resolve: {
@@ -29,14 +26,17 @@ module.exports = {
   module: {
     loaders: [
       {
-        loaders: ['react-hot', 'babel?' + JSON.stringify({presets: ['react', 'es2015', 'stage-0']})],
+        loaders: ['react-hot',
+        'babel?' + JSON.stringify({
+          presets: ['react', 'es2015', 'stage-0'],
+          plugins:["transform-runtime"]})],
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
       },
       {
         test: /\.scss$/,
         loaders: ["style", "css", "sass"]
-      },
+      }
     ]
   },
   devtool: 'source-map'

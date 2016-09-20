@@ -8,10 +8,6 @@ const PLAYLIST_INITIAL_STATE = {
 
 const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
   switch (action.type) {
-    case ActionTypes.LOAD_PLAYLIST:
-      return {
-        ...state
-      }
     case ActionTypes.REQUEST_SONGS:
       return {
         ...state,
@@ -21,9 +17,9 @@ const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
       return {
         ...state,
         isFetching: false,
-        nextUrl: action.nextUrl,
-        songIds: [...state.songIds, ...action.songIds],
-        songs: {...state.songs, ...action.songs}
+        nextUrl: action.payload.nextUrl,
+        songIds: [...state.songIds, ...action.payload.songIds],
+        songs: {...state.songs, ...action.payload.songs}
       };
     default:
       return state;

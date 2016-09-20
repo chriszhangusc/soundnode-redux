@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchSongsOnScroll } from '../actions/playlists';
+import { loadMoreSongsOnScroll } from '../actions';
 import SongCardList from '../components/SongCardList';
 import * as selectors from '../selectors/songCardsSelectors';
 
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  scrollFunc() { dispatch(fetchSongsOnScroll()); }
+  scrollFunc() { dispatch(loadMoreSongsOnScroll()); }
 })
 
 const VisibleSongCardList = connect(mapStateToProps,

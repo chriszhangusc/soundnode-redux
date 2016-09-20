@@ -1,9 +1,18 @@
-import { SEED_FETCH_URL } from '../constants/SongConstants';
+import { GENRES, SEED_FETCH_URL } from '../constants/SongConstants';
 import { CLIENT_ID } from '../constants/Config';
 import { LOOP, SHUFFLE, REPEAT, NEXT, PREV } from '../constants/PlayerConstants';
 export const generateFetchUrl = (genre) => {
   // const url = `${SEED_FETCH_URL}&tags=${genre}`;
-  const url = `${SEED_FETCH_URL}&genres=${genre}`;
+  genre = genre.trim();
+  let url = null;
+  if (genre in GENRES) {
+    // Genre search
+    url = `${SEED_FETCH_URL}&genres=${genre}`;
+  } else {
+    // General search
+    url = `${SEED_FETCH_URL}&q=${genre}`;
+  }
+
   return url;
 };
 
@@ -15,12 +24,14 @@ export const generateStreamUrl = (song) => {
   return streamUrl;
 }
 
-const getRandomIntInclusive = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  let res = Math.floor(Math.random() * (max - min + 1)) + min;
-  return res;
-}
+
+
+// const getRandomIntInclusive = (min, max) => {
+//   min = Math.ceil(min);
+//   max = Math.floor(max);
+//   let res = Math.floor(Math.random() * (max - min + 1)) + min;
+//   return res;
+// }
 
 const getLoopNext = (songId, songIds) => {
   let nextSongId = null;
@@ -55,9 +66,13 @@ export const getSongIdByMode = (songId, songIds, mode, method) => {
     case LOOP:
       if (method === NEXT) return getLoopNext(songId, songIds);
       if (method === PREV) return getLoopPrev(songId, songIds);
+      break;
     case SHUFFLE:
       if (method === NEXT) return getShuffleNext(songId, songIds);
       if (method === PREV) return getShufflePrev(songId, songIds);
+      break;
+    case REPEAT:
+      return songId;
     default:
       return null;
   }

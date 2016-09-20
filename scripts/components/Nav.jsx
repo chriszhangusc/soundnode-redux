@@ -1,5 +1,5 @@
 import React from 'react';
-import NavSearch from './NavSearch';
+import NavSearchContainer from '../containers/NavSearchContainer';
 
 const Nav = () => (
 
@@ -16,7 +16,7 @@ const Nav = () => (
 
       <div className="nav-nav float-right">
         <div className="nav-nav-item">
-          <NavSearch />
+          <NavSearchContainer />
         </div>
       </div>
     </div>

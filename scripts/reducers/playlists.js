@@ -13,12 +13,12 @@ const playlists = (state = PLAYLISTS_INITIAL_STATE, action) => {
     case ActionTypes.REQUEST_SONGS:
       return {
         ...state,
-        [action.playlist]: playlist(state[action.playlist], action)
+        [action.payload]: playlist(state[action.payload], action)
       }
     case ActionTypes.RECEIVE_SONGS:
       return {
         ...state,
-        [action.playlist]: playlist(state[action.playlist], action)
+        [action.payload.playlist]: playlist(state[action.payload.playlist], action)
       }
     default:
       return state;

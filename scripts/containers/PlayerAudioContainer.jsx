@@ -1,32 +1,26 @@
 import { connect } from 'react-redux';
 import PlayerAudio from '../components/PlayerAudio';
 
-import {
-  getPlayingState,
-  getStreamUrl,
-  getCurrentVolume,
-  getPlayerMode,
-  getCurrentTime,
-  getSeekState
-} from '../selectors/playerSelectors';
+import * as selectors from '../selectors/playerSelectors';
 
-import { onTimeUpdate, playNextSong, changeDuration } from '../actions/player';
+import actions from '../actions';
 
 const mapStateToProps = (state) => ({
-  isPlaying: getPlayingState(state),
-  volume: getCurrentVolume(state),
-  mode: getPlayerMode(state),
-  streamUrl: getStreamUrl(state),
-  currentTime: getCurrentTime(state),
-  isSeeking: getSeekState(state)
+  isPlaying: selectors.getPlayingState(state),
+  volume: selectors.getCurrentVolume(state),
+  mode: selectors.getPlayerMode(state),
+  streamUrl: selectors.getStreamUrl(state),
+  currentTime: selectors.getCurrentTime(state),
+  isSeeking: selectors.getSeekState(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   //Update time in store
-  onTimeUpdate: (e) => { dispatch(onTimeUpdate(e.target.currentTime)) },
-  onEnded: () => { dispatch(playNextSong()) },
+  onTimeUpdate: (e) => { dispatch(actions.onRegularTimeUpdate(e.target.currentTime)) },
+  onEnded: () => { dispatch(actions.playNextSong()) },
   onLoadedMetadata: (audioElement) => {
-    dispatch(changeDuration(Math.floor(audioElement.duration)))
+    const duration = Math.floor(audioElement.duration);
+    dispatch(actions.changeDuration(duration));
   }
 });
 

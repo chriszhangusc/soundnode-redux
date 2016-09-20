@@ -8,23 +8,28 @@ class PlayerDurationBar extends Component {
     this.renderDurationBar = this.renderDurationBar.bind(this);
     this.renderPlayTime = this.renderPlayTime.bind(this);
     this.handleDurationHandleMouseMove = this.handleDurationHandleMouseMove.bind(this);
+    this.handleEndSeek = this.handleEndSeek.bind(this);
   }
 
   componentDidUpdate (prevProps) {
     const {isSeeking} = this.props;
-    const {onDurationHandleMouseUp} = this.props;
     const prevIsSeeking = prevProps.isSeeking;
 
     if (!prevIsSeeking && isSeeking) {
       // Listen to event only when we start seeking
       document.addEventListener('mousemove', this.handleDurationHandleMouseMove);
-      document.addEventListener('mouseup', onDurationHandleMouseUp);
+      document.addEventListener('mouseup', this.handleEndSeek);
     } else if (prevIsSeeking && !isSeeking) {
       // Remove listeners when we finish seeking
       document.removeEventListener('mousemove', this.handleDurationHandleMouseMove);
-      document.removeEventListener('mouseup', onDurationHandleMouseUp);
+      document.removeEventListener('mouseup', this.handleEndSeek);
     }
 
+  }
+
+  handleEndSeek(e) {
+    const {duration, onMouseUp} = this.props;
+    onMouseUp(this.seekBarElement, duration, e);
   }
 
   // Can not use bind because it will fail when removing listener.
@@ -37,7 +42,6 @@ class PlayerDurationBar extends Component {
     const {
       duration,
       currentTime,
-      onDurationBarMouseUp,
       onDurationBarMouseDown,
       onDurationHandleMouseDown
     } = this.props;
@@ -46,7 +50,7 @@ class PlayerDurationBar extends Component {
     return (
       <div className="player-seek-bar-wrap"
         onMouseDown={onDurationBarMouseDown}
-        onMouseUp={onDurationBarMouseUp.bind(null, this.seekBarElement, duration)}
+        onMouseUp={this.handleEndSeek}
         >
         <div className="player-seek-bar" ref={seekBar => this.seekBarElement = seekBar}>
           <div className="player-seek-duration-bar" style={{ width: `${percent}%` }} >
@@ -89,9 +93,8 @@ PlayerDurationBar.propTypes = {
   currentTime: PropTypes.number,
   onDurationHandleMouseDown: PropTypes.func,
   onDurationHandleMouseMove: PropTypes.func,
-  onDurationHandleMouseUp: PropTypes.func,
   onDurationBarMouseDown: PropTypes.func,
-  onDurationBarMouseUp: PropTypes.func
+  onMouseUp: PropTypes.func
 };
 
 export default PlayerDurationBar;

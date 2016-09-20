@@ -12,22 +12,15 @@ const INITIAL_STATE = {
   volumeIsSeeking: false,
   duration: 0,
   mode: DEFAULT_MODE
-}
+};
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
 
-    case ActionTypes.LOAD_PLAYLIST:
+    case ActionTypes.LOAD_PLAYER_PLAYLIST:
       return {
         ...state,
-        playlist: action.playlist
-      };
-      // return state.set('playlist', action.playlist);
-
-    case ActionTypes.TOGGLE_PLAY:
-      return {
-        ...state,
-        isPlaying: !state.isPlaying
+        playlist: action.payload
       };
 
     case ActionTypes.PLAY_SONG:
@@ -45,26 +38,19 @@ const player = (state = INITIAL_STATE, action) => {
     case ActionTypes.CHANGE_DURATION:
       return {
         ...state,
-        duration: action.duration
+        duration: action.payload
       };
 
     case ActionTypes.CHANGE_SONG:
       return {
         ...state,
-        currentTime: 0,
-        songId: action.songId
+        songId: action.payload
       };
 
     case ActionTypes.UPDATE_TIME:
       return {
         ...state,
-        currentTime: action.currentTime
-      };
-
-    case ActionTypes.TOGGLE_SEEK:
-      return {
-        ...state,
-        isSeeking: !state.isSeeking
+        currentTime: action.payload
       };
 
     case ActionTypes.BEGIN_SEEK:
@@ -82,7 +68,7 @@ const player = (state = INITIAL_STATE, action) => {
     case ActionTypes.CHANGE_VOLUME:
       return {
         ...state,
-        volume: action.volume
+        volume: action.payload
       };
 
     case ActionTypes.BEGIN_VOLUME_SEEK:
@@ -100,13 +86,28 @@ const player = (state = INITIAL_STATE, action) => {
     case ActionTypes.SWITCH_MODE:
       return {
         ...state,
-        mode: action.mode
+        mode: action.payload
       };
+
+    case ActionTypes.MUTE:
+      return {
+        ...state,
+        volume: 0
+      };
+
+    case ActionTypes.CLEAR_TIME:
+      return {
+        ...state,
+        currentTime: 0
+      }
 
     default:
       return state;
   }
 };
+
+export default player;
+
 
 /* Player Selectors */
 export const getCurrentSongId = state => state.songId
@@ -117,4 +118,3 @@ export const getSeekState = state => state.isSeeking
 export const getPlayerMode = state => state.mode
 export const getVolumeSeekState = state => state.volumeIsSeeking
 export const getCurrentVolume = state => state.volume
-export default player;
