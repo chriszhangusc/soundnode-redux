@@ -1,5 +1,4 @@
 import * as ActionTypes from '../constants/ActionTypes';
-import { DEFAULT_MODE } from '../constants/PlayerConstants';
 
 /* Pure actions */
 export const toggleSeek = () => ({ type: ActionTypes.TOGGLE_SEEK })
@@ -52,6 +51,7 @@ export const toggleMute = () => {
   };
 };
 
+// Saga Commands (Actions that has side effects)
 export const changePlayMode = (mode) => {
   return {
     type: ActionTypes.CHANGE_PLAY_MODE,
@@ -86,7 +86,7 @@ export const onSeekTimeUpdate = (newTime) => {
   }
 }
 
-// Saga action
+
 export const updateTimeAndEndSeek = (newTime) => {
   return {
     type: ActionTypes.UPDATE_TIME_AND_END_SEEK,

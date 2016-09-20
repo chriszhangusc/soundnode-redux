@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import PlayerModeControls from '../components/PlayerModeControls';
 import { getPlayerMode } from '../selectors/playerSelectors';
-import { changePlayMode } from '../actions/player';
+import actions from '../actions';
 import { REPEAT, SHUFFLE } from '../constants/PlayerConstants';
 
 const mapStateToProps = (state) => ({
@@ -9,8 +9,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onRepeatClick: () => { dispatch(changePlayMode(REPEAT)) },
-  onShuffleClick: () => { dispatch(changePlayMode(SHUFFLE)) }
+  onRepeatClick: () => { dispatch(actions.changePlayMode(REPEAT)) },
+  onShuffleClick: () => { dispatch(actions.changePlayMode(SHUFFLE)) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerModeControls);

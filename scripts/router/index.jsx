@@ -5,14 +5,13 @@ import Main from '../components/Main';
 import NotFound from '../components/NotFound';
 
 import { DEFAULT_GENRE } from '../constants/SongConstants';
-import { loadSongCardsPage } from '../actions';
 
+import actions from '../actions';
 
 const configureRoutes = (store) => {
-
   const onEnterHandler = (nextState) => {
     const playlist = nextState.params.genre;
-    store.dispatch(loadSongCardsPage(playlist));
+    store.dispatch(actions.loadSongCardsPage(playlist));
   };
 
   return (

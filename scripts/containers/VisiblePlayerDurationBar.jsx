@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import PlayerDurationBar from '../components/PlayerDurationBar';
 import { computeNewTimeOnSeek } from '../utils/PlayerUtils';
-import { beginSeek, endSeek, onSeekTimeUpdate, updateTimeAndEndSeek } from '../actions/player';
+import actions from '../actions';
 import {
   getPlayingState,
   getCurrentTime,
@@ -19,20 +19,20 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     onDurationHandleMouseDown: () => {
-      dispatch(beginSeek())
+      dispatch(actions.beginSeek())
     },
     onDurationHandleMouseMove: (seekBar, duration, e) => {
       let newTime = computeNewTimeOnSeek(seekBar, duration, e);
-      dispatch(onSeekTimeUpdate(newTime));
+      dispatch(actions.onSeekTimeUpdate(newTime));
     },
 
     onDurationBarMouseDown: () => {
-      dispatch(beginSeek())
+      dispatch(actions.beginSeek())
     },
     // Handle both seekbar handle mouse up and duration bar mouse up
     onMouseUp: (seekBar, duration, e) => {
       let newTime = computeNewTimeOnSeek(seekBar, duration, e);
-      dispatch(updateTimeAndEndSeek(newTime));
+      dispatch(actions.updateTimeAndEndSeek(newTime));
     }
   }
 }

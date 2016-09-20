@@ -2,12 +2,7 @@ import { connect } from 'react-redux';
 import PlayerVolumeControls from '../components/PlayerVolumeControls';
 import { getCurrentVolume, getVolumeSeekState } from '../selectors/playerSelectors';
 import { computeNewVolumeOnSeek } from '../utils/PlayerUtils';
-import {
-  beginVolumeSeek,
-  updateVolumeAndEndSeek,
-  changeVolume,
-  toggleMute
-} from '../actions/player';
+import actions from '../actions';
 
 
 const mapStateToProps = (state) => ({
@@ -16,16 +11,16 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onVolumeHandleMouseDown: () => { dispatch(beginVolumeSeek()) },
+  onVolumeHandleMouseDown: () => { dispatch(actions.beginVolumeSeek()) },
   onVolumeHandleMouseMove: (volumeBar, e) => {
     const newVolume = computeNewVolumeOnSeek(volumeBar, e);
-    dispatch(changeVolume(newVolume));
+    dispatch(actions.changeVolume(newVolume));
   },
-  onVolumeBarMouseDown: () => { dispatch(beginVolumeSeek()) },
-  onToggleMuteClick: () => { dispatch(toggleMute()) },
+  onVolumeBarMouseDown: () => { dispatch(actions.beginVolumeSeek()) },
+  onToggleMuteClick: () => { dispatch(actions.toggleMute()) },
   onVolumeMouseUp: (volumeBar, e) => {
     const newVolume = computeNewVolumeOnSeek(volumeBar, e);
-    dispatch(updateVolumeAndEndSeek(newVolume));
+    dispatch(actions.updateVolumeAndEndSeek(newVolume));
   }
 });
 

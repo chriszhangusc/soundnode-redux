@@ -1,23 +1,8 @@
-/******************************************************************************/
-/***************************** SAGA ACTIONS ***********************************/
-/******************************************************************************/
-import * as ActionTypes from '../constants/ActionTypes';
-export const loadSongCardsPage = (playlist) => {
-  return {
-    type: ActionTypes.LOAD_SONG_CARDS_PAGE,
-    payload: playlist
-  };
+import * as playerActions from './player';
+import * as playlistsActions from './playlists';
+import * as visiblePlaylistActions from './visiblePlaylist';
+export default {
+  ...playerActions,
+  ...playlistsActions,
+  ...visiblePlaylistActions
 };
-
-export const loadMoreSongsOnScroll = () => {
-  return {
-    type: ActionTypes.LOAD_MORE_SONGS_ON_SCROLL
-  };
-};
-
-export const changeSongAndPlay = (songId) => {
-  return {
-    type: ActionTypes.CHANGE_SONG_AND_PLAY,
-    payload: songId
-  };
-}
