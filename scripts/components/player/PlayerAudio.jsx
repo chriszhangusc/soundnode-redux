@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import {REPEAT} from '../constants/PlayerConstants';
+import {REPEAT} from '../../constants/PlayerConstants';
 
 class PlayerAudio extends Component {
   constructor(props) {

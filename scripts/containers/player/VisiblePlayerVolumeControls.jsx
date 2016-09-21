@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import PlayerVolumeControls from '../components/PlayerVolumeControls';
-import { getCurrentVolume, getVolumeSeekState } from '../selectors/playerSelectors';
-import { computeNewVolumeOnSeek } from '../utils/PlayerUtils';
-import actions from '../actions';
+import PlayerVolumeControls from '../../components/player/PlayerVolumeControls';
+import { getCurrentVolume, getVolumeSeekState } from '../../selectors/playerSelectors';
+import { computeNewVolumeOnSeek } from '../../utils/PlayerUtils';
+import actions from '../../actions';
 
 
 const mapStateToProps = (state) => ({

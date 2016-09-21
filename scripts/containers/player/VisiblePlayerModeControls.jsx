@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import PlayerModeControls from '../components/PlayerModeControls';
-import { getPlayerMode } from '../selectors/playerSelectors';
-import actions from '../actions';
-import { REPEAT, SHUFFLE } from '../constants/PlayerConstants';
+import PlayerModeControls from '../../components/player/PlayerModeControls';
+import { getPlayerMode } from '../../selectors/playerSelectors';
+import actions from '../../actions';
+import { REPEAT, SHUFFLE } from '../../constants/PlayerConstants';
 
 const mapStateToProps = (state) => ({
   mode: getPlayerMode(state)

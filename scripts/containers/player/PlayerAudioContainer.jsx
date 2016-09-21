@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import PlayerAudio from '../components/PlayerAudio';
+import PlayerAudio from '../../components/player/PlayerAudio';
 
-import * as selectors from '../selectors/playerSelectors';
+import * as selectors from '../../selectors/playerSelectors';
 
-import actions from '../actions';
+import actions from '../../actions';
 
 const mapStateToProps = (state) => ({
   isPlaying: selectors.getPlayingState(state),

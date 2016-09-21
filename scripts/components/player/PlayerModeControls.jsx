@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import {REPEAT, SHUFFLE} from '../constants/PlayerConstants';
+import {REPEAT, SHUFFLE} from '../../constants/PlayerConstants';
 // Stateless functional component
 class PlayerModeControls extends Component {
 

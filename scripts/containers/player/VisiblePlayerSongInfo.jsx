@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import PlayerSongInfo from '../components/PlayerSongInfo';
-import * as selectors from '../selectors/playerSelectors';
+import PlayerSongInfo from '../../components/player/PlayerSongInfo';
+import * as selectors from '../../selectors/playerSelectors';
 
 const mapStateToProps = (state) => {
   return {

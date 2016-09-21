@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
-import PlayerDurationBar from '../components/PlayerDurationBar';
-import { computeNewTimeOnSeek } from '../utils/PlayerUtils';
-import actions from '../actions';
+import PlayerDurationBar from '../../components/player/PlayerDurationBar';
+import { computeNewTimeOnSeek } from '../../utils/PlayerUtils';
+import actions from '../../actions';
 import {
   getPlayingState,
   getCurrentTime,
   getDuration,
   getSeekState
-} from '../selectors/playerSelectors';
+} from '../../selectors/playerSelectors';
 
 const mapStateToProps = (state) => ({
   isSeeking: getSeekState(state),

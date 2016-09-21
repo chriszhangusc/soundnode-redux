@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {formatSecondsAsTime} from '../utils/FormatUtils';
-import {computeSeekBarPercent} from '../utils/PlayerUtils';
+import {formatSecondsAsTime} from '../../utils/FormatUtils';
+import {computeSeekBarPercent} from '../../utils/PlayerUtils';
 
 class PlayerDurationBar extends Component {
   constructor (props) {

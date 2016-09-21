@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import PlayerControls from '../components/PlayerControls';
-import { getPlayingState } from '../selectors/playerSelectors';
-import actions from '../actions';
+import PlayerControls from '../../components/player/PlayerControls';
+import { getPlayingState } from '../../selectors/playerSelectors';
+import actions from '../../actions';
 
 const mapStateToProps = (state) => ({
   isPlaying: getPlayingState(state)
