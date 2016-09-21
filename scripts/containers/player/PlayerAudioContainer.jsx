@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import PlayerAudio from '../../components/player/PlayerAudio';
+import PlayerAudio from '../../components/Player/PlayerAudio';
 
 import * as selectors from '../../selectors/playerSelectors';
 
 import actions from '../../actions';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isPlaying: selectors.getPlayingState(state),
   volume: selectors.getCurrentVolume(state),
   mode: selectors.getPlayerMode(state),
@@ -14,10 +14,10 @@ const mapStateToProps = (state) => ({
   isSeeking: selectors.getSeekState(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  //Update time in store
-  onTimeUpdate: (e) => { dispatch(actions.onRegularTimeUpdate(e.target.currentTime)) },
-  onEnded: () => { dispatch(actions.playNextSong()) },
+const mapDispatchToProps = dispatch => ({
+  // Update time in store
+  onTimeUpdate: (e) => { dispatch(actions.onRegularTimeUpdate(e.target.currentTime)); },
+  onEnded: () => { dispatch(actions.playNextSong()); },
   onLoadedMetadata: (audioElement) => {
     const duration = Math.floor(audioElement.duration);
     dispatch(actions.changeDuration(duration));

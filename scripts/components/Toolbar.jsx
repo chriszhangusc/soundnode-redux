@@ -1,6 +1,6 @@
 import React from 'react';
-import { GENRES } from '../constants/SongConstants';
 import { Link } from 'react-router';
+import { GENRES } from '../constants/SongConstants';
 
 const renderGenres = (genres) => {
   return genres.map(genre =>

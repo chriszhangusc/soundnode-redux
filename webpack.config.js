@@ -1,3 +1,4 @@
+var path = require('path');
 module.exports = {
   entry: {
     main: [
@@ -13,13 +14,16 @@ module.exports = {
   },
 
   devServer: {
-      historyApiFallback: true,
-      contentBase: './server/public',
-      port: 3000
+    historyApiFallback: true,
+    contentBase: './server/public',
+    port: 3000
   },
-
+  // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
+  // In every other case use resolve.root.
   resolve: {
-    root: __dirname,
+    root: [
+      path.resolve('./node_modules')
+    ],
     extensions: ['', '.js', '.jsx', 'stage-0']
   },
 
@@ -29,13 +33,13 @@ module.exports = {
         loaders: ['react-hot',
         'babel?' + JSON.stringify({
           presets: ['react', 'es2015', 'stage-0'],
-          plugins:["transform-runtime"]})],
+          plugins: ['transform-runtime'] })],
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ['style', 'css', 'sass']
       }
     ]
   },

@@ -2,10 +2,9 @@ import { connect } from 'react-redux';
 import NavSearch from '../components/NavSearch';
 import actions from '../actions';
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   handleSearch: (searchText) => {
-    searchText = searchText.trim();
-    dispatch(actions.searchSongs(searchText));
+    dispatch(actions.searchSongs(searchText.trim()));
   }
 });
 

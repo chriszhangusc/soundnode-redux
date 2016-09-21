@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { KEY_ENTER } from '../constants/KeyCodes';
+
 class NavSearch extends Component {
 
   constructor(props) {
@@ -19,14 +20,14 @@ class NavSearch extends Component {
       <div className="nav-search">
         <i className="icon ion-search" />
         <input
-          ref={node => this.searchField = node}
+          ref={(ref) => { this.searchField = ref; }}
           className="nav-search-input"
           placeholder="SEARCH"
           type="text"
           onKeyPress={this.handleKeyPress}
         />
       </div>
-    )
+    );
   }
 }
 

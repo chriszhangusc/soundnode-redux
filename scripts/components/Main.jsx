@@ -1,14 +1,14 @@
 import React from 'react';
 import Toolbar from './Toolbar';
-import VisibleSongCardList from '../containers/VisibleSongCardList';
-import VisiblePlayer from '../containers/player/VisiblePlayer'
+import SongCardListContainer from '../containers/SongCardListContainer';
+import PlayerContainer from '../containers/Player/PlayerContainer';
 
-const Main = () => (
-  <div className='songs'>
-    <Toolbar />
-    <VisibleSongCardList />
-    <VisiblePlayer />
-  </div>
-)
-
-export default Main;
+export default function Main() {
+  return (
+    <div className="songs">
+      <Toolbar />
+      <SongCardListContainer />
+      <PlayerContainer />
+    </div>
+  );
+}

@@ -2,14 +2,14 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureRoutes from '../router/index';
 
-const Root = ({ store }) => (
-  <Provider store={store}>
-    {configureRoutes(store)}
-  </Provider>
-);
+export default function Root({ store }) {
+  return (
+    <Provider store={store}>
+      {configureRoutes(store)}
+    </Provider>
+  );
+}
 
-Root.propTypes = {
-  store: React.PropTypes.object
-};
-
-export default Root;
+// Root.propTypes = {
+//   store: React.PropTypes.shape({})
+// };

@@ -1,6 +1,6 @@
 {
-  "extends": [ "eslint:recommended", "plugin:react/recommended" ],
-  "plugins": [ "react" ],
+  # "extends": [ "eslint:recommended", "plugin:react/recommended" ],
+  "extends": "airbnb",
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 6,
@@ -15,8 +15,9 @@
     "node": true
   },
   "rules":{
-    "no-console":0,
-    "no-constant-condition": ["error", { "checkLoops": false }]
-  },
-
+    // disable requiring trailing commas because it might be nice to revert to
+    // being JSON at some point, and I don't want to make big changes now.
+    "comma-dangle": 0,
+    "no-console":0
+  }
 }

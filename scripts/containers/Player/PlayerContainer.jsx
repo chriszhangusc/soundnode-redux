@@ -2,16 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getCurrentSongId } from '../../selectors/playerSelectors';
 import PlayerAudioContainer from './PlayerAudioContainer';
-import VisiblePlayerSongInfo from './VisiblePlayerSongInfo';
-import VisiblePlayerControls from './VisiblePlayerControls';
-import VisiblePlayerDurationBar from './VisiblePlayerDurationBar';
-import VisiblePlayerModeControls from './VisiblePlayerModeControls';
-import VisiblePlayerVolumeControls from './VisiblePlayerVolumeControls';
+import PlayerSongInfoContainer from './PlayerSongInfoContainer';
+import PlayerControlsContainer from './PlayerControlsContainer';
+import PlayerDurationBarContainer from './PlayerDurationBarContainer';
+import PlayerModeControlsContainer from './PlayerModeControlsContainer';
+import PlayerVolumeControlsContainer from './PlayerVolumeControlsContainer';
 
-class VisiblePlayer extends Component {
-  constructor(props) {
-    super(props);
-  }
+// Player Layout Container
+
+class Player extends Component {
 
   render() {
     // Extract props that we care, and pass the other props as others.
@@ -24,11 +23,11 @@ class VisiblePlayer extends Component {
             <div className="container">
               <div className="player-main">
                 <PlayerAudioContainer />
-                <VisiblePlayerSongInfo />
-                <VisiblePlayerControls />
-                <VisiblePlayerDurationBar />
-                <VisiblePlayerModeControls />
-                <VisiblePlayerVolumeControls />
+                <PlayerSongInfoContainer />
+                <PlayerControlsContainer />
+                <PlayerDurationBarContainer />
+                <PlayerModeControlsContainer />
+                <PlayerVolumeControlsContainer />
               </div>
             </div>
           </div>
@@ -42,8 +41,8 @@ const mapStateToProps = (state) => ({
   currentSongId: getCurrentSongId(state)
 })
 
-VisiblePlayer.propTypes = {
+Player.propTypes = {
   currentSongId: PropTypes.number
 };
 
-export default connect(mapStateToProps)(VisiblePlayer);
+export default connect(mapStateToProps)(Player);

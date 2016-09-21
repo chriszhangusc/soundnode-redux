@@ -1,11 +1,15 @@
 import React from 'react';
 import Nav from './Nav';
 
-const App = (props) => (
-  <div>
-    <Nav />
-    { props.children }
-  </div>
-)
+export default function App({ children }) {
+  return (
+    <div>
+      <Nav />
+      { children }
+    </div>
+  );
+}
 
-export default App;
+App.propTypes = {
+  children: React.PropTypes.element.isRequired
+};

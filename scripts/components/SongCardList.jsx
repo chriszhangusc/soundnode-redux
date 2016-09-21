@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import VisibleSongCard from '../containers/VisibleSongCard';
+import chunk from 'lodash/chunk';
+import SongCardContainer from '../containers/SongCardContainer';
 import Spinner from './Spinner';
 import infiniteScroll from './hocs/InfiniteScroll';
-import chunk from 'lodash/chunk';
 
 const SongCardList = (props) => {
   const { isFetching, songs } = props;
@@ -23,12 +23,12 @@ const renderSongCardList = (songs) => {
     <div className="songs-row grid" key={i} >
       {
         rowItems.map(song => (<div className="col-1-5 clearfix" key={song.id}>
-          <VisibleSongCard song={song} />
+          <SongCardContainer song={song} />
         </div>))
       }
     </div>
   ));
-}
+};
 
 SongCardList.propTypes = {
   isFetching: PropTypes.bool,
