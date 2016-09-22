@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import {REPEAT} from '../../constants/PlayerConstants';
+import { REPEAT } from '../../constants/PlayerConstants';
 
 class PlayerAudio extends Component {
   constructor(props) {
@@ -11,77 +11,80 @@ class PlayerAudio extends Component {
     this.updateVolumeIfNeeded = this.updateVolumeIfNeeded.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.bindEventListeners();
-    this.togglePlayIfNeeded(this.audioElement, this.props.isPlaying);
+    this.togglePlayIfNeeded(this.audioElement, this.props);
   }
 
-  componentWillUnmount () {
+  componentDidUpdate(prevProps) {
+    this.updateTimeIfNeeded(prevProps);
+    this.updateVolumeIfNeeded(prevProps);
+    this.togglePlayIfNeeded(this.audioElement);
+  }
+
+  componentWillUnmount() {
     this.removeEventListeners();
   }
 
-  componentDidUpdate (prevProps) {
-    this.updateTimeIfNeeded(prevProps, this.props);
-    this.updateVolumeIfNeeded(prevProps, this.props);
-    this.togglePlayIfNeeded(this.audioElement, this.props.isPlaying);
-  }
-
   // If seeking status changed from true to false, then we should update time in our audioElement
-  updateTimeIfNeeded(prevProps, currProps) {
-    if (prevProps.isSeeking && !currProps.isSeeking) {
-      this.audioElement.currentTime = currProps.currentTime;
+  updateTimeIfNeeded(prevProps) {
+    if (prevProps.isSeeking && !this.props.isSeeking) {
+      this.audioElement.currentTime = this.props.currentTime;
     }
     // Reason: In case of repeat mode, when user click next/prev song button,
     // we will update currentTime to 0, so we need to force update the actual
     // time of our player.
-    if (prevProps.currentTime !== 0 && currProps.currentTime === 0) {
-      this.audioElement.currentTime = currProps.currentTime;
+    if (prevProps.currentTime !== 0 && this.props.currentTime === 0) {
+      this.audioElement.currentTime = this.props.currentTime;
     }
   }
 
-  updateVolumeIfNeeded(prevProps, currProps) {
+  updateVolumeIfNeeded(prevProps) {
     if (prevProps.volume !== this.props.volume) {
-      this.audioElement.volume = currProps.volume;
+      this.audioElement.volume = this.props.volume;
     }
   }
 
-  togglePlayIfNeeded(audioElement, isPlaying) {
+  togglePlayIfNeeded(audioElement) {
     // This also covers change song and play logic
-    if (audioElement.paused === isPlaying) {
-      audioElement.paused ? audioElement.play() : audioElement.pause();
+    if (audioElement.paused === this.props.isPlaying) {
+      if (audioElement.paused) audioElement.play();
+      else audioElement.pause();
     }
   }
 
-  bindEventListeners () {
+  bindEventListeners() {
     const audio = this.audioElement;
-    const {onTimeUpdate, onEnded, onLoadedMetadata} = this.props;
+    const { onTimeUpdate, onEnded, onLoadedMetadata } = this.props;
     audio.addEventListener('timeupdate', onTimeUpdate);
     audio.addEventListener('ended', onEnded);
     audio.addEventListener('loadedmetadata', onLoadedMetadata.bind(null, audio));
   }
 
-  removeEventListeners () {
+  removeEventListeners() {
     const audio = this.audioElement;
-    const {onTimeUpdate, onEnded, onLoadedMetadata} = this.props;
+    const { onTimeUpdate, onEnded, onLoadedMetadata } = this.props;
     audio.removeEventListener('timeupdate', onTimeUpdate);
     audio.removeEventListener('ended', onEnded);
     audio.removeEventListener('loadedmetadata', onLoadedMetadata);
   }
 
-
-
-  render () {
-    const {streamUrl, mode} = this.props;
+  render() {
+    const { streamUrl, mode } = this.props;
     return (
-      <audio id="audio"
-        loop={mode === REPEAT ? true : false}
-        ref={ref => this.audioElement = ref}
-        src={streamUrl} />
+      <audio
+        id="audio"
+        loop={mode === REPEAT}
+        ref={(ref) => { this.audioElement = ref; }}
+        src={streamUrl}
+      />
     );
   }
 }
 
 PlayerAudio.propTypes = {
+  isSeeking: PropTypes.bool,
+  currentTime: PropTypes.number,
   isPlaying: PropTypes.bool,
   volume: PropTypes.number,
   mode: PropTypes.string,

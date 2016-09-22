@@ -13,21 +13,24 @@ export default function SongCardImage(props) {
   let togglePlayButton = null;
   if (isActive && isPlaying) {
     togglePlayButton = (
-      <div className={`toggle-play-button ${(isActive ? 'active' : '')}`}
-        onClick={ handlePauseSong }>
+      <button
+        className={`toggle-play-button ${(isActive ? 'active' : '')}`}
+        onClick={handlePauseSong}
+      >
         <i className="toggle-play-button-icon ion-ios-pause" />
-      </div>
+      </button>
     );
   } else {
     togglePlayButton = (
-      <div
+      <button
         className={`toggle-play-button ${(isActive ? 'active' : '')}`}
         onClick={() => {
           if (isActive) handlePlaySong();
           else handleChangeSong();
-        }}>
+        }}
+      >
         <i className="toggle-play-button-icon ion-ios-play" />
-      </div>
+      </button>
     );
   }
 

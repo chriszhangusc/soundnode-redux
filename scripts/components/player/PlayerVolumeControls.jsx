@@ -8,18 +8,8 @@ class PlayerVolumeControls extends Component {
     this.handleVolumeMouseUp = this.handleVolumeMouseUp.bind(this);
   }
 
-  handleVolumeMouseMove (e) {
-    const {onVolumeHandleMouseMove} = this.props;
-    onVolumeHandleMouseMove(this.volumeBar, e);
-  }
-
-  handleVolumeMouseUp(e) {
-    const {onVolumeMouseUp} = this.props;
-    onVolumeMouseUp(this.volumeBar, e);
-  }
-
-  componentDidUpdate (prevProps) {
-    const {volumeIsSeeking} = this.props;
+  componentDidUpdate(prevProps) {
+    const { volumeIsSeeking } = this.props;
     const prevIsSeeking = prevProps.volumeIsSeeking;
     const currIsSeeking = volumeIsSeeking;
     if (!prevIsSeeking && currIsSeeking) {
@@ -31,12 +21,18 @@ class PlayerVolumeControls extends Component {
       document.removeEventListener('mousemove', this.handleVolumeMouseMove);
       document.removeEventListener('mouseup', this.handleVolumeMouseUp);
     }
-
   }
 
-  renderVolumeIcon () {
-    const { volume } = this.props;
-    const {onToggleMuteClick} = this.props;
+  handleVolumeMouseMove(e) {
+    this.props.onVolumeHandleMouseMove(this.volumeBar, e);
+  }
+
+  handleVolumeMouseUp(e) {
+    this.props.onVolumeMouseUp(this.volumeBar, e);
+  }
+
+  renderVolumeIcon() {
+    const { volume, onToggleMuteClick } = this.props;
     // Render different icon depending on current volume.
     let icon = null;
     if (volume <= 0) {
@@ -49,13 +45,14 @@ class PlayerVolumeControls extends Component {
       icon = 'ion-volume-high';
     }
     return (
-      <i className={`icon ${icon}`} onClick={onToggleMuteClick}/>
+      <button className="icon-btn" onClick={onToggleMuteClick} >
+        <i className={`icon ${icon}`} />
+      </button>
     );
   }
 
-  render () {
-    const {volume} = this.props;
-    const {onVolumeBarMouseDown, onVolumeHandleMouseDown} = this.props;
+  render() {
+    const { volume, onVolumeBarMouseDown, onVolumeHandleMouseDown } = this.props;
 
     return (
       <div className="player-section">
@@ -65,13 +62,14 @@ class PlayerVolumeControls extends Component {
           </div>
         </div>
         <div className="player-volume">
-          <div className="player-seek-bar-wrap"
+          <div
+            className="player-seek-bar-wrap"
             onMouseDown={onVolumeBarMouseDown}
             onMouseUp={this.handleVolumeMouseUp}
-            >
-            <div className="player-seek-bar" ref={ref => this.volumeBar = ref}>
+          >
+            <div className="player-seek-bar" ref={(ref) => { this.volumeBar = ref; }}>
               <div className="player-seek-duration-bar" style={{ width: `${volume * 100}%` }} >
-                <div className="player-seek-handle" onMouseDown={onVolumeHandleMouseDown}/>
+                <div className="player-seek-handle" onMouseDown={onVolumeHandleMouseDown} />
               </div>
             </div>
           </div>

@@ -1,0 +1,44 @@
+.icon-btn {
+  padding: 4px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+
+  & + .icon-btn {
+    margin-left: 30px;
+  }
+
+  & > i {
+      color: $player-button-color;
+      font-size: 0.9rem;
+  }
+
+  &.active {
+      &:hover {
+          & > i {
+              color: $theme-color;
+          }
+      }
+
+      & > i {
+          color: $theme-color;
+      }
+  }
+
+  &:hover {
+      cursor: pointer;
+
+      & > i {
+          color: $button-hover-color;
+      }
+
+      .ion-ios-pause {
+          color: $button-hover-color;
+      }
+  }
+
+}

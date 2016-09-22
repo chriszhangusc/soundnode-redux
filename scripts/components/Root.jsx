@@ -10,6 +10,6 @@ export default function Root({ store }) {
   );
 }
 
-// Root.propTypes = {
-//   store: React.PropTypes.shape({})
-// };
+Root.propTypes = {
+  store: React.PropTypes.shape({})
+};

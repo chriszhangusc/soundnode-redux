@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import {REPEAT, SHUFFLE} from '../../constants/PlayerConstants';
+import { REPEAT, SHUFFLE } from '../../constants/PlayerConstants';
 // Stateless functional component
 class PlayerModeControls extends Component {
 
@@ -10,26 +10,36 @@ class PlayerModeControls extends Component {
   }
 
   renderRepeat() {
-    const {onRepeatClick, mode} = this.props;
+    const { onRepeatClick, mode } = this.props;
     return (
-      <div className={`player-button tooltip ${(mode === REPEAT ? 'active' : '')}`}>
+      <div className="player-btn-wrapper tooltip">
         <span className="tooltiptext">Repeat</span>
-        <i className="icon ion-loop" onClick={onRepeatClick} />
+        <button
+          className={`icon-btn ${(mode === REPEAT ? 'active' : '')}`}
+          onClick={onRepeatClick}
+        >
+          <i className="icon ion-loop" />
+        </button>
       </div>
     );
   }
 
   renderShuffle() {
-    const {onShuffleClick, mode} = this.props;
+    const { onShuffleClick, mode } = this.props;
     return (
-      <div className={`player-button tooltip ${(mode === SHUFFLE ? 'active' : '')}`}>
+      <div className="player-btn-wrapper tooltip">
         <span className="tooltiptext">Shuffle</span>
-        <i className="icon ion-shuffle" onClick={onShuffleClick} />
+        <button
+          className={`icon-btn ${(mode === SHUFFLE ? 'active' : '')}`}
+          onClick={onShuffleClick}
+        >
+          <i className="icon ion-shuffle" />
+        </button>
       </div>
     );
   }
 
-  render () {
+  render() {
     return (
       <div className="player-section">
         {this.renderRepeat()}

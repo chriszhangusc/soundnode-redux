@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 // Higher order component
 export default function (InnerComponent) {
   class InfiniteScrollComponent extends Component {
@@ -29,7 +28,7 @@ export default function (InnerComponent) {
   }
 
   InfiniteScrollComponent.propTypes = {
-    scrollFunc: PropTypes.func.isRequired,
+    scrollFunc: PropTypes.func.isRequired
   };
   // Connect to redux store only because we need dispatch!
   return InfiniteScrollComponent;

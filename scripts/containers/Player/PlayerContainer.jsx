@@ -17,29 +17,28 @@ class Player extends Component {
     const { currentSongId } = this.props;
     if (!currentSongId) {
       return null;
-    } else {
-      return (
-          <div className="player">
-            <div className="container">
-              <div className="player-main">
-                <PlayerAudioContainer />
-                <PlayerSongInfoContainer />
-                <PlayerControlsContainer />
-                <PlayerDurationBarContainer />
-                <PlayerModeControlsContainer />
-                <PlayerVolumeControlsContainer />
-              </div>
-            </div>
-          </div>
-      );
     }
+    return (
+      <div className="player">
+        <div className="container">
+          <div className="player-main">
+            <PlayerAudioContainer />
+            <PlayerSongInfoContainer />
+            <PlayerControlsContainer />
+            <PlayerDurationBarContainer />
+            <PlayerModeControlsContainer />
+            <PlayerVolumeControlsContainer />
+          </div>
+        </div>
+      </div>
+    );
   }
 
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   currentSongId: getCurrentSongId(state)
-})
+});
 
 Player.propTypes = {
   currentSongId: PropTypes.number

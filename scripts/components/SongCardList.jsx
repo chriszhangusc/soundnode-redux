@@ -4,18 +4,6 @@ import SongCardContainer from '../containers/SongCardContainer';
 import Spinner from './Spinner';
 import infiniteScroll from './hocs/InfiniteScroll';
 
-const SongCardList = (props) => {
-  const { isFetching, songs } = props;
-  return (
-    <div className="container">
-      <div className="content">
-        {renderSongCardList(songs)}
-        {isFetching ? <Spinner /> : null}
-      </div>
-    </div>
-  );
-}
-
 const renderSongCardList = (songs) => {
   const COLS = 5;
   const rows = chunk(songs, COLS);
@@ -30,9 +18,23 @@ const renderSongCardList = (songs) => {
   ));
 };
 
+
+const SongCardList = (props) => {
+  const { isFetching, songs } = props;
+  return (
+    <div className="container">
+      <div className="content">
+        {renderSongCardList(songs)}
+        {isFetching ? <Spinner /> : null}
+      </div>
+    </div>
+  );
+};
+
+
 SongCardList.propTypes = {
   isFetching: PropTypes.bool,
-  songs: PropTypes.array
+  songs: PropTypes.arrayOf(PropTypes.shape({}))
 };
 
 export default infiniteScroll(SongCardList);

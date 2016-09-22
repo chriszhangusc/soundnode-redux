@@ -1,44 +1,41 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 
 class PlayerControls extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.renderPlayPauseButton = this.renderPlayPauseButton.bind(this);
     this.renderForwardButton = this.renderForwardButton.bind(this);
     this.renderBackwardButton = this.renderBackwardButton.bind(this);
   }
 
-  renderPlayPauseButton () {
-    const {isPlaying, onPauseClick, onPlayClick} = this.props;
+  renderPlayPauseButton() {
+    const { isPlaying, onPauseClick, onPlayClick } = this.props;
     return (
-      <div className="player-button">
-        <i
-          className={isPlaying ? 'icon ion-ios-pause' : 'icon ion-ios-play'}
-          onClick={isPlaying ? onPauseClick : onPlayClick}
-          />
-      </div>
+      <button className="icon-btn" onClick={isPlaying ? onPauseClick : onPlayClick}>
+        <i className={isPlaying ? 'icon ion-ios-pause' : 'icon ion-ios-play'} />
+      </button>
     );
   }
 
-  renderForwardButton () {
-    const {onNextClick} = this.props;
+  renderForwardButton() {
+    const { onNextClick } = this.props;
     return (
-      <div className="player-button" onClick={onNextClick}>
+      <button className="icon-btn" onClick={onNextClick}>
         <i className="icon ion-ios-fastforward" />
-      </div>
+      </button>
     );
   }
 
-  renderBackwardButton () {
-    const {onPrevClick} = this.props;
+  renderBackwardButton() {
+    const { onPrevClick } = this.props;
     return (
-      <div className="player-button" onClick={onPrevClick}>
+      <button className="icon-btn" onClick={onPrevClick}>
         <i className="icon ion-ios-rewind" />
-      </div>
+      </button>
     );
   }
 
-  render () {
+  render() {
     return (
       <div className="player-section">
         {this.renderBackwardButton()}

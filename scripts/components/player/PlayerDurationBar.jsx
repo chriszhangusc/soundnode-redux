@@ -1,9 +1,9 @@
-import React, {Component, PropTypes} from 'react';
-import {formatSecondsAsTime} from '../../utils/FormatUtils';
-import {computeSeekBarPercent} from '../../utils/PlayerUtils';
+import React, { Component, PropTypes } from 'react';
+import { formatSecondsAsTime } from '../../utils/FormatUtils';
+import { computeSeekBarPercent } from '../../utils/PlayerUtils';
 
 class PlayerDurationBar extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.renderDurationBar = this.renderDurationBar.bind(this);
     this.renderPlayTime = this.renderPlayTime.bind(this);
@@ -11,8 +11,8 @@ class PlayerDurationBar extends Component {
     this.handleEndSeek = this.handleEndSeek.bind(this);
   }
 
-  componentDidUpdate (prevProps) {
-    const {isSeeking} = this.props;
+  componentDidUpdate(prevProps) {
+    const { isSeeking } = this.props;
     const prevIsSeeking = prevProps.isSeeking;
 
     if (!prevIsSeeking && isSeeking) {
@@ -24,49 +24,48 @@ class PlayerDurationBar extends Component {
       document.removeEventListener('mousemove', this.handleDurationHandleMouseMove);
       document.removeEventListener('mouseup', this.handleEndSeek);
     }
-
   }
 
   handleEndSeek(e) {
-    const {duration, onMouseUp} = this.props;
+    const { duration, onMouseUp } = this.props;
     onMouseUp(this.seekBarElement, duration, e);
   }
 
   // Can not use bind because it will fail when removing listener.
-  handleDurationHandleMouseMove (e) {
-    const {duration, onDurationHandleMouseMove} = this.props;
+  handleDurationHandleMouseMove(e) {
+    const { duration, onDurationHandleMouseMove } = this.props;
     onDurationHandleMouseMove(this.seekBarElement, duration, e);
   }
 
-  renderDurationBar () {
+  renderDurationBar() {
     const {
       duration,
       currentTime,
       onDurationBarMouseDown,
       onDurationHandleMouseDown
     } = this.props;
-    let percent = computeSeekBarPercent(currentTime, duration);
+    const percent = computeSeekBarPercent(currentTime, duration);
 
     return (
-      <div className="player-seek-bar-wrap"
+      <div
+        className="player-seek-bar-wrap"
         onMouseDown={onDurationBarMouseDown}
         onMouseUp={this.handleEndSeek}
-        >
-        <div className="player-seek-bar" ref={seekBar => this.seekBarElement = seekBar}>
+      >
+        <div className="player-seek-bar" ref={(seekBar) => { this.seekBarElement = seekBar; }}>
           <div className="player-seek-duration-bar" style={{ width: `${percent}%` }} >
-            <div className="player-seek-handle" onMouseDown={ onDurationHandleMouseDown } />
+            <div className="player-seek-handle" onMouseDown={onDurationHandleMouseDown} />
           </div>
         </div>
       </div>
     );
   }
 
-  renderPlayTime () {
-
-    const {currentTime, duration} = this.props;
+  renderPlayTime() {
+    const { currentTime, duration } = this.props;
     // Move to selectors
-    let durationStr = formatSecondsAsTime(duration);
-    let currentTimeStr = formatSecondsAsTime(currentTime);
+    const durationStr = formatSecondsAsTime(duration);
+    const currentTimeStr = formatSecondsAsTime(currentTime);
 
     return (
       <div className="player-time">
@@ -77,7 +76,7 @@ class PlayerDurationBar extends Component {
     );
   }
 
-  render () {
+  render() {
     return (
       <div className="player-section player-seek">
         { this.renderDurationBar() }

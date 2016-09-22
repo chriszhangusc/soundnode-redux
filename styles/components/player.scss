@@ -84,6 +84,12 @@
     }
 }
 
+.player-btn-wrapper {
+  & + .player-btn-wrapper {
+    margin-left: 30px;
+  }
+}
+
 .player-seek {
     flex: 1;
 }
@@ -143,7 +149,7 @@
 
 .player-volume-button-wrap {
 
-    & > i {
+    & > button > i {
       font-size: 1.1rem;
       color: $player-button-color;
     }

@@ -1,4 +1,5 @@
-import {CLIENT_ID} from './Config';
+import { CLIENT_ID } from './Config';
+
 export const GENRES = [
   'chill',
   'deep',
