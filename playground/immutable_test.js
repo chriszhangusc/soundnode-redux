@@ -1,32 +1,19 @@
 var Immutable = require('immutable');
 
-var jsList = [{val:1}, {val:2}];
-
-let book = Immutable.fromJS({
-  title: 'Harry Potter & The Goblet of Fire',
-  isbn: '0439139600',
-  series: 'Harry Potter',
-  author: {
-    firstName: 'J.K.',
-    lastName: 'Rowling'
-  },
-  genres: [
-    'Crime',
-    'Fiction',
-    'Adventure',
-  ],
-  storeListings: [
-    {storeId: 'amazon', price: 7.95},
-    {storeId: 'barnesnoble', price: 7.95},
-    {storeId: 'biblio', price: 4.99},
-    {storeId: 'bookdepository', price: 11.88},
-  ]
+var merge = Immutable.merge;
+var concat = Immutable.concat;
+var obj1 = Immutable.fromJS({
+  isFetching: true,
+  songIds: [1,2,3],
+  songs: {1:{name:'1'}, 2: {name:'2'}}
 });
 
-console.log(book);
-// console.log(Immutable.fromJS(jsList));
-// console.log(Immutable.List(jsList));
-console.log(book.setIn(['genres', 1], 'YOYOYO'));
+var obj2 = Immutable.fromJS({
+  isFetching: false,
+  songIds: [4,5,6],
+  songs: {4:{name:'4'}}
+});
 
-var todo = Immutable.fromJS({id: 1, text: 'hello world', genre: 'hiphop'});
-console.log(todo.mergeDeep({id:1, text: 'fuck you', name:'huachao'}));
+console.log(obj1.mergeDeep(obj2));
+console.log(obj1.get('songIds').concat(obj2.get('songIds')));
+console.log();

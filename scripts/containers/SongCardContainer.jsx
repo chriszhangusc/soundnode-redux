@@ -1,18 +1,24 @@
 import { connect } from 'react-redux';
 import SongCard from '../components/SongCard/SongCard';
 import actions from '../actions';
-import * as selectors from '../selectors/songCardsSelectors';
-import { formatImageUrl, formatTitle } from '../utils/FormatUtils';
+
+import {
+  getSongImage,
+  getSongTitle,
+  getSongUserAvatar,
+  getSongUsername,
+  getSingleSongIsActive,
+  getSingleSongPlayingState
+} from '../selectors/songCardSelectors';
 
 const mapStateToProps = (state, { song }) => ({
-  songImage: formatImageUrl(song.artwork_url),
-  title: formatTitle(song.title),
-  userImage: song.user.avatar_url,
-  username: song.user.username,
-  isActive: selectors.getIsActive(state, song.id),
-  visiblePlaylistName: selectors.getVisiblePlaylistName(state),
-  isPlaying: selectors.getPlayingState(state),
-  currentSong: selectors.getCurrentSong(state)
+  // This is just like passing down props!
+  songImage: getSongImage(song),
+  title: getSongTitle(song),
+  userImage: getSongUserAvatar(song),
+  username: getSongUsername(song),
+  isActive: getSingleSongIsActive(state, song.id),
+  isPlaying: getSingleSongPlayingState(state, song.id)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

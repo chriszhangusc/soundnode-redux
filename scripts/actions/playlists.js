@@ -15,6 +15,11 @@ export const receiveSongs = (playlist, songs, songIds, nextUrl) => ({
   }
 });
 
+export const changeVisiblePlaylist = visiblePlaylistName => ({
+  type: ActionTypes.CHANGE_VISIBLE_PLAYLIST,
+  payload: visiblePlaylistName
+});
+
 // Saga Commands
 export const changeSongAndPlay = songId => ({
   type: ActionTypes.CHANGE_SONG_AND_PLAY,

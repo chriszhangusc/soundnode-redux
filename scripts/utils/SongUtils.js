@@ -1,6 +1,7 @@
 import { GENRES, SEED_FETCH_URL } from '../constants/SongConstants';
 import { CLIENT_ID } from '../constants/Config';
 import { LOOP, SHUFFLE, REPEAT, NEXT, PREV } from '../constants/PlayerConstants';
+
 export const generateFetchUrl = (genre) => {
   // const url = `${SEED_FETCH_URL}&tags=${genre}`;
   genre = genre.trim();

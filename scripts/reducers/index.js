@@ -1,91 +1,75 @@
-import playlists from './playlists';
-import player from './player';
-import visiblePlaylist from './visiblePlaylist';
 import { combineReducers } from 'redux';
+// import { createSelector } from 'reselect';
 import * as fromPlaylists from './playlists';
-import * as fromPlaylist from './playlist';
 import * as fromPlayer from './player';
 
 const rootReducer = combineReducers({
-  playlists,
-  player,
-  visiblePlaylist
+  playlists: fromPlaylists.default,
+  player: fromPlayer.default
 });
 
-/******************************************************************************/
-/*********************** Reusable Selectors ***********************************/
-/******************************************************************************/
-/* Selectors are our reading API of our state, so it is recommended to colocate them with the reducers */
+/* Selectors are our reading API of our state,
+so it is recommended to colocate them with the reducers */
 
-/* From playlists */
-export const getPlaylists = state => state.playlists;
+/* From Playlists */
 
-export const getPlayerPlaylistName = state => fromPlayer.getPlaylistName(state.player);
+// Return the current player playlist name
+export const getPlayerPlaylistName = state => fromPlaylists.getPlayerPlaylistName(state.playlists);
 
-export const getPlayerPlaylist = state => {
-  const playlistName = fromPlayer.getPlaylistName(state.player);
-  return fromPlaylists.getPlaylist(state.playlists, playlistName);
-}
+// Return the current playlist object itself
+export const getPlayerPlaylist = state => fromPlaylists.getPlayerPlaylist(state.playlists);
 
-export const getVisiblePlaylistName = state => state.visiblePlaylist
+// Return the visible playlist name
+export const getVisiblePlaylistName = state =>
+  fromPlaylists.getVisiblePlaylistName(state.playlists);
 
-export const getVisiblePlaylist = state => {
-  const visiblePlaylist = state.visiblePlaylist;
-  return fromPlaylists.getPlaylist(state.playlists, visiblePlaylist);
-}
+// Return the visible playlist object itself
+export const getVisiblePlaylist = state => fromPlaylists.getVisiblePlaylist(state.playlists);
 
-export const getPlayerSongMap = state => {
-  const playlist = getPlayerPlaylist(state);
-  if (playlist) return fromPlaylist.getSongs(playlist);
-  return null;
-}
+// Return the fetch state of the current visible playlist
+export const getVisibleFetchState = state => fromPlaylists.getVisibleFetchState(state.playlists);
 
-export const getPlayerSongIds = state => {
-  const playlist = getPlayerPlaylist(state);
-  if (playlist) return fromPlaylist.getSongIds(playlist);
-  return null;
-}
-// Visible Playlist
-export const getVisibleSongMap = state => {
-  const playlist = getVisiblePlaylist(state);
-  if (playlist) return fromPlaylist.getSongs(playlist);
-  return null;
-}
+// Get the Songs Object-Array of current player playlist
+export const getPlayerSongMap = state => fromPlaylists.getPlayerSongMap(state.playlists);
 
-export const getVisibleSongIds = state => {
-  const playlist = getVisiblePlaylist(state);
-  if (playlist) return fromPlaylist.getSongIds(playlist);
-  return null;
-}
+export const getPlayerSongIds = state => fromPlaylists.getPlayerSongIds(state.playlists);
 
-export const getFetchState = state => {
-  const playlist = getVisiblePlaylist(state);
-  if (playlist) return fromPlaylist.getFetchState(playlist);
-  return null;
-}
+export const getVisibleSongMap = state => fromPlaylists.getVisibleSongMap(state.playlists);
 
-export const getNextUrlOfVisiblePlaylist = state => {
-  const playlist = getVisiblePlaylist(state);
-  if (playlist) return fromPlaylist.getNextUrl(playlist);
-  return null;
-}
+export const getVisibleSongIds = state => fromPlaylists.getVisibleSongIds(state.playlists);
+
+export const getVisibleNextUrl = state => fromPlaylists.getVisibleNextUrl(state.playlists);
+
+// Return if the playlistName is already loaded
+export const playlistExists = (state, playlistName) =>
+  fromPlaylists.playlistExists(state.playlists, playlistName);
 
 /* From players */
-export const getPlaylistName = state => fromPlayer.getPlaylistName(state.player)
 
-export const getCurrentSongId = state => fromPlayer.getCurrentSongId(state.player)
+export const getCurrentSongId = state => fromPlayer.getCurrentSongId(state.player);
 
-export const getPlayingState = state => fromPlayer.getPlayingState(state.player)
+export const getPlayingState = state => fromPlayer.getPlayingState(state.player);
 
-export const getCurrentVolume = state => fromPlayer.getCurrentVolume(state.player)
+export const getCurrentVolume = state => fromPlayer.getCurrentVolume(state.player);
 
-export const getVolumeSeekState = state => fromPlayer.getVolumeSeekState(state.player)
+export const getVolumeSeekState = state => fromPlayer.getVolumeSeekState(state.player);
 
-export const getCurrentTime = state => fromPlayer.getCurrentTime(state.player)
+export const getCurrentTime = state => fromPlayer.getCurrentTime(state.player);
 
-export const getSeekState = state => fromPlayer.getSeekState(state.player)
+export const getSeekState = state => fromPlayer.getSeekState(state.player);
 
-export const getPlayerMode = state => fromPlayer.getPlayerMode(state.player)
+export const getPlayerMode = state => fromPlayer.getPlayerMode(state.player);
 
+
+
+/* Mixed / Memoized Selectors */
+// Not sure if we should put it here.
+// export const getCurrentSong = createSelector(
+//   [getPlayerSongMap, getCurrentSongId],
+//   (songsById, songId) => {
+//     if (songId) return songsById[songId];
+//     return null;
+//   }
+// );
 
 export default rootReducer;

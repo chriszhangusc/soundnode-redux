@@ -1,16 +1,16 @@
+import axios from 'axios';
+import { normalize } from 'normalizr';
 import { fork, put, call, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import * as ActionTypes from '../constants/ActionTypes';
 import { generateFetchUrl } from '../utils/SongUtils';
-import axios from 'axios';
-import { normalize } from 'normalizr';
 import { arrayOfSongs } from '../actions/schema';
 import actions from '../actions';
 import * as selectors from '../reducers';
 
-/******************************************************************************/
-/******************************* SUBROUTINES **********************************/
-/******************************************************************************/
+/* *****************************************************************************/
+/* ****************************** SUBROUTINES **********************************/
+/* *****************************************************************************/
 
 function* doFetchSongs(playlist, url) {
   yield put(actions.requestSongs(playlist));
@@ -26,31 +26,29 @@ function* doFetchSongs(playlist, url) {
 
 // Initial loading and Nav bar searching
 function* loadSongCardsPage({ payload }) {
-  const playlist = payload;
+  const playlistName = payload;
   // 1.Change visiblePlaylistName
-  yield put(actions.changeVisiblePlaylist(playlist));
-  const playlists = yield select(selectors.getPlaylists);
+  yield put(actions.changeVisiblePlaylist(playlistName));
+  const playlistExists = yield select(selectors.playlistExists, playlistName);
   // 2.Load songs if not cached
-  const url = yield call(generateFetchUrl, playlist);
-  if (!(playlist in playlists)) {
-    yield fork(doFetchSongs, playlist, url);
-  }
+  const url = yield call(generateFetchUrl, playlistName);
+  if (!playlistExists) yield fork(doFetchSongs, playlistName, url);
 }
 
 // Scroll loading
 function* loadMoreSongsOnScroll() {
-    const nextUrl = yield select(selectors.getNextUrlOfVisiblePlaylist);
-    const playlist = yield select(selectors.getVisiblePlaylistName);
-    const playlists = yield select(selectors.getPlaylists);
-    if ((playlist in playlists) && (!playlists[playlist].isFetching)
-     && (playlists[playlist].nextUrl !== null)) {
-       yield fork(doFetchSongs, playlist, nextUrl);
-    }
+  const nextUrl = yield select(selectors.getVisibleNextUrl);
+  const playlistName = yield select(selectors.getVisiblePlaylistName);
+  const playlistExists = yield select(selectors.playlistExists, playlistName);
+  const isFetching = yield select(selectors.getVisibleFetchState);
+  if (playlistExists && !isFetching && nextUrl) {
+    yield fork(doFetchSongs, playlistName, nextUrl);
+  }
 }
 
-/******************************************************************************/
-/******************************* WATCHERS *************************************/
-/******************************************************************************/
+/* *****************************************************************************/
+/* ****************************** WATCHERS *************************************/
+/* *****************************************************************************/
 
 export function* watchLoadSongCardsPage() {
   yield takeEvery(ActionTypes.LOAD_SONG_CARDS_PAGE, loadSongCardsPage);

@@ -1,34 +1,36 @@
+import { fromJS } from 'immutable';
 import * as ActionTypes from '../constants/ActionTypes';
-const PLAYLIST_INITIAL_STATE = {
+
+const PLAYLIST_INITIAL_STATE = fromJS({
   isFetching: false,
-  songs: {},
   songIds: [],
+  songs: {},
   nextUrl: null
-};
+});
 
 const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
   switch (action.type) {
+
     case ActionTypes.REQUEST_SONGS:
-      return {
-        ...state,
-        isFetching: true
-      };
+      return state.set('isFetching', true);
+
     case ActionTypes.RECEIVE_SONGS:
-      return {
-        ...state,
+      // mergeDeep will merge obj correctly not lists! Have to concat lists!
+      return state.mergeDeep(fromJS({
         isFetching: false,
-        nextUrl: action.payload.nextUrl,
-        songIds: [...state.songIds, ...action.payload.songIds],
-        songs: {...state.songs, ...action.payload.songs}
-      };
+        songIds: state.get('songIds').concat(fromJS(action.payload.songIds)),
+        songs: action.payload.songs,
+        nextUrl: action.payload.nextUrl
+      }));
+
     default:
       return state;
   }
 };
 
-export const getFetchState = state => state.isFetching
-export const getSongs = state => state.songs
-export const getSongIds = state => state.songIds
-export const getNextUrl = state => state.nextUrl
+export const getFetchState = state => state.get('isFetching');
+export const getSongIds = state => state.get('songIds').toJS(); // Immutable.Map convert to JS
+export const getSongs = state => state.get('songs').toJS(); // Immutable.List convert to JS
+export const getNextUrl = state => state.get('nextUrl');
 
 export default playlist;

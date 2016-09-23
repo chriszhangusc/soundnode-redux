@@ -16,7 +16,7 @@ function* rootSaga() {
     fork(fromPlayer.watchPlayNextSong),
     fork(fromPlayer.watchPlayPrevSong),
     fork(fromPlayer.watchChangePlayMode)
-  ]
+  ];
 }
 
 export default rootSaga;

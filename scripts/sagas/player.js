@@ -8,9 +8,9 @@ import * as selectors from '../reducers';
 import { NEXT, PREV, DEFAULT_MODE } from '../constants/PlayerConstants';
 import { getSongIdByMode } from '../utils/SongUtils';
 
-/******************************************************************************/
-/******************************* SUBROUTINES **********************************/
-/******************************************************************************/
+/* *****************************************************************************/
+/* ****************************** SUBROUTINES **********************************/
+/* *****************************************************************************/
 
 function* convertAndUpdateTime(rawTime) {
   const newTime = yield call(Math.floor, rawTime); // Convert float to int
@@ -23,12 +23,12 @@ function* convertAndUpdateTime(rawTime) {
 function* updateTimeRegular({ payload }) {
   const isSeeking = yield select(selectors.getSeekState);
   if (!isSeeking) {
-      yield call(convertAndUpdateTime, payload);
+    yield call(convertAndUpdateTime, payload);
   }
 }
 
 function* updateTimeSeek({ payload }) {
-  yield call(convertAndUpdateTime,payload);
+  yield call(convertAndUpdateTime, payload);
 }
 
 function* updateTimeAndEndSeek({ payload }) {
@@ -87,9 +87,9 @@ function* changePlayMode({ payload }) {
   }
 }
 
-/******************************************************************************/
-/******************************* WATCHERS *************************************/
-/******************************************************************************/
+/* *****************************************************************************/
+/* ****************************** WATCHERS *************************************/
+/* *****************************************************************************/
 
 export function* watchRegularTimeUpdate() {
   yield takeEvery(ActionTypes.UPDATE_TIME_ON_PLAY, updateTimeRegular);

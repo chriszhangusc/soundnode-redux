@@ -1,5 +1,5 @@
-import {createSelector} from 'reselect';
-import {generateStreamUrl} from '../utils/SongUtils';
+import { createSelector } from 'reselect';
+import { generateStreamUrl } from '../utils/SongUtils';
 import * as fromReducers from '../reducers';
 
 /* Composed memoized selectors for PlayerContainer */
