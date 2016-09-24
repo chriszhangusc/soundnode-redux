@@ -67,20 +67,12 @@ const player = (state = INITIAL_STATE, action) => {
 
     // Remove payload(songId) from shuffleDraw
     case ActionTypes.SHUFFLE_DRAW:
-      console.log(state.mergeDeep({
-        shuffleDraw: state.get('shuffleDraw').filter(item => item !== action.payload)
-      }).toJS());
-
       return state.mergeDeep({
         shuffleDraw: state.get('shuffleDraw').filter(item => item !== action.payload)
       });
 
     // Add payload(songId) to shuffleDiscard
     case ActionTypes.SHUFFLE_DISCARD:
-      console.log(state.mergeDeep({
-        shuffleDiscard: state.get('shuffleDiscard').push(action.payload)
-      }).toJS());
-
       return state.mergeDeep({
         shuffleDiscard: state.get('shuffleDiscard').push(action.payload)
       });

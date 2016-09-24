@@ -66,6 +66,23 @@ function* changeSongAndPlay({ payload }) {
   yield put(actions.playSong());
 }
 
+function* shuffle() {
+  const shuffleDraw = yield select(selectors.getShuffleDraw);
+  // Generate the array index of the song we are going to play next
+  const nextIdx = yield call(generateRandom, 0, shuffleDraw.length - 1);
+  const nextSongId = shuffleDraw[nextIdx];
+  // Remove nextSongId from shuffleDraw
+  yield put(actions.shuffleDraw(nextSongId));
+  // Add nextSongId to shuffleDiscard
+  yield put(actions.shuffleDiscard(nextSongId));
+  // Reshuffle if all cards are played once.
+  if ((yield select(selectors.getShuffleDraw)).length === 0) {
+    const visibleSongIds = yield select(selectors.getVisibleSongIds);
+    yield put(actions.initShuffle(visibleSongIds));
+  }
+  return nextSongId;
+}
+
 // action being NEXT or PREV
 function* playSong(action) {
   const mode = yield select(selectors.getPlayerMode);
@@ -73,16 +90,7 @@ function* playSong(action) {
   let playlistSongIds = null;
   let nextSongId = null;
   if (mode === SHUFFLE) {
-    const shuffleDraw = yield select(selectors.getShuffleDraw);
-console.log('Shuffle Draw: ', shuffleDraw);
-    // Generate the array index of the song we are going to play next
-    const nextIdx = yield call(generateRandom, 0, shuffleDraw.length - 1);
-console.log('next idx: ', nextIdx);
-    nextSongId = shuffleDraw[nextIdx];
-    // Remove nextSongId from shuffleDraw
-    yield put(actions.shuffleDraw(nextSongId));
-    // Add nextSongId to shuffleDiscard
-    yield put(actions.shuffleDiscard(nextSongId));
+    nextSongId = yield call(shuffle);
   } else {
     playlistSongIds = yield select(selectors.getPlayerSongIds);
     nextSongId = yield call(getSongIdByMode, currentSongId, playlistSongIds, mode, action);
