@@ -14,8 +14,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   // Update time in store
-  onTimeUpdate: (e) => { dispatch(actions.onRegularTimeUpdate(e.target.currentTime)); },
-  onEnded: () => { dispatch(actions.playNextSong()); },
+  onTimeUpdate: (e) => { dispatch(actions.sagaUpdateTimeOnPlay(e.target.currentTime)); },
+  onEnded: () => { dispatch(actions.sagaPlayNextSong()); },
   onLoadedMetadata: (audioElement) => {
     const duration = Math.floor(audioElement.duration);
     dispatch(actions.changeDuration(duration));

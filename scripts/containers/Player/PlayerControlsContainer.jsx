@@ -10,8 +10,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onPlayClick: () => { dispatch(actions.playSong()); },
   onPauseClick: () => { dispatch(actions.pauseSong()); },
-  onNextClick: () => { dispatch(actions.playNextSong()); },
-  onPrevClick: () => { dispatch(actions.playPrevSong()); }
+  onNextClick: () => { dispatch(actions.sagaPlayNextSong()); },
+  onPrevClick: () => { dispatch(actions.sagaPlayPrevSong()); }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerControls);

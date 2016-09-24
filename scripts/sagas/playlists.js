@@ -27,7 +27,7 @@ function* doFetchSongs(playlist, url) {
 // Initial loading and Nav bar searching
 function* loadSongCardsPage({ payload }) {
   const playlistName = payload;
-  // 1.Change visiblePlaylistName8890
+  // 1.Change visiblePlaylistName
   yield put(actions.changeVisiblePlaylist(playlistName));
   const playlistExists = yield select(selectors.playlistExists, playlistName);
   // 2.Load songs if not cached
@@ -51,10 +51,10 @@ function* loadMoreSongsOnScroll() {
 /* *****************************************************************************/
 
 export function* watchLoadSongCardsPage() {
-  yield takeEvery(ActionTypes.LOAD_SONG_CARDS_PAGE, loadSongCardsPage);
+  yield takeEvery(ActionTypes.SAGA_LOAD_SONG_CARDS_PAGE, loadSongCardsPage);
 }
 export function* watchLoadMoreSongsOnScroll() {
-  yield takeEvery(ActionTypes.LOAD_MORE_SONGS_ON_SCROLL, loadMoreSongsOnScroll);
+  yield takeEvery(ActionTypes.SAGA_LOAD_MORE_SONGS_ON_SCROLL, loadMoreSongsOnScroll);
 }
 
 export function* watchSearchSongs() {

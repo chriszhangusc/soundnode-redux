@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  scrollFunc() { dispatch(actions.loadMoreSongsOnScroll()); }
+  scrollFunc() { dispatch(actions.sagaLoadMoreSongsOnScroll()); }
 });
 
 const SongCardListContainer = connect(mapStateToProps,

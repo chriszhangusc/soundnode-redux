@@ -20,19 +20,20 @@ export const changeVisiblePlaylist = visiblePlaylistName => ({
   payload: visiblePlaylistName
 });
 
-// Saga Commands
-export const changeSongAndPlay = songId => ({
-  type: ActionTypes.CHANGE_SONG_AND_PLAY,
+// Saga Actions
+// Import from player
+export const sagaChangeSongAndPlay = songId => ({
+  type: ActionTypes.SAGA_CHANGE_SONG_AND_PLAY,
   payload: songId
 });
 
-export const loadSongCardsPage = playlist => ({
-  type: ActionTypes.LOAD_SONG_CARDS_PAGE,
+export const sagaLoadSongCardsPage = playlist => ({
+  type: ActionTypes.SAGA_LOAD_SONG_CARDS_PAGE,
   payload: playlist
 });
 
-export const loadMoreSongsOnScroll = () => ({
-  type: ActionTypes.LOAD_MORE_SONGS_ON_SCROLL
+export const sagaLoadMoreSongsOnScroll = () => ({
+  type: ActionTypes.SAGA_LOAD_MORE_SONGS_ON_SCROLL
 });
 
 export const searchSongs = searchText => ({

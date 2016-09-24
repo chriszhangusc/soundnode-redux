@@ -11,14 +11,14 @@ import actions from '../actions';
 const configureRoutes = (store) => {
   const onEnterHandler = (nextState) => {
     const playlist = nextState.params.genre;
-    store.dispatch(actions.loadSongCardsPage(playlist));
+    store.dispatch(actions.sagaLoadSongCardsPage(playlist));
   };
 
   return (
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRedirect to={`songs/${DEFAULT_GENRE}`} />
-        <Route path="songs/(:genre)" component={Main} onEnter={onEnterHandler}/>
+        <Route path="songs/(:genre)" component={Main} onEnter={onEnterHandler} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

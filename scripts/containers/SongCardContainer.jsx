@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   // Fire if the user click on a song card that is active
   handlePlaySong() { dispatch(actions.playSong()); },
   // Fire if the user click on a song card that is not active
-  handleChangeSong() { dispatch(actions.changeSongAndPlay(ownProps.song.id)); },
+  handleChangeSong() { dispatch(actions.sagaChangeSongAndPlay(ownProps.song.id)); },
   handlePauseSong() { dispatch(actions.pauseSong()); }
 });
 

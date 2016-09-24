@@ -9,8 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onRepeatClick: () => { dispatch(actions.changePlayMode(REPEAT)); },
-  onShuffleClick: () => { dispatch(actions.changePlayMode(SHUFFLE)); }
+  onRepeatClick: () => { dispatch(actions.sagaChangePlayMode(REPEAT)); },
+  onShuffleClick: () => { dispatch(actions.sagaChangePlayMode(SHUFFLE)); }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerModeControls);

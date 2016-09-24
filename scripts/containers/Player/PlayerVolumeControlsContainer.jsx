@@ -12,15 +12,19 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onVolumeHandleMouseDown: () => { dispatch(actions.beginVolumeSeek()); },
+
   onVolumeHandleMouseMove: (volumeBar, e) => {
     const newVolume = computeNewVolumeOnSeek(volumeBar, e);
     dispatch(actions.changeVolume(newVolume));
   },
+
   onVolumeBarMouseDown: () => { dispatch(actions.beginVolumeSeek()); },
-  onToggleMuteClick: () => { dispatch(actions.toggleMute()); },
+
+  onToggleMuteClick: () => { dispatch(actions.sagaToggleMute()); },
+
   onVolumeMouseUp: (volumeBar, e) => {
     const newVolume = computeNewVolumeOnSeek(volumeBar, e);
-    dispatch(actions.updateVolumeAndEndSeek(newVolume));
+    dispatch(actions.sagaUpdateVolumeAndEndSeek(newVolume));
   }
 });
 

@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
   },
   onDurationHandleMouseMove: (seekBar, duration, e) => {
     const newTime = computeNewTimeOnSeek(seekBar, duration, e);
-    dispatch(actions.onSeekTimeUpdate(newTime));
+    dispatch(actions.sagaUpdateTimeOnSeek(newTime));
   },
 
   onDurationBarMouseDown: () => {
@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
   // Handle both seekbar handle mouse up and duration bar mouse up
   onMouseUp: (seekBar, duration, e) => {
     const newTime = computeNewTimeOnSeek(seekBar, duration, e);
-    dispatch(actions.updateTimeAndEndSeek(newTime));
+    dispatch(actions.sagaUpdateTimeAndEndSeek(newTime));
   }
 });
 

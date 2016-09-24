@@ -65,45 +65,46 @@ export const changeVolume = volume => ({
   payload: volume
 });
 
-export const switchMode = mode => ({
-  type: ActionTypes.SWITCH_MODE,
+export const changeMode = mode => ({
+  type: ActionTypes.CHANGE_MODE,
   payload: mode
 });
 
-export const toggleMute = () => ({
-  type: ActionTypes.TOGGLE_MUTE
+// Saga Actions (Actions that will trigger a saga and execute side effects)
+export const sagaToggleMute = () => ({
+  type: ActionTypes.SAGA_TOGGLE_MUTE
 });
 
-// Saga Commands (Actions that has side effects)
-export const changePlayMode = mode => ({
-  type: ActionTypes.CHANGE_PLAY_MODE,
+
+export const sagaChangePlayMode = mode => ({
+  type: ActionTypes.SAGA_CHANGE_PLAY_MODE,
   payload: mode
 });
 
-export const playNextSong = () => ({
-  type: ActionTypes.PLAY_NEXT_SONG
+export const sagaPlayNextSong = () => ({
+  type: ActionTypes.SAGA_PLAY_NEXT_SONG
 });
 
-export const playPrevSong = () => ({
-  type: ActionTypes.PLAY_PREV_SONG
+export const sagaPlayPrevSong = () => ({
+  type: ActionTypes.SAGA_PLAY_PREV_SONG
 });
 
-export const onRegularTimeUpdate = newTime => ({
-  type: ActionTypes.UPDATE_TIME_ON_PLAY,
+export const sagaUpdateTimeOnPlay = newTime => ({
+  type: ActionTypes.SAGA_UPDATE_TIME_ON_PLAY,
   payload: newTime
 });
 
-export const onSeekTimeUpdate = newTime => ({
-  type: ActionTypes.UPDATE_TIME_ON_SEEK,
+export const sagaUpdateTimeOnSeek = newTime => ({
+  type: ActionTypes.SAGA_UPDATE_TIME_ON_SEEK,
   payload: newTime
 });
 
-export const updateTimeAndEndSeek = newTime => ({
-  type: ActionTypes.UPDATE_TIME_AND_END_SEEK,
+export const sagaUpdateTimeAndEndSeek = newTime => ({
+  type: ActionTypes.SAGA_UPDATE_TIME_AND_END_SEEK,
   payload: newTime
 });
 
-export const updateVolumeAndEndSeek = newVolume => ({
-  type: ActionTypes.UPDATE_VOLUME_AND_END_SEEK,
+export const sagaUpdateVolumeAndEndSeek = newVolume => ({
+  type: ActionTypes.SAGA_UPDATE_VOLUME_AND_END_SEEK,
   payload: newVolume
 });

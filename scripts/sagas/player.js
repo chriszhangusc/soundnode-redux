@@ -124,37 +124,37 @@ function* changePlayMode({ payload }) {
 /* *****************************************************************************/
 
 export function* watchRegularTimeUpdate() {
-  yield takeEvery(ActionTypes.UPDATE_TIME_ON_PLAY, updateTimeRegular);
+  yield takeEvery(ActionTypes.SAGA_UPDATE_TIME_ON_PLAY, updateTimeRegular);
 }
 
 export function* watchSeekTimeUpdate() {
-  yield takeEvery(ActionTypes.UPDATE_TIME_ON_SEEK, updateTimeSeek);
+  yield takeEvery(ActionTypes.SAGA_UPDATE_TIME_ON_SEEK, updateTimeSeek);
 }
 
 export function* watchEndSeekTime() {
-  yield takeEvery(ActionTypes.UPDATE_TIME_AND_END_SEEK, updateTimeAndEndSeek);
+  yield takeEvery(ActionTypes.SAGA_UPDATE_TIME_AND_END_SEEK, updateTimeAndEndSeek);
 }
 
 export function* watchEndSeekVolume() {
-  yield takeEvery(ActionTypes.UPDATE_VOLUME_AND_END_SEEK, updateVolumeAndEndSeek);
-}
-
-export function* watchToggleMute() {
-  yield takeEvery(ActionTypes.TOGGLE_MUTE, toggleMute);
-}
-
-export function* watchPlayNextSong() {
-  yield takeEvery(ActionTypes.PLAY_NEXT_SONG, playSong, NEXT);
-}
-
-export function* watchPlayPrevSong() {
-  yield takeEvery(ActionTypes.PLAY_PREV_SONG, playSong, PREV);
+  yield takeEvery(ActionTypes.SAGA_UPDATE_VOLUME_AND_END_SEEK, updateVolumeAndEndSeek);
 }
 
 export function* watchChangePlayMode() {
-  yield takeEvery(ActionTypes.CHANGE_PLAY_MODE, changePlayMode);
+  yield takeEvery(ActionTypes.SAGA_CHANGE_PLAY_MODE, changePlayMode);
 }
 
 export function* watchChangeSongAndPlay() {
-  yield takeEvery(ActionTypes.CHANGE_SONG_AND_PLAY, changeSongAndPlay);
+  yield takeEvery(ActionTypes.SAGA_CHANGE_SONG_AND_PLAY, changeSongAndPlay);
+}
+
+export function* watchToggleMute() {
+  yield takeEvery(ActionTypes.SAGA_TOGGLE_MUTE, toggleMute);
+}
+
+export function* watchPlayNextSong() {
+  yield takeEvery(ActionTypes.SAGA_PLAY_NEXT_SONG, playSong, NEXT);
+}
+
+export function* watchPlayPrevSong() {
+  yield takeEvery(ActionTypes.SAGA_PLAY_PREV_SONG, playSong, PREV);
 }
