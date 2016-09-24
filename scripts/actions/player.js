@@ -19,6 +19,27 @@ export const mute = () => ({ type: ActionTypes.MUTE });
 
 export const clearTime = () => ({ type: ActionTypes.CLEAR_TIME });
 
+/**
+ * Create INIT_SHUFFLE action
+ * @param  {Array}  An array of songIds
+ * @return {Object} INIT_SHUFFLE action
+ */
+export const initShuffle = songIds => ({ type: ActionTypes.INIT_SHUFFLE, payload: songIds });
+
+/**
+ * Create SHUFFLE_DRAW action
+ * @param  {Number} songId The songId we want to remove from the shuffleDraw list
+ * @return {Object}        SHUFFLE_DRAW action
+ */
+export const shuffleDraw = songId => ({ type: ActionTypes.SHUFFLE_DRAW, payload: songId });
+
+/**
+ * Create SHUFFLE_DISCARD action
+ * @param  {Number} songId The songId we want to add to the shuffleDiscard list
+ * @return {Object}        SHUFFLE_DISCARD
+ */
+export const shuffleDiscard = songId => ({ type: ActionTypes.SHUFFLE_DISCARD, payload: songId });
+
 export const updateTime = currentTime => ({
   type: ActionTypes.UPDATE_TIME,
   payload: currentTime

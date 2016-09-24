@@ -8,8 +8,8 @@ const rootReducer = combineReducers({
   player: fromPlayer.default
 });
 
-/* Selectors are our reading API of our state,
-so it is recommended to colocate them with the reducers */
+// Selectors are our reading API of our state,
+// so it is recommended to colocate them with the reducers.
 
 /* From Playlists */
 
@@ -46,6 +46,12 @@ export const playlistExists = (state, playlistName) =>
 
 /* From players */
 
+export const getShuffleDraw = state => fromPlayer.getShuffleDraw(state.player);
+
+export const getShuffleDiscard = state => fromPlayer.getShuffleDiscard(state.player);
+
+export const shuffleInitialized = state => fromPlayer.shuffleInitialized(state.player);
+
 export const getCurrentSongId = state => fromPlayer.getCurrentSongId(state.player);
 
 export const getPlayingState = state => fromPlayer.getPlayingState(state.player);
@@ -59,8 +65,6 @@ export const getCurrentTime = state => fromPlayer.getCurrentTime(state.player);
 export const getSeekState = state => fromPlayer.getSeekState(state.player);
 
 export const getPlayerMode = state => fromPlayer.getPlayerMode(state.player);
-
-
 
 /* Mixed / Memoized Selectors */
 // Not sure if we should put it here.

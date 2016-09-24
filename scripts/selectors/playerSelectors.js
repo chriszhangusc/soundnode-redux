@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { generateStreamUrl } from '../utils/SongUtils';
+import { formatStreamUrl } from '../utils/SongUtils';
 import * as fromReducers from '../reducers';
 
 /* Composed memoized selectors for PlayerContainer */
@@ -15,20 +15,17 @@ export const getCurrentSongId = createSelector(
 
 export const getCurrentSong = createSelector(
   [fromReducers.getPlayerSongMap, fromReducers.getCurrentSongId],
-  (songsById, songId) => {
-    if (songId) return songsById[songId];
-    return null;
-  }
+  (songsById, songId) => ((songsById && songId) ? songsById[songId] : undefined)
 );
 
 export const getDuration = createSelector(
   [getCurrentSong],
-  currentSong => currentSong ? currentSong.duration / 1000.0 : null
+  currentSong => (currentSong ? currentSong.duration / 1000.0 : null)
 );
 
 export const getStreamUrl = createSelector(
   [getCurrentSong],
-  currentSong => generateStreamUrl(currentSong)
+  currentSong => (currentSong ? formatStreamUrl(currentSong.stream_url) : null)
 );
 
 export const getCurrentTime = createSelector(
@@ -53,17 +50,17 @@ export const getVolumeSeekState = createSelector(
 
 export const getCurrentSongTitle = createSelector(
   [getCurrentSong],
-  currentSong => currentSong ? currentSong.title : null
+  currentSong => (currentSong ? currentSong.title : null)
 );
 
 export const getCurrentSongUsername = createSelector(
   [getCurrentSong],
-  currentSong => currentSong ? currentSong.user.username : null
+  currentSong => (currentSong ? currentSong.user.username : null)
 );
 
 export const getCurrentSongArtworkUrl = createSelector(
   [getCurrentSong],
-  currentSong => currentSong ? currentSong.artwork_url : null
+  currentSong => (currentSong ? currentSong.artwork_url : null)
 );
 
 export const getPlayerMode = createSelector(

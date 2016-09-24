@@ -5,9 +5,9 @@ import { getLastVolume, setLastVolume } from '../utils/LocalStorageUtils';
 import actions from '../actions';
 import * as selectors from '../reducers';
 
-import { NEXT, PREV, DEFAULT_MODE } from '../constants/PlayerConstants';
+import { SHUFFLE, NEXT, PREV, DEFAULT_MODE } from '../constants/PlayerConstants';
 import { getSongIdByMode } from '../utils/SongUtils';
-
+import { generateRandom } from '../utils/GeneralUtils';
 /* *****************************************************************************/
 /* ****************************** SUBROUTINES **********************************/
 /* *****************************************************************************/
@@ -69,9 +69,24 @@ function* changeSongAndPlay({ payload }) {
 // action being NEXT or PREV
 function* playSong(action) {
   const mode = yield select(selectors.getPlayerMode);
-  const playlistSongIds = yield select(selectors.getPlayerSongIds);
   const currentSongId = yield select(selectors.getCurrentSongId);
-  const nextSongId = yield call(getSongIdByMode, currentSongId, playlistSongIds, mode, action);
+  let playlistSongIds = null;
+  let nextSongId = null;
+  if (mode === SHUFFLE) {
+    const shuffleDraw = yield select(selectors.getShuffleDraw);
+console.log('Shuffle Draw: ', shuffleDraw);
+    // Generate the array index of the song we are going to play next
+    const nextIdx = yield call(generateRandom, 0, shuffleDraw.length - 1);
+console.log('next idx: ', nextIdx);
+    nextSongId = shuffleDraw[nextIdx];
+    // Remove nextSongId from shuffleDraw
+    yield put(actions.shuffleDraw(nextSongId));
+    // Add nextSongId to shuffleDiscard
+    yield put(actions.shuffleDiscard(nextSongId));
+  } else {
+    playlistSongIds = yield select(selectors.getPlayerSongIds);
+    nextSongId = yield call(getSongIdByMode, currentSongId, playlistSongIds, mode, action);
+  }
   yield put(actions.changeSongAndPlay(nextSongId));
 }
 
@@ -83,6 +98,15 @@ function* changePlayMode({ payload }) {
     yield put(actions.switchMode(DEFAULT_MODE));
   } else {
     // Toggle On
+    if (newMode === SHUFFLE) {
+      const shuffleInitialized = yield select(selectors.shuffleInitialized);
+      // Init shuffle with current visible playlist / Or should we use player playist?
+      if (!shuffleInitialized) {
+        const visibleSongIds = yield select(selectors.getVisibleSongIds);
+        yield put(actions.initShuffle(visibleSongIds));
+      }
+    }
+    // Set up two sets for shuffle
     yield put(actions.switchMode(newMode));
   }
 }

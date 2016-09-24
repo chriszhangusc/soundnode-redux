@@ -30,3 +30,6 @@ export const CHANGE_PLAY_MODE = 'CHANGE_PLAY_MODE';
 export const MUTE = 'MUTE';
 export const CLEAR_TIME = 'CLEAR_TIME';
 export const SEARCH_SONGS = 'SEARCH_SONGS';
+export const INIT_SHUFFLE = 'INIT_SHUFFLE';
+export const SHUFFLE_DRAW = 'SHUFFLE_DRAW';
+export const SHUFFLE_DISCARD = 'SHUFFLE_DISCARD';

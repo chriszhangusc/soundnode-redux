@@ -16,4 +16,5 @@ var obj2 = Immutable.fromJS({
 
 console.log(obj1.mergeDeep(obj2));
 console.log(obj1.get('songIds').concat(obj2.get('songIds')));
-console.log();
+
+console.log(obj1.delete('isFetching'));

@@ -1,31 +1,31 @@
 import { GENRES, SEED_FETCH_URL } from '../constants/SongConstants';
 import { CLIENT_ID } from '../constants/Config';
 import { LOOP, SHUFFLE, REPEAT, NEXT, PREV } from '../constants/PlayerConstants';
-
-export const generateFetchUrl = (genre) => {
+/**
+ * Generate fetch url by given query
+ * @param {String} rawQuery
+ * @return {String} url
+ */
+export const generateFetchUrl = (rawQuery) => {
   // const url = `${SEED_FETCH_URL}&tags=${genre}`;
-  genre = genre.trim();
+  const query = rawQuery.trim().toUpperCase();
   let url = null;
-  if (genre in GENRES) {
+  if (query in GENRES) {
     // Genre search
-    url = `${SEED_FETCH_URL}&genres=${genre}`;
+    url = `${SEED_FETCH_URL}&genres=${query}`;
   } else {
-    // General search
-    url = `${SEED_FETCH_URL}&q=${genre}`;
+    // Nav bar search
+    url = `${SEED_FETCH_URL}&q=${query}`;
   }
-
   return url;
 };
 
-export const generateStreamUrl = (song) => {
-  if (!song) return null;
-  let streamUrl = null;
-  if (song.stream_url)
-    streamUrl = `${song.stream_url}?client_id=${CLIENT_ID}`;
-  return streamUrl;
-}
-
-
+/**
+ * Generate stream url given song obj
+ * @param  {String} rawUrl Stream url comming from the song object
+ * @return {String} Stream url appended by client_id
+ */
+export const formatStreamUrl = rawUrl => (rawUrl ? `${rawUrl}?client_id=${CLIENT_ID}` : null);
 
 // const getRandomIntInclusive = (min, max) => {
 //   min = Math.ceil(min);
@@ -37,7 +37,7 @@ export const generateStreamUrl = (song) => {
 const getLoopNext = (songId, songIds) => {
   let nextSongId = null;
   const firstId = songIds[0];
-  for (let i = 0; i < songIds.length; i++) {
+  for (let i = 0; i < songIds.length; i += 1) {
     if (songIds[i] === songId) {
       nextSongId = i + 1 < songIds.length ? songIds[i + 1] : firstId;
       break;
@@ -49,17 +49,21 @@ const getLoopNext = (songId, songIds) => {
 const getLoopPrev = (songId, songIds) => {
   let prevSongId = null;
   const lastId = songIds[songIds.length - 1];
-  for (let i = 0; i < songIds.length; i++) {
+  for (let i = 0; i < songIds.length; i += 1) {
     if (songIds[i] === songId) {
       prevSongId = i - 1 >= 0 ? songIds[i - 1] : lastId;
       break;
     }
   }
   return prevSongId;
-}
+};
 
-const getShufflePrev = () => {}
-const getShuffleNext = () => {}
+// Get a random song from shuffleDraw return it and add it to shuffleDiscard
+// const getShufflePrev = () => {};
+//
+// const getShuffleNext = (songId, songIds) => {
+//   return pickRandomProperty(songIds);
+// };
 
 export const getSongIdByMode = (songId, songIds, mode, method) => {
   if (songIds.length === 0) return null;
@@ -69,12 +73,12 @@ export const getSongIdByMode = (songId, songIds, mode, method) => {
       if (method === PREV) return getLoopPrev(songId, songIds);
       break;
     case SHUFFLE:
-      if (method === NEXT) return getShuffleNext(songId, songIds);
-      if (method === PREV) return getShufflePrev(songId, songIds);
+
       break;
     case REPEAT:
       return songId;
     default:
-      return null;
+      break;
   }
-}
+  return null;
+};

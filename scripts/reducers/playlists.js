@@ -5,7 +5,7 @@ import * as fromPlaylist from './playlist';
 const playlist = fromPlaylist.default;
 
 const PLAYLISTS_INITIAL_STATE = fromJS({
-  visiblePlaylist: null, // or undefined?
+  visiblePlaylist: null,
   playerPlaylist: null
 });
 
@@ -20,19 +20,13 @@ const playlists = (state = PLAYLISTS_INITIAL_STATE, action) => {
 
     case ActionTypes.REQUEST_SONGS:
       return state.set(action.payload, playlist(state.get(action.payload), action));
-      // return {
-      //   ...state,
-      //   [action.payload]: playlist(state[action.payload], action)
-      // };
+
     case ActionTypes.RECEIVE_SONGS:
       return state.set(
         action.payload.playlist,
         playlist(state.get(action.payload.playlist), action)
       );
-      // return {
-      //   ...state,
-      //   [action.payload.playlist]: playlist(state[action.payload.playlist], action)
-      // };
+
     default:
       return state;
   }
@@ -46,10 +40,9 @@ export const getPlayerPlaylistName = state => state.get('playerPlaylist');
 export const getPlayerPlaylist = (state) => {
   const playlistName = getPlayerPlaylistName(state);
   // Weired rule: eslint no-prototype-builtins: "error"
-  const hasPlayerPlaylist = {}.hasOwnProperty.call(state, playlistName);
   // Difference between a in obj and hasOwnProperty,
   // the second way won`t look down the prototype chain
-  return hasPlayerPlaylist ? state.get(playlistName) : undefined;
+  return state.has(playlistName) ? state.get(playlistName) : undefined;
 };
 
 // Return the visible playlist object itself.

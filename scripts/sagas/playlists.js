@@ -27,7 +27,7 @@ function* doFetchSongs(playlist, url) {
 // Initial loading and Nav bar searching
 function* loadSongCardsPage({ payload }) {
   const playlistName = payload;
-  // 1.Change visiblePlaylistName
+  // 1.Change visiblePlaylistName8890
   yield put(actions.changeVisiblePlaylist(playlistName));
   const playlistExists = yield select(selectors.playlistExists, playlistName);
   // 2.Load songs if not cached
