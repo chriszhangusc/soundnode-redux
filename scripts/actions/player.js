@@ -75,6 +75,11 @@ export const sagaToggleMute = () => ({
   type: ActionTypes.SAGA_TOGGLE_MUTE
 });
 
+// Import from player
+export const sagaChangeSongAndPlay = songId => ({
+  type: ActionTypes.SAGA_CHANGE_SONG_AND_PLAY,
+  payload: songId
+});
 
 export const sagaChangePlayMode = mode => ({
   type: ActionTypes.SAGA_CHANGE_PLAY_MODE,

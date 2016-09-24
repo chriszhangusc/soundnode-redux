@@ -14,11 +14,12 @@ export const BEGIN_VOLUME_SEEK = 'BEGIN_VOLUME_SEEK';
 export const END_VOLUME_SEEK = 'END_VOLUME_SEEK';
 export const CHANGE_MODE = 'CHANGE_MODE';
 export const CHANGE_VISIBLE_PLAYLIST = 'CHANGE_VISIBLE_PLAYLIST';
-// Actions for saga
+
+/* Playlists Saga Action Types */
 export const SAGA_LOAD_SONG_CARDS_PAGE = 'SAGA_LOAD_SONG_CARDS_PAGE';
 export const SAGA_LOAD_MORE_SONGS_ON_SCROLL = 'SAGA_LOAD_MORE_SONGS_ON_SCROLL';
 
-/* Player Saga */
+/* Player Saga Action Types*/
 export const SAGA_CHANGE_SONG_AND_PLAY = 'SAGA_CHANGE_SONG_AND_PLAY';
 export const SAGA_UPDATE_TIME_ON_PLAY = 'SAGA_UPDATE_TIME_ON_PLAY';
 export const SAGA_UPDATE_TIME_ON_SEEK = 'SAGA_UPDATE_TIME_ON_SEEK';

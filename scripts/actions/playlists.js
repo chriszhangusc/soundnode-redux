@@ -21,12 +21,6 @@ export const changeVisiblePlaylist = visiblePlaylistName => ({
 });
 
 // Saga Actions
-// Import from player
-export const sagaChangeSongAndPlay = songId => ({
-  type: ActionTypes.SAGA_CHANGE_SONG_AND_PLAY,
-  payload: songId
-});
-
 export const sagaLoadSongCardsPage = playlist => ({
   type: ActionTypes.SAGA_LOAD_SONG_CARDS_PAGE,
   payload: playlist
