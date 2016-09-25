@@ -66,25 +66,29 @@ nav {
 // }
 //
 // // nav-search
-// .nav-search {
-//     position: relative;
-//     background-color: #2B2B2B;
-//     border-radius: 3px;
-//
-//     i {
-//         position: absolute;
-//         top: 5px;
-//         left: 10px;
-//         color: #808080;
-//         pointer-events: none;
-//     }
-// }
-//
-//
-// input[type="text"].nav-search-input {
-//     width: 290px;
-//     padding: 6px 10px 6px 30px;
-//     color: #e3e3e3;
-//     font-weight: 300;
-//     background-color: transparent;
-// }
+.nav-search {
+  padding: 20px 0; // Vertical center
+  display: inline-block;
+  float: right;
+  border-radius: 3px;
+  form {
+    position: relative;//relative must be put on a block element
+
+    i {
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      color: #808080;
+      pointer-events: none;
+    }
+  }
+}
+
+input[type="text"].nav-search-input {
+  height: 30px;
+  width: 290px;
+  padding: 6px 10px 6px 30px;
+  color: #e3e3e3;
+  font-weight: 300;
+  background-color: #2B2B2B;
+}

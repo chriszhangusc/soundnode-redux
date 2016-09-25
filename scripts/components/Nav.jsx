@@ -1,16 +1,6 @@
 import React from 'react';
 import NavSearchContainer from '../containers/NavSearchContainer';
 
-function renderSearchField() {
-  return (
-    <div className="nav-nav float-right">
-      <div className="nav-nav-item">
-        <NavSearchContainer />
-      </div>
-    </div>
-  );
-}
-
 export default function Nav() {
   return (
     <nav className="navbar navbar-fixed-top">
@@ -20,6 +10,7 @@ export default function Nav() {
             <span className="glyphicon glyphicon-headphones" id="nav-icon" /><span>ReduxSound</span>
           </a>
         </div>
+        <NavSearchContainer />
       </div>
     </nav>
   );
