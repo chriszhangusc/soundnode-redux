@@ -1,18 +1,16 @@
 // Colors
-$grey: #333333;
-$white: white;
-$light-grey: #fafafa;
-$light-grey-border: #eeeeee;
-$light-color: #aaaaaa;
-// Navigation colors
-$nav-background: $grey;
-$nav-text-color: $white;
-$clock-text-color: $white;
-$clock-bg-color: #B5D0E2;
-$clock-border-color: #2099E8;
+$light-black: rgb(29, 31, 33);
+$black: rgb(15, 16, 16);
+$background-color: $light-black;
+$sidebar-color: rgb(22,24,25);
 
-$theme-color: #61dafb;
-$nav-bar-color: #3a3f41;
+$player-background-color: $sidebar-color;
+$theme-color: #ff6600;
+// $nav-bar-color: #3a3f41;
+$nav-bar-color: black;
+
+$font-color: white;
+$link-color: white;
 
 $player-button-color: #CCC;
 $button-hover-color: #222;

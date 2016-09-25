@@ -1,3 +1,9 @@
+
+.card {
+    background-color: $background-color;
+    border: 1px solid $light-black;
+}
+
 .song-card {
   padding: 10px;
 
@@ -32,7 +38,7 @@
     transition: background-color 0.2s ease-in-out;
     border: none;
     cursor: pointer;
-    
+
     &:focus {
       outline: 0;
     }
@@ -109,7 +115,7 @@
 
 .song-card-title {
     display: block;
-    color: #222;
+    color: white;
     font-size: 11px;
     overflow: hidden;
     text-overflow: ellipsis;

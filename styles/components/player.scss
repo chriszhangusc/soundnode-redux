@@ -1,15 +1,17 @@
+$volume-icon-size: 1.5rem;
+$player-border-color: black;
 .player {
     // Fix it on bottom left.
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #fff;
-    border-top: 1px solid #e3e3e3;
+    background-color: $player-background-color;
+    border-top: 1px solid $player-border-color;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    z-index: 999; // Make sure it is always on top
+    z-index: 1001; // Make sure it is always on top
 
     .song-card-details {
         overflow: hidden;
@@ -150,7 +152,7 @@
 .player-volume-button-wrap {
 
     & > button > i {
-      font-size: 1.1rem;
+      font-size: $volume-icon-size;
       color: $player-button-color;
     }
 

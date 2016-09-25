@@ -12,10 +12,10 @@
 }
 
 body {
-    color: #222;
+    color: white;
     font-family: 'Open Sans';
     font-size: 14px;
-    background-color: #f4f4f4;
+    background-color: $background-color;
 }
 
 .container {
@@ -51,6 +51,6 @@ body {
 }
 
 .card {
-    background-color: #fff;
-    border: 1px solid #e3e3e3;
+    background-color: $background-color;
+    border: 1px solid grey;
 }

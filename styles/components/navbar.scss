@@ -1,6 +1,11 @@
 .nav {
   background-color: $nav-bar-color;
-  height: 50px;
+  position: fixed;
+  z-index: 1030;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 70px;
   .container {
     height: 100%;
   }
@@ -8,7 +13,7 @@
 
 .nav-logo {
     display: inline-block;
-    padding: 11px 0;
+    padding: 22px 0;
     color: #fff;
     font-size: 20px;
     float: left;
@@ -39,4 +44,28 @@
         color: #fff;
         text-decoration: none;
     }
+}
+
+// nav-search
+.nav-search {
+    position: relative;
+    background-color: #2B2B2B;
+    border-radius: 3px;
+
+    i {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        color: #808080;
+        pointer-events: none;
+    }
+}
+
+
+input[type="text"].nav-search-input {
+    width: 290px;
+    padding: 6px 10px 6px 30px;
+    color: #e3e3e3;
+    font-weight: 300;
+    background-color: transparent;
 }
