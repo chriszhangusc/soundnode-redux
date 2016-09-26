@@ -9,7 +9,8 @@ $transitionValue: all 0.5s ease;
 $transitionFastValue: all 0.25s ease;
 $transitionInstantValue: all 0.1s ease-out;
 
-
+.genre-charts {
+}
 
 .button {
     float: right;
@@ -57,6 +58,7 @@ $transitionInstantValue: all 0.1s ease-out;
     font-size: 10px;
 }
 
+
 .genre-selector {
     width: 100%;
     // overflow: hidden;
@@ -64,10 +66,9 @@ $transitionInstantValue: all 0.1s ease-out;
     transition: height 0.4s;
     margin: 0 0 20px 0;
 
-
-    &:hover{
-      height: 230px;
-    }
+    // &:hover{
+    //   height: 230px;
+    // }
 
     .title {
       font-size: 13px;

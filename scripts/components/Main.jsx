@@ -1,5 +1,4 @@
 import React from 'react';
-import Toolbar from './Toolbar';
 import SongCardListContainer from '../containers/SongCardListContainer';
 import PlayerContainer from '../containers/Player/PlayerContainer';
 import Sidebar from './Sidebar';
@@ -12,8 +11,12 @@ export default function Main() {
         <div className="col-sm-2 sidebar">
           <Sidebar />
         </div>
-        <div className="col-sm-10 col-sm-offset-2">
-          <GenreCharts />
+        <div className="col-sm-8 col-sm-offset-2">
+          <div className="container">
+            <GenreCharts />
+            <SongCardListContainer />
+            <PlayerContainer />
+          </div>
         </div>
       </div>
     </div>

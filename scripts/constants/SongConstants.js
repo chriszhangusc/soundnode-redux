@@ -6,9 +6,11 @@ export const GENRES = [
   'dubstep',
   'house',
   'progressive',
-  'tech',
   'trance',
-  'tropical'
+  'tropical',
+  'country',
+  'classical',
+  'pop'
 ];
 
 export const SEED_FETCH_URL =
