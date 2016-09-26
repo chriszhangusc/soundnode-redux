@@ -19,14 +19,16 @@ class NavSearch extends Component {
     return (
       <div className="nav-search">
         <form>
-          <i className="icon ion-search" />
-          <input
-            ref={(ref) => { this.searchField = ref; }}
-            className="nav-search-input"
-            placeholder="SEARCH"
-            type="text"
-            onKeyPress={this.handleKeyPress}
-          />
+          <div className="form-group">
+            <i className="icon ion-search" />
+            <input
+              ref={(ref) => { this.searchField = ref; }}
+              className="nav-search-input"
+              placeholder="SEARCH"
+              type="text"
+              onKeyPress={this.handleKeyPress}
+            />
+          </div>
         </form>
       </div>
     );

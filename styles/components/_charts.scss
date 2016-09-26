@@ -1,0 +1,86 @@
+$bodyBackground: #121314;
+$sectionBackground: #222326;
+$linkColor: #a9aaae;
+$defaultColor: #949599;
+$separatorCleanColor: #3e3e40;
+$separatorDarkColor: #000;
+$scColor: #f50;
+$transitionValue: all 0.5s ease;
+$transitionFastValue: all 0.25s ease;
+$transitionInstantValue: all 0.1s ease-out;
+
+
+
+.button {
+    float: right;
+    text-align: center;
+    color: #ededed;
+    background: transparent;
+    border: 1px solid;
+    padding: .75em 0;
+    border-radius: .25em;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-left: 1em;
+
+    &.active, &.liked {
+        color: $scColor;
+        &:hover {
+            color: #FFF;
+        }
+    }
+
+    &:hover {
+        color: $defaultColor;
+        cursor: pointer;
+        & span {
+            cursor: pointer;
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.button.show_more {
+    padding: .34em 0;
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.button.inline {
+    float: none;
+    display: inline-block;
+    margin: 5px 5px 0 0;
+    padding: .4em .75em;
+    font-size: 10px;
+}
+
+.genre-selector {
+    width: 100%;
+    // overflow: hidden;
+    height: 75px;
+    transition: height 0.4s;
+    margin: 0 0 20px 0;
+
+
+    &:hover{
+      height: 230px;
+    }
+
+    .title {
+      font-size: 13px;
+      color: #a9aaae;
+    }
+}
+
+// .genre-selector button.button{
+//     margin-top: 5px;
+//     width: 19%;
+// }
+
+.genre-selector button {
+  width: 19%;
+  margin-top: 5px;
+}

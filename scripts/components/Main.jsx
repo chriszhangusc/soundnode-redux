@@ -3,17 +3,26 @@ import Toolbar from './Toolbar';
 import SongCardListContainer from '../containers/SongCardListContainer';
 import PlayerContainer from '../containers/Player/PlayerContainer';
 import Sidebar from './Sidebar';
+import GenreCharts from './GenreCharts';
+
 export default function Main() {
   return (
-    <div>
-      <Sidebar />
-      <div className="content">
-        <SongCardListContainer />
-        <PlayerContainer />
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-sm-2 sidebar">
+          <Sidebar />
+        </div>
+        <div className="col-sm-10 col-sm-offset-2">
+          <GenreCharts />
+        </div>
       </div>
     </div>
   );
 }
+// <Sidebar />
+// <SongCardListContainer />
+// <PlayerContainer />
+
 // export default function Main() {
 //   return (
 //     <div className="songs">

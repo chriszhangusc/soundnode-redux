@@ -16,6 +16,7 @@ body {
     font-family: 'Open Sans';
     font-size: 14px;
     background-color: $background-color;
+    padding-top: $navbar-height;
 }
 
 // .container {
@@ -27,25 +28,19 @@ body {
     margin: 40px 0 80px;
 }
 
-.clearfix:after {
-     visibility: hidden;
-     display: block;
-     font-size: 0;
-     content: " ";
-     clear: both;
-     height: 0;
-}
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   margin: 0;
+//   color: #fff;
+//   font-weight: 600;
+// }
 
-* html .clearfix {
-    height: 1%;
-}
-
-.clearfix {
-    display: block;
-}
-
-*, *:after, *:before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+h1 {
+  margin: 10px 0 30px;
+  font-weight: 300;
+  font-size: 3rem;
 }

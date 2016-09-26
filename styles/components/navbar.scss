@@ -1,10 +1,10 @@
 nav {
   background-color: $nav-bar-color;
-  height: 70px;
+  height: $navbar-height;
 }
 
 .navbar-brand {
-  height: 70px;
+  height: $navbar-height;
   line-height: 35px;
 }
 
@@ -71,7 +71,7 @@ nav {
   display: inline-block;
   float: right;
   border-radius: 3px;
-  form {
+  .form-group {
     position: relative;//relative must be put on a block element
 
     i {
