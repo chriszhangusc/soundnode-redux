@@ -34,7 +34,9 @@ export const generateTopGenreFetchUrl = (rawQuery) => {
  * @param  {String} rawUrl Stream url comming from the song object
  * @return {String} Stream url appended by client_id
  */
-export const formatStreamUrl = rawUrl => (rawUrl ? `${rawUrl}?client_id=${CLIENT_ID}` : null);
+export function formatStreamUrl(rawUrl) {
+  return (rawUrl ? `${rawUrl}/stream?client_id=${CLIENT_ID}` : null);
+}
 
 // const getRandomIntInclusive = (min, max) => {
 //   min = Math.ceil(min);

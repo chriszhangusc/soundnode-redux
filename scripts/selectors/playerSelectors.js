@@ -25,7 +25,7 @@ export const getDuration = createSelector(
 
 export const getStreamUrl = createSelector(
   [getCurrentSong],
-  currentSong => (currentSong ? formatStreamUrl(currentSong.stream_url) : null)
+  currentSong => (currentSong ? formatStreamUrl(currentSong.uri) : null)
 );
 
 export const getCurrentTime = createSelector(

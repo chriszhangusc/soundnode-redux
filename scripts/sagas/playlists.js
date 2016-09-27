@@ -3,25 +3,26 @@ import { normalize } from 'normalizr';
 import { fork, put, call, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import * as ActionTypes from '../constants/ActionTypes';
-import { generateTopGenreFetchUrl } from '../utils/SongUtils';
-import { arrayOfSongs } from '../actions/schema';
+
 import actions from '../actions';
 import * as selectors from '../reducers';
+
+import { fetchCharts } from '../services/SCAPIV2Services';
 
 /* *****************************************************************************/
 /* ****************************** SUBROUTINES **********************************/
 /* *****************************************************************************/
-
-function* doFetchSongs(playlist, url) {
-  yield put(actions.requestSongs(playlist));
-  const response = yield call(axios.get, url);
-  const normalizedSongs = yield call(normalize, response.data.collection, arrayOfSongs);
-  yield put(actions.receiveSongs(
-      playlist,
-      normalizedSongs.entities.songs,
-      normalizedSongs.result,
-      response.data.next_href));
-}
+// 
+// function* doFetchSongs(playlist, url) {
+//
+//   const response = yield call(axios.get, url);
+//   const normalizedSongs = yield call(normalize, response.data.collection, arrayOfSongs);
+//   yield put(actions.receiveSongs(
+//       playlist,
+//       normalizedSongs.entities.songs,
+//       normalizedSongs.result,
+//       response.data.next_href));
+// }
 
 
 // Initial loading and Nav bar searching
@@ -31,9 +32,19 @@ function* loadSongCardsPage({ payload }) {
   yield put(actions.changeVisiblePlaylist(playlistName));
   const playlistExists = yield select(selectors.playlistExists, playlistName);
   // 2.Load songs if not cached
-  const url = yield call(generateTopGenreFetchUrl, playlistName);
-  console.log(url);
-  if (!playlistExists) yield fork(doFetchSongs, playlistName, url);
+  // if (!playlistExists) yield fork(doFetchSongs, playlistName, url)
+  if (!playlistExists) {
+    yield put(actions.requestSongs(playlistName));
+    const normalizedTracks = yield call(fetchCharts, playlistName);
+    yield put(
+      actions.receiveSongs(
+        playlistName,
+        normalizedTracks.entities,
+        normalizedTracks.ids,
+        normalizedTracks.next_href
+       )
+    );
+  }
 }
 
 // Scroll loading

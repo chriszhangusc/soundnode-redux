@@ -1,16 +1,16 @@
 import { CLIENT_ID } from './Config';
 
 export const GENRES = [
-  'Chill',
-  'Deep',
-  'Dubstep',
-  'House',
-  'Progressive',
-  'Trance',
-  'Tropical',
+  'All-Music',
+  'Ambient',
   'Country',
-  'Classical',
-  'Pop'
+  'Dance & EDM',
+  'Deep House',
+  'Disco',
+  'Hip-hop & Rap',
+  'Metal',
+  'Pop',
+  'R&B & Soul'
 ];
 
 // export const SEED_FETCH_URL =
@@ -21,4 +21,4 @@ export const GENRES = [
 
 
 
-export const DEFAULT_GENRE = 'All';
+export const DEFAULT_GENRE = 'All-Music';
