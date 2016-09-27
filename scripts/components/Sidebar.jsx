@@ -1,9 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const Sidebar = () => (
   <ul className="nav-sidebar">
     <li>
-      <a href="#">Top 50</a>
+      <Link
+        to="/songs/All-Music"
+        activeClassName="sidebar-link-active"
+      >Top 50</Link>
     </li>
     <li>
       <a href="#">Stream</a>

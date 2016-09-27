@@ -17,8 +17,6 @@ export function fetchCharts(genre) {
     client_id: CLIENT_ID
   };
 
-  console.log(params.genre);
-
   fetchUrl = concatParamsToUrl(fetchUrl, params);
 
   return axios.get(fetchUrl).then((res) => {

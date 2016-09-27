@@ -1,7 +1,9 @@
 import * as selectors from '../reducers';
 import { formatImageUrl, formatTitle } from '../utils/FormatUtils';
 
-export const getSongImage = song => formatImageUrl(song.artwork_url);
+export function getSongImage(song) {
+  return formatImageUrl(song.artwork_url);
+}
 
 export const getSongTitle = song => formatTitle(song.title);
 

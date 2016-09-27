@@ -12,12 +12,9 @@ export const formatSecondsAsTime = (secs) => {
   return min + ':' + sec;
 };
 
-export const formatImageUrl = (imageUrl) => {
-  let formattedUrl = '';
-  if (imageUrl)
-    formattedUrl = imageUrl.replace('large', 't300x300');
-  return formattedUrl;
-};
+export function formatImageUrl(imageUrl) {
+  return imageUrl ? imageUrl.replace('large', 't500x500') : imageUrl;
+}
 
 export const formatTitle = (title) => {
   const res = title.split(' - ');
