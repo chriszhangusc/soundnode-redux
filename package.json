@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint scripts",
+    "backend": "nodemon ./server/server.js",
     "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.js"
   },
   "author": "AngryBugs",
