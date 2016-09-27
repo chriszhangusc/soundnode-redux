@@ -1,8 +1,9 @@
+// Override all default link styles
 a {
     color: $link-color;
     text-decoration: none;
 
-    &:hover {
+    &:hover, &:focus, &:active {
       color: $link-color;
       cursor: pointer;
       text-decoration: none;

@@ -1,4 +1,4 @@
-import { GENRES, SEED_FETCH_URL } from '../constants/SongConstants';
+import { TOP_FETCH_URL } from '../constants/SongConstants';
 import { CLIENT_ID } from '../constants/Config';
 import { LOOP, SHUFFLE, REPEAT, NEXT, PREV } from '../constants/PlayerConstants';
 /**
@@ -6,17 +6,26 @@ import { LOOP, SHUFFLE, REPEAT, NEXT, PREV } from '../constants/PlayerConstants'
  * @param {String} rawQuery
  * @return {String} url
  */
-export const generateFetchUrl = (rawQuery) => {
-  // const url = `${SEED_FETCH_URL}&tags=${genre}`;
-  const query = rawQuery.trim().toUpperCase();
-  let url = null;
-  if (query in GENRES) {
-    // Genre search
-    url = `${SEED_FETCH_URL}&genres=${query}`;
-  } else {
-    // Nav bar search
-    url = `${SEED_FETCH_URL}&q=${query}`;
-  }
+// export const generateFetchUrl = (rawQuery) => {
+//   // const url = `${SEED_FETCH_URL}&tags=${genre}`;
+//   const query = rawQuery.trim().toUpperCase();
+//   let url = null;
+//   if (query in GENRES) {
+//     // Genre search
+//     url = `${SEED_FETCH_URL}&genres=${query}`;
+//   } else {
+//     // Nav bar search
+//     url = `${SEED_FETCH_URL}&q=${query}`;
+//   }
+//   return url;
+// };
+
+export const generateTopGenreFetchUrl = (rawQuery) => {
+  let query = rawQuery.trim().toLowerCase();
+  if (query === 'all') query = 'all-music';
+  // const queryStr = `&genre=soundcloud:genres:${query}`;
+  // const url = `${TOP_FETCH_URL}${queryStr}`;
+  const url = TOP_FETCH_URL;
   return url;
 };
 

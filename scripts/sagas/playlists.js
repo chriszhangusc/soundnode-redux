@@ -3,7 +3,7 @@ import { normalize } from 'normalizr';
 import { fork, put, call, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import * as ActionTypes from '../constants/ActionTypes';
-import { generateFetchUrl } from '../utils/SongUtils';
+import { generateTopGenreFetchUrl } from '../utils/SongUtils';
 import { arrayOfSongs } from '../actions/schema';
 import actions from '../actions';
 import * as selectors from '../reducers';
@@ -31,7 +31,8 @@ function* loadSongCardsPage({ payload }) {
   yield put(actions.changeVisiblePlaylist(playlistName));
   const playlistExists = yield select(selectors.playlistExists, playlistName);
   // 2.Load songs if not cached
-  const url = yield call(generateFetchUrl, playlistName);
+  const url = yield call(generateTopGenreFetchUrl, playlistName);
+  console.log(url);
   if (!playlistExists) yield fork(doFetchSongs, playlistName, url);
 }
 

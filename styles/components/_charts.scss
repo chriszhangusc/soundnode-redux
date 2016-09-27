@@ -10,6 +10,7 @@ $transitionFastValue: all 0.25s ease;
 $transitionInstantValue: all 0.1s ease-out;
 
 .genre-charts {
+  padding: 20px 0 0 20px;
 }
 
 .button {
@@ -76,12 +77,7 @@ $transitionInstantValue: all 0.1s ease-out;
     }
 }
 
-// .genre-selector button.button{
-//     margin-top: 5px;
-//     width: 19%;
-// }
-
-.genre-selector button {
+.genre-selector .button {
   width: 19%;
   margin-top: 5px;
 }
