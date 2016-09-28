@@ -2,14 +2,19 @@ import { combineReducers } from 'redux';
 // import { createSelector } from 'reselect';
 import * as fromPlaylists from './playlists';
 import * as fromPlayer from './player';
+import * as fromAuth from './auth';
 
 const rootReducer = combineReducers({
   playlists: fromPlaylists.default,
-  player: fromPlayer.default
+  player: fromPlayer.default,
+  auth: fromAuth.default
 });
 
 // Selectors are our reading API of our state,
 // so it is recommended to colocate them with the reducers.
+
+/* From Auth */
+// export const getUid = state => fromAuth.getUid(state.auth);
 
 /* From Playlists */
 

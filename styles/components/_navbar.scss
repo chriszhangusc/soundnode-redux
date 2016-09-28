@@ -12,59 +12,6 @@ nav {
   margin-right: 20px;
 }
 
-// .navbar-nav li a {
-//  line-height: 50px;
-// }
-//
-//
-// .nav {
-//   background-color: $nav-bar-color;
-//   position: fixed;
-//   z-index: 1030;
-//   left: 0;
-//   right: 0;
-//   top: 0;
-//   height: 70px;
-//   .container {
-//     height: 100%;
-//   }
-// }
-//
-// .nav-logo {
-//     display: inline-block;
-//     padding: 22px 0;
-//     color: #fff;
-//     font-size: 20px;
-//     float: left;
-// }
-//
-// .nav-nav {
-//     display: table;
-//     height: 100%;
-// }
-//
-// .nav-nav-item {
-//     display: table-cell;
-//     vertical-align: middle;
-// }
-//
-// .nav-nav-item-link {
-//     display: inline-block;
-//     margin: 10px 30px;
-//     color: rgba(255,255,255, 0.5);
-//     letter-spacing: 2px;
-//     text-transform: uppercase;
-//
-//     &:hover {
-//         text-decoration: none;
-//     }
-//
-//     &.active {
-//         color: #fff;
-//         text-decoration: none;
-//     }
-// }
-//
 // // nav-search
 .nav-search {
   padding: 20px 0; // Vertical center
@@ -73,7 +20,7 @@ nav {
   border-radius: 3px;
   .form-group {
     position: relative;//relative must be put on a block element
-
+    margin-bottom: 0;
     i {
       position: absolute;
       top: 5px;
@@ -91,4 +38,25 @@ input[type="text"].nav-search-input {
   color: #e3e3e3;
   font-weight: 300;
   background-color: #2B2B2B;
+}
+
+
+.nav-user-link {
+    display: inline-block;
+    float: right;
+    color: #fff;
+    &:hover {
+        cursor: pointer;
+    }
+
+    .ion-person {
+        margin-left: 30px;
+        font-size: 20px;
+    }
+
+    .ion-chevron-down, .ion-chevron-up {
+        margin-left: 6px;
+        color: #6B6B6B;
+        font-size: 10px;
+    }
 }

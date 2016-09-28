@@ -1,6 +1,7 @@
 import React from 'react';
 import NavSearchContainer from '../containers/NavSearchContainer';
 
+
 export default function Nav() {
   return (
     <nav className="navbar navbar-fixed-top">

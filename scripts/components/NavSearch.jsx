@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { KEY_ENTER } from '../constants/KeyCodes';
-
 class NavSearch extends Component {
 
   constructor(props) {
@@ -17,19 +16,27 @@ class NavSearch extends Component {
 
   render() {
     return (
-      <div className="nav-search">
-        <form>
-          <div className="form-group">
-            <i className="icon ion-search" />
-            <input
-              ref={(ref) => { this.searchField = ref; }}
-              className="nav-search-input"
-              placeholder="SEARCH"
-              type="text"
-              onKeyPress={this.handleKeyPress}
-            />
+      <div className="nav table-display pull-right">
+        <div className="table-item nav-search">
+          <form>
+            <div className="form-group">
+              <i className="icon ion-search" />
+              <input
+                ref={(ref) => { this.searchField = ref; }}
+                className="nav-search-input"
+                placeholder="SEARCH"
+                type="text"
+                onKeyPress={this.handleKeyPress}
+              />
+            </div>
+          </form>
+        </div>
+        <div className="table-item">
+          <div className="nav-user-link">
+            <i className="icon ion-person" />
+            <i className="icon ion-chevron-down" />
           </div>
-        </form>
+        </div>
       </div>
     );
   }

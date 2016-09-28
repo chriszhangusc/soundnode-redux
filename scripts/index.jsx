@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import configureStore  from './store/configureStore';
+import configureStore from './store/configureStore';
 import Root from './components/Root';
 // Import stylesheets(inline)
 import '../styles/app.scss';

@@ -32,6 +32,15 @@ body {
     margin: 40px 0 80px;
 }
 
+.table-display {
+  display: table;
+}
+
+.table-item {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 // h1,
 // h2,
 // h3,

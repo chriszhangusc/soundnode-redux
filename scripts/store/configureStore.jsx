@@ -1,21 +1,19 @@
-import * as redux from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers';
-import { loadState, saveState } from '../utils/LocalStorageUtils';
-// Only load one file so that we don't have to load the whole lodash library
-import throttle from 'lodash/throttle';
 import createSagaMiddleware from 'redux-saga';
+import rootReducer from '../reducers';
+// Only load one file so that we don't have to load the whole lodash library
 import rootSaga from '../sagas';
 
 const configureStore = () => {
   // const persistedState = loadState();
   const sagaMiddleware = createSagaMiddleware();
-  const store = redux.createStore(
+  const store = createStore(
     rootReducer,
     // persistedState,
-    redux.compose(
-      redux.applyMiddleware(thunk, sagaMiddleware),
-      window.devToolsExtension && window.devToolsExtension()
+    compose(
+      applyMiddleware(thunk, sagaMiddleware),
+      window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );
   sagaMiddleware.run(rootSaga);
