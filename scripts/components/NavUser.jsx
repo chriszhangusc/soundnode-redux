@@ -3,7 +3,9 @@ import React from 'react';
 const NavUser = () => {
   return (
     <div className="nav-user-link">
-      <i className="fa fa-github" aria-hidden="true" />
+      <button className="icon-button">
+        <i className="fa fa-github" aria-hidden="true" />
+      </button>
     </div>
   );
 };
