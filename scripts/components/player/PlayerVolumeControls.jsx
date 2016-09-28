@@ -45,7 +45,7 @@ class PlayerVolumeControls extends Component {
       icon = 'ion-volume-high';
     }
     return (
-      <button className="icon-btn" onClick={onToggleMuteClick} >
+      <button className="icon-button" onClick={onToggleMuteClick} >
         <i className={`icon ${icon}`} />
       </button>
     );

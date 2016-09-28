@@ -65,8 +65,8 @@ export const changeVolume = volume => ({
   payload: volume
 });
 
-export const changeMode = mode => ({
-  type: ActionTypes.CHANGE_MODE,
+export const changePlayMode = mode => ({
+  type: ActionTypes.CHANGE_PLAY_MODE,
   payload: mode
 });
 

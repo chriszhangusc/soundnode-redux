@@ -49,33 +49,43 @@ $player-border-color: black;
 .player-button {
     padding: 4px;
 
-    & > i {
-        color: $player-button-color;
+    &:hover {
+      & i {
+        color: $theme-color;
+      }
     }
 
     &.active {
-        &:hover {
-            & i {
-                color: $theme-color;
-            }
-        }
-
-        & > i {
-            color: $theme-color;
-        }
+      color: $theme-color;
     }
-
-    &:hover {
-        cursor: pointer;
-
-        & > i {
-            color: $button-hover-color;
-        }
-
-        .ion-ios-pause {
-            color: $button-hover-color;
-        }
-    }
+    //
+    // & > i {
+    //     color: $player-button-color;
+    // }
+    //
+    // &.active {
+    //     &:hover {
+    //         & i {
+    //             color: $theme-color;
+    //         }
+    //     }
+    //
+    //     & > i {
+    //         color: $theme-color;
+    //     }
+    // }
+    //
+    // &:hover {
+    //     cursor: pointer;
+    //
+    //     & > i {
+    //         color: $button-hover-color;
+    //     }
+    //
+    //     .ion-ios-pause {
+    //         color: $button-hover-color;
+    //     }
+    // }
 
     & + .player-button {
         margin-left: 30px;

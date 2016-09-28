@@ -12,7 +12,7 @@ export const CHANGE_DURATION = 'CHANGE_DURATION';
 export const CHANGE_VOLUME = 'CHANGE_VOLUME';
 export const BEGIN_VOLUME_SEEK = 'BEGIN_VOLUME_SEEK';
 export const END_VOLUME_SEEK = 'END_VOLUME_SEEK';
-export const CHANGE_MODE = 'CHANGE_MODE';
+export const CHANGE_PLAY_MODE = 'CHANGE_PLAY_MODE';
 export const CHANGE_VISIBLE_PLAYLIST = 'CHANGE_VISIBLE_PLAYLIST';
 
 /* Playlists Saga Action Types */

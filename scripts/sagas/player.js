@@ -103,7 +103,7 @@ function* changePlayMode({ payload }) {
   const newMode = payload;
   if (currMode === newMode) {
     // Toggle off
-    yield put(actions.switchMode(DEFAULT_MODE));
+    yield put(actions.changePlayMode(DEFAULT_MODE));
   } else {
     // Toggle On
     if (newMode === SHUFFLE) {
@@ -115,7 +115,7 @@ function* changePlayMode({ payload }) {
       }
     }
     // Set up two sets for shuffle
-    yield put(actions.switchMode(newMode));
+    yield put(actions.changePlayMode(newMode));
   }
 }
 

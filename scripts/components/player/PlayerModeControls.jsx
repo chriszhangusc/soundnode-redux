@@ -12,30 +12,24 @@ class PlayerModeControls extends Component {
   renderRepeat() {
     const { onRepeatClick, mode } = this.props;
     return (
-      <div className="player-btn-wrapper tooltip">
-        <span className="tooltiptext">Repeat</span>
-        <button
-          className={`icon-btn ${(mode === REPEAT ? 'active' : '')}`}
-          onClick={onRepeatClick}
-        >
-          <i className="icon ion-loop" />
-        </button>
-      </div>
+      <button
+        className={`icon-button player-button ${(mode === REPEAT ? 'active' : '')}`}
+        onClick={onRepeatClick}
+      >
+        <i className="icon ion-loop" />
+      </button>
     );
   }
 
   renderShuffle() {
     const { onShuffleClick, mode } = this.props;
     return (
-      <div className="player-btn-wrapper tooltip">
-        <span className="tooltiptext">Shuffle</span>
-        <button
-          className={`icon-btn ${(mode === SHUFFLE ? 'active' : '')}`}
-          onClick={onShuffleClick}
-        >
-          <i className="icon ion-shuffle" />
-        </button>
-      </div>
+      <button
+        className={`icon-button player-button ${(mode === SHUFFLE ? 'active' : '')}`}
+        onClick={onShuffleClick}
+      >
+        <i className="icon ion-shuffle" />
+      </button>
     );
   }
 

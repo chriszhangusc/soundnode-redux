@@ -49,7 +49,7 @@ const player = (state = INITIAL_STATE, action) => {
     case ActionTypes.END_VOLUME_SEEK:
       return state.set('volumeIsSeeking', false);
 
-    case ActionTypes.SWITCH_MODE:
+    case ActionTypes.CHANGE_PLAY_MODE:
       return state.set('mode', action.payload);
 
     case ActionTypes.MUTE:
