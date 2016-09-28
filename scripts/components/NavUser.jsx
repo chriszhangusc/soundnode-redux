@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-const NavUser = () => {
+const NavUser = ({ uid, displayName, photoUrl, handleLogin }) => {
+  if (uid) {
+    return (
+      <div>
+        <img alt="user profile" className="user-profile-image" src={photoUrl} />
+        <span className="user-display-name">{displayName}</span>
+      </div>
+    );
+  }
   return (
     <div className="nav-user-link">
-      <button className="icon-button">
+      <button className="icon-button" onClick={handleLogin}>
         <i className="fa fa-github" aria-hidden="true" />
       </button>
     </div>
   );
+};
+
+NavUser.propTypes = {
+  uid: PropTypes.string,
+  photoUrl: PropTypes.string,
+  displayName: PropTypes.string,
+  handleLogin: PropTypes.func.isRequired
 };
 
 export default NavUser;

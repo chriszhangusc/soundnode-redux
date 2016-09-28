@@ -30,6 +30,11 @@ export const sagaLoadMoreSongsOnScroll = () => ({
   type: ActionTypes.SAGA_LOAD_MORE_SONGS_ON_SCROLL
 });
 
+export const sagaChangeSongAndPlay = songId => ({
+  type: ActionTypes.SAGA_CHANGE_SONG_AND_PLAY,
+  payload: songId
+});
+
 export const searchSongs = searchText => ({
   type: ActionTypes.SEARCH_SONGS,
   payload: searchText

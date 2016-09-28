@@ -14,7 +14,11 @@ const rootReducer = combineReducers({
 // so it is recommended to colocate them with the reducers.
 
 /* From Auth */
-// export const getUid = state => fromAuth.getUid(state.auth);
+export const getUid = state => fromAuth.getUid(state.auth);
+
+export const getDisplayName = state => fromAuth.getDisplayName(state.auth);
+
+export const getPhotoUrl = state => fromAuth.getPhotoUrl(state.auth);
 
 /* From Playlists */
 

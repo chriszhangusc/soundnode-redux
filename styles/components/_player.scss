@@ -58,42 +58,11 @@ $player-border-color: black;
     &.active {
       color: $theme-color;
     }
-    //
-    // & > i {
-    //     color: $player-button-color;
-    // }
-    //
-    // &.active {
-    //     &:hover {
-    //         & i {
-    //             color: $theme-color;
-    //         }
-    //     }
-    //
-    //     & > i {
-    //         color: $theme-color;
-    //     }
-    // }
-    //
-    // &:hover {
-    //     cursor: pointer;
-    //
-    //     & > i {
-    //         color: $button-hover-color;
-    //     }
-    //
-    //     .ion-ios-pause {
-    //         color: $button-hover-color;
-    //     }
-    // }
 
     & + .player-button {
         margin-left: 30px;
     }
 
-    .ion-ios-pause {
-        color: $theme-color;
-    }
 }
 
 .player-btn-wrapper {

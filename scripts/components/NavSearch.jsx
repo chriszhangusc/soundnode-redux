@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { KEY_ENTER } from '../constants/KeyCodes';
-import NavUser from './NavUser';
+import NavUserContainer from '../containers/NavUserContainer';
 
 class NavSearch extends Component {
 
@@ -34,7 +34,7 @@ class NavSearch extends Component {
           </form>
         </div>
         <div className="table-item">
-          <NavUser />
+          <NavUserContainer />
         </div>
       </div>
     );

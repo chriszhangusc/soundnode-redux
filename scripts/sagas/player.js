@@ -95,7 +95,7 @@ function* playSong(action) {
     playlistSongIds = yield select(selectors.getPlayerSongIds);
     nextSongId = yield call(getSongIdByMode, currentSongId, playlistSongIds, mode, action);
   }
-  yield put(actions.changeSongAndPlay(nextSongId));
+  yield put(actions.sagaChangeSongAndPlay(nextSongId));
 }
 
 function* changePlayMode({ payload }) {
