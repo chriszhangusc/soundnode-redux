@@ -43,14 +43,18 @@ input[type="text"].nav-search-input {
 
 .nav-user-link {
     display: inline-block;
-    float: right;
     color: #fff;
     &:hover {
         cursor: pointer;
     }
 
+    .fa-github {
+      margin-left: 20px;
+      font-size: 30px;
+    }
+
     .ion-person {
-        margin-left: 30px;
+        margin-left: 20px;
         font-size: 20px;
     }
 

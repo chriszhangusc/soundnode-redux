@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { KEY_ENTER } from '../constants/KeyCodes';
+import NavUser from './NavUser';
+
 class NavSearch extends Component {
 
   constructor(props) {
@@ -32,10 +34,7 @@ class NavSearch extends Component {
           </form>
         </div>
         <div className="table-item">
-          <div className="nav-user-link">
-            <i className="icon ion-person" />
-            <i className="icon ion-chevron-down" />
-          </div>
+          <NavUser />
         </div>
       </div>
     );

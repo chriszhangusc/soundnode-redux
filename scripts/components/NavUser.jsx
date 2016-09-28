@@ -3,8 +3,7 @@ import React from 'react';
 const NavUser = () => {
   return (
     <div className="nav-user-link">
-      <i className="icon ion-person" />
-      <i className="icon ion-chevron-down" />
+      <i className="fa fa-github" aria-hidden="true" />
     </div>
   );
 };
