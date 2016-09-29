@@ -14,6 +14,7 @@ export const startLogin = () => {
   return (dispatch) => {
     return firebase.auth().signInWithPopup(githubProvider).then((result) => {
       console.log('Auth worked!', result);
+      // Store token in localStorage
       const authObj = {
         uid: result.user.uid,
         displayName: result.user.displayName,
