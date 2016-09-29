@@ -1,7 +1,6 @@
 import { fromJS } from 'immutable';
 
 const INITIAL_STATE = fromJS({
-  isAuthenticated: false
 });
 
 const auth = (state = INITIAL_STATE, action) => {

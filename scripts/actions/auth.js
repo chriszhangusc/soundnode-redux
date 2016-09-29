@@ -18,7 +18,7 @@ export const startLogin = () => {
       const authObj = {
         uid: result.user.uid,
         displayName: result.user.displayName,
-        photoURL: result.user.photoURL
+        photoURL: result.user.photoURL,
       };
       dispatch(login(authObj));
     }, (error) => {
