@@ -1,27 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, IndexLink } from 'react-router';
 
-const Sidebar = () => (
-  <ul className="nav-sidebar">
-    <li>
-      <Link
-        to="/"
-        activeClassName="sidebar-link-active"
-      >Top 50</Link>
-    </li>
-    <li>
-      <a href="#">Likes</a>
-    </li>
-    <li>
-      <a href="#">Stream</a>
-    </li>
-    <li>
-      <a href="#">Tracks</a>
-    </li>
-    <li>
-      <a href="#">Playlists</a>
-    </li>
-  </ul>
-);
-
+const Sidebar = () => {
+  return (
+    <ul className="nav-sidebar">
+      <li>
+        <Link
+          to="/top50"
+          activeClassName="sidebar-link-active"
+        >Top 50</Link>
+      </li>
+      <li>
+        <Link
+          to="/likes"
+          activeClassName="sidebar-link-active"
+        >Likes</Link>
+      </li>
+      <li>
+        <a href="#">Stream</a>
+      </li>
+      <li>
+        <a href="#">Tracks</a>
+      </li>
+      <li>
+        <a href="#">Playlists</a>
+      </li>
+    </ul>
+  );
+}
 export default Sidebar;

@@ -10,11 +10,11 @@ const renderGenres = () => GENRES.map(
     <Link
       key={genre}
       className="button inline"
-      to={`/songs/${genre}`}
+      to={`/top50/${genre}`}
     >{genre.toUpperCase()}</Link>
 );
 
-const GenreCharts = ({ visiblePlaylistName = 'All' }) => (
+const GenreCharts = ({ visiblePlaylistName }) => (
   <div className="genre-charts">
     <h1>Top 50 - { visiblePlaylistName.toUpperCase() }</h1>
     <div className="genre-selector" >
