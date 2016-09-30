@@ -6,7 +6,7 @@ import { INITIAL_VOLUME, DEFAULT_MODE } from '../constants/PlayerConstants';
 const INITIAL_STATE = fromJS({
   currentTime: 0,
   volume: INITIAL_VOLUME,
-  songId: null,
+  song: null,
   isPlaying: false,
   isSeeking: false,
   volumeIsSeeking: false,
@@ -29,7 +29,7 @@ const player = (state = INITIAL_STATE, action) => {
       return state.set('duration', action.payload);
 
     case ActionTypes.CHANGE_SONG:
-      return state.set('songId', action.payload);
+      return state.set('song', fromJS(action.payload));
 
     case ActionTypes.UPDATE_TIME:
       return state.set('currentTime', action.payload);
@@ -90,7 +90,15 @@ export const getShuffleDiscard = state => state.get('shuffleDiscard').toJS();
 
 export const shuffleInitialized = state => (getShuffleDraw(state).length > 0);
 
-export const getCurrentSongId = state => state.get('songId');
+export const getCurrentSong = (state) => {
+  const song = state.get('song');
+  return song ? song.toJS() : undefined;
+};
+
+export const getCurrentSongId = (state) => {
+  const song = getCurrentSong(state);
+  return song ? song.id : undefined;
+};
 
 export const getPlayingState = state => state.get('isPlaying');
 

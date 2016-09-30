@@ -14,8 +14,8 @@ export const getCurrentSongId = createSelector(
 );
 
 export const getCurrentSong = createSelector(
-  [fromReducers.getPlayerSongMap, fromReducers.getCurrentSongId],
-  (songsById, songId) => ((songsById && songId) ? songsById[songId] : undefined)
+  [fromReducers.getCurrentSong],
+  song => song
 );
 
 export const getDuration = createSelector(

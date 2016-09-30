@@ -60,7 +60,7 @@ export const getVisibleNextUrl = state => fromPlaylists.getVisibleNextUrl(state.
 export const playlistExists = (state, playlistName) =>
   fromPlaylists.playlistExists(state.get('playlists'), playlistName);
 
-/* From players */
+/* From player */
 
 export const getShuffleDraw = state => fromPlayer.getShuffleDraw(state.get('player'));
 
@@ -69,6 +69,8 @@ export const getShuffleDiscard = state => fromPlayer.getShuffleDiscard(state.get
 export const shuffleInitialized = state => fromPlayer.shuffleInitialized(state.get('player'));
 
 export const getCurrentSongId = state => fromPlayer.getCurrentSongId(state.get('player'));
+
+export const getCurrentSong = state => fromPlayer.getCurrentSong(state.get('player'));
 
 export const getPlayingState = state => fromPlayer.getPlayingState(state.get('player'));
 

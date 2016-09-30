@@ -50,9 +50,9 @@ export const changeDuration = duration => ({
   payload: duration
 });
 
-export const changeSong = newSongId => ({
+export const changeSong = newSong => ({
   type: ActionTypes.CHANGE_SONG,
-  payload: newSongId
+  payload: newSong
 });
 
 export const loadPlayerPlaylist = playlist => ({

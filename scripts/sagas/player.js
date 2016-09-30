@@ -54,14 +54,14 @@ function* toggleMute() {
 
 // Change to new song or just play paused current song.
 function* changeSongAndPlay({ payload }) {
-  const newSongId = payload;
+  const newSong = payload;
   const visiblePlaylistName = yield select(selectors.getVisiblePlaylistName);
   const playerPlaylistName = yield select(selectors.getPlayerPlaylistName);
   if (visiblePlaylistName !== playerPlaylistName) {
     yield put(actions.loadPlayerPlaylist(visiblePlaylistName));
   }
   yield put(actions.pauseSong());
-  yield put(actions.changeSong(newSongId));
+  yield put(actions.changeSong(newSong));
   yield put(actions.clearTime());
   yield put(actions.playSong());
 }
