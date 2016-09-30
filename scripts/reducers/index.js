@@ -14,6 +14,11 @@ const rootReducer = combineReducers({
 // so it is recommended to colocate them with the reducers.
 
 /* From Auth */
+export const isSongLiked = (state, songId) => {
+  const likes = fromAuth.getLikes(state.get('auth'));
+  return (likes.indexOf(songId) !== -1);
+};
+
 export const getUid = state => fromAuth.getUid(state.get('auth'));
 
 export const getDisplayName = state => fromAuth.getDisplayName(state.get('auth'));

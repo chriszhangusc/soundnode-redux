@@ -5,15 +5,15 @@ const Sidebar = () => (
   <ul className="nav-sidebar">
     <li>
       <Link
-        to="/songs/All-Music"
+        to="/"
         activeClassName="sidebar-link-active"
       >Top 50</Link>
     </li>
     <li>
-      <a href="#">Stream</a>
+      <a href="#">Likes</a>
     </li>
     <li>
-      <a href="#">Likes</a>
+      <a href="#">Stream</a>
     </li>
     <li>
       <a href="#">Tracks</a>

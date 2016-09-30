@@ -104,10 +104,11 @@
     position: relative;
 }
 
-.song-card-user-username {
+.song-card-username {
     display: block;
+    color: $light-gray;
     margin-right: 30px;
-    font-size: 11px;
+    font-size: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -116,15 +117,29 @@
 .song-card-title {
     display: block;
     color: white;
-    font-size: 11px;
+    font-size: 15px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.song-card-heart {
-    position: absolute;
-    bottom: -2px;
-    right: 0;
-    font-size: 14px;
+.song-card-controls {
+  margin-top: 10px;
+
+  button + button {
+    margin-left: 20px;
+  }
+
+  i {
+    color: $light-gray;
+
+    &:hover {
+      color: white;
+    }
+
+    &.active {
+      color: $theme-color;
+    }
+  }
+
 }

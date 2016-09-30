@@ -11,8 +11,11 @@ import {
   getSingleSongPlayingState
 } from '../selectors/songCardSelectors';
 
+import { isSongLiked } from '../reducers';
+
 const mapStateToProps = (state, { song }) => ({
   // This is just like passing down props!
+  isLiked: isSongLiked(state, song.id),
   songImage: getSongImage(song),
   title: getSongTitle(song),
   userImage: getSongUserAvatar(song),
@@ -26,7 +29,13 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   handlePlaySong() { dispatch(actions.playSong()); },
   // Fire if the user click on a song card that is not active
   handleChangeSong() { dispatch(actions.sagaChangeSongAndPlay(ownProps.song.id)); },
-  handlePauseSong() { dispatch(actions.pauseSong()); }
+  handlePauseSong() { dispatch(actions.pauseSong()); },
+  handleLike() {
+    dispatch(actions.startLikeSong(ownProps.song.id));
+  },
+  handleImageNotFound(description) {
+    console.log('Image not found', description);
+  }
 });
 
 const SongCardContainer = connect(mapStateToProps,

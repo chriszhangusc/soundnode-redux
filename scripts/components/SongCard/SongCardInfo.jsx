@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-export default function SongCardInfo({ userImage, title, username }) {
+export default function SongCardInfo({ userImage, title, username, handleImageNotFound }) {
   return (
     <div className="song-card-user clearfix">
       <img
@@ -12,7 +12,7 @@ export default function SongCardInfo({ userImage, title, username }) {
         <a className="song-card-title">
           {title}
         </a>
-        <a className="song-card-user-username">
+        <a className="song-card-username">
           {username}
         </a>
       </div>
@@ -23,5 +23,6 @@ export default function SongCardInfo({ userImage, title, username }) {
 SongCardInfo.propTypes = {
   userImage: PropTypes.string,
   title: PropTypes.string,
-  username: PropTypes.string
+  username: PropTypes.string,
+  handleImageNotFound: PropTypes.func
 };

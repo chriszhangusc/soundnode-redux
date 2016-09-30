@@ -37,3 +37,8 @@ export const SEARCH_SONGS = 'SEARCH_SONGS';
 export const INIT_SHUFFLE = 'INIT_SHUFFLE';
 export const SHUFFLE_DRAW = 'SHUFFLE_DRAW';
 export const SHUFFLE_DISCARD = 'SHUFFLE_DISCARD';
+
+export const LIKE_SONG = 'LIKE_SONG';
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const LOAD_ALL_LIKES = 'LOAD_ALL_LIKES';

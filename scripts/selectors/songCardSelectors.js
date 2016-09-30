@@ -1,7 +1,14 @@
+import axios from 'axios';
 import * as selectors from '../reducers';
 import { formatImageUrl, formatTitle } from '../utils/FormatUtils';
 
 export function getSongImage(song) {
+  const imageUrl = formatImageUrl(song.artwork_url);
+  axios.get(imageUrl).then(() => {
+    // console.log(imageUrl, ' good');
+  }, (err) => {
+    // console.log(imageUrl, ' bad with err,', err);
+  });
   return formatImageUrl(song.artwork_url);
 }
 

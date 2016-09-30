@@ -4,20 +4,18 @@ export const setLastVolume = (volume) => {
   localStorage.setItem('lastVolume', JSON.stringify(volume));
 };
 
-export const getLastVolume = () => {
-  return JSON.parse(localStorage.getItem('lastVolume'));
-};
+export const getLastVolume = () => JSON.parse(localStorage.getItem('lastVolume'));
 
 // Currently we are persisting everything in the store, will change this to improve preformance.
 export const loadState = () => {
   try {
     const serializedState = localStorage.getItem('state');
-    console.log('load state', serializedState);
-    console.log(JSON.parse(serializedState));
+    // console.log('load state', serializedState);
+    // console.log(JSON.parse(serializedState));
     if (serializedState === null) {
       return undefined;
     }
-    console.log(serializedState);
+    // console.log(serializedState);
     return fromJS(JSON.parse(serializedState));
   } catch (err) {
     console.log(err);
