@@ -1,9 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
+import 'react-notifications/src/notifications.scss';
 import configureStore from './store/configureStore';
 import configureRoutes from './router';
-
 // Import stylesheets(inline)
 import '../styles/app.scss';
 

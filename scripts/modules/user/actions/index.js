@@ -1,3 +1,4 @@
+import { NotificationManager } from 'react-notifications';
 import firebase, { firebaseRef, githubProvider } from '../../../firebase/';
 import { getUid } from '../../reducers';
 import {
@@ -81,8 +82,14 @@ export function startLikeSong(songId) {
     }
     firebaseRef.child(`${uid}/likes`).push(songId).then(() => {
       dispatch(likeSong(songId));
+      NotificationManager.success('Song added to likes', 'Success');
     }, (err) => {
+      NotificationManager.error('Failed to add song to likes', 'Error');
       if (err) console.log('Push fail', err);
     });
   };
 }
+
+// export const startUnlikeSong(songId) {
+//
+// }

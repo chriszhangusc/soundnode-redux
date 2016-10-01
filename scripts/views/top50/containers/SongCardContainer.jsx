@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import copy from 'copy-to-clipboard';
+import { NotificationManager } from 'react-notifications';
 import SongCard from '../components/SongCard/SongCard';
 import {
   playSong,
@@ -36,7 +37,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   // Fire if the user click on a song card that is not active
   handleChangeSong() { dispatch(sagaChangeSongAndPlay(ownProps.song)); },
   handlePauseSong() { dispatch(pauseSong()); },
-  handleLike() {
+  handleLikeClick() {
     dispatch(startLikeSong(ownProps.song.id));
   },
   handleCopyToClipboard() {
