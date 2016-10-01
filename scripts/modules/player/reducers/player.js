@@ -1,6 +1,5 @@
 import { fromJS } from 'immutable';
 import * as ActionTypes from '../../../constants/ActionTypes';
-
 import { INITIAL_VOLUME, DEFAULT_MODE } from '../../../constants/PlayerConstants';
 
 /* Player Reducers */
@@ -83,6 +82,7 @@ const player = (state = INITIAL_STATE, action) => {
   }
 };
 export default player;
+
 
 /* Player Selectors */
 export const getShuffleDraw = state => state.get('shuffleDraw').toJS();

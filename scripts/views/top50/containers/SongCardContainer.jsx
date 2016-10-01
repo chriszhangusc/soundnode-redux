@@ -9,15 +9,14 @@ import {
 import { startLikeSong } from '../../../modules/user/actions';
 
 import {
+  isSongLiked,
   getSongImage,
   getSongTitle,
   getSongUserAvatar,
   getSongUsername,
   getSingleSongIsActive,
   getSingleSongPlayingState
-} from '../../../selectors/songCardSelectors';
-
-import { isSongLiked } from '../../../modules/reducers';
+} from '../../../modules/reducers';
 
 const mapStateToProps = (state, { song }) => ({
   // This is just like passing down props!

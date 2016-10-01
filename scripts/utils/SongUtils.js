@@ -1,5 +1,4 @@
 import { TOP_FETCH_URL } from '../constants/SongConstants';
-import { CLIENT_ID } from '../constants/Config';
 import { LOOP, SHUFFLE, REPEAT, NEXT, PREV } from '../constants/PlayerConstants';
 /**
  * Generate fetch url by given query
@@ -28,15 +27,6 @@ export const generateTopGenreFetchUrl = (rawQuery) => {
   const url = TOP_FETCH_URL;
   return url;
 };
-
-/**
- * Generate stream url given song obj
- * @param  {String} rawUrl Stream url comming from the song object
- * @return {String} Stream url appended by client_id
- */
-export function formatStreamUrl(rawUrl) {
-  return (rawUrl ? `${rawUrl}/stream?client_id=${CLIENT_ID}` : null);
-}
 
 // const getRandomIntInclusive = (min, max) => {
 //   min = Math.ceil(min);

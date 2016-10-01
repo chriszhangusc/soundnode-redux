@@ -6,7 +6,7 @@ const INITIAL_STATE = fromJS({
   likes: []
 });
 
-const auth = (state = INITIAL_STATE, action) => {
+const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOGIN:
       return state.mergeDeep(fromJS(action.payload));
@@ -21,7 +21,7 @@ const auth = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default auth;
+export default user;
 
 // Selectors
 export const getUid = state => state.get('uid');

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getCurrentSongId } from '../../../selectors/playerSelectors';
+import { getCurrentSongId } from '../../../modules/reducers';
 import PlayerAudioContainer from './PlayerAudioContainer';
 import PlayerSongInfoContainer from './PlayerSongInfoContainer';
 import PlayerControlsContainer from './PlayerControlsContainer';

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PlayerControls from '../components/PlayerControls';
-import { getPlayingState } from '../../../selectors/playerSelectors';
+import { getPlayingState } from '../../../modules/reducers';
 import {
   playSong,
   pauseSong,

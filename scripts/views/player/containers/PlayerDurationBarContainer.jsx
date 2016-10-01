@@ -6,7 +6,7 @@ import {
   getCurrentTime,
   getDuration,
   getSeekState
-} from '../../../selectors/playerSelectors';
+} from '../../../modules/reducers';
 
 import {
   beginSeek,

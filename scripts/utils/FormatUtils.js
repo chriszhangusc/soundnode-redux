@@ -1,16 +1,27 @@
-export const formatSecondsAsTime = (secs) => {
+import { CLIENT_ID } from '../constants/Config';
 
-  let hr  = Math.floor(secs / 3600);
+export const formatSecondsAsTime = (secs) => {
+  const hr = Math.floor(secs / 3600);
   let min = Math.floor((secs - (hr * 3600)) / 60);
-  let sec = Math.floor(secs - (hr * 3600) -  (min * 60));
+  let sec = Math.floor(secs - (hr * 3600) - (min * 60));
   if (min < 10) {
-    min = "0" + min;
+    min = `0${min}`;
   }
   if (sec < 10) {
-    sec  = "0" + sec;
+    sec = `0${sec}`;
   }
-  return min + ':' + sec;
+  return `${min}:${sec}`;
 };
+
+/**
+ * Generate stream url given song obj
+ * @param  {String} rawUrl Stream url comming from the song object
+ * @return {String} Stream url appended by client_id
+ */
+export function formatStreamUrl(rawUrl) {
+  return (rawUrl ? `${rawUrl}/stream?client_id=${CLIENT_ID}` : null);
+}
+
 
 export function formatImageUrl(imageUrl) {
   return imageUrl ? imageUrl.replace('large', 't500x500') : imageUrl;

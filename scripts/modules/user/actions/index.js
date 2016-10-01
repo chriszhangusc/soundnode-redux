@@ -1,5 +1,5 @@
 import firebase, { firebaseRef, githubProvider } from '../../../firebase/';
-import { getUid } from '../reducers/user';
+import { getUid } from '../../reducers';
 import {
   LOGIN,
   LOGOUT,
@@ -27,6 +27,7 @@ export const loadAllLikes = likes => ({
 export const startLoadAllLikes = () => (dispatch, getState) => {
   const state = getState();
   const uid = getUid(state);
+  console.log(uid);
   const likesRef = firebaseRef.child(`${uid}/likes`);
   const likes = [];
   likesRef.once('value', (snapshot) => {

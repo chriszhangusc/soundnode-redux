@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PlayerVolumeControls from '../components/PlayerVolumeControls';
-import { getCurrentVolume, getVolumeSeekState } from '../../../selectors/playerSelectors';
+import { getCurrentVolume, getVolumeSeekState } from '../../../modules/reducers';
 import { computeNewVolumeOnSeek } from '../../../utils/PlayerUtils';
 
 import {

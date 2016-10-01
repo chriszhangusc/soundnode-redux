@@ -1,6 +1,15 @@
 import { connect } from 'react-redux';
 import PlayerAudio from '../components/PlayerAudio';
-import * as selectors from '../../../selectors/playerSelectors';
+// Selectors
+import {
+  getPlayingState,
+  getCurrentVolume,
+  getPlayerMode,
+  getStreamUrl,
+  getCurrentTime,
+  getSeekState
+} from '../../../modules/reducers';
+// Actions
 import {
   sagaUpdateTimeOnPlay,
   sagaPlayNextSong,
@@ -8,12 +17,12 @@ import {
 } from '../../../modules/player/actions';
 
 const mapStateToProps = state => ({
-  isPlaying: selectors.getPlayingState(state),
-  volume: selectors.getCurrentVolume(state),
-  mode: selectors.getPlayerMode(state),
-  streamUrl: selectors.getStreamUrl(state),
-  currentTime: selectors.getCurrentTime(state),
-  isSeeking: selectors.getSeekState(state)
+  isPlaying: getPlayingState(state),
+  volume: getCurrentVolume(state),
+  mode: getPlayerMode(state),
+  streamUrl: getStreamUrl(state),
+  currentTime: getCurrentTime(state),
+  isSeeking: getSeekState(state)
 });
 
 const mapDispatchToProps = dispatch => ({

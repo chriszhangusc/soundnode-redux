@@ -1,30 +1,32 @@
 /* Main reducer */
 import { combineReducers } from 'redux-immutable';
-// import { createSelector } from 'reselect';
+import { createSelector } from 'reselect';
 import * as fromPlaylists from './playlists/reducers/playlists';
 import * as fromPlayer from './player/reducers/player';
 import * as fromUser from './user/reducers/user';
+import { formatImageUrl, formatTitle, formatStreamUrl } from '../utils/FormatUtils';
+
 
 const rootReducer = combineReducers({
   playlists: fromPlaylists.default,
   player: fromPlayer.default,
-  auth: fromUser.default
+  user: fromUser.default
 });
 
 // Selectors are our reading API of our state,
 // so it is recommended to colocate them with the reducers.
 
-/* From Auth */
+/* From user */
 export const isSongLiked = (state, songId) => {
-  const likes = fromUser.getLikes(state.get('auth'));
+  const likes = fromUser.getLikes(state.get('user'));
   return (likes.indexOf(songId) !== -1);
 };
 
-export const getUid = state => fromUser.getUid(state.get('auth'));
+export const getUid = state => fromUser.getUid(state.get('user'));
 
-export const getDisplayName = state => fromUser.getDisplayName(state.get('auth'));
+export const getDisplayName = state => fromUser.getDisplayName(state.get('user'));
 
-export const getPhotoUrl = state => fromUser.getPhotoUrl(state.get('auth'));
+export const getPhotoUrl = state => fromUser.getPhotoUrl(state.get('user'));
 
 /* From Playlists */
 
@@ -62,7 +64,6 @@ export const playlistExists = (state, playlistName) =>
   fromPlaylists.playlistExists(state.get('playlists'), playlistName);
 
 /* From player */
-
 export const getShuffleDraw = state => fromPlayer.getShuffleDraw(state.get('player'));
 
 export const getShuffleDiscard = state => fromPlayer.getShuffleDiscard(state.get('player'));
@@ -85,14 +86,63 @@ export const getSeekState = state => fromPlayer.getSeekState(state.get('player')
 
 export const getPlayerMode = state => fromPlayer.getPlayerMode(state.get('player'));
 
-/* Mixed / Memoized Selectors */
-// Not sure if we should put it here.
-// export const getCurrentSong = createSelector(
-//   [getPlayerSongMap, getCurrentSongId],
-//   (songsById, songId) => {
-//     if (songId) return songsById[songId];
-//     return null;
-//   }
-// );
+/* Composed memoized selectors */
+/* Players */
+export const getDuration = createSelector(
+  [getCurrentSong],
+  currentSong => (currentSong ? currentSong.duration / 1000.0 : null)
+);
+
+export const getStreamUrl = createSelector(
+  [getCurrentSong],
+  currentSong => (currentSong ? formatStreamUrl(currentSong.uri) : null)
+);
+
+export const getCurrentSongTitle = createSelector(
+  [getCurrentSong],
+  currentSong => (currentSong ? currentSong.title : null)
+);
+
+export const getCurrentSongUsername = createSelector(
+  [getCurrentSong],
+  currentSong => (currentSong ? currentSong.user.username : null)
+);
+
+export const getCurrentSongArtworkUrl = createSelector(
+  [getCurrentSong],
+  currentSong => (currentSong ? currentSong.artwork_url : null)
+);
+
+/* songCardListSelectors */
+// Return the sorted array of songs of visible playlist
+export const getVisibleSongsAsArray = createSelector(
+  [getVisibleSongMap, getVisibleSongIds],
+  (songsById, songIds) => (songIds && songsById ? songIds.map(id => songsById[id]) : undefined)
+);
+
+/* SongCardSelectors */
+
+export function getSongImage(song) {
+  return formatImageUrl(song.artwork_url);
+}
+
+export const getSongTitle = song => formatTitle(song.title);
+
+export const getSongUserAvatar = song => (song.user ? song.user.avatar_url : undefined);
+
+export const getSongUsername = song => (song.user ? song.user.username : undefined);
+
+// Return if the specific song is playing or not
+export const getSingleSongPlayingState = (state, id) => {
+  const currentSongId = getCurrentSongId(state);
+  return currentSongId === id ? getPlayingState(state) : false;
+};
+
+// To memoize it we have to check out createSelector with param!
+export const getSingleSongIsActive = (state, id) => {
+  const currentSongId = getCurrentSongId(state);
+  return currentSongId ? id === currentSongId : false;
+};
+
 
 export default rootReducer;

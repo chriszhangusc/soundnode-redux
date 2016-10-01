@@ -25,7 +25,7 @@ const configureStore = () => {
   // throttle it because it contains expensive stringify function.
   // Make sure it does not get called more often than once a second.
   store.subscribe(throttle(() => {
-    saveState(store.getState(), ['player', 'auth']);
+    saveState(store.getState(), ['player', 'user']);
   }, 1000));
 
   return store;

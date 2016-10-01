@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PlayerModeControls from '../components/PlayerModeControls';
-import { getPlayerMode } from '../../../selectors/playerSelectors';
+import { getPlayerMode } from '../../../modules/reducers';
 import { sagaChangePlayMode } from '../../../modules/player/actions';
 import { REPEAT, SHUFFLE } from '../../../constants/PlayerConstants';
 
