@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import * as selectors from '../reducers';
+import * as selectors from '../modules/reducers';
 
 // Return the sorted array of songs of visible playlist
 export const getVisibleSongsAsArray = createSelector(

@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
-import throttle from 'lodash/throttle';
-import rootReducer from '../reducers';
 // Only load one file so that we don't have to load the whole lodash library
+import throttle from 'lodash/throttle';
+import rootReducer from '../modules/reducers';
 import rootSaga from '../sagas';
 import { loadState, saveState } from '../utils/LocalStorageUtils';
 
@@ -20,9 +20,6 @@ const configureStore = () => {
     )
   );
   sagaMiddleware.run(rootSaga);
-  // if (process.env.NODE_ENV !== 'production') {
-  //   store.dispatch = addLoggingToDispatch(store);
-  // }
 
   // Every time the store changes, save our state to localStorage
   // throttle it because it contains expensive stringify function.

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as selectors from '../reducers';
+import * as selectors from '../modules/reducers';
 import { formatImageUrl, formatTitle } from '../utils/FormatUtils';
 
 export function getSongImage(song) {

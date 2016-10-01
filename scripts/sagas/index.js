@@ -1,5 +1,5 @@
 import { fork } from 'redux-saga/effects';
-import * as fromPlayer from './player';
+import * as fromPlayer from './playerSagas';
 import * as fromPlaylists from './playlists';
 
 function* rootSaga() {

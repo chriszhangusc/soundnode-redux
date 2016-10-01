@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { formatStreamUrl } from '../utils/SongUtils';
-import * as fromReducers from '../reducers';
+import * as fromReducers from '../modules/reducers';
 
 /* Composed memoized selectors for PlayerContainer */
 export const getPlayingState = createSelector(

@@ -4,8 +4,12 @@ import { fork, put, call, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import * as ActionTypes from '../constants/ActionTypes';
 
-import actions from '../actions';
-import * as selectors from '../reducers';
+import {
+  changeVisiblePlaylist,
+  requestSongs,
+  receiveSongs
+} from '../modules/playlists/actions';
+import * as selectors from '../modules/reducers';
 
 import { fetchCharts } from '../services/SCAPIV2Services';
 
@@ -29,15 +33,15 @@ import { fetchCharts } from '../services/SCAPIV2Services';
 function* loadSongCardsPage({ payload }) {
   const playlistName = payload;
   // 1.Change visiblePlaylistName
-  yield put(actions.changeVisiblePlaylist(playlistName));
+  yield put(changeVisiblePlaylist(playlistName));
   const playlistExists = yield select(selectors.playlistExists, playlistName);
   // 2.Load songs if not cached
   // if (!playlistExists) yield fork(doFetchSongs, playlistName, url)
   if (!playlistExists) {
-    yield put(actions.requestSongs(playlistName));
+    yield put(requestSongs(playlistName));
     const normalizedTracks = yield call(fetchCharts, playlistName);
     yield put(
-      actions.receiveSongs(
+      receiveSongs(
         playlistName,
         normalizedTracks.entities,
         normalizedTracks.ids,
