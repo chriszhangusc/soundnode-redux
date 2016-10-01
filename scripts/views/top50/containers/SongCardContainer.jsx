@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import copy from 'copy-to-clipboard';
 import SongCard from '../components/SongCard/SongCard';
 import {
   playSong,
@@ -38,8 +39,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   handleLike() {
     dispatch(startLikeSong(ownProps.song.id));
   },
-  handleImageNotFound(description) {
-    console.log('Image not found', description);
+  handleCopyToClipboard() {
+    copy(ownProps.song.permalink_url);
   }
 });
 

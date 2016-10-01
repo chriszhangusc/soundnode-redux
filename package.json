@@ -39,6 +39,7 @@
   "dependencies": {
     "axios": "^0.13.1",
     "body-parser": "^1.15.2",
+    "copy-to-clipboard": "^3.0.5",
     "expect": "^1.20.2",
     "express": "^4.14.0",
     "firebase": "^3.4.1",
