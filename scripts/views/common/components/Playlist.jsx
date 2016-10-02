@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const Playlist = ({ playerPlaylistSongs, currentSongId, handleItemClick }) => {
+const Playlist = ({ playerPlaylistSongs, currentSongId, handleChangeSong }) => {
   return (
     <div className="playlist-container">
       <div className="playlist-title">
@@ -14,7 +14,10 @@ const Playlist = ({ playerPlaylistSongs, currentSongId, handleItemClick }) => {
             return (
             <li
               className={`playlist-item ${currentSongId === song.id ? 'active' : ''}`}
-              onClick={handleItemClick}
+              onClick={(e) => {
+                e.preventDefault();
+                if (currentSongId !== song.id) handleChangeSong(song)
+              }}
               key={idx}
             >
               <span className="playlist-item-index">{`${idx + 1}.`}</span>
@@ -31,7 +34,7 @@ const Playlist = ({ playerPlaylistSongs, currentSongId, handleItemClick }) => {
 Playlist.propTypes = {
   currentSongId: PropTypes.number,
   playerPlaylistSongs: PropTypes.array,
-  handleItemClick: PropTypes.func
+  handleChangeSong: PropTypes.func
 };
 
 export default Playlist;

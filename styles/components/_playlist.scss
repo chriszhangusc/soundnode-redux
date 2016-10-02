@@ -42,10 +42,16 @@
   white-space: nowrap;
   cursor: pointer;
 
+  &.active {
+    cursor: default;
+  }
+
   &:hover,
   &.active {
-      background: $separatorDarkColor;
+    background: $separatorDarkColor;
   }
+
+
 
   &:last-child {
       border-bottom: none;

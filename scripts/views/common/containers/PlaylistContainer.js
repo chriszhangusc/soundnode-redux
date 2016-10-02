@@ -5,14 +5,16 @@ import {
   getCurrentSongId
 } from '../../../modules/reducers';
 
+import { sagaChangeSongAndPlay } from '../../../modules/player/actions';
+
 const mapStateToProps = state => ({
   playerPlaylistSongs: getPlayerPlaylistAsArray(state),
   currentSongId: getCurrentSongId(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleItemClick: () => {
-    console.log('Item clicked');
+  handleChangeSong(song) {
+    dispatch(sagaChangeSongAndPlay(song));
   }
 });
 
