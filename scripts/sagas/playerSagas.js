@@ -15,9 +15,11 @@ import {
   changeSong,
   clearTime,
   playSong,
-  shuffleDiscard,
   initShuffle,
   sagaChangeSongAndPlay,
+  changePlayMode,
+  shuffleDraw,
+  shuffleDiscard
 } from '../modules/player/actions';
 
 import { SHUFFLE, NEXT, PREV, DEFAULT_MODE } from '../constants/PlayerConstants';
@@ -82,10 +84,10 @@ function* changeSongAndPlay({ payload }) {
 }
 
 function* shuffle() {
-  const shuffleDraw = yield select(selectors.getShuffleDraw);
+  const shuffleDrawQueue = yield select(selectors.getShuffleDraw);
   // Generate the array index of the song we are going to play next
-  const nextIdx = yield call(generateRandom, 0, shuffleDraw.length - 1);
-  const nextSongId = shuffleDraw[nextIdx];
+  const nextIdx = yield call(generateRandom, 0, shuffleDrawQueue.length - 1);
+  const nextSongId = shuffleDrawQueue[nextIdx];
   // Remove nextSongId from shuffleDraw
   yield put(shuffleDraw(nextSongId));
   // Add nextSongId to shuffleDiscard
@@ -110,10 +112,12 @@ function* doPlaySong(action) {
     playlistSongIds = yield select(selectors.getPlayerSongIds);
     nextSongId = yield call(getSongIdByMode, currentSongId, playlistSongIds, mode, action);
   }
-  yield put(sagaChangeSongAndPlay(nextSongId));
+
+  const nextSong = yield select(selectors.getSongByIdFromPlaylist, nextSongId);
+  yield put(sagaChangeSongAndPlay(nextSong));
 }
 
-function* changePlayMode({ payload }) {
+function* doChangePlayMode({ payload }) {
   const currMode = yield select(selectors.getPlayerMode);
   const newMode = payload;
   if (currMode === newMode) {
@@ -155,7 +159,7 @@ export function* watchEndSeekVolume() {
 }
 
 export function* watchChangePlayMode() {
-  yield takeEvery(ActionTypes.SAGA_CHANGE_PLAY_MODE, changePlayMode);
+  yield takeEvery(ActionTypes.SAGA_CHANGE_PLAY_MODE, doChangePlayMode);
 }
 
 export function* watchChangeSongAndPlay() {

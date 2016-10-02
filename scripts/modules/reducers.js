@@ -146,5 +146,10 @@ export const getSingleSongIsActive = (state, id) => {
   return currentSongId ? id === currentSongId : false;
 };
 
+// Return the song object by songId from current player playlist
+export const getSongByIdFromPlaylist = (state, id) => {
+  const playerSongMap = getPlayerSongMap(state);
+  return playerSongMap ? playerSongMap[id] : undefined;
+};
 
 export default rootReducer;

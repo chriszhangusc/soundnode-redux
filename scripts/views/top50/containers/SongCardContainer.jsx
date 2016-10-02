@@ -4,8 +4,8 @@ import SongCard from '../components/SongCard/SongCard';
 import {
   playSong,
   sagaChangeSongAndPlay,
-  pauseSong,
-} from '../../../modules/playlists/actions';
+  pauseSong
+} from '../../../modules/player/actions';
 
 import { startLikeSong, startUnlikeSong } from '../../../modules/user/actions';
 
