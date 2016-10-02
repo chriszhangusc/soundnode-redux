@@ -37,15 +37,19 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   handleChangeSong() { dispatch(sagaChangeSongAndPlay(ownProps.song)); },
   handlePauseSong() { dispatch(pauseSong()); },
   handleLikeClick() {
-    console.log('Like Clicked');
     dispatch(startLikeSong(ownProps.song.id));
   },
   handleUnlikeClick() {
-    console.log('Unlike Clicked');
     dispatch(startUnlikeSong(ownProps.song.id));
   },
   handleCopyToClipboard() {
     copy(ownProps.song.permalink_url);
+    dispatch({
+      type: 'COPY_SUCCESS',
+      payload: {
+        message: 'Song URL copied to clipboard'
+      }
+    });
   }
 });
 

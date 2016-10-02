@@ -13,7 +13,7 @@ const SongCardControls = ({
 }) => (
   <div className="song-card-controls">
     <button
-      title="like"
+      title={isLiked ? 'Unlike' : 'Like'}
       className="icon-button"
       onClick={() => {
         if (isLiked) {
@@ -35,7 +35,7 @@ const SongCardControls = ({
     <button title="repost" className="icon-button">
       <i className="fa fa-external-link" />
     </button>
-    <button title="copy to clipboard" className="icon-button" onClick={handleCopyToClipboard}>
+    <button title="Copy to clipboard" className="icon-button" onClick={handleCopyToClipboard}>
       <i className="fa fa-clipboard" />
     </button>
   </div>
