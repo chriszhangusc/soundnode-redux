@@ -38,7 +38,12 @@ export const INIT_SHUFFLE = 'INIT_SHUFFLE';
 export const SHUFFLE_DRAW = 'SHUFFLE_DRAW';
 export const SHUFFLE_DISCARD = 'SHUFFLE_DISCARD';
 
-export const LIKE_SONG = 'LIKE_SONG';
-export const LOGIN = 'LOGIN';
+/* User Action Types */
+export const LIKE_SONG_SUCCESS = 'LIKE_SONG_SUCCESS';
+export const LIKE_SONG_FAILED = 'LIKE_SONG_FAILED';
+export const UNLIKE_SONG_SUCCESS = 'UNLIKE_SONG_SUCCESS';
+export const UNLIKE_SONG_FAILED = 'UNLIKE_SONG_FAILED';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
 export const LOGOUT = 'LOGOUT';
 export const LOAD_ALL_LIKES = 'LOAD_ALL_LIKES';

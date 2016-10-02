@@ -5,9 +5,24 @@ function createInfo(msg) {
   NotificationManager.info(msg);
 }
 
-const SongCardControls = ({ handleLikeClick, isLiked, handleCopyToClipboard }) => (
+const SongCardControls = ({
+  handleLikeClick,
+  handleUnlikeClick,
+  isLiked,
+  handleCopyToClipboard
+}) => (
   <div className="song-card-controls">
-    <button title="like" className="icon-button" onClick={handleLikeClick}>
+    <button
+      title="like"
+      className="icon-button"
+      onClick={() => {
+        if (isLiked) {
+          handleUnlikeClick();
+        } else {
+          handleLikeClick();
+        }
+      }}
+    >
       <i className={`fa fa-heart ${isLiked ? 'active' : ''}`} />
     </button>
     <button
@@ -29,6 +44,7 @@ const SongCardControls = ({ handleLikeClick, isLiked, handleCopyToClipboard }) =
 SongCardControls.propTypes = {
   isLiked: PropTypes.bool,
   handleLikeClick: PropTypes.func,
+  handleUnlikeClick: PropTypes.func,
   handleCopyToClipboard: PropTypes.func
 };
 

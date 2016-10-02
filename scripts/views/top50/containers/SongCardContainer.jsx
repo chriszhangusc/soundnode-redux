@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import copy from 'copy-to-clipboard';
-import { NotificationManager } from 'react-notifications';
 import SongCard from '../components/SongCard/SongCard';
 import {
   playSong,
@@ -8,7 +7,7 @@ import {
   pauseSong,
 } from '../../../modules/playlists/actions';
 
-import { startLikeSong } from '../../../modules/user/actions';
+import { startLikeSong, startUnlikeSong } from '../../../modules/user/actions';
 
 import {
   isSongLiked,
@@ -38,7 +37,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   handleChangeSong() { dispatch(sagaChangeSongAndPlay(ownProps.song)); },
   handlePauseSong() { dispatch(pauseSong()); },
   handleLikeClick() {
+    console.log('Like Clicked');
     dispatch(startLikeSong(ownProps.song.id));
+  },
+  handleUnlikeClick() {
+    console.log('Unlike Clicked');
+    dispatch(startUnlikeSong(ownProps.song.id));
   },
   handleCopyToClipboard() {
     copy(ownProps.song.permalink_url);

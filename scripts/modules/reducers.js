@@ -19,8 +19,10 @@ const rootReducer = combineReducers({
 /* From user */
 export const isSongLiked = (state, songId) => {
   const likes = fromUser.getLikes(state.get('user'));
-  return (likes.indexOf(songId) !== -1);
+  return (songId in likes);
 };
+
+export const getLikes = state => fromUser.getLikes(state.get('user'));
 
 export const getUid = state => fromUser.getUid(state.get('user'));
 

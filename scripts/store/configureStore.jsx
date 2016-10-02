@@ -6,6 +6,7 @@ import throttle from 'lodash/throttle';
 import rootReducer from '../modules/reducers';
 import rootSaga from '../sagas';
 import { loadState, saveState } from '../utils/LocalStorageUtils';
+import notificationMiddleware from '../middlewares/notificationMiddleware';
 
 const configureStore = () => {
   const persistedState = loadState();
@@ -15,7 +16,7 @@ const configureStore = () => {
     persistedState,
     // initialState,
     compose(
-      applyMiddleware(thunk, sagaMiddleware),
+      applyMiddleware(thunk, sagaMiddleware, notificationMiddleware),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );
