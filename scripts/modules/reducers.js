@@ -119,7 +119,12 @@ export const getCurrentSongArtworkUrl = createSelector(
 // Return the sorted array of songs of visible playlist
 export const getVisibleSongsAsArray = createSelector(
   [getVisibleSongMap, getVisibleSongIds],
-  (songsById, songIds) => (songIds && songsById ? songIds.map(id => songsById[id]) : undefined)
+  (songsById, songIds) => (songIds && songsById ? songIds.map(id => songsById[id]) : [])
+);
+
+export const getPlayerPlaylistAsArray = createSelector(
+  [getPlayerSongMap, getPlayerSongIds],
+  (songsById, songIds) => (songIds && songsById ? songIds.map(id => songsById[id]) : [])
 );
 
 /* SongCardSelectors */

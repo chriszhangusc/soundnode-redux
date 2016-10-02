@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-const Playlist = () => {
+const Playlist = ({ playerPlaylistSongs, currentSongId, handleItemClick }) => {
   return (
     <div className="playlist-container">
       <div className="playlist-title">
@@ -9,24 +9,29 @@ const Playlist = () => {
         <span className="labelColumn">ARTIST</span>
       </div>
       <ul className="playlist-list">
-        <li className="playlist-item">
-          <span className="playlist-item-index">1.</span>
-          <span className="playlist-item-title">Young Mother Fucker</span>
-          <span className="playlist-item-username">by: Huachao Zhang</span>
-        </li>
-        <li className="playlist-item">
-          <span className="playlist-item-index">2.</span>
-          <span className="playlist-item-title">Always analyzing</span>
-          <span className="playlist-item-username">by: Vencent</span>
-        </li>
-        <li className="playlist-item">
-          <span className="playlist-item-index">3.</span>
-          <span className="playlist-item-title">HJ Auto Group is Shit</span>
-          <span className="playlist-item-username">by: Holly Shit</span>
-        </li>
+        {
+          playerPlaylistSongs.map((song, idx) => {
+            return (
+            <li
+              className={`playlist-item ${currentSongId === song.id ? 'active' : ''}`}
+              onClick={handleItemClick}
+              key={idx}
+            >
+              <span className="playlist-item-index">{`${idx + 1}.`}</span>
+              <span className="playlist-item-title">{ song.title }</span>
+              <span className="playlist-item-username">by: {song.user.username}</span>
+            </li>);
+          })
+        }
       </ul>
     </div>
   );
+};
+
+Playlist.propTypes = {
+  currentSongId: PropTypes.number,
+  playerPlaylistSongs: PropTypes.array,
+  handleItemClick: PropTypes.func
 };
 
 export default Playlist;

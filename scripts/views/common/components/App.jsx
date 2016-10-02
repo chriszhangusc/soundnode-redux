@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import Nav from './Nav';
 import Sidebar from './Sidebar';
-import Playlist from './Playlist';
+import PlaylistContainer from '../containers/PlaylistContainer';
 // Skeleton layout of our app
 class App extends Component {
   render() {
@@ -18,7 +18,7 @@ class App extends Component {
               { this.props.children }
             </div>
             <div className="col-sm-2 playlist" >
-              <Playlist />
+              <PlaylistContainer />
             </div>
           </div>
         </div>

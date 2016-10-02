@@ -35,7 +35,7 @@
 }
 
 .playlist-item {
-  font-size: 15px;
+  font-size: 13px;
   color: #fff;
   border-bottom: 1px solid $separatorDarkColor;
   padding: 12px 20px;
@@ -43,7 +43,7 @@
   cursor: pointer;
 
   &:hover,
-  & .active {
+  &.active {
       background: $separatorDarkColor;
   }
 
@@ -55,10 +55,6 @@
     display: inline-block;
   }
 
-  & .playlist-item-index {
-    width: 18px;
-  }
-
   & .playlist-item-index,
   & .playlist-item-title,
   & .playlist-item-username {
@@ -67,11 +63,16 @@
     overflow: hidden;
   }
 
+  & .playlist-item-index {
+    width: 20px;
+  }
+
   & .playlist-item-title {
-    width: 160px;
+    width: 180px;
   }
 
   & .playlist-item-username {
+    color: #bdbdbd;
     width: 140px;
   }
 }
