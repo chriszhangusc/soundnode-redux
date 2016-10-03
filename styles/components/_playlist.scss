@@ -4,14 +4,24 @@
   width: 400px;
   position: fixed;
   top: 70px;
+  right: -400px;
   bottom: 0;
-  right: 0;
   z-index: 1000;
   display: block;
   padding: 0;
   overflow-x: hidden;
   overflow-y: scroll; /* Scrollable contents if viewport is shorter than content. */
+  /* Transitions */
   background-color: $sidebar-color;
+
+  -webkit-animation: slide 0.5s backwards;
+  -webkit-animation-delay: 2s;
+  animation: slide 0.5s backwards;
+  animation-delay: 1s;
+}
+
+.playlist.show {
+  right: 0;
 }
 
 .playlist-container {
@@ -70,7 +80,7 @@
   }
 
   & .playlist-item-index {
-    width: 20px;
+    width: 25px;
   }
 
   & .playlist-item-title {

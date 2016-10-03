@@ -17,9 +17,8 @@ class App extends Component {
             <div className="col-sm-8 col-sm-offset-2">
               { this.props.children }
             </div>
-            <div className="col-sm-2 playlist" >
-              <PlaylistContainer />
-            </div>
+
+            <PlaylistContainer />
           </div>
         </div>
         <NotificationContainer />

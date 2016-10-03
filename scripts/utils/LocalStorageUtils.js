@@ -15,7 +15,7 @@ export const loadState = () => {
 
     return fromJS(JSON.parse(serializedState));
   } catch (err) {
-    console.log(err);
+    console.log('Load State Error: ', err);
     return undefined; // Return undefined so that our reducer initialize with default state.
   }
 };
@@ -32,6 +32,6 @@ export const saveState = (state, keys) => {
     const serializedState = JSON.stringify(sliceOfState.toJS());
     localStorage.setItem('state', serializedState);
   } catch (err) {
-    console.log(err);
+    console.log('Save State Error', err);
   }
 };

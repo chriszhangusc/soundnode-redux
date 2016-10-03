@@ -1,3 +1,5 @@
+/* Player Action Types */
+export const TOGGLE_PLAYLIST = 'TOGGLE_PLAYLIST';
 export const REQUEST_SONGS = 'REQUEST_SONGS';
 export const RECEIVE_SONGS = 'RECEIVE_SONGS';
 export const PLAY_SONG = 'PLAY_SONG';

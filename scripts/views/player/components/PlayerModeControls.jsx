@@ -7,6 +7,7 @@ class PlayerModeControls extends Component {
     super(props);
     this.renderRepeat = this.renderRepeat.bind(this);
     this.renderShuffle = this.renderShuffle.bind(this);
+    this.renderTogglePlaylist = this.renderTogglePlaylist.bind(this);
   }
 
   renderRepeat() {
@@ -17,6 +18,18 @@ class PlayerModeControls extends Component {
         onClick={onRepeatClick}
       >
         <i className="icon ion-loop" />
+      </button>
+    );
+  }
+
+  renderTogglePlaylist() {
+    const { onTogglePlaylistClick, isPlaylistShown } = this.props;
+    return (
+      <button
+        className={`icon-button player-button ${(isPlaylistShown ? 'active' : '')}`}
+        onClick={onTogglePlaylistClick}
+      >
+        <i className="icon ion-ios-list" />
       </button>
     );
   }
@@ -38,6 +51,7 @@ class PlayerModeControls extends Component {
       <div className="player-section">
         {this.renderRepeat()}
         {this.renderShuffle()}
+        {this.renderTogglePlaylist()}
       </div>
     );
   }
@@ -46,8 +60,10 @@ class PlayerModeControls extends Component {
 
 PlayerModeControls.propTypes = {
   mode: PropTypes.string,
+  isPlaylistShown: PropTypes.bool,
   onRepeatClick: PropTypes.func,
-  onShuffleClick: PropTypes.func
+  onShuffleClick: PropTypes.func,
+  onTogglePlaylistClick: PropTypes.func
 };
 
 export default PlayerModeControls;

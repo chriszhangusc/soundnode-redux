@@ -1,6 +1,8 @@
 import * as ActionTypes from '../../../constants/ActionTypes';
 
 /* Pure actions */
+export const togglePlaylist = () => ({ type: ActionTypes.TOGGLE_PLAYLIST });
+
 export const toggleSeek = () => ({ type: ActionTypes.TOGGLE_SEEK });
 
 export const beginSeek = () => ({ type: ActionTypes.BEGIN_SEEK });

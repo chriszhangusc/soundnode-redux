@@ -66,6 +66,8 @@ export const playlistExists = (state, playlistName) =>
   fromPlaylists.playlistExists(state.get('playlists'), playlistName);
 
 /* From player */
+export const getShowPlaylist = state => fromPlayer.getShowPlaylist(state.get('player'));
+
 export const getShuffleDraw = state => fromPlayer.getShuffleDraw(state.get('player'));
 
 export const getShuffleDiscard = state => fromPlayer.getShuffleDiscard(state.get('player'));
