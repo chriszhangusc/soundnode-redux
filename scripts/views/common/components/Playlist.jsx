@@ -23,6 +23,17 @@ const Playlist = ({ playerPlaylistSongs, currentSongId, handleChangeSong }) => {
               <span className="playlist-item-index">{`${idx + 1}.`}</span>
               <span className="playlist-item-title">{ song.title }</span>
               <span className="playlist-item-username">by: {song.user.username}</span>
+              <div className="playlist-item-options-container">
+                <i className="fa fa-ellipsis-v" />
+                <div className="playlist-item-popup-arrow" />
+                <ul className="playlist-item-options-list">
+                  <li className="playlist-item-options-list_button">Go to track</li>
+                  <li className="playlist-item-options-list_button">Like</li>
+                  <li className="playlist-item-options-list_button">Add to playlist</li>
+                  <li className="playlist-item-options-list_button">Remove</li>
+                  <li className="playlist-item-options-list_button">Repost</li>
+                </ul>
+              </div>
             </li>);
           })
         }
@@ -40,15 +51,15 @@ Playlist.propTypes = {
 export default Playlist;
 
 //
-// <div class="queueListView">
+// <div className="queueListView">
 //
-//     <ul class="queueListView_list">
-//         <li class="queueListView_list_itemTitle">
-//             <span class="labelColumn">TRACKS</span>
+//     <ul className="queueListView_list">
+//         <li className="queueListView_list_itemTitle">
+//             <span className="labelColumn">TRACKS</span>
 //             |
-//             <span class="labelColumn">ARTIST</span>
+//             <span className="labelColumn">ARTIST</span>
 //         </li>
-//         <li class="queueListView_list_item"
+//         <li className="queueListView_list_item"
 //             ng-repeat="item in data"
 //             song
 //             data-song-url="{{ item.songUrl }}"
@@ -58,21 +69,21 @@ export default Playlist;
 //             data-song-id="{{ item.songId }}"
 //             ng-click="activateTrackInQueue($event)">
 //
-//             <small class="queueListView_list_item_index">{{ $index + 1 }}</small>
-//             <span class="queueListView_list_item_title selectable-text" title="{{ item.songTitle }}">{{ item.songTitle }}</span>
-//             <span class="queueListView_list_item_user" title="by: {{ item.songUser }}">by: {{ item.songUser }} </span>
-//             <div class="queueListView_list_item_options"
-//                  ng-class="{ active: hover }"
+//             <small className="queueListView_list_item_index">{{ $index + 1 }}</small>
+//             <span className="queueListView_list_item_title selectable-text" title="{{ item.songTitle }}">{{ item.songTitle }}</span>
+//             <span className="queueListView_list_item_user" title="by: {{ item.songUser }}">by: {{ item.songUser }} </span>
+//             <div className="playlist-item-options-container"
+//                  ng-className="{ active: hover }"
 //                  ng-mouseover="menuPosition($event); hover = true"
 //                  ng-mouseleave="hover = false" >
-//                 <i class="fa fa-ellipsis-v"></i>
-//                 <div class="queueListView_list_item_options_arrow"></div>
-//                 <ul class="queueListView_list_item_options_list">
-//                     <li class="queueListView_list_item_options_list_button" ng-click="remove($event); $event.stopPropagation();">Remove</li>
-//                     <li class="queueListView_list_item_options_list_button" ng-click="like($event); $event.stopPropagation();">Like</li>
-//                     <li class="queueListView_list_item_options_list_button" ng-click="repost($event); $event.stopPropagation();">Repost</li>
-//                     <li class="queueListView_list_item_options_list_button" ng-click="addToPlaylist($event); $event.stopPropagation();">Add to playlist</li>
-//                     <li class="queueListView_list_item_options_list_button" ng-click="gotoTrack($event); $event.stopPropagation();">Go to track</li>
+//                 <i className="fa fa-ellipsis-v"></i>
+//                 <div className="playlist-item-options-container_arrow"></div>
+//                 <ul className="playlist-item-options-list">
+//                     <li className="playlist-item-options-list_button" ng-click="remove($event); $event.stopPropagation();">Remove</li>
+//                     <li className="playlist-item-options-list_button" ng-click="like($event); $event.stopPropagation();">Like</li>
+//                     <li className="playlist-item-options-list_button" ng-click="repost($event); $event.stopPropagation();">Repost</li>
+//                     <li className="playlist-item-options-list_button" ng-click="addToPlaylist($event); $event.stopPropagation();">Add to playlist</li>
+//                     <li className="playlist-item-options-list_button" ng-click="gotoTrack($event); $event.stopPropagation();">Go to track</li>
 //                 </ul>
 //             </div>
 //
