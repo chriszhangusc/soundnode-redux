@@ -10,12 +10,9 @@ export const getLastVolume = () => JSON.parse(localStorage.getItem('lastVolume')
 export const loadState = () => {
   try {
     const serializedState = localStorage.getItem('state');
-    // console.log('load state', serializedState);
-    // console.log(JSON.parse(serializedState));
-    if (serializedState === null) {
-      return undefined;
-    }
-    // console.log(serializedState);
+
+    if (serializedState === null) return undefined;
+
     return fromJS(JSON.parse(serializedState));
   } catch (err) {
     console.log(err);
@@ -26,16 +23,13 @@ export const loadState = () => {
 // Only store player state and auth state, no fetched playlists
 export const saveState = (state, keys) => {
   try {
-    // console.log('before:', state);
-    const sliceOfState = {};
+    // For playlists, we only want to store playerPlaylist
+    let sliceOfState = fromJS({});
     keys.forEach((key) => {
-      if (state.get(key)) {
-        sliceOfState[key] = state.get(key).toJS();
-      }
+      const keyPath = key.split('/');
+      sliceOfState = sliceOfState.setIn(keyPath, state.getIn(keyPath));
     });
-    const serializedState = JSON.stringify(sliceOfState);
-    // console.log('after:', serializedState);
-    // const serializedState = JSON.stringify(state.toJS());
+    const serializedState = JSON.stringify(sliceOfState.toJS());
     localStorage.setItem('state', serializedState);
   } catch (err) {
     console.log(err);
