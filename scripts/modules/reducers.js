@@ -147,6 +147,7 @@ export const getSingleSongPlayingState = (state, id) => {
 
 // To memoize it we have to check out createSelector with param!
 export const getSingleSongIsActive = (state, id) => {
+  if (!id) return false;
   const currentSongId = getCurrentSongId(state);
   return currentSongId ? id === currentSongId : false;
 };

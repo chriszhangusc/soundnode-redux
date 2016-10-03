@@ -24,12 +24,15 @@ const user = (state = INITIAL_STATE, action) => {
       return state.set('likes', fromJS(action.payload));
     case LIKE_SONG_SUCCESS:
       return state.setIn(
-        ['likes', action.payload.record.songId],
+        ['likes', action.payload.record.songId.toString()],
         action.payload.record.firebaseKey
       );
     case UNLIKE_SONG_SUCCESS:
       // It will fail without toString!!!
-      return state.deleteIn(['likes', action.payload.songId.toString()]);
+      console.log(action.payload.songId.toString());
+      const newState = state.deleteIn(['likes', action.payload.songId.toString()]);
+      console.log(newState.get('likes').toJS());
+      return newState;
     case LIKE_SONG_FAILED:
     case LOGIN_FAILED:
     default:
