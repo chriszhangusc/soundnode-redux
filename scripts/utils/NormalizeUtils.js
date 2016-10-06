@@ -2,7 +2,7 @@
 
 export function normalizeCharts(data) {
   // { [trackIds] {tracks obj array} }
-  const collection = data.collection
+  const collection = data.collection;
   const ids = [];
   const entities = {};
   collection.forEach((item) => {
@@ -16,5 +16,20 @@ export function normalizeCharts(data) {
     ids,
     entities,
     next_href: data.next_href
+  };
+}
+
+export function normalizeSearchResults(data) {
+  const collection = data.collection;
+  const ids = [];
+  const entities = {};
+  collection.forEach((item) => {
+    ids.push(item.id);
+    entities[item.id] = item;
+  });
+  return {
+    ids,
+    entities,
+    nextHref: data.next_href
   };
 }

@@ -17,6 +17,7 @@ import {
 const mapStateToProps = (state, ownProps) => {
   const { song, index } = ownProps;
   return {
+    songId: song ? song.id : undefined,
     isActive: song ? getSingleSongIsActive(state, song.id) : false,
     title: song ? song.title : undefined,
     username: song && song.user ? song.user.username : undefined,

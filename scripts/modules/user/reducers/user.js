@@ -29,10 +29,7 @@ const user = (state = INITIAL_STATE, action) => {
       );
     case UNLIKE_SONG_SUCCESS:
       // It will fail without toString!!!
-      console.log(action.payload.songId.toString());
-      const newState = state.deleteIn(['likes', action.payload.songId.toString()]);
-      console.log(newState.get('likes').toJS());
-      return newState;
+      return state.deleteIn(['likes', action.payload.songId.toString()]);
     case LIKE_SONG_FAILED:
     case LOGIN_FAILED:
     default:

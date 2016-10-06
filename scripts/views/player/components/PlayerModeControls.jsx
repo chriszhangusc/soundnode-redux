@@ -14,6 +14,7 @@ class PlayerModeControls extends Component {
     const { onRepeatClick, mode } = this.props;
     return (
       <button
+        title="Repeat"
         className={`icon-button player-button ${(mode === REPEAT ? 'active' : '')}`}
         onClick={onRepeatClick}
       >
@@ -26,6 +27,7 @@ class PlayerModeControls extends Component {
     const { onTogglePlaylistClick, isPlaylistShown } = this.props;
     return (
       <button
+        title="Playlist"
         className={`icon-button player-button ${(isPlaylistShown ? 'active' : '')}`}
         onClick={onTogglePlaylistClick}
       >
@@ -38,6 +40,7 @@ class PlayerModeControls extends Component {
     const { onShuffleClick, mode } = this.props;
     return (
       <button
+        title="Shuffle"
         className={`icon-button player-button ${(mode === SHUFFLE ? 'active' : '')}`}
         onClick={onShuffleClick}
       >

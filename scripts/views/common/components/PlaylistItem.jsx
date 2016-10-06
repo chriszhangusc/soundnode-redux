@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 const PlaylistItem = ({
+  songId,
   title,
   username,
   isLiked,

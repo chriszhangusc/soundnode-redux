@@ -1,11 +1,31 @@
 import { connect } from 'react-redux';
 import NavSearch from '../components/NavSearch';
-import { searchSongs } from '../../../modules/playlists/actions';
+import {
+  doSearch,
+  hideSearchResults
+} from '../../../modules/search/actions';
+
+import {
+  getSearchUsersAsArray,
+  getSearchTracksAsArray,
+  getSearchIsFetching,
+  getShowResults
+} from '../../../modules/reducers';
+
+const mapStateToProps = state => ({
+  showResults: getShowResults(state),
+  isFetching: getSearchIsFetching(state),
+  users: getSearchUsersAsArray(state),
+  tracks: getSearchTracksAsArray(state)
+});
 
 const mapDispatchToProps = dispatch => ({
-  handleSearch: (searchText) => {
-    dispatch(searchSongs(searchText.trim()));
+  handleSearch: (keywords) => {
+    dispatch(doSearch(keywords));
+  },
+  handleBlur: () => {
+    dispatch(hideSearchResults());
   }
 });
 
-export default connect(null, mapDispatchToProps)(NavSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(NavSearch);

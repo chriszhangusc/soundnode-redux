@@ -12,6 +12,7 @@ class PlayerControls extends Component {
     const { isPlaying, onPauseClick, onPlayClick } = this.props;
     return (
       <button
+        title="Play"
         className="icon-button player-button"
         onClick={isPlaying ? onPauseClick : onPlayClick}
       >
@@ -23,7 +24,11 @@ class PlayerControls extends Component {
   renderForwardButton() {
     const { onNextClick } = this.props;
     return (
-      <button className="icon-button player-button" onClick={onNextClick}>
+      <button
+        title="Next"
+        className="icon-button player-button"
+        onClick={onNextClick}
+      >
         <i className="icon ion-ios-fastforward" />
       </button>
     );
@@ -32,7 +37,11 @@ class PlayerControls extends Component {
   renderBackwardButton() {
     const { onPrevClick } = this.props;
     return (
-      <button className="icon-button player-button" onClick={onPrevClick}>
+      <button
+        title="Back"
+        className="icon-button player-button"
+        onClick={onPrevClick}
+      >
         <i className="icon ion-ios-rewind" />
       </button>
     );

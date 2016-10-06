@@ -4,17 +4,26 @@ import { createSelector } from 'reselect';
 import * as fromPlaylists from './playlists/reducers/playlists';
 import * as fromPlayer from './player/reducers/player';
 import * as fromUser from './user/reducers/user';
+import * as fromSearch from './search/reducers/search';
 import { formatImageUrl, formatTitle, formatStreamUrl } from '../utils/FormatUtils';
 
 
 const rootReducer = combineReducers({
   playlists: fromPlaylists.default,
   player: fromPlayer.default,
-  user: fromUser.default
+  user: fromUser.default,
+  search: fromSearch.default
 });
 
 // Selectors are our reading API of our state,
 // so it is recommended to colocate them with the reducers.
+/* From search */
+export const getSearchTracksAsArray = state => fromSearch.getTracksAsArray(state.get('search'));
+export const getSearchTrackNextHref = state => fromSearch.getTrackNextHref(state.get('search'));
+export const getSearchUsersAsArray = state => fromSearch.getUsersAsArray(state.get('search'));
+export const getSearchUsersNextHref = state => fromSearch.getUserNextHref(state.get('search'));
+export const getSearchIsFetching = state => fromSearch.getIsFetching(state.get('search'));
+export const getShowResults = state => fromSearch.getShowResults(state.get('search'));
 
 /* From user */
 export const isSongLiked = (state, songId) => {

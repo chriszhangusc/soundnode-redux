@@ -1,3 +1,4 @@
+// SoundCloud API V2
 import axios from 'axios';
 import { CLIENT_ID } from '../constants/Config';
 import { concatParamsToUrl, formatGenre } from '../utils/FormatUtils';
@@ -26,12 +27,3 @@ export function fetchCharts(genre) {
     return normalizedTracks;
   });
 }
-//
-// yield put(actions.requestSongs(playlist));
-// const response = yield call(axios.get, url);
-// const normalizedSongs = yield call(normalize, response.data.collection, arrayOfSongs);
-// yield put(actions.receiveSongs(
-//     playlist,
-//     normalizedSongs.entities.songs,
-//     normalizedSongs.result,
-//     response.data.next_href));
