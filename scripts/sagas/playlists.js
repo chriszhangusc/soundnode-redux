@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { normalize } from 'normalizr';
 import { fork, put, call, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import * as ActionTypes from '../constants/ActionTypes';

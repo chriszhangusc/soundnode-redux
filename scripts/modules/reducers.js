@@ -23,7 +23,9 @@ export const getArtistAvatarUrl = state => fromArtist.getAvatarUrl(state.get('ar
 export const getArtistName = state => fromArtist.getName(state.get('artist'));
 export const getArtistFollowers = state => fromArtist.getFollowers(state.get('artist'));
 export const getArtistDescription = state => fromArtist.getDescription(state.get('artist'));
-
+export const getArtistTracksAsArray = state => fromArtist.getTracksAsArray(state.get('artist'));
+export const getArtistTracksFetchState = state =>
+  fromArtist.getTracksFetchState(state.get('artist'));
 // Selectors are our reading API of our state,
 // so it is recommended to colocate them with the reducers.
 /* From search */

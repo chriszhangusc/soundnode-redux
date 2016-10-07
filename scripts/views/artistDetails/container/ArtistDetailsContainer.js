@@ -5,7 +5,8 @@ import {
   getArtistAvatarUrl,
   getArtistName,
   getArtistFollowers,
-  getArtistDescription
+  getArtistDescription,
+  getArtistTracksAsArray
 } from '../../../modules/reducers';
 import { formatImageUrl } from '../../../utils/FormatUtils';
 import { crop } from '../../../constants/ImageConstants';
@@ -15,7 +16,8 @@ const mapStateToProps = (state, ownProps) => ({
   avatarUrl: formatImageUrl(getArtistAvatarUrl(state), crop),
   artistName: getArtistName(state),
   followers: getArtistFollowers(state),
-  description: getArtistDescription(state)
+  description: getArtistDescription(state),
+  tracks: getArtistTracksAsArray(state)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

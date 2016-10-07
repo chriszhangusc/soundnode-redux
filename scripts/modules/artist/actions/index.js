@@ -1,10 +1,13 @@
 import {
   START_ARTIST_FETCH,
   END_ARTIST_FETCH,
-  USER_RECEIVED
+  USER_RECEIVED,
+  TRACKS_RECEIVED
 } from '../../../constants/ActionTypes';
 
 import { fetchUser, fetchUserTracks } from '../../../services/SCAPIServices';
+
+import { normalizeTracks } from '../../../utils/NormalizeUtils';
 
 export const startFetching = () => ({
   type: START_ARTIST_FETCH
@@ -24,6 +27,15 @@ export const userReceived = user => ({
   }
 });
 
+export const tracksReceived = normalizedTracks => ({
+  type: TRACKS_RECEIVED,
+  payload: {
+    trackNextHref: normalizedTracks.nextHref,
+    tracksById: normalizedTracks.entities,
+    trackIds: normalizedTracks.ids
+  }
+});
+
 /* Thunk actions */
 export const loadUser = (uid) => {
   return (dispatch) => {
@@ -32,12 +44,14 @@ export const loadUser = (uid) => {
       fetchUser(uid),
       fetchUserTracks(uid)
     ])
-    .then(([user, userTracks]) => {
+    .then(([user, tracks]) => {
       dispatch(userReceived(user.data));
+      const normalizedTracks = normalizeTracks(tracks.data);
+      dispatch(tracksReceived(normalizedTracks));
       dispatch(endFetching());
-    })
-    .catch((error) => {
-      console.log('Error in loadUser', error);
     });
+    // .catch((error) => {
+    //   console.log('Error in loadUser', error);
+    // });
   };
 };

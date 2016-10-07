@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { loadUser } from '../../../modules/artist/actions';
 import Spinner from '../../common/components/Spinner';
+import TrackListContainer from '../container/TrackListContainer';
 
 class ArtistDetails extends Component {
 
@@ -17,7 +18,8 @@ class ArtistDetails extends Component {
       avatarUrl,
       artistName,
       followers,
-      description
+      description,
+      tracks
     } = this.props;
 
     if (isFetching) return <Spinner />;
@@ -31,6 +33,13 @@ class ArtistDetails extends Component {
             <h1 className="artist-name">{artistName}</h1>
             <div className="artist-followers">Followers: {followers}</div>
             <div className="artist-description">{description}</div>
+          </div>
+        </div>
+
+        <div className="artist-tracks-container">
+          <div className="artist-tracks-title">
+            <h3>Tracks:</h3>
+            <TrackListContainer />
           </div>
         </div>
       </div>

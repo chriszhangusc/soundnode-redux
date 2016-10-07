@@ -27,10 +27,10 @@ export function fetchUser(uid) {
 
 /**
  * Fetch all tracks of a user specified by uid
- * @return {[type]} [description]
+ * @return Promise
  */
 export function fetchUserTracks(uid) {
-  const url = `${SC_API_V1}/users/${uid}/tracks?client_id=${CLIENT_ID}`;
+  const url = `${SC_API_V1}/users/${uid}/tracks?client_id=${CLIENT_ID}&linked_partitioning=1&limit=10`;
   return axios.get(url);
 }
 

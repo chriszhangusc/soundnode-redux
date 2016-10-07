@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { CLIENT_ID } from '../constants/Config';
 import { concatParamsToUrl, formatGenre } from '../utils/FormatUtils';
-import { normalizeCharts } from '../utils/NormalizeUtils';
+import { normalizeTracks } from '../utils/NormalizeUtils';
 
 export const SC_API_V2 = 'http://localhost:3001/sc/api-v2';
 
@@ -22,7 +22,7 @@ export function fetchCharts(genre) {
 
   return axios.get(fetchUrl).then((res) => {
     // console.log(res.data);
-    const normalizedTracks = normalizeCharts(res.data);
+    const normalizedTracks = normalizeTracks(res.data);
     // console.log(normalizedTracks);
     return normalizedTracks;
   });

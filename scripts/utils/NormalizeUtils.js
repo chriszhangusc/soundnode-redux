@@ -1,12 +1,12 @@
 // Normalize data from the server.
 
-export function normalizeCharts(data) {
+export function normalizeTracks(data) {
   // { [trackIds] {tracks obj array} }
   const collection = data.collection;
   const ids = [];
   const entities = {};
   collection.forEach((item) => {
-    const obj = item.track;
+    const obj = item.track ? item.track : item;
     const id = obj.id;
     ids.push(id);
     entities[id] = obj;
@@ -15,7 +15,7 @@ export function normalizeCharts(data) {
   return {
     ids,
     entities,
-    next_href: data.next_href
+    nextHref: data.next_href
   };
 }
 
