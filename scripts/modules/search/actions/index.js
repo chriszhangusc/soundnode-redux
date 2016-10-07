@@ -5,7 +5,8 @@ import {
   SEARCH_USERS_RECEIVED,
   SEARCH_TRACKS_RECEIVED,
   SHOW_SEARCH_RESULTS,
-  HIDE_SEARCH_RESULTS
+  HIDE_SEARCH_RESULTS,
+  CLEAR_SEARCH_RESULTS
 } from '../../../constants/ActionTypes';
 import { normalizeSearchResults } from '../../../utils/NormalizeUtils';
 
@@ -55,12 +56,24 @@ export function showSearchResults() {
   };
 }
 
+export function clearSearchResults() {
+  return {
+    type: CLEAR_SEARCH_RESULTS
+  };
+}
+
 /* Thunk Actions */
+
+export function clearAndHideSearchResults() {
+  return (dispatch) => {
+    dispatch(hideSearchResults());
+    dispatch(clearSearchResults());
+  };
+}
 
 export function doSearch(keyword) {
   return (dispatch) => {
     // Show dropdown with fetching sign.
-    dispatch(showSearchResults());
     dispatch(startSearch());
     Promise.all([
       fetchUsers(keyword),
@@ -72,6 +85,7 @@ export function doSearch(keyword) {
       dispatch(usersReceived(normalizedUsers));
       dispatch(tracksReceived(normalizedTracks));
       dispatch(endSearch());
+      dispatch(showSearchResults());
     })
     .catch((err) => {
       console.log('Error occurs in doSearch:', err);

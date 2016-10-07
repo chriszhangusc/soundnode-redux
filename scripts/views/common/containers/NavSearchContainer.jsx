@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import NavSearch from '../components/NavSearch';
 import {
   doSearch,
-  hideSearchResults
+  clearAndHideSearchResults,
+  clearSearchResults
 } from '../../../modules/search/actions';
 
 import {
@@ -20,11 +21,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleSearch: (keywords) => {
-    dispatch(doSearch(keywords));
+  handleChange: (keywords) => {
+    if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
+    else dispatch(doSearch(keywords));
   },
   handleBlur: () => {
-    dispatch(hideSearchResults());
+    dispatch(clearAndHideSearchResults());
+  },
+  handleFocus: (keywords) => {
+    if (keywords === '') dispatch(clearAndHideSearchResults());
+    else dispatch(doSearch(keywords));
   }
 });
 

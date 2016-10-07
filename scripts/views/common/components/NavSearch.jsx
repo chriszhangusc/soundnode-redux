@@ -13,19 +13,16 @@ class NavSearch extends Component {
     this.renderDropdownList = this.renderDropdownList.bind(this);
   }
 
+  // Should we put logic here?!
   onChange(e) {
     e.preventDefault();
     e.stopPropagation();
-    const { handleSearch } = this.props;
-    const keywords = e.target.value.trim();
-    handleSearch(keywords);
+    const { handleChange } = this.props;
+    handleChange(e.target.value.trim());
   }
 
   onFocus(e) {
-    const keyword = e.target.value.trim();
-    if (keyword !== '') {
-      this.props.handleSearch(keyword);
-    }
+    this.props.handleFocus(e.target.value.trim());
   }
 
   onBlur() {
@@ -115,7 +112,8 @@ NavSearch.propTypes = {
   tracks: PropTypes.array,
   isFetching: PropTypes.bool,
   handleBlur: PropTypes.func,
-  handleSearch: PropTypes.func.isRequired
+  handleFocus: PropTypes.func,
+  handleChange: PropTypes.func.isRequired
 };
 
 export default NavSearch;

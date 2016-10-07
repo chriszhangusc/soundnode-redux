@@ -5,7 +5,8 @@ import {
   SEARCH_USERS_RECEIVED,
   SEARCH_TRACKS_RECEIVED,
   HIDE_SEARCH_RESULTS,
-  SHOW_SEARCH_RESULTS
+  SHOW_SEARCH_RESULTS,
+  CLEAR_SEARCH_RESULTS
 } from '../../../constants/ActionTypes';
 
 const INITIAL_STATE = fromJS({
@@ -34,6 +35,8 @@ const search = (state = INITIAL_STATE, action) => {
       return state.set('showResults', false);
     case SHOW_SEARCH_RESULTS:
       return state.set('showResults', true);
+    case CLEAR_SEARCH_RESULTS:
+      return INITIAL_STATE;
     default:
       return state;
   }
