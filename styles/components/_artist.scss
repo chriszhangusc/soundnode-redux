@@ -1,0 +1,33 @@
+.artist-info-container {
+  padding: 20px;
+  display: flex;
+
+  & .artist-avatar {
+    display: inline-block;
+  }
+
+  & .artist-details {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 20px;
+
+    & .artist-name {
+      margin-bottom: 10px;
+    }
+
+    & .artist-followers {
+      margin: 10px 0;
+      color: $font-main-color;
+    }
+
+    & .artist-description {
+      margin: 10px 0;
+      color: $font-sub-color;
+    }
+  }
+}
+
+.artist-tracks-container {
+
+}

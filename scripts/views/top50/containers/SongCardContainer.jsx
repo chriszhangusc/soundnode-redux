@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import copy from 'copy-to-clipboard';
 import SongCard from '../components/SongCard/SongCard';
+import { t500x500 } from '../../../constants/ImageConstants';
 import {
   playSong,
   sagaChangeSongAndPlay,
@@ -9,9 +10,9 @@ import {
 
 import { startLikeSong, startUnlikeSong } from '../../../modules/user/actions';
 
+// We should keep reducer simple!!!
 import {
   isSongLiked,
-  getSongImage,
   getSongTitle,
   getSongUserAvatar,
   getSongUsername,
@@ -19,10 +20,13 @@ import {
   getSingleSongPlayingState
 } from '../../../modules/reducers';
 
+import { getSongUserId, getSongImage } from '../selectors/songCardSelectors';
+
 const mapStateToProps = (state, { song }) => ({
   // This is just like passing down props!
+  uid: getSongUserId(song),
   isLiked: isSongLiked(state, song.id),
-  songImage: getSongImage(song),
+  songImage: getSongImage(song, t500x500),
   title: getSongTitle(song),
   userImage: getSongUserAvatar(song),
   username: getSongUsername(song),

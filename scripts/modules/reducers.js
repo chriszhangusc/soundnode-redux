@@ -5,6 +5,7 @@ import * as fromPlaylists from './playlists/reducers/playlists';
 import * as fromPlayer from './player/reducers/player';
 import * as fromUser from './user/reducers/user';
 import * as fromSearch from './search/reducers/search';
+import * as fromArtist from './artist/reducers/artist';
 import { formatImageUrl, formatTitle, formatStreamUrl } from '../utils/FormatUtils';
 
 
@@ -12,8 +13,16 @@ const rootReducer = combineReducers({
   playlists: fromPlaylists.default,
   player: fromPlayer.default,
   user: fromUser.default,
-  search: fromSearch.default
+  search: fromSearch.default,
+  artist: fromArtist.default
 });
+
+/* From artist */
+export const getArtistFetchState = state => fromArtist.getIsFetching(state.get('artist'));
+export const getArtistAvatarUrl = state => fromArtist.getAvatarUrl(state.get('artist'));
+export const getArtistName = state => fromArtist.getName(state.get('artist'));
+export const getArtistFollowers = state => fromArtist.getFollowers(state.get('artist'));
+export const getArtistDescription = state => fromArtist.getDescription(state.get('artist'));
 
 // Selectors are our reading API of our state,
 // so it is recommended to colocate them with the reducers.

@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Router, IndexRedirect, browserHistory } from 'react-router';
 import App from '../views/common/components/App';
 import TopMusicPage from '../views/top50/components/TopMusicPage';
+import ArtistDetailsContainer from '../views/artistDetails/container/ArtistDetailsContainer';
 import NotFound from '../views/common/components/NotFound';
 import LikesContainer from '../views/likes/components/LikesPage';
 
@@ -23,6 +24,7 @@ const configureRoutes = (store) => {
           <Route path=":genre" component={TopMusicPage} onEnter={onEnterHandler} />
         </Route>
         <Route path="likes" component={LikesContainer} />
+        <Route path="artist/:uid" component={ArtistDetailsContainer} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

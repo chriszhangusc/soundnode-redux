@@ -1,4 +1,7 @@
 import { CLIENT_ID } from '../constants/Config';
+import {
+  large
+} from '../constants/ImageConstants';
 
 export const formatSecondsAsTime = (secs) => {
   const hr = Math.floor(secs / 3600);
@@ -13,6 +16,14 @@ export const formatSecondsAsTime = (secs) => {
   return `${min}:${sec}`;
 };
 
+export function formatImageUrl(rawUrl, size = large) {
+  // Check size
+  if (rawUrl && rawUrl.indexOf(large) > -1) {
+    return rawUrl.replace(large, size);
+  }
+  return rawUrl;
+}
+
 /**
  * Generate stream url given song obj
  * @param  {String} rawUrl Stream url comming from the song object
@@ -20,11 +31,6 @@ export const formatSecondsAsTime = (secs) => {
  */
 export function formatStreamUrl(rawUrl) {
   return (rawUrl ? `${rawUrl}/stream?client_id=${CLIENT_ID}` : null);
-}
-
-
-export function formatImageUrl(imageUrl) {
-  return imageUrl ? imageUrl.replace('large', 't500x500') : imageUrl;
 }
 
 export const formatTitle = (title) => {

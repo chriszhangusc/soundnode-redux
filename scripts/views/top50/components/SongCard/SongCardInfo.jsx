@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
-export default function SongCardInfo({ userImage, title, username }) {
+export default function SongCardInfo({ uid, userImage, title, username }) {
   return (
     <div className="song-card-user clearfix">
       <img
@@ -12,15 +13,16 @@ export default function SongCardInfo({ userImage, title, username }) {
         <a className="song-card-title">
           {title}
         </a>
-        <a className="song-card-username">
+        <Link to={`/artist/${uid}`} className="song-card-username">
           {username}
-        </a>
+        </Link>
       </div>
     </div>
   );
 }
 
 SongCardInfo.propTypes = {
+  uid: PropTypes.number,
   userImage: PropTypes.string,
   title: PropTypes.string,
   username: PropTypes.string
