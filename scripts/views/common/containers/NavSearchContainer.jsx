@@ -2,8 +2,7 @@ import { connect } from 'react-redux';
 import NavSearch from '../components/NavSearch';
 import {
   doSearch,
-  clearAndHideSearchResults,
-  clearSearchResults
+  clearAndHideSearchResults
 } from '../../../modules/search/actions';
 
 import {

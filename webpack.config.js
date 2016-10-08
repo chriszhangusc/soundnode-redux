@@ -22,8 +22,11 @@ module.exports = {
   // In every other case use resolve.root.
   resolve: {
     root: [
-      path.resolve('./node_modules')
+      path.resolve(__dirname, './node_modules')
     ],
+    alias: {
+      rootDir: path.resolve(__dirname, './scripts')
+    },
     extensions: ['', '.js', '.jsx', 'stage-0']
   },
 

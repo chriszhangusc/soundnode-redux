@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { loadUser } from '../../../modules/artist/actions';
-import Spinner from '../../common/components/Spinner';
+// import { loadUser } from '../../../modules/artist/actions';
+import { loadUser } from 'rootDir/modules/artist/actions';
+import Spinner from 'rootDir/views/common/components/Spinner';
 import TrackListContainer from '../container/TrackListContainer';
 
 class ArtistDetails extends Component {
