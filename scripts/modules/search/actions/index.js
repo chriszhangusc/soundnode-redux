@@ -1,4 +1,4 @@
-import { fetchUsers, fetchTracks } from '../../../services/SCAPIServices';
+import { fetchUsers, fetchTracks } from 'client/services/SCAPIServices';
 import {
   START_SEARCH,
   END_SEARCH,
@@ -7,8 +7,8 @@ import {
   SHOW_SEARCH_RESULTS,
   HIDE_SEARCH_RESULTS,
   CLEAR_SEARCH_RESULTS
-} from '../../../constants/ActionTypes';
-import { normalizeSearchResults } from '../../../utils/NormalizeUtils';
+} from 'client/constants/ActionTypes';
+import { normalizeSearchResults } from 'client/utils/NormalizeUtils';
 
 function startSearch() {
   return {

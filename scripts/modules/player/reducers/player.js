@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
-import * as ActionTypes from '../../../constants/ActionTypes';
-import { INITIAL_VOLUME, DEFAULT_MODE } from '../../../constants/PlayerConstants';
+import * as ActionTypes from 'client/constants/ActionTypes';
+import { INITIAL_VOLUME, DEFAULT_MODE } from 'client/constants/PlayerConstants';
 
 /* Player Reducers */
 const INITIAL_STATE = fromJS({

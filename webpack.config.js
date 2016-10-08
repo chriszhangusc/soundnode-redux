@@ -25,7 +25,7 @@ module.exports = {
       path.resolve(__dirname, './node_modules')
     ],
     alias: {
-      rootDir: path.resolve(__dirname, './scripts')
+      client: path.resolve(__dirname, './scripts')
     },
     extensions: ['', '.js', '.jsx', 'stage-0']
   },

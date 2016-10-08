@@ -1,8 +1,8 @@
 // SoundCloud API V2
 import axios from 'axios';
-import { CLIENT_ID } from '../constants/Config';
-import { concatParamsToUrl, formatGenre } from '../utils/FormatUtils';
-import { normalizeTracks } from '../utils/NormalizeUtils';
+import { CLIENT_ID } from 'client/constants/Config';
+import { concatParamsToUrl, formatGenre } from 'client/utils/FormatUtils';
+import { normalizeTracks } from 'client/utils/NormalizeUtils';
 
 export const SC_API_V2 = 'http://localhost:3001/sc/api-v2';
 

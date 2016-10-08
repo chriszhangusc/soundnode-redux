@@ -1,9 +1,4 @@
-import firebase, { firebaseRef, githubProvider } from '../../../firebase/';
-
-import {
-  getUid,
-  getLikes
-} from '../../reducers';
+import firebase, { firebaseRef, githubProvider } from 'client/firebase';
 
 import {
   LOGIN_SUCCESS,
@@ -13,7 +8,12 @@ import {
   LOAD_ALL_LIKES,
   LIKE_SONG_FAILED,
   UNLIKE_SONG_SUCCESS
- } from '../../../constants/ActionTypes';
+} from 'client/constants/ActionTypes';
+
+import {
+  getUid,
+  getLikes
+} from '../../reducers';
 
 export const loginSuccess = uid => ({
   type: LOGIN_SUCCESS,

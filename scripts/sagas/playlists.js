@@ -1,15 +1,16 @@
 import { fork, put, call, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import * as ActionTypes from '../constants/ActionTypes';
+import * as ActionTypes from 'client/constants/ActionTypes';
 
 import {
   changeVisiblePlaylist,
   requestSongs,
   receiveSongs
-} from '../modules/playlists/actions';
-import * as selectors from '../modules/reducers';
+} from 'client/modules/playlists/actions';
 
-import { fetchCharts } from '../services/SCAPIV2Services';
+import * as selectors from 'client/modules/reducers';
+
+import { fetchCharts } from 'client/services/SCAPIV2Services';
 
 /* *****************************************************************************/
 /* ****************************** SUBROUTINES **********************************/

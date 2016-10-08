@@ -1,4 +1,4 @@
-import * as ActionTypes from '../../../constants/ActionTypes';
+import * as ActionTypes from 'client/constants/ActionTypes';
 
 export const requestSongs = playlist => ({
   type: ActionTypes.REQUEST_SONGS,

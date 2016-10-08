@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import * as ActionTypes from '../../../constants/ActionTypes';
+import * as ActionTypes from 'client/constants/ActionTypes';
 
 const PLAYLIST_INITIAL_STATE = fromJS({
   isFetching: false,

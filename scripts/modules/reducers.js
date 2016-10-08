@@ -1,12 +1,12 @@
 /* Main reducer */
 import { combineReducers } from 'redux-immutable';
 import { createSelector } from 'reselect';
+import { formatImageUrl, formatTitle, formatStreamUrl } from 'client/utils/FormatUtils';
 import * as fromPlaylists from './playlists/reducers/playlists';
 import * as fromPlayer from './player/reducers/player';
 import * as fromUser from './user/reducers/user';
 import * as fromSearch from './search/reducers/search';
 import * as fromArtist from './artist/reducers/artist';
-import { formatImageUrl, formatTitle, formatStreamUrl } from '../utils/FormatUtils';
 
 
 const rootReducer = combineReducers({

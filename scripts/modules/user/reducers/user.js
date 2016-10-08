@@ -8,7 +8,7 @@ import {
   LIKE_SONG_FAILED,
   LOAD_ALL_LIKES,
   UNLIKE_SONG_SUCCESS
-} from '../../../constants/ActionTypes';
+} from 'client/constants/ActionTypes';
 
 const INITIAL_STATE = fromJS({
   likes: {}

@@ -1,6 +1,6 @@
 /* SoundCloud API V1 */
 import axios from 'axios';
-import { CLIENT_ID } from '../constants/Config';
+import { CLIENT_ID } from 'client/constants/Config';
 
 const SC_API_V1 = 'https://api.soundcloud.com';
 

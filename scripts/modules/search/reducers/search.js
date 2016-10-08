@@ -7,7 +7,7 @@ import {
   HIDE_SEARCH_RESULTS,
   SHOW_SEARCH_RESULTS,
   CLEAR_SEARCH_RESULTS
-} from '../../../constants/ActionTypes';
+} from 'client/constants/ActionTypes';
 
 const INITIAL_STATE = fromJS({
   showResults: false,

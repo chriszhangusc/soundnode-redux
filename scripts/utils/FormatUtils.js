@@ -1,7 +1,7 @@
-import { CLIENT_ID } from '../constants/Config';
+import { CLIENT_ID } from 'client/constants/Config';
 import {
   large
-} from '../constants/ImageConstants';
+} from 'client/constants/ImageConstants';
 
 export const formatSecondsAsTime = (secs) => {
   const hr = Math.floor(secs / 3600);

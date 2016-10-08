@@ -3,11 +3,11 @@ import {
   END_ARTIST_FETCH,
   USER_RECEIVED,
   TRACKS_RECEIVED
-} from '../../../constants/ActionTypes';
+} from 'client/constants/ActionTypes';
 
-import { fetchUser, fetchUserTracks } from '../../../services/SCAPIServices';
+import { fetchUser, fetchUserTracks } from 'client/services/SCAPIServices';
 
-import { normalizeTracks } from '../../../utils/NormalizeUtils';
+import { normalizeTracks } from 'client/utils/NormalizeUtils';
 
 export const startFetching = () => ({
   type: START_ARTIST_FETCH

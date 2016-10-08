@@ -6,7 +6,7 @@ import {
   START_TRACKS_FETCH,
   END_TRACKS_FETCH,
   TRACKS_RECEIVED
-} from '../../../constants/ActionTypes';
+} from 'client/constants/ActionTypes';
 // The currently active artist. (ArtistDetails Page)
 const INITIAL_STATE = fromJS({
   isFetching: false,

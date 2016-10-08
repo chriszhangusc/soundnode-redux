@@ -1,4 +1,4 @@
-import * as ActionTypes from '../../../constants/ActionTypes';
+import * as ActionTypes from 'client/constants/ActionTypes';
 
 /* Pure actions */
 export const togglePlaylist = () => ({ type: ActionTypes.TOGGLE_PLAYLIST });

@@ -5,10 +5,10 @@ import createSagaMiddleware from 'redux-saga';
 // Only load one file so that we don't have to load the whole lodash library
 import throttle from 'lodash/throttle';
 import createLogger from 'redux-logger';
-import rootReducer from '../modules/reducers';
-import rootSaga from '../sagas';
-import { loadState, saveState } from '../utils/LocalStorageUtils';
-import notificationMiddleware from '../middlewares/notificationMiddleware';
+import rootReducer from 'client/modules/reducers';
+import rootSaga from 'client/sagas';
+import { loadState, saveState } from 'client/utils/LocalStorageUtils';
+import notificationMiddleware from 'client/middlewares/notificationMiddleware';
 
 const stateTransformer = (state) => {
   if (Iterable.isIterable(state)) return state.toJS();

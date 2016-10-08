@@ -1,8 +1,8 @@
 import { put, call, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import * as ActionTypes from '../constants/ActionTypes';
-import { getLastVolume, setLastVolume } from '../utils/LocalStorageUtils';
-import * as selectors from '../modules/reducers';
+import * as ActionTypes from 'client/constants/ActionTypes';
+import { getLastVolume, setLastVolume } from 'client/utils/LocalStorageUtils';
+import * as selectors from 'client/modules/reducers';
 
 import {
   updateTime,
@@ -20,11 +20,11 @@ import {
   changePlayMode,
   shuffleDraw,
   shuffleDiscard
-} from '../modules/player/actions';
+} from 'client/modules/player/actions';
 
-import { SHUFFLE, NEXT, PREV, DEFAULT_MODE } from '../constants/PlayerConstants';
-import { getSongIdByMode } from '../utils/SongUtils';
-import { generateRandom } from '../utils/GeneralUtils';
+import { SHUFFLE, NEXT, PREV, DEFAULT_MODE } from 'client/constants/PlayerConstants';
+import { getSongIdByMode } from 'client/utils/SongUtils';
+import { generateRandom } from 'client/utils/GeneralUtils';
 /* *****************************************************************************/
 /* ****************************** SUBROUTINES **********************************/
 /* *****************************************************************************/
