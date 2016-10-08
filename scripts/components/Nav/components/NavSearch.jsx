@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link, browserHistory } from 'react-router';
 
 class NavSearch extends Component {
 
@@ -7,7 +8,7 @@ class NavSearch extends Component {
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
-    this.renderDropdownList = this.renderDropdownList.bind(this);
+    this.renderSearchResults = this.renderSearchResults.bind(this);
   }
 
   // Should we put logic here?!
@@ -26,9 +27,7 @@ class NavSearch extends Component {
     this.props.handleBlur();
   }
 
-
-
-  renderDropdownList() {
+  renderSearchResults() {
     const { users, tracks, isFetching, showResults } = this.props;
     if (showResults) {
       return (
@@ -45,7 +44,13 @@ class NavSearch extends Component {
                     className="nav-search-result-item-image"
                     src={user.avatar_url}
                   />
-                  <span className="nav-search-result-item-username">{user.username}</span>
+                  <Link
+                    onMouseDown={() => {
+                      browserHistory.push(`/artist/${user.id}`);
+                    }}
+                  >
+                    <span className="nav-search-result-item-username">{user.username}</span>
+                  </Link>
                 </li>)
               )
             }
@@ -70,7 +75,6 @@ class NavSearch extends Component {
         </div>
       );
     }
-
     return <div />;
   }
 
@@ -90,7 +94,7 @@ class NavSearch extends Component {
             />
           </div>
         </form>
-        { this.renderDropdownList() }
+        { this.renderSearchResults() }
       </div>
     );
   }
