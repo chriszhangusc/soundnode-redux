@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { REPEAT, SHUFFLE } from 'client/constants/PlayerConstants';
+import { REPEAT, SHUFFLE } from '../../../constants/PlayerConstants';
 // Stateless functional component
 class PlayerModeControls extends Component {
 
@@ -7,35 +7,45 @@ class PlayerModeControls extends Component {
     super(props);
     this.renderRepeat = this.renderRepeat.bind(this);
     this.renderShuffle = this.renderShuffle.bind(this);
+    this.renderTogglePlaylist = this.renderTogglePlaylist.bind(this);
   }
 
   renderRepeat() {
     const { onRepeatClick, mode } = this.props;
     return (
-      <div className="player-btn-wrapper tooltip">
-        <span className="tooltiptext">Repeat</span>
-        <button
-          className={`icon-btn ${(mode === REPEAT ? 'active' : '')}`}
-          onClick={onRepeatClick}
-        >
-          <i className="icon ion-loop" />
-        </button>
-      </div>
+      <button
+        title="Repeat"
+        className={`icon-button player-button ${(mode === REPEAT ? 'active' : '')}`}
+        onClick={onRepeatClick}
+      >
+        <i className="icon ion-loop" />
+      </button>
+    );
+  }
+
+  renderTogglePlaylist() {
+    const { onTogglePlaylistClick, isPlaylistShown } = this.props;
+    return (
+      <button
+        title="Playlist"
+        className={`icon-button player-button ${(isPlaylistShown ? 'active' : '')}`}
+        onClick={onTogglePlaylistClick}
+      >
+        <i className="icon ion-ios-list" />
+      </button>
     );
   }
 
   renderShuffle() {
     const { onShuffleClick, mode } = this.props;
     return (
-      <div className="player-btn-wrapper tooltip">
-        <span className="tooltiptext">Shuffle</span>
-        <button
-          className={`icon-btn ${(mode === SHUFFLE ? 'active' : '')}`}
-          onClick={onShuffleClick}
-        >
-          <i className="icon ion-shuffle" />
-        </button>
-      </div>
+      <button
+        title="Shuffle"
+        className={`icon-button player-button ${(mode === SHUFFLE ? 'active' : '')}`}
+        onClick={onShuffleClick}
+      >
+        <i className="icon ion-shuffle" />
+      </button>
     );
   }
 
@@ -44,6 +54,7 @@ class PlayerModeControls extends Component {
       <div className="player-section">
         {this.renderRepeat()}
         {this.renderShuffle()}
+        {this.renderTogglePlaylist()}
       </div>
     );
   }
@@ -52,8 +63,10 @@ class PlayerModeControls extends Component {
 
 PlayerModeControls.propTypes = {
   mode: PropTypes.string,
+  isPlaylistShown: PropTypes.bool,
   onRepeatClick: PropTypes.func,
-  onShuffleClick: PropTypes.func
+  onShuffleClick: PropTypes.func,
+  onTogglePlaylistClick: PropTypes.func
 };
 
 export default PlayerModeControls;

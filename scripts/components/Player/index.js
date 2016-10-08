@@ -1,3 +1,3 @@
-import PlayerLayoutContainer from './containers/PlayerLayoutContainer';
+import PlayerContainer from './containers/PlayerContainer';
 
-export default PlayerLayoutContainer;
+export default PlayerContainer;

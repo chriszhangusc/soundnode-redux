@@ -1,3 +1,4 @@
+
 import React, { PropTypes, Component } from 'react';
 
 class PlayerVolumeControls extends Component {
@@ -45,7 +46,10 @@ class PlayerVolumeControls extends Component {
       icon = 'ion-volume-high';
     }
     return (
-      <button className="icon-btn" onClick={onToggleMuteClick} >
+      <button
+        title="Mute"
+        className="icon-button"
+        onClick={onToggleMuteClick} >
         <i className={`icon ${icon}`} />
       </button>
     );
