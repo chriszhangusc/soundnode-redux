@@ -1,5 +1,11 @@
 import { fromJS } from 'immutable';
-import * as ActionTypes from 'client/constants/ActionTypes';
+import {
+  LOAD_PLAYER_PLAYLIST,
+  CHANGE_VISIBLE_PLAYLIST,
+  REQUEST_SONGS,
+  RECEIVE_SONGS
+} from 'client/constants/ActionTypes';
+
 import * as fromPlaylist from './playlist';
 
 const playlist = fromPlaylist.default;
@@ -12,16 +18,16 @@ const PLAYLISTS_INITIAL_STATE = fromJS({
 const playlists = (state = PLAYLISTS_INITIAL_STATE, action) => {
   switch (action.type) {
 
-    case ActionTypes.LOAD_PLAYER_PLAYLIST:
+    case LOAD_PLAYER_PLAYLIST:
       return state.set('playerPlaylist', action.payload);
 
-    case ActionTypes.CHANGE_VISIBLE_PLAYLIST:
+    case CHANGE_VISIBLE_PLAYLIST:
       return state.set('visiblePlaylist', action.payload);
 
-    case ActionTypes.REQUEST_SONGS:
+    case REQUEST_SONGS:
       return state.set(action.payload, playlist(state.get(action.payload), action));
 
-    case ActionTypes.RECEIVE_SONGS:
+    case RECEIVE_SONGS:
       return state.set(
         action.payload.playlist,
         playlist(state.get(action.payload.playlist), action)

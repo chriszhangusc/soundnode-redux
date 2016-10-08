@@ -14,7 +14,7 @@ export function fetchCharts(genre) {
     kind: 'top',
     genre: `soundcloud:genres:${formattedGenre}`,
     offset: 0,
-    limit: 50,
+    limit: 51,
     client_id: CLIENT_ID
   };
 

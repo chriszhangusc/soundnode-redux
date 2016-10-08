@@ -4,7 +4,8 @@ import SongCard from 'client/components/SongCard';
 import Spinner from 'client/components/Spinner';
 import infiniteScroll from 'client/components/hocs/InfiniteScroll';
 
-const renderSongCardList = (songs) => {
+const renderSongCardList = (songs, isFetching) => {
+  if (isFetching) return <Spinner />;
   const COLS = 4;
   const rows = chunk(songs, COLS);
   return rows.map((rowItems, i) => (
@@ -23,8 +24,7 @@ const SongCardList = (props) => {
   const { isFetching, songs } = props;
   return (
     <div className="container">
-      {renderSongCardList(songs)}
-      {isFetching ? <Spinner /> : null}
+      {renderSongCardList(songs, isFetching)}
     </div>
   );
 };

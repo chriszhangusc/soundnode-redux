@@ -8,8 +8,6 @@ import {
   receiveSongs
 } from 'client/modules/playlists/actions';
 
-import * as selectors from 'client/modules/reducers';
-
 import { fetchCharts } from 'client/services/SCAPIV2Services';
 
 /* *****************************************************************************/
@@ -28,37 +26,34 @@ import { fetchCharts } from 'client/services/SCAPIV2Services';
 // }
 
 
-// Initial loading and Nav bar searching
+// Initial loading
 function* loadSongCardsPage({ payload }) {
   const playlistName = payload;
   // 1.Change visiblePlaylistName
   yield put(changeVisiblePlaylist(playlistName));
-  const playlistExists = yield select(selectors.playlistExists, playlistName);
-  // 2.Load songs if not cached
-  // if (!playlistExists) yield fork(doFetchSongs, playlistName, url)
-  if (!playlistExists) {
-    yield put(requestSongs(playlistName));
-    const normalizedTracks = yield call(fetchCharts, playlistName);
-    yield put(
-      receiveSongs(
-        playlistName,
-        normalizedTracks.entities,
-        normalizedTracks.ids,
-        normalizedTracks.next_href
-       )
-    );
-  }
+  // const playlistExists = yield select(selectors.playlistExists, playlistName);
+  // Always load songs! Not working!
+  yield put(requestSongs(playlistName));
+  const normalizedTracks = yield call(fetchCharts, playlistName);
+  yield put(
+    receiveSongs(
+      playlistName,
+      normalizedTracks.entities,
+      normalizedTracks.ids,
+      normalizedTracks.next_href
+     )
+  );
 }
 
 // Scroll loading
 function* loadMoreSongsOnScroll() {
-  const nextUrl = yield select(selectors.getVisibleNextUrl);
-  const playlistName = yield select(selectors.getVisiblePlaylistName);
-  const playlistExists = yield select(selectors.playlistExists, playlistName);
-  const isFetching = yield select(selectors.getVisibleFetchState);
-  if (playlistExists && !isFetching && nextUrl) {
-    yield fork(doFetchSongs, playlistName, nextUrl);
-  }
+  // const nextUrl = yield select(selectors.getVisibleNextUrl);
+  // const playlistName = yield select(selectors.getVisiblePlaylistName);
+  // const playlistExists = yield select(selectors.playlistExists, playlistName);
+  // const isFetching = yield select(selectors.getVisibleFetchState);
+  // if (playlistExists && !isFetching && nextUrl) {
+  //   yield fork(doFetchSongs, playlistName, nextUrl);
+  // }
 }
 
 /* *****************************************************************************/
@@ -70,8 +65,4 @@ export function* watchLoadSongCardsPage() {
 }
 export function* watchLoadMoreSongsOnScroll() {
   yield takeEvery(ActionTypes.SAGA_LOAD_MORE_SONGS_ON_SCROLL, loadMoreSongsOnScroll);
-}
-
-export function* watchSearchSongs() {
-  yield takeEvery(ActionTypes.SEARCH_SONGS, loadSongCardsPage);
 }

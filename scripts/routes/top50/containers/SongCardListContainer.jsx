@@ -7,14 +7,11 @@ import { sagaLoadMoreSongsOnScroll } from 'client/modules/playlists/actions';
 // Simply providing slices of state for the component to render.
 const mapStateToProps = state => ({
   isFetching: getVisibleFetchState(state),
-  songs: getVisibleSongsAsArray(state) // may break on search
+  songs: getVisibleSongsAsArray(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   scrollFunc() { dispatch(sagaLoadMoreSongsOnScroll()); }
 });
 
-const SongCardListContainer = connect(mapStateToProps,
-  mapDispatchToProps)(SongCardList);
-
-export default SongCardListContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(SongCardList);

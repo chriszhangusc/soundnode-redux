@@ -1,5 +1,8 @@
 import { fromJS } from 'immutable';
-import * as ActionTypes from 'client/constants/ActionTypes';
+import {
+  REQUEST_SONGS,
+  RECEIVE_SONGS
+} from 'client/constants/ActionTypes';
 
 const PLAYLIST_INITIAL_STATE = fromJS({
   isFetching: false,
@@ -11,10 +14,10 @@ const PLAYLIST_INITIAL_STATE = fromJS({
 const playlist = (state = PLAYLIST_INITIAL_STATE, action) => {
   switch (action.type) {
 
-    case ActionTypes.REQUEST_SONGS:
+    case REQUEST_SONGS:
       return state.set('isFetching', true);
 
-    case ActionTypes.RECEIVE_SONGS:
+    case RECEIVE_SONGS:
       // mergeDeep will merge obj correctly not lists! Have to concat lists!
       return state.mergeDeep(fromJS({
         isFetching: false,

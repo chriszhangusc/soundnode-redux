@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { GENRES } from '../../../constants/SongConstants';
-import { getVisiblePlaylistName } from '../../../modules/reducers';
+import { GENRES } from 'client/constants/SongConstants';
+import { getVisiblePlaylistName } from 'client/modules/reducers';
 
 /* Since we only connect to store for playlist name, so no need to wrap it in a container */
 const renderGenres = () => GENRES.map(

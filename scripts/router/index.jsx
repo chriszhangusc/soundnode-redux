@@ -10,6 +10,7 @@ import { sagaLoadSongCardsPage } from 'client/modules/playlists/actions';
 
 const configureRoutes = (store) => {
   const onEnterHandler = (nextState) => {
+    // Will be called twice somehow.
     const playlist = nextState.params.genre || DEFAULT_GENRE;
     store.dispatch(sagaLoadSongCardsPage(playlist));
   };
@@ -18,7 +19,7 @@ const configureRoutes = (store) => {
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRedirect to={`top50/${DEFAULT_GENRE}`} />
-        <Route path="top50" component={TopMusicPage} onEnter={onEnterHandler}>
+        <Route path="top50" component={TopMusicPage}>
           <IndexRedirect to={`${DEFAULT_GENRE}`} />
           <Route path=":genre" component={TopMusicPage} onEnter={onEnterHandler} />
         </Route>
@@ -28,7 +29,5 @@ const configureRoutes = (store) => {
     </Router>
   );
 };
-
-// <Route path="top50/(:genre)" component={TopMusicPage} onEnter={onEnterHandler} />
 
 export default configureRoutes;
