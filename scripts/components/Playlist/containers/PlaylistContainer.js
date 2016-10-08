@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import {
-  getPlayerPlaylistAsArray,
+  getPlaylistAsArray,
   getShowPlaylist
 } from 'client/modules/reducers';
 
 import Playlist from '../components/Playlist';
 
 const mapStateToProps = state => ({
-  playerPlaylistSongs: getPlayerPlaylistAsArray(state),
+  playlistTracks: getPlaylistAsArray(state),
   isPlaylistShown: getShowPlaylist(state)
 });
 export default connect(mapStateToProps)(Playlist);

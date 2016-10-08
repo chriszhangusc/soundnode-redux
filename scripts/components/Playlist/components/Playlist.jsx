@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import PlaylistItemContainer from '../containers/PlaylistItemContainer';
 
 const Playlist = ({
-  playerPlaylistSongs,
+  playlistTracks,
   isPlaylistShown
  }) => {
   return (
@@ -15,7 +15,7 @@ const Playlist = ({
         </div>
         <ul className="playlist-list">
           {
-            playerPlaylistSongs.map(
+            playlistTracks.map(
               (song, idx) => <PlaylistItemContainer song={song} index={idx + 1} key={idx} />
             )
           }
@@ -27,7 +27,7 @@ const Playlist = ({
 
 Playlist.propTypes = {
   isPlaylistShown: PropTypes.bool,
-  playerPlaylistSongs: PropTypes.array
+  playlistTracks: PropTypes.array
 };
 
 export default Playlist;

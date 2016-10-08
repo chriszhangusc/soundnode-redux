@@ -3,7 +3,7 @@ import copy from 'copy-to-clipboard';
 import { t500x500 } from 'client/constants/ImageConstants';
 import {
   playSong,
-  sagaChangeSongAndPlay,
+  changeSongAndPlay,
   pauseSong
 } from 'client/modules/player/actions';
 import { startLikeSong, startUnlikeSong } from 'client/modules/user/actions';
@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   // Fire if the user click on a song card that is active
   handlePlaySong() { dispatch(playSong()); },
   // Fire if the user click on a song card that is not active
-  handleChangeSong() { dispatch(sagaChangeSongAndPlay(ownProps.song)); },
+  handleChangeSong() { dispatch(changeSongAndPlay(ownProps.song, true)); },
   handlePauseSong() { dispatch(pauseSong()); },
   handleLikeClick() {
     dispatch(startLikeSong(ownProps.song.id));

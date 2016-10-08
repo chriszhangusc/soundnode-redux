@@ -30,6 +30,7 @@ class App extends Component {
     );
   }
 }
+// <Playlist />
 
 App.propTypes = {
   children: React.PropTypes.element.isRequired

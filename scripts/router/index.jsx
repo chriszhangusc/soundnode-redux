@@ -7,12 +7,15 @@ import NotFound from 'client/components/NotFound';
 // import LikesContainer from '../views/likes/components/LikesPage';
 import { DEFAULT_GENRE } from 'client/constants/SongConstants';
 import { sagaLoadSongCardsPage } from 'client/modules/playlists/actions';
+import { loadCharts } from 'client/modules/charts/actions/chartsActions';
 
 const configureRoutes = (store) => {
   const onEnterHandler = (nextState) => {
     // Will be called twice somehow.
-    const playlist = nextState.params.genre || DEFAULT_GENRE;
-    store.dispatch(sagaLoadSongCardsPage(playlist));
+    const dispatch = store.dispatch;
+    const genre = nextState.params.genre || DEFAULT_GENRE;
+    dispatch(loadCharts(genre));
+    // store.dispatch(sagaLoadSongCardsPage(playlist));
   };
 
   return (

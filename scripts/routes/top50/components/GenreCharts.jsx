@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { GENRES } from 'client/constants/SongConstants';
-import { getVisiblePlaylistName } from 'client/modules/reducers';
+import { getChartsGenre } from 'client/modules/reducers';
 
 /* Since we only connect to store for playlist name, so no need to wrap it in a container */
 const renderGenres = () => GENRES.map(
@@ -14,9 +14,9 @@ const renderGenres = () => GENRES.map(
     >{genre.toUpperCase()}</Link>
 );
 
-const GenreCharts = ({ visiblePlaylistName }) => (
+const GenreCharts = ({ chartsGenre }) => (
   <div className="genre-charts">
-    <h1>Top 50 - { visiblePlaylistName.toUpperCase() }</h1>
+    <h1>Top 50 - { chartsGenre.toUpperCase() }</h1>
     <div className="genre-selector" >
       <h3 className="title">Charts By Genre</h3>
       { renderGenres() }
@@ -25,12 +25,12 @@ const GenreCharts = ({ visiblePlaylistName }) => (
 );
 
 GenreCharts.propTypes = {
-  visiblePlaylistName: React.PropTypes.string.isRequired
+  chartsGenre: React.PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    visiblePlaylistName: getVisiblePlaylistName(state)
+    chartsGenre: getChartsGenre(state)
   };
 }
 

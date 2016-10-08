@@ -5,13 +5,13 @@ export const requestSongs = playlist => ({
   payload: playlist
 });
 
-export const receiveSongs = (playlist, songs, songIds, nextUrl) => ({
+export const receiveSongs = (playlist, normalizedTracks) => ({
   type: ActionTypes.RECEIVE_SONGS,
   payload: {
     playlist,
-    songs,
-    songIds,
-    nextUrl
+    songs: normalizedTracks.entities,
+    songIds: normalizedTracks.ids,
+    nextHref: normalizedTracks.nextHref
   }
 });
 

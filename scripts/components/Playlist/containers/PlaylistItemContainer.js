@@ -6,7 +6,7 @@ import {
 } from 'client/modules/reducers';
 
 import {
-  sagaChangeSongAndPlay
+  changeSongAndPlay
 } from 'client/modules/player/actions';
 
 import {
@@ -31,7 +31,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   const { song } = ownProps;
   return {
     handleChangeSong() {
-      dispatch(sagaChangeSongAndPlay(song));
+      // Do not load playlist
+      dispatch(changeSongAndPlay(song, false));
     },
     handleLikeSong() {
       dispatch(startLikeSong(song.id));

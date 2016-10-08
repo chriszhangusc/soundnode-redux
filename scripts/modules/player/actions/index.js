@@ -1,4 +1,6 @@
 import * as ActionTypes from 'client/constants/ActionTypes';
+import { getChartsMap, getChartsIds } from 'client/modules/reducers';
+import { loadPlaylist } from 'client/modules/playlist/actions/playlist';
 
 /* Pure actions */
 export const togglePlaylist = () => ({ type: ActionTypes.TOGGLE_PLAYLIST });
@@ -57,11 +59,6 @@ export const changeSong = newSong => ({
   payload: newSong
 });
 
-export const loadPlayerPlaylist = playlist => ({
-  type: ActionTypes.LOAD_PLAYER_PLAYLIST,
-  payload: playlist
-});
-
 export const changeVolume = volume => ({
   type: ActionTypes.CHANGE_VOLUME,
   payload: volume
@@ -71,6 +68,24 @@ export const changePlayMode = mode => ({
   type: ActionTypes.CHANGE_PLAY_MODE,
   payload: mode
 });
+
+/* Thunks */
+export const changeSongAndPlay = (song, shouldLoadPlaylist) => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const chartsMap = getChartsMap(state);
+    const chartsIds = getChartsIds(state);
+    const playlist = {
+      tracksById: chartsMap,
+      trackIds: chartsIds
+    };
+    if (shouldLoadPlaylist) dispatch(loadPlaylist(playlist));
+    dispatch(pauseSong());
+    dispatch(changeSong(song));
+    dispatch(clearTime());
+    dispatch(playSong());
+  };
+};
 
 // Saga Actions (Actions that will trigger a saga and execute side effects)
 export const sagaToggleMute = () => ({

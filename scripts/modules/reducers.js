@@ -2,20 +2,37 @@
 import { combineReducers } from 'redux-immutable';
 import { createSelector } from 'reselect';
 import { formatImageUrl, formatTitle, formatStreamUrl } from 'client/utils/FormatUtils';
-import * as fromPlaylists from './playlists/reducers/playlists';
 import * as fromPlayer from './player/reducers/player';
 import * as fromUser from './user/reducers/user';
 import * as fromSearch from './search/reducers/search';
 import * as fromArtist from './artist/reducers/artist';
-
+import * as fromCharts from './charts/reducers/charts';
+import * as fromPlaylist from './playlist/reducers/playlist';
 
 const rootReducer = combineReducers({
-  playlists: fromPlaylists.default,
+  // playlists: fromPlaylists.default,
+  charts: fromCharts.default,
+  playlist: fromPlaylist.default,
   player: fromPlayer.default,
   user: fromUser.default,
   search: fromSearch.default,
   artist: fromArtist.default
 });
+
+/* From Playlist */
+export const getPlaylistMap = state => fromPlaylist.getPlaylistMap(state.get('playlist'));
+export const getPlaylistIds = state => fromPlaylist.getPlaylistIds(state.get('playlist'));
+export const getPlaylistAsArray = state => fromPlaylist.getPlaylistAsArray(state.get('playlist'));
+
+/* From Charts */
+export const getChartsGenre = state => fromCharts.getGenre(state.get('charts'));
+export const getChartsMap = state => fromCharts.getTracksMap(state.get('charts'));
+export const getChartsIds = state => fromCharts.getTrackIds(state.get('charts'));
+// const getTracksMap = state => state.get('tracksById').toJS();
+// const getTrackIds = state => state.get('trackIds').toJS();
+export const getChartsAsArray = state => fromCharts.getTracksAsArray(state.get('charts'));
+export const getIsChartsFetching = state => fromCharts.getIsFetching(state.get('charts'));
+
 
 /* From artist */
 export const getArtistFetchState = state => fromArtist.getIsFetching(state.get('artist'));
@@ -50,40 +67,6 @@ export const getDisplayName = state => fromUser.getDisplayName(state.get('user')
 
 export const getPhotoUrl = state => fromUser.getPhotoUrl(state.get('user'));
 
-/* From Playlists */
-
-// Return the current player playlist name
-export const getPlayerPlaylistName = state =>
-  fromPlaylists.getPlayerPlaylistName(state.get('playlists'));
-
-// Return the current playlist object itself
-export const getPlayerPlaylist = state => fromPlaylists.getPlayerPlaylist(state.get('playlists'));
-
-// Return the visible playlist name
-export const getVisiblePlaylistName = state =>
-  fromPlaylists.getVisiblePlaylistName(state.get('playlists'));
-
-// Return the visible playlist object itself
-export const getVisiblePlaylist = state => fromPlaylists.getVisiblePlaylist(state.get('playlists'));
-
-// Return the fetch state of the current visible playlist
-export const getVisibleFetchState = state =>
-  fromPlaylists.getVisibleFetchState(state.get('playlists'));
-
-// Get the Songs Object-Array of current player playlist
-export const getPlayerSongMap = state => fromPlaylists.getPlayerSongMap(state.get('playlists'));
-
-export const getPlayerSongIds = state => fromPlaylists.getPlayerSongIds(state.get('playlists'));
-
-export const getVisibleSongMap = state => fromPlaylists.getVisibleSongMap(state.get('playlists'));
-
-export const getVisibleSongIds = state => fromPlaylists.getVisibleSongIds(state.get('playlists'));
-
-export const getVisibleNextUrl = state => fromPlaylists.getVisibleNextUrl(state.get('playlists'));
-
-// Return if the playlistName is already loaded
-export const playlistExists = (state, playlistName) =>
-  fromPlaylists.playlistExists(state.get('playlists'), playlistName);
 
 /* From player */
 export const getShowPlaylist = state => fromPlayer.getShowPlaylist(state.get('player'));
@@ -137,19 +120,6 @@ export const getCurrentSongArtworkUrl = createSelector(
   currentSong => (currentSong ? currentSong.artwork_url : null)
 );
 
-/* songCardListSelectors */
-// Return the sorted array of songs of visible playlist
-export const getVisibleSongsAsArray = createSelector(
-  [getVisibleSongMap, getVisibleSongIds],
-  (songsById, songIds) => (songIds && songsById ? songIds.map(id => songsById[id]) : [])
-);
-
-export const getPlayerPlaylistAsArray = createSelector(
-  [getPlayerSongMap, getPlayerSongIds],
-  (songsById, songIds) => (songIds && songsById ? songIds.map(id => songsById[id]) : [])
-);
-
-/* SongCardSelectors */
 
 export function getSongImage(song) {
   return formatImageUrl(song.artwork_url);

@@ -1,11 +1,8 @@
 import { fork } from 'redux-saga/effects';
 import * as fromPlayer from './playerSagas';
-import * as fromPlaylists from './playlists';
 
 function* rootSaga() {
   yield [
-    fork(fromPlaylists.watchLoadSongCardsPage),
-    fork(fromPlaylists.watchLoadMoreSongsOnScroll),
     fork(fromPlayer.watchChangeSongAndPlay),
     fork(fromPlayer.watchRegularTimeUpdate),
     fork(fromPlayer.watchSeekTimeUpdate),
