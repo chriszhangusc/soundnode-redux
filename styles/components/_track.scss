@@ -1,0 +1,29 @@
+.track-info-container {
+  padding: 20px 0;
+  display: flex;
+  & .track-avatar {
+    display: inline-block;
+  }
+
+  & .track-details {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 20px;
+
+    & .track-title {
+      margin-bottom: 10px;
+    }
+
+    & .track-artist-name {
+      margin: 10px 0;
+      color: $font-main-color;
+    }
+
+    & .track-description {
+      margin: 10px 0;
+      color: $font-sub-color;
+      width: 500px;
+    }
+  }
+}

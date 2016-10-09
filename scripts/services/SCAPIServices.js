@@ -35,6 +35,16 @@ export function fetchUserTracks(uid) {
 }
 
 /**
+ * Fetch a single track by id
+ * @param  number trackId
+ * @return Promise
+ */
+export function fetchTrack(trackId) {
+  const url = `${SC_API_V1}/tracks/${trackId}?client_id=${CLIENT_ID}`;
+  return axios.get(url);
+}
+
+/**
  * Search for a list of users by keyword
  * @param  {[type]} keyword               [description]
  * @param  {[type]} [limit=DEFAULT_LIMIT] [description]

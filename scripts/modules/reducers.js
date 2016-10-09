@@ -8,6 +8,7 @@ import * as fromSearch from './search/reducers/search';
 import * as fromArtist from './artist/reducers/artist';
 import * as fromCharts from './charts/reducers/charts';
 import * as fromPlaylist from './playlist/reducers/playlist';
+import * as fromTrack from './track/reducers/track';
 
 const rootReducer = combineReducers({
   // playlists: fromPlaylists.default,
@@ -16,8 +17,15 @@ const rootReducer = combineReducers({
   player: fromPlayer.default,
   user: fromUser.default,
   search: fromSearch.default,
-  artist: fromArtist.default
+  artist: fromArtist.default,
+  track: fromTrack.default
 });
+
+/* From Track */
+export const getIsTrackFetching = state => fromTrack.getIsFetching(state.get('track'));
+export const getTrackTitle = state => fromTrack.getTitle(state.get('track'));
+export const getTrackDescription = state => fromTrack.getDescription(state.get('track'));
+export const getTrackArtworkUrl = state => fromTrack.getArtworkUrl(state.get('track'));
 
 /* From Playlist */
 export const getPlaylistMap = state => fromPlaylist.getPlaylistMap(state.get('playlist'));
