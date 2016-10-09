@@ -1,5 +1,6 @@
 import { fetchUsers, fetchTracks } from 'client/services/SCAPIServices';
 import {
+  SAGA_SEARCH,
   START_SEARCH,
   END_SEARCH,
   SEARCH_USERS_RECEIVED,
@@ -10,19 +11,19 @@ import {
 } from 'client/constants/ActionTypes';
 import { normalizeSearchResults } from 'client/utils/NormalizeUtils';
 
-function startSearch() {
+export function startSearch() {
   return {
     type: START_SEARCH
   };
 }
 
-function endSearch() {
+export function endSearch() {
   return {
     type: END_SEARCH
   };
 }
 
-function tracksReceived(normalizedTracks) {
+export function tracksReceived(normalizedTracks) {
   return {
     type: SEARCH_TRACKS_RECEIVED,
     payload: {
@@ -33,7 +34,7 @@ function tracksReceived(normalizedTracks) {
   };
 }
 
-function usersReceived(normalizedUsers) {
+export function usersReceived(normalizedUsers) {
   return {
     type: SEARCH_USERS_RECEIVED,
     payload: {
@@ -90,5 +91,13 @@ export function doSearch(keyword) {
     .catch((err) => {
       console.log('Error occurs in doSearch:', err);
     });
+  };
+}
+
+/* Saga Actions */
+export function sagaSearch(keyword) {
+  return {
+    type: SAGA_SEARCH,
+    payload: keyword.trim().toLowerCase()
   };
 }

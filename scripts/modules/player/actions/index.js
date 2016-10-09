@@ -70,8 +70,8 @@ export const changePlayMode = mode => ({
 });
 
 /* Thunks */
-export const changeSongAndPlay = (song, shouldLoadPlaylist) => {
-  return (dispatch, getState) => {
+export const changeSongAndPlay = (song, shouldLoadPlaylist) =>
+  ((dispatch, getState) => {
     const state = getState();
     const chartsMap = getChartsMap(state);
     const chartsIds = getChartsIds(state);
@@ -84,8 +84,7 @@ export const changeSongAndPlay = (song, shouldLoadPlaylist) => {
     dispatch(changeSong(song));
     dispatch(clearTime());
     dispatch(playSong());
-  };
-};
+  });
 
 // Saga Actions (Actions that will trigger a saga and execute side effects)
 export const sagaToggleMute = () => ({

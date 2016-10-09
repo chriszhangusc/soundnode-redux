@@ -45,6 +45,7 @@ export const LOGOUT = 'LOGOUT';
 export const LOAD_ALL_LIKES = 'LOAD_ALL_LIKES';
 
 /* Search Action Types */
+export const SAGA_SEARCH = 'SAGA_SEARCH';
 export const START_SEARCH = 'START_SEARCH';
 export const END_SEARCH = 'END_SEARCH';
 export const SEARCH_USERS_RECEIVED = 'SEARCH_USERS_RECEIVED';
