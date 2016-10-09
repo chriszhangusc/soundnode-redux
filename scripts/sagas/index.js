@@ -13,7 +13,7 @@ function* rootSaga() {
     fork(fromPlayer.watchPlayNextSong),
     fork(fromPlayer.watchPlayPrevSong),
     fork(fromPlayer.watchChangePlayMode),
-    fork(fromSearch.watchSearch)
+    fork(fromSearch.watchDoSearch)
   ];
 }
 

@@ -1,4 +1,4 @@
-import { put, call, select } from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
 import { SAGA_SEARCH } from 'client/constants/ActionTypes';
 import {
@@ -35,6 +35,6 @@ function* doSearch({ payload }) {
 /* ****************************** WATCHERS *************************************/
 /* *****************************************************************************/
 
-export function* watchSearch() {
+export function* watchDoSearch() {
   yield takeLatest(SAGA_SEARCH, doSearch);
 }
