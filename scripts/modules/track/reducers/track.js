@@ -11,7 +11,9 @@ const INITIAL_STATE = fromJS({
   artworkUrl: '',
   createdAt: '',
   artistName: '',
-  commentCount: ''
+  commentCount: 0,
+  playbackCount: 0,
+  likedCount: 0
 });
 
 const track = (state = INITIAL_STATE, action) => {
@@ -37,3 +39,5 @@ export const getArtworkUrl = state => state.get('artworkUrl');
 export const getCreatedAt = state => state.get('createdAt');
 export const getArtistName = state => state.get('artistName');
 export const getCommentCount = state => state.get('commentCount');
+export const getPlaybackCount = state => state.get('playbackCount');
+export const getLikedCount = state => state.get('likedCount');

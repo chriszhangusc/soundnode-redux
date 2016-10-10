@@ -29,6 +29,8 @@ export const getTrackArtworkUrl = state => fromTrack.getArtworkUrl(state.get('tr
 export const getTrackCreatedAt = state => fromTrack.getCreatedAt(state.get('track'));
 export const getTrackArtistName = state => fromTrack.getArtistName(state.get('track'));
 export const getTrackCommentCount = state => fromTrack.getCommentCount(state.get('track'));
+export const getTrackPlaybackCount = state => fromTrack.getPlaybackCount(state.get('track'));
+export const getTrackLikedCount = state => fromTrack.getLikedCount(state.get('track'));
 
 /* From Playlist */
 export const getPlaylistMap = state => fromPlaylist.getPlaylistMap(state.get('playlist'));

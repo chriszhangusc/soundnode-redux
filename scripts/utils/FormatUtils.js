@@ -64,6 +64,14 @@ export function concatParamsToUrl(url, params) {
       count += 1;
     }
   }
-
   return resultUrl;
+}
+
+
+export function formatPlaybacks(count) {
+  return count.toLocaleString(count);
+}
+
+export function formatLikes(count) {
+  return count.toLocaleString(count);
 }

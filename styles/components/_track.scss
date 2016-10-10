@@ -1,8 +1,34 @@
 .track-info-container {
   padding: 20px 0;
   display: flex;
+
   & .track-avatar {
     display: inline-block;
+    position: relative;
+  }
+
+  & .track-image {
+    width: 350px;
+    height: 350px;
+  }
+
+  & .image-details-bar {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: #FFF;
+    padding: 5px;
+    background: rgba(0,0,0,0.6); // Transparent background
+
+    & >span {
+        flex-grow: 1;
+        & .fa {
+            display: inline-block !important;
+        }
+    }
   }
 
   & .track-details {
@@ -16,7 +42,7 @@
     }
 
     & .track-artist-name {
-      margin: 10px 0;
+      margin: 5px 0;
       color: $font-main-color;
     }
 
@@ -26,6 +52,22 @@
       width: 500px;
       font-size: 1.2rem;
       white-space: pre-wrap;
+    }
+
+    & .track-controls {
+      display: inline;
+      > button {
+        margin-right: 15px;
+        color: $font-sub-color;
+        &:hover {
+          color: $font-main-color;
+        }
+        > i {
+          font-size: 1.2rem;
+          margin-right: 5px;
+        }
+      }
+      // For all the icons under track-controls
     }
   }
 }

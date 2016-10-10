@@ -16,7 +16,9 @@ export const trackReceived = (track) => ({
     artworkUrl: track.artwork_url,
     createdAt: track.created_at,
     artistName: track.user ? track.user.username : '',
-    commentCount: track.comment_count
+    commentCount: track.comment_count,
+    playbackCount: track.playback_count,
+    likedCount: track.favoritings_count
   }
 });
 
