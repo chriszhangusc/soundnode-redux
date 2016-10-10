@@ -13,7 +13,10 @@ export const trackReceived = (track) => ({
   payload: {
     title: track.title,
     description: track.description,
-    artworkUrl: track.artwork_url
+    artworkUrl: track.artwork_url,
+    createdAt: track.created_at,
+    artistName: track.user ? track.user.username : '',
+    commentCount: track.comment_count
   }
 });
 

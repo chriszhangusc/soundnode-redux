@@ -7,7 +7,10 @@ import {
   getIsTrackFetching,
   getTrackTitle,
   getTrackDescription,
-  getTrackArtworkUrl
+  getTrackArtworkUrl,
+  getTrackCreatedAt,
+  getTrackCommentCount,
+  getTrackArtistName
 } from 'client/modules/reducers';
 import TrackDetails from '../components/TrackDetails';
 
@@ -38,8 +41,11 @@ TrackDetailsContainer.propTypes = {
 const mapStateToProps = state => ({
   isFetching: getIsTrackFetching(state),
   title: getTrackTitle(state),
+  createdAt: getTrackCreatedAt(state),
   description: getTrackDescription(state),
-  artworkUrl: formatImageUrl(getTrackArtworkUrl(state), crop)
+  artworkUrl: formatImageUrl(getTrackArtworkUrl(state), crop),
+  artistName: getTrackArtistName(state),
+  commentCount: getTrackCommentCount(state)
 });
 
 const mapDispatchToProps = dispatch => ({

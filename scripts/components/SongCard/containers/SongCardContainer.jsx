@@ -25,6 +25,7 @@ import SongCard from '../components/SongCard';
 const mapStateToProps = (state, { song }) => ({
   // This is just like passing down props!
   uid: getSongUserId(song),
+  trackId: song.id,
   isLiked: isSongLiked(state, song.id),
   songImage: getSongImage(song, t500x500),
   title: getSongTitle(song),
