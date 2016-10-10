@@ -1,6 +1,14 @@
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import { loadTrack } from 'client/modules/track/actions/track';
+
+import {
+  playSong,
+  changeSongAndPlay,
+  pauseSong
+} from 'client/modules/player/actions';
+import { startLikeSong, startUnlikeSong } from 'client/modules/user/actions';
+
 import {
   formatImageUrl,
   formatPlaybacks,
@@ -58,8 +66,19 @@ const mapStateToProps = (state, ownProps) => ({
   likedCount: formatLikes(getTrackLikedCount(state))
 });
 
-const mapDispatchToProps = dispatch => ({
-  dispatch
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  dispatch,
+  // Fire if the user click on a song card that is active
+  // handlePlaySong() { dispatch(playSong()); },
+  // Fire if the user click on a song card that is not active
+  // handleChangeSong() { dispatch(changeSongAndPlay(ownProps.song, true)); },
+  // handlePauseSong() { dispatch(pauseSong()); },
+  handleLikeClick() {
+    dispatch(startLikeSong(ownProps.params.trackId));
+  },
+  handleUnlikeClick() {
+    dispatch(startUnlikeSong(ownProps.params.trackId));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrackDetailsContainer);

@@ -24,14 +24,23 @@
     background: rgba(0,0,0,0.6); // Transparent background
 
     & >span {
-        flex-grow: 1;
-        & .fa {
-            display: inline-block !important;
+      flex-grow: 1;
+      & .fa {
+        display: inline-block !important;
+        &.fa-heart {
+          &:hover {
+            cursor: pointer;
+          }
+          &.active {
+            color: $theme-color;
+          }
         }
+      }
     }
   }
 
   & .track-details {
+    position: relative;
     display: inline-flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -55,13 +64,18 @@
     }
 
     & .track-controls {
+      position: absolute;
       display: inline;
+      bottom: 10px;
+
       > button {
         margin-right: 15px;
         color: $font-sub-color;
+
         &:hover {
           color: $font-main-color;
         }
+
         > i {
           font-size: 1.2rem;
           margin-right: 5px;

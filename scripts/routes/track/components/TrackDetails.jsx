@@ -11,7 +11,9 @@ const TrackDetails = ({
   commentCount,
   playbackCount,
   likedCount,
-  isLiked
+  isLiked,
+  handleLikeClick,
+  handleUnlikeClick
 }) => {
   if (isFetching) {
     return <Spinner />;
@@ -26,7 +28,10 @@ const TrackDetails = ({
               <i className="fa fa-play" /> {playbackCount}
             </span>
             <span className="likes-count">
-              <i className="fa fa-heart" /> {likedCount}
+              <i
+                className={`fa fa-heart ${isLiked ? 'active' : ''}`}
+                onClick={isLiked ? handleUnlikeClick : handleLikeClick}
+              /> {likedCount}
             </span>
           </div>
         </div>
