@@ -23,14 +23,16 @@ const rootReducer = combineReducers({
 
 /* From Track */
 export const getIsTrackFetching = state => fromTrack.getIsFetching(state.get('track'));
-export const getTrackTitle = state => fromTrack.getTitle(state.get('track'));
-export const getTrackDescription = state => fromTrack.getDescription(state.get('track'));
-export const getTrackArtworkUrl = state => fromTrack.getArtworkUrl(state.get('track'));
-export const getTrackCreatedAt = state => fromTrack.getCreatedAt(state.get('track'));
-export const getTrackArtistName = state => fromTrack.getArtistName(state.get('track'));
-export const getTrackCommentCount = state => fromTrack.getCommentCount(state.get('track'));
-export const getTrackPlaybackCount = state => fromTrack.getPlaybackCount(state.get('track'));
-export const getTrackLikedCount = state => fromTrack.getLikedCount(state.get('track'));
+export const getTrackRecord = state => fromTrack.getTrack(state.get('track'));
+export const getTrackArtistRecord = state => fromTrack.getArtist(state.get('track'));
+// export const getTrackTitle = state => fromTrack.getTitle(state.get('track'));
+// export const getTrackDescription = state => fromTrack.getDescription(state.get('track'));
+// export const getTrackArtworkUrl = state => fromTrack.getArtworkUrl(state.get('track'));
+// export const getTrackCreatedAt = state => fromTrack.getCreatedAt(state.get('track'));
+// export const getTrackArtistName = state => fromTrack.getArtistName(state.get('track'));
+// export const getTrackCommentCount = state => fromTrack.getCommentCount(state.get('track'));
+// export const getTrackPlaybackCount = state => fromTrack.getPlaybackCount(state.get('track'));
+// export const getTrackLikedCount = state => fromTrack.getLikedCount(state.get('track'));
 
 /* From Playlist */
 export const getPlaylistMap = state => fromPlaylist.getPlaylistMap(state.get('playlist'));

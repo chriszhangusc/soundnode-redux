@@ -7,25 +7,14 @@ import {
   changeSongAndPlay,
   pauseSong
 } from 'client/modules/player/actions';
+
 import { startLikeSong, startUnlikeSong } from 'client/modules/user/actions';
 
 import {
-  formatImageUrl,
-  formatPlaybacks,
-  formatLikes
- } from 'client/utils/FormatUtils';
-import { t500x500 } from 'client/constants/ImageConstants';
-import {
   getIsTrackFetching,
-  getTrackTitle,
-  getTrackDescription,
-  getTrackArtworkUrl,
-  getTrackCreatedAt,
-  getTrackCommentCount,
-  getTrackArtistName,
-  getTrackPlaybackCount,
+  getTrackRecord,
   isSongLiked,
-  getTrackLikedCount
+  getTrackArtistRecord
 } from 'client/modules/reducers';
 import TrackDetails from '../components/TrackDetails';
 
@@ -35,7 +24,6 @@ class TrackDetailsContainer extends Component {
   // static propTypes = {
   //   dispatch: PropTypes.func
   // };
-
   componentWillMount() {
     // Fetch track here.
     const { params, dispatch } = this.props;
@@ -55,15 +43,9 @@ TrackDetailsContainer.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   isFetching: getIsTrackFetching(state),
-  title: getTrackTitle(state),
-  createdAt: getTrackCreatedAt(state).replace('+0000', ''), // Move this to a new function
-  description: getTrackDescription(state),
-  artworkUrl: formatImageUrl(getTrackArtworkUrl(state), t500x500),
-  artistName: getTrackArtistName(state),
-  commentCount: getTrackCommentCount(state),
-  playbackCount: formatPlaybacks(getTrackPlaybackCount(state)),
-  isLiked: isSongLiked(state, ownProps.params.trackId),
-  likedCount: formatLikes(getTrackLikedCount(state))
+  artist: getTrackArtistRecord(state),
+  track: getTrackRecord(state),
+  isLiked: isSongLiked(state, ownProps.params.trackId)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
