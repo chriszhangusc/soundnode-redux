@@ -32,8 +32,9 @@ export const getTrackRecord = state => fromTrack.getTrack(state.get('track'));
 export const getTrackArtistRecord = state => fromTrack.getArtist(state.get('track'));
 
 /* From Playlist */
-export const getPlaylistAsOrderedMap = state =>
-  fromPlaylist.getPlaylistAsOrderedMap(state.get('playlist'));
+export const getShowPlaylist = state => fromPlaylist.getShowPlaylist(state.get('playlist'));
+export const getPlaylistAsOrderedMap =
+  state => fromPlaylist.getPlaylistAsOrderedMap(state.get('playlist'));
 export const getPlaylistAsArray = state => fromPlaylist.getPlaylistAsArray(state.get('playlist'));
 /* From Artist */
 export const getArtistRecord = state => fromArtist.getArtistRecord(state.get('artist'));
@@ -67,8 +68,6 @@ export const getPhotoUrl = state => fromUser.getPhotoUrl(state.get('user'));
 
 /* From player */
 export const getCurrentPlayerTrack = state => fromPlayer.getCurrentTrack(state.get('player'));
-
-export const getShowPlaylist = state => fromPlayer.getShowPlaylist(state.get('player'));
 
 export const getShuffleDraw = state => fromPlayer.getShuffleDraw(state.get('player'));
 

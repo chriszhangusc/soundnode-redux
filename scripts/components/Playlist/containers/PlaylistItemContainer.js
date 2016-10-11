@@ -16,29 +16,27 @@ import {
 
 import PlaylistItem from '../components/PlaylistItem';
 
-const mapStateToProps = (state, ownProps) => {
-  const { song, index } = ownProps;
+const mapStateToProps = (state, { track, index }) => {
   return {
-    songId: song ? song.id : undefined,
-    isActive: song ? getSingleSongIsActive(state, song.id) : false,
-    title: song ? song.title : undefined,
-    username: song && song.user ? song.user.username : undefined,
-    isLiked: isSongLiked(state, song.id),
+    trackId: track.getId(),
+    isActive: getSingleSongIsActive(state, track.getId()),
+    title: track.getTitle(),
+    username: track.getArtist().getUsername(),
+    isLiked: isSongLiked(state, track.getId()),
     index
   };
 };
-const mapDispatchToProps = (dispatch, ownProps) => {
-  const { song } = ownProps;
+const mapDispatchToProps = (dispatch, { track }) => {
   return {
     handleChangeSong() {
       // Do not load playlist
-      dispatch(changeSongAndPlay(song, false));
+      dispatch(changeSongAndPlay(track, false));
     },
     handleLikeSong() {
-      dispatch(startLikeSong(song.id));
+      dispatch(startLikeSong(track.getId()));
     },
     handleUnlikeSong() {
-      dispatch(startUnlikeSong(song.id));
+      dispatch(startUnlikeSong(track.getId()));
     }
   };
 };

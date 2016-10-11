@@ -3,8 +3,6 @@ import { getChartsTrackMap } from 'client/modules/reducers';
 import { loadPlaylist } from 'client/modules/playlist/actions/playlist';
 
 /* Pure actions */
-export const togglePlaylist = () => ({ type: ActionTypes.TOGGLE_PLAYLIST });
-
 export const toggleSeek = () => ({ type: ActionTypes.TOGGLE_SEEK });
 
 export const beginSeek = () => ({ type: ActionTypes.BEGIN_SEEK });
@@ -53,7 +51,11 @@ export const changeDuration = duration => ({
   type: ActionTypes.CHANGE_DURATION,
   payload: duration
 });
-
+/**
+ * Change the current song to newSong.
+ * @param  {Track(Record)} newSong The Track Record model.
+ * @return {Object} Action
+ */
 export const changeSong = newSong => ({
   type: ActionTypes.CHANGE_SONG,
   payload: newSong
@@ -70,6 +72,12 @@ export const changePlayMode = mode => ({
 });
 
 /* Thunks */
+/**
+ * Change current track to new track, and play the new track.
+ * @param  {Track(Record)} track        The Track model representing a track object
+ * @param  {Boolean} shouldLoadPlaylist If we should load playlist to state.
+ * @return {[type]}                    [description]
+ */
 export const changeSongAndPlay = (track, shouldLoadPlaylist) =>
   ((dispatch, getState) => {
     const state = getState();

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const PlaylistItem = ({
-  songId,
+  trackId,
   title,
   username,
   isLiked,
@@ -54,6 +54,7 @@ PlaylistItem.propTypes = {
   handleChangeSong: PropTypes.func,
   handleLikeSong: PropTypes.func,
   handleUnlikeSong: PropTypes.func,
+  trackId: PropTypes.number,
   title: PropTypes.string,
   username: PropTypes.string,
   isLiked: PropTypes.bool,

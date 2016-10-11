@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
+import { formatTitle } from 'client/utils/FormatUtils';
 import PlayerSongInfo from '../components/PlayerSongInfo';
 
 const mapStateToProps = (state, ownProps) => {
   const { track } = ownProps;
   const artist = track.getArtist();
   return {
-    title: track.getTitle(),
+    title: formatTitle(track.getTitle()),
     username: artist.getUsername(),
     artworkUrl: track.getArtworkUrl()
   };

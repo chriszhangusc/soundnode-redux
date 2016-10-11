@@ -12,17 +12,12 @@ const INITIAL_STATE = fromJS({
   volumeIsSeeking: false,
   duration: 0,
   mode: DEFAULT_MODE,
-  showPlaylist: false, // Should be moved to playlist!
   shuffleDraw: [],
   shuffleDiscard: []
 });
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-
-    case ActionTypes.TOGGLE_PLAYLIST:
-      return state.set('showPlaylist', !state.get('showPlaylist'));
-
     case ActionTypes.PLAY_SONG:
       return state.set('isPlaying', true);
 
@@ -105,5 +100,3 @@ export const getPlayerMode = state => state.get('mode');
 export const getVolumeSeekState = state => state.get('volumeIsSeeking');
 
 export const getCurrentVolume = state => state.get('volume');
-
-export const getShowPlaylist = state => state.get('showPlaylist');

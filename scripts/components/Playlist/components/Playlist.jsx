@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Track from 'client/models/Track';
 import PlaylistItemContainer from '../containers/PlaylistItemContainer';
 
 const Playlist = ({
@@ -16,7 +17,7 @@ const Playlist = ({
         <ul className="playlist-list">
           {
             playlistTracks.map(
-              (song, idx) => <PlaylistItemContainer song={song} index={idx + 1} key={idx} />
+              (track, idx) => <PlaylistItemContainer track={track} index={idx + 1} key={idx} />
             )
           }
         </ul>
@@ -27,7 +28,8 @@ const Playlist = ({
 
 Playlist.propTypes = {
   isPlaylistShown: PropTypes.bool,
-  playlistTracks: PropTypes.array
+  // Not 100% sure if this is the right way.
+  playlistTracks: PropTypes.arrayOf(PropTypes.shape(Track))
 };
 
 export default Playlist;

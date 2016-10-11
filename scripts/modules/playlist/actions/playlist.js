@@ -1,6 +1,9 @@
 import {
-  LOAD_PLAYLIST
+  LOAD_PLAYLIST,
+  TOGGLE_PLAYLIST
 } from 'client/constants/ActionTypes';
+
+export const togglePlaylist = () => ({ type: TOGGLE_PLAYLIST });
 
 /**
  * Load currently visible charts to our playlist

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { getPlayerMode, getShowPlaylist } from 'client/modules/reducers';
-import { sagaChangePlayMode, togglePlaylist } from 'client/modules/player/actions';
+import { sagaChangePlayMode } from 'client/modules/player/actions';
+import { togglePlaylist } from 'client/modules/playlist/actions/playlist';
 import { REPEAT, SHUFFLE } from 'client/constants/PlayerConstants';
 import PlayerModeControls from '../components/PlayerModeControls';
 
