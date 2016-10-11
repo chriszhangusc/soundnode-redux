@@ -1,18 +1,24 @@
 import React, { PropTypes } from 'react';
 import chunk from 'lodash/chunk';
-import SongCard from 'client/components/SongCard';
+import SongCardContainer from 'client/components/SongCard';
 import Spinner from 'client/components/Spinner';
 import infiniteScroll from 'client/components/hocs/InfiniteScroll';
-
-const renderSongCardList = (songs, isFetching) => {
+import TrackMap from 'client/models/TrackMap';
+/**
+ * Render SongCardList subroutine
+ * @param  {Array of Track Records}  tracks     [description]
+ * @param  {Boolean} isFetching [description]
+ * @return {[type]}             [description]
+ */
+const renderSongCardList = (tracks, isFetching) => {
   if (isFetching) return <Spinner />;
   const COLS = 4;
-  const rows = chunk(songs, COLS);
+  const rows = chunk(tracks, COLS);
   return rows.map((rowItems, i) => (
     <div className="row" key={i} >
       {
-        rowItems.map(song => (<div className="col-sm-3" key={song.id}>
-          <SongCard song={song} />
+        rowItems.map(track => (<div className="col-sm-3" key={track.getId()}>
+          <SongCardContainer track={track} />
         </div>))
       }
     </div>
@@ -21,10 +27,10 @@ const renderSongCardList = (songs, isFetching) => {
 
 
 const SongCardList = (props) => {
-  const { isFetching, songs } = props;
+  const { isFetching, tracks } = props;
   return (
     <div className="container">
-      {renderSongCardList(songs, isFetching)}
+      {renderSongCardList(tracks, isFetching)}
     </div>
   );
 };
@@ -32,7 +38,7 @@ const SongCardList = (props) => {
 
 SongCardList.propTypes = {
   isFetching: PropTypes.bool,
-  songs: PropTypes.arrayOf(PropTypes.shape({}))
+  tracks: PropTypes.arrayOf(TrackMap)
 };
 
 export default infiniteScroll(SongCardList);

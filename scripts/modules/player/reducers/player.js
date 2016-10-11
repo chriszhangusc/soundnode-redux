@@ -1,18 +1,18 @@
 import { fromJS } from 'immutable';
 import * as ActionTypes from 'client/constants/ActionTypes';
 import { INITIAL_VOLUME, DEFAULT_MODE } from 'client/constants/PlayerConstants';
-
+import Track from 'client/models/Track';
 /* Player Reducers */
 const INITIAL_STATE = fromJS({
   currentTime: 0,
   volume: INITIAL_VOLUME,
-  song: null,
+  track: new Track(),
   isPlaying: false,
   isSeeking: false,
   volumeIsSeeking: false,
   duration: 0,
   mode: DEFAULT_MODE,
-  showPlaylist: false,
+  showPlaylist: false, // Should be moved to playlist!
   shuffleDraw: [],
   shuffleDiscard: []
 });
@@ -29,11 +29,8 @@ const player = (state = INITIAL_STATE, action) => {
     case ActionTypes.PAUSE_SONG:
       return state.set('isPlaying', false);
 
-    case ActionTypes.CHANGE_DURATION:
-      return state.set('duration', action.payload);
-
     case ActionTypes.CHANGE_SONG:
-      return state.set('song', fromJS(action.payload));
+      return state.set('track', fromJS(action.payload));
 
     case ActionTypes.UPDATE_TIME:
       return state.set('currentTime', action.payload);
@@ -89,21 +86,13 @@ export default player;
 
 
 /* Player Selectors */
+export const getCurrentTrack = state => state.get('track');
+
 export const getShuffleDraw = state => state.get('shuffleDraw').toJS();
 
 export const getShuffleDiscard = state => state.get('shuffleDiscard').toJS();
 
 export const shuffleInitialized = state => (getShuffleDraw(state).length > 0);
-
-export const getCurrentSong = (state) => {
-  const song = state.get('song');
-  return song ? song.toJS() : undefined;
-};
-
-export const getCurrentSongId = (state) => {
-  const song = getCurrentSong(state);
-  return song ? song.id : undefined;
-};
 
 export const getPlayingState = state => state.get('isPlaying');
 

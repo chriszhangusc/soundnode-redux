@@ -4,7 +4,7 @@ import {
   USER_RECEIVED,
   TRACKS_RECEIVED
 } from 'client/constants/ActionTypes';
-
+import Artist from 'client/models/Artist';
 import { fetchUser, fetchUserTracks } from 'client/services/SCAPIServices';
 
 import { normalizeTracks } from 'client/utils/NormalizeUtils';
@@ -17,14 +17,9 @@ export const endFetching = () => ({
   type: END_ARTIST_FETCH
 });
 
-export const userReceived = user => ({
+export const userReceived = artistRecord => ({
   type: USER_RECEIVED,
-  payload: {
-    avatarUrl: user.avatar_url,
-    name: user.username,
-    followers: user.followers_count,
-    description: user.description
-  }
+  payload: artistRecord
 });
 
 export const tracksReceived = normalizedTracks => ({
@@ -44,9 +39,10 @@ export const loadUser = (uid) => {
       fetchUser(uid),
       fetchUserTracks(uid)
     ])
-    .then(([user, tracks]) => {
-      dispatch(userReceived(user.data));
-      const normalizedTracks = normalizeTracks(tracks.data);
+    .then(([userRes, tracksRes]) => {
+      const artistRecord = new Artist(userRes.data);
+      dispatch(userReceived(artistRecord));
+      const normalizedTracks = normalizeTracks(tracksRes.data);
       dispatch(tracksReceived(normalizedTracks));
       dispatch(endFetching());
     });

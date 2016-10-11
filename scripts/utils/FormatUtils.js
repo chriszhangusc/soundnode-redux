@@ -1,5 +1,6 @@
 import { CLIENT_ID } from 'client/constants/Config';
 import {
+  t500x500,
   large
 } from 'client/constants/ImageConstants';
 
@@ -16,7 +17,7 @@ export const formatSecondsAsTime = (secs) => {
   return `${min}:${sec}`;
 };
 
-export function formatImageUrl(rawUrl, size = large) {
+export function formatImageUrl(rawUrl, size = t500x500) {
   // Check size
   if (rawUrl && rawUrl.indexOf(large) > -1) {
     return rawUrl.replace(large, size);
@@ -30,7 +31,7 @@ export function formatImageUrl(rawUrl, size = large) {
  * @return {String} Stream url appended by client_id
  */
 export function formatStreamUrl(rawUrl) {
-  return (rawUrl ? `${rawUrl}/stream?client_id=${CLIENT_ID}` : null);
+  return (rawUrl ? `${rawUrl}?client_id=${CLIENT_ID}` : null);
 }
 
 export const formatTitle = (title) => {

@@ -1,3 +1,5 @@
+/* COPY Actions */
+export const COPY_SUCCESS = 'COPY_SUCCESS';
 /* Player Action Types */
 export const TOGGLE_PLAYLIST = 'TOGGLE_PLAYLIST';
 export const PLAY_SONG = 'PLAY_SONG';
@@ -8,7 +10,6 @@ export const LOAD_PLAYER_PLAYLIST = 'LOAD_PLAYER_PLAYLIST';
 export const CHANGE_SONG = 'CHANGE_SONG';
 export const BEGIN_SEEK = 'BEGIN_SEEK';
 export const END_SEEK = 'END_SEEK';
-export const CHANGE_DURATION = 'CHANGE_DURATION';
 export const CHANGE_VOLUME = 'CHANGE_VOLUME';
 export const BEGIN_VOLUME_SEEK = 'BEGIN_VOLUME_SEEK';
 export const END_VOLUME_SEEK = 'END_VOLUME_SEEK';

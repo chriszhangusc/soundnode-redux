@@ -4,6 +4,10 @@
 
   & .artist-avatar {
     display: inline-block;
+    & > img {
+      height: 350px;
+      width: 350px;
+    }
   }
 
   & .artist-details {

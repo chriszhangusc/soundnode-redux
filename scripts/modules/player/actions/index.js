@@ -1,5 +1,5 @@
 import * as ActionTypes from 'client/constants/ActionTypes';
-import { getChartsMap, getChartsIds } from 'client/modules/reducers';
+import { getChartsTrackMap } from 'client/modules/reducers';
 import { loadPlaylist } from 'client/modules/playlist/actions/playlist';
 
 /* Pure actions */
@@ -70,18 +70,13 @@ export const changePlayMode = mode => ({
 });
 
 /* Thunks */
-export const changeSongAndPlay = (song, shouldLoadPlaylist) =>
+export const changeSongAndPlay = (track, shouldLoadPlaylist) =>
   ((dispatch, getState) => {
     const state = getState();
-    const chartsMap = getChartsMap(state);
-    const chartsIds = getChartsIds(state);
-    const playlist = {
-      tracksById: chartsMap,
-      trackIds: chartsIds
-    };
-    if (shouldLoadPlaylist) dispatch(loadPlaylist(playlist));
+    const trackMap = getChartsTrackMap(state);
+    if (shouldLoadPlaylist) dispatch(loadPlaylist(trackMap));
     dispatch(pauseSong());
-    dispatch(changeSong(song));
+    dispatch(changeSong(track));
     dispatch(clearTime());
     dispatch(playSong());
   });

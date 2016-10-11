@@ -55,18 +55,16 @@ class PlayerAudio extends Component {
 
   bindEventListeners() {
     const audio = this.audioElement;
-    const { onTimeUpdate, onEnded, onLoadedMetadata } = this.props;
+    const { onTimeUpdate, onEnded } = this.props;
     audio.addEventListener('timeupdate', onTimeUpdate);
     audio.addEventListener('ended', onEnded);
-    audio.addEventListener('loadedmetadata', onLoadedMetadata.bind(null, audio));
   }
 
   removeEventListeners() {
     const audio = this.audioElement;
-    const { onTimeUpdate, onEnded, onLoadedMetadata } = this.props;
+    const { onTimeUpdate, onEnded } = this.props;
     audio.removeEventListener('timeupdate', onTimeUpdate);
     audio.removeEventListener('ended', onEnded);
-    audio.removeEventListener('loadedmetadata', onLoadedMetadata);
   }
 
   render() {
@@ -90,8 +88,7 @@ PlayerAudio.propTypes = {
   mode: PropTypes.string,
   streamUrl: PropTypes.string,
   onTimeUpdate: PropTypes.func,
-  onEnded: PropTypes.func,
-  onLoadedMetadata: PropTypes.func
+  onEnded: PropTypes.func
 };
 
 export default PlayerAudio;

@@ -3,6 +3,9 @@ import React, { Component, PropTypes } from 'react';
 import { loadUser } from 'client/modules/artist/actions';
 import Spinner from 'client/components/Spinner';
 import TrackListContainer from 'client/routes/artist/container/TrackListContainer';
+import Artist from 'client/models/Artist';
+import { formatImageUrl } from 'client/utils/FormatUtils';
+import { t500x500 } from 'client/constants/ImageConstants';
 
 class ArtistDetails extends Component {
 
@@ -15,12 +18,8 @@ class ArtistDetails extends Component {
 
   render() {
     const {
-      isFetching,
-      avatarUrl,
-      artistName,
-      followers,
-      description,
-      tracks
+      artistRecord,
+      isFetching
     } = this.props;
 
     if (isFetching) return <Spinner />;
@@ -28,12 +27,12 @@ class ArtistDetails extends Component {
       <div className="container">
         <div className="artist-info-container">
           <div className="artist-avatar">
-            <img alt="User avatar" src={avatarUrl} />
+            <img alt="User avatar" src={formatImageUrl(artistRecord.getAvatarUrl(), t500x500)} />
           </div>
           <div className="artist-details">
-            <h1 className="artist-name">{artistName}</h1>
-            <div className="artist-followers">Followers: {followers}</div>
-            <div className="artist-description">{description}</div>
+            <h1 className="artist-name">{artistRecord.getUsername()}</h1>
+            <div className="artist-followers">Followers: {artistRecord.getFollowersCount()}</div>
+            <div className="artist-description">{artistRecord.getDescription()}</div>
           </div>
         </div>
 
@@ -47,5 +46,11 @@ class ArtistDetails extends Component {
     );
   }
 }
+
+ArtistDetails.propTypes = {
+  artistRecord: PropTypes.instanceOf(Artist).isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  tracks: PropTypes.array,
+};
 
 export default ArtistDetails;

@@ -1,4 +1,5 @@
 import { Record } from 'immutable';
+import Artist from './Artist';
 
 const TrackRecord = Record({
   id: null,
@@ -7,9 +8,13 @@ const TrackRecord = Record({
   title: '',
   genre: '',
   description: '',
+  duration: 0,
   comment_count: 0,
   playback_count: 0,
-  favoritings_count: 0
+  favoritings_count: 0,
+  user: null,
+  permalink_url: '',
+  stream_url: ''
   //
   // "kind": "track",
   // "user_id": 20665501,
@@ -68,6 +73,10 @@ class Track extends TrackRecord {
     return this.get('id');
   }
 
+  getArtist() {
+    return new Artist(this.get('user'));
+  }
+
   getArtworkUrl() {
     return this.get('artwork_url');
   }
@@ -98,6 +107,18 @@ class Track extends TrackRecord {
 
   getLikedCount() {
     return this.get('favoritings_count');
+  }
+
+  getPermalinkUrl() {
+    return this.get('permalink_url');
+  }
+
+  getStreamUrl() {
+    return this.get('stream_url');
+  }
+
+  getDuration() {
+    return Math.floor(this.get('duration') / 1000.0);
   }
 }
 

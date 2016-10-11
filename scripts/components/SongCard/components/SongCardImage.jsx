@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 export default function SongCardImage(props) {
   const {
     isActive,
-    songImage,
+    artworkUrl,
     isPlaying,
     handlePauseSong,
     handlePlaySong,
@@ -35,14 +35,14 @@ export default function SongCardImage(props) {
   }
 
   return (
-    <div className="song-card-image" style={{ backgroundImage: `url(${songImage})` }}>
+    <div className="song-card-image" style={{ backgroundImage: `url(${artworkUrl})` }}>
       { togglePlayButton }
     </div>
   );
 }
 SongCardImage.propTypes = {
   isActive: PropTypes.bool,
-  songImage: PropTypes.string,
+  artworkUrl: PropTypes.string,
   isPlaying: PropTypes.bool,
   handlePlaySong: PropTypes.func,
   handlePauseSong: PropTypes.func,

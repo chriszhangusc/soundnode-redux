@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
+import { COPY_SUCCESS } from 'client/constants/ActionTypes';
 import copy from 'copy-to-clipboard';
-import { t500x500 } from 'client/constants/ImageConstants';
+import { formatImageUrl } from 'client/utils/FormatUtils';
+
 import {
   playSong,
   changeSongAndPlay,
@@ -11,52 +13,55 @@ import { startLikeSong, startUnlikeSong } from 'client/modules/user/actions';
 // We should keep reducer simple!!!
 import {
   isSongLiked,
-  getSongTitle,
-  getSongUserAvatar,
-  getSongUsername,
   getSingleSongIsActive,
   getSingleSongPlayingState
 } from 'client/modules/reducers';
 
-import { getSongUserId, getSongImage } from 'client/selectors/songCardSelectors';
 import SongCard from '../components/SongCard';
 
 
-const mapStateToProps = (state, { song }) => ({
-  // This is just like passing down props!
-  uid: getSongUserId(song),
-  trackId: song.id,
-  isLiked: isSongLiked(state, song.id),
-  songImage: getSongImage(song, t500x500),
-  title: getSongTitle(song),
-  userImage: getSongUserAvatar(song),
-  username: getSongUsername(song),
-  isActive: getSingleSongIsActive(state, song.id),
-  isPlaying: getSingleSongPlayingState(state, song.id)
-});
+const mapStateToProps = (state, { track }) => {
+  const trackId = track.getId();
+  const trackArtist = track.getArtist();
+  return {
+    // This is just like passing down props!
+    trackId,
+    artist: trackArtist,
+    isLiked: isSongLiked(state, trackId),
+    isActive: getSingleSongIsActive(state, trackId),
+    isPlaying: getSingleSongPlayingState(state, trackId),
+    artworkUrl: formatImageUrl(track.getArtworkUrl()),
+    title: track.getTitle(),
+    userAvatar: trackArtist.getAvatarUrl(),
+    artistName: trackArtist.getUsername()
+  };
+};
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  // Fire if the user click on a song card that is active
-  handlePlaySong() { dispatch(playSong()); },
-  // Fire if the user click on a song card that is not active
-  handleChangeSong() { dispatch(changeSongAndPlay(ownProps.song, true)); },
-  handlePauseSong() { dispatch(pauseSong()); },
-  handleLikeClick() {
-    dispatch(startLikeSong(ownProps.song.id));
-  },
-  handleUnlikeClick() {
-    dispatch(startUnlikeSong(ownProps.song.id));
-  },
-  handleCopyToClipboard() {
-    copy(ownProps.song.permalink_url);
-    dispatch({
-      type: 'COPY_SUCCESS',
-      payload: {
-        message: 'Song URL copied to clipboard'
-      }
-    });
-  }
-});
+const mapDispatchToProps = (dispatch, { track }) => {
+  const trackId = track.getId();
+  return {
+    // Fire if the user click on a song card that is active
+    handlePlaySong() { dispatch(playSong()); },
+    // Fire if the user click on a song card that is not active
+    handleChangeSong() { dispatch(changeSongAndPlay(track, true)); },
+    handlePauseSong() { dispatch(pauseSong()); },
+    handleLikeClick() {
+      dispatch(startLikeSong(trackId));
+    },
+    handleUnlikeClick() {
+      dispatch(startUnlikeSong(trackId));
+    },
+    handleCopyToClipboard() {
+      copy(track.getPermalinkUrl());
+      dispatch({
+        type: COPY_SUCCESS,
+        payload: {
+          message: 'Track URL copied to clipboard'
+        }
+      });
+    }
+  };
+};
 
 const SongCardContainer = connect(mapStateToProps,
   mapDispatchToProps)(SongCard);

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getCurrentSongId } from 'client/modules/reducers';
+import { getCurrentPlayerTrack } from 'client/modules/reducers';
+import Track from 'client/models/Track';
 import PlayerAudioContainer from './PlayerAudioContainer';
 import PlayerSongInfoContainer from './PlayerSongInfoContainer';
 import PlayerControlsContainer from './PlayerControlsContainer';
@@ -9,25 +10,24 @@ import PlayerModeControlsContainer from './PlayerModeControlsContainer';
 import PlayerVolumeControlsContainer from './PlayerVolumeControlsContainer';
 
 // Player Layout Container
-
-class Player extends Component {
+class PlayerContainer extends Component {
 
   render() {
     // Extract props that we care, and pass the other props as others.
-    const { currentSongId } = this.props;
-    if (!currentSongId) {
+    const { currentTrack } = this.props;
+    if (!currentTrack.getId()) {
       return null;
     }
     return (
       <div className="player">
         <div className="container">
           <div className="player-main">
-            <PlayerAudioContainer />
-            <PlayerSongInfoContainer />
-            <PlayerControlsContainer />
-            <PlayerDurationBarContainer />
-            <PlayerModeControlsContainer />
-            <PlayerVolumeControlsContainer />
+            <PlayerAudioContainer track={currentTrack} />
+            <PlayerSongInfoContainer track={currentTrack} />
+            <PlayerControlsContainer track={currentTrack} />
+            <PlayerDurationBarContainer track={currentTrack} />
+            <PlayerModeControlsContainer track={currentTrack} />
+            <PlayerVolumeControlsContainer track={currentTrack} />
           </div>
         </div>
       </div>
@@ -37,11 +37,11 @@ class Player extends Component {
 }
 
 const mapStateToProps = state => ({
-  currentSongId: getCurrentSongId(state)
+  currentTrack: getCurrentPlayerTrack(state)
 });
 
-Player.propTypes = {
-  currentSongId: PropTypes.number
+PlayerContainer.propTypes = {
+  currentTrack: PropTypes.instanceOf(Track)
 };
 
-export default connect(mapStateToProps)(Player);
+export default connect(mapStateToProps)(PlayerContainer);

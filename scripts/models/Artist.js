@@ -1,4 +1,5 @@
 import { Record } from 'immutable';
+import { camelizeKeys } from 'humps';
 
 const ArtistRecord = Record({
   id: null,
@@ -40,6 +41,10 @@ class Artist extends ArtistRecord {
 
   getDescription() {
     return this.get('description');
+  }
+
+  getFollowersCount() {
+    return this.get('followers_count');
   }
 }
 

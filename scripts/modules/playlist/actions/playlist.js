@@ -6,7 +6,7 @@ import {
  * Load currently visible charts to our playlist
  * @return Action
  */
-export const loadPlaylist = playlist => ({
+export const loadPlaylist = trackMap => ({
   type: LOAD_PLAYLIST,
-  payload: playlist
+  payload: trackMap
 });

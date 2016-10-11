@@ -1,33 +1,27 @@
 import { fromJS } from 'immutable';
-import {
-  LOAD_PLAYLIST
-} from 'client/constants/ActionTypes';
+import { LOAD_PLAYLIST } from 'client/constants/ActionTypes';
+import TrackMap from 'client/models/TrackMap';
 
 /* Current Playing Playlist */
 const INITIAL_STATE = fromJS({
-  tracksById: {},
-  trackIds: []
+  trackMap: new TrackMap()
 });
 
 const playlist = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOAD_PLAYLIST:
-      return fromJS({
-        tracksById: action.payload.tracksById,
-        trackIds: action.payload.trackIds
-      });
+      return state.set('trackMap', action.payload);
     default:
       return state;
   }
 };
 
-export const getPlaylistMap = state => state.get('tracksById').toJS();
-export const getPlaylistIds = state => state.get('trackIds').toJS();
+export const getPlaylistAsOrderedMap = state => state.get('trackMap');
 
 export const getPlaylistAsArray = (state) => {
-  const tracksById = getPlaylistMap(state);
-  const trackIds = getPlaylistIds(state);
-  return trackIds.map(id => tracksById[id]);
+  const trackMap = state.get('trackMap');
+  if (trackMap) return trackMap.toArray();
+  return [];
 };
 
 export default playlist;

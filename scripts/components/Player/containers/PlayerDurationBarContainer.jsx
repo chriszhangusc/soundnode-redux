@@ -3,7 +3,6 @@ import { computeNewTimeOnSeek } from 'client/utils/PlayerUtils';
 import {
   getPlayingState,
   getCurrentTime,
-  getDuration,
   getSeekState
 } from 'client/modules/reducers';
 
@@ -15,10 +14,10 @@ import {
 
 import PlayerDurationBar from '../components/PlayerDurationBar';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, { track }) => ({
   isSeeking: getSeekState(state),
   isPlaying: getPlayingState(state),
-  duration: getDuration(state),
+  duration: track.getDuration(),
   currentTime: getCurrentTime(state)
 });
 

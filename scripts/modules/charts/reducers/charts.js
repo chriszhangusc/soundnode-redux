@@ -1,16 +1,17 @@
 import { fromJS } from 'immutable';
-// import { DEFAULT_GENRE } from 'client/constants/SongConstants';
 import {
   CHARTS_REQUEST_TRACKS,
   CHARTS_RECEIVE_TRACKS,
   CHARTS_CHANGE_GENRE
 } from 'client/constants/ActionTypes';
 
+import TrackMap from 'client/models/TrackMap';
+
 const INITIAL_STATE = fromJS({
   genre: '',
-  tracksById: {},
-  trackIds: [],
-  isFetching: false
+  trackMap: new TrackMap(),
+  isFetching: false,
+  nextHref: ''
 });
 
 const charts = (state = INITIAL_STATE, action) => {
@@ -24,9 +25,9 @@ const charts = (state = INITIAL_STATE, action) => {
     // This wont work well with scroll to load more.
       return state.merge(fromJS({
         isFetching: false,
-        tracksById: action.payload.tracksById,
-        trackIds: action.payload.trackIds
-      }));
+        nextHref: action.payload.nextHref
+      }))
+      .set('trackMap', action.payload.trackMap);
     default:
       return state;
   }
@@ -36,13 +37,6 @@ export default charts;
 
 export const getGenre = state => state.get('genre');
 
-export const getTracksMap = state => state.get('tracksById').toJS();
-export const getTrackIds = state => state.get('trackIds').toJS();
-
-export const getTracksAsArray = (state) => {
-  const tracksById = getTracksMap(state);
-  const trackIds = getTrackIds(state);
-  return trackIds.map(id => tracksById[id]);
-};
+export const getTrackMap = state => state.get('trackMap');
 
 export const getIsFetching = state => state.get('isFetching');

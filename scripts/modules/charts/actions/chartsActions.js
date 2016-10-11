@@ -3,7 +3,6 @@ import {
   CHARTS_REQUEST_TRACKS,
   CHARTS_RECEIVE_TRACKS
 } from 'client/constants/ActionTypes';
-
 import { fetchCharts } from 'client/services/SCAPIV2Services';
 
 import { normalizeTracks } from 'client/utils/NormalizeUtils';
@@ -17,11 +16,11 @@ const startRequestTracks = () => ({
   type: CHARTS_REQUEST_TRACKS
 });
 
-const tracksReceived = normalizedTracks => ({
+const tracksReceived = normalized => ({
   type: CHARTS_RECEIVE_TRACKS,
   payload: {
-    tracksById: normalizedTracks.entities,
-    trackIds: normalizedTracks.ids
+    trackMap: normalized.trackMap,
+    nextHref: normalized.nextHref
   }
 });
 
@@ -32,8 +31,8 @@ export const loadCharts = (genre) => {
     dispatch(startRequestTracks());
     fetchCharts(genre)
       .then((res) => {
-        const normalizedTracks = normalizeTracks(res.data);
-        dispatch(tracksReceived(normalizedTracks));
+        const normalized = normalizeTracks(res.data);
+        dispatch(tracksReceived(normalized));
       });
   };
 };
