@@ -27,7 +27,12 @@
 
     & .artist-description {
       margin: 10px 0;
+      font-size: 1.2rem;
+      overflow: scroll;
+      height: 240px;
+      width: 500px;
       color: $font-sub-color;
+      white-space: pre-wrap;
     }
   }
 }

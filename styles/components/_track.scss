@@ -58,7 +58,9 @@
     & .track-description {
       margin: 10px 0;
       color: $font-sub-color;
+      height: 180px;
       width: 500px;
+      overflow: scroll; // Should use a ShowMore button.
       font-size: 1.2rem;
       white-space: pre-wrap;
     }

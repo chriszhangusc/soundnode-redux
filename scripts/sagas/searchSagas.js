@@ -19,7 +19,7 @@ import { normalizeArtists, normalizeTracks } from 'client/utils/NormalizeUtils';
 // Should add try catch
 function* doDropdownSearch({ payload }) {
   const { keyword, limit } = payload;
-  yield put(startSearch());
+  // yield put(startSearch());
   const [artistRes, trackRes] = yield [
     call(fetchUsers, keyword, limit),
     call(fetchTracks, keyword, limit)
@@ -28,7 +28,7 @@ function* doDropdownSearch({ payload }) {
   const normalizedTracks = yield call(normalizeTracks, trackRes.data);
   yield put(artistsReceived(normalizedArtists));
   yield put(tracksReceived(normalizedTracks));
-  yield put(endSearch());
+  // yield put(endSearch());
   yield put(showSearchResults());
 }
 
