@@ -9,7 +9,7 @@ const endpoints = {
   tracks: 'tracks'
 };
 
-const DEFAULT_LIMIT = 4;
+const DEFAULT_LIMIT = 20;
 
 function genFetchUrl(endpoint, limit, keyword) {
   return `${SC_API_V1}/${endpoint}?linked_partitioning=1&limit=${limit}&q=${keyword}&client_id=${CLIENT_ID}`;

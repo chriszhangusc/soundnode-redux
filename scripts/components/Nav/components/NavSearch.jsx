@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link, browserHistory } from 'react-router';
-import Spinner from 'client/components/Spinner';
+// import Spinner from 'client/components/Spinner';
 import Track from 'client/models/Track';
 import Artist from 'client/models/Artist';
 
@@ -11,7 +11,17 @@ class NavSearch extends Component {
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.renderSearchResults = this.renderSearchResults.bind(this);
+  }
+
+  // When user press enter, the search input form will be submitted
+  onSubmit(e) {
+    e.preventDefault();
+    const { handleShowAll } = this.props;
+    const searchKeyword = this.searchInput.value;
+    handleShowAll(searchKeyword);
+    this.searchInput.value = '';
   }
 
   onChange(e) {
@@ -30,11 +40,8 @@ class NavSearch extends Component {
   }
 
   renderSearchResults() {
-    const { artists, tracks, isFetching, shouldShowResults } = this.props;
+    const { artists, tracks, shouldShowResults } = this.props;
     if (shouldShowResults) {
-      if (isFetching) {
-        return <Spinner />;
-      }
       return (
         <div className="nav-search-result">
           <div className="nav-search-result-title">
@@ -50,7 +57,9 @@ class NavSearch extends Component {
                     src={artist.getAvatarUrl()}
                   />
                   <Link
-                    onMouseDown={() => {
+                    onMouseDown={(e) => {
+                      // e.stopPropagation();
+                      // e.preventDefault();
                       browserHistory.push(`/artist/${artist.getId()}`);
                     }}
                   >
@@ -72,7 +81,15 @@ class NavSearch extends Component {
                     className="nav-search-result-item-image"
                     src={track.getArtworkUrl()}
                   />
-                  <span className="nav-search-result-item-username">{track.getTitle()}</span>
+                  <Link
+                    onMouseDown={(e) => {
+                      // e.stopPropagation();
+                      // e.preventDefault();
+                      browserHistory.push(`/track/${track.getId()}`);
+                    }}
+                  >
+                    <span className="nav-search-result-item-username">{track.getTitle()}</span>
+                  </Link>
                 </li>)
               )
             }
@@ -86,13 +103,14 @@ class NavSearch extends Component {
   render() {
     return (
       <div className="table-item nav-search">
-        <form>
+        <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <i className="icon ion-search" />
             <input
               className="nav-search-input"
               placeholder="SEARCH"
               type="search"
+              ref={(node) => { this.searchInput = node; }}
               onChange={this.onChange}
               onFocus={this.onFocus}
               onBlur={this.onBlur}
@@ -110,10 +128,11 @@ NavSearch.propTypes = {
   shouldShowResults: PropTypes.bool.isRequired,
   artists: PropTypes.arrayOf(PropTypes.shape(Artist)),
   tracks: PropTypes.arrayOf(PropTypes.shape(Track)),
-  isFetching: PropTypes.bool.isRequired,
+  // isFetching: PropTypes.bool.isRequired,
   handleBlur: PropTypes.func,
   handleFocus: PropTypes.func,
-  handleChange: PropTypes.func.isRequired
+  handleChange: PropTypes.func.isRequired,
+  handleShowAll: PropTypes.func
 };
 
 export default NavSearch;

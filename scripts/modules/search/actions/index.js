@@ -1,15 +1,16 @@
 // import { fetchUsers, fetchTracks } from 'client/services/SCAPIServices';
 import {
   SAGA_SEARCH,
+  SAGA_DROPDOWN_SEARCH,
   START_SEARCH,
   END_SEARCH,
-  SEARCH_ARTISTS_RECEIVED,
-  SEARCH_TRACKS_RECEIVED,
+  SEARCH_DROPDOWN_ARTISTS_RECEIVED,
+  SEARCH_DROPDOWN_TRACKS_RECEIVED,
+  SEARCH_RESULTS_RECEIVED,
   SHOW_SEARCH_RESULTS,
   HIDE_SEARCH_RESULTS,
   CLEAR_SEARCH_RESULTS
 } from 'client/constants/ActionTypes';
-// import { normalizeTracks, normalizeArtists } from 'client/utils/NormalizeUtils';
 
 export function startSearch() {
   return {
@@ -23,22 +24,32 @@ export function endSearch() {
   };
 }
 
+export function searchResultsReceived(normalizedResults) {
+  return {
+    type: SEARCH_RESULTS_RECEIVED,
+    payload: {
+      resultMap: normalizedResults.trackMap,
+      nextHref: normalizedResults.nextHref
+    }
+  };
+}
+
 export function tracksReceived(normalizedTracks) {
   return {
-    type: SEARCH_TRACKS_RECEIVED,
+    type: SEARCH_DROPDOWN_TRACKS_RECEIVED,
     payload: {
       trackMap: normalizedTracks.trackMap,
-      trackNextHref: normalizedTracks.nextHref
+      nextHref: normalizedTracks.nextHref
     }
   };
 }
 
 export function artistsReceived(normalizedArtists) {
   return {
-    type: SEARCH_ARTISTS_RECEIVED,
+    type: SEARCH_DROPDOWN_ARTISTS_RECEIVED,
     payload: {
       artistMap: normalizedArtists.artistMap,
-      artistNextHref: normalizedArtists.nextHref
+      nextHref: normalizedArtists.nextHref
     }
   };
 }
@@ -94,9 +105,22 @@ export function clearAndHideSearchResults() {
 // }
 
 /* Saga Actions */
-export function sagaSearch(keyword) {
+export function sagaDropdownSearch(keyword, limit) {
+  return {
+    type: SAGA_DROPDOWN_SEARCH,
+    payload: {
+      keyword: keyword.trim().toLowerCase(),
+      limit
+    }
+  };
+}
+
+export function sagaSearch(keyword, limit) {
   return {
     type: SAGA_SEARCH,
-    payload: keyword.trim().toLowerCase()
+    payload: {
+      keyword: keyword.trim().toLowerCase(),
+      limit
+    }
   };
 }

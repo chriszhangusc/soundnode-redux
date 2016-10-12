@@ -43,13 +43,14 @@ export const getArtistFetchState = state => fromArtist.getIsArtistFetching(state
 export const getArtistTracksFetchState = state =>
   fromArtist.getIsTrackFetching(state.get('artist'));
 
-/* From search */
+/* From Search */
 export const getSearchTrackMap = state => fromSearch.getTrackMap(state.get('search'));
 export const getSearchArtistMap = state => fromSearch.getArtistMap(state.get('search'));
 export const getSearchTrackNextHref = state => fromSearch.getTrackNextHref(state.get('search'));
 export const getSearchArtistNextHref = state => fromSearch.getArtistNextHref(state.get('search'));
-export const isSearchResultFetching = state => fromSearch.isFetching(state.get('search'));
+export const isSearching = state => fromSearch.isFetching(state.get('search'));
 export const isSearchResultShown = state => fromSearch.isShown(state.get('search'));
+export const getSearchResults = state => fromSearch.getSearchResults(state.get('search'));
 
 /* From user */
 export const isSongLiked = (state, songId) => {

@@ -31,7 +31,7 @@ export const tracksReceived = normalizedTracks => ({
 });
 
 /* Thunk actions */
-export const loadUser = (uid) => {
+export const loadArtist = (uid) => {
   return (dispatch) => {
     dispatch(startFetching());
     Promise.all([

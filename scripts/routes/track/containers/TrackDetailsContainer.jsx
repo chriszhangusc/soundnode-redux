@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
-import { loadTrack } from 'client/modules/track/actions/track';
+// import { loadTrack } from 'client/modules/track/actions/track';
 
 import {
   playSong,
@@ -20,16 +20,6 @@ import TrackDetails from '../components/TrackDetails';
 
 
 class TrackDetailsContainer extends Component {
-  // Not supported by eslint
-  // static propTypes = {
-  //   dispatch: PropTypes.func
-  // };
-  componentWillMount() {
-    // Fetch track here.
-    const { params, dispatch } = this.props;
-    const trackId = params.trackId;
-    dispatch(loadTrack(trackId));
-  }
 
   render() {
     return <TrackDetails {...this.props} />;

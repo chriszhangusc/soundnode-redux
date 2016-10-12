@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { loadUser } from 'client/modules/artist/actions';
 import Spinner from 'client/components/Spinner';
 import TrackListContainer from 'client/routes/artist/container/TrackListContainer';
 import Artist from 'client/models/Artist';
@@ -7,13 +6,6 @@ import { formatImageUrl } from 'client/utils/FormatUtils';
 import { t500x500 } from 'client/constants/ImageConstants';
 
 class ArtistDetails extends Component {
-
-  componentWillMount() {
-    // Load user info
-    const { params, dispatch } = this.props;
-    const uid = params.uid;
-    dispatch(loadUser(uid));
-  }
 
   render() {
     const {
@@ -47,7 +39,6 @@ class ArtistDetails extends Component {
 }
 
 ArtistDetails.propTypes = {
-  dispatch: PropTypes.func,
   artist: PropTypes.instanceOf(Artist).isRequired,
   isFetching: PropTypes.bool.isRequired
 };
