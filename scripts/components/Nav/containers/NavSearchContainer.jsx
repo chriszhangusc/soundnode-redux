@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import {
   sagaSearch,
+  sagaDropdownSearch,
   clearAndHideSearchResults
 } from 'client/modules/search/actions';
 import {
@@ -22,14 +23,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   handleChange: (keywords) => {
     if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
-    else dispatch(sagaSearch(keywords, 4));
+    else dispatch(sagaDropdownSearch(keywords, 4));
   },
   handleBlur: () => {
     dispatch(clearAndHideSearchResults());
   },
   handleFocus: (keywords) => {
     if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
-    else dispatch(sagaSearch(keywords, 4));
+    else dispatch(sagaDropdownSearch(keywords, 4));
   },
   handleShowAll: (rawKeywords) => {
     const keywords = rawKeywords.toLowerCase().trim();

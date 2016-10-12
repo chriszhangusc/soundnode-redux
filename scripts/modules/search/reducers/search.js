@@ -16,13 +16,12 @@ const INITIAL_STATE = fromJS({
   isShown: false,
   isFetching: false,
   // Search dropdown list results
-  artistMap: new ArtistMap(),
-  trackMap: new TrackMap(),
+  dropdownArtists: new ArtistMap(),
+  dropdownTracks: new TrackMap(),
   // Search results page
   searchResults: new TrackMap(), // For now just display all tracks.
   artistNextHref: null,
-  trackNextHref: null,
-  resultNextHref: null
+  trackNextHref: null
 });
 
 const search = (state = INITIAL_STATE, action) => {
@@ -33,23 +32,25 @@ const search = (state = INITIAL_STATE, action) => {
       return state.set('isFetching', false);
     case SEARCH_DROPDOWN_ARTISTS_RECEIVED:
       // Set payload(users) to users
-      return state.set('artistMap', action.payload.artistMap).merge({
+      return state.set('dropdownArtists', action.payload.artistMap).merge({
         artistNextHref: action.payload.nextHref
       });
     case SEARCH_DROPDOWN_TRACKS_RECEIVED:
-      return state.set('trackMap', action.payload.trackMap).merge({
-        trackNextHref: action.payload.nextHref
-      });
+      return state
+        .set('dropdownTracks', action.payload.trackMap);
+      //   .merge({
+      //   trackNextHref: action.payload.nextHref
+      // });
     case SEARCH_RESULTS_RECEIVED:
       return state.set('searchResults', action.payload.resultMap).merge({
-        resultNextHref: action.payload.nextHref
+        trackNextHref: action.payload.nextHref
       });
     case HIDE_SEARCH_RESULTS:
       return state.set('isShown', false);
     case SHOW_SEARCH_RESULTS:
       return state.set('isShown', true);
     case CLEAR_SEARCH_RESULTS:
-      return INITIAL_STATE;
+      return state.set('dropdownArtists', new ArtistMap()).set('dropdownTracks', new TrackMap());
     default:
       return state;
   }
@@ -57,8 +58,8 @@ const search = (state = INITIAL_STATE, action) => {
 export default search;
 
 /* Selectors */
-export const getArtistMap = state => state.get('artistMap');
-export const getTrackMap = state => state.get('trackMap');
+export const getArtistMap = state => state.get('dropdownArtists');
+export const getTrackMap = state => state.get('dropdownTracks');
 export const getArtistNextHref = state => state.get('userNextHref');
 export const getTrackNextHref = state => state.get('trackNextHref');
 export const isFetching = state => state.get('isFetching');
