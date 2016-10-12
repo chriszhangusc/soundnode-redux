@@ -2,19 +2,17 @@ import { connect } from 'react-redux';
 
 import {
   getArtistRecord,
-  getArtistFetchState,
-  getArtistTracksAsArray
+  getArtistFetchState
 } from 'client/modules/reducers';
 
 import ArtistDetails from '../components/ArtistDetails';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   isFetching: getArtistFetchState(state),
-  artistRecord: getArtistRecord(state),
-  tracks: getArtistTracksAsArray(state)
+  artist: getArtistRecord(state)
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   dispatch
 });
 

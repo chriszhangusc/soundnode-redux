@@ -1,19 +1,19 @@
 import { fromJS } from 'immutable';
 import Artist from 'client/models/Artist';
+import TrackMap from 'client/models/TrackMap';
 import {
   START_ARTIST_FETCH,
   END_ARTIST_FETCH,
-  USER_RECEIVED,
+  ARTIST_RECEIVED,
   START_TRACKS_FETCH,
   END_TRACKS_FETCH,
   TRACKS_RECEIVED
 } from 'client/constants/ActionTypes';
 // The currently active artist. (ArtistDetails Page)
 const INITIAL_STATE = fromJS({
-  isFetching: false,
+  isArtistFetching: false,
   artist: new Artist(),
-  tracksById: {},
-  trackIds: [],
+  trackMap: new TrackMap(),
   trackNextHref: null,
   isTracksFetching: false
 });
@@ -21,10 +21,10 @@ const INITIAL_STATE = fromJS({
 const artist = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case START_ARTIST_FETCH:
-      return state.set('isFetching', true);
+      return state.set('isArtistFetching', true);
     case END_ARTIST_FETCH:
-      return state.set('isFetching', false);
-    case USER_RECEIVED:
+      return state.set('isArtistFetching', false);
+    case ARTIST_RECEIVED:
       return state.merge(fromJS({
         artist: action.payload
       })); // action.payload is an instance of Artist.
@@ -33,20 +33,19 @@ const artist = (state = INITIAL_STATE, action) => {
     case END_TRACKS_FETCH:
       return state.set('isTracksFetching', false);
     case TRACKS_RECEIVED:
-      return state.merge(fromJS(action.payload));
+    // Is merge gonna addon or override.
+      return state.merge({
+        trackMap: action.payload.trackMap,
+        trackNextHref: action.payload.trackNextHref
+      });
     default:
       return state;
   }
 };
 
 export const getArtistRecord = state => state.get('artist');
-
-export const getIsFetching = state => state.get('isFetching');
-export const getTracksAsArray = (state) => {
-  const tracksById = state.get('tracksById').toJS();
-  const trackIds = state.get('trackIds').toJS();
-  return trackIds.map(id => tracksById[id]);
-};
-export const getTracksFetchState = state => state.get('isTracksFetching');
+export const getArtistTrackMap = state => state.get('trackMap');
+export const getIsArtistFetching = state => state.get('isArtistFetching');
+export const getIsTrackFetching = state => state.get('isTracksFetching');
 
 export default artist;

@@ -1,5 +1,5 @@
 import { Record } from 'immutable';
-import { camelizeKeys } from 'humps';
+// import { camelizeKeys } from 'humps';
 
 const ArtistRecord = Record({
   id: null,

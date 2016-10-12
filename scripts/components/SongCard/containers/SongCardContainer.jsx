@@ -32,8 +32,9 @@ const mapStateToProps = (state, { track }) => {
     isPlaying: getSingleSongPlayingState(state, trackId),
     artworkUrl: formatImageUrl(track.getArtworkUrl()),
     title: track.getTitle(),
-    userAvatar: trackArtist.getAvatarUrl(),
-    artistName: trackArtist.getUsername()
+    artistAvatar: trackArtist.getAvatarUrl(),
+    artistName: trackArtist.getUsername(),
+    artistId: trackArtist.getId()
   };
 };
 

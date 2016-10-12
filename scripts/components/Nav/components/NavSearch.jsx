@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link, browserHistory } from 'react-router';
+import Spinner from 'client/components/Spinner';
+import Track from 'client/models/Track';
+import Artist from 'client/models/Artist';
 
 class NavSearch extends Component {
 
@@ -11,7 +14,6 @@ class NavSearch extends Component {
     this.renderSearchResults = this.renderSearchResults.bind(this);
   }
 
-  // Should we put logic here?!
   onChange(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -28,8 +30,11 @@ class NavSearch extends Component {
   }
 
   renderSearchResults() {
-    const { users, tracks, isFetching, showResults } = this.props;
-    if (showResults) {
+    const { artists, tracks, isFetching, shouldShowResults } = this.props;
+    if (shouldShowResults) {
+      if (isFetching) {
+        return <Spinner />;
+      }
       return (
         <div className="nav-search-result">
           <div className="nav-search-result-title">
@@ -37,19 +42,19 @@ class NavSearch extends Component {
           </div>
           <ul className="nav-search-result-list">
             {
-              users.map(user =>
-                (<li className="nav-search-result-item" key={user.id}>
+              artists.map(artist =>
+                (<li className="nav-search-result-item" key={artist.getId()}>
                   <img
                     alt="user-profile-img"
                     className="nav-search-result-item-image"
-                    src={user.avatar_url}
+                    src={artist.getAvatarUrl()}
                   />
                   <Link
                     onMouseDown={() => {
-                      browserHistory.push(`/artist/${user.id}`);
+                      browserHistory.push(`/artist/${artist.getId()}`);
                     }}
                   >
-                    <span className="nav-search-result-item-username">{user.username}</span>
+                    <span className="nav-search-result-item-username">{artist.getUsername()}</span>
                   </Link>
                 </li>)
               )
@@ -61,13 +66,13 @@ class NavSearch extends Component {
           <ul className="nav-search-result-list">
             {
               tracks.map(track =>
-                (<li className="nav-search-result-item" key={track.id}>
+                (<li className="nav-search-result-item" key={track.getId()}>
                   <img
                     alt="user-profile-img"
                     className="nav-search-result-item-image"
-                    src={track.artwork_url}
+                    src={track.getArtworkUrl()}
                   />
-                  <span className="nav-search-result-item-username">{track.title}</span>
+                  <span className="nav-search-result-item-username">{track.getTitle()}</span>
                 </li>)
               )
             }
@@ -102,10 +107,10 @@ class NavSearch extends Component {
 }
 
 NavSearch.propTypes = {
-  showResults: PropTypes.bool,
-  users: PropTypes.array,
-  tracks: PropTypes.array,
-  isFetching: PropTypes.bool,
+  shouldShowResults: PropTypes.bool.isRequired,
+  artists: PropTypes.arrayOf(PropTypes.shape(Artist)),
+  tracks: PropTypes.arrayOf(PropTypes.shape(Track)),
+  isFetching: PropTypes.bool.isRequired,
   handleBlur: PropTypes.func,
   handleFocus: PropTypes.func,
   handleChange: PropTypes.func.isRequired

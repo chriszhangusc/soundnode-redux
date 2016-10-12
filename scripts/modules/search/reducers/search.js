@@ -1,8 +1,10 @@
 import { fromJS } from 'immutable';
+import TrackMap from 'client/models/TrackMap';
+import ArtistMap from 'client/models/ArtistMap';
 import {
   START_SEARCH,
   END_SEARCH,
-  SEARCH_USERS_RECEIVED,
+  SEARCH_ARTISTS_RECEIVED,
   SEARCH_TRACKS_RECEIVED,
   HIDE_SEARCH_RESULTS,
   SHOW_SEARCH_RESULTS,
@@ -10,13 +12,11 @@ import {
 } from 'client/constants/ActionTypes';
 
 const INITIAL_STATE = fromJS({
-  showResults: false,
+  isShown: false,
   isFetching: false,
-  usersById: {},
-  userIds: [],
-  userNextHref: null,
-  tracksById: {},
-  trackIds: [],
+  artistMap: new ArtistMap(),
+  trackMap: new TrackMap(),
+  artistNextHref: null,
   trackNextHref: null
 });
 
@@ -26,15 +26,19 @@ const search = (state = INITIAL_STATE, action) => {
       return state.set('isFetching', true);
     case END_SEARCH:
       return state.set('isFetching', false);
-    case SEARCH_USERS_RECEIVED:
+    case SEARCH_ARTISTS_RECEIVED:
       // Set payload(users) to users
-      return state.merge(fromJS(action.payload));
+      return state.set('artistMap', action.payload.artistMap).merge({
+        artistNextHref: action.payload.nextHref
+      });
     case SEARCH_TRACKS_RECEIVED:
-      return state.merge(fromJS(action.payload));
+      return state.set('trackMap', action.payload.trackMap).merge({
+        trackNextHref: action.payload.nextHref
+      });
     case HIDE_SEARCH_RESULTS:
-      return state.set('showResults', false);
+      return state.set('isShown', false);
     case SHOW_SEARCH_RESULTS:
-      return state.set('showResults', true);
+      return state.set('isShown', true);
     case CLEAR_SEARCH_RESULTS:
       return INITIAL_STATE;
     default:
@@ -44,27 +48,9 @@ const search = (state = INITIAL_STATE, action) => {
 export default search;
 
 /* Selectors */
-const getUsersMap = state => state.get('usersById').toJS();
-const getUserIds = state => state.get('userIds').toJS();
-
-const getTracksMap = state => state.get('tracksById').toJS();
-const getTrackIds = state => state.get('trackIds').toJS();
-
-export const getTracksAsArray = (state) => {
-  const trackIds = getTrackIds(state);
-  const tracksById = getTracksMap(state);
-  if (trackIds && tracksById) return trackIds.map(trackId => tracksById[trackId]);
-  return [];
-};
-
-export const getUsersAsArray = (state) => {
-  const userIds = getUserIds(state);
-  const usersById = getUsersMap(state);
-  if (userIds && usersById) return userIds.map(userId => usersById[userId]);
-  return [];
-};
+export const getArtistMap = state => state.get('artistMap');
+export const getTrackMap = state => state.get('trackMap');
+export const getArtistNextHref = state => state.get('userNextHref');
 export const getTrackNextHref = state => state.get('trackNextHref');
-
-export const getUserNextHref = state => state.get('userNextHref');
-export const getIsFetching = state => state.get('isFetching');
-export const getShowResults = state => state.get('showResults');
+export const isFetching = state => state.get('isFetching');
+export const isShown = state => state.get('isShown');

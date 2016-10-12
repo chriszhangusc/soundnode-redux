@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-// import { loadUser } from '../../../modules/artist/actions';
 import { loadUser } from 'client/modules/artist/actions';
 import Spinner from 'client/components/Spinner';
 import TrackListContainer from 'client/routes/artist/container/TrackListContainer';
@@ -18,7 +17,7 @@ class ArtistDetails extends Component {
 
   render() {
     const {
-      artistRecord,
+      artist,
       isFetching
     } = this.props;
 
@@ -27,12 +26,12 @@ class ArtistDetails extends Component {
       <div className="container">
         <div className="artist-info-container">
           <div className="artist-avatar">
-            <img alt="User avatar" src={formatImageUrl(artistRecord.getAvatarUrl(), t500x500)} />
+            <img alt="User avatar" src={formatImageUrl(artist.getAvatarUrl(), t500x500)} />
           </div>
           <div className="artist-details">
-            <h1 className="artist-name">{artistRecord.getUsername()}</h1>
-            <div className="artist-followers">Followers: {artistRecord.getFollowersCount()}</div>
-            <div className="artist-description">{artistRecord.getDescription()}</div>
+            <h1 className="artist-name">{artist.getUsername()}</h1>
+            <div className="artist-followers">Followers: {artist.getFollowersCount()}</div>
+            <div className="artist-description">{artist.getDescription()}</div>
           </div>
         </div>
 
@@ -48,9 +47,9 @@ class ArtistDetails extends Component {
 }
 
 ArtistDetails.propTypes = {
-  artistRecord: PropTypes.instanceOf(Artist).isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  tracks: PropTypes.array,
+  dispatch: PropTypes.func,
+  artist: PropTypes.instanceOf(Artist).isRequired,
+  isFetching: PropTypes.bool.isRequired
 };
 
 export default ArtistDetails;

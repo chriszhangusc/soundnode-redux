@@ -1,7 +1,7 @@
 import {
   START_ARTIST_FETCH,
   END_ARTIST_FETCH,
-  USER_RECEIVED,
+  ARTIST_RECEIVED,
   TRACKS_RECEIVED
 } from 'client/constants/ActionTypes';
 import Artist from 'client/models/Artist';
@@ -18,16 +18,15 @@ export const endFetching = () => ({
 });
 
 export const userReceived = artistRecord => ({
-  type: USER_RECEIVED,
+  type: ARTIST_RECEIVED,
   payload: artistRecord
 });
 
 export const tracksReceived = normalizedTracks => ({
   type: TRACKS_RECEIVED,
   payload: {
-    trackNextHref: normalizedTracks.nextHref,
-    tracksById: normalizedTracks.entities,
-    trackIds: normalizedTracks.ids
+    trackMap: normalizedTracks.trackMap,
+    trackNextHref: normalizedTracks.nextHref
   }
 });
 

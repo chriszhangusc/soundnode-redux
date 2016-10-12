@@ -1,28 +1,14 @@
 import TrackMap from 'client/models/TrackMap';
 import Track from 'client/models/Track';
 import trackMapper from 'client/models/TrackMapper';
-// Normalize data from the server.
-// The byIds and ids way
-// export function normalizeTracks(data) {
-//   // { [trackIds] {tracks obj array} }
-//   const collection = data.collection;
-//   const ids = [];
-//   const entities = {};
-//   collection.forEach((item) => {
-//     const obj = item.track ? item.track : item;
-//     const id = obj.id;
-//     ids.push(id);
-//     entities[id] = obj;
-//   });
-//
-//   return {
-//     ids,
-//     entities,
-//     nextHref: data.next_href
-//   };
-// }
+import Artist from 'client/models/Artist';
+import ArtistMap from 'client/models/ArtistMap';
 
-
+/**
+ * Take the data coming back from axios, return an OrderedMap containing Track immutable object.
+ * @param  {[type]} data [description]
+ * @return {[type]}      [description]
+ */
 export function normalizeTracks(data) {
   const collection = data.collection;
   let trackMap = new TrackMap();
@@ -37,17 +23,15 @@ export function normalizeTracks(data) {
   };
 }
 
-export function normalizeSearchResults(data) {
+export function normalizeArtists(data) {
   const collection = data.collection;
-  const ids = [];
-  const entities = {};
+  let artistMap = new ArtistMap();
   collection.forEach((item) => {
-    ids.push(item.id);
-    entities[item.id] = item;
+    artistMap = artistMap.set(item.id, new Artist(item));
   });
+
   return {
-    ids,
-    entities,
+    artistMap,
     nextHref: data.next_href
   };
 }

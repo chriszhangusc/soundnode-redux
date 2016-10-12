@@ -4,12 +4,12 @@ import { SAGA_SEARCH } from 'client/constants/ActionTypes';
 import {
   startSearch,
   endSearch,
-  usersReceived,
+  artistsReceived,
   tracksReceived,
   showSearchResults
 } from 'client/modules/search/actions';
 import { fetchUsers, fetchTracks } from 'client/services/SCAPIServices';
-import { normalizeSearchResults } from 'client/utils/NormalizeUtils';
+import { normalizeArtists, normalizeTracks } from 'client/utils/NormalizeUtils';
 
 /* *****************************************************************************/
 /* ****************************** SUBROUTINES **********************************/
@@ -19,13 +19,13 @@ import { normalizeSearchResults } from 'client/utils/NormalizeUtils';
 function* doSearch({ payload }) {
   const keyword = payload;
   yield put(startSearch());
-  const [userRes, trackRes] = yield [
+  const [artistRes, trackRes] = yield [
     call(fetchUsers, keyword),
     call(fetchTracks, keyword)
   ];
-  const normalizedUsers = yield call(normalizeSearchResults, userRes.data);
-  const normalizedTracks = yield call(normalizeSearchResults, trackRes.data);
-  yield put(usersReceived(normalizedUsers));
+  const normalizedArtists = yield call(normalizeArtists, artistRes.data);
+  const normalizedTracks = yield call(normalizeTracks, trackRes.data);
+  yield put(artistsReceived(normalizedArtists));
   yield put(tracksReceived(normalizedTracks));
   yield put(endSearch());
   yield put(showSearchResults());

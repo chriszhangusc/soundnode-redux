@@ -1,26 +1,24 @@
 import { connect } from 'react-redux';
-
 import {
-  doSearch,
   sagaSearch,
   clearAndHideSearchResults
 } from 'client/modules/search/actions';
-
 import {
-  getSearchUsersAsArray,
-  getSearchTracksAsArray,
-  getSearchIsFetching,
-  getShowResults
+  getSearchArtistMap,
+  getSearchTrackMap,
+  isSearchResultFetching,
+  isSearchResultShown
 } from 'client/modules/reducers';
-
 import NavSearch from '../components/NavSearch';
 
-const mapStateToProps = state => ({
-  showResults: getShowResults(state),
-  isFetching: getSearchIsFetching(state),
-  users: getSearchUsersAsArray(state),
-  tracks: getSearchTracksAsArray(state)
-});
+const mapStateToProps = (state) => {
+  return ({
+    shouldShowResults: isSearchResultShown(state),
+    isFetching: isSearchResultFetching(state),
+    artists: getSearchArtistMap(state).toArray(),
+    tracks: getSearchTrackMap(state).toArray()
+  });
+};
 
 const mapDispatchToProps = dispatch => ({
   handleChange: (keywords) => {
