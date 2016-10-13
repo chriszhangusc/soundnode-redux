@@ -7,7 +7,7 @@ import { isSearching, getSearchResults } from 'client/modules/reducers';
 const mapStateToProps = state => ({
   isFetching: isSearching(state),
   // Array of TrackRecords
-  tracks: getSearchResults(state).toArray()
+  trackMap: getSearchResults(state)
 });
 
 const mapDispatchToProps = dispatch => ({

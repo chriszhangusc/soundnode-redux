@@ -6,8 +6,7 @@ import { getIsChartsFetching, getChartsTrackMap } from 'client/modules/reducers'
 // Simply providing slices of state for the component to render.
 const mapStateToProps = state => ({
   isFetching: getIsChartsFetching(state),
-  // Array of TrackRecords
-  tracks: getChartsTrackMap(state).toArray()
+  trackMap: getChartsTrackMap(state)
 });
 
 const mapDispatchToProps = dispatch => ({

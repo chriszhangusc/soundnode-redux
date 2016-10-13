@@ -36,7 +36,5 @@ const charts = (state = INITIAL_STATE, action) => {
 export default charts;
 
 export const getGenre = state => state.get('genre');
-
 export const getTrackMap = state => state.get('trackMap');
-
 export const getIsFetching = state => state.get('isFetching');

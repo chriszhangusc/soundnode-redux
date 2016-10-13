@@ -6,19 +6,20 @@ import infiniteScroll from 'client/components/hocs/InfiniteScroll';
 import TrackMap from 'client/models/TrackMap';
 /**
  * Render SongCardList subroutine
- * @param  {Array of Track Records}  tracks     [description]
+ * @param  {Track Map}  tracksMap     [description]
  * @param  {Boolean} isFetching [description]
  * @return {[type]}             [description]
  */
-const renderSongCardList = (tracks, isFetching) => {
+const renderSongCardList = (trackMap, isFetching) => {
   if (isFetching) return <Spinner />;
+  const tracksArray = trackMap.toArray();
   const COLS = 4;
-  const rows = chunk(tracks, COLS);
+  const rows = chunk(tracksArray, COLS);
   return rows.map((rowItems, i) => (
     <div className="row" key={i} >
       {
         rowItems.map(track => (<div className="col-sm-3" key={track.getId()}>
-          <SongCardContainer track={track} />
+          <SongCardContainer track={track} playlist={trackMap} />
         </div>))
       }
     </div>
@@ -27,10 +28,10 @@ const renderSongCardList = (tracks, isFetching) => {
 
 
 const SongCardList = (props) => {
-  const { isFetching, tracks } = props;
+  const { isFetching, trackMap } = props;
   return (
     <div className="container">
-      {renderSongCardList(tracks, isFetching)}
+      {renderSongCardList(trackMap, isFetching)}
     </div>
   );
 };
@@ -38,7 +39,7 @@ const SongCardList = (props) => {
 
 SongCardList.propTypes = {
   isFetching: PropTypes.bool,
-  tracks: PropTypes.arrayOf(TrackMap)
+  trackMap: PropTypes.instanceOf(TrackMap)
 };
 
 export default infiniteScroll(SongCardList);

@@ -19,7 +19,6 @@ import {
 
 import SongCard from '../components/SongCard';
 
-
 const mapStateToProps = (state, { track }) => {
   const trackId = track.getId();
   const trackArtist = track.getArtist();
@@ -38,13 +37,14 @@ const mapStateToProps = (state, { track }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, { track }) => {
+const mapDispatchToProps = (dispatch, { track, playlist }) => {
   const trackId = track.getId();
   return {
     // Fire if the user click on a song card that is active
     handlePlaySong() { dispatch(playSong()); },
     // Fire if the user click on a song card that is not active
-    handleChangeSong() { dispatch(changeSongAndPlay(track, true)); },
+    // Here playlist is trackMap
+    handleChangeSong() { dispatch(changeSongAndPlay(track, playlist)); },
     handlePauseSong() { dispatch(pauseSong()); },
     handleLikeClick() {
       dispatch(startLikeSong(trackId));

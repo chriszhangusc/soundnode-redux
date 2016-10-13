@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable';
+import { fromJS, is } from 'immutable';
 import { LOAD_PLAYLIST, TOGGLE_PLAYLIST } from 'client/constants/ActionTypes';
 import TrackMap from 'client/models/TrackMap';
 
@@ -13,7 +13,11 @@ const playlist = (state = INITIAL_STATE, action) => {
     case TOGGLE_PLAYLIST:
       return state.set('showPlaylist', !state.get('showPlaylist'));
     case LOAD_PLAYLIST:
-      return state.set('trackMap', action.payload);
+      // Only load playlist when the new playlist is different from the current one.
+      if (!is(state.get('trackMap'), (action.payload))) {
+        return state.set('trackMap', action.payload);
+      }
+      return state;
     default:
       return state;
   }

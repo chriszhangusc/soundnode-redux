@@ -75,14 +75,14 @@ export const changePlayMode = mode => ({
 /**
  * Change current track to new track, and play the new track.
  * @param  {Track(Record)} track        The Track model representing a track object
- * @param  {Boolean} shouldLoadPlaylist If we should load playlist to state.
+ * @param  {Boolean} playlist If we should load playlist to state.
  * @return {[type]}                    [description]
  */
-export const changeSongAndPlay = (track, shouldLoadPlaylist) =>
-  ((dispatch, getState) => {
-    const state = getState();
-    const trackMap = getChartsTrackMap(state);
-    if (shouldLoadPlaylist) dispatch(loadPlaylist(trackMap));
+export const changeSongAndPlay = (track, playlist) =>
+  ((dispatch) => {
+    // Get current page
+    // Check if the load is actually nessary
+    dispatch(loadPlaylist(playlist));
     dispatch(pauseSong());
     dispatch(changeSong(track));
     dispatch(clearTime());
