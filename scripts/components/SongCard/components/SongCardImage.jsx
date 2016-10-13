@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import defaultArtworkImage from 'assets/images/default_sound.png';
+import defaultArtworkImage from 'assets/images/default-artwork.png';
 
 export default function SongCardImage(props) {
   const {
@@ -37,7 +37,6 @@ export default function SongCardImage(props) {
   }
 
   return (
-
     <div
       className="song-card-image"
       style={{ backgroundImage: `url(${artworkUrl || defaultArtworkImage})` }}

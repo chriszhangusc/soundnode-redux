@@ -1,6 +1,6 @@
 /* Main reducer */
 import { combineReducers } from 'redux-immutable';
-import { formatImageUrl, formatTitle, formatStreamUrl } from 'client/utils/FormatUtils';
+
 import * as fromPlayer from './player/reducers/player';
 import * as fromUser from './user/reducers/user';
 import * as fromSearch from './search/reducers/search';
@@ -74,17 +74,22 @@ export const getCurrentTime = state => fromPlayer.getCurrentTime(state.get('play
 export const getSeekState = state => fromPlayer.getSeekState(state.get('player'));
 export const getPlayerMode = state => fromPlayer.getPlayerMode(state.get('player'));
 
-// Return if the specific song is playing or not
-export const getSingleSongPlayingState = (state, id) => {
+/**
+ * Return if the current track(byId) is loaded in player
+ * @param  {[type]} state [description]
+ * @param  {[type]} id    [description]
+ * @return {[type]}       [description]
+ */
+export const getSingleSongIsActive = (state, id) => {
   const currentSongId = getCurrentPlayerTrack(state).getId();
-  return currentSongId === id ? getPlayingState(state) : false;
+  if (currentSongId && id) {
+    return currentSongId.toString() === id.toString();
+  }
+  return false;
 };
 
-// To memoize it we have to check out createSelector with param!
-export const getSingleSongIsActive = (state, id) => {
-  if (!id) return false;
-  const currentSongId = getCurrentPlayerTrack(state).getId();
-  return currentSongId ? id === currentSongId : false;
-};
+// Return if the specific song is playing or not
+export const getSingleSongPlayingState = (state, id) =>
+  getSingleSongIsActive(state, id) && getPlayingState(state);
 
 export default rootReducer;

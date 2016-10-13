@@ -5,6 +5,11 @@
   & .track-avatar {
     display: inline-block;
     position: relative;
+
+    // Big icon for play pause button in Track Details Page
+    .icon-big {
+      font-size: 100px;
+    }
   }
 
   & .track-image {

@@ -2,6 +2,7 @@ import {
   LOAD_PLAYLIST,
   TOGGLE_PLAYLIST
 } from 'client/constants/ActionTypes';
+import TrackMap from 'client/models/TrackMap';
 
 export const togglePlaylist = () => ({ type: TOGGLE_PLAYLIST });
 
@@ -11,5 +12,5 @@ export const togglePlaylist = () => ({ type: TOGGLE_PLAYLIST });
  */
 export const loadPlaylist = trackMap => ({
   type: LOAD_PLAYLIST,
-  payload: trackMap
+  payload: trackMap || new TrackMap()
 });

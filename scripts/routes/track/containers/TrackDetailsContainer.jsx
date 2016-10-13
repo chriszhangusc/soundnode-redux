@@ -14,37 +14,30 @@ import {
   getIsTrackFetching,
   getTrackRecord,
   isSongLiked,
-  getTrackArtistRecord
+  getTrackArtistRecord,
+  getSingleSongIsActive,
+  getSingleSongPlayingState
 } from 'client/modules/reducers';
 import TrackDetails from '../components/TrackDetails';
 
-
-class TrackDetailsContainer extends Component {
-
-  render() {
-    return <TrackDetails {...this.props} />;
-  }
-}
-
-TrackDetailsContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  params: PropTypes.object
-};
+const TrackDetailsContainer = props => <TrackDetails {...props} />;
 
 const mapStateToProps = (state, ownProps) => ({
   isFetching: getIsTrackFetching(state),
   artist: getTrackArtistRecord(state),
   track: getTrackRecord(state),
-  isLiked: isSongLiked(state, ownProps.params.trackId)
+  isLiked: isSongLiked(state, ownProps.params.trackId),
+  isActive: getSingleSongIsActive(state, ownProps.params.trackId),
+  isPlaying: getSingleSongPlayingState(state, ownProps.params.trackId)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   dispatch,
   // Fire if the user click on a song card that is active
-  // handlePlaySong() { dispatch(playSong()); },
+  handlePlaySong() { dispatch(playSong()); },
   // Fire if the user click on a song card that is not active
-  // handleChangeSong() { dispatch(changeSongAndPlay(ownProps.song, true)); },
-  // handlePauseSong() { dispatch(pauseSong()); },
+  handleChangeSong(track) { dispatch(changeSongAndPlay(track)); },
+  handlePauseSong() { dispatch(pauseSong()); },
   handleLikeClick() {
     dispatch(startLikeSong(ownProps.params.trackId));
   },

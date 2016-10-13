@@ -5,27 +5,66 @@ import Track from 'client/models/Track';
 import Artist from 'client/models/Artist';
 import { formatPlaybacks, formatLikes, formatImageUrl } from 'client/utils/FormatUtils';
 import { t500x500 } from 'client/constants/ImageConstants';
+import defaultArtworkImage from 'assets/images/default-artwork.png';
 
 const TrackDetails = ({
   artist,
   track,
   isFetching,
   isLiked,
+  isPlaying,
+  isActive,
+  handlePlaySong,
+  handlePauseSong,
+  handleChangeSong,
   handleLikeClick,
   handleUnlikeClick
 }) => {
   if (isFetching) {
     return <Spinner />;
   }
+
+  let togglePlayButton = null;
+  if (isActive && isPlaying) {
+    togglePlayButton = (
+      <button
+        className={`toggle-play-button ${(isActive ? 'active' : '')}`}
+        onClick={handlePauseSong}
+      >
+        <i className="toggle-play-button-icon ion-ios-pause icon-big" />
+      </button>
+    );
+  } else {
+    togglePlayButton = (
+      <button
+        className={`toggle-play-button ${(isActive ? 'active' : '')}`}
+        onClick={() => {
+          if (isActive) handlePlaySong();
+          else handleChangeSong(track);
+        }}
+      >
+        <i className="toggle-play-button-icon ion-ios-play icon-big" />
+      </button>
+    );
+  }
+  // <img
+  //   className="track-image"
+  //   alt="Track Avatar"
+  //   src={formatImageUrl(track.getArtworkUrl(), t500x500) || defaultArtworkImage}
+  // />
   return (
     <div className="container">
       <div className="track-info-container">
         <div className="track-avatar">
-          <img
-            className="track-image"
-            alt="Track Avatar"
-            src={formatImageUrl(track.getArtworkUrl(), t500x500)}
-          />
+          <div
+            className="song-card-image track-image"
+            style={{
+              backgroundImage: `url(${formatImageUrl(track.getArtworkUrl(), t500x500)
+                || defaultArtworkImage})`
+            }}
+          >
+            { togglePlayButton }
+          </div>
           <div className="image-details-bar">
             <span className="playback-count">
               <i className="fa fa-play" /> {formatPlaybacks(track.getPlaybackCount())}

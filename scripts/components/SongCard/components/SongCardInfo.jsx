@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const handleOnError = (e) => {
-  console.log(e.target.src);
-};
+import defaultArtist from 'assets/images/default-artist.png';
 
 export default function SongCardInfo({ trackId, artistId, artistAvatar, title, artistName }) {
   return (
@@ -11,8 +9,7 @@ export default function SongCardInfo({ trackId, artistId, artistAvatar, title, a
       <img
         alt="user-profile-img"
         className="song-card-user-image"
-        onError={handleOnError}
-        src={artistAvatar}
+        src={artistAvatar || defaultArtist}
       />
       <div className="song-card-details">
         <Link to={`/track/${trackId}`} className="song-card-title">

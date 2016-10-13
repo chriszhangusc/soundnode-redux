@@ -6,7 +6,7 @@ import { getArtistTracksFetchState, getArtistTrackMap } from 'client/modules/red
 // Simply providing slices of state for the component to render.
 const mapStateToProps = state => ({
   isFetching: getArtistTracksFetchState(state),
-  tracks: getArtistTrackMap(state).toArray()
+  trackMap: getArtistTrackMap(state)
 });
 
 const mapDispatchToProps = dispatch => ({
