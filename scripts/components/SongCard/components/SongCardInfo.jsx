@@ -1,12 +1,17 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
+const handleOnError = (e) => {
+  console.log(e.target.src);
+};
+
 export default function SongCardInfo({ trackId, artistId, artistAvatar, title, artistName }) {
   return (
     <div className="song-card-user clearfix">
       <img
         alt="user-profile-img"
         className="song-card-user-image"
+        onError={handleOnError}
         src={artistAvatar}
       />
       <div className="song-card-details">

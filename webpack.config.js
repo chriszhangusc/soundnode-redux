@@ -25,7 +25,8 @@ module.exports = {
       path.resolve(__dirname, './node_modules')
     ],
     alias: {
-      client: path.resolve(__dirname, './scripts')
+      client: path.resolve(__dirname, './scripts'),
+      assets: path.resolve(__dirname, './server/public')
     },
     extensions: ['', '.js', '.jsx', 'stage-0']
   },
@@ -45,7 +46,7 @@ module.exports = {
         loaders: ['style', 'css', 'sass']
       },
       {
-        test: /\.(ttf|eot|svg|woff(2)?)(\S+)?$/,
+        test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
         loader: 'file-loader?name=[name].[ext]'
       }
     ]

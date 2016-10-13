@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+import defaultArtworkImage from 'assets/images/default_sound.png';
+
 export default function SongCardImage(props) {
   const {
     isActive,
@@ -35,11 +37,16 @@ export default function SongCardImage(props) {
   }
 
   return (
-    <div className="song-card-image" style={{ backgroundImage: `url(${artworkUrl})` }}>
+
+    <div
+      className="song-card-image"
+      style={{ backgroundImage: `url(${artworkUrl || defaultArtworkImage})` }}
+    >
       { togglePlayButton }
     </div>
   );
 }
+
 SongCardImage.propTypes = {
   isActive: PropTypes.bool,
   artworkUrl: PropTypes.string,

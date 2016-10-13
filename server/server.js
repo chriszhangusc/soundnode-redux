@@ -9,8 +9,6 @@ var url = require('url');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/test', express.static(__dirname + '/test'));
-
 //http://localhost:3001/sc/api-v2/charts?kind=top&genre=soundcloud:genres:country&limit=20&offset=0&client_id=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
 var SC_API_V2 = 'https://api-v2.soundcloud.com/';
 
