@@ -1,9 +1,10 @@
 var path = require('path');
+var webpack = require('webpack');
 module.exports = {
   entry: {
     main: [
       './scripts/index.jsx',
-      'webpack-dev-server/client?http://localhost:3000',
+      'webpack-dev-server/client?http://localhost:3000/',
       'webpack/hot/only-dev-server'
     ]
   },
@@ -30,7 +31,10 @@ module.exports = {
     },
     extensions: ['', '.js', '.jsx', 'stage-0']
   },
-
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
   module: {
     loaders: [
       {

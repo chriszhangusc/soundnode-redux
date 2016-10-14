@@ -1,20 +1,23 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
-const PlayerSongInfo = ({ username, title, artworkUrl }) => (
+const PlayerSongInfo = ({ trackId, artistId, username, title, artworkUrl }) => (
   <div className="player-section player-info">
     <img alt="artwork pic" className="player-image" src={artworkUrl} />
     <div className="player-song-card-details">
-      <a className="song-card-title">
+      <Link to={`/track/${trackId}`} className="song-card-title">
         {title}
-      </a>
-      <a className="song-card-username">
+      </Link>
+      <Link to={`/artist/${artistId}`} className="song-card-username">
         {username}
-      </a>
+      </Link>
     </div>
   </div>
 );
 
 PlayerSongInfo.propTypes = {
+  trackId: PropTypes.number,
+  artistId: PropTypes.number,
   username: PropTypes.string,
   title: PropTypes.string,
   artworkUrl: PropTypes.string

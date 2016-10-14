@@ -28,7 +28,7 @@ const TrackDetails = ({
   if (isActive && isPlaying) {
     togglePlayButton = (
       <button
-        className={`toggle-play-button ${(isActive ? 'active' : '')}`}
+        className="toggle-play-button"
         onClick={handlePauseSong}
       >
         <i className="toggle-play-button-icon ion-ios-pause icon-big" />
@@ -37,7 +37,7 @@ const TrackDetails = ({
   } else {
     togglePlayButton = (
       <button
-        className={`toggle-play-button ${(isActive ? 'active' : '')}`}
+        className="toggle-play-button"
         onClick={() => {
           if (isActive) handlePlaySong();
           else handleChangeSong(track);
@@ -47,11 +47,6 @@ const TrackDetails = ({
       </button>
     );
   }
-  // <img
-  //   className="track-image"
-  //   alt="Track Avatar"
-  //   src={formatImageUrl(track.getArtworkUrl(), t500x500) || defaultArtworkImage}
-  // />
   return (
     <div className="container">
       <div className="track-info-container">
@@ -105,9 +100,14 @@ const TrackDetails = ({
 
 TrackDetails.propTypes = {
   track: PropTypes.instanceOf(Track).isRequired,
-  artist: PropTypes.instanceOf(Artist),
+  artist: PropTypes.instanceOf(Artist).isRequired,
   isFetching: PropTypes.bool.isRequired,
-  isLiked: PropTypes.bool,
+  isLiked: PropTypes.bool.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  handlePlaySong: PropTypes.bool.isRequired,
+  handlePauseSong: PropTypes.bool.isRequired,
+  handleChangeSong: PropTypes.bool.isRequired,
   handleLikeClick: PropTypes.func.isRequired,
   handleUnlikeClick: PropTypes.func.isRequired
 };

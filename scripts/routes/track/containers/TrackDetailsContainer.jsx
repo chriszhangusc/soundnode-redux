@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 // import { loadTrack } from 'client/modules/track/actions/track';
 
 import {
