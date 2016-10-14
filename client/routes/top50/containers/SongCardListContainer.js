@@ -10,7 +10,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  scrollFunc() {}
+  scrollFunc() {
+    console.log('Scroll Func lol');
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongCardList);
