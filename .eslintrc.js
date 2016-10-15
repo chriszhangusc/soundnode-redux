@@ -15,9 +15,4 @@ module.exports = {
       "import/no-extraneous-dependencies": 0,
       "comma-dangle": 0
     }
-    // 'import/resolver': {
-    //   webpack: {
-    //     config: path.join(__dirname, 'webpack.config.js')
-    //   }
-    // }
 };

@@ -80,6 +80,13 @@ const TrackDetails = ({
           <div className="track-artist-name">Created At: {track.getCreatedAt().replace('+0000', '')}</div>
           <div className="track-description"><p>{track.getDescription()}</p></div>
           <div className="track-controls">
+            <button
+              className="button inline"
+              onClick={isLiked ? handleUnlikeClick : handleLikeClick}
+            >
+              <i className={`fa fa-heart ${isLiked ? 'active' : ''}`} />
+              <span>{`${isLiked ? 'UNLIKE' : 'LIKE'}`}</span>
+            </button>
             <button className="button inline">
               <i className="fa fa-bookmark" /><span>ADD TO PLAYLIST</span>
             </button>

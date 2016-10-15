@@ -147,9 +147,10 @@
       color: white;
     }
 
-    &.active {
-      color: $theme-color;
-    }
+    // Move to global in icons.scss
+    // &.active {
+    //   color: $theme-color;
+    // }
   }
 
 }

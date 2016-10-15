@@ -3,7 +3,8 @@ import axios from 'axios';
 import { CLIENT_ID } from 'client/constants/Config';
 import { concatParamsToUrl, formatGenre } from 'client/utils/FormatUtils';
 
-export const SC_API_V2 = 'http://localhost:3001/sc/api-v2';
+// This will be redirected to 3001! See config in webpack
+export const SC_API_V2 = 'http://localhost:3000/sc/api-v2';
 
 export function fetchCharts(genre) {
   let fetchUrl = `${SC_API_V2}/charts`;

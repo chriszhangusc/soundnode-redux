@@ -4,15 +4,16 @@
   "description": "A Simple Client for SoundCloud",
   "main": "index.js",
   "scripts": {
-    "start": "npm run dev & npm run api",
+    "start": "npm run dev & npm run server",
     "dev": "webpack-dev-server --progress --colors --hot --inline --config ./webpack.config.js",
-    "api": "nodemon ./server/server.js",
+    "server": "nodemon ./server",
     "lint": "eslint scripts",
     "clean": "rm -rf node-modules"
   },
   "author": "AngryBugs",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.16.0",
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-runtime": "^6.15.0",

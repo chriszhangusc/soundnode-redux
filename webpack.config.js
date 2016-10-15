@@ -1,16 +1,16 @@
 var path = require('path');
-// var webpack = require('webpack');
+var webpack = require('webpack');
 var buildPath = path.resolve(__dirname, 'public', 'build');
 
 var PORT = 3000;
 
 module.exports = {
   entry: [
-    './client/index.jsx'
+    // Only needed in node webpack dev server
+    // 'webpack-dev-server/client?http://localhost:3000/',
+    // 'webpack/hot/only-dev-server',
+    path.resolve(__dirname, 'client', 'index.jsx')
   ],
-
-  // Here if we are using webpack-dev-server, it will generate a single file
-  // directly on the server's root.
 
   // Just like app.use(publicPath, express.static(__dirname, contentBase))
   output: {
@@ -19,7 +19,7 @@ module.exports = {
     // error will occur if nothing is specified. We use the buildPath
     // as that points to where the files will eventually be bundled
     // in production
-    path: buildPath,
+    path: '/',
     filename: 'bundle.js',
     // This modified bundle is served from memory at the relative path specified in publicPath (see API).
     // It will not be written to your configured output directory.
@@ -28,7 +28,20 @@ module.exports = {
     publicPath: '/build/'
   },
 
+  plugins: [
+    // Only needed when we write webpack-dev-server in node file.
+    // new webpack.optimize.OccurenceOrderPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
+    // new webpack.NoErrorsPlugin()
+  ],
   devServer: {
+    // http://localhost:3000/api/abc will be redirect to 3001/api/abc
+    proxy: {
+      '/sc/api-v2/*': {
+        target: 'http://localhost:3001',
+        secure: false
+      }
+    },
     historyApiFallback: true,
     // Serve the static files under public folder
     contentBase: './public',
@@ -49,12 +62,9 @@ module.exports = {
   module: {
     loaders: [
       {
-        loaders: ['react-hot',
-        'babel?' + JSON.stringify({
-          presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['transform-runtime'] })],
+        loaders: ['react-hot', 'babel-loader'],
         test: /\.jsx?$/,
-        exclude: [path.resolve(__dirname, 'node_modules')]
+        exclude: /node_modules/
       },
       {
         test: /\.scss$/,
