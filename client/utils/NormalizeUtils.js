@@ -6,6 +6,26 @@ import ArtistMap from 'client/models/ArtistMap';
 import Comment from 'client/models/Comment';
 import CommentMap from 'client/models/CommentMap';
 /**
+ * Take the normalized tracks response and return a TrackMap containing all the tracks.
+ * @param  {[type]} normalized [description]
+ * @return {[type]}            [description]
+ */
+export const denormalizeTracks = (normalized) => {
+  const { result, entities } = normalized;
+  const { tracks, artists } = entities;
+  let newTracks = new TrackMap();
+  result.forEach((id) => {
+    // user is normalized to an id, we need to set it to a ArtistRecord
+    const artistId = tracks[id].user;
+    const artist = new Artist(artists[artistId]);
+    let track = new Track(tracks[id]);
+    track = track.set('user', artist);
+    newTracks = newTracks.set(id, track);
+  });
+  return newTracks;
+};
+
+/**
  * Take the data coming back from axios, return an OrderedMap containing Track immutable object.
  * @param  {[type]} data [description]
  * @return {[type]}      [description]

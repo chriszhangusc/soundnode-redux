@@ -1,10 +1,11 @@
 import { fromJS } from 'immutable';
 import {
-  CHARTS_REQUEST_TRACKS,
-  CHARTS_RECEIVE_TRACKS,
-  CHARTS_CHANGE_GENRE
+  CHARTS_CHANGE_GENRE,
+  CHARTS_REQUEST,
+  CHARTS_RECEIVE,
+  CHARTS_FAILURE,
 } from 'client/constants/ActionTypes';
-
+import { denormalizeTracks } from 'client/utils/NormalizeUtils';
 import TrackMap from 'client/models/TrackMap';
 
 const INITIAL_STATE = fromJS({
@@ -18,16 +19,15 @@ const charts = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case CHARTS_CHANGE_GENRE:
       return state.set('genre', fromJS(action.payload));
-    case CHARTS_REQUEST_TRACKS:
+    case CHARTS_REQUEST:
       return state.set('isFetching', true);
 
-    case CHARTS_RECEIVE_TRACKS:
-    // This wont work well with scroll to load more.
-      return state.merge(fromJS({
-        isFetching: false,
-        nextHref: action.payload.nextHref
-      }))
-      .set('trackMap', action.payload.trackMap);
+    case CHARTS_RECEIVE:
+      return state.merge({
+        trackMap: denormalizeTracks(action.payload),
+        nextHref: action.payload.nextHref,
+        isFetching: false
+      });
     default:
       return state;
   }

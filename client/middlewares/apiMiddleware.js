@@ -2,31 +2,26 @@ import fetch from 'isomorphic-fetch';
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
 import { CLIENT_ID } from 'client/constants/Config';
+import querystring from 'querystring';
 
 export const CALL_API = 'CALL_API';
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
-const callApi = (endpoint, schema, responseType) => {
-  const finalUrl = `${endpoint}`;
+const callApi = (endpoint, query, schema) => {
+  // Append ClientId
+  const queryString = querystring.stringify({ ...query, client_id: CLIENT_ID });
+  const finalUrl = `http://localhost:3000${endpoint}?${queryString}`;
+console.log(finalUrl);
   return fetch(finalUrl)
     .then(response => response.json())
     .then((json) => {
       const camelizedJson = camelizeKeys(json);
-      if (responseType === 'single') {
-        return Object.assign({}, normalize(camelizedJson, schema));
-      } else if (responseType === 'collection') {
+      if (camelizedJson.collection) {
         const { nextHref, collection } = camelizedJson;
         return Object.assign({}, normalize(collection, schema), { nextHref });
       }
-      // Not sure what to do here.
-console.log('Should not be reached');
-      return Object.assign({}, camelizedJson);
+      return Object.assign({}, normalize(camelizedJson, schema));
     });
-
-  // return fetch(endpoint)
-  //   .then(response => response.json().then((json) => {
-  //     return callback(json);
-  //   }));
 };
 
 export default store => next => (action) => {
@@ -41,12 +36,12 @@ export default store => next => (action) => {
     return finalAction;
   };
 
-  const { endpoint, types, schema, responseType } = callAPI;
+  const { endpoint, types, query, schema } = callAPI;
   const [requestType, successType, failureType] = types;
   // Start request
   next(actionWith({ type: requestType }));
 
-  return callApi(endpoint, schema, responseType)
+  return callApi(endpoint, query, schema)
   .then(
     response => next(actionWith({
       type: successType,

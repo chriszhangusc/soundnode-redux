@@ -12,9 +12,8 @@ import { artistSchema, trackArraySchema } from 'client/schemas';
 
 export const fetchArtist = id => ({
   [CALL_API]: {
-    endpoint: `https://api.soundcloud.com/users/${id}?client_id=f9e1e2232182a46705c880554a1011af`,
+    endpoint: `/sc/api-v1/users/${id}`,
     method: 'GET',
-    responseType: 'single',
     types: [ARTIST_REQUEST, ARTIST_RECEIVE, ARTIST_FAILURE],
     schema: artistSchema
   }
@@ -22,9 +21,11 @@ export const fetchArtist = id => ({
 
 export const fetchArtistTracks = id => ({
   [CALL_API]: {
-    endpoint: `https://api.soundcloud.com/users/${id}/tracks?linked_partitioning=1&limit=20&client_id=f9e1e2232182a46705c880554a1011af`,
+    endpoint: `/sc/api-v1/users/${id}/tracks`,
+    query: {
+      limit: 20
+    },
     method: 'GET',
-    responseType: 'collection',
     types: [ARTIST_TRACKS_REQUEST, ARTIST_TRACKS_RECEIVE, ARTIST_TRACKS_FAILURE],
     schema: trackArraySchema
   }

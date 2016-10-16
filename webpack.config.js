@@ -36,16 +36,17 @@ module.exports = {
   ],
   devServer: {
     // http://localhost:3000/api/abc will be redirect to 3001/api/abc
+    // Serve the static files under public folder
+    contentBase: './public',
+    port: PORT,
     proxy: {
-      '/sc/api-v2/*': {
+      // /sc/api-v1/* and /sc/api-v2/*
+      '/sc/*': {
         target: 'http://localhost:3001',
         secure: false
       }
     },
-    historyApiFallback: true,
-    // Serve the static files under public folder
-    contentBase: './public',
-    port: PORT
+    historyApiFallback: true
   },
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
   // In every other case use resolve.root.
