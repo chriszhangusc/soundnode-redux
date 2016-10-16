@@ -9,7 +9,7 @@ import NotFound from 'client/components/NotFound';
 // import LikesContainer from '../views/likes/components/LikesPage';
 import { DEFAULT_GENRE } from 'client/constants/SongConstants';
 import { loadCharts } from 'client/modules/charts/actions/chartsActions';
-import { loadArtist } from 'client/modules/artist/actions';
+import { fetchArtistAndTracks } from 'client/modules/artist/actions';
 import { loadTrack } from 'client/modules/track/actions/track';
 import { sagaSearch } from 'client/modules/search/actions';
 
@@ -23,7 +23,7 @@ const configureRoutes = (store) => {
   const onArtistDetailsPageEnter = (nextState) => {
     const dispatch = store.dispatch;
     const uid = nextState.params.uid;
-    dispatch(loadArtist(uid));
+    dispatch(fetchArtistAndTracks(uid));
   };
 
   const onTrackDetailsPageEnter = (nextState) => {

@@ -9,6 +9,7 @@ import rootReducer from 'client/modules/reducers';
 import rootSaga from 'client/sagas';
 import { loadState, saveState } from 'client/utils/LocalStorageUtils';
 import notificationMiddleware from 'client/middlewares/notificationMiddleware';
+import apiMiddleware from 'client/middlewares/apiMiddleware';
 
 const stateTransformer = (state) => {
   if (Iterable.isIterable(state)) return state.toJS();
@@ -27,7 +28,7 @@ const configureStore = () => {
     persistedState,
     // initialState,
     compose(
-      applyMiddleware(thunk, sagaMiddleware, notificationMiddleware, logger),
+      applyMiddleware(thunk, sagaMiddleware, apiMiddleware, notificationMiddleware, logger),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );

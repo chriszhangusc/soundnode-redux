@@ -101,6 +101,30 @@ const TrackDetails = ({
           </div>
         </div>
       </div>
+
+      <div className="comment-container">
+        <div className="comment-title">
+          <h4>Comments: (5321)</h4>
+        </div>
+        <div className="comment-list-container">
+          <ul className="comment-list">
+            <li className="comment-item">
+              <img
+                className="song-card-user-image comment-artist-avatar"
+                role="presentation"
+                src="https://a1.sndcdn.com/images/default_avatar_large.png"
+              />
+              <div className="comment-header">
+                <a className="comment-artist-name">RandyJJ</a>
+                <span className="comment-created-at">2016/10/15 05:18:21</span>
+              </div>
+              <p className="comment-body">
+                Learn how you can make $10k per month using your computer (even if you're a newbie). Visit this site for more info: http://GivenDaily.com
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };
@@ -112,9 +136,9 @@ TrackDetails.propTypes = {
   isLiked: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   isActive: PropTypes.bool.isRequired,
-  handlePlaySong: PropTypes.bool.isRequired,
-  handlePauseSong: PropTypes.bool.isRequired,
-  handleChangeSong: PropTypes.bool.isRequired,
+  handlePlaySong: PropTypes.func.isRequired,
+  handlePauseSong: PropTypes.func.isRequired,
+  handleChangeSong: PropTypes.func.isRequired,
   handleLikeClick: PropTypes.func.isRequired,
   handleUnlikeClick: PropTypes.func.isRequired
 };

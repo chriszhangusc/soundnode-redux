@@ -3,18 +3,18 @@ import Artist from './Artist';
 
 const TrackRecord = Record({
   id: null,
-  artwork_url: '',
-  created_at: '',
+  artworkUrl: '',
+  createdAt: '',
   title: '',
   genre: '',
   description: '',
   duration: 0,
-  comment_count: 0,
-  playback_count: 0,
-  favoritings_count: 0,
+  commentCount: 0,
+  playbackCount: 0,
+  favoritingsCount: 0,
   user: null,
-  permalink_url: '',
-  stream_url: ''
+  permalinkUrl: '',
+  streamUrl: ''
   //
   // "kind": "track",
   // "user_id": 20665501,
@@ -74,15 +74,15 @@ class Track extends TrackRecord {
   }
 
   getArtist() {
-    return new Artist(this.get('user'));
+    return this.get('user');
   }
 
   getArtworkUrl() {
-    return this.get('artwork_url');
+    return this.get('artworkUrl');
   }
 
   getCreatedAt() {
-    return this.get('created_at');
+    return this.get('createdAt');
   }
 
   getTitle() {
@@ -98,23 +98,23 @@ class Track extends TrackRecord {
   }
 
   getCommentCount() {
-    return this.get('comment_count');
+    return this.get('commentCount');
   }
 
   getPlaybackCount() {
-    return this.get('playback_count');
+    return this.get('playbackCount');
   }
 
   getLikedCount() {
-    return this.get('favoritings_count');
+    return this.get('favoritingsCount');
   }
 
   getPermalinkUrl() {
-    return this.get('permalink_url');
+    return this.get('permalinkUrl');
   }
 
   getStreamUrl() {
-    return this.get('stream_url');
+    return this.get('streamUrl');
   }
 
   getDuration() {

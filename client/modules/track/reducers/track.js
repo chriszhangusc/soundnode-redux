@@ -2,20 +2,34 @@ import { fromJS } from 'immutable';
 import {
   TRACK_START_FETCH,
   TRACK_RECEIVED,
-  TRACK_ARTIST_RECEIVED
+  TRACK_ARTIST_RECEIVED,
+  COMMENTS_START_FETCH,
+  COMMENTS_RECEIVED
 } from 'client/constants/ActionTypes';
 import Track from 'client/models/Track';
 import Artist from 'client/models/Artist';
+import CommentMap from 'client/models/CommentMap';
 // The currently active artist. (ArtistDetails Page)
 
 const INITIAL_STATE = fromJS({
   isFetching: false,
   track: new Track(),
-  artist: new Artist()
+  artist: new Artist(),
+  comments: new CommentMap(),
+  isCommentsFetching: false,
+  commentsNextHref: null
 });
 
 const track = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case COMMENTS_START_FETCH:
+      return state.set('isCommentsFetching', true);
+    case COMMENTS_RECEIVED:
+      return state.merge(fromJS({
+        isCommentsFetching: false,
+        comments: action.payload.resultMap,
+        commentsNextHref: action.payload.nextHref
+      }));
     case TRACK_START_FETCH:
       return state.set('isFetching', true);
     case TRACK_RECEIVED:

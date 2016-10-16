@@ -6,20 +6,20 @@ const ArtistRecord = Record({
   kind: '',
   permalink: '',
   username: '',
-  last_modified: '',
+  lastModified: '',
   uri: '',
-  permalink_url: '',
-  avatar_url: '',
+  permalinkUrl: '',
+  avatarUrl: '',
   country: '',
-  first_name: '',
-  last_name: '',
-  full_name: '',
+  firstName: '',
+  lastName: '',
+  fullName: '',
   description: '',
   city: '',
-  track_count: 0,
-  playlist_count: 0,
-  followers_count: 0,
-  followings_count: 0
+  trackCount: 0,
+  playlistCount: 0,
+  followersCount: 0,
+  followingsCount: 0
 });
 
 class Artist extends ArtistRecord {
@@ -36,7 +36,7 @@ class Artist extends ArtistRecord {
   }
 
   getAvatarUrl() {
-    return this.get('avatar_url');
+    return this.get('avatarUrl');
   }
 
   getDescription() {
@@ -44,7 +44,7 @@ class Artist extends ArtistRecord {
   }
 
   getFollowersCount() {
-    return this.get('followers_count');
+    return this.get('followersCount');
   }
 }
 

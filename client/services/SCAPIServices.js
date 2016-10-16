@@ -11,6 +11,8 @@ const endpoints = {
 
 const DEFAULT_LIMIT = 20;
 
+const DEFAULT_COMMENT_LIMIT = 50;
+
 function genFetchUrl(endpoint, limit, keyword) {
   return `${SC_API_V1}/${endpoint}?linked_partitioning=1&limit=${limit}&q=${keyword}&client_id=${CLIENT_ID}`;
 }
@@ -21,7 +23,7 @@ function genFetchUrl(endpoint, limit, keyword) {
  * @return Promise
  */
 export function fetchUser(uid) {
-  const url = `${SC_API_V1}/users/${uid}?&client_id=${CLIENT_ID}`;
+  const url = `${SC_API_V1}/users/${uid}?client_id=${CLIENT_ID}`;
   return axios.get(url);
 }
 
@@ -41,6 +43,16 @@ export function fetchUserTracks(uid) {
  */
 export function fetchTrack(trackId) {
   const url = `${SC_API_V1}/tracks/${trackId}?client_id=${CLIENT_ID}`;
+  return axios.get(url);
+}
+
+/**
+ * Fetch comments of the track by trackId
+ * @param  {[type]} trackId [description]
+ * @return {[type]}         [description]
+ */
+export function fetchComments(trackId) {
+  const url = `${SC_API_V1}/tracks/${trackId}/comments?linked_partitioning=1&limit=${DEFAULT_COMMENT_LIMIT}&client_id=${CLIENT_ID}`;
   return axios.get(url);
 }
 

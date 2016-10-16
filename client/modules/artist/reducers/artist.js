@@ -1,43 +1,63 @@
 import { fromJS } from 'immutable';
 import Artist from 'client/models/Artist';
+import Track from 'client/models/Track';
 import TrackMap from 'client/models/TrackMap';
 import {
-  START_ARTIST_FETCH,
-  END_ARTIST_FETCH,
-  ARTIST_RECEIVED,
-  START_TRACKS_FETCH,
-  END_TRACKS_FETCH,
-  TRACKS_RECEIVED
+  ARTIST_REQUEST,
+  ARTIST_RECEIVE,
+  ARTIST_FAILURE,
+  ARTIST_TRACKS_REQUEST,
+  ARTIST_TRACKS_RECEIVE,
+  ARTIST_TRACKS_FAILURE
 } from 'client/constants/ActionTypes';
+
 // The currently active artist. (ArtistDetails Page)
 const INITIAL_STATE = fromJS({
   isArtistFetching: false,
   artist: new Artist(),
   trackMap: new TrackMap(),
-  trackNextHref: null,
+  tracksNextHref: null,
   isTracksFetching: false
 });
 
+
+const artistReceived = (state, normalized) => {
+  const artistId = normalized.result;
+  const artistRecord = new Artist(normalized.entities.artists[artistId]);
+  return state
+  .set('isArtistFetching', false)
+  .set('artist', artistRecord);
+};
+
+const artistTracksReceived = (state, normalized) => {
+  const { result, nextHref, entities } = normalized;
+  const { tracks, artists } = entities;
+  let newTracks = new TrackMap();
+  result.forEach((id) => {
+    // user is normalized to an id, we need to set it to a ArtistRecord
+    const artistId = tracks[id].user;
+    const artist = new Artist(artists[artistId]);
+    let track = new Track(tracks[id]);
+    track = track.set('user', artist);
+    newTracks = newTracks.set(id, track);
+  });
+  return state.merge({
+    trackMap: newTracks,
+    tracksNextHref: nextHref,
+    isTracksFetching: false
+  });
+};
+
 const artist = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case START_ARTIST_FETCH:
+    case ARTIST_REQUEST:
       return state.set('isArtistFetching', true);
-    case END_ARTIST_FETCH:
-      return state.set('isArtistFetching', false);
-    case ARTIST_RECEIVED:
-      return state.merge(fromJS({
-        artist: action.payload
-      })); // action.payload is an instance of Artist.
-    case START_TRACKS_FETCH:
+    case ARTIST_RECEIVE:
+      return artistReceived(state, action.payload);
+    case ARTIST_TRACKS_REQUEST:
       return state.set('isTracksFetching', true);
-    case END_TRACKS_FETCH:
-      return state.set('isTracksFetching', false);
-    case TRACKS_RECEIVED:
-    // Is merge gonna addon or override.
-      return state.merge({
-        trackMap: action.payload.trackMap,
-        trackNextHref: action.payload.trackNextHref
-      });
+    case ARTIST_TRACKS_RECEIVE:
+      return artistTracksReceived(state, action.payload);
     default:
       return state;
   }
@@ -47,5 +67,5 @@ export const getArtistRecord = state => state.get('artist');
 export const getArtistTrackMap = state => state.get('trackMap');
 export const getIsArtistFetching = state => state.get('isArtistFetching');
 export const getIsTrackFetching = state => state.get('isTracksFetching');
-
+export const getTracksNextHref = state => state.get('tracksNextHref');
 export default artist;
