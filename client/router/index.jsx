@@ -8,10 +8,10 @@ import SearchResultsPage from 'client/routes/search/components/SearchResults';
 import NotFound from 'client/components/NotFound';
 // import LikesContainer from '../views/likes/components/LikesPage';
 import { DEFAULT_GENRE } from 'client/constants/SongConstants';
-import { loadCharts } from 'client/modules/charts/actions/chartsActions';
-import { fetchArtistAndTracks } from 'client/modules/artist/actions';
-import { loadTrackPage } from 'client/modules/track/actions/track';
-import { sagaSearch } from 'client/modules/search/actions';
+import { loadCharts } from 'client/redux/modules/charts';
+import { fetchArtistAndTracks } from 'client/redux/modules/artist';
+import { loadTrackPage } from 'client/redux/modules/track/actions/track';
+import { sagaSearch } from 'client/redux/modules/search/actions';
 
 const configureRoutes = (store) => {
   const onEnterCharts = (nextState) => {

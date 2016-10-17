@@ -1,17 +1,48 @@
+/* artist module */
 import { fromJS } from 'immutable';
 import Artist from 'client/models/Artist';
 import TrackMap from 'client/models/TrackMap';
 import { denormalizeTracks, denormalizeArtist } from 'client/models/denormalizr';
+import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
+import { artistSchema, trackArraySchema } from 'client/schemas';
 import {
   ARTIST_REQUEST,
   ARTIST_RECEIVE,
-  // ARTIST_FAILURE,
+  ARTIST_FAILURE,
   ARTIST_TRACKS_REQUEST,
   ARTIST_TRACKS_RECEIVE,
-  // ARTIST_TRACKS_FAILURE
+  ARTIST_TRACKS_FAILURE
 } from 'client/constants/ActionTypes';
 
-// The currently active artist. (ArtistDetails Page)
+/* Actions */
+const fetchArtist = id => ({
+  [CALL_API]: {
+    endpoint: `/sc/api-v1/users/${id}`,
+    method: 'GET',
+    types: [ARTIST_REQUEST, ARTIST_RECEIVE, ARTIST_FAILURE],
+    schema: artistSchema
+  }
+});
+
+const fetchArtistTracks = id => ({
+  [CALL_API]: {
+    endpoint: `/sc/api-v1/users/${id}/tracks`,
+    query: {
+      limit: 20
+    },
+    method: 'GET',
+    types: [ARTIST_TRACKS_REQUEST, ARTIST_TRACKS_RECEIVE, ARTIST_TRACKS_FAILURE],
+    schema: trackArraySchema
+  }
+});
+
+export const fetchArtistAndTracks = id => (dispatch) => {
+  dispatch(fetchArtist(id));
+  dispatch(fetchArtistTracks(id));
+};
+
+
+/* Reducer */
 const INITIAL_STATE = fromJS({
   isArtistFetching: false,
   isTracksFetching: false,

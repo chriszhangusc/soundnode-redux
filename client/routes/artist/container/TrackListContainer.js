@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SongCardList from 'client/components/SongCardList';
-import { getArtistTracksFetchState, getArtistTrackMap } from 'client/modules/reducers';
+import { getArtistTracksFetchState, getArtistTrackMap } from 'client/redux/modules/reducers';
 
 // Container for SongCardList
 // Simply providing slices of state for the component to render.

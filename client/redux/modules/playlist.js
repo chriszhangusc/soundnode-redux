@@ -2,7 +2,20 @@ import { fromJS, is } from 'immutable';
 import { LOAD_PLAYLIST, TOGGLE_PLAYLIST } from 'client/constants/ActionTypes';
 import TrackMap from 'client/models/TrackMap';
 
-/* Current Playing Playlist */
+/* Actions */
+export const togglePlaylist = () => ({ type: TOGGLE_PLAYLIST });
+
+/**
+ * Load currently visible charts to our playlist
+ * @return Action
+ */
+export const loadPlaylist = trackMap => ({
+  type: LOAD_PLAYLIST,
+  payload: trackMap || new TrackMap()
+});
+
+
+/* Reducer */
 const INITIAL_STATE = fromJS({
   trackMap: new TrackMap(),
   showPlaylist: false

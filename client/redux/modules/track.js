@@ -1,3 +1,9 @@
+import { fromJS } from 'immutable';
+import Track from 'client/models/Track';
+import CommentMap from 'client/models/CommentMap';
+import { denormalizeTrack } from 'client/models/denormalizr';
+import { trackSchema } from 'client/schemas';
+import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import {
   TRACK_REQUEST,
   TRACK_RECEIVE,
@@ -7,13 +13,7 @@ import {
   TRACK_COMMENTS_FAILURE
 } from 'client/constants/ActionTypes';
 
-import Track from 'client/models/Track';
-import Artist from 'client/models/Artist';
-import Comment from 'client/models/Comment';
-
-import { trackSchema } from 'client/schemas';
-import { CALL_API } from 'client/middlewares/apiMiddleware';
-
+/* Actions */
 const fetchTrack = trackId => ({
   [CALL_API]: {
     endpoint: `/sc/api-v1/tracks/${trackId}`,
@@ -29,7 +29,7 @@ const fetchComments = (trackId) => {
 
 export const loadTrackPage = trackId => (dispatch) => {
   dispatch(fetchTrack(trackId));
-}
+};
 
 // export const loadTrack = (trackId) => {
 //   return (dispatch) => {
@@ -51,3 +51,34 @@ export const loadTrackPage = trackId => (dispatch) => {
 //       });
 //   };
 // };
+
+/* Reducer */
+
+const INITIAL_STATE = fromJS({
+  isTrackFetching: false,
+  isCommentsFetching: false,
+  track: new Track(),
+  comments: new CommentMap(),
+  commentsNextHref: null
+});
+
+const track = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case TRACK_REQUEST:
+      return state.set('isTrackFetching', true);
+    case TRACK_RECEIVE:
+      return state.merge({
+        track: denormalizeTrack(action.payload),
+        isTrackFetching: false
+      });
+    default:
+      return state;
+  }
+};
+export default track;
+
+/* State Selectors */
+export const isTrackFetching = state => state.get('isTrackFetching');
+export const isCommentsFetching = state => state.get('isCommentsFetching');
+export const getTrack = state => state.get('track'); // Return the immutable record
+export const getArtist = state => state.get('artist');

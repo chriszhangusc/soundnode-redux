@@ -1,19 +1,20 @@
+import { fromJS } from 'immutable';
 import firebase, { firebaseRef, githubProvider } from 'client/firebase';
-
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILED,
   LOGOUT,
   LIKE_SONG_SUCCESS,
-  LOAD_ALL_LIKES,
   LIKE_SONG_FAILED,
+  LOAD_ALL_LIKES,
   UNLIKE_SONG_SUCCESS
 } from 'client/constants/ActionTypes';
 
-import {
-  getUid,
-  getLikes
-} from '../../reducers';
+// import {
+//   getUid,
+//   getLikes
+// } from '../../reducers';
+
 
 export const loginSuccess = uid => ({
   type: LOGIN_SUCCESS,
@@ -102,10 +103,10 @@ export const likeSongFailed = songId => ({
   }
 });
 
-
 export function startLikeSong(songId) {
   return (dispatch, getState) => {
-    const uid = getUid(getState());
+    const state = getState();
+    const uid = getUid(state.get('user'));
     // If not logged in, display a message to tell the user to login first.
     if (!uid) {
       // Trigger notification!!!!
@@ -137,14 +138,14 @@ export function unlikeSongSuccess(songId) {
 export function startUnlikeSong(songId) {
   return (dispatch, getState) => {
     const state = getState();
-    const uid = getUid(state);
+    const uid = getUid(state.get('user'));
     // If not logged in, display a message to tell the user to login first.
     if (!uid) {
       // Trigger notification!!!!
       console.log('You have to login first.');
       return;
     }
-    const likes = getLikes(state);
+    const likes = getLikes(state.get('user'));
     const firebaseKey = likes[songId];
     firebaseRef.child(`${uid}/likes/${firebaseKey}`).remove((ret) => {
       console.log(ret);
@@ -152,3 +153,39 @@ export function startUnlikeSong(songId) {
     });
   };
 }
+
+/* Reducer */
+
+const INITIAL_STATE = fromJS({
+  likes: {}
+});
+const user = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case LOGIN_SUCCESS:
+      return state.mergeDeep(fromJS(action.payload.uid));
+    case LOGOUT:
+      return fromJS({});
+    case LOAD_ALL_LIKES:
+      return state.set('likes', fromJS(action.payload));
+    case LIKE_SONG_SUCCESS:
+      return state.setIn(
+        ['likes', action.payload.record.songId.toString()],
+        action.payload.record.firebaseKey
+      );
+    case UNLIKE_SONG_SUCCESS:
+      // It will fail without toString!!!
+      return state.deleteIn(['likes', action.payload.songId.toString()]);
+    case LIKE_SONG_FAILED:
+    case LOGIN_FAILED:
+    default:
+      return state;
+  }
+};
+
+export default user;
+
+// Selectors
+export const getUid = state => state.get('uid');
+export const getDisplayName = state => state.get('displayName');
+export const getPhotoUrl = state => state.get('photoURL');
+export const getLikes = state => state.get('likes').toJS();

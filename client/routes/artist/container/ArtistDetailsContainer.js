@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
   getArtistRecord,
   getArtistFetchState
-} from 'client/modules/reducers';
+} from 'client/redux/modules/reducers';
 
 import ArtistDetails from '../components/ArtistDetails';
 

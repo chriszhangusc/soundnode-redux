@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { startLogin } from 'client/modules/user/actions';
+import { startLogin } from 'client/redux/modules/user';
 import { getUid, getDisplayName, getPhotoUrl } from 'client/modules/reducers';
 import NavUser from '../components/NavUser';
 

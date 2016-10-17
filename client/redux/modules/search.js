@@ -2,16 +2,109 @@ import { fromJS } from 'immutable';
 import TrackMap from 'client/models/TrackMap';
 import ArtistMap from 'client/models/ArtistMap';
 import {
+  SAGA_SEARCH,
+  SAGA_DROPDOWN_SEARCH,
   START_SEARCH,
   END_SEARCH,
   SEARCH_DROPDOWN_ARTISTS_RECEIVED,
   SEARCH_DROPDOWN_TRACKS_RECEIVED,
   SEARCH_RESULTS_RECEIVED,
-  HIDE_SEARCH_RESULTS,
   SHOW_SEARCH_RESULTS,
+  HIDE_SEARCH_RESULTS,
   CLEAR_SEARCH_RESULTS
 } from 'client/constants/ActionTypes';
 
+/* Actions */
+export function startSearch() {
+  return {
+    type: START_SEARCH
+  };
+}
+
+export function endSearch() {
+  return {
+    type: END_SEARCH
+  };
+}
+
+export function searchResultsReceived(normalizedResults) {
+  return {
+    type: SEARCH_RESULTS_RECEIVED,
+    payload: {
+      resultMap: normalizedResults.trackMap,
+      nextHref: normalizedResults.nextHref
+    }
+  };
+}
+
+export function tracksReceived(normalizedTracks) {
+  return {
+    type: SEARCH_DROPDOWN_TRACKS_RECEIVED,
+    payload: {
+      trackMap: normalizedTracks.trackMap,
+      nextHref: normalizedTracks.nextHref
+    }
+  };
+}
+
+export function artistsReceived(normalizedArtists) {
+  return {
+    type: SEARCH_DROPDOWN_ARTISTS_RECEIVED,
+    payload: {
+      artistMap: normalizedArtists.artistMap,
+      nextHref: normalizedArtists.nextHref
+    }
+  };
+}
+
+export function hideSearchResults() {
+  return {
+    type: HIDE_SEARCH_RESULTS
+  };
+}
+
+export function showSearchResults() {
+  return {
+    type: SHOW_SEARCH_RESULTS
+  };
+}
+
+export function clearSearchResults() {
+  return {
+    type: CLEAR_SEARCH_RESULTS
+  };
+}
+
+/* Thunk Actions */
+export function clearAndHideSearchResults() {
+  return (dispatch) => {
+    dispatch(hideSearchResults());
+    dispatch(clearSearchResults());
+  };
+}
+
+/* Saga Actions */
+export function sagaDropdownSearch(keyword, limit) {
+  return {
+    type: SAGA_DROPDOWN_SEARCH,
+    payload: {
+      keyword: keyword.trim().toLowerCase(),
+      limit
+    }
+  };
+}
+
+export function sagaSearch(keyword, limit) {
+  return {
+    type: SAGA_SEARCH,
+    payload: {
+      keyword: keyword.trim().toLowerCase(),
+      limit
+    }
+  };
+}
+
+/* Reducers */
 const INITIAL_STATE = fromJS({
   isShown: false,
   isFetching: false,
@@ -38,9 +131,6 @@ const search = (state = INITIAL_STATE, action) => {
     case SEARCH_DROPDOWN_TRACKS_RECEIVED:
       return state
         .set('dropdownTracks', action.payload.trackMap);
-      //   .merge({
-      //   trackNextHref: action.payload.nextHref
-      // });
     case SEARCH_RESULTS_RECEIVED:
       return state.set('searchResults', action.payload.resultMap).merge({
         trackNextHref: action.payload.nextHref

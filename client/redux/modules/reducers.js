@@ -1,13 +1,13 @@
 /* Main reducer */
 import { combineReducers } from 'redux-immutable';
 
-import * as fromPlayer from './player/reducers/player';
-import * as fromUser from './user/reducers/user';
-import * as fromSearch from './search/reducers/search';
-import * as fromArtist from './artist/reducers/artist';
-import * as fromCharts from './charts/reducers/charts';
-import * as fromPlaylist from './playlist/reducers/playlist';
-import * as fromTrack from './track/reducers/track';
+import * as fromPlayer from './player';
+import * as fromSearch from './search';
+import * as fromUser from './user';
+import * as fromArtist from './artist';
+import * as fromCharts from './charts';
+import * as fromPlaylist from './playlist';
+import * as fromTrack from './track';
 
 const rootReducer = combineReducers({
   // playlists: fromPlaylists.default,

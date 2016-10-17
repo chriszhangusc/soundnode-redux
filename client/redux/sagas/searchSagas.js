@@ -1,6 +1,8 @@
 import { put, call } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
 import { SAGA_DROPDOWN_SEARCH, SAGA_SEARCH } from 'client/constants/ActionTypes';
+import { fetchUsers, fetchTracks } from 'client/services/SCAPIServices';
+import { normalizeArtists, normalizeTracks } from 'client/utils/NormalizeUtils';
 import {
   startSearch,
   endSearch,
@@ -8,9 +10,7 @@ import {
   artistsReceived,
   tracksReceived,
   showSearchResults
-} from 'client/modules/search/actions';
-import { fetchUsers, fetchTracks } from 'client/services/SCAPIServices';
-import { normalizeArtists, normalizeTracks } from 'client/utils/NormalizeUtils';
+} from 'client/redux/modules/search';
 
 /* *****************************************************************************/
 /* ****************************** SUBROUTINES **********************************/
