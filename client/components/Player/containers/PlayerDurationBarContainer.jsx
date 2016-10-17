@@ -4,13 +4,13 @@ import {
   getPlayingState,
   getCurrentTime,
   getSeekState
-} from 'client/modules/reducers';
+} from 'client/redux/modules/reducers';
 
 import {
   beginSeek,
   sagaUpdateTimeOnSeek,
   sagaUpdateTimeAndEndSeek
-} from 'client/modules/player/actions';
+} from 'client/redux/modules/player';
 
 import PlayerDurationBar from '../components/PlayerDurationBar';
 

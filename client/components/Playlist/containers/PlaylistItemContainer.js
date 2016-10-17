@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import {
   getSingleSongIsActive,
   isSongLiked
-} from 'client/modules/reducers';
+} from 'client/redux/modules/reducers';
 
 import {
   changeSongAndPlay
-} from 'client/modules/player/actions';
+} from 'client/redux/modules/player';
 
 import {
   startLikeSong,
   startUnlikeSong
-} from 'client/modules/user/actions';
+} from 'client/redux/modules/user';
 
 import PlaylistItem from '../components/PlaylistItem';
 

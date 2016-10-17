@@ -4,12 +4,12 @@ import {
   sagaSearch,
   sagaDropdownSearch,
   clearAndHideSearchResults
-} from 'client/modules/search/actions';
+} from 'client/redux/modules/search';
 import {
   getSearchArtistMap,
   getSearchTrackMap,
   isSearchResultShown
-} from 'client/modules/reducers';
+} from 'client/redux/modules/reducers';
 import NavSearch from '../components/NavSearch';
 
 const mapStateToProps = (state) => {

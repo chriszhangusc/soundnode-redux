@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import {
   getPlaylistAsArray,
   getShowPlaylist
-} from 'client/modules/reducers';
+} from 'client/redux/modules/reducers';
 
 import Playlist from '../components/Playlist';
 

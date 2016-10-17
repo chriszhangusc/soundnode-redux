@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getCurrentPlayerTrack } from 'client/modules/reducers';
+import { getCurrentPlayerTrack } from 'client/redux/modules/reducers';
 import Track from 'client/models/Track';
 import PlayerAudioContainer from './PlayerAudioContainer';
 import PlayerSongInfoContainer from './PlayerSongInfoContainer';

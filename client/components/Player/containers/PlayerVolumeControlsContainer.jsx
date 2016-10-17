@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import { getCurrentVolume, getVolumeSeekState } from 'client/modules/reducers';
+import { getCurrentVolume, getVolumeSeekState } from 'client/redux/modules/reducers';
 import { computeNewVolumeOnSeek } from 'client/utils/PlayerUtils';
 import {
   beginVolumeSeek,
   changeVolume,
   sagaToggleMute,
   sagaUpdateVolumeAndEndSeek
-} from 'client/modules/player/actions';
+} from 'client/redux/modules/player';
 import PlayerVolumeControls from '../components/PlayerVolumeControls';
 
 const mapStateToProps = state => ({

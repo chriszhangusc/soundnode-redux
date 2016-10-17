@@ -7,12 +7,12 @@ import {
   getPlayerMode,
   getCurrentTime,
   getSeekState
-} from 'client/modules/reducers';
+} from 'client/redux/modules/reducers';
 // Actions
 import {
   sagaUpdateTimeOnPlay,
   sagaPlayNextSong,
-} from 'client/modules/player/actions';
+} from 'client/redux/modules/player';
 import PlayerAudio from '../components/PlayerAudio';
 
 const mapStateToProps = (state, { track }) => {

@@ -1,22 +1,18 @@
 import { connect } from 'react-redux';
 import React from 'react';
-// import { loadTrack } from 'client/modules/track/actions/track';
-
-import {
-  playSong,
-  changeSongAndPlay,
-  pauseSong
-} from 'client/modules/player/actions';
-
-import { startLikeSong, startUnlikeSong } from 'client/modules/user/actions';
-
+import { startLikeSong, startUnlikeSong } from 'client/redux/modules/user';
 import {
   getIsTrackFetching,
   getTrackRecord,
   isSongLiked,
   getSingleSongIsActive,
   getSingleSongPlayingState
-} from 'client/modules/reducers';
+} from 'client/redux/modules/reducers';
+import {
+  playSong,
+  changeSongAndPlay,
+  pauseSong
+} from 'client/redux/modules/player';
 import TrackDetails from '../components/TrackDetails';
 
 const TrackDetailsContainer = props => <TrackDetails {...props} />;

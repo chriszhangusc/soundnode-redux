@@ -7,15 +7,15 @@ import {
   playSong,
   changeSongAndPlay,
   pauseSong
-} from 'client/modules/player/actions';
-import { startLikeSong, startUnlikeSong } from 'client/modules/user/actions';
+} from 'client/redux/modules/player';
+import { startLikeSong, startUnlikeSong } from 'client/redux/modules/user';
 
 // We should keep reducer simple!!!
 import {
   isSongLiked,
   getSingleSongIsActive,
   getSingleSongPlayingState
-} from 'client/modules/reducers';
+} from 'client/redux/modules/reducers';
 
 import SongCard from '../components/SongCard';
 

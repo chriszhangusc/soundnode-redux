@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { getPlayingState } from 'client/modules/reducers';
+import { getPlayingState } from 'client/redux/modules/reducers';
 import {
   playSong,
   pauseSong,
   sagaPlayNextSong,
   sagaPlayPrevSong
-} from 'client/modules/player/actions';
+} from 'client/redux/modules/player';
 import PlayerControls from '../components/PlayerControls';
 
 const mapStateToProps = state => ({
