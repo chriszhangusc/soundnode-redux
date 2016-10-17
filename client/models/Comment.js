@@ -38,7 +38,7 @@ class Comment extends CommentRecord {
     return this.get('createdAt');
   }
 
-  getBody() {
+  getCommentBody() {
     return this.get('body');
   }
 
@@ -47,7 +47,7 @@ class Comment extends CommentRecord {
   }
 
   getArtist() {
-    return new Artist(this.get('user'));
+    return this.get('user');
   }
 }
 

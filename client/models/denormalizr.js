@@ -1,6 +1,8 @@
 import Artist from './Artist';
 import Track from './Track';
 import TrackMap from './TrackMap';
+import Comment from './Comment';
+import CommentMap from './CommentMap';
 
 export const denormalizeArtist = (normalized) => {
   const artistId = normalized.result;
@@ -41,4 +43,19 @@ export const denormalizeTracks = (normalized) => {
     newTracks = newTracks.set(id, track);
   });
   return newTracks;
+};
+
+export const denormalizeComments = (normalized) => {
+  const { result, entities } = normalized;
+  const { comments, artists } = entities;
+  let newComments = new CommentMap();
+  result.forEach((id) => {
+    // user is normalized to an id, we need to set it to a ArtistRecord
+    const artistId = comments[id].user;
+    const artist = new Artist(artists[artistId]);
+    let comment = new Comment(comments[id]);
+    comment = comment.set('user', artist);
+    newComments = newComments.set(id, comment);
+  });
+  return newComments;
 };

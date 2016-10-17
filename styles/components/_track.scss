@@ -92,3 +92,37 @@
     }
   }
 }
+
+.comments-container {
+  width: 900px;
+  font-size: 1.2rem;
+
+  .comment-item {
+    display: flex; // To prevent comment body go under the image.
+    padding: 5px 5px;
+    border-bottom: 1px solid $separatorDarkColor;
+  }
+
+  .comment-artist-avatar {
+    width: 35px;
+    height: 35px;
+  }
+
+  .comment-title {
+    margin: 20px;
+  }
+
+  .comment-created-at {
+    float: right;
+    color: $font-sub-color;
+  }
+
+  .comment-body {
+
+    color: $font-main-color;
+  }
+
+  .comment-header {
+    margin-bottom: 5px;
+  }
+}

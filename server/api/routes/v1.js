@@ -51,4 +51,17 @@ router.get('/tracks/:trackId', (req, res) => {
     });
 });
 
+// Get comments of a single track
+router.get('/tracks/:trackId/comments', (req, res) => {
+  const clientId = encodeURIComponent(req.query.client_id);
+  const limit = encodeURIComponent(req.query.limit);
+  const fetchUrl = `${SC_API_V1}/tracks/${req.params.trackId}/comments?\
+linked_partitioning=1&limit=${limit}&client_id=${clientId}`;
+  fetch(fetchUrl)
+    .then(response => response.json())
+    .then((json) => {
+      res.json(json);
+    });
+});
+
 export default router;

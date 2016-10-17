@@ -2,11 +2,13 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { startLikeSong, startUnlikeSong } from 'client/redux/modules/user';
 import {
-  getIsTrackFetching,
+  isTrackFetching,
   getTrackRecord,
   isSongLiked,
   getSingleSongIsActive,
-  getSingleSongPlayingState
+  getSingleSongPlayingState,
+  isTrackCommentsFetching,
+  getTrackComments
 } from 'client/redux/modules/reducers';
 import {
   playSong,
@@ -18,12 +20,13 @@ import TrackDetails from '../components/TrackDetails';
 const TrackDetailsContainer = props => <TrackDetails {...props} />;
 
 const mapStateToProps = (state, ownProps) => ({
-  isFetching: getIsTrackFetching(state),
-  // artist: getTrackRecord(state).getArtist(),
+  isTrackFetching: isTrackFetching(state),
+  isCommentsFetching: isTrackCommentsFetching(state),
   track: getTrackRecord(state),
   isLiked: isSongLiked(state, ownProps.params.trackId),
   isActive: getSingleSongIsActive(state, ownProps.params.trackId),
-  isPlaying: getSingleSongPlayingState(state, ownProps.params.trackId)
+  isPlaying: getSingleSongPlayingState(state, ownProps.params.trackId),
+  comments: getTrackComments(state)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

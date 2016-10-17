@@ -8,8 +8,13 @@ trackSchema.define({
   user: artistSchema
 });
 
+commentSchema.define({
+  user: artistSchema
+});
+
 export const trackArraySchema = arrayOf(trackSchema);
 
+export const commentArraySchema = arrayOf(commentSchema);
 // const Schemas = {
 //   artistSchema,
 //   trackSchema,

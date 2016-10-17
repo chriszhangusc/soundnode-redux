@@ -1,8 +1,8 @@
 import { fromJS } from 'immutable';
 import Track from 'client/models/Track';
 import CommentMap from 'client/models/CommentMap';
-import { denormalizeTrack } from 'client/models/denormalizr';
-import { trackSchema } from 'client/schemas';
+import { denormalizeTrack, denormalizeComments } from 'client/models/denormalizr';
+import { trackSchema, commentArraySchema } from 'client/schemas';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import {
   TRACK_REQUEST,
@@ -23,34 +23,22 @@ const fetchTrack = trackId => ({
   }
 });
 
-const fetchComments = (trackId) => {
-
-};
+const fetchComments = trackId => ({
+  [CALL_API]: {
+    endpoint: `/sc/api-v1/tracks/${trackId}/comments`,
+    method: 'GET',
+    query: {
+      limit: 20
+    },
+    types: [TRACK_COMMENTS_REQUEST, TRACK_COMMENTS_RECEIVE, TRACK_COMMENTS_FAILURE],
+    schema: commentArraySchema
+  }
+});
 
 export const loadTrackPage = trackId => (dispatch) => {
   dispatch(fetchTrack(trackId));
+  dispatch(fetchComments(trackId));
 };
-
-// export const loadTrack = (trackId) => {
-//   return (dispatch) => {
-//     dispatch(startTrackFetch());
-//     fetchTrack(trackId)
-//       .then((res) => {
-//         const track = new Track(res.data);
-//         // Extract the artist of this track
-//         const artist = new Artist(res.data.user);
-//         dispatch(trackReceived(track));
-//         dispatch(artistReceived(artist));
-//         // Now that we got our track, we can start fetching its comments.
-//         dispatch(startCommentsFetch());
-//         // Nesting then is kinda ugly.
-//         fetchComments(trackId).then((commentsRes) => {
-//           const normalized = normalizeComments(commentsRes.data);
-//           dispatch(commentsReceived(normalized));
-//         });
-//       });
-//   };
-// };
 
 /* Reducer */
 
@@ -71,6 +59,13 @@ const track = (state = INITIAL_STATE, action) => {
         track: denormalizeTrack(action.payload),
         isTrackFetching: false
       });
+    case TRACK_COMMENTS_REQUEST:
+      return state.set('isCommentsFetching', true);
+    case TRACK_COMMENTS_RECEIVE:
+      return state.merge({
+        comments: denormalizeComments(action.payload),
+        isCommentsFetching: false
+      });
     default:
       return state;
   }
@@ -81,4 +76,4 @@ export default track;
 export const isTrackFetching = state => state.get('isTrackFetching');
 export const isCommentsFetching = state => state.get('isCommentsFetching');
 export const getTrack = state => state.get('track'); // Return the immutable record
-export const getArtist = state => state.get('artist');
+export const getComments = state => state.get('comments');

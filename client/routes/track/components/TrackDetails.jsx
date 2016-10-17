@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Comment from 'client/models/Comment';
 import { Link } from 'react-router';
 import Spinner from 'client/components/Spinner';
 import Track from 'client/models/Track';
@@ -8,7 +9,9 @@ import defaultArtworkImage from 'assets/images/default-artwork.png';
 
 const TrackDetails = ({
   track,
-  isFetching,
+  isTrackFetching,
+  isCommentsFetching,
+  comments,
   isLiked,
   isPlaying,
   isActive,
@@ -18,7 +21,7 @@ const TrackDetails = ({
   handleLikeClick,
   handleUnlikeClick
 }) => {
-  if (isFetching) return <Spinner />;
+  if (isTrackFetching) return <Spinner />;
 
   const artist = track.getArtist();
 
@@ -100,26 +103,28 @@ const TrackDetails = ({
         </div>
       </div>
 
-      <div className="comment-container">
+      <div className="comments-container">
         <div className="comment-title">
           <h4>Comments: (5321)</h4>
         </div>
         <div className="comment-list-container">
           <ul className="comment-list">
-            <li className="comment-item">
+            {comments.toArray().map(comment => (<li className="comment-item" key={comment.getId()}>
               <img
                 className="song-card-user-image comment-artist-avatar"
                 role="presentation"
-                src="https://a1.sndcdn.com/images/default_avatar_large.png"
+                src={comment.getArtist().getAvatarUrl()}
               />
-              <div className="comment-header">
-                <a className="comment-artist-name">RandyJJ</a>
-                <span className="comment-created-at">2016/10/15 05:18:21</span>
+              <div>
+                <div className="comment-header">
+                  <a className="comment-artist-name">{comment.getArtist().getUsername()}</a>
+                  <span className="comment-created-at">{comment.getCreatedAt()}</span>
+                </div>
+                <p className="comment-body">
+                  {comment.getCommentBody()}
+                </p>
               </div>
-              <p className="comment-body">
-                Learn how you can make $10k per month using your computer (even if you're a newbie). Visit this site for more info: http://GivenDaily.com
-              </p>
-            </li>
+            </li>))}
           </ul>
         </div>
       </div>
@@ -129,7 +134,9 @@ const TrackDetails = ({
 
 TrackDetails.propTypes = {
   track: PropTypes.instanceOf(Track).isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  comments: PropTypes.arrayOf(Comment).isRequired,
+  isTrackFetching: PropTypes.bool.isRequired,
+  isCommentsFetching: PropTypes.bool.isRequired,
   isLiked: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   isActive: PropTypes.bool.isRequired,

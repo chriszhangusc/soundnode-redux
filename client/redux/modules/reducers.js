@@ -26,8 +26,10 @@ export const getChartsTrackMap = state => fromCharts.getTrackMap(state.get('char
 export const getIsChartsFetching = state => fromCharts.getIsFetching(state.get('charts'));
 
 /* From Track */
-export const getIsTrackFetching = state => fromTrack.getIsFetching(state.get('track'));
+export const isTrackFetching = state => fromTrack.isTrackFetching(state.get('track'));
+export const isTrackCommentsFetching = state => fromTrack.isCommentsFetching(state.get('track'));
 export const getTrackRecord = state => fromTrack.getTrack(state.get('track'));
+export const getTrackComments = state => fromTrack.getComments(state.get('track'));
 /* From Playlist */
 export const getShowPlaylist = state => fromPlaylist.getShowPlaylist(state.get('playlist'));
 export const getPlaylistAsOrderedMap =
