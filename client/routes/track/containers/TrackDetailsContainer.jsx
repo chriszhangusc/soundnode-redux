@@ -14,7 +14,6 @@ import {
   getIsTrackFetching,
   getTrackRecord,
   isSongLiked,
-  getTrackArtistRecord,
   getSingleSongIsActive,
   getSingleSongPlayingState
 } from 'client/modules/reducers';
@@ -24,7 +23,7 @@ const TrackDetailsContainer = props => <TrackDetails {...props} />;
 
 const mapStateToProps = (state, ownProps) => ({
   isFetching: getIsTrackFetching(state),
-  artist: getTrackArtistRecord(state),
+  // artist: getTrackRecord(state).getArtist(),
   track: getTrackRecord(state),
   isLiked: isSongLiked(state, ownProps.params.trackId),
   isActive: getSingleSongIsActive(state, ownProps.params.trackId),

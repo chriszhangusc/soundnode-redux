@@ -1,7 +1,5 @@
 import express from 'express';
 import fetch from 'isomorphic-fetch';
-import url from 'url';
-
 const SC_API_V1 = 'https://api.soundcloud.com';
 
 const router = express.Router();
@@ -36,8 +34,20 @@ router.get('/users/:userId/tracks', (req, res) => {
       json.collection.forEach((item) => {
         newJson.collection.push(item);
       });
-      console.log(newJson);
       res.json(newJson);
+    });
+});
+
+// Get single track
+router.get('/tracks/:trackId', (req, res) => {
+  const clientId = encodeURIComponent(req.query.client_id);
+  const fetchUrl = `${SC_API_V1}/tracks/${req.params.trackId}?client_id=${clientId}`;
+
+  fetch(fetchUrl)
+    .then(response => response.json())
+    .then((json) => {
+      // Single object from SC, just return it.
+      res.json(json);
     });
 });
 

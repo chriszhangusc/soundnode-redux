@@ -3,14 +3,14 @@ import {
   CHARTS_CHANGE_GENRE,
   CHARTS_REQUEST,
   CHARTS_RECEIVE,
-  CHARTS_FAILURE,
+  // CHARTS_FAILURE,
 } from 'client/constants/ActionTypes';
-import { denormalizeTracks } from 'client/utils/NormalizeUtils';
 import TrackMap from 'client/models/TrackMap';
+import { denormalizeTracks } from 'client/models/denormalizr';
 
 const INITIAL_STATE = fromJS({
   genre: '',
-  trackMap: new TrackMap(),
+  tracks: new TrackMap(),
   isFetching: false,
   nextHref: ''
 });
@@ -24,7 +24,7 @@ const charts = (state = INITIAL_STATE, action) => {
 
     case CHARTS_RECEIVE:
       return state.merge({
-        trackMap: denormalizeTracks(action.payload),
+        tracks: denormalizeTracks(action.payload),
         nextHref: action.payload.nextHref,
         isFetching: false
       });
@@ -36,5 +36,5 @@ const charts = (state = INITIAL_STATE, action) => {
 export default charts;
 
 export const getGenre = state => state.get('genre');
-export const getTrackMap = state => state.get('trackMap');
+export const getTrackMap = state => state.get('tracks');
 export const getIsFetching = state => state.get('isFetching');

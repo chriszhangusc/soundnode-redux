@@ -11,6 +11,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const PORT = 3001;
 
+// Simple logger
+function logger(req, res, next) {
+  console.log(new Date(), req.method, req.url);
+  next();
+}
+
+app.use(logger);
+
 app.use('/sc/api-v1', v1);
 app.use('/sc/api-v2', v2);
 

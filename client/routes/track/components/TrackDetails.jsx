@@ -2,13 +2,11 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Spinner from 'client/components/Spinner';
 import Track from 'client/models/Track';
-import Artist from 'client/models/Artist';
 import { formatPlaybacks, formatLikes, formatImageUrl } from 'client/utils/FormatUtils';
 import { t500x500 } from 'client/constants/ImageConstants';
 import defaultArtworkImage from 'assets/images/default-artwork.png';
 
 const TrackDetails = ({
-  artist,
   track,
   isFetching,
   isLiked,
@@ -20,9 +18,9 @@ const TrackDetails = ({
   handleLikeClick,
   handleUnlikeClick
 }) => {
-  if (isFetching) {
-    return <Spinner />;
-  }
+  if (isFetching) return <Spinner />;
+
+  const artist = track.getArtist();
 
   let togglePlayButton = null;
   if (isActive && isPlaying) {
@@ -131,7 +129,6 @@ const TrackDetails = ({
 
 TrackDetails.propTypes = {
   track: PropTypes.instanceOf(Track).isRequired,
-  artist: PropTypes.instanceOf(Artist).isRequired,
   isFetching: PropTypes.bool.isRequired,
   isLiked: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,

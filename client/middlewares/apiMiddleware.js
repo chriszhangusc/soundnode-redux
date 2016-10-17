@@ -11,7 +11,6 @@ const callApi = (endpoint, query, schema) => {
   // Append ClientId
   const queryString = querystring.stringify({ ...query, client_id: CLIENT_ID });
   const finalUrl = `http://localhost:3000${endpoint}?${queryString}`;
-console.log(finalUrl);
   return fetch(finalUrl)
     .then(response => response.json())
     .then((json) => {

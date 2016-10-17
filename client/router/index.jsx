@@ -10,7 +10,7 @@ import NotFound from 'client/components/NotFound';
 import { DEFAULT_GENRE } from 'client/constants/SongConstants';
 import { loadCharts } from 'client/modules/charts/actions/chartsActions';
 import { fetchArtistAndTracks } from 'client/modules/artist/actions';
-import { loadTrack } from 'client/modules/track/actions/track';
+import { loadTrackPage } from 'client/modules/track/actions/track';
 import { sagaSearch } from 'client/modules/search/actions';
 
 const configureRoutes = (store) => {
@@ -29,7 +29,7 @@ const configureRoutes = (store) => {
   const onTrackDetailsPageEnter = (nextState) => {
     const dispatch = store.dispatch;
     const trackId = nextState.params.trackId;
-    dispatch(loadTrack(trackId));
+    dispatch(loadTrackPage(trackId));
   };
 
   const onSearchPageEnter = (nextState) => {

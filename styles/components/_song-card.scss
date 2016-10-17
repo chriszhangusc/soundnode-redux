@@ -148,9 +148,9 @@
     }
 
     // Move to global in icons.scss
-    // &.active {
-    //   color: $theme-color;
-    // }
+    &.active {
+      color: $theme-color;
+    }
   }
 
 }

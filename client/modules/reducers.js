@@ -28,8 +28,6 @@ export const getIsChartsFetching = state => fromCharts.getIsFetching(state.get('
 /* From Track */
 export const getIsTrackFetching = state => fromTrack.getIsFetching(state.get('track'));
 export const getTrackRecord = state => fromTrack.getTrack(state.get('track'));
-export const getTrackArtistRecord = state => fromTrack.getArtist(state.get('track'));
-
 /* From Playlist */
 export const getShowPlaylist = state => fromPlaylist.getShowPlaylist(state.get('playlist'));
 export const getPlaylistAsOrderedMap =

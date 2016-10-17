@@ -6,10 +6,6 @@ const SC_API_V2 = 'https://api-v2.soundcloud.com/';
 
 const router = express.Router();
 
-// router.get('/', function (req, res) {
-//   res.send('Hello');
-// });
-
 function convertTrackToV1(trackV2) {
   return Object.assign({}, trackV2, {
     stream_url: `${trackV2.uri}/stream`,
