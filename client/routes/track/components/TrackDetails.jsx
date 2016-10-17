@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react';
-import Comment from 'client/models/Comment';
+import LikeButton from 'client/components/LikeButton';
+import CommentMap from 'client/models/CommentMap';
 import { Link } from 'react-router';
 import Spinner from 'client/components/Spinner';
 import Track from 'client/models/Track';
 import { formatPlaybacks, formatLikes, formatImageUrl } from 'client/utils/FormatUtils';
 import { t500x500 } from 'client/constants/ImageConstants';
 import defaultArtworkImage from 'assets/images/default-artwork.png';
+import defaultArtistImage from 'assets/images/default-artist.png';
 
 const TrackDetails = ({
   track,
@@ -66,10 +68,13 @@ const TrackDetails = ({
               <i className="fa fa-play" /> {formatPlaybacks(track.getPlaybackCount())}
             </span>
             <span className="likes-count">
-              <i
-                className={`fa fa-heart ${isLiked ? 'active' : ''}`}
-                onClick={isLiked ? handleUnlikeClick : handleLikeClick}
-              /> {formatLikes(track.getLikedCount())}
+              <LikeButton
+                btnClassName="icon-button"
+                isLiked={isLiked}
+                handleLikeClick={handleLikeClick}
+                handleUnlikeClick={handleUnlikeClick}
+              />
+              {formatLikes(track.getLikedCount())}
             </span>
           </div>
         </div>
@@ -81,13 +86,12 @@ const TrackDetails = ({
           <div className="track-artist-name">Created At: {track.getCreatedAt().replace('+0000', '')}</div>
           <div className="track-description"><p>{track.getDescription()}</p></div>
           <div className="track-controls">
-            <button
-              className="button inline"
+            <LikeButton
+              isLiked={isLiked}
+              btnClassName="button inline"
               onClick={isLiked ? handleUnlikeClick : handleLikeClick}
-            >
-              <i className={`fa fa-heart ${isLiked ? 'active' : ''}`} />
-              <span>{`${isLiked ? 'UNLIKE' : 'LIKE'}`}</span>
-            </button>
+              btnText={isLiked ? 'UNLIKE' : 'LIKE'}
+            />
             <button className="button inline">
               <i className="fa fa-bookmark" /><span>ADD TO PLAYLIST</span>
             </button>
@@ -105,15 +109,18 @@ const TrackDetails = ({
 
       <div className="comments-container">
         <div className="comment-title">
-          <h4>Comments: (5321)</h4>
+          <h4>Comments: ({track.getCommentCount()})</h4>
         </div>
         <div className="comment-list-container">
           <ul className="comment-list">
-            {comments.toArray().map(comment => (<li className="comment-item" key={comment.getId()}>
+            {comments.valueSeq().map(comment => (<li className="comment-item" key={comment.getId()}>
               <img
                 className="song-card-user-image comment-artist-avatar"
                 role="presentation"
-                src={comment.getArtist().getAvatarUrl()}
+                onError={(e) => {
+                  e.target.src = defaultArtistImage;
+                }}
+                src={comment.getArtist().getAvatarUrl() || defaultArtistImage}
               />
               <div>
                 <div className="comment-header">
@@ -134,7 +141,7 @@ const TrackDetails = ({
 
 TrackDetails.propTypes = {
   track: PropTypes.instanceOf(Track).isRequired,
-  comments: PropTypes.arrayOf(Comment).isRequired,
+  comments: PropTypes.instanceOf(CommentMap).isRequired,
   isTrackFetching: PropTypes.bool.isRequired,
   isCommentsFetching: PropTypes.bool.isRequired,
   isLiked: PropTypes.bool.isRequired,

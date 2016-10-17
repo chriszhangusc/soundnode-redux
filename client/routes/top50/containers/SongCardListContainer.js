@@ -6,7 +6,7 @@ import { getIsChartsFetching, getChartsTrackMap } from 'client/redux/modules/red
 // Simply providing slices of state for the component to render.
 const mapStateToProps = state => ({
   isFetching: getIsChartsFetching(state),
-  trackMap: getChartsTrackMap(state)
+  tracks: getChartsTrackMap(state)
 });
 
 const mapDispatchToProps = dispatch => ({

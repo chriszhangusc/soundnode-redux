@@ -6,7 +6,7 @@ import { getArtistTracksFetchState, getArtistTrackMap } from 'client/redux/modul
 // Simply providing slices of state for the component to render.
 const mapStateToProps = state => ({
   isFetching: getArtistTracksFetchState(state),
-  trackMap: getArtistTrackMap(state)
+  tracks: getArtistTrackMap(state)
 });
 
 const mapDispatchToProps = dispatch => ({

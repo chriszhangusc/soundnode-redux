@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { NotificationManager } from 'react-notifications';
+import LikeButton from 'client/components/LikeButton';
 
 function createInfo(msg) {
   NotificationManager.info(msg);
@@ -12,19 +13,11 @@ const SongCardControls = ({
   handleCopyToClipboard
 }) => (
   <div className="song-card-controls">
-    <button
-      title={isLiked ? 'Unlike' : 'Like'}
-      className="icon-button"
-      onClick={() => {
-        if (isLiked) {
-          handleUnlikeClick();
-        } else {
-          handleLikeClick();
-        }
-      }}
-    >
-      <i className={`fa fa-heart ${isLiked ? 'active' : ''}`} />
-    </button>
+    <LikeButton
+      btnClassName="icon-button"
+      isLiked={isLiked}
+      onClick={isLiked ? handleUnlikeClick : handleLikeClick}
+    />
     <button
       title="Add to playlist"
       className="icon-button"
