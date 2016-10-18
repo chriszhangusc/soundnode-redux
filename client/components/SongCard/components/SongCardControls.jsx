@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { NotificationManager } from 'react-notifications';
-import LikeButton from 'client/components/LikeButton';
+import MagicButton from 'client/components/MagicButton';
 
 function createInfo(msg) {
   NotificationManager.info(msg);
@@ -13,28 +13,30 @@ const SongCardControls = ({
   handleCopyToClipboard
 }) => (
   <div className="song-card-controls">
-    <LikeButton
+    <MagicButton
+      title={isLiked ? 'Unlike' : 'Like'}
       btnClassName="icon-button"
-      isLiked={isLiked}
+      iconClassName={`fa fa-heart ${isLiked && 'active'}`}
       onClick={isLiked ? handleUnlikeClick : handleLikeClick}
     />
-    <button
+    <MagicButton
       title="Add to playlist"
-      className="icon-button"
+      btnClassName="icon-button"
+      iconClassName="fa fa-bookmark"
       onClick={() => createInfo('Added to playlist')}
-    >
-      <i className="fa fa-bookmark" />
-    </button>
-    <button title="repost" className="icon-button">
-      <i className="fa fa-external-link" />
-    </button>
-    <button
+    />
+    <MagicButton
+      title="Repost"
+      btnClassName="icon-button"
+      iconClassName="fa fa-external-link"
+      onClick={() => createInfo('Added to repose')}
+    />
+    <MagicButton
       title="Copy to clipboard"
-      className="icon-button"
+      btnClassName="icon-button"
+      iconClassName="fa fa-clipboard"
       onClick={handleCopyToClipboard}
-    >
-      <i className="fa fa-clipboard" />
-    </button>
+    />
   </div>
 );
 
