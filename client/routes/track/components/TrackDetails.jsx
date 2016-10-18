@@ -71,8 +71,7 @@ const TrackDetails = ({
               <LikeButton
                 btnClassName="icon-button"
                 isLiked={isLiked}
-                handleLikeClick={handleLikeClick}
-                handleUnlikeClick={handleUnlikeClick}
+                onClick={isLiked ? handleUnlikeClick : handleLikeClick}
               />
               {formatLikes(track.getLikedCount())}
             </span>

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-
+import MagicButton from 'client/components/MagicButton';
 import defaultArtworkImage from 'assets/images/default-artwork.png';
 
 export default function SongCardImage(props) {
@@ -12,36 +12,24 @@ export default function SongCardImage(props) {
     handleChangeSong
   } = props;
 
-  let togglePlayButton = null;
-  if (isActive && isPlaying) {
-    togglePlayButton = (
-      <button
-        className={`toggle-play-button ${(isActive ? 'active' : '')}`}
-        onClick={handlePauseSong}
-      >
-        <i className="toggle-play-button-icon ion-ios-pause" />
-      </button>
-    );
-  } else {
-    togglePlayButton = (
-      <button
-        className={`toggle-play-button ${(isActive ? 'active' : '')}`}
-        onClick={() => {
-          if (isActive) handlePlaySong();
-          else handleChangeSong();
-        }}
-      >
-        <i className="toggle-play-button-icon ion-ios-play" />
-      </button>
-    );
-  }
 
   return (
     <div
       className="song-card-image"
       style={{ backgroundImage: `url(${artworkUrl || defaultArtworkImage})` }}
     >
-      { togglePlayButton }
+      { isActive && isPlaying ?
+        <MagicButton
+          btnClassName={`toggle-play-button ${(isActive ? 'active' : '')}`}
+          iconClassName="toggle-play-button-icon ion-ios-pause"
+          onClick={handlePauseSong}
+        /> :
+        <MagicButton
+          btnClassName={`toggle-play-button ${(isActive ? 'active' : '')}`}
+          iconClassName="toggle-play-button-icon ion-ios-play"
+          onClick={isActive ? handlePlaySong : handleChangeSong}
+        />
+      }
     </div>
   );
 }
