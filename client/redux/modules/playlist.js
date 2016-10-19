@@ -18,13 +18,13 @@ export const loadPlaylist = trackMap => ({
 /* Reducer */
 const INITIAL_STATE = fromJS({
   trackMap: new TrackMap(),
-  showPlaylist: false
+  playlistShown: false
 });
 
 const playlist = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case TOGGLE_PLAYLIST:
-      return state.set('showPlaylist', !state.get('showPlaylist'));
+      return state.set('playlistShown', !state.get('playlistShown'));
     case LOAD_PLAYLIST:
       // Only load playlist when the new playlist is different from the current one.
       if (!is(state.get('trackMap'), (action.payload))) {
@@ -36,7 +36,7 @@ const playlist = (state = INITIAL_STATE, action) => {
   }
 };
 
-export const getShowPlaylist = state => state.get('showPlaylist');
+export const isPlaylistShown = state => state.get('playlistShown');
 
 export const getPlaylistAsOrderedMap = state => state.get('trackMap');
 

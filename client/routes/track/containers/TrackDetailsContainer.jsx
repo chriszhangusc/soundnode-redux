@@ -21,26 +21,26 @@ import TrackImage from '../components/TrackImage';
 import TrackInfo from '../components/TrackInfo';
 
 const TrackDetailsContainer = (props) => {
-  if (props.isTrackFetching) return <Spinner />;
+  if (props.trackFetching) return <Spinner />;
   return (
     <div className="container">
       <div className="track-info-container">
         <TrackImage {...props} />
         <TrackInfo {...props} />
       </div>
-      {props.isCommentsFetching || <CommentSection {...props} />}
+      {props.commentsFetching || <CommentSection {...props} />}
     </div>
   );
 };
 
 TrackDetailsContainer.propTypes = {
-  isTrackFetching: PropTypes.bool.isRequired,
-  isCommentsFetching: PropTypes.bool.isRequired
+  trackFetching: PropTypes.bool.isRequired,
+  commentsFetching: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  isTrackFetching: isTrackFetching(state),
-  isCommentsFetching: isTrackCommentsFetching(state),
+  trackFetching: isTrackFetching(state),
+  commentsFetching: isTrackCommentsFetching(state),
   track: getTrackRecord(state),
   isLiked: isSongLiked(state, ownProps.params.trackId),
   isActive: getSingleSongIsActive(state, ownProps.params.trackId),

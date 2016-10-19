@@ -4,10 +4,10 @@ import PlaylistItemContainer from '../containers/PlaylistItemContainer';
 
 const Playlist = ({
   playlistTracks,
-  isPlaylistShown
+  playlistShown
  }) => {
   return (
-    <div className={`col-sm-2 playlist ${isPlaylistShown ? 'show' : ''}`} >
+    <div className={`col-sm-2 playlist ${playlistShown ? 'show' : ''}`} >
       <div className="playlist-container">
         <div className="playlist-title">
           <span className="labelColumn">TRACKS</span>
@@ -27,8 +27,7 @@ const Playlist = ({
 };
 
 Playlist.propTypes = {
-  isPlaylistShown: PropTypes.bool,
-  // Not 100% sure if this is the right way.
+  playlistShown: PropTypes.bool,
   playlistTracks: PropTypes.arrayOf(PropTypes.shape(Track))
 };
 

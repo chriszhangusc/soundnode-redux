@@ -8,9 +8,10 @@ import * as fromArtist from './artist';
 import * as fromCharts from './charts';
 import * as fromPlaylist from './playlist';
 import * as fromTrack from './track';
+import * as fromEntities from './entities';
 
 const rootReducer = combineReducers({
-  // playlists: fromPlaylists.default,
+  entities: fromEntities.default,
   charts: fromCharts.default,
   playlist: fromPlaylist.default,
   player: fromPlayer.default,
@@ -23,15 +24,16 @@ const rootReducer = combineReducers({
 /* From Charts */
 export const getChartsGenre = state => fromCharts.getGenre(state.get('charts'));
 export const getChartsTrackMap = state => fromCharts.getTrackMap(state.get('charts'));
-export const getIsChartsFetching = state => fromCharts.getIsFetching(state.get('charts'));
+export const isChartsFetching = state => fromCharts.isFetching(state.get('charts'));
 
 /* From Track */
 export const isTrackFetching = state => fromTrack.isTrackFetching(state.get('track'));
 export const isTrackCommentsFetching = state => fromTrack.isCommentsFetching(state.get('track'));
 export const getTrackRecord = state => fromTrack.getTrack(state.get('track'));
 export const getTrackComments = state => fromTrack.getComments(state.get('track'));
+
 /* From Playlist */
-export const getShowPlaylist = state => fromPlaylist.getShowPlaylist(state.get('playlist'));
+export const isPlaylistShown = state => fromPlaylist.isPlaylistShown(state.get('playlist'));
 export const getPlaylistAsOrderedMap =
   state => fromPlaylist.getPlaylistAsOrderedMap(state.get('playlist'));
 export const getPlaylistAsArray = state => fromPlaylist.getPlaylistAsArray(state.get('playlist'));
@@ -39,9 +41,9 @@ export const getPlaylistAsArray = state => fromPlaylist.getPlaylistAsArray(state
 /* From Artist */
 export const getArtistRecord = state => fromArtist.getArtistRecord(state.get('artist'));
 export const getArtistTrackMap = state => fromArtist.getArtistTrackMap(state.get('artist'));
-export const getArtistFetchState = state => fromArtist.getIsArtistFetching(state.get('artist'));
-export const getArtistTracksFetchState = state =>
-  fromArtist.getIsTrackFetching(state.get('artist'));
+export const isArtistFetching = state => fromArtist.isArtistFetching(state.get('artist'));
+export const isArtistTracksFetching = state =>
+  fromArtist.isTracksFetching(state.get('artist'));
 
 /* From Search */
 export const getSearchTrackMap = state => fromSearch.getTrackMap(state.get('search'));
@@ -53,9 +55,9 @@ export const isSearchResultShown = state => fromSearch.isShown(state.get('search
 export const getSearchResults = state => fromSearch.getSearchResults(state.get('search'));
 
 /* From user */
-export const isSongLiked = (state, songId) => {
+export const isTrackLiked = (state, trackId) => {
   const likes = fromUser.getLikes(state.get('user'));
-  return (songId in likes);
+  return (trackId in likes);
 };
 export const getLikes = state => fromUser.getLikes(state.get('user'));
 export const getUid = state => fromUser.getUid(state.get('user'));
@@ -67,11 +69,11 @@ export const getCurrentPlayerTrack = state => fromPlayer.getCurrentTrack(state.g
 export const getShuffleDraw = state => fromPlayer.getShuffleDraw(state.get('player'));
 export const getShuffleDiscard = state => fromPlayer.getShuffleDiscard(state.get('player'));
 export const shuffleInitialized = state => fromPlayer.shuffleInitialized(state.get('player'));
-export const getPlayingState = state => fromPlayer.getPlayingState(state.get('player'));
+export const isPlayerPlaying = state => fromPlayer.isPlaying(state.get('player'));
+export const isPlayerSeeking = state => fromPlayer.isSeeking(state.get('player'));
 export const getCurrentVolume = state => fromPlayer.getCurrentVolume(state.get('player'));
-export const getVolumeSeekState = state => fromPlayer.getVolumeSeekState(state.get('player'));
+export const isVolumeSeeking = state => fromPlayer.isVolumeSeeking(state.get('player'));
 export const getCurrentTime = state => fromPlayer.getCurrentTime(state.get('player'));
-export const getSeekState = state => fromPlayer.getSeekState(state.get('player'));
 export const getPlayerMode = state => fromPlayer.getPlayerMode(state.get('player'));
 
 /**
@@ -80,7 +82,7 @@ export const getPlayerMode = state => fromPlayer.getPlayerMode(state.get('player
  * @param  {[type]} id    [description]
  * @return {[type]}       [description]
  */
-export const getSingleSongIsActive = (state, id) => {
+export const isTrackActive = (state, id) => {
   const currentSongId = getCurrentPlayerTrack(state).getId();
   if (currentSongId && id) {
     return currentSongId.toString() === id.toString();
@@ -89,7 +91,7 @@ export const getSingleSongIsActive = (state, id) => {
 };
 
 // Return if the specific song is playing or not
-export const getSingleSongPlayingState = (state, id) =>
-  getSingleSongIsActive(state, id) && getPlayingState(state);
+export const isTrackPlaying = (state, id) =>
+  isTrackActive(state, id) && isPlayerPlaying(state);
 
 export default rootReducer;

@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react';
+import Track from 'client/models/Track';
 import { REPEAT } from 'client/constants/PlayerConstants';
+import { formatStreamUrl } from 'client/utils/FormatUtils';
 
 class PlayerAudio extends Component {
   constructor(props) {
@@ -28,7 +30,7 @@ class PlayerAudio extends Component {
 
   // If seeking status changed from true to false, then we should update time in our audioElement
   updateTimeIfNeeded(prevProps) {
-    if (prevProps.isSeeking && !this.props.isSeeking) {
+    if (prevProps.seeking && !this.props.seeking) {
       this.audioElement.currentTime = this.props.currentTime;
     }
     // Reason: In case of repeat mode, when user click next/prev song button,
@@ -47,7 +49,7 @@ class PlayerAudio extends Component {
 
   togglePlayIfNeeded(audioElement) {
     // This also covers change song and play logic
-    if (audioElement.paused === this.props.isPlaying) {
+    if (audioElement.paused === this.props.playing) {
       if (audioElement.paused) audioElement.play();
       else audioElement.pause();
     }
@@ -81,12 +83,13 @@ class PlayerAudio extends Component {
 }
 
 PlayerAudio.propTypes = {
-  isSeeking: PropTypes.bool,
+  seeking: PropTypes.bool,
   currentTime: PropTypes.number,
-  isPlaying: PropTypes.bool,
+  playing: PropTypes.bool,
   volume: PropTypes.number,
   mode: PropTypes.string,
   streamUrl: PropTypes.string,
+  // track: PropTypes.instanceOf(Track),
   onTimeUpdate: PropTypes.func,
   onEnded: PropTypes.func
 };

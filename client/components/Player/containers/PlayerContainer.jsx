@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getCurrentPlayerTrack } from 'client/redux/modules/reducers';
 import Track from 'client/models/Track';
+import { formatStreamUrl } from 'client/utils/FormatUtils';
 import PlayerAudioContainer from './PlayerAudioContainer';
 import PlayerSongInfoContainer from './PlayerSongInfoContainer';
 import PlayerControlsContainer from './PlayerControlsContainer';
@@ -13,6 +14,7 @@ import PlayerVolumeControlsContainer from './PlayerVolumeControlsContainer';
 class PlayerContainer extends Component {
 
   render() {
+    console.log('Render: PlayerContainer(Top level)');
     // Extract props that we care, and pass the other props as others.
     const { currentTrack } = this.props;
     if (!currentTrack.getId()) {
@@ -22,12 +24,14 @@ class PlayerContainer extends Component {
       <div className="player">
         <div className="container">
           <div className="player-main">
-            <PlayerAudioContainer track={currentTrack} />
+            <PlayerAudioContainer
+              streamUrl={formatStreamUrl(currentTrack.getStreamUrl())}
+            />
             <PlayerSongInfoContainer track={currentTrack} />
-            <PlayerControlsContainer track={currentTrack} />
-            <PlayerDurationBarContainer track={currentTrack} />
-            <PlayerModeControlsContainer track={currentTrack} />
-            <PlayerVolumeControlsContainer track={currentTrack} />
+            <PlayerControlsContainer />
+            <PlayerDurationBarContainer duration={currentTrack.getDuration()} />
+            <PlayerModeControlsContainer />
+            <PlayerVolumeControlsContainer />
           </div>
         </div>
       </div>
@@ -41,7 +45,7 @@ const mapStateToProps = state => ({
 });
 
 PlayerContainer.propTypes = {
-  currentTrack: PropTypes.instanceOf(Track)
+  currentTrack: PropTypes.instanceOf(Track).isRequired
 };
 
 export default connect(mapStateToProps)(PlayerContainer);

@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import defaultArtist from 'assets/images/default-artist.png';
 
 export default function SongCardInfo({ trackId, artistId, artistAvatar, title, artistName }) {
+// console.log('Render: SongCardInfo');
   return (
     <div className="song-card-user clearfix">
       <img

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import MagicButton from 'client/components/MagicButton';
 
 class PlayerControls extends Component {
   constructor(props) {
@@ -9,45 +10,41 @@ class PlayerControls extends Component {
   }
 
   renderPlayPauseButton() {
-    const { isPlaying, onPauseClick, onPlayClick } = this.props;
-    return (
-      <button
-        title="Play"
-        className="icon-button player-button"
-        onClick={isPlaying ? onPauseClick : onPlayClick}
-      >
-        <i className={isPlaying ? 'icon ion-ios-pause' : 'icon ion-ios-play'} />
-      </button>
-    );
+    const { playing, onPauseClick, onPlayClick } = this.props;
+    return (<MagicButton
+      title="Play"
+      btnClassName="icon-button player-button"
+      iconClassName={playing ? 'icon ion-ios-pause' : 'icon ion-ios-play'}
+      onClick={playing ? onPauseClick : onPlayClick}
+    />);
   }
 
   renderForwardButton() {
     const { onNextClick } = this.props;
     return (
-      <button
+      <MagicButton
         title="Next"
-        className="icon-button player-button"
+        btnClassName="icon-button player-button"
+        iconClassName="icon ion-ios-fastforward"
         onClick={onNextClick}
-      >
-        <i className="icon ion-ios-fastforward" />
-      </button>
+      />
     );
   }
 
   renderBackwardButton() {
     const { onPrevClick } = this.props;
     return (
-      <button
-        title="Back"
-        className="icon-button player-button"
+      <MagicButton
+        title="Previous"
+        btnClassName="icon-button player-button"
+        iconClassName="icon ion-ios-rewind"
         onClick={onPrevClick}
-      >
-        <i className="icon ion-ios-rewind" />
-      </button>
+      />
     );
   }
 
   render() {
+  console.log('Render: PlayerControls');
     return (
       <div className="player-section">
         {this.renderBackwardButton()}
@@ -59,7 +56,7 @@ class PlayerControls extends Component {
 }
 
 PlayerControls.propTypes = {
-  isPlaying: PropTypes.bool,
+  playing: PropTypes.bool,
   onNextClick: PropTypes.func,
   onPrevClick: PropTypes.func,
   onPlayClick: PropTypes.func,

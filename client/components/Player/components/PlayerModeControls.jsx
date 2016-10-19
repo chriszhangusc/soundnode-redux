@@ -50,6 +50,7 @@ class PlayerModeControls extends Component {
   }
 
   render() {
+  console.log('Render: PlayerModeControls');
     return (
       <div className="player-section">
         {this.renderRepeat()}

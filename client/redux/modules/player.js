@@ -96,7 +96,6 @@ export const sagaToggleMute = () => ({
   type: ActionTypes.SAGA_TOGGLE_MUTE
 });
 
-// Import from player
 export const sagaChangeSongAndPlay = songId => ({
   type: ActionTypes.SAGA_CHANGE_SONG_AND_PLAY,
   payload: songId
@@ -140,9 +139,9 @@ const INITIAL_STATE = fromJS({
   currentTime: 0,
   volume: INITIAL_VOLUME,
   track: new Track(),
-  isPlaying: false,
-  isSeeking: false,
-  volumeIsSeeking: false,
+  playing: false,
+  seeking: false,
+  volumeSeeking: false,
   duration: 0,
   mode: DEFAULT_MODE,
   shuffleDraw: [],
@@ -152,10 +151,10 @@ const INITIAL_STATE = fromJS({
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ActionTypes.PLAY_SONG:
-      return state.set('isPlaying', true);
+      return state.set('playing', true);
 
     case ActionTypes.PAUSE_SONG:
-      return state.set('isPlaying', false);
+      return state.set('playing', false);
 
     case ActionTypes.CHANGE_SONG:
       return state.set('track', fromJS(action.payload));
@@ -164,19 +163,19 @@ const player = (state = INITIAL_STATE, action) => {
       return state.set('currentTime', action.payload);
 
     case ActionTypes.BEGIN_SEEK:
-      return state.set('isSeeking', true);
+      return state.set('seeking', true);
 
     case ActionTypes.END_SEEK:
-      return state.set('isSeeking', false);
+      return state.set('seeking', false);
 
     case ActionTypes.CHANGE_VOLUME:
       return state.set('volume', action.payload);
 
     case ActionTypes.BEGIN_VOLUME_SEEK:
-      return state.set('volumeIsSeeking', true);
+      return state.set('volumeSeeking', true);
 
     case ActionTypes.END_VOLUME_SEEK:
-      return state.set('volumeIsSeeking', false);
+      return state.set('volumeSeeking', false);
 
     case ActionTypes.CHANGE_PLAY_MODE:
       return state.set('mode', action.payload);
@@ -218,9 +217,9 @@ export const getCurrentTrack = state => state.get('track');
 export const getShuffleDraw = state => state.get('shuffleDraw').toJS();
 export const getShuffleDiscard = state => state.get('shuffleDiscard').toJS();
 export const shuffleInitialized = state => (getShuffleDraw(state).length > 0);
-export const getPlayingState = state => state.get('isPlaying');
+export const isPlaying = state => state.get('playing');
+export const isSeeking = state => state.get('seeking');
 export const getCurrentTime = state => state.get('currentTime');
-export const getSeekState = state => state.get('isSeeking');
 export const getPlayerMode = state => state.get('mode');
-export const getVolumeSeekState = state => state.get('volumeIsSeeking');
+export const isVolumeSeeking = state => state.get('volumeSeeking');
 export const getCurrentVolume = state => state.get('volume');

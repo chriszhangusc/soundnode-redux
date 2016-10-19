@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
 import { computeNewTimeOnSeek } from 'client/utils/PlayerUtils';
 import {
-  getPlayingState,
   getCurrentTime,
-  getSeekState
+  isPlayerSeeking
 } from 'client/redux/modules/reducers';
 
 import {
@@ -14,11 +13,10 @@ import {
 
 import PlayerDurationBar from '../components/PlayerDurationBar';
 
-const mapStateToProps = (state, { track }) => ({
-  isSeeking: getSeekState(state),
-  isPlaying: getPlayingState(state),
-  duration: track.getDuration(),
-  currentTime: getCurrentTime(state)
+const mapStateToProps = (state, { duration }) => ({
+  seeking: isPlayerSeeking(state),
+  currentTime: getCurrentTime(state),
+  duration
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import {
-  getSingleSongIsActive,
+  isTrackActive,
   isSongLiked
 } from 'client/redux/modules/reducers';
 
@@ -19,7 +19,7 @@ import PlaylistItem from '../components/PlaylistItem';
 const mapStateToProps = (state, { track, index }) => {
   return {
     trackId: track.getId(),
-    isActive: getSingleSongIsActive(state, track.getId()),
+    isActive: isTrackActive(state, track.getId()),
     title: track.getTitle(),
     username: track.getArtist().getUsername(),
     isLiked: isSongLiked(state, track.getId()),

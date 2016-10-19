@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getCurrentVolume, getVolumeSeekState } from 'client/redux/modules/reducers';
+import { getCurrentVolume, isVolumeSeeking } from 'client/redux/modules/reducers';
 import { computeNewVolumeOnSeek } from 'client/utils/PlayerUtils';
 import {
   beginVolumeSeek,
@@ -11,7 +11,7 @@ import PlayerVolumeControls from '../components/PlayerVolumeControls';
 
 const mapStateToProps = state => ({
   volume: getCurrentVolume(state),
-  volumeIsSeeking: getVolumeSeekState(state)
+  volumeSeeking: isVolumeSeeking(state)
 });
 
 const mapDispatchToProps = dispatch => ({

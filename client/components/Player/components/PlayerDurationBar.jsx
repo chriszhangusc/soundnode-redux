@@ -12,14 +12,14 @@ class PlayerDurationBar extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { isSeeking } = this.props;
-    const prevIsSeeking = prevProps.isSeeking;
+    const { seeking } = this.props;
+    const prevSeeking = prevProps.seeking;
 
-    if (!prevIsSeeking && isSeeking) {
+    if (!prevSeeking && seeking) {
       // Listen to event only when we start seeking
       document.addEventListener('mousemove', this.handleDurationHandleMouseMove);
       document.addEventListener('mouseup', this.handleEndSeek);
-    } else if (prevIsSeeking && !isSeeking) {
+    } else if (prevSeeking && !seeking) {
       // Remove listeners when we finish seeking
       document.removeEventListener('mousemove', this.handleDurationHandleMouseMove);
       document.removeEventListener('mouseup', this.handleEndSeek);
@@ -77,6 +77,7 @@ class PlayerDurationBar extends Component {
   }
 
   render() {
+console.log('Render: PlayerDurationBar');
     return (
       <div className="player-section player-seek">
         { this.renderDurationBar() }
@@ -87,7 +88,7 @@ class PlayerDurationBar extends Component {
 }
 
 PlayerDurationBar.propTypes = {
-  isSeeking: PropTypes.bool,
+  seeking: PropTypes.bool,
   duration: PropTypes.number,
   currentTime: PropTypes.number,
   onDurationHandleMouseDown: PropTypes.func,

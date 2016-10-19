@@ -28,7 +28,7 @@ const configureStore = () => {
     persistedState,
     // initialState,
     compose(
-      applyMiddleware(thunk, sagaMiddleware, apiMiddleware, notificationMiddleware, logger),
+      applyMiddleware(thunk, sagaMiddleware, apiMiddleware, notificationMiddleware),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );

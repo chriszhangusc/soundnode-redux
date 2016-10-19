@@ -1,12 +1,12 @@
+
 import { connect } from 'react-redux';
-import { formatStreamUrl } from 'client/utils/FormatUtils';
 // Selectors
 import {
-  getPlayingState,
+  isPlayerPlaying,
   getCurrentVolume,
   getPlayerMode,
   getCurrentTime,
-  getSeekState
+  isPlayerSeeking
 } from 'client/redux/modules/reducers';
 // Actions
 import {
@@ -15,14 +15,14 @@ import {
 } from 'client/redux/modules/player';
 import PlayerAudio from '../components/PlayerAudio';
 
-const mapStateToProps = (state, { track }) => {
+const mapStateToProps = (state, { streamUrl }) => {
   return {
-    isPlaying: getPlayingState(state),
+    playing: isPlayerPlaying(state),
     volume: getCurrentVolume(state),
     mode: getPlayerMode(state),
-    streamUrl: formatStreamUrl(track.getStreamUrl(state)),
+    streamUrl,
     currentTime: getCurrentTime(state),
-    isSeeking: getSeekState(state)
+    seeking: isPlayerSeeking(state)
   };
 };
 

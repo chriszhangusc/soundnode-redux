@@ -44,7 +44,8 @@ export default store => next => (action) => {
   .then(
     response => next(actionWith({
       type: successType,
-      payload: response
+      payload: response,
+      entities: response.entities
     })),
     error => next(actionWith({
       type: failureType,

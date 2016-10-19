@@ -44,8 +44,8 @@ export const fetchArtistAndTracks = id => (dispatch) => {
 
 /* Reducer */
 const INITIAL_STATE = fromJS({
-  isArtistFetching: false,
-  isTracksFetching: false,
+  artistFetching: false,
+  tracksFetching: false,
   artist: new Artist(),
   tracks: new TrackMap(),
   tracksNextHref: null
@@ -54,19 +54,19 @@ const INITIAL_STATE = fromJS({
 const artist = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ARTIST_REQUEST:
-      return state.set('isArtistFetching', true);
+      return state.set('artistFetching', true);
     case ARTIST_RECEIVE:
       return state.merge({
         artist: denormalizeArtist(action.payload),
-        isArtistFetching: false
+        artistFetching: false
       });
     case ARTIST_TRACKS_REQUEST:
-      return state.set('isTracksFetching', true);
+      return state.set('tracksFetching', true);
     case ARTIST_TRACKS_RECEIVE:
       return state.merge({
         tracks: denormalizeTracks(action.payload),
         tracksNextHref: action.payload.nextHref,
-        isTracksFetching: false
+        tracksFetching: false
       });
     default:
       return state;
@@ -75,7 +75,7 @@ const artist = (state = INITIAL_STATE, action) => {
 
 export const getArtistRecord = state => state.get('artist');
 export const getArtistTrackMap = state => state.get('tracks');
-export const getIsArtistFetching = state => state.get('isArtistFetching');
-export const getIsTrackFetching = state => state.get('isTracksFetching');
+export const isArtistFetching = state => state.get('artistFetching');
+export const isTracksFetching = state => state.get('tracksFetching');
 export const getTracksNextHref = state => state.get('tracksNextHref');
 export default artist;

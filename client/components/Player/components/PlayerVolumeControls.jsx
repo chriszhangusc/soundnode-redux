@@ -56,6 +56,7 @@ class PlayerVolumeControls extends Component {
   }
 
   render() {
+console.log('Render: PlayerVolumeControls');
     const { volume, onVolumeBarMouseDown, onVolumeHandleMouseDown } = this.props;
 
     return (

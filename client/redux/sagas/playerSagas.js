@@ -36,8 +36,8 @@ function* convertAndUpdateTime(rawTime) {
 }
 
 function* updateTimeRegular({ payload }) {
-  const isSeeking = yield select(selectors.getSeekState);
-  if (!isSeeking) {
+  const seeking = yield select(selectors.isPlayerSeeking);
+  if (!seeking) {
     yield call(convertAndUpdateTime, payload);
   }
 }

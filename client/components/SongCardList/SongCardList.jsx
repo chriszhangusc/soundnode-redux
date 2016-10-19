@@ -5,8 +5,8 @@ import Spinner from 'client/components/Spinner';
 import infiniteScroll from 'client/components/hocs/InfiniteScroll';
 import TrackMap from 'client/models/TrackMap';
 
-const renderSongCardList = (tracks, isFetching) => {
-  if (isFetching) return <Spinner />;
+const renderSongCardList = (tracks, fetching) => {
+  if (fetching) return <Spinner />;
   const tracksArray = tracks.toArray();
   const COLS = 4;
   const rows = chunk(tracksArray, COLS);
@@ -23,17 +23,17 @@ const renderSongCardList = (tracks, isFetching) => {
 
 
 const SongCardList = (props) => {
-  const { isFetching, tracks } = props;
+  const { fetching, tracks } = props;
   return (
     <div className="container">
-      {renderSongCardList(tracks, isFetching)}
+      {renderSongCardList(tracks, fetching)}
     </div>
   );
 };
 
 
 SongCardList.propTypes = {
-  isFetching: PropTypes.bool,
+  fetching: PropTypes.bool,
   tracks: PropTypes.instanceOf(TrackMap)
 };
 

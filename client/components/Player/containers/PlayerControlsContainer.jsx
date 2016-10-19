@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getPlayingState } from 'client/redux/modules/reducers';
+import { isPlayerPlaying } from 'client/redux/modules/reducers';
 import {
   playSong,
   pauseSong,
@@ -9,7 +9,7 @@ import {
 import PlayerControls from '../components/PlayerControls';
 
 const mapStateToProps = state => ({
-  isPlaying: getPlayingState(state)
+  playing: isPlayerPlaying(state)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -43,8 +43,8 @@ export const loadTrackPage = trackId => (dispatch) => {
 /* Reducer */
 
 const INITIAL_STATE = fromJS({
-  isTrackFetching: false,
-  isCommentsFetching: false,
+  trackFetching: false,
+  commentsFetching: false,
   track: new Track(),
   comments: new CommentMap(),
   commentsNextHref: null
@@ -53,18 +53,18 @@ const INITIAL_STATE = fromJS({
 const track = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case TRACK_REQUEST:
-      return state.set('isTrackFetching', true);
+      return state.set('trackFetching', true);
     case TRACK_RECEIVE:
       return state.merge({
         track: denormalizeTrack(action.payload),
-        isTrackFetching: false
+        trackFetching: false
       });
     case TRACK_COMMENTS_REQUEST:
-      return state.set('isCommentsFetching', true);
+      return state.set('commentsFetching', true);
     case TRACK_COMMENTS_RECEIVE:
       return state.merge({
         comments: denormalizeComments(action.payload),
-        isCommentsFetching: false
+        commentsFetching: false
       });
     default:
       return state;
@@ -73,7 +73,7 @@ const track = (state = INITIAL_STATE, action) => {
 export default track;
 
 /* State Selectors */
-export const isTrackFetching = state => state.get('isTrackFetching');
-export const isCommentsFetching = state => state.get('isCommentsFetching');
+export const isTrackFetching = state => state.get('trackFetching');
+export const isCommentsFetching = state => state.get('commentsFetching');
 export const getTrack = state => state.get('track'); // Return the immutable record
 export const getComments = state => state.get('comments');
