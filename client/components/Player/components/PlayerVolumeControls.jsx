@@ -1,4 +1,3 @@
-
 import React, { PropTypes, Component } from 'react';
 
 class PlayerVolumeControls extends Component {
@@ -10,14 +9,13 @@ class PlayerVolumeControls extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { volumeIsSeeking } = this.props;
-    const prevIsSeeking = prevProps.volumeIsSeeking;
-    const currIsSeeking = volumeIsSeeking;
-    if (!prevIsSeeking && currIsSeeking) {
+    const prevSeeking = prevProps.volumeSeeking;
+    const currSeeking = this.props.volumeSeeking;
+    if (!prevSeeking && currSeeking) {
       // Listen to event only when we start seeking
       document.addEventListener('mousemove', this.handleVolumeMouseMove);
       document.addEventListener('mouseup', this.handleVolumeMouseUp);
-    } else if (prevIsSeeking && !currIsSeeking) {
+    } else if (prevSeeking && !currSeeking) {
       // Remove them only when we finish seeking
       document.removeEventListener('mousemove', this.handleVolumeMouseMove);
       document.removeEventListener('mouseup', this.handleVolumeMouseUp);
@@ -86,7 +84,7 @@ console.log('Render: PlayerVolumeControls');
 
 PlayerVolumeControls.propTypes = {
   volume: PropTypes.number,
-  volumeIsSeeking: PropTypes.bool,
+  volumeSeeking: PropTypes.bool,
   onVolumeBarMouseDown: PropTypes.func,
   onVolumeHandleMouseDown: PropTypes.func,
   onVolumeMouseUp: PropTypes.func,

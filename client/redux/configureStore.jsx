@@ -9,9 +9,10 @@ import { loadState, saveState } from 'client/utils/LocalStorageUtils';
 import notificationMiddleware from './middlewares/notificationMiddleware';
 import rootReducer from './modules/reducers';
 import apiMiddleware from './middlewares/apiMiddleware';
-import rootSaga from './sagas';
+import rootSaga from './middlewares/sagas';
 
 const stateTransformer = (state) => {
+  // toJS is expensive!
   if (Iterable.isIterable(state)) return state.toJS();
   return state;
 };
