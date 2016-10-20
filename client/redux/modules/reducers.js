@@ -21,10 +21,39 @@ const rootReducer = combineReducers({
   track: fromTrack.default
 });
 
+/* From entities */
+
+// Get single track
+
+export const getAllArtists = state => fromEntities.getArtists(state.get('entities'));
+export const getAllTracks = state => fromEntities.getTracks(state.get('entities'));
+
+// Select one track from entities tree.
+export const getTrackById = (state, trackId) =>
+  fromEntities.getTrackById(state.get('entities'), trackId);
+
+export const getArtistById = (state, artistId) =>
+  fromEntities.getArtistById(state.get('entities'), artistId);
+
+export const getArtistByTrackId = (state, trackId) => {
+  const track = getTrackById(state, trackId);
+  const artistId = track && track.getArtistId();
+  return getArtistById(state, artistId);
+};
+
+// Get Array of Immutable Records
+// export const getTracksAsArray = (state, trackIds) =>
+//   trackIds.map(trackId => fromEntities.getTrackById(state.get('entities', trackId)));
+
 /* From Charts */
 export const getChartsGenre = state => fromCharts.getGenre(state.get('charts'));
 export const getChartsTrackMap = state => fromCharts.getTrackMap(state.get('charts'));
+export const getChartsTrackIds = state => fromCharts.getTrackIds(state.get('charts'));
 export const isChartsFetching = state => fromCharts.isFetching(state.get('charts'));
+// export const getChartsTracksAsArray = (state) => {
+//   const trackIds = fromCharts.getTrackIds(state.get('charts'));
+//   return trackIds.map(trackId => getTrackById(state, trackId));
+// };
 
 /* From Track */
 export const isTrackFetching = state => fromTrack.isTrackFetching(state.get('track'));

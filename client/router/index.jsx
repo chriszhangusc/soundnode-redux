@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Router, IndexRedirect, browserHistory } from 'react-router';
 import App from 'client/components/App';
-import TopMusicPage from 'client/routes/top50';
+import ChartsPage from 'client/routes/charts';
 import ArtistDetailsPage from 'client/routes/artist';
 import TrackDetailsPage from 'client/routes/track';
 import SearchResultsPage from 'client/routes/search/components/SearchResults';
@@ -42,9 +42,9 @@ const configureRoutes = (store) => {
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRedirect to={`top50/${DEFAULT_GENRE}`} />
-        <Route path="top50" component={TopMusicPage}>
+        <Route path="top50" component={ChartsPage}>
           <IndexRedirect to={`${DEFAULT_GENRE}`} />
-          <Route path=":genre" component={TopMusicPage} onEnter={onEnterCharts} />
+          <Route path=":genre" component={ChartsPage} onEnter={onEnterCharts} />
         </Route>
         <Route path="artist" >
           <Route path=":uid" component={ArtistDetailsPage} onEnter={onArtistDetailsPageEnter} />

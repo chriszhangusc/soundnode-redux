@@ -1,8 +1,8 @@
 import { Record } from 'immutable';
-import Artist from './Artist';
+// import Artist from './Artist';
 
 const TrackRecord = Record({
-  id: null,
+  id: '',
   artworkUrl: '',
   createdAt: '',
   title: '',
@@ -70,9 +70,13 @@ const TrackRecord = Record({
 class Track extends TrackRecord {
 
   getId() {
-    return this.get('id');
+    return this.get('id').toString();
   }
-
+  // User field will be set to user id after normalization
+  getArtistId() {
+    return this.get('user').toString();
+  }
+  // user will be the id of its artist
   getArtist() {
     return this.get('user');
   }

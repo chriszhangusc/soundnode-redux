@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import defaultArtist from 'assets/images/default-artist.png';
 
 export default function SongCardInfo({ trackId, artistId, artistAvatar, title, artistName }) {
-// console.log('Render: SongCardInfo');
+console.log('Render: SongCardInfo');
   return (
     <div className="song-card-user clearfix">
       <img
@@ -25,8 +25,8 @@ export default function SongCardInfo({ trackId, artistId, artistAvatar, title, a
 }
 
 SongCardInfo.propTypes = {
-  trackId: PropTypes.number,
-  artistId: PropTypes.number,
+  trackId: PropTypes.string,
+  artistId: PropTypes.string,
   artistAvatar: PropTypes.string,
   title: PropTypes.string,
   artistName: PropTypes.string

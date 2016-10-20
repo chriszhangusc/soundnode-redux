@@ -7,12 +7,12 @@ function createInfo(msg) {
 }
 
 const SongCardControls = ({
+  liked,
   handleLikeClick,
   handleUnlikeClick,
-  liked,
   handleCopyToClipboard
 }) => {
-  // console.log('Render: SongCardControls');
+console.log('Render: SongCardControls');
   return (
     <div className="song-card-controls">
       <MagicButton

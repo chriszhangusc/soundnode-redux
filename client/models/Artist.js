@@ -2,7 +2,7 @@ import { Record } from 'immutable';
 // import { camelizeKeys } from 'humps';
 
 const ArtistRecord = Record({
-  id: null,
+  id: '',
   kind: '',
   permalink: '',
   username: '',
@@ -24,7 +24,7 @@ const ArtistRecord = Record({
 
 class Artist extends ArtistRecord {
   getId() {
-    return this.get('id');
+    return this.get('id').toString();
   }
 
   getKind() {

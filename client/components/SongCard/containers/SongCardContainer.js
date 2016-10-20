@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Track from 'client/models/Track';
-
+// import Artist from 'client/models/Artist';
 // We should keep reducer simple!!!
 import {
   isTrackActive,
+  getTrackById,
+  getArtistByTrackId
 } from 'client/redux/modules/reducers';
 
 import SongCardInfoContainer from './SongCardInfoContainer';
@@ -19,18 +21,24 @@ import SongCardImageContainer from './SongCardImageContainer';
 // all be re-rendered.
 // Instead of having a top level container passing down props to its children,
 // we need to connect each of the children component to a container.
+// When the connected container is told to be re-rendered, it will check if the mapped
+// object is shallowly equal or not.
 
-const SongCardContainer = props => (
-  <div className={`card song-card ${(props.active ? 'active' : '')}`}>
-    <SongCardImageContainer track={props.track} />
-    <SongCardInfoContainer track={props.track} />
-    <SongCardControlsContainer track={props.track} />
-  </div>
-);
+const SongCardContainer = ({ track, active }) => {
+  return (
+    <div className={`card song-card ${(active ? 'active' : '')}`}>
+      <SongCardImageContainer track={track} />
+      <SongCardInfoContainer track={track} />
+      <SongCardControlsContainer track={track} />
+    </div>
+  );
+};
 
-const mapStateToProps = (state, { track }) => {
+const mapStateToProps = (state, { trackId }) => {
   return {
-    active: isTrackActive(state, track.getId())
+    track: getTrackById(state, trackId),
+    artist: getArtistByTrackId(state, trackId),
+    active: isTrackActive(state, trackId)
   };
 };
 

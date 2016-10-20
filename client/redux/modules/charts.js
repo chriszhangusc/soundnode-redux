@@ -47,7 +47,7 @@ export const loadCharts = genre => (dispatch) => {
 const INITIAL_STATE = fromJS({
   genre: '',
   tracks: new TrackMap(),
-  trackIds: [],
+  trackIds: [], // Array of Strings!!!
   fetching: false,
   nextHref: ''
 });
@@ -62,7 +62,7 @@ const charts = (state = INITIAL_STATE, action) => {
     case CHARTS_RECEIVE:
       return state.merge({
         tracks: denormalizeTracks(action.payload),
-        trackIds: state.get('trackIds').concat(action.payload.result),
+        trackIds: state.get('trackIds').concat(action.payload.result.map(String)),
         nextHref: action.payload.nextHref,
         fetching: false
       });
@@ -72,7 +72,7 @@ const charts = (state = INITIAL_STATE, action) => {
 };
 
 export default charts;
-
 export const getGenre = state => state.get('genre');
 export const getTrackMap = state => state.get('tracks');
 export const isFetching = state => state.get('fetching');
+export const getTrackIds = state => state.get('trackIds'); // As Immutable.List

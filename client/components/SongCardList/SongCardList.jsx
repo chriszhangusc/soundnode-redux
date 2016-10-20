@@ -3,18 +3,20 @@ import chunk from 'lodash/chunk';
 import SongCardContainer from 'client/components/SongCard';
 import Spinner from 'client/components/Spinner';
 import infiniteScroll from 'client/components/hocs/InfiniteScroll';
-import TrackMap from 'client/models/TrackMap';
+// import TrackMap from 'client/models/TrackMap';
+import { List } from 'immutable';
 
-const renderSongCardList = (tracks, fetching) => {
+const renderSongCardList = (trackIds, fetching) => {
   if (fetching) return <Spinner />;
-  const tracksArray = tracks.toArray();
   const COLS = 4;
-  const rows = chunk(tracksArray, COLS);
+  // Shallow convert Immutable.List to array for chunking
+  // and preserving the goodness of Track Records
+  const rows = chunk(trackIds.toArray(), COLS);
   return rows.map((rowItems, i) => (
-    <div className="row" key={i} >
+    <div className="row" key={i} > {/* anti-pattern here ?*/}
       {
-        rowItems.map(track => (<div className="col-sm-3" key={track.getId()}>
-          <SongCardContainer track={track} playlist={tracks} />
+        rowItems.map(trackId => (<div className="col-sm-3" key={trackId}>
+          <SongCardContainer trackId={trackId} />
         </div>))
       }
     </div>
@@ -23,10 +25,10 @@ const renderSongCardList = (tracks, fetching) => {
 
 
 const SongCardList = (props) => {
-  const { fetching, tracks } = props;
+  const { fetching, trackIds } = props;
   return (
     <div className="container">
-      {renderSongCardList(tracks, fetching)}
+      {renderSongCardList(trackIds, fetching)}
     </div>
   );
 };
@@ -34,7 +36,7 @@ const SongCardList = (props) => {
 
 SongCardList.propTypes = {
   fetching: PropTypes.bool,
-  tracks: PropTypes.instanceOf(TrackMap)
+  trackIds: PropTypes.instanceOf(List)
 };
 
 export default infiniteScroll(SongCardList);

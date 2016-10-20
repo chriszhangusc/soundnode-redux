@@ -20,6 +20,8 @@ export default function entities(state = INITIAL_STATE, action) {
     comments: Comment
   };
 
+  // Iterate through all our eneities tables, merge incoming new entities one by one.
+  // Note we have to use string as key.
   if (action.entities) {
     const [...keys] = state.keys(); // Note the way to extract immutable Iterator as array
     let newState = state;
@@ -32,3 +34,28 @@ export default function entities(state = INITIAL_STATE, action) {
   }
   return state;
 }
+
+export const getAllTracks = state => state.get('tracks');
+export const getAllArtists = state => state.get('artists');
+
+// export function getArtistsByIdsAsMap(state, artistIds) {
+//   return state.get('artists').filter(artistIds);
+// }
+
+export function getArtistById(state, artistId) {
+  return artistId && state.get('artists').get(artistId.toString());
+}
+
+// Grap a bunch of tracks specified by List of ids.
+// Note that immutable map is keyed only by string!!
+export function getTrackById(state, trackId) {
+  return trackId && state.get('tracks').get(trackId.toString());
+}
+
+// export function getTracksByIdsAsArray(state, trackIds) {
+//   return trackIds.map(trackId => getTrackById(trackId));
+// }
+
+// export function getComments(commentIds) {
+//
+// }
