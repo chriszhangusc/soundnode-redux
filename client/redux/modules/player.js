@@ -58,9 +58,9 @@ export const changeDuration = duration => ({
  * @param  {Track(Record)} newSong The Track Record model.
  * @return {Object} Action
  */
-export const changeSong = newSong => ({
+export const changeSong = trackId => ({
   type: ActionTypes.CHANGE_SONG,
-  payload: newSong
+  payload: trackId
 });
 
 export const changeVolume = volume => ({
@@ -80,14 +80,16 @@ export const changePlayMode = mode => ({
  * @param  {Boolean} playlist If we should load playlist to state.
  * @return {[type]}                    [description]
  */
-export const changeSongAndPlay = (track, playlist) =>
+export const changeSongAndPlay = trackId =>
   ((dispatch) => {
     // Get current page
     // Check if the load is actually nessary
-    dispatch(loadPlaylist(playlist));
+    // dispatch(loadPlaylist(playlist));
+    // Pause current playing song if any
     dispatch(pauseSong());
-    dispatch(changeSong(track));
     dispatch(clearTime());
+    // Change current track to new track.
+    dispatch(changeSong(trackId));
     dispatch(playSong());
   });
 
@@ -134,11 +136,11 @@ export const sagaUpdateVolumeAndEndSeek = newVolume => ({
   payload: newVolume
 });
 
-/* Reducer */
+/* Player Reducer */
 const INITIAL_STATE = fromJS({
   currentTime: 0,
   volume: INITIAL_VOLUME,
-  track: new Track(),
+  trackId: undefined,
   playing: false,
   seeking: false,
   volumeSeeking: false,
@@ -157,7 +159,7 @@ const player = (state = INITIAL_STATE, action) => {
       return state.set('playing', false);
 
     case ActionTypes.CHANGE_SONG:
-      return state.set('track', fromJS(action.payload));
+      return state.set('trackId', action.payload);
 
     case ActionTypes.UPDATE_TIME:
       return state.set('currentTime', action.payload);
@@ -213,7 +215,9 @@ export default player;
 
 
 /* Player Selectors */
-export const getCurrentTrack = state => state.get('track');
+// Return the current trackId in player.
+export const getPlayerTrackId = state => state.get('trackId');
+
 export const getShuffleDraw = state => state.get('shuffleDraw').toJS();
 export const getShuffleDiscard = state => state.get('shuffleDiscard').toJS();
 export const shuffleInitialized = state => (getShuffleDraw(state).length > 0);

@@ -2,14 +2,13 @@ import React, { PropTypes } from 'react';
 import MagicButton from 'client/components/MagicButton';
 import defaultArtworkImage from 'assets/images/default-artwork.png';
 
-export default function SongCardImage(props) {
+export default function SongCardImage({
+  active,
+  artworkUrl,
+  playing,
+  handleImageClick
+}) {
 // console.log('Render: SongCardImage');
-  const {
-    active,
-    artworkUrl,
-    playing,
-    handleImageClick
-  } = props;
 
   return (
     <div
@@ -27,24 +26,8 @@ export default function SongCardImage(props) {
 }
 
 SongCardImage.propTypes = {
-  active: PropTypes.bool.isRequired,
-  playing: PropTypes.bool.isRequired,
-  artworkUrl: PropTypes.string, // Could be null
+  active: PropTypes.bool,
+  playing: PropTypes.bool,
+  artworkUrl: PropTypes.string,
   handleImageClick: PropTypes.func.isRequired
-  // handlePlaySong: PropTypes.func.isRequired,
-  // handlePauseSong: PropTypes.func.isRequired,
-  // handleChangeSong: PropTypes.func.isRequired
 };
-
-// { active && playing ?
-//   <MagicButton
-//     btnClassName={`toggle-play-button ${(active ? 'active' : '')}`}
-//     iconClassName="toggle-play-button-icon ion-ios-pause"
-//     onClick={handlePauseSong}
-//   /> :
-//   <MagicButton
-//     btnClassName={`toggle-play-button ${(active ? 'active' : '')}`}
-//     iconClassName="toggle-play-button-icon ion-ios-play"
-//     onClick={active ? handlePlaySong : handleChangeSong}
-//   />
-// }

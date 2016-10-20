@@ -1,18 +1,9 @@
-import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Track from 'client/models/Track';
-// import Artist from 'client/models/Artist';
-// We should keep reducer simple!!!
 import {
   isTrackActive,
-  getTrackById,
-  getArtistByTrackId
+  getTrackById
 } from 'client/redux/modules/reducers';
-
-import SongCardInfoContainer from './SongCardInfoContainer';
-import SongCardControlsContainer from './SongCardControlsContainer';
-import SongCardImageContainer from './SongCardImageContainer';
-
+import SongCardLayout from '../components/SongCardLayout';
 
 // Layout component just to assemble children presentational components.
 
@@ -24,27 +15,10 @@ import SongCardImageContainer from './SongCardImageContainer';
 // When the connected container is told to be re-rendered, it will check if the mapped
 // object is shallowly equal or not.
 
-const SongCardContainer = ({ track, active }) => {
-  return (
-    <div className={`card song-card ${(active ? 'active' : '')}`}>
-      <SongCardImageContainer track={track} />
-      <SongCardInfoContainer track={track} />
-      <SongCardControlsContainer track={track} />
-    </div>
-  );
-};
+const mapStateToProps = (state, { trackId }) => ({
+    // Prepare track object for its children
+  track: getTrackById(state, trackId),
+  active: isTrackActive(state, trackId)
+});
 
-const mapStateToProps = (state, { trackId }) => {
-  return {
-    track: getTrackById(state, trackId),
-    artist: getArtistByTrackId(state, trackId),
-    active: isTrackActive(state, trackId)
-  };
-};
-
-SongCardContainer.propTypes = {
-  track: PropTypes.instanceOf(Track),
-  active: PropTypes.bool
-};
-
-export default connect(mapStateToProps)(SongCardContainer);
+export default connect(mapStateToProps)(SongCardLayout);

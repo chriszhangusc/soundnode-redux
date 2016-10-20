@@ -8,18 +8,17 @@ function createInfo(msg) {
 
 const SongCardControls = ({
   liked,
-  handleLikeClick,
-  handleUnlikeClick,
+  handleToggleLike,
   handleCopyToClipboard
 }) => {
-console.log('Render: SongCardControls');
+// console.log('Render: SongCardControls');
   return (
     <div className="song-card-controls">
       <MagicButton
         title={liked ? 'Unlike' : 'Like'}
         btnClassName="icon-button"
         iconClassName={`fa fa-heart ${liked && 'active'}`}
-        onClick={liked ? handleUnlikeClick : handleLikeClick}
+        onClick={handleToggleLike}
       />
       <MagicButton
         title="Add to playlist"
@@ -45,8 +44,7 @@ console.log('Render: SongCardControls');
 
 SongCardControls.propTypes = {
   liked: PropTypes.bool,
-  handleLikeClick: PropTypes.func,
-  handleUnlikeClick: PropTypes.func,
+  handleToggleLike: PropTypes.func,
   handleCopyToClipboard: PropTypes.func
 };
 

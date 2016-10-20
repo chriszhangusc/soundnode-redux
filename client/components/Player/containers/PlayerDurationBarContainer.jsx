@@ -13,16 +13,17 @@ import {
 
 import PlayerDurationBar from '../components/PlayerDurationBar';
 
-const mapStateToProps = (state, { duration }) => ({
+const mapStateToProps = (state, { playerTrack }) => ({
   seeking: isPlayerSeeking(state),
   currentTime: getCurrentTime(state),
-  duration
+  duration: playerTrack.getDuration()
 });
 
 const mapDispatchToProps = dispatch => ({
   onDurationHandleMouseDown: () => {
     dispatch(beginSeek());
   },
+
   onDurationHandleMouseMove: (seekBar, duration, e) => {
     const newTime = computeNewTimeOnSeek(seekBar, duration, e);
     dispatch(sagaUpdateTimeOnSeek(newTime));

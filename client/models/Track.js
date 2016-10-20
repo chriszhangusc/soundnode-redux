@@ -2,7 +2,7 @@ import { Record } from 'immutable';
 // import Artist from './Artist';
 
 const TrackRecord = Record({
-  id: '',
+  id: undefined, // id should be undefined to identify it is not initialized!!
   artworkUrl: '',
   createdAt: '',
   title: '',

@@ -94,7 +94,8 @@ export const getDisplayName = state => fromUser.getDisplayName(state.get('user')
 export const getPhotoUrl = state => fromUser.getPhotoUrl(state.get('user'));
 
 /* From player */
-export const getCurrentPlayerTrack = state => fromPlayer.getCurrentTrack(state.get('player'));
+
+export const getPlayerTrackId = state => fromPlayer.getPlayerTrackId(state.get('player'));
 export const getShuffleDraw = state => fromPlayer.getShuffleDraw(state.get('player'));
 export const getShuffleDiscard = state => fromPlayer.getShuffleDiscard(state.get('player'));
 export const shuffleInitialized = state => fromPlayer.shuffleInitialized(state.get('player'));
@@ -105,16 +106,22 @@ export const isVolumeSeeking = state => fromPlayer.isVolumeSeeking(state.get('pl
 export const getCurrentTime = state => fromPlayer.getCurrentTime(state.get('player'));
 export const getPlayerMode = state => fromPlayer.getPlayerMode(state.get('player'));
 
+// (Reselect) Return the current player track (Immutable.Record)
+export const getCurrentPlayerTrack = (state) => {
+  const trackId = getPlayerTrackId(state);
+  return getTrackById(state, trackId);
+};
+
 /**
  * Return if the current track(byId) is loaded in player
  * @param  {[type]} state [description]
  * @param  {[type]} id    [description]
  * @return {[type]}       [description]
  */
-export const isTrackActive = (state, id) => {
-  const currentSongId = getCurrentPlayerTrack(state).getId();
-  if (currentSongId && id) {
-    return currentSongId.toString() === id.toString();
+export const isTrackActive = (state, trackId) => {
+  const playerTrackId = getPlayerTrackId(state);
+  if (playerTrackId && trackId) {
+    return playerTrackId.toString() === trackId.toString();
   }
   return false;
 };

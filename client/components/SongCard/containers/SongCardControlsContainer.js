@@ -8,18 +8,15 @@ const mapStateToProps = (state, { track }) => ({
   liked: isTrackLiked(state, track.getId())
 });
 
-const mapDispatchToProps = (dispatch, { track }) => {
-  return ({
-    handleLikeClick() {
-      dispatch(startLikeSong(track.getId()));
-    },
-    handleUnlikeClick() {
-      dispatch(startUnlikeSong(track.getId()));
-    },
-    handleCopyToClipboard() {
-      dispatch(copyToClipboard(track.getPermalinkUrl()));
-    }
-  });
-};
+const mergeProps = ({ liked }, { dispatch }, { track }) => ({
+  liked,
+  handleToggleLike() {
+    const toggleLike = liked ? startUnlikeSong : startLikeSong;
+    dispatch(toggleLike(track.getId()));
+  },
+  handleCopyToClipboard() {
+    dispatch(copyToClipboard(track.getPermalinkUrl()));
+  }
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(SongCardControls);
+export default connect(mapStateToProps, null, mergeProps)(SongCardControls);

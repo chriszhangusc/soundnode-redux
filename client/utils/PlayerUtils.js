@@ -2,7 +2,7 @@ const computeSeekPercent = (clientX, offsetLeft, offsetWidth) => {
   let offset = clientX - offsetLeft;
   offset = offset < 0 ? 0 : offset;
   offset = offset > offsetWidth ? offsetWidth : offset;
-  return offset * 1.0 / offsetWidth;
+  return (offset * 1.0) / offsetWidth;
 };
 
 // This should be moved to util functions
@@ -17,7 +17,7 @@ export const computeNewVolumeOnSeek = (volumeBar, mouseEvent) => {
 }
 
 export const computeSeekBarPercent = (currentTime, duration) => {
-  let percent = currentTime * 100 / duration;
+  let percent = (currentTime * 100) / duration;
   percent = percent > 100 ? 100 : percent;
   percent = percent < 0 ? 0 : percent;
   return percent;

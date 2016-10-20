@@ -1,11 +1,11 @@
-
 import { connect } from 'react-redux';
+import { formatStreamUrl } from 'client/utils/FormatUtils';
 // Selectors
 import {
-  isPlayerPlaying,
+  getCurrentTime,
   getCurrentVolume,
   getPlayerMode,
-  getCurrentTime,
+  isPlayerPlaying,
   isPlayerSeeking
 } from 'client/redux/modules/reducers';
 // Actions
@@ -15,16 +15,14 @@ import {
 } from 'client/redux/modules/player';
 import PlayerAudio from '../components/PlayerAudio';
 
-const mapStateToProps = (state, { streamUrl }) => {
-  return {
-    playing: isPlayerPlaying(state),
-    volume: getCurrentVolume(state),
-    mode: getPlayerMode(state),
-    streamUrl,
-    currentTime: getCurrentTime(state),
-    seeking: isPlayerSeeking(state)
-  };
-};
+const mapStateToProps = (state, { playerTrack }) => ({
+  playing: isPlayerPlaying(state),
+  volume: getCurrentVolume(state),
+  mode: getPlayerMode(state),
+  streamUrl: formatStreamUrl(playerTrack.getStreamUrl()),
+  currentTime: getCurrentTime(state),
+  seeking: isPlayerSeeking(state)
+});
 
 const mapDispatchToProps = dispatch => ({
   // Update time in store
