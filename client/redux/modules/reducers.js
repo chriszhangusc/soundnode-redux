@@ -9,8 +9,10 @@ import * as fromCharts from './charts';
 import * as fromPlaylist from './playlist';
 import * as fromTrack from './track';
 import * as fromEntities from './entities';
+import * as fromUI from './ui';
 
 const rootReducer = combineReducers({
+  ui: fromUI.default,
   entities: fromEntities.default,
   charts: fromCharts.default,
   playlist: fromPlaylist.default,
@@ -21,6 +23,8 @@ const rootReducer = combineReducers({
   track: fromTrack.default
 });
 
+/* From ui */
+export const getVisibleTrackIds = state => fromUI.getVisibleTrackIds(state.get('ui'));
 /* From entities */
 
 // Get single track
@@ -62,10 +66,10 @@ export const getTrackRecord = state => fromTrack.getTrack(state.get('track'));
 export const getTrackComments = state => fromTrack.getComments(state.get('track'));
 
 /* From Playlist */
-export const isPlaylistShown = state => fromPlaylist.isPlaylistShown(state.get('playlist'));
-export const getPlaylistAsOrderedMap =
-  state => fromPlaylist.getPlaylistAsOrderedMap(state.get('playlist'));
-export const getPlaylistAsArray = state => fromPlaylist.getPlaylistAsArray(state.get('playlist'));
+export const isPlaylistHidden = state => fromPlaylist.isPlaylistHidden(state.get('playlist'));
+export const getPlaylistTrackIds = state => fromPlaylist.getTrackIds(state.get('playlist'));
+export const isPlaylistEmpty = state => fromPlaylist.isEmpty(state.get('playlist'));
+export const isTrackInPlaylist = (state, trackId) => getPlaylistTrackIds(state).indexOf(trackId);
 
 /* From Artist */
 export const getArtistRecord = state => fromArtist.getArtistRecord(state.get('artist'));

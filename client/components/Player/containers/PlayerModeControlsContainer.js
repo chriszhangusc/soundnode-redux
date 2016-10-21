@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getPlayerMode, isPlaylistShown } from 'client/redux/modules/reducers';
+import { getPlayerMode, isPlaylistHidden } from 'client/redux/modules/reducers';
 import { sagaChangePlayMode } from 'client/redux/modules/player';
 import { togglePlaylist } from 'client/redux/modules/playlist';
 import { REPEAT, SHUFFLE } from 'client/constants/PlayerConstants';
@@ -7,7 +7,7 @@ import PlayerModeControls from '../components/PlayerModeControls';
 
 const mapStateToProps = state => ({
   mode: getPlayerMode(state),
-  playlistShown: isPlaylistShown(state)
+  playlistHidden: isPlaylistHidden(state)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -12,11 +12,14 @@ import { loadCharts } from 'client/redux/modules/charts';
 import { fetchArtistAndTracks } from 'client/redux/modules/artist';
 import { loadTrackPage } from 'client/redux/modules/track';
 import { sagaSearch } from 'client/redux/modules/search';
+import { clearVisibleTracks } from 'client/redux/modules/ui';
 
 const configureRoutes = (store) => {
-  const onEnterCharts = (nextState) => {
+
+  const onChartsPageEnter = (nextState) => {
     const dispatch = store.dispatch;
     const genre = nextState.params.genre || DEFAULT_GENRE;
+    dispatch(clearVisibleTracks());
     dispatch(loadCharts(genre));
   };
 
@@ -44,7 +47,7 @@ const configureRoutes = (store) => {
         <IndexRedirect to={`top50/${DEFAULT_GENRE}`} />
         <Route path="top50" component={ChartsPage}>
           <IndexRedirect to={`${DEFAULT_GENRE}`} />
-          <Route path=":genre" component={ChartsPage} onEnter={onEnterCharts} />
+          <Route path=":genre" component={ChartsPage} onEnter={onChartsPageEnter} />
         </Route>
         <Route path="artist" >
           <Route path=":uid" component={ArtistDetailsPage} onEnter={onArtistDetailsPageEnter} />

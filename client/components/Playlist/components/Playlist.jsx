@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
-import Track from 'client/models/Track';
+import { List } from 'immutable';
 import PlaylistItemContainer from '../containers/PlaylistItemContainer';
 
 const Playlist = ({
-  playlistTracks,
-  playlistShown
+  playlistTrackIds,
+  playlistHidden
  }) => {
   return (
-    <div className={`col-sm-2 playlist ${playlistShown ? 'show' : ''}`} >
+    <div className={`col-sm-2 playlist ${playlistHidden ? '' : 'show'}`} >
       <div className="playlist-container">
         <div className="playlist-title">
           <span className="labelColumn">TRACKS</span>
@@ -16,8 +16,13 @@ const Playlist = ({
         </div>
         <ul className="playlist-list">
           {
-            playlistTracks.map(
-              (track, idx) => <PlaylistItemContainer track={track} index={idx + 1} key={idx} />
+            playlistTrackIds.map(
+              (trackId, idx) =>
+                <PlaylistItemContainer
+                  trackId={trackId}
+                  index={idx + 1}
+                  key={trackId}
+                />
             )
           }
         </ul>
@@ -27,8 +32,8 @@ const Playlist = ({
 };
 
 Playlist.propTypes = {
-  playlistShown: PropTypes.bool,
-  playlistTracks: PropTypes.arrayOf(PropTypes.shape(Track))
+  playlistHidden: PropTypes.bool,
+  playlistTrackIds: PropTypes.instanceOf(List)
 };
 
 export default Playlist;

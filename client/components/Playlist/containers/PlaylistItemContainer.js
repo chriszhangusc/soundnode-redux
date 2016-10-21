@@ -2,11 +2,13 @@ import { connect } from 'react-redux';
 
 import {
   isTrackActive,
-  isSongLiked
+  isTrackLiked,
+  getTrackById,
+  getArtistByTrackId
 } from 'client/redux/modules/reducers';
 
 import {
-  changeSongAndPlay
+  changeSongAndPlay // Should seperate logic of playlist
 } from 'client/redux/modules/player';
 
 import {
@@ -16,29 +18,29 @@ import {
 
 import PlaylistItem from '../components/PlaylistItem';
 
-const mapStateToProps = (state, { track, index }) => {
+const mapStateToProps = (state, { trackId, index }) => {
+  // console.log(typeof trackId);
+  const track = getTrackById(state, trackId);
+  const artist = getArtistByTrackId(state, trackId);
   return {
-    trackId: track.getId(),
-    isActive: isTrackActive(state, track.getId()),
+    active: isTrackActive(state, trackId),
+    liked: isTrackLiked(state, trackId),
     title: track.getTitle(),
-    username: track.getArtist().getUsername(),
-    isLiked: isSongLiked(state, track.getId()),
+    artistName: artist.getUsername(),
     index
   };
 };
-const mapDispatchToProps = (dispatch, { track }) => {
-  return {
-    handleChangeSong() {
-      // Do not load playlist
-      dispatch(changeSongAndPlay(track, false));
-    },
-    handleLikeSong() {
-      dispatch(startLikeSong(track.getId()));
-    },
-    handleUnlikeSong() {
-      dispatch(startUnlikeSong(track.getId()));
-    }
-  };
-};
+const mapDispatchToProps = (dispatch, { trackId }) => ({
+  handleChangeSong() {
+    // Do not load playlist
+    // dispatch(changeSongAndPlay());
+  },
+  handleLikeSong() {
+    dispatch(startLikeSong(trackId));
+  },
+  handleUnlikeSong() {
+    dispatch(startUnlikeSong(trackId));
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistItem);

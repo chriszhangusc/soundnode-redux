@@ -1,7 +1,13 @@
+/* Playlist Action Types */
+
+export const INIT_PLAYLIST = 'INIT_PLAYLIST';
+export const ADD_TO_PLAYLIST = 'ADD_TO_PLAYLIST';
+export const TOGGLE_PLAYLIST = 'TOGGLE_PLAYLIST';
+
+
 /* COPY Actions */
 export const COPY_SUCCESS = 'COPY_SUCCESS';
 /* Player Action Types */
-export const TOGGLE_PLAYLIST = 'TOGGLE_PLAYLIST';
 export const PLAY_SONG = 'PLAY_SONG';
 export const PAUSE_SONG = 'PAUSE_SONG';
 export const UPDATE_TIME = 'UPDATE_TIME';

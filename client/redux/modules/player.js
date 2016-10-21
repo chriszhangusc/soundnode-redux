@@ -1,8 +1,9 @@
 import { fromJS } from 'immutable';
 import { INITIAL_VOLUME, DEFAULT_MODE } from 'client/constants/PlayerConstants';
-import Track from 'client/models/Track';
+// import Track from 'client/models/Track';
 import * as ActionTypes from 'client/constants/ActionTypes';
-import { loadPlaylist } from 'client/redux/modules/playlist';
+import { initPlaylist, addToPlaylistIfNeeded } from './playlist';
+import { getVisibleTrackIds, isPlaylistEmpty } from './reducers';
 
 /* Pure actions */
 export const toggleSeek = () => ({ type: ActionTypes.TOGGLE_SEEK });
@@ -80,18 +81,14 @@ export const changePlayMode = mode => ({
  * @param  {Boolean} playlist If we should load playlist to state.
  * @return {[type]}                    [description]
  */
-export const changeSongAndPlay = trackId =>
-  ((dispatch) => {
-    // Get current page
-    // Check if the load is actually nessary
-    // dispatch(loadPlaylist(playlist));
-    // Pause current playing song if any
-    dispatch(pauseSong());
-    dispatch(clearTime());
-    // Change current track to new track.
-    dispatch(changeSong(trackId));
-    dispatch(playSong());
-  });
+// Maybe we should have a ui state to store currently displayed list of data
+export const changeSongAndPlay = trackId => (dispatch) => {
+  dispatch(pauseSong());
+  dispatch(clearTime());
+  // Change current track to new track.
+  dispatch(changeSong(trackId));
+  dispatch(playSong());
+};
 
 // Saga Actions (Actions that will trigger a saga and execute side effects)
 export const sagaToggleMute = () => ({

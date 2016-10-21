@@ -24,11 +24,11 @@ class PlayerModeControls extends Component {
   }
 
   renderTogglePlaylist() {
-    const { onTogglePlaylistClick, isPlaylistShown } = this.props;
+    const { onTogglePlaylistClick, playlistHidden } = this.props;
     return (
       <button
         title="Playlist"
-        className={`icon-button player-button ${(isPlaylistShown ? 'active' : '')}`}
+        className={`icon-button player-button ${(playlistHidden ? '' : 'active')}`}
         onClick={onTogglePlaylistClick}
       >
         <i className="icon ion-ios-list" />
@@ -64,7 +64,7 @@ class PlayerModeControls extends Component {
 
 PlayerModeControls.propTypes = {
   mode: PropTypes.string,
-  isPlaylistShown: PropTypes.bool,
+  playlistHidden: PropTypes.bool,
   onRepeatClick: PropTypes.func,
   onShuffleClick: PropTypes.func,
   onTogglePlaylistClick: PropTypes.func

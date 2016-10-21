@@ -11,6 +11,8 @@ import { trackArraySchema } from 'client/schemas';
 import TrackMap from 'client/models/TrackMap';
 import { denormalizeTracks } from 'client/models/denormalizr';
 
+const CLEAR_ALL_CHARTS = 'CLEAR_ALL_CHARTS';
+
 /* Action */
 const changeGenre = genre => ({
   type: CHARTS_CHANGE_GENRE,
@@ -35,10 +37,17 @@ export const fetchCharts = genre => ({
   }
 });
 
+export const clearAllCharts = () => ({
+  type: CLEAR_ALL_CHARTS
+});
+
 /* Thunks */
+// This is only called from onEnter of charts page.
 export const loadCharts = genre => (dispatch) => {
   const formattedGenre = formatGenre(genre);
   dispatch(changeGenre(genre));
+  // Clear all charts
+  dispatch(clearAllCharts());
   dispatch(fetchCharts(formattedGenre));
 };
 
@@ -46,7 +55,6 @@ export const loadCharts = genre => (dispatch) => {
 /* Reducer */
 const INITIAL_STATE = fromJS({
   genre: '',
-  tracks: new TrackMap(),
   trackIds: [], // Array of Strings!!!
   fetching: false,
   nextHref: ''
@@ -58,14 +66,14 @@ const charts = (state = INITIAL_STATE, action) => {
       return state.set('genre', fromJS(action.payload));
     case CHARTS_REQUEST:
       return state.set('fetching', true);
-
     case CHARTS_RECEIVE:
       return state.merge({
-        tracks: denormalizeTracks(action.payload),
-        trackIds: state.get('trackIds').concat(action.payload.result.map(String)),
+        trackIds: state.get('trackIds').concat(fromJS(action.payload.result.map(String))),
         nextHref: action.payload.nextHref,
         fetching: false
       });
+    case CLEAR_ALL_CHARTS:
+      return state.set('trackIds', fromJS([]));
     default:
       return state;
   }

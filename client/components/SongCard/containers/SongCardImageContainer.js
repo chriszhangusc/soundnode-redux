@@ -8,6 +8,10 @@ import {
 } from 'client/redux/modules/player';
 
 import {
+  updatePlaylistIfNeeded
+} from 'client/redux/modules/playlist';
+
+import {
   isTrackActive,
   isTrackPlaying
 } from 'client/redux/modules/reducers';
@@ -27,7 +31,11 @@ const mergeProps = (stateProps, { dispatch }, { track }) => ({
   //  or pass all args into components and assemble there
   handleImageClick: () => {
     if (!stateProps.active) {
-      console.log('changeSongAndPlay');
+      // 1. Init playlist (with all tracks come after the current playing song)
+      // if current playlist is empty. We need to access to currently loaded tracks in charts.
+      // 2. If current playlist is not empty, do not mess with it, just add the current track
+      // after the currently playing track.
+      dispatch(updatePlaylistIfNeeded(track.getId()));
       dispatch(changeSongAndPlay(track.getId()));
     } else {
       // console.log('Toggle Song');
