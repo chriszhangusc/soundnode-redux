@@ -30,6 +30,7 @@ const mergeProps = (stateProps, { dispatch }, { track }) => ({
   // Besides doing it this way, we could also do it in a thunk function
   //  or pass all args into components and assemble there
   handleImageClick: () => {
+    // Maybe we should put them into one function?
     if (!stateProps.active) {
       // 1. Init playlist (with all tracks come after the current playing song)
       // if current playlist is empty. We need to access to currently loaded tracks in charts.

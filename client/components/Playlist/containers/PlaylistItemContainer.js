@@ -33,7 +33,7 @@ const mapStateToProps = (state, { trackId, index }) => {
 const mapDispatchToProps = (dispatch, { trackId }) => ({
   handleChangeSong() {
     // Do not load playlist
-    // dispatch(changeSongAndPlay());
+    dispatch(changeSongAndPlay(trackId));
   },
   handleLikeSong() {
     dispatch(startLikeSong(trackId));
