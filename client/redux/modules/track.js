@@ -1,20 +1,32 @@
 import { fromJS } from 'immutable';
-import Track from 'client/models/Track';
-import CommentMap from 'client/models/CommentMap';
-import { denormalizeTrack, denormalizeComments } from 'client/models/denormalizr';
-import { trackSchema, commentArraySchema } from 'client/schemas';
+import { trackSchema, commentArraySchema, trackArraySchema } from 'client/schemas';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import {
   TRACK_REQUEST,
   TRACK_RECEIVE,
   TRACK_FAILURE,
+  TRACKS_REQUEST,
+  TRACKS_RECEIVE,
+  TRACKS_FAILURE,
   TRACK_COMMENTS_REQUEST,
   TRACK_COMMENTS_RECEIVE,
   TRACK_COMMENTS_FAILURE
 } from 'client/constants/ActionTypes';
 
 /* Actions */
-const fetchTrack = trackId => ({
+export const fetchTracks = trackIds => ({
+  [CALL_API]: {
+    endpoint: '/sc/api-v1/tracks',
+    method: 'post',
+    data: {
+      trackIds: [...trackIds]
+    },
+    types: [TRACKS_REQUEST, TRACKS_RECEIVE, TRACKS_FAILURE],
+    schema: trackArraySchema
+  }
+});
+
+export const fetchTrack = trackId => ({
   [CALL_API]: {
     endpoint: `/sc/api-v1/tracks/${trackId}`,
     method: 'GET',
@@ -23,7 +35,7 @@ const fetchTrack = trackId => ({
   }
 });
 
-const fetchComments = trackId => ({
+export const fetchComments = trackId => ({
   [CALL_API]: {
     endpoint: `/sc/api-v1/tracks/${trackId}/comments`,
     method: 'GET',

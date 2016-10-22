@@ -8,8 +8,6 @@ import {
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { formatGenre } from 'client/utils/FormatUtils';
 import { trackArraySchema } from 'client/schemas';
-import TrackMap from 'client/models/TrackMap';
-import { denormalizeTracks } from 'client/models/denormalizr';
 
 const CLEAR_ALL_CHARTS = 'CLEAR_ALL_CHARTS';
 

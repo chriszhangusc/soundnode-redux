@@ -37,6 +37,32 @@ router.get('/users/:userId/tracks', (req, res) => {
       res.json(newJson);
     });
 });
+// Post with post body {trackIds: [...ids]}
+router.post('/tracks', (req, res) => {
+  const clientId = encodeURIComponent(req.query.client_id);
+  const trackIds = req.body.trackIds;
+  const resJson = {
+    collection: [],
+    nextHref: null
+  };
+  const fetchQueue = [];
+  if (!trackIds) res.json(resJson);
+  trackIds.forEach((trackId) => {
+    const fetchUrl = `${SC_API_V1}/tracks/${trackId}?client_id=${clientId}`;
+    // console.log('fetching...', fetchUrl);
+    fetchQueue.push(
+      fetch(fetchUrl)
+      .then(response => response.json())
+      .then((json) => {
+        if (json.errors) console.log(json.errors);
+        else resJson.collection.push(json);
+      })
+    );
+  });
+  Promise.all(fetchQueue).then(() => {
+    res.json(resJson);
+  });
+});
 
 // Get single track
 router.get('/tracks/:trackId', (req, res) => {

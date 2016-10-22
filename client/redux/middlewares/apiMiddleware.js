@@ -7,14 +7,24 @@ import querystring from 'querystring';
 export const CALL_API = 'CALL_API';
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
-const callApi = (endpoint, query, schema) => {
+const callApi = (endpoint, query, schema, method = 'get', data) => {
   // Append ClientId
   const queryString = querystring.stringify({ ...query, client_id: CLIENT_ID });
   const finalUrl = `http://localhost:3000${endpoint}?${queryString}`;
-  return fetch(finalUrl)
+
+  const fetchOptions = {
+    method
+  };
+  if (method === 'post' || method === 'POST') {
+    fetchOptions.headers = { 'Content-Type': 'application/json' };
+    fetchOptions.body = JSON.stringify({ ...data });
+  }
+  // console.log(fetchOptions);
+  return fetch(finalUrl, fetchOptions)
     .then(response => response.json())
     .then((json) => {
       const camelizedJson = camelizeKeys(json);
+      console.log(camelizedJson);
       if (camelizedJson.collection) {
         const { nextHref, collection } = camelizedJson;
         return Object.assign({}, normalize(collection, schema), { nextHref });
@@ -35,12 +45,12 @@ export default store => next => (action) => {
     return finalAction;
   };
 
-  const { endpoint, types, query, schema } = callAPI;
+  const { endpoint, types, query, schema, method, data } = callAPI;
   const [requestType, successType, failureType] = types;
   // Start request
   next(actionWith({ type: requestType }));
 
-  return callApi(endpoint, query, schema)
+  return callApi(endpoint, query, schema, method, data)
   .then(
     response => next(actionWith({
       type: successType,

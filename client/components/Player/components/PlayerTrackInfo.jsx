@@ -10,14 +10,15 @@ const PlayerTrackInfo = ({
   trackUrl,
   artistUrl
 }) => {
-console.log('Render: PlayerSongInfo');
   return (
     <div className="player-section player-info">
-      <img
-        role="presentation"
-        className="player-image"
-        src={artworkUrl || defaultArtworkImage}
-      />
+      <Link to={trackUrl} >
+        <img
+          role="presentation"
+          className="player-image"
+          src={artworkUrl || defaultArtworkImage}
+        />
+      </Link>
       <div className="player-song-card-details">
         <Link to={trackUrl} className="song-card-title">
           {trackTitle}

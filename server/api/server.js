@@ -7,7 +7,7 @@ import v2 from './routes/v2';
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const PORT = 3001;
 

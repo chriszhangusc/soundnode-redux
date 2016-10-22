@@ -1,5 +1,6 @@
 /* Main reducer */
 import { combineReducers } from 'redux-immutable';
+import { List } from 'immutable';
 
 import * as fromPlayer from './player';
 import * as fromSearch from './search';
@@ -97,14 +98,17 @@ export const isSearchResultShown = state => fromSearch.isShown(state.get('search
 export const getSearchResults = state => fromSearch.getSearchResults(state.get('search'));
 
 /* From user */
-export const isTrackLiked = (state, trackId) => {
-  const likes = fromUser.getLikes(state.get('user'));
-  return (trackId in likes);
-};
 export const getUserLikes = state => fromUser.getLikes(state.get('user'));
+export const isTrackLiked = (state, trackId) => {
+  const likes = getUserLikes(state);
+  return likes.has(trackId);
+};
+
 export const getUserId = state => fromUser.getUid(state.get('user'));
 export const getDisplayName = state => fromUser.getDisplayName(state.get('user'));
 export const getPhotoUrl = state => fromUser.getPhotoUrl(state.get('user'));
+// Return all trackIds liked by current logged in user.
+export const getUserLikeIds = state => List(getUserLikes(state).keySeq());
 
 /* From player */
 

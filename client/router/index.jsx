@@ -5,6 +5,7 @@ import ChartsPage from 'client/routes/charts';
 import ArtistDetailsPage from 'client/routes/artist';
 import TrackDetailsPage from 'client/routes/track';
 import SearchResultsPage from 'client/routes/search/components/SearchResults';
+import LikesPage from 'client/routes/likes';
 import NotFound from 'client/components/NotFound';
 // import LikesContainer from '../views/likes/components/LikesPage';
 import { DEFAULT_GENRE } from 'client/constants/SongConstants';
@@ -13,6 +14,7 @@ import { fetchArtistAndTracks } from 'client/redux/modules/artist';
 import { loadTrackPage } from 'client/redux/modules/track';
 import { sagaSearch } from 'client/redux/modules/search';
 import { clearVisibleTracks } from 'client/redux/modules/ui';
+import { fetchAllLikedTracks } from 'client/redux/modules/user';
 
 const configureRoutes = (store) => {
 
@@ -42,6 +44,11 @@ const configureRoutes = (store) => {
     dispatch(sagaSearch(query.q, 20));
   };
 
+  const onLikesPageEnter = () => {
+    const { dispatch } = store;
+    dispatch(fetchAllLikedTracks());
+  };
+
   return (
     <Router history={browserHistory}>
       <Route path="/" component={App}>
@@ -57,6 +64,7 @@ const configureRoutes = (store) => {
           <Route path=":trackId" component={TrackDetailsPage} onEnter={onTrackDetailsPageEnter} />
         </Route>
         <Route path="search" component={SearchResultsPage} onEnter={onSearchPageEnter} />
+        {<Route path="likes" component={LikesPage} onEnter={onLikesPageEnter} />}
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

@@ -5,7 +5,7 @@ import SongCardControlsContainer from '../containers/SongCardControlsContainer';
 import SongCardImageContainer from '../containers/SongCardImageContainer';
 
 const SongCardLayout = ({ track, active }) => {
-// console.log('Render: SongCardLayout');
+  if (!track) return null;
   return (
     <div className={`card song-card ${(active ? 'active' : '')}`}>
       <SongCardImageContainer track={track} />

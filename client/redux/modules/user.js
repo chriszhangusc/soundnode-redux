@@ -1,5 +1,6 @@
-import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
 import firebase, { firebaseRef, githubProvider } from 'client/firebase';
+
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILED,
@@ -12,8 +13,10 @@ import {
 
 import {
   getUserLikes,
-  getUserId
+  getUserId,
+  getUserLikeIds
 } from './reducers';
+import { fetchTracks } from './track';
 
 
 export const loginSuccess = uid => ({
@@ -36,6 +39,16 @@ export const logout = () => ({
   type: LOGOUT
 });
 
+/**
+ * Fetch the actual liked track objects
+ * @return {[type]} [description]
+ */
+export const fetchAllLikedTracks = () => (dispatch, getState) => {
+  const state = getState();
+  const trackIds = getUserLikeIds(state);
+  dispatch(fetchTracks(trackIds.toJS()));
+};
+
 export const loadAllLikes = likes => ({
   type: LOAD_ALL_LIKES,
   payload: likes
@@ -53,7 +66,7 @@ export const startLoadAllLikes = () => (dispatch, getState) => {
   likesRef.once('value', (snapshot) => {
     snapshot.forEach((childSnapshot) => {
       const songId = childSnapshot.val();
-      likes[songId] = childSnapshot.key;
+      likes[String(songId)] = childSnapshot.key;
     });
   }).then(() => {
     dispatch(loadAllLikes(likes));
@@ -106,7 +119,7 @@ export const likeSongFailed = songId => ({
 export function startLikeSong(songId) {
   return (dispatch, getState) => {
     const state = getState();
-    const uid = getUserId(state.get('user'));
+    const uid = getUserId(state);
     // If not logged in, display a message to tell the user to login first.
     if (!uid) {
       // Trigger notification!!!!
@@ -138,7 +151,7 @@ export function unlikeSongSuccess(songId) {
 export function startUnlikeSong(songId) {
   return (dispatch, getState) => {
     const state = getState();
-    const uid = getUserId(state.get('user'));
+    const uid = getUserId(state);
     // If not logged in, display a message to tell the user to login first.
     if (!uid) {
       // Trigger notification!!!!
@@ -157,7 +170,7 @@ export function startUnlikeSong(songId) {
 /* Reducer */
 
 const INITIAL_STATE = fromJS({
-  likes: {}
+  likes: {} // Saving map from trackId: firebaseKey
 });
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -188,4 +201,5 @@ export default user;
 export const getUid = state => state.get('uid');
 export const getDisplayName = state => state.get('displayName');
 export const getPhotoUrl = state => state.get('photoURL');
-export const getLikes = state => state.get('likes').toJS();
+export const getLikes = state => state.get('likes');
+export const getLikeIds = state => List(state.get('likes').keys());

@@ -23,7 +23,6 @@ const renderSongCardList = (trackIds, fetching) => {
   ));
 };
 
-
 const SongCardList = (props) => {
   const { fetching, trackIds } = props;
   return (
@@ -33,6 +32,9 @@ const SongCardList = (props) => {
   );
 };
 
+SongCardList.defaultProps = {
+  fetching: false
+};
 
 SongCardList.propTypes = {
   fetching: PropTypes.bool,
