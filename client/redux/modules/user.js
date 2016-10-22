@@ -158,7 +158,7 @@ export function startUnlikeSong(songId) {
       console.log('You have to login first.');
       return;
     }
-    const likes = getUserLikes(state.get('user'));
+    const likes = getUserLikes(state);
     const firebaseKey = likes[songId];
     firebaseRef.child(`${uid}/likes/${firebaseKey}`).remove((ret) => {
       console.log(ret);

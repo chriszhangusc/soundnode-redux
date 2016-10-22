@@ -1,3 +1,3 @@
-import LikesListContainer from './containers/LikesListContainer';
+import LikesPageLayout from './components/LikesPageLayout';
 
-export default LikesListContainer;
+export default LikesPageLayout;
