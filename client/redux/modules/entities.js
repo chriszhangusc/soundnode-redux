@@ -52,6 +52,10 @@ export function getTrackById(state, trackId) {
   return trackId && state.get('tracks').get(trackId.toString());
 }
 
+export function getCommentById(state, commentId) {
+  return commentId && state.get('comments').get(commentId.toString());
+}
+
 // export function getTracksByIdsAsArray(state, trackIds) {
 //   return trackIds.map(trackId => getTrackById(trackId));
 // }

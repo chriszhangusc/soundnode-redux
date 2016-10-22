@@ -45,8 +45,8 @@ export const loadTrackPage = trackId => (dispatch) => {
 const INITIAL_STATE = fromJS({
   trackFetching: false,
   commentsFetching: false,
-  track: new Track(),
-  comments: new CommentMap(),
+  trackId: undefined,
+  commentIds: [],
   commentsNextHref: null
 });
 
@@ -56,14 +56,14 @@ const track = (state = INITIAL_STATE, action) => {
       return state.set('trackFetching', true);
     case TRACK_RECEIVE:
       return state.merge({
-        track: denormalizeTrack(action.payload),
+        trackId: action.payload.result,
         trackFetching: false
       });
     case TRACK_COMMENTS_REQUEST:
       return state.set('commentsFetching', true);
     case TRACK_COMMENTS_RECEIVE:
       return state.merge({
-        comments: denormalizeComments(action.payload),
+        commentIds: state.get('commentIds').concat(fromJS(action.payload.result)),
         commentsFetching: false
       });
     default:
@@ -75,5 +75,5 @@ export default track;
 /* State Selectors */
 export const isTrackFetching = state => state.get('trackFetching');
 export const isCommentsFetching = state => state.get('commentsFetching');
-export const getTrack = state => state.get('track'); // Return the immutable record
-export const getComments = state => state.get('comments');
+export const getTrackId = state => state.get('trackId');
+export const getCommentIds = state => state.get('commentIds');

@@ -1,13 +1,14 @@
 import { Record } from 'immutable';
-import Artist from './Artist';
+
+// The user field will be normalized to userId
 
 const CommentRecord = Record({
   id: null,
   kind: '',
-  user_id: null,
-  track_id: null,
+  userId: null,
+  trackId: null,
   timestamp: 0,
-  created_at: '',
+  createdAt: '',
   body: '',
   uri: '',
   user: null
@@ -22,12 +23,12 @@ class Comment extends CommentRecord {
     return this.get('kind');
   }
 
-  getUserId() {
-    return this.get('user_id');
+  getArtistId() {
+    return this.get('userId');
   }
 
   getTrackId() {
-    return this.get('track_id');
+    return this.get('trackId');
   }
 
   getTimestamp() {
@@ -46,9 +47,9 @@ class Comment extends CommentRecord {
     return this.get('uri');
   }
 
-  getArtist() {
-    return this.get('user');
-  }
+  // getArtistId() {
+  //   return this.get('user');
+  // }
 }
 
 export default Comment;

@@ -94,10 +94,9 @@
 }
 
 .comments-container {
-  width: 900px;
   font-size: 1.2rem;
-
   .comment-item {
+    position: relative;
     display: flex; // To prevent comment body go under the image.
     padding: 5px 5px;
     border-bottom: 1px solid $separatorDarkColor;
@@ -113,7 +112,9 @@
   }
 
   .comment-created-at {
-    float: right;
+    position: absolute;
+    right: 5px;
+    top: 5px;
     color: $font-sub-color;
   }
 

@@ -10,10 +10,10 @@ import {
   UNLIKE_SONG_SUCCESS
 } from 'client/constants/ActionTypes';
 
-// import {
-//   getUid,
-//   getLikes
-// } from '../../reducers';
+import {
+  getUserLikes,
+  getUserId
+} from './reducers';
 
 
 export const loginSuccess = uid => ({
@@ -47,7 +47,7 @@ export const loadAllLikes = likes => ({
  */
 export const startLoadAllLikes = () => (dispatch, getState) => {
   const state = getState();
-  const uid = getUid(state);
+  const uid = getUserId(state);
   const likesRef = firebaseRef.child(`${uid}/likes`);
   const likes = {};
   likesRef.once('value', (snapshot) => {
@@ -106,7 +106,7 @@ export const likeSongFailed = songId => ({
 export function startLikeSong(songId) {
   return (dispatch, getState) => {
     const state = getState();
-    const uid = getUid(state.get('user'));
+    const uid = getUserId(state.get('user'));
     // If not logged in, display a message to tell the user to login first.
     if (!uid) {
       // Trigger notification!!!!
@@ -138,14 +138,14 @@ export function unlikeSongSuccess(songId) {
 export function startUnlikeSong(songId) {
   return (dispatch, getState) => {
     const state = getState();
-    const uid = getUid(state.get('user'));
+    const uid = getUserId(state.get('user'));
     // If not logged in, display a message to tell the user to login first.
     if (!uid) {
       // Trigger notification!!!!
       console.log('You have to login first.');
       return;
     }
-    const likes = getLikes(state.get('user'));
+    const likes = getUserLikes(state.get('user'));
     const firebaseKey = likes[songId];
     firebaseRef.child(`${uid}/likes/${firebaseKey}`).remove((ret) => {
       console.log(ret);

@@ -39,9 +39,18 @@ export const getTrackById = (state, trackId) =>
 export const getArtistById = (state, artistId) =>
   fromEntities.getArtistById(state.get('entities'), artistId);
 
+export const getCommentById = (state, commentId) =>
+  fromEntities.getCommentById(state.get('entities'), commentId);
+
 export const getArtistByTrackId = (state, trackId) => {
   const track = getTrackById(state, trackId);
   const artistId = track && track.getArtistId();
+  return getArtistById(state, artistId);
+};
+
+export const getArtistByCommentId = (state, commentId) => {
+  const comment = getCommentById(state, commentId);
+  const artistId = comment && comment.getArtistId();
   return getArtistById(state, artistId);
 };
 
@@ -62,8 +71,8 @@ export const isChartsFetching = state => fromCharts.isFetching(state.get('charts
 /* From Track */
 export const isTrackFetching = state => fromTrack.isTrackFetching(state.get('track'));
 export const isTrackCommentsFetching = state => fromTrack.isCommentsFetching(state.get('track'));
-export const getTrackRecord = state => fromTrack.getTrack(state.get('track'));
-export const getTrackComments = state => fromTrack.getComments(state.get('track'));
+export const getTrackId = state => fromTrack.getTrackId(state.get('track'));
+export const getTrackCommentIds = state => fromTrack.getCommentIds(state.get('track'));
 
 /* From Playlist */
 export const isPlaylistHidden = state => fromPlaylist.isPlaylistHidden(state.get('playlist'));
@@ -92,8 +101,8 @@ export const isTrackLiked = (state, trackId) => {
   const likes = fromUser.getLikes(state.get('user'));
   return (trackId in likes);
 };
-export const getLikes = state => fromUser.getLikes(state.get('user'));
-export const getUid = state => fromUser.getUid(state.get('user'));
+export const getUserLikes = state => fromUser.getLikes(state.get('user'));
+export const getUserId = state => fromUser.getUid(state.get('user'));
 export const getDisplayName = state => fromUser.getDisplayName(state.get('user'));
 export const getPhotoUrl = state => fromUser.getPhotoUrl(state.get('user'));
 

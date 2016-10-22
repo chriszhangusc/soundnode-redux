@@ -32,6 +32,7 @@ const configureRoutes = (store) => {
   const onTrackDetailsPageEnter = (nextState) => {
     const dispatch = store.dispatch;
     const trackId = nextState.params.trackId;
+    dispatch(clearVisibleTracks());
     dispatch(loadTrackPage(trackId));
   };
 

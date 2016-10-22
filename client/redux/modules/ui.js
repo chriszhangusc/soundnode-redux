@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { CHARTS_RECEIVE } from 'client/constants/ActionTypes';
+import { CHARTS_RECEIVE, TRACK_RECEIVE } from 'client/constants/ActionTypes';
 
 const LOAD_VISIBLE_TRACKS = 'LOAD_VISIBLE_TRACKS';
 const CLEAR_VISIBLE_TRACKS = 'CLEAR_VISIBLE_TRACKS';
@@ -29,6 +29,10 @@ const ui = (state = INITIAL_STATE, action) => {
       return state.merge({
         visibleTrackIds: state.get('visibleTrackIds')
           .concat(fromJS(action.payload.result.map(String)))
+      });
+    case TRACK_RECEIVE:
+      return state.merge({
+        visibleTrackIds: state.get('visibleTrackIds').concat(action.payload.result.toString())
       });
     default:
       return state;
