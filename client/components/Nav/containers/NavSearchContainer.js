@@ -6,17 +6,17 @@ import {
   clearAndHideSearchResults
 } from 'client/redux/modules/search';
 import {
-  getSearchArtistMap,
-  getSearchTrackMap,
-  isSearchResultShown
+  isSearchResultShown,
+  getDropdownSearchArtistIds,
+  getDropdownSearchTrackIds
 } from 'client/redux/modules/reducers';
 import NavSearch from '../components/NavSearch';
 
 const mapStateToProps = (state) => {
   return ({
     shouldShowResults: isSearchResultShown(state),
-    artists: getSearchArtistMap(state).toArray(),
-    tracks: getSearchTrackMap(state).toArray()
+    artistIds: getDropdownSearchArtistIds(state),
+    trackIds: getDropdownSearchTrackIds(state)
   });
 };
 
@@ -40,6 +40,7 @@ const mapDispatchToProps = dispatch => ({
         pathname: '/search',
         query: { q: keywords }
       });
+      dispatch(sagaSearch(keywords, 20));
     }
   }
 });

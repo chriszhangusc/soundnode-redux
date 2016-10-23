@@ -39,6 +39,7 @@ const configureRoutes = (store) => {
   };
 
   const onSearchPageEnter = (nextState) => {
+    console.log('On Search Page Enter');
     const dispatch = store.dispatch;
     const query = nextState.location.query;
     dispatch(sagaSearch(query.q, 20));

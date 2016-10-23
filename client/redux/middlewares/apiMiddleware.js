@@ -3,28 +3,20 @@ import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
 import { CLIENT_ID } from 'client/constants/Config';
 import querystring from 'querystring';
+import { UI_START_FETCHING, UI_END_FETCHING } from 'client/constants/ActionTypes';
 
 export const CALL_API = 'CALL_API';
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
-const callApi = (endpoint, query, schema, method = 'get', data) => {
-  // Append ClientId
+export const callApi = (endpoint, schema, query, fetchOptions) => {
   const queryString = querystring.stringify({ ...query, client_id: CLIENT_ID });
   const finalUrl = `http://localhost:3000${endpoint}?${queryString}`;
-
-  const fetchOptions = {
-    method
-  };
-  if (method === 'post' || method === 'POST') {
-    fetchOptions.headers = { 'Content-Type': 'application/json' };
-    fetchOptions.body = JSON.stringify({ ...data });
-  }
-  // console.log(fetchOptions);
+console.log(finalUrl);
   return fetch(finalUrl, fetchOptions)
     .then(response => response.json())
     .then((json) => {
       const camelizedJson = camelizeKeys(json);
-      console.log(camelizedJson);
+console.log(camelizedJson);
       if (camelizedJson.collection) {
         const { nextHref, collection } = camelizedJson;
         return Object.assign({}, normalize(collection, schema), { nextHref });
@@ -45,18 +37,23 @@ export default store => next => (action) => {
     return finalAction;
   };
 
-  const { endpoint, types, query, schema, method, data } = callAPI;
+  const { endpoint, types, query, schema, fetchOptions } = callAPI;
   const [requestType, successType, failureType] = types;
   // Start request
   next(actionWith({ type: requestType }));
-
-  return callApi(endpoint, query, schema, method, data)
+  next(actionWith({ type: UI_START_FETCHING }));
+  return callApi(endpoint, schema, query, fetchOptions)
   .then(
-    response => next(actionWith({
-      type: successType,
-      payload: response,
-      entities: response.entities
-    })),
+    (response) => {
+      next(actionWith({
+        type: successType,
+        payload: response,
+        entities: response.entities
+      }));
+      next(actionWith({
+        type: UI_END_FETCHING
+      }));
+    },
     error => next(actionWith({
       type: failureType,
       error: error.message || 'Something bad happened'

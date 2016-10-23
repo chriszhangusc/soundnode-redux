@@ -26,6 +26,7 @@ const rootReducer = combineReducers({
 
 /* From ui */
 export const getVisibleTrackIds = state => fromUI.getVisibleTrackIds(state.get('ui'));
+export const isUIFetching = state => fromUI.isFetching(state.get('ui'));
 /* From entities */
 
 // Get single track
@@ -89,13 +90,17 @@ export const isArtistTracksFetching = state =>
   fromArtist.isTracksFetching(state.get('artist'));
 
 /* From Search */
-export const getSearchTrackMap = state => fromSearch.getTrackMap(state.get('search'));
-export const getSearchArtistMap = state => fromSearch.getArtistMap(state.get('search'));
-export const getSearchTrackNextHref = state => fromSearch.getTrackNextHref(state.get('search'));
-export const getSearchArtistNextHref = state => fromSearch.getArtistNextHref(state.get('search'));
 export const isSearching = state => fromSearch.isFetching(state.get('search'));
 export const isSearchResultShown = state => fromSearch.isShown(state.get('search'));
-export const getSearchResults = state => fromSearch.getSearchResults(state.get('search'));
+
+export const getDropdownSearchTrackIds = state =>
+  fromSearch.getDropdownSearchTrackIds(state.get('search'));
+
+export const getDropdownSearchArtistIds = state =>
+  fromSearch.getDropdownSearchArtistIds(state.get('search'));
+
+// Get the general search result ids.
+export const getSearchResultTrackIds = state => fromSearch.getSearchTrackIds(state.get('search'));
 
 /* From user */
 export const getUserLikes = state => fromUser.getLikes(state.get('user'));

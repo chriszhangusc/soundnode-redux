@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 // Reusing SongCardList Dumb Component!!
 import SongCardList from 'client/components/SongCardList';
-import { isSearching, getSearchResults } from 'client/redux/modules/reducers';
+import { isSearching, getSearchResultTrackIds } from 'client/redux/modules/reducers';
 // Container for SongCardList
 // Simply providing slices of state for the component to render.
 const mapStateToProps = state => ({
-  isFetching: isSearching(state),
+  fetching: isSearching(state),
   // Array of TrackRecords
-  trackMap: getSearchResults(state)
+  trackIds: getSearchResultTrackIds(state)
 });
 
 const mapDispatchToProps = dispatch => ({

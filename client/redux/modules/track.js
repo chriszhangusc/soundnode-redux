@@ -5,6 +5,7 @@ import {
   TRACK_REQUEST,
   TRACK_RECEIVE,
   TRACK_FAILURE,
+  UI_START_FETCHING,
   TRACKS_REQUEST,
   TRACKS_RECEIVE,
   TRACKS_FAILURE,
@@ -22,6 +23,7 @@ export const fetchTracks = trackIds => ({
       trackIds: [...trackIds]
     },
     types: [TRACKS_REQUEST, TRACKS_RECEIVE, TRACKS_FAILURE],
+    // types: [UI_START_FETCHING, TRACKS_RECEIVE, TRACKS_FAILURE],
     schema: trackArraySchema
   }
 });

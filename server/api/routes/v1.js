@@ -37,6 +37,31 @@ router.get('/users/:userId/tracks', (req, res) => {
       res.json(newJson);
     });
 });
+
+router.get('/artists', (req, res) => {
+  const keyword = req.query.q;
+  const limit = req.query.limit;
+  const clientId = req.query.client_id;
+  const fetchUrl = `${SC_API_V1}/users?linked_partitioning=1&limit=${limit}&q=${keyword}&client_id=${clientId}`;
+  fetch(fetchUrl)
+    .then(response => response.json())
+    .then((json) => {
+      res.json(json);
+    });
+});
+
+router.get('/tracks', (req, res) => {
+  const keyword = req.query.q;
+  const limit = req.query.limit;
+  const clientId = req.query.client_id;
+  const fetchUrl = `${SC_API_V1}/tracks?linked_partitioning=1&limit=${limit}&q=${keyword}&client_id=${clientId}`;
+  fetch(fetchUrl)
+    .then(response => response.json())
+    .then((json) => {
+      res.json(json);
+    });
+});
+
 // Post with post body {trackIds: [...ids]}
 router.post('/tracks', (req, res) => {
   const clientId = encodeURIComponent(req.query.client_id);

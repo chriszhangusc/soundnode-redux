@@ -3,7 +3,7 @@ import {
   CHARTS_CHANGE_GENRE,
   CHARTS_REQUEST,
   CHARTS_RECEIVE,
-  CHARTS_FAILURE,
+  CHARTS_FAILURE
 } from 'client/constants/ActionTypes';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { formatGenre } from 'client/utils/FormatUtils';
@@ -23,13 +23,15 @@ const changeGenre = genre => ({
 export const fetchCharts = genre => ({
   [CALL_API]: {
     endpoint: '/sc/api-v2/charts',
+    fetchOptions: {
+      method: 'GET'
+    },
     query: {
       kind: 'top',
       genre: `soundcloud:genres:${genre}`,
       offset: 0,
       limit: 50
     },
-    method: 'GET',
     types: [CHARTS_REQUEST, CHARTS_RECEIVE, CHARTS_FAILURE],
     schema: trackArraySchema
   }

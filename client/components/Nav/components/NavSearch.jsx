@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { Link, browserHistory } from 'react-router';
+import { List } from 'immutable';
 // import Spinner from 'client/components/Spinner';
-import Track from 'client/models/Track';
-import Artist from 'client/models/Artist';
+import NavSearchDropdownTrackContainer from '../containers/NavSearchDropdownTrackContainer';
+import NavSearchDropdownArtistContainer from '../containers/NavSearchDropdownArtistContainer';
 
 class NavSearch extends Component {
 
@@ -40,7 +40,7 @@ class NavSearch extends Component {
   }
 
   renderSearchResults() {
-    const { artists, tracks, shouldShowResults } = this.props;
+    const { artistIds, trackIds, shouldShowResults } = this.props;
     if (shouldShowResults) {
       return (
         <div className="nav-search-result">
@@ -49,24 +49,11 @@ class NavSearch extends Component {
           </div>
           <ul className="nav-search-result-list">
             {
-              artists.map(artist =>
-                (<li className="nav-search-result-item" key={artist.getId()}>
-                  <img
-                    alt="user-profile-img"
-                    className="nav-search-result-item-image"
-                    src={artist.getAvatarUrl()}
-                  />
-                  <Link
-                    onMouseDown={(e) => {
-                      // e.stopPropagation();
-                      // e.preventDefault();
-                      browserHistory.push(`/artist/${artist.getId()}`);
-                    }}
-                  >
-                    <span className="nav-search-result-item-username">{artist.getUsername()}</span>
-                  </Link>
-                </li>)
-              )
+              artistIds.map(artistId =>
+                <NavSearchDropdownArtistContainer
+                  key={artistId}
+                  artistId={artistId}
+                />)
             }
           </ul>
           <div className="nav-search-result-title">
@@ -74,24 +61,11 @@ class NavSearch extends Component {
           </div>
           <ul className="nav-search-result-list">
             {
-              tracks.map(track =>
-                (<li className="nav-search-result-item" key={track.getId()}>
-                  <img
-                    alt="user-profile-img"
-                    className="nav-search-result-item-image"
-                    src={track.getArtworkUrl()}
-                  />
-                  <Link
-                    onMouseDown={(e) => {
-                      // e.stopPropagation();
-                      // e.preventDefault();
-                      browserHistory.push(`/track/${track.getId()}`);
-                    }}
-                  >
-                    <span className="nav-search-result-item-username">{track.getTitle()}</span>
-                  </Link>
-                </li>)
-              )
+              trackIds.map(trackId =>
+                <NavSearchDropdownTrackContainer
+                  key={trackId}
+                  trackId={trackId}
+                />)
             }
           </ul>
         </div>
@@ -124,10 +98,16 @@ class NavSearch extends Component {
 
 }
 
+
+//
+//
+//
+
+
 NavSearch.propTypes = {
   shouldShowResults: PropTypes.bool.isRequired,
-  artists: PropTypes.arrayOf(PropTypes.shape(Artist)),
-  tracks: PropTypes.arrayOf(PropTypes.shape(Track)),
+  artistIds: PropTypes.instanceOf(List),
+  trackIds: PropTypes.instanceOf(List),
   // isFetching: PropTypes.bool.isRequired,
   handleBlur: PropTypes.func,
   handleFocus: PropTypes.func,

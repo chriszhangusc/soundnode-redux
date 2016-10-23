@@ -1,14 +1,10 @@
 import { put, call } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
 import { SAGA_DROPDOWN_SEARCH, SAGA_SEARCH } from 'client/constants/ActionTypes';
-import { fetchUsers, fetchTracks } from 'client/services/SCAPIServices';
-import { normalizeArtists, normalizeTracks } from 'client/utils/NormalizeUtils';
 import {
-  startSearch,
-  endSearch,
-  searchResultsReceived,
-  artistsReceived,
-  tracksReceived,
+  fetchAllSearchResults,
+  fetchDropdownTracks,
+  fetchDropdownArtists,
   showSearchResults
 } from 'client/redux/modules/search';
 
@@ -19,26 +15,17 @@ import {
 // Should add try catch
 function* doDropdownSearch({ payload }) {
   const { keyword, limit } = payload;
-  // yield put(startSearch());
-  const [artistRes, trackRes] = yield [
-    call(fetchUsers, keyword, limit),
-    call(fetchTracks, keyword, limit)
-  ];
-  const normalizedArtists = yield call(normalizeArtists, artistRes.data);
-  const normalizedTracks = yield call(normalizeTracks, trackRes.data);
-  yield put(artistsReceived(normalizedArtists));
-  yield put(tracksReceived(normalizedTracks));
+  yield put(fetchDropdownTracks(keyword, limit));
+  yield put(fetchDropdownArtists(keyword, limit));
   // yield put(endSearch());
   yield put(showSearchResults());
+  console.log('Drop down search');
 }
 
 function* doSearch({ payload }) {
   const { keyword, limit } = payload;
-  yield put(startSearch());
-  const trackRes = yield call(fetchTracks, keyword, limit);
-  const normalizedTracks = yield call(normalizeTracks, trackRes.data);
-  yield put(searchResultsReceived(normalizedTracks));
-  yield put(endSearch());
+  console.log('do search saga: ', keyword, limit);
+  yield put(fetchAllSearchResults(keyword, limit));
 }
 
 /* *****************************************************************************/

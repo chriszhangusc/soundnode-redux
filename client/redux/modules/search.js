@@ -1,18 +1,20 @@
 import { fromJS } from 'immutable';
-import TrackMap from 'client/models/TrackMap';
-import ArtistMap from 'client/models/ArtistMap';
+import { trackArraySchema, artistArraySchema } from 'client/schemas';
 import {
   SAGA_SEARCH,
   SAGA_DROPDOWN_SEARCH,
+  START_DROPDOWN_SEARCH,
   START_SEARCH,
   END_SEARCH,
+  SEARCH_FAILURE,
   SEARCH_DROPDOWN_ARTISTS_RECEIVED,
   SEARCH_DROPDOWN_TRACKS_RECEIVED,
   SEARCH_RESULTS_RECEIVED,
-  SHOW_SEARCH_RESULTS,
-  HIDE_SEARCH_RESULTS,
-  CLEAR_SEARCH_RESULTS
+  SHOW_DROPDOWN_SEARCH_RESULTS,
+  HIDE_DROPDOWN_SEARCH_RESULTS,
+  CLEAR_DROPDOWN_SEARCH_RESULTS
 } from 'client/constants/ActionTypes';
+import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 
 /* Actions */
 export function startSearch() {
@@ -27,51 +29,21 @@ export function endSearch() {
   };
 }
 
-export function searchResultsReceived(normalizedResults) {
-  return {
-    type: SEARCH_RESULTS_RECEIVED,
-    payload: {
-      resultMap: normalizedResults.trackMap,
-      nextHref: normalizedResults.nextHref
-    }
-  };
-}
-
-export function tracksReceived(normalizedTracks) {
-  return {
-    type: SEARCH_DROPDOWN_TRACKS_RECEIVED,
-    payload: {
-      trackMap: normalizedTracks.trackMap,
-      nextHref: normalizedTracks.nextHref
-    }
-  };
-}
-
-export function artistsReceived(normalizedArtists) {
-  return {
-    type: SEARCH_DROPDOWN_ARTISTS_RECEIVED,
-    payload: {
-      artistMap: normalizedArtists.artistMap,
-      nextHref: normalizedArtists.nextHref
-    }
-  };
-}
-
 export function hideSearchResults() {
   return {
-    type: HIDE_SEARCH_RESULTS
+    type: HIDE_DROPDOWN_SEARCH_RESULTS
   };
 }
 
 export function showSearchResults() {
   return {
-    type: SHOW_SEARCH_RESULTS
+    type: SHOW_DROPDOWN_SEARCH_RESULTS
   };
 }
 
 export function clearSearchResults() {
   return {
-    type: CLEAR_SEARCH_RESULTS
+    type: CLEAR_DROPDOWN_SEARCH_RESULTS
   };
 }
 
@@ -104,43 +76,92 @@ export function sagaSearch(keyword, limit) {
   };
 }
 
+export const fetchDropdownTracks = (keyword, limit) => ({
+  [CALL_API]: {
+    endpoint: '/sc/api-v1/tracks',
+    fetchOptions: {
+      method: 'get'
+    },
+    query: {
+      limit,
+      q: keyword
+    },
+    types: [START_DROPDOWN_SEARCH, SEARCH_DROPDOWN_TRACKS_RECEIVED, SEARCH_FAILURE],
+    schema: trackArraySchema
+  }
+});
+
+export const fetchDropdownArtists = (keyword, limit) => ({
+  [CALL_API]: {
+    endpoint: '/sc/api-v1/artists',
+    fetchOptions: {
+      method: 'get'
+    },
+    query: {
+      limit,
+      q: keyword
+    },
+    types: [START_DROPDOWN_SEARCH, SEARCH_DROPDOWN_ARTISTS_RECEIVED, SEARCH_FAILURE],
+    schema: artistArraySchema
+  }
+});
+
+export const fetchAllSearchResults = (keyword, limit) => ({
+  [CALL_API]: {
+    endpoint: '/sc/api-v1/tracks',
+    method: 'get',
+    query: {
+      limit,
+      q: keyword
+    },
+    types: [START_SEARCH, SEARCH_RESULTS_RECEIVED, SEARCH_FAILURE],
+    schema: trackArraySchema
+  }
+});
+
+// export const searchArtists = (keyword, limit) => {
+//
+// };
+
 /* Reducers */
 const INITIAL_STATE = fromJS({
-  isShown: false,
-  isFetching: false,
+  shown: false,
+  fetching: false,
+  dropdownFetching: false,
   // Search dropdown list results
-  dropdownArtists: new ArtistMap(),
-  dropdownTracks: new TrackMap(),
+  dropdownArtistIds: [],
+  dropdownTrackIds: [],
   // Search results page
-  searchResults: new TrackMap(), // For now just display all tracks.
-  artistNextHref: null,
-  trackNextHref: null
+  searchResultTrackIds: []
 });
 
 const search = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case START_SEARCH:
-      return state.set('isFetching', true);
-    case END_SEARCH:
-      return state.set('isFetching', false);
+      return state.set('fetching', true);
+    case START_DROPDOWN_SEARCH:
+      return state.set('dropdownFetching', true);
     case SEARCH_DROPDOWN_ARTISTS_RECEIVED:
-      // Set payload(users) to users
-      return state.set('dropdownArtists', action.payload.artistMap).merge({
-        artistNextHref: action.payload.nextHref
-      });
+      return state.merge(fromJS({
+        dropdownArtistIds: action.payload.result,
+        dropdownFetching: false
+      }));
     case SEARCH_DROPDOWN_TRACKS_RECEIVED:
-      return state
-        .set('dropdownTracks', action.payload.trackMap);
+      return state.merge(fromJS({
+        dropdownTrackIds: action.payload.result,
+        dropdownFetching: false // This will not be correct
+      }));
     case SEARCH_RESULTS_RECEIVED:
-      return state.set('searchResults', action.payload.resultMap).merge({
-        trackNextHref: action.payload.nextHref
-      });
-    case HIDE_SEARCH_RESULTS:
-      return state.set('isShown', false);
-    case SHOW_SEARCH_RESULTS:
-      return state.set('isShown', true);
-    case CLEAR_SEARCH_RESULTS:
-      return state.set('dropdownArtists', new ArtistMap()).set('dropdownTracks', new TrackMap());
+      return state.merge(fromJS({
+        searchResultTrackIds: action.payload.result,
+        fetching: false
+      }));
+    case HIDE_DROPDOWN_SEARCH_RESULTS:
+      return state.set('shown', false);
+    case SHOW_DROPDOWN_SEARCH_RESULTS:
+      return state.set('shown', true);
+    case CLEAR_DROPDOWN_SEARCH_RESULTS:
+      return state.set('dropdownArtistIds', fromJS([])).set('dropdownTrackIds', fromJS([]));
     default:
       return state;
   }
@@ -148,10 +169,8 @@ const search = (state = INITIAL_STATE, action) => {
 export default search;
 
 /* Selectors */
-export const getArtistMap = state => state.get('dropdownArtists');
-export const getTrackMap = state => state.get('dropdownTracks');
-export const getArtistNextHref = state => state.get('userNextHref');
-export const getTrackNextHref = state => state.get('trackNextHref');
-export const isFetching = state => state.get('isFetching');
-export const isShown = state => state.get('isShown');
-export const getSearchResults = state => state.get('searchResults');
+export const isFetching = state => state.get('fetching');
+export const isShown = state => state.get('shown');
+export const getSearchTrackIds = state => state.get('searchResultTrackIds');
+export const getDropdownSearchArtistIds = state => state.get('dropdownArtistIds');
+export const getDropdownSearchTrackIds = state => state.get('dropdownTrackIds');

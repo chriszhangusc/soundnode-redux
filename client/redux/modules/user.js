@@ -203,3 +203,4 @@ export const getDisplayName = state => state.get('displayName');
 export const getPhotoUrl = state => state.get('photoURL');
 export const getLikes = state => state.get('likes');
 export const getLikeIds = state => List(state.get('likes').keys());
+export const isFetching = state => state.get('fetching');

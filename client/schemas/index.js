@@ -13,7 +13,7 @@ commentSchema.define({
 });
 
 export const trackArraySchema = arrayOf(trackSchema);
-
+export const artistArraySchema = arrayOf(artistSchema);
 export const commentArraySchema = arrayOf(commentSchema);
 // const Schemas = {
 //   artistSchema,
