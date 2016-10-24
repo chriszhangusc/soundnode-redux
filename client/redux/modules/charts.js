@@ -1,19 +1,17 @@
 import { fromJS } from 'immutable';
-import {
-  CHARTS_CHANGE_GENRE,
-  CHARTS_REQUEST,
-  CHARTS_RECEIVE,
-  CHARTS_FAILURE
-} from 'client/constants/ActionTypes';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { formatGenre } from 'client/utils/FormatUtils';
 import { trackArraySchema } from 'client/schemas';
 
 const CLEAR_ALL_CHARTS = 'CLEAR_ALL_CHARTS';
+export const CHANGE_GENRE = 'redux-music/charts/CHANGE_GENRE';
+export const REQUEST = 'redux-music/charts/REQUEST';
+export const RECEIVED = 'redux-music/charts/RECEIVE';
+export const FAILURE = 'redux-music/charts/FAILURE';
 
 /* Action */
 const changeGenre = genre => ({
-  type: CHARTS_CHANGE_GENRE,
+  type: CHANGE_GENRE,
   payload: genre
 });
 
@@ -32,7 +30,7 @@ export const fetchCharts = genre => ({
       offset: 0,
       limit: 50
     },
-    types: [CHARTS_REQUEST, CHARTS_RECEIVE, CHARTS_FAILURE],
+    types: [REQUEST, RECEIVED, FAILURE],
     schema: trackArraySchema
   }
 });
@@ -62,11 +60,11 @@ const INITIAL_STATE = fromJS({
 
 const charts = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CHARTS_CHANGE_GENRE:
+    case CHANGE_GENRE:
       return state.set('genre', fromJS(action.payload));
-    case CHARTS_REQUEST:
+    case REQUEST:
       return state.set('fetching', true);
-    case CHARTS_RECEIVE:
+    case RECEIVED:
       return state.merge({
         trackIds: state.get('trackIds').concat(fromJS(action.payload.result.map(String))),
         nextHref: action.payload.nextHref,
