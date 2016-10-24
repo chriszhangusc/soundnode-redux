@@ -1,26 +1,29 @@
 import { fromJS } from 'immutable';
-import { trackSchema, commentArraySchema, trackArraySchema } from 'client/schemas';
+import { trackSchema, commentArraySchema } from 'client/schemas';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
-import {
-  CLEAR_TRACK_STATE,
-  TRACK_REQUEST,
-  TRACK_RECEIVE,
-  TRACK_FAILURE,
-  TRACK_COMMENTS_REQUEST,
-  TRACK_COMMENTS_RECEIVE,
-  TRACK_COMMENTS_FAILURE
-} from 'client/constants/ActionTypes';
+
+/* Track Action Types */
+export const TRACK_REQUEST = 'redux-music/track/REQUEST';
+export const TRACK_RECEIVED = 'redux-music/track/RECEIVED';
+export const TRACK_FAILURE = 'redux-music/track/FAILURE';
+
+export const COMMENTS_REQUEST = 'redux-music/track/COMMENTS_REQUEST';
+export const COMMENTS_RECEIVED = 'redux-music/track/COMMENTS_RECEIVED';
+export const COMMENTS_FAILURE = 'redux-music/track/COMMENTS_FAILURE';
+
+export const CLEAR_STATE = 'redux-music/track/CLEAR_STATE';
+
 
 /* Actions */
 export const clearTrackState = () => ({
-  type: CLEAR_TRACK_STATE
+  type: CLEAR_STATE
 });
 
 export const fetchTrack = trackId => ({
   [CALL_API]: {
     endpoint: `/sc/api-v1/tracks/${trackId}`,
     method: 'GET',
-    types: [TRACK_REQUEST, TRACK_RECEIVE, TRACK_FAILURE],
+    types: [TRACK_REQUEST, TRACK_RECEIVED, TRACK_FAILURE],
     schema: trackSchema
   }
 });
@@ -32,7 +35,7 @@ export const fetchComments = trackId => ({
     query: {
       limit: 20
     },
-    types: [TRACK_COMMENTS_REQUEST, TRACK_COMMENTS_RECEIVE, TRACK_COMMENTS_FAILURE],
+    types: [COMMENTS_REQUEST, COMMENTS_RECEIVED, COMMENTS_FAILURE],
     schema: commentArraySchema
   }
 });
@@ -55,18 +58,18 @@ const INITIAL_STATE = fromJS({
 
 const track = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CLEAR_TRACK_STATE:
+    case CLEAR_STATE:
       return INITIAL_STATE;
     case TRACK_REQUEST:
       return state.set('trackFetching', true);
-    case TRACK_RECEIVE:
+    case TRACK_RECEIVED:
       return state.merge({
         trackId: action.payload.result,
         trackFetching: false
       });
-    case TRACK_COMMENTS_REQUEST:
+    case COMMENTS_REQUEST:
       return state.set('commentsFetching', true);
-    case TRACK_COMMENTS_RECEIVE:
+    case COMMENTS_RECEIVED:
       return state.merge({
         commentIds: state.get('commentIds').concat(fromJS(action.payload.result)),
         commentsFetching: false
