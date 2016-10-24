@@ -10,14 +10,14 @@ import NotFound from 'client/components/NotFound';
 // import LikesContainer from '../views/likes/components/LikesPage';
 import { DEFAULT_GENRE } from 'client/constants/SongConstants';
 import { loadCharts } from 'client/redux/modules/charts';
-import { fetchArtistAndTracks } from 'client/redux/modules/artist';
-import { loadTrackPage } from 'client/redux/modules/track';
+import { fetchArtistAndTracks, clearArtistState } from 'client/redux/modules/artist';
+import { loadTrackPage, clearTrackState } from 'client/redux/modules/track';
 import { sagaSearch } from 'client/redux/modules/search';
 import { clearVisibleTracks } from 'client/redux/modules/ui';
 import { fetchAllLikedTracks } from 'client/redux/modules/user';
 
 const configureRoutes = (store) => {
-
+  // Move these hooks into seperate files
   const onChartsPageEnter = (nextState) => {
     const dispatch = store.dispatch;
     const genre = nextState.params.genre || DEFAULT_GENRE;
@@ -31,11 +31,23 @@ const configureRoutes = (store) => {
     dispatch(fetchArtistAndTracks(uid));
   };
 
+  const onArtistDetailsPageLeave = () => {
+    const { dispatch } = store;
+    dispatch(clearArtistState());
+  };
+
   const onTrackDetailsPageEnter = (nextState) => {
     const dispatch = store.dispatch;
     const trackId = nextState.params.trackId;
     dispatch(clearVisibleTracks());
     dispatch(loadTrackPage(trackId));
+  };
+
+  const onTrackDetailsPageLeave = () => {
+    // Clear state info before leaving the page
+    // console.log('onLeave');
+    const { dispatch } = store;
+    dispatch(clearTrackState());
   };
 
   const onSearchPageEnter = (nextState) => {
@@ -59,13 +71,23 @@ const configureRoutes = (store) => {
           <Route path=":genre" component={ChartsPage} onEnter={onChartsPageEnter} />
         </Route>
         <Route path="artist" >
-          <Route path=":uid" component={ArtistDetailsPage} onEnter={onArtistDetailsPageEnter} />
+          <Route
+            path=":uid"
+            component={ArtistDetailsPage}
+            onEnter={onArtistDetailsPageEnter}
+            onLeave={onArtistDetailsPageLeave}
+          />
         </Route>
         <Route path="track">
-          <Route path=":trackId" component={TrackDetailsPage} onEnter={onTrackDetailsPageEnter} />
+          <Route
+            path=":trackId"
+            component={TrackDetailsPage}
+            onEnter={onTrackDetailsPageEnter}
+            onLeave={onTrackDetailsPageLeave}
+          />
         </Route>
         <Route path="search" component={SearchResultsPage} onEnter={onSearchPageEnter} />
-        {<Route path="likes" component={LikesPage} onEnter={onLikesPageEnter} />}
+        <Route path="likes" component={LikesPage} onEnter={onLikesPageEnter} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

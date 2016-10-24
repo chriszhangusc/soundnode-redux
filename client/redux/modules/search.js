@@ -1,18 +1,23 @@
 import { fromJS } from 'immutable';
-import { trackArraySchema, artistArraySchema } from 'client/schemas';
+import { trackArraySchema } from 'client/schemas';
 import {
-  SAGA_SEARCH,
   SAGA_DROPDOWN_SEARCH,
   START_DROPDOWN_SEARCH,
+  END_DROPDOWN_SEARCH,
+  DROPDOWN_ARTISTS_RECEIVED,
+  DROPDOWN_TRACKS_RECEIVED,
+
+  SAGA_SEARCH,
   START_SEARCH,
   END_SEARCH,
   SEARCH_FAILURE,
-  SEARCH_DROPDOWN_ARTISTS_RECEIVED,
-  SEARCH_DROPDOWN_TRACKS_RECEIVED,
+
   SEARCH_RESULTS_RECEIVED,
   SHOW_DROPDOWN_SEARCH_RESULTS,
   HIDE_DROPDOWN_SEARCH_RESULTS,
-  CLEAR_DROPDOWN_SEARCH_RESULTS
+  CLEAR_DROPDOWN_SEARCH_RESULTS,
+  // FETCH_DROPDOWN_TRACKS,
+  // FETCH_DROPDOWN_ARTISTS
 } from 'client/constants/ActionTypes';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 
@@ -28,6 +33,14 @@ export function endSearch() {
     type: END_SEARCH
   };
 }
+
+export const startDropdownSearch = () => ({
+  type: START_DROPDOWN_SEARCH
+});
+
+export const endDropdownSearch = () => ({
+  type: END_DROPDOWN_SEARCH
+});
 
 export function hideSearchResults() {
   return {
@@ -76,34 +89,16 @@ export function sagaSearch(keyword, limit) {
   };
 }
 
-export const fetchDropdownTracks = (keyword, limit) => ({
-  [CALL_API]: {
-    endpoint: '/sc/api-v1/tracks',
-    fetchOptions: {
-      method: 'get'
-    },
-    query: {
-      limit,
-      q: keyword
-    },
-    types: [START_DROPDOWN_SEARCH, SEARCH_DROPDOWN_TRACKS_RECEIVED, SEARCH_FAILURE],
-    schema: trackArraySchema
-  }
+export const dropdownArtistsReceived = normalized => ({
+  type: DROPDOWN_ARTISTS_RECEIVED,
+  payload: normalized,
+  entities: normalized.entities
 });
 
-export const fetchDropdownArtists = (keyword, limit) => ({
-  [CALL_API]: {
-    endpoint: '/sc/api-v1/artists',
-    fetchOptions: {
-      method: 'get'
-    },
-    query: {
-      limit,
-      q: keyword
-    },
-    types: [START_DROPDOWN_SEARCH, SEARCH_DROPDOWN_ARTISTS_RECEIVED, SEARCH_FAILURE],
-    schema: artistArraySchema
-  }
+export const dropdownTracksReceived = normalized => ({
+  type: DROPDOWN_TRACKS_RECEIVED,
+  payload: normalized,
+  entities: normalized.entities
 });
 
 export const fetchAllSearchResults = (keyword, limit) => ({
@@ -141,16 +136,12 @@ const search = (state = INITIAL_STATE, action) => {
       return state.set('fetching', true);
     case START_DROPDOWN_SEARCH:
       return state.set('dropdownFetching', true);
-    case SEARCH_DROPDOWN_ARTISTS_RECEIVED:
-      return state.merge(fromJS({
-        dropdownArtistIds: action.payload.result,
-        dropdownFetching: false
-      }));
-    case SEARCH_DROPDOWN_TRACKS_RECEIVED:
-      return state.merge(fromJS({
-        dropdownTrackIds: action.payload.result,
-        dropdownFetching: false // This will not be correct
-      }));
+    case END_DROPDOWN_SEARCH:
+      return state.set('dropdownFetching', false);
+    case DROPDOWN_ARTISTS_RECEIVED:
+      return state.set('dropdownArtistIds', fromJS(action.payload.result));
+    case DROPDOWN_TRACKS_RECEIVED:
+      return state.set('dropdownTrackIds', fromJS(action.payload.result));
     case SEARCH_RESULTS_RECEIVED:
       return state.merge(fromJS({
         searchResultTrackIds: action.payload.result,

@@ -64,7 +64,7 @@ router.get('/tracks', (req, res) => {
 
 // Post with post body {trackIds: [...ids]}
 router.post('/tracks', (req, res) => {
-  const clientId = encodeURIComponent(req.query.client_id);
+  const clientId = req.query.client_id;
   const trackIds = req.body.trackIds;
   const resJson = {
     collection: [],
@@ -72,6 +72,7 @@ router.post('/tracks', (req, res) => {
   };
   const fetchQueue = [];
   if (!trackIds) res.json(resJson);
+console.log(trackIds);
   trackIds.forEach((trackId) => {
     const fetchUrl = `${SC_API_V1}/tracks/${trackId}?client_id=${clientId}`;
     // console.log('fetching...', fetchUrl);

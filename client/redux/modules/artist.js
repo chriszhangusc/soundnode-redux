@@ -1,8 +1,5 @@
 /* artist module */
 import { fromJS } from 'immutable';
-import Artist from 'client/models/Artist';
-import TrackMap from 'client/models/TrackMap';
-import { denormalizeTracks, denormalizeArtist } from 'client/models/denormalizr';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { artistSchema, trackArraySchema } from 'client/schemas';
 import {
@@ -11,14 +8,17 @@ import {
   ARTIST_FAILURE,
   ARTIST_TRACKS_REQUEST,
   ARTIST_TRACKS_RECEIVE,
-  ARTIST_TRACKS_FAILURE
+  ARTIST_TRACKS_FAILURE,
+  CLEAR_ARTIST_STATE
 } from 'client/constants/ActionTypes';
 
 /* Actions */
 const fetchArtist = id => ({
   [CALL_API]: {
     endpoint: `/sc/api-v1/users/${id}`,
-    method: 'GET',
+    fetchOptions: {
+      method: 'GET'
+    },
     types: [ARTIST_REQUEST, ARTIST_RECEIVE, ARTIST_FAILURE],
     schema: artistSchema
   }
@@ -27,6 +27,9 @@ const fetchArtist = id => ({
 const fetchArtistTracks = id => ({
   [CALL_API]: {
     endpoint: `/sc/api-v1/users/${id}/tracks`,
+    fetchOptions: {
+      method: 'GET'
+    },
     query: {
       limit: 20
     },
@@ -41,41 +44,45 @@ export const fetchArtistAndTracks = id => (dispatch) => {
   dispatch(fetchArtistTracks(id));
 };
 
+export const clearArtistState = () => ({
+  type: CLEAR_ARTIST_STATE
+});
 
 /* Reducer */
 const INITIAL_STATE = fromJS({
   artistFetching: false,
   tracksFetching: false,
-  artist: new Artist(),
-  tracks: new TrackMap(),
-  tracksNextHref: null
+  artistId: undefined,
+  trackIds: [],
+  tracksNextHref: undefined
 });
 
 const artist = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case CLEAR_ARTIST_STATE:
+      return INITIAL_STATE;
     case ARTIST_REQUEST:
       return state.set('artistFetching', true);
     case ARTIST_RECEIVE:
       return state.merge({
-        artist: denormalizeArtist(action.payload),
+        artistId: action.payload.result,
         artistFetching: false
       });
     case ARTIST_TRACKS_REQUEST:
       return state.set('tracksFetching', true);
     case ARTIST_TRACKS_RECEIVE:
       return state.merge({
-        tracks: denormalizeTracks(action.payload),
-        tracksNextHref: action.payload.nextHref,
+        trackIds: state.get('trackIds').concat(fromJS(action.payload.result)), // concat for scroll to load more
         tracksFetching: false
       });
     default:
       return state;
   }
 };
-
-export const getArtistRecord = state => state.get('artist');
-export const getArtistTrackMap = state => state.get('tracks');
+export const getArtistId = state => state.get('artistId');
+export const getTrackIds = state => state.get('trackIds');
 export const isArtistFetching = state => state.get('artistFetching');
 export const isTracksFetching = state => state.get('tracksFetching');
 export const getTracksNextHref = state => state.get('tracksNextHref');
+
 export default artist;

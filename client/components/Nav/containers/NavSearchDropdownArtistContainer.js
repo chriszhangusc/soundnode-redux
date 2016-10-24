@@ -6,9 +6,8 @@ import NavSearchDropdownItem from '../components/NavSearchDropdownItem';
 const mapStateToProps = (state, { artistId }) => {
   const artist = getArtistById(state, artistId);
   return ({
-    artworkUrl: artist.getAvatarUrl(),
-    defaultImageUrl,
-    itemLinkUrl: `artist/${artist.getId()}`,
+    imageUrl: artist.getAvatarUrl() || defaultImageUrl,
+    itemLinkUrl: `/artist/${artist.getId()}`,
     itemTitle: artist.getUsername()
   });
 };

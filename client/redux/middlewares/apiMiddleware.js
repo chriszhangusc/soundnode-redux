@@ -11,12 +11,11 @@ export const CALL_API = 'CALL_API';
 export const callApi = (endpoint, schema, query, fetchOptions) => {
   const queryString = querystring.stringify({ ...query, client_id: CLIENT_ID });
   const finalUrl = `http://localhost:3000${endpoint}?${queryString}`;
-console.log(finalUrl);
+console.log('Request Url: ', finalUrl);
   return fetch(finalUrl, fetchOptions)
     .then(response => response.json())
     .then((json) => {
       const camelizedJson = camelizeKeys(json);
-console.log(camelizedJson);
       if (camelizedJson.collection) {
         const { nextHref, collection } = camelizedJson;
         return Object.assign({}, normalize(collection, schema), { nextHref });

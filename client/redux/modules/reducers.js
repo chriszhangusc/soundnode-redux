@@ -83,8 +83,8 @@ export const isPlaylistEmpty = state => fromPlaylist.isEmpty(state.get('playlist
 export const isTrackInPlaylist = (state, trackId) => getPlaylistTrackIds(state).indexOf(trackId);
 
 /* From Artist */
-export const getArtistRecord = state => fromArtist.getArtistRecord(state.get('artist'));
-export const getArtistTrackMap = state => fromArtist.getArtistTrackMap(state.get('artist'));
+export const getArtistId = state => fromArtist.getArtistId(state.get('artist'));
+export const getArtistTrackIds = state => fromArtist.getTrackIds(state.get('artist'));
 export const isArtistFetching = state => fromArtist.isArtistFetching(state.get('artist'));
 export const isArtistTracksFetching = state =>
   fromArtist.isTracksFetching(state.get('artist'));

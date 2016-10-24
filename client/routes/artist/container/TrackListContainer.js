@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import SongCardList from 'client/components/SongCardList';
-import { isArtistTracksFetching, getArtistTrackMap } from 'client/redux/modules/reducers';
+import { isArtistTracksFetching, getArtistTrackIds } from 'client/redux/modules/reducers';
 
 // Container for SongCardList
 // Simply providing slices of state for the component to render.
 const mapStateToProps = state => ({
-  isFetching: isArtistTracksFetching(state),
-  tracks: getArtistTrackMap(state)
+  fetching: isArtistTracksFetching(state),
+  trackIds: getArtistTrackIds(state)
 });
 
 const mapDispatchToProps = dispatch => ({

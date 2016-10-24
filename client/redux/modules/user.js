@@ -1,5 +1,7 @@
 import { fromJS, List } from 'immutable';
 import firebase, { firebaseRef, githubProvider } from 'client/firebase';
+import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
+import { trackArraySchema } from 'client/schemas';
 
 import {
   LOGIN_SUCCESS,
@@ -8,7 +10,10 @@ import {
   LIKE_SONG_SUCCESS,
   LIKE_SONG_FAILED,
   LOAD_ALL_LIKES,
-  UNLIKE_SONG_SUCCESS
+  UNLIKE_SONG_SUCCESS,
+  LIKED_TRACKS_REQUEST,
+  LIKED_TRACKS_RECEIVE,
+  LIKED_TRACKS_FAILURE
 } from 'client/constants/ActionTypes';
 
 import {
@@ -16,7 +21,6 @@ import {
   getUserId,
   getUserLikeIds
 } from './reducers';
-import { fetchTracks } from './track';
 
 
 export const loginSuccess = uid => ({
@@ -37,6 +41,25 @@ export const loginFailed = error => ({
 
 export const logout = () => ({
   type: LOGOUT
+});
+
+// This should be grouped in api folder.
+export const fetchTracks = trackIds => ({
+  [CALL_API]: {
+    endpoint: '/sc/api-v1/tracks',
+    fetchOptions: {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        trackIds: [...trackIds]
+      })
+    },
+    types: [LIKED_TRACKS_REQUEST, LIKED_TRACKS_RECEIVE, LIKED_TRACKS_FAILURE],
+    // types: [UI_START_FETCHING, TRACKS_RECEIVE, TRACKS_FAILURE],
+    schema: trackArraySchema
+  }
 });
 
 /**
@@ -170,6 +193,7 @@ export function startUnlikeSong(songId) {
 /* Reducer */
 
 const INITIAL_STATE = fromJS({
+  likesFetching: false,
   likes: {} // Saving map from trackId: firebaseKey
 });
 const user = (state = INITIAL_STATE, action) => {

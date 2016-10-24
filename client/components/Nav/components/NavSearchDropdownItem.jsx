@@ -3,19 +3,18 @@ import { Link, browserHistory } from 'react-router';
 
 const NavSearchDropdownItem = ({
   imageUrl,
-  defaultImageUrl,
   itemLinkUrl,
   itemTitle
 }) => (<li className="nav-search-result-item">
   <img
     alt="user-profile-img"
     className="nav-search-result-item-image"
-    src={imageUrl || defaultImageUrl}
+    src={imageUrl}
   />
   <Link
     onMouseDown={(e) => {
       e.stopPropagation();
-      e.preventDefault();
+
       browserHistory.push(itemLinkUrl);
     }}
   >
@@ -25,7 +24,6 @@ const NavSearchDropdownItem = ({
 
 NavSearchDropdownItem.propTypes = {
   imageUrl: PropTypes.string,
-  defaultImageUrl: PropTypes.string,
   itemLinkUrl: PropTypes.string,
   itemTitle: PropTypes.string
 };

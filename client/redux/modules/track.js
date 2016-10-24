@@ -2,30 +2,18 @@ import { fromJS } from 'immutable';
 import { trackSchema, commentArraySchema, trackArraySchema } from 'client/schemas';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import {
+  CLEAR_TRACK_STATE,
   TRACK_REQUEST,
   TRACK_RECEIVE,
   TRACK_FAILURE,
-  UI_START_FETCHING,
-  TRACKS_REQUEST,
-  TRACKS_RECEIVE,
-  TRACKS_FAILURE,
   TRACK_COMMENTS_REQUEST,
   TRACK_COMMENTS_RECEIVE,
   TRACK_COMMENTS_FAILURE
 } from 'client/constants/ActionTypes';
 
 /* Actions */
-export const fetchTracks = trackIds => ({
-  [CALL_API]: {
-    endpoint: '/sc/api-v1/tracks',
-    method: 'post',
-    data: {
-      trackIds: [...trackIds]
-    },
-    types: [TRACKS_REQUEST, TRACKS_RECEIVE, TRACKS_FAILURE],
-    // types: [UI_START_FETCHING, TRACKS_RECEIVE, TRACKS_FAILURE],
-    schema: trackArraySchema
-  }
+export const clearTrackState = () => ({
+  type: CLEAR_TRACK_STATE
 });
 
 export const fetchTrack = trackId => ({
@@ -50,6 +38,7 @@ export const fetchComments = trackId => ({
 });
 
 export const loadTrackPage = trackId => (dispatch) => {
+  // Clear previous state.
   dispatch(fetchTrack(trackId));
   dispatch(fetchComments(trackId));
 };
@@ -66,6 +55,8 @@ const INITIAL_STATE = fromJS({
 
 const track = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case CLEAR_TRACK_STATE:
+      return INITIAL_STATE;
     case TRACK_REQUEST:
       return state.set('trackFetching', true);
     case TRACK_RECEIVE:
