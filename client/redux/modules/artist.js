@@ -2,15 +2,16 @@
 import { fromJS } from 'immutable';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { artistSchema, trackArraySchema } from 'client/schemas';
-import {
-  ARTIST_REQUEST,
-  ARTIST_RECEIVE,
-  ARTIST_FAILURE,
-  ARTIST_TRACKS_REQUEST,
-  ARTIST_TRACKS_RECEIVE,
-  ARTIST_TRACKS_FAILURE,
-  CLEAR_ARTIST_STATE
-} from 'client/constants/ActionTypes';
+/* Artist Action Types */
+export const CLEAR_STATE = 'redux-music/artist/CLEAR_STATE';
+
+export const ARTIST_REQUEST = 'redux-music/artist/ARTIST_REQUEST';
+export const ARTIST_RECEIVED = 'redux-music/artist/ARTIST_RECEIVED';
+export const ARTIST_FAILURE = 'redux-music/artist/ARTIST_FAILURE';
+
+export const TRACKS_REQUEST = 'redux-music/artist/TRACKS_REQUEST';
+export const TRACKS_RECEIVED = 'redux-music/artist/TRACKS_RECEIVED';
+export const TRACKS_FAILURE = 'redux-music/artist/TRACKS_FAILURE';
 
 /* Actions */
 const fetchArtist = id => ({
@@ -19,7 +20,7 @@ const fetchArtist = id => ({
     fetchOptions: {
       method: 'GET'
     },
-    types: [ARTIST_REQUEST, ARTIST_RECEIVE, ARTIST_FAILURE],
+    types: [ARTIST_REQUEST, ARTIST_RECEIVED, ARTIST_FAILURE],
     schema: artistSchema
   }
 });
@@ -34,7 +35,7 @@ const fetchArtistTracks = id => ({
       limit: 20
     },
     method: 'GET',
-    types: [ARTIST_TRACKS_REQUEST, ARTIST_TRACKS_RECEIVE, ARTIST_TRACKS_FAILURE],
+    types: [TRACKS_REQUEST, TRACKS_RECEIVED, TRACKS_FAILURE],
     schema: trackArraySchema
   }
 });
@@ -45,7 +46,7 @@ export const fetchArtistAndTracks = id => (dispatch) => {
 };
 
 export const clearArtistState = () => ({
-  type: CLEAR_ARTIST_STATE
+  type: CLEAR_STATE
 });
 
 /* Reducer */
@@ -59,18 +60,18 @@ const INITIAL_STATE = fromJS({
 
 const artist = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CLEAR_ARTIST_STATE:
+    case CLEAR_STATE:
       return INITIAL_STATE;
     case ARTIST_REQUEST:
       return state.set('artistFetching', true);
-    case ARTIST_RECEIVE:
+    case ARTIST_RECEIVED:
       return state.merge({
         artistId: action.payload.result,
         artistFetching: false
       });
-    case ARTIST_TRACKS_REQUEST:
+    case TRACKS_REQUEST:
       return state.set('tracksFetching', true);
-    case ARTIST_TRACKS_RECEIVE:
+    case TRACKS_RECEIVED:
       return state.merge({
         trackIds: state.get('trackIds').concat(fromJS(action.payload.result)), // concat for scroll to load more
         tracksFetching: false
