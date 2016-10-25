@@ -20,21 +20,24 @@ var Immutable = require('immutable');
 // console.log(obj1.delete('isFetching'));
 
 //OrderedMap
-var orderedMap = Immutable.OrderedMap();
-orderedMap = orderedMap.set(2, {id: 2, name: 'b'});
-orderedMap = orderedMap.set(1, {id: 1, name: 'a'});
-
-var map2 = Immutable.OrderedMap();
-map2 = map2.set(2, {id: 3, name: 'c'});
-
-console.log(orderedMap.merge(map2).toJS());
+// var orderedMap = Immutable.OrderedMap();
+// orderedMap = orderedMap.set(2, {id: 2, name: 'b'});
+// orderedMap = orderedMap.set(1, {id: 1, name: 'a'});
+//
+// var map2 = Immutable.OrderedMap();
+// map2 = map2.set(2, {id: 3, name: 'c'});
+//
+// console.log(orderedMap.merge(map2).toJS());
 
 // Record
-// var ABRecord = Immutable.Record({
-//   a: 1,
-//   b: 2
-// });
+var ABRecord = Immutable.Record({
+  a: 1,
+  b: undefined
+});
 //
-// var myRecord = new ABRecord({b: 3});
-// console.log(myRecord);
+var r1 = new ABRecord({});
+var r2 = new ABRecord({b: 2});
+console.log(r1, r2);
+console.log(r1.merge(r2));
+console.log(r2.merge(r1));
 // console.log(Immutable.fromJS(myRecord));

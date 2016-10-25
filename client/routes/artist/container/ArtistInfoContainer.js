@@ -5,13 +5,11 @@ import { formatImageUrl } from 'client/utils/FormatUtils';
 import ArtistInfo from '../components/ArtistInfo';
 
 export const mapStateToProps = (state, { artistId }) => {
-  console.log(artistId);
   const artist = getArtistById(state, artistId);
-  console.log(artist);
   return {
     avatarUrl: formatImageUrl(artist.getAvatarUrl(), t500x500),
     artistName: artist.getUsername(),
-    followerCount: artist.getFollowersCount(),
+    followerCount: artist.getFollowersCount().toLocaleString(),
     description: artist.getDescription()
   };
 };

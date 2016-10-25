@@ -3,10 +3,10 @@ import { Record } from 'immutable';
 // The user field will be normalized to userId
 
 const CommentRecord = Record({
-  id: null,
+  id: undefined,
   kind: '',
-  userId: null,
-  trackId: null,
+  userId: undefined,
+  trackId: undefined,
   timestamp: 0,
   createdAt: '',
   body: '',

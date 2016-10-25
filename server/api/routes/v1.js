@@ -11,6 +11,7 @@ router.get('/users/:userId', (req, res) => {
   // Url resolve will not take userId
   const clientId = encodeURIComponent(req.query.client_id);
   const fetchUrl = `${SC_API_V1}/users/${req.params.userId}?client_id=${clientId}`;
+console.log(fetchUrl);
   fetch(fetchUrl)
     .then(response => response.json())
     .then((json) => {

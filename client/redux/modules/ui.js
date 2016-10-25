@@ -1,10 +1,7 @@
 import { fromJS } from 'immutable';
-import {
-  CHARTS_RECEIVE,
-  TRACK_RECEIVE,
-  UI_START_FETCHING,
-  UI_END_FETCHING
-} from 'client/constants/ActionTypes';
+import { TRACK_RECEIVED } from 'client/redux/modules/track';
+import { CHARTS_RECEIVED } from 'client/redux/modules/charts';
+
 const LOAD_VISIBLE_TRACKS = 'LOAD_VISIBLE_TRACKS';
 const CLEAR_VISIBLE_TRACKS = 'CLEAR_VISIBLE_TRACKS';
 
@@ -19,8 +16,7 @@ export const loadVisibleTrackIds = trackIds => ({
 
 const INITIAL_STATE = fromJS({
   // Store a list of ids that are currently visible
-  visibleTrackIds: [],
-  fetching: false
+  visibleTrackIds: []
 });
 
 const ui = (state = INITIAL_STATE, action) => {
@@ -30,19 +26,15 @@ const ui = (state = INITIAL_STATE, action) => {
     // Not used for now.
     case LOAD_VISIBLE_TRACKS:
       return state.set('visibleTrackIds', fromJS(action.payload));
-    case CHARTS_RECEIVE:
+    case CHARTS_RECEIVED:
       return state.merge({
         visibleTrackIds: state.get('visibleTrackIds')
           .concat(fromJS(action.payload.result.map(String)))
       });
-    case TRACK_RECEIVE:
+    case TRACK_RECEIVED:
       return state.merge({
         visibleTrackIds: state.get('visibleTrackIds').concat(action.payload.result.toString())
       });
-    case UI_START_FETCHING:
-      return state.set('fetching', true);
-    case UI_END_FETCHING:
-      return state.set('fetching', false);
     default:
       return state;
   }

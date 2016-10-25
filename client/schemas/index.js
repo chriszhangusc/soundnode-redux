@@ -4,10 +4,12 @@ export const artistSchema = new Schema('artists');
 export const commentSchema = new Schema('comments');
 export const trackSchema = new Schema('tracks');
 
+// Removing it because the user information sent back along with tracks is not intact.
 trackSchema.define({
   user: artistSchema
 });
 
+// Same reason as above
 commentSchema.define({
   user: artistSchema
 });

@@ -26,7 +26,6 @@ const rootReducer = combineReducers({
 
 /* From ui */
 export const getVisibleTrackIds = state => fromUI.getVisibleTrackIds(state.get('ui'));
-export const isUIFetching = state => fromUI.isFetching(state.get('ui'));
 /* From entities */
 
 // Get single track
@@ -65,10 +64,6 @@ export const getChartsGenre = state => fromCharts.getGenre(state.get('charts'));
 export const getChartsTrackMap = state => fromCharts.getTrackMap(state.get('charts'));
 export const getChartsTrackIds = state => fromCharts.getTrackIds(state.get('charts'));
 export const isChartsFetching = state => fromCharts.isFetching(state.get('charts'));
-// export const getChartsTracksAsArray = (state) => {
-//   const trackIds = fromCharts.getTrackIds(state.get('charts'));
-//   return trackIds.map(trackId => getTrackById(state, trackId));
-// };
 
 /* From Track */
 export const isTrackFetching = state => fromTrack.isTrackFetching(state.get('track'));

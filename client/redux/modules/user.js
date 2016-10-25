@@ -2,26 +2,22 @@ import { fromJS, List } from 'immutable';
 import firebase, { firebaseRef, githubProvider } from 'client/firebase';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { trackArraySchema } from 'client/schemas';
-
-import {
-  LOGIN_SUCCESS,
-  LOGIN_FAILED,
-  LOGOUT,
-  LIKE_SONG_SUCCESS,
-  LIKE_SONG_FAILED,
-  LOAD_ALL_LIKES,
-  UNLIKE_SONG_SUCCESS,
-  LIKED_TRACKS_REQUEST,
-  LIKED_TRACKS_RECEIVE,
-  LIKED_TRACKS_FAILURE
-} from 'client/constants/ActionTypes';
-
 import {
   getUserLikes,
   getUserId,
   getUserLikeIds
 } from './reducers';
 
+const LOGIN_SUCCESS = 'redux-music/user/LOGIN_SUCCESS';
+const LOGIN_FAILED = 'redux-music/user/LOGIN_FAILED';
+const LOGOUT = 'redux-music/user/LOGOUT';
+const LIKE_SUCCESS = 'redux-music/user/LIKE_SUCCESS';
+const LIKE_FAILED = 'redux-music/user/LIKE_FAILED';
+const LOAD_ALL_LIKES = 'redux-music/user/LOAD_ALL_LIKES';
+const UNLIKE_SUCCESS = 'redux-music/user/UNLIKE_SUCCESS';
+const LIKED_TRACKS_REQUEST = 'redux-music/user/LIKED_TRACKS_REQUEST';
+const LIKED_TRACKS_RECEIVED = 'redux-music/user/LIKED_TRACKS_RECEIVED';
+const LIKED_TRACKS_FAILURE = 'redux-music/user/LIKED_TRACKS_FAILURE';
 
 export const loginSuccess = uid => ({
   type: LOGIN_SUCCESS,
@@ -56,8 +52,7 @@ export const fetchTracks = trackIds => ({
         trackIds: [...trackIds]
       })
     },
-    types: [LIKED_TRACKS_REQUEST, LIKED_TRACKS_RECEIVE, LIKED_TRACKS_FAILURE],
-    // types: [UI_START_FETCHING, TRACKS_RECEIVE, TRACKS_FAILURE],
+    types: [LIKED_TRACKS_REQUEST, LIKED_TRACKS_RECEIVED, LIKED_TRACKS_FAILURE],
     schema: trackArraySchema
   }
 });
@@ -124,7 +119,7 @@ export const startLogout = () => (dispatch) => {
 
 // record is an object where { songId:Firebase Key }
 export const likeSongSuccess = record => ({
-  type: LIKE_SONG_SUCCESS,
+  type: LIKE_SUCCESS,
   payload: {
     record,
     message: 'Song added to likes'
@@ -132,7 +127,7 @@ export const likeSongSuccess = record => ({
 });
 
 export const likeSongFailed = songId => ({
-  type: LIKE_SONG_FAILED,
+  type: LIKE_FAILED,
   payload: {
     songId,
     message: 'Failed to add song to likes'
@@ -163,7 +158,7 @@ export function startLikeSong(songId) {
 
 export function unlikeSongSuccess(songId) {
   return {
-    type: UNLIKE_SONG_SUCCESS,
+    type: UNLIKE_SUCCESS,
     payload: {
       songId,
       message: 'Song removed from likes'
@@ -204,15 +199,15 @@ const user = (state = INITIAL_STATE, action) => {
       return fromJS({});
     case LOAD_ALL_LIKES:
       return state.set('likes', fromJS(action.payload));
-    case LIKE_SONG_SUCCESS:
+    case LIKE_SUCCESS:
       return state.setIn(
         ['likes', action.payload.record.songId.toString()],
         action.payload.record.firebaseKey
       );
-    case UNLIKE_SONG_SUCCESS:
+    case UNLIKE_SUCCESS:
       // It will fail without toString!!!
       return state.deleteIn(['likes', action.payload.songId.toString()]);
-    case LIKE_SONG_FAILED:
+    case LIKE_FAILED:
     case LOGIN_FAILED:
     default:
       return state;

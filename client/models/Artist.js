@@ -46,6 +46,10 @@ class Artist extends ArtistRecord {
   getFollowersCount() {
     return this.get('followersCount');
   }
+
+  getTrackCount() {
+    return this.get('trackCount');
+  }
 }
 
 export default Artist;

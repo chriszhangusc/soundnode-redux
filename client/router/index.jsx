@@ -19,10 +19,15 @@ import { fetchAllLikedTracks } from 'client/redux/modules/user';
 const configureRoutes = (store) => {
   // Move these hooks into seperate files
   const onChartsPageEnter = (nextState) => {
-    const dispatch = store.dispatch;
+    const { dispatch } = store;
     const genre = nextState.params.genre || DEFAULT_GENRE;
-    dispatch(clearVisibleTracks());
     dispatch(loadCharts(genre));
+  };
+
+  const onChartsPageLeave = () => {
+    console.log('onChartsPageLeave');
+    const { dispatch } = store;
+    dispatch(clearVisibleTracks());
   };
 
   const onArtistDetailsPageEnter = (nextState) => {
@@ -68,7 +73,12 @@ const configureRoutes = (store) => {
         <IndexRedirect to={`top50/${DEFAULT_GENRE}`} />
         <Route path="top50" component={ChartsPage}>
           <IndexRedirect to={`${DEFAULT_GENRE}`} />
-          <Route path=":genre" component={ChartsPage} onEnter={onChartsPageEnter} />
+          <Route
+            path=":genre"
+            component={ChartsPage}
+            onEnter={onChartsPageEnter}
+            onLeave={onChartsPageLeave}
+          />
         </Route>
         <Route path="artist" >
           <Route

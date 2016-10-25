@@ -4,13 +4,13 @@ const SUCCESS = 'Success';
 const ERROR = 'Error';
 
 const notificationMiddleware = () => next => (action) => {
-  if (!action.type) return next(action);
-  if (action.type.indexOf('SUCCESS') > -1) {
-    // console.log(action.type);
+  const { type } = action;
+  if (!type) return next(action);
+  if (type.indexOf('SUCCESS') > -1) {
     NotificationManager.success(action.payload.message, SUCCESS);
-  } else if (action.type.indexOf('FAILED') > -1) {
-    // console.log(action.type);
-    NotificationManager.error(action.payload.message, ERROR);
+  } else if (type.indexOf('FAILED') > -1 || type.indexOf('FAILURE') > -1) {
+    // Need to display error message.
+    NotificationManager.error('An unknown error has occurred...', ERROR);
   }
   return next(action);
 };

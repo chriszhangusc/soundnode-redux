@@ -24,7 +24,7 @@ const ArtistInfo = ({
 ArtistInfo.propTypes = {
   avatarUrl: PropTypes.string,
   artistName: PropTypes.string,
-  followerCount: PropTypes.number,
+  followerCount: PropTypes.string, //formatted number
   description: PropTypes.string
 };
 

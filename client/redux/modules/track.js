@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable';
 import { trackSchema, commentArraySchema } from 'client/schemas';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
+import * as v1 from 'client/../api/sc/v1';
 
 /* Track Action Types */
 export const TRACK_REQUEST = 'redux-music/track/REQUEST';
@@ -41,6 +42,11 @@ export const fetchComments = trackId => ({
 });
 
 export const loadTrackPage = trackId => (dispatch) => {
+  v1.fetchTrack(trackId).then(track => {
+    console.log(track);
+  }).catch(err => {
+    console.log('Something wrong', err);
+  });
   // Clear previous state.
   dispatch(fetchTrack(trackId));
   dispatch(fetchComments(trackId));

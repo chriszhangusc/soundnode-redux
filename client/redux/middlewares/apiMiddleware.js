@@ -3,7 +3,6 @@ import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
 import { CLIENT_ID } from 'client/constants/Config';
 import querystring from 'querystring';
-import { UI_START_FETCHING, UI_END_FETCHING } from 'client/constants/ActionTypes';
 
 export const CALL_API = 'CALL_API';
 // Fetches an API response and normalizes the result JSON according to schema.
@@ -40,7 +39,6 @@ export default store => next => (action) => {
   const [requestType, successType, failureType] = types;
   // Start request
   next(actionWith({ type: requestType }));
-  next(actionWith({ type: UI_START_FETCHING }));
   return callApi(endpoint, schema, query, fetchOptions)
   .then(
     (response) => {
@@ -48,9 +46,6 @@ export default store => next => (action) => {
         type: successType,
         payload: response,
         entities: response.entities
-      }));
-      next(actionWith({
-        type: UI_END_FETCHING
       }));
     },
     error => next(actionWith({

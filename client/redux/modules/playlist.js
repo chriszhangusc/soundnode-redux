@@ -1,11 +1,17 @@
 import { fromJS } from 'immutable';
-import { INIT_PLAYLIST, ADD_TO_PLAYLIST, TOGGLE_PLAYLIST } from 'client/constants/ActionTypes';
 import {
   isPlaylistEmpty,
   getPlaylistTrackIds,
   getPlayerTrackId,
   getVisibleTrackIds
 } from './reducers';
+
+/* Playlist Action Types */
+
+export const INIT_PLAYLIST = 'redux-music/playlist/INIT_PLAYLIST';
+export const ADD_TO_PLAYLIST = 'redux-music/playlist/ADD_TO_PLAYLIST';
+export const TOGGLE_PLAYLIST = 'redux-music/playlist/TOGGLE_PLAYLIST';
+
 /* Actions */
 export const togglePlaylist = () => ({ type: TOGGLE_PLAYLIST });
 
@@ -96,7 +102,5 @@ const playlist = (state = INITIAL_STATE, action) => {
 
 export const isPlaylistHidden = state => state.get('hidden');
 export const getTrackIds = state => state.get('trackIds');
-
 export const isEmpty = state => getTrackIds(state).isEmpty();
-
 export default playlist;

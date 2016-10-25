@@ -1,21 +1,13 @@
 // Seperate into different files
-/* UI */
-export const UI_START_FETCHING = 'UI_START_FETCHING';
-export const UI_END_FETCHING = 'UI_END_FETCHING';
-/* Playlist Action Types */
-
-export const INIT_PLAYLIST = 'INIT_PLAYLIST';
-export const ADD_TO_PLAYLIST = 'ADD_TO_PLAYLIST';
-export const TOGGLE_PLAYLIST = 'TOGGLE_PLAYLIST';
 
 /* COPY Actions */
 export const COPY_SUCCESS = 'COPY_SUCCESS';
+
 /* Player Action Types */
 export const PLAY_SONG = 'PLAY_SONG';
 export const PAUSE_SONG = 'PAUSE_SONG';
 export const UPDATE_TIME = 'UPDATE_TIME';
 export const LOAD_PLAYER_PLAYLIST = 'LOAD_PLAYER_PLAYLIST';
-
 export const CHANGE_SONG = 'CHANGE_SONG';
 export const BEGIN_SEEK = 'BEGIN_SEEK';
 export const END_SEEK = 'END_SEEK';
@@ -32,7 +24,6 @@ export const SAGA_UPDATE_TIME_ON_SEEK = 'SAGA_UPDATE_TIME_ON_SEEK';
 export const SAGA_UPDATE_TIME_AND_END_SEEK = 'SAGA_UPDATE_TIME_AND_END_SEEK';
 export const SAGA_UPDATE_VOLUME_AND_END_SEEK = 'SAGA_UPDATE_VOLUME_AND_END_SEEK';
 export const SAGA_TOGGLE_MUTE = 'SAGA_TOGGLE_MUTE';
-
 export const SAGA_PLAY_NEXT_SONG = 'SAGA_PLAY_NEXT_SONG';
 export const SAGA_PLAY_PREV_SONG = 'SAGA_PLAY_PREV_SONG';
 export const SAGA_CHANGE_PLAY_MODE = 'SAGA_CHANGE_PLAY_MODE';
@@ -43,16 +34,6 @@ export const SEARCH_SONGS = 'SEARCH_SONGS';
 export const INIT_SHUFFLE = 'INIT_SHUFFLE';
 export const SHUFFLE_DRAW = 'SHUFFLE_DRAW';
 export const SHUFFLE_DISCARD = 'SHUFFLE_DISCARD';
-
-/* User Action Types */
-export const LIKE_SONG_SUCCESS = 'LIKE_SONG_SUCCESS';
-export const LIKE_SONG_FAILED = 'LIKE_SONG_FAILED';
-export const UNLIKE_SONG_SUCCESS = 'UNLIKE_SONG_SUCCESS';
-export const UNLIKE_SONG_FAILED = 'UNLIKE_SONG_FAILED';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILED = 'LOGIN_FAILED';
-export const LOGOUT = 'LOGOUT';
-export const LOAD_ALL_LIKES = 'LOAD_ALL_LIKES';
 
 /* Search Action Types */
 export const FETCH_DROPDOWN_TRACKS = 'FETCH_DROPDOWN_TRACKS';
@@ -72,17 +53,10 @@ export const SHOW_DROPDOWN_SEARCH_RESULTS = 'SHOW_DROPDOWN_SEARCH_RESULTS';
 export const HIDE_DROPDOWN_SEARCH_RESULTS = 'HIDE_DROPDOWN_SEARCH_RESULTS';
 export const CLEAR_DROPDOWN_SEARCH_RESULTS = 'CLEAR_DROPDOWN_SEARCH_RESULTS';
 
-
-
 // Should be moved to ducks
 export const TRACKS_REQUEST = 'TRACKS_REQUEST';
 export const TRACKS_RECEIVE = 'TRACKS_RECEIVE';
 export const TRACKS_FAILURE = 'TRACKS_FAILURE';
 
+// Not sure where we used it.
 export const LOAD_PLAYLIST = 'LOAD_PLAYLIST';
-
-
-/* Likes Page Action Types */
-export const LIKED_TRACKS_REQUEST = 'LIKED_TRACKS_REQUEST';
-export const LIKED_TRACKS_RECEIVE = 'LIKED_TRACKS_RECEIVE';
-export const LIKED_TRACKS_FAILURE = 'LIKED_TRACKS_FAILURE';

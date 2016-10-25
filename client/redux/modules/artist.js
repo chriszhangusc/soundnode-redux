@@ -4,6 +4,7 @@ import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { artistSchema, trackArraySchema } from 'client/schemas';
 /* Artist Action Types */
 export const CLEAR_STATE = 'redux-music/artist/CLEAR_STATE';
+import * as v1 from 'client/../api/sc/v1';
 
 export const ARTIST_REQUEST = 'redux-music/artist/ARTIST_REQUEST';
 export const ARTIST_RECEIVED = 'redux-music/artist/ARTIST_RECEIVED';
@@ -41,6 +42,9 @@ const fetchArtistTracks = id => ({
 });
 
 export const fetchArtistAndTracks = id => (dispatch) => {
+  v1.fetchArtist(id).then(artist => {
+    console.log(artist);
+  });
   dispatch(fetchArtist(id));
   dispatch(fetchArtistTracks(id));
 };
