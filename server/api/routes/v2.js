@@ -1,9 +1,8 @@
 import express from 'express';
-import fetch from 'isomorphic-fetch';
-import url from 'url';
+import qs from 'querystring';
 import { fetchCharts } from '../../../api/sc/v2';
-import { fetchArtist } from '../../../api/sc/v1';
-const SC_API_V2 = 'https://api-v2.soundcloud.com/';
+// import { fetchArtist } from '../../../api/sc/v1';
+// The reason why we use a proxy server is that soundcloud api v2 is not public yet
 
 const router = express.Router();
 
@@ -24,55 +23,32 @@ router.get('/charts', (req, res) => {
   const clientId = req.query.client_id;
 
   // The downside of fetching detailed artists: SLOW!!
-  fetchCharts(genre, limit, offset, clientId).then(charts => {
+  fetchCharts(genre, limit, offset, clientId).then((charts) => {
     // res.json(charts);
     // Here we need to simplify results coming back from soundcloud server
     // to keep only collection and next_href that we care about
     const { collection, next_href } = charts;
+    const nextOffset = qs.parse(next_href).offset;
+
     const resJson = {
       collection: [],
-      nextHref: null
+      // nextHref: null
+      nextOffset
     };
-
     if (collection) {
-      const fetchQueue = [];
-      collection.forEach(item => {
+      // const fetchQueue = [];
+      collection.forEach((item) => {
         const { track } = item;
-        const { user_id } = track;
-        fetchQueue.push(fetchArtist(user_id));
+        // const { user_id } = track;
+        // fetchQueue.push(fetchArtist(user_id));
         // console.log(fetchQueue);
         resJson.collection.push(convertTrackToV1(track));
       });
-      // The order of the promise array is preserved
-      Promise.all(fetchQueue).then(artists => {
-        artists.forEach((artist, i) => resJson.collection[i].user = artist);
-        res.json(resJson);
-      });
+      res.json(resJson);
     } else {
       res.json(resJson);
     }
   });
-  // fetch(fetchUrl)
-  //   .then(response => response.json())
-  //   .then((json) => {
-  //     const newJson = {
-  //       collection: [],
-  //       nextHref: json.next_href
-  //     };
-  //     // For each track, go fetch their user.
-  //     json.collection.forEach((item) => {
-  //       const { track } = item;
-  //       const { user_id } = track;
-  //       // Fetch user
-  //       // fetch(`http://localhost:3001/sc/api-v1/users/${user_id}?client_id=${clientId}`).then(response => response.json).then((userJson) => {
-  //       //   console.log(userJson.id);
-  //       // });
-  //       // Tracks coming back from v2 is different from v1, convert it to v1.
-  //       newJson.collection.push(convertTrackToV1(track));
-  //     });
-  //
-  //     res.json(newJson);
-  //   });
 });
 
 export default router;

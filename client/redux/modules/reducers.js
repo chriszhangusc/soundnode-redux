@@ -45,13 +45,13 @@ export const getCommentById = (state, commentId) =>
 
 export const getArtistByTrackId = (state, trackId) => {
   const track = getTrackById(state, trackId);
-  const artistId = track && track.getArtistId();
+  const artistId = track && track.get('userId');
   return getArtistById(state, artistId);
 };
 
 export const getArtistByCommentId = (state, commentId) => {
   const comment = getCommentById(state, commentId);
-  const artistId = comment && comment.getArtistId();
+  const artistId = comment && comment.get('userId');
   return getArtistById(state, artistId);
 };
 
@@ -61,9 +61,9 @@ export const getArtistByCommentId = (state, commentId) => {
 
 /* From Charts */
 export const getChartsGenre = state => fromCharts.getGenre(state.get('charts'));
-export const getChartsTrackMap = state => fromCharts.getTrackMap(state.get('charts'));
 export const getChartsTrackIds = state => fromCharts.getTrackIds(state.get('charts'));
 export const isChartsFetching = state => fromCharts.isFetching(state.get('charts'));
+export const getChartsOffset = state => fromCharts.getOffset(state.get('charts'));
 
 /* From Track */
 export const isTrackFetching = state => fromTrack.isTrackFetching(state.get('track'));

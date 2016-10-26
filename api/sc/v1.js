@@ -10,14 +10,14 @@ const SC_API_V1 = 'https://api.soundcloud.com/';
  */
 export function fetchTrack(id) {
   const endpoint = `/tracks/${id}`;
-  const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id:CLIENT_ID });
+  const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id: CLIENT_ID });
   // Also fetch its artist!
   return makeRequest(fetchUrl);
-};
+}
 
 export function fetchArtist(id) {
   const endpoint = `/users/${id}`;
-  const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id:CLIENT_ID });
+  const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id: CLIENT_ID });
   console.log(fetchUrl);
   return makeRequest(fetchUrl);
-};
+}

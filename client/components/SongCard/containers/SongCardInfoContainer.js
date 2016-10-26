@@ -4,13 +4,13 @@ import { getArtistByTrackId } from 'client/redux/modules/reducers';
 import SongCardInfo from '../components/SongCardInfo';
 
 const mapStateToProps = (state, { track }) => {
-  const artist = getArtistByTrackId(state, track.getId());
+  const artist = getArtistByTrackId(state, track.get('id'));
   return {
-    trackId: track.getId(),
-    title: track.getTitle(),
-    artistAvatar: artist.getAvatarUrl(),
-    artistName: artist.getUsername(),
-    artistId: artist.getId()
+    trackId: track.get('id'),
+    title: track.get('title'),
+    artistAvatar: artist.get('avatarUrl'),
+    artistName: artist.get('username'),
+    artistId: artist.get('id')
   };
 };
 

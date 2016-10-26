@@ -14,23 +14,24 @@ function mergeEntities(state, entityName, entityMap, RecordType) {
 }
 
 export default function entities(state = INITIAL_STATE, action) {
-  const modelMapper = {
-    tracks: Track,
-    artists: Artist,
-    comments: Comment
-  };
+  // const modelMapper = {
+  //   tracks: Track,
+  //   artists: Artist,
+  //   comments: Comment
+  // };
 
   // Iterate through all our eneities tables, merge incoming new entities one by one.
   // Note we have to use string as key.
   if (action.entities) {
-    const [...keys] = state.keys(); // Note the way to extract immutable Iterator as array
-    let newState = state;
-    keys.forEach((key) => {
-      if (action.entities[key]) {
-        newState = mergeEntities(newState, key, fromJS(action.entities[key]), modelMapper[key]);
-      }
-    });
-    return newState;
+    // console.log(action.entities);
+    // const [...keys] = state.keys(); // Note the way to extract immutable Iterator as array
+    // let newState = state;
+    // keys.forEach((key) => {
+    //   if (action.entities[key]) {
+    //     newState = mergeEntities(newState, key, fromJS(action.entities[key]), modelMapper[key]);
+    //   }
+    // });
+    return state.mergeDeep(action.entities);
   }
   return state;
 }

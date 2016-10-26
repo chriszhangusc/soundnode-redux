@@ -19,9 +19,9 @@ import {
 import SongCardImage from '../components/SongCardImage';
 
 const mapStateToProps = (state, { track }) => ({
-  artworkUrl: formatImageUrl(track.getArtworkUrl()),
-  active: isTrackActive(state, track.getId()),
-  playing: isTrackPlaying(state, track.getId())
+  artworkUrl: formatImageUrl(track.get('artworkUrl')),
+  active: isTrackActive(state, track.get('id')),
+  playing: isTrackPlaying(state, track.get('id'))
 });
 
 // This is useful when you need to compute some action using stateProps
@@ -36,8 +36,8 @@ const mergeProps = (stateProps, { dispatch }, { track }) => ({
       // if current playlist is empty. We need to access to currently loaded tracks in charts.
       // 2. If current playlist is not empty, do not mess with it, just add the current track
       // after the currently playing track.
-      dispatch(updatePlaylistIfNeeded(track.getId()));
-      dispatch(changeSongAndPlay(track.getId()));
+      dispatch(updatePlaylistIfNeeded(track.get('id')));
+      dispatch(changeSongAndPlay(track.get('id')));
     } else {
       // console.log('Toggle Song');
       dispatch(stateProps.playing ? pauseSong() : playSong());

@@ -30,14 +30,34 @@ var Immutable = require('immutable');
 // console.log(orderedMap.merge(map2).toJS());
 
 // Record
-var ABRecord = Immutable.Record({
-  a: 1,
-  b: undefined
-});
-//
-var r1 = new ABRecord({});
-var r2 = new ABRecord({b: 2});
-console.log(r1, r2);
-console.log(r1.merge(r2));
-console.log(r2.merge(r1));
+// var ABRecord = Immutable.Record({
+//   a: 1,
+//   b: undefined
+// });
+// //
+// var r1 = new ABRecord({});
+// var r2 = new ABRecord({b: 2});
+// console.log(r1, r2);
+// console.log(r1.merge(r2));
+// console.log(r2.merge(r1));
 // console.log(Immutable.fromJS(myRecord));
+
+var a = Immutable.fromJS({
+  artists: {
+    1: {
+      name: 'a'
+    }
+  }
+});
+
+var b = Immutable.fromJS({
+  artists: {
+    1: {
+      name: 'b',
+      id: 'c'
+    }
+  }
+});
+
+console.log(a.mergeDeep(b).toJS());
+console.log(b.mergeDeep(a).toJS());

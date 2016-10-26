@@ -24,8 +24,8 @@ export default function SongCardInfo({ trackId, artistId, artistAvatar, title, a
 }
 
 SongCardInfo.propTypes = {
-  trackId: PropTypes.string,
-  artistId: PropTypes.string,
+  trackId: PropTypes.number,
+  artistId: PropTypes.number,
   artistAvatar: PropTypes.string,
   title: PropTypes.string,
   artistName: PropTypes.string

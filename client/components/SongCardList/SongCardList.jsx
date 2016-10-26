@@ -6,8 +6,7 @@ import infiniteScroll from 'client/components/hocs/InfiniteScroll';
 // import TrackMap from 'client/models/TrackMap';
 import { List } from 'immutable';
 
-const renderSongCardList = (trackIds, fetching) => {
-  if (fetching) return <Spinner />;
+const renderSongCardList = (trackIds) => {
   const COLS = 4;
   // Shallow convert Immutable.List to array for chunking
   // and preserving the goodness of Track Records
@@ -27,7 +26,8 @@ const SongCardList = (props) => {
   const { fetching, trackIds } = props;
   return (
     <div className="container">
-      {renderSongCardList(trackIds, fetching)}
+      {renderSongCardList(trackIds)}
+      { fetching && <Spinner /> }
     </div>
   );
 };
