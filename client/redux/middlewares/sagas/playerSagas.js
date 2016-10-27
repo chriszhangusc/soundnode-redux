@@ -20,12 +20,13 @@ import { generateRandom } from 'client/utils/GeneralUtils';
 //   shuffleDraw,
 //   shuffleDiscard
 // }  from 'client/redux/modules/player';
+// Not good
 import * as playerDuck from 'client/redux/modules/player';
 /* *****************************************************************************/
 /* ****************************** SUBROUTINES **********************************/
 /* *****************************************************************************/
 
-function* convertAndUpdateTime(rawTime) {
+function* updateTimeIfNeeded(rawTime) {
   const newTime = yield call(Math.floor, rawTime); // Convert float to int
   const currentTime = yield select(playerDuck.getCurrentTime);
   if (newTime !== currentTime) {
@@ -36,16 +37,16 @@ function* convertAndUpdateTime(rawTime) {
 function* updateTimeRegular({ payload }) {
   const seeking = yield select(playerDuck.isPlayerSeeking);
   if (!seeking) {
-    yield call(convertAndUpdateTime, payload);
+    yield call(updateTimeIfNeeded, payload);
   }
 }
 
 function* updateTimeSeek({ payload }) {
-  yield call(convertAndUpdateTime, payload);
+  yield call(updateTimeIfNeeded, payload);
 }
 
 function* updateTimeAndEndSeek({ payload }) {
-  yield call(convertAndUpdateTime, payload);
+  yield call(updateTimeIfNeeded, payload);
   yield put(playerDuck.endSeek());
 }
 
@@ -67,15 +68,10 @@ function* toggleMute() {
 
 // Change to new song or just play paused current song.
 function* changeSongAndPlay({ payload }) {
-  const newSong = payload;
-  const visiblePlaylistName = yield select(playerDuck.getVisiblePlaylistName);
-  const playerPlaylistName = yield select(playerDuck.getPlayerPlaylistName);
-  if (visiblePlaylistName !== playerPlaylistName) {
-    yield put(playerDuck.loadPlayerPlaylist(visiblePlaylistName));
-  }
   yield put(playerDuck.pauseSong());
-  yield put(playerDuck.changeSong(newSong));
   yield put(playerDuck.clearTime());
+  // Change current track to new track.
+  yield put(playerDuck.changeSong(payload));
   yield put(playerDuck.playSong());
 }
 

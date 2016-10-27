@@ -19,10 +19,10 @@ const INITIAL_STATE = fromJS({
   tracksFetching: false,
   artistId: undefined,
   trackIds: [],
-  tracksNextHref: undefined
+  tracksNextHref: undefined,
 });
 
-const artist = (state = INITIAL_STATE, action) => {
+export default function artistReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case CLEAR_STATE:
       return INITIAL_STATE;
@@ -31,21 +31,19 @@ const artist = (state = INITIAL_STATE, action) => {
     case ARTIST_RECEIVED:
       return state.merge({
         artistId: action.payload.result,
-        artistFetching: false
+        artistFetching: false,
       });
     case TRACKS_REQUEST:
       return state.set('tracksFetching', true);
     case TRACKS_RECEIVED:
       return state.merge({
         trackIds: state.get('trackIds').concat(fromJS(action.payload.result)), // concat for scroll to load more
-        tracksFetching: false
+        tracksFetching: false,
       });
     default:
       return state;
   }
-};
-
-export default artist;
+}
 
 /* Selectors */
 export const getState = state => state.get('artist');
@@ -57,40 +55,42 @@ export const getTracksNextHref = state => getState(state).get('tracksNextHref');
 
 
 /* Actions */
+export const clearArtistState = () => ({
+  type: CLEAR_STATE,
+});
+
 const fetchArtist = id => ({
   [CALL_API]: {
     endpoint: `/sc/api-v1/users/${id}`,
     fetchOptions: {
-      method: 'GET'
+      method: 'GET',
     },
     types: [ARTIST_REQUEST, ARTIST_RECEIVED, ARTIST_FAILURE],
-    schema: artistSchema
-  }
+    schema: artistSchema,
+  },
 });
 
 const fetchArtistTracks = id => ({
   [CALL_API]: {
     endpoint: `/sc/api-v1/users/${id}/tracks`,
     fetchOptions: {
-      method: 'GET'
+      method: 'GET',
     },
     query: {
-      limit: 20
+      limit: 20,
     },
     method: 'GET',
     types: [TRACKS_REQUEST, TRACKS_RECEIVED, TRACKS_FAILURE],
-    schema: trackArraySchema
-  }
+    schema: trackArraySchema,
+  },
 });
 
-export const fetchArtistAndTracks = id => (dispatch) => {
-  v1.fetchArtist(id).then((artistObj) => {
-    console.log(artistObj);
-  });
-  dispatch(fetchArtist(id));
-  dispatch(fetchArtistTracks(id));
-};
-
-export const clearArtistState = () => ({
-  type: CLEAR_STATE
-});
+export function fetchArtistAndTracks(id) {
+  return (dispatch) => {
+    v1.fetchArtist(id).then((artistObj) => {
+      console.log(artistObj);
+    });
+    dispatch(fetchArtist(id));
+    dispatch(fetchArtistTracks(id));
+  };
+}

@@ -21,10 +21,10 @@ const INITIAL_STATE = fromJS({
   commentsFetching: false,
   trackId: undefined,
   commentIds: [],
-  commentsNextHref: undefined
+  commentsNextHref: undefined,
 });
 
-const track = (state = INITIAL_STATE, action) => {
+export default function track(state = INITIAL_STATE, action) {
   switch (action.type) {
     case CLEAR_STATE:
       return INITIAL_STATE;
@@ -33,20 +33,19 @@ const track = (state = INITIAL_STATE, action) => {
     case TRACK_RECEIVED:
       return state.merge({
         trackId: action.payload.result,
-        trackFetching: false
+        trackFetching: false,
       });
     case COMMENTS_REQUEST:
       return state.set('commentsFetching', true);
     case COMMENTS_RECEIVED:
       return state.merge({
         commentIds: state.get('commentIds').concat(fromJS(action.payload.result)),
-        commentsFetching: false
+        commentsFetching: false,
       });
     default:
       return state;
   }
-};
-export default track;
+}
 
 /* Selectors */
 const getState = state => state.get('track');
@@ -57,7 +56,7 @@ export const getTrackCommentIds = state => getState(state).get('commentIds');
 
 /* Actions */
 export const clearTrackState = () => ({
-  type: CLEAR_STATE
+  type: CLEAR_STATE,
 });
 
 export const fetchTrack = trackId => ({
@@ -65,8 +64,8 @@ export const fetchTrack = trackId => ({
     endpoint: `/sc/api-v1/tracks/${trackId}`,
     method: 'GET',
     types: [TRACK_REQUEST, TRACK_RECEIVED, TRACK_FAILURE],
-    schema: trackSchema
-  }
+    schema: trackSchema,
+  },
 });
 
 export const fetchComments = trackId => ({
@@ -74,11 +73,11 @@ export const fetchComments = trackId => ({
     endpoint: `/sc/api-v1/tracks/${trackId}/comments`,
     method: 'GET',
     query: {
-      limit: 20
+      limit: 20,
     },
     types: [COMMENTS_REQUEST, COMMENTS_RECEIVED, COMMENTS_FAILURE],
-    schema: commentArraySchema
-  }
+    schema: commentArraySchema,
+  },
 });
 
 // Check!!

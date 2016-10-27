@@ -1,10 +1,6 @@
 import { connect } from 'react-redux';
-import {
-  getTrackById
-} from 'client/redux/modules/entities';
-import {
-  isTrackActive
-} from 'client/redux/modules/player';
+import { getTrackById } from 'client/redux/modules/entities';
+import { isTrackActive } from 'client/redux/modules/player';
 import SongCardLayout from '../components/SongCardLayout';
 
 // Layout component just to assemble children presentational components.
@@ -20,7 +16,7 @@ import SongCardLayout from '../components/SongCardLayout';
 const mapStateToProps = (state, { trackId }) => ({
     // Prepare track object for its children
   track: getTrackById(state, trackId),
-  active: isTrackActive(state, trackId)
+  active: isTrackActive(state, trackId),
 });
 
 export default connect(mapStateToProps)(SongCardLayout);

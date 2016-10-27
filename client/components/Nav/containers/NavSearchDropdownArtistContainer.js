@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getArtistById } from 'client/redux/modules/reducers';
+import { getArtistById } from 'client/redux/modules/entities';
 import defaultImageUrl from 'assets/images/default-artist.png';
 import NavSearchDropdownItem from '../components/NavSearchDropdownItem';
 
@@ -8,7 +8,7 @@ const mapStateToProps = (state, { artistId }) => {
   return ({
     imageUrl: artist.getAvatarUrl() || defaultImageUrl,
     itemLinkUrl: `/artist/${artist.getId()}`,
-    itemTitle: artist.getUsername()
+    itemTitle: artist.getUsername(),
   });
 };
 

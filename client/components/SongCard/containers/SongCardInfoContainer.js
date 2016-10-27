@@ -10,7 +10,7 @@ const mapStateToProps = (state, { track }) => {
     title: track.get('title'),
     artistAvatar: artist.get('avatarUrl'),
     artistName: artist.get('username'),
-    artistId: artist.get('id')
+    artistId: artist.get('id'),
   };
 };
 

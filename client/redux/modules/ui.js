@@ -6,17 +6,17 @@ const LOAD_VISIBLE_TRACKS = 'LOAD_VISIBLE_TRACKS';
 const CLEAR_VISIBLE_TRACKS = 'CLEAR_VISIBLE_TRACKS';
 
 export const clearVisibleTracks = () => ({
-  type: CLEAR_VISIBLE_TRACKS
+  type: CLEAR_VISIBLE_TRACKS,
 });
 
 export const loadVisibleTrackIds = trackIds => ({
   type: LOAD_VISIBLE_TRACKS,
-  payload: trackIds
+  payload: trackIds,
 });
 
 const INITIAL_STATE = fromJS({
   // Store a list of ids that are currently visible
-  visibleTrackIds: []
+  visibleTrackIds: [],
 });
 
 const ui = (state = INITIAL_STATE, action) => {
@@ -29,18 +29,18 @@ const ui = (state = INITIAL_STATE, action) => {
     case CHARTS_RECEIVED:
       return state.merge({
         visibleTrackIds: state.get('visibleTrackIds')
-          .concat(fromJS(action.payload.result.map(String)))
+          .concat(fromJS(action.payload.result.map(String))),
       });
     case TRACK_RECEIVED:
       return state.merge({
-        visibleTrackIds: state.get('visibleTrackIds').concat(action.payload.result.toString())
+        visibleTrackIds: state.get('visibleTrackIds').concat(String(action.payload.result)),
       });
     default:
       return state;
   }
 };
 
-export const getVisibleTrackIds = state => state.get('visibleTrackIds');
-export const isFetching = state => state.get('fetching');
+export const getUIState = state => state.get('ui');
+export const getVisibleTrackIds = state => getUIState(state).get('trackIds');
 
 export default ui;

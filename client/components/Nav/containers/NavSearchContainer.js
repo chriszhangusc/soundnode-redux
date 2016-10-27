@@ -1,24 +1,20 @@
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import {
-  sagaSearch,
-  sagaDropdownSearch,
-  clearAndHideSearchResults
-} from 'client/redux/modules/search';
-import {
   isSearchResultShown,
   getDropdownSearchArtistIds,
-  getDropdownSearchTrackIds
-} from 'client/redux/modules/reducers';
+  getDropdownSearchTrackIds,
+  sagaSearch,
+  sagaDropdownSearch,
+  clearAndHideSearchResults,
+} from 'client/redux/modules/search';
 import NavSearch from '../components/NavSearch';
 
-const mapStateToProps = (state) => {
-  return ({
-    shouldShowResults: isSearchResultShown(state),
-    artistIds: getDropdownSearchArtistIds(state),
-    trackIds: getDropdownSearchTrackIds(state)
-  });
-};
+const mapStateToProps = state => ({
+  shouldShowResults: isSearchResultShown(state),
+  artistIds: getDropdownSearchArtistIds(state),
+  trackIds: getDropdownSearchTrackIds(state),
+});
 
 const mapDispatchToProps = dispatch => ({
   handleChange: (keywords) => {
@@ -38,11 +34,11 @@ const mapDispatchToProps = dispatch => ({
       dispatch(clearAndHideSearchResults());
       browserHistory.push({
         pathname: '/search',
-        query: { q: keywords }
+        query: { q: keywords },
       });
       dispatch(sagaSearch(keywords, 20));
     }
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavSearch);

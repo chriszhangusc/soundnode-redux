@@ -2,11 +2,6 @@ import { fromJS, List } from 'immutable';
 import firebase, { firebaseRef, githubProvider } from 'client/firebase';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { trackArraySchema } from 'client/schemas';
-import {
-  getUserLikes,
-  getUserId,
-  getUserLikeIds
-} from './reducers';
 
 const LOGIN_SUCCESS = 'redux-music/user/LOGIN_SUCCESS';
 const LOGIN_FAILED = 'redux-music/user/LOGIN_FAILED';
@@ -19,24 +14,71 @@ const LIKED_TRACKS_REQUEST = 'redux-music/user/LIKED_TRACKS_REQUEST';
 const LIKED_TRACKS_RECEIVED = 'redux-music/user/LIKED_TRACKS_RECEIVED';
 const LIKED_TRACKS_FAILURE = 'redux-music/user/LIKED_TRACKS_FAILURE';
 
+/* Reducer */
+
+const INITIAL_STATE = fromJS({
+  likesFetching: false,
+  // Saving map from trackId: firebaseKey
+  likes: {},
+});
+const user = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case LOGIN_SUCCESS:
+      return state.mergeDeep(fromJS(action.payload.uid));
+    case LOGOUT:
+      return fromJS({});
+    case LOAD_ALL_LIKES:
+      return state.set('likes', fromJS(action.payload));
+    case LIKE_SUCCESS:
+      return state.setIn(
+        ['likes', action.payload.record.songId.toString()],
+        action.payload.record.firebaseKey
+      );
+    case UNLIKE_SUCCESS:
+      // It will fail without toString!!!
+      return state.deleteIn(['likes', action.payload.songId.toString()]);
+    case LIKE_FAILED:
+    case LOGIN_FAILED:
+    default:
+      return state;
+  }
+};
+
+export default user;
+
+// Selectors
+export const getUserState = state => state.get('user');
+
+export const getUserId = state => getUserState(state).get('uid');
+export const getDisplayName = state => getUserState(state).get('displayName');
+export const getPhotoUrl = state => getUserState(state).get('photoURL');
+export const getUserLikes = state => getUserState(state).get('likes');
+export const getLikeIds = state => List(getUserState(state).get('likes').keys());
+export const isFetching = state => getUserState(state).get('fetching');
+export const isTrackLiked = (state, trackId) => {
+  const likes = getUserLikes(state);
+  return likes.has(String(trackId));
+};
+
+
 export const loginSuccess = uid => ({
   type: LOGIN_SUCCESS,
   payload: {
     uid,
-    message: 'User Login Success!'
-  }
+    message: 'User Login Success!',
+  },
 });
 
 export const loginFailed = error => ({
   type: LOGIN_FAILED,
   payload: {
     error,
-    message: 'User Login Failed!'
-  }
+    message: 'User Login Failed!',
+  },
 });
 
 export const logout = () => ({
-  type: LOGOUT
+  type: LOGOUT,
 });
 
 // This should be grouped in api folder.
@@ -45,31 +87,32 @@ export const fetchTracks = trackIds => ({
     endpoint: '/sc/api-v1/tracks',
     fetchOptions: {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       method: 'POST',
       body: JSON.stringify({
-        trackIds: [...trackIds]
-      })
+        trackIds: [...trackIds],
+      }),
     },
     types: [LIKED_TRACKS_REQUEST, LIKED_TRACKS_RECEIVED, LIKED_TRACKS_FAILURE],
-    schema: trackArraySchema
-  }
+    schema: trackArraySchema,
+  },
 });
 
 /**
  * Fetch the actual liked track objects
  * @return {[type]} [description]
  */
+// FIXME: not sure what this function is about
 export const fetchAllLikedTracks = () => (dispatch, getState) => {
-  const state = getState();
-  const trackIds = getUserLikeIds(state);
-  dispatch(fetchTracks(trackIds.toJS()));
+  // const state = getState();
+  // const trackIds = getUserLikeIds(state);
+  // dispatch(fetchTracks(trackIds.toJS()));
 };
 
 export const loadAllLikes = likes => ({
   type: LOAD_ALL_LIKES,
-  payload: likes
+  payload: likes,
 });
 
 /**
@@ -100,7 +143,7 @@ export const startLogin = () => (dispatch) => {
     const authObj = {
       uid: result.user.uid,
       displayName: result.user.displayName,
-      photoURL: result.user.photoURL
+      photoURL: result.user.photoURL,
     };
     dispatch(loginSuccess(authObj));
     dispatch(startLoadAllLikes());
@@ -122,16 +165,16 @@ export const likeSongSuccess = record => ({
   type: LIKE_SUCCESS,
   payload: {
     record,
-    message: 'Song added to likes'
-  }
+    message: 'Song added to likes',
+  },
 });
 
 export const likeSongFailed = songId => ({
   type: LIKE_FAILED,
   payload: {
     songId,
-    message: 'Failed to add song to likes'
-  }
+    message: 'Failed to add song to likes',
+  },
 });
 
 export function startLikeSong(songId) {
@@ -147,7 +190,7 @@ export function startLikeSong(songId) {
     firebaseRef.child(`${uid}/likes`).push(songId).then((ret) => {
       const record = {
         songId,
-        firebaseKey: ret.key
+        firebaseKey: ret.key,
       };
       dispatch(likeSongSuccess(record));
     }, (err) => {
@@ -161,8 +204,8 @@ export function unlikeSongSuccess(songId) {
     type: UNLIKE_SUCCESS,
     payload: {
       songId,
-      message: 'Song removed from likes'
-    }
+      message: 'Song removed from likes',
+    },
   };
 }
 
@@ -185,41 +228,5 @@ export function startUnlikeSong(songId) {
   };
 }
 
-/* Reducer */
-
-const INITIAL_STATE = fromJS({
-  likesFetching: false,
-  likes: {} // Saving map from trackId: firebaseKey
-});
-const user = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case LOGIN_SUCCESS:
-      return state.mergeDeep(fromJS(action.payload.uid));
-    case LOGOUT:
-      return fromJS({});
-    case LOAD_ALL_LIKES:
-      return state.set('likes', fromJS(action.payload));
-    case LIKE_SUCCESS:
-      return state.setIn(
-        ['likes', action.payload.record.songId.toString()],
-        action.payload.record.firebaseKey
-      );
-    case UNLIKE_SUCCESS:
-      // It will fail without toString!!!
-      return state.deleteIn(['likes', action.payload.songId.toString()]);
-    case LIKE_FAILED:
-    case LOGIN_FAILED:
-    default:
-      return state;
-  }
-};
-
-export default user;
-
-// Selectors
-export const getUid = state => state.get('uid');
-export const getDisplayName = state => state.get('displayName');
-export const getPhotoUrl = state => state.get('photoURL');
-export const getLikes = state => state.get('likes');
-export const getLikeIds = state => List(state.get('likes').keys());
-export const isFetching = state => state.get('fetching');
+// Return all trackIds liked by current logged in user.
+// export const getUserLikeIds = state => List(getUserLikes(state).keySeq());

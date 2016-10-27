@@ -4,21 +4,19 @@ import { formatImageUrl } from 'client/utils/FormatUtils';
 import {
   isTrackActive,
   isTrackPlaying,
-  changeSongAndPlay,
+  sagaChangeSongAndPlay,
   playSong,
-  pauseSong
+  pauseSong,
 } from 'client/redux/modules/player';
 
-import {
-  updatePlaylistIfNeeded
-} from 'client/redux/modules/playlist';
+import { updatePlaylistIfNeeded } from 'client/redux/modules/playlist';
 
 import SongCardImage from '../components/SongCardImage';
 
 const mapStateToProps = (state, { track }) => ({
   artworkUrl: formatImageUrl(track.get('artworkUrl')),
   active: isTrackActive(state, track.get('id')),
-  playing: isTrackPlaying(state, track.get('id'))
+  playing: isTrackPlaying(state, track.get('id')),
 });
 
 // This is useful when you need to compute some action using stateProps
@@ -34,12 +32,12 @@ const mergeProps = (stateProps, { dispatch }, { track }) => ({
       // 2. If current playlist is not empty, do not mess with it, just add the current track
       // after the currently playing track.
       dispatch(updatePlaylistIfNeeded(track.get('id')));
-      dispatch(changeSongAndPlay(track.get('id')));
+      dispatch(sagaChangeSongAndPlay(track.get('id')));
     } else {
       // console.log('Toggle Song');
       dispatch(stateProps.playing ? pauseSong() : playSong());
     }
-  }
+  },
 });
 
 export default connect(mapStateToProps, null, mergeProps)(SongCardImage);

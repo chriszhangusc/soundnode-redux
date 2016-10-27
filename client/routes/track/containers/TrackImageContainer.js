@@ -1,26 +1,16 @@
 import { connect } from 'react-redux';
 import { t500x500 } from 'client/constants/ImageConstants';
 import { formatPlaybacks, formatLikes, formatImageUrl } from 'client/utils/FormatUtils';
-import {
-  isTrackPlaying,
-  isTrackLiked,
-  isTrackActive
-} from 'client/redux/modules/reducers';
-
-import {
-  startLikeSong,
-  startUnlikeSong
-} from 'client/redux/modules/user';
+import { isTrackLiked, startLikeSong, startUnlikeSong } from 'client/redux/modules/user';
+import { updatePlaylistIfNeeded } from 'client/redux/modules/playlist';
 
 import {
   playSong,
   pauseSong,
-  changeSongAndPlay
+  changeSongAndPlay,
+  isTrackActive,
+  isTrackPlaying,
 } from 'client/redux/modules/player';
-
-import {
-  updatePlaylistIfNeeded
-} from 'client/redux/modules/playlist';
 
 import TrackImage from '../components/TrackImage';
 
@@ -34,7 +24,7 @@ const mapStateToProps = (state, { track }) => {
     likeCount: formatLikes(track.get('favoritingsCount')),
     playing: isTrackPlaying(state, trackId),
     liked: isTrackLiked(state, trackId),
-    active: isTrackActive(state, trackId)
+    active: isTrackActive(state, trackId),
   };
 };
 
@@ -54,7 +44,7 @@ const mergeProps = (stateProps, { dispatch }, { track }) => {
     },
     handleToggleLike() {
       dispatch(liked ? startUnlikeSong(trackId) : startLikeSong(trackId));
-    }
+    },
   };
 };
 

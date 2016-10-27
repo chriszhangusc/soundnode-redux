@@ -1,14 +1,12 @@
 import { connect } from 'react-redux';
 import SongCardList from 'client/components/SongCardList';
-import {
-  isUIFetching,
-  getUserLikeIds
-} from 'client/redux/modules/reducers';
+import { getUserLikeIds } from 'client/redux/modules/user';
 
+// FIXME: Have not written like ducks for this page yet.
 // Container for SongCardList
 const mapStateToProps = state => ({
   trackIds: getUserLikeIds(state), // There are invalid trackIds somehow...
-  fetching: isUIFetching(state)
+  fetching: true,
 });
 
 const mapDispatchToProps = dispatch => ({

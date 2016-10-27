@@ -8,8 +8,8 @@ export const copyToClipboard = (str) => {
     dispatch({
       type: COPY_SUCCESS,
       payload: {
-        message: 'Track URL copied to clipboard'
-      }
+        message: 'Track URL copied to clipboard',
+      },
     });
   };
 };

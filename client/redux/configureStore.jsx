@@ -7,7 +7,7 @@ import throttle from 'lodash/throttle';
 import createLogger from 'redux-logger';
 import { loadState, saveState } from 'client/utils/LocalStorageUtils';
 import notificationMiddleware from './middlewares/notificationMiddleware';
-import rootReducer from './modules/reducers';
+import rootReducer from './rootReducer';
 import apiMiddleware from './middlewares/apiMiddleware';
 import rootSaga from './middlewares/sagas';
 
@@ -18,7 +18,7 @@ const stateTransformer = (state) => {
 };
 
 const logger = createLogger({
-  stateTransformer
+  stateTransformer,
 });
 
 const configureStore = () => {

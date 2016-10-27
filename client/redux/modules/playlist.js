@@ -1,16 +1,37 @@
 import { fromJS } from 'immutable';
-import {
-  isPlaylistEmpty,
-  getPlaylistTrackIds,
-  getPlayerTrackId,
-  getVisibleTrackIds
-} from './reducers';
-
-/* Playlist Action Types */
-
+import { getPlayerTrackId } from './player';
+import { getVisibleTrackIds } from './ui';
+/* Constants */
 export const INIT_PLAYLIST = 'redux-music/playlist/INIT_PLAYLIST';
 export const ADD_TO_PLAYLIST = 'redux-music/playlist/ADD_TO_PLAYLIST';
 export const TOGGLE_PLAYLIST = 'redux-music/playlist/TOGGLE_PLAYLIST';
+
+/* Reducer */
+const INITIAL_STATE = fromJS({
+  trackIds: [],
+  hidden: true,
+});
+
+export default function playlistReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case TOGGLE_PLAYLIST:
+      return state.set('hidden', !state.get('hidden'));
+    case INIT_PLAYLIST:
+      return state.set('trackIds', fromJS(action.payload));
+    case ADD_TO_PLAYLIST:
+      return state.set('trackIds',
+        state.get('trackIds').insert(action.payload.position, action.payload.trackId));
+    default:
+      return state;
+  }
+}
+
+export const getPlaylistState = state => state.get('playlist');
+export const isPlaylistHidden = state => getPlaylistState(state).get('hidden');
+export const getPlaylistTrackIds = state => getPlaylistState(state).get('trackIds');
+export const isPlaylistEmpty = state => getPlaylistTrackIds(state).isEmpty();
+export const isTrackInPlaylist = (state, trackId) => getPlaylistTrackIds(state).indexOf(trackId);
+
 
 /* Actions */
 export const togglePlaylist = () => ({ type: TOGGLE_PLAYLIST });
@@ -21,7 +42,7 @@ export const togglePlaylist = () => ({ type: TOGGLE_PLAYLIST });
  */
 export const initPlaylist = trackIds => ({
   type: INIT_PLAYLIST,
-  payload: trackIds
+  payload: trackIds,
 });
 
 /**
@@ -33,8 +54,8 @@ export const addToPlaylist = (trackId, position) => ({
   type: ADD_TO_PLAYLIST,
   payload: {
     trackId,
-    position
-  }
+    position,
+  },
 });
 
 /* Thunks logic */
@@ -67,40 +88,17 @@ export const addToPlaylistIfNeeded = trackId => (dispatch, getState) => {
  * @param  {[type]} trackId [description]
  * @return {[type]}         [description]
  */
-export const updatePlaylistIfNeeded = trackId => (dispatch, getState) => {
-  const state = getState();
-  if (isPlaylistEmpty(state)) {
-    const visibleTrackIds = getVisibleTrackIds(state);
-    const initPlaylistTrackIds = visibleTrackIds.slice(visibleTrackIds.indexOf(trackId));
-    dispatch(initPlaylist(initPlaylistTrackIds));
-  } else {
-    // check if track is already in current playlist
-    dispatch(addToPlaylistIfNeeded(trackId));
-    console.log('Insert trackId right after current playerId');
-  }
-};
-
-/* Reducer */
-const INITIAL_STATE = fromJS({
-  trackIds: [],
-  hidden: true
-});
-
-const playlist = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case TOGGLE_PLAYLIST:
-      return state.set('hidden', !state.get('hidden'));
-    case INIT_PLAYLIST:
-      return state.set('trackIds', fromJS(action.payload));
-    case ADD_TO_PLAYLIST:
-      return state.set('trackIds',
-        state.get('trackIds').insert(action.payload.position, action.payload.trackId));
-    default:
-      return state;
-  }
-};
-
-export const isPlaylistHidden = state => state.get('hidden');
-export const getTrackIds = state => state.get('trackIds');
-export const isEmpty = state => getTrackIds(state).isEmpty();
-export default playlist;
+export function updatePlaylistIfNeeded(trackId) {
+  return (dispatch, getState) => {
+    const state = getState();
+    if (isPlaylistEmpty(state)) {
+      const visibleTrackIds = getVisibleTrackIds(state);
+      const initPlaylistTrackIds = visibleTrackIds.slice(visibleTrackIds.indexOf(trackId));
+      dispatch(initPlaylist(initPlaylistTrackIds));
+    } else {
+      // check if track is already in current playlist
+      dispatch(addToPlaylistIfNeeded(trackId));
+      console.log('Insert trackId right after current playerId');
+    }
+  };
+}

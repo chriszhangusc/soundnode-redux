@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
-import { startLikeSong, startUnlikeSong } from 'client/redux/modules/user';
-import { isTrackLiked } from 'client/redux/modules/reducers';
+import { startLikeSong, startUnlikeSong, isTrackLiked } from 'client/redux/modules/user';
 import { copyToClipboard } from 'client/redux/modules/utils';
 import SongCardControls from '../components/SongCardControls';
 
 const mapStateToProps = (state, { track }) => ({
-  liked: isTrackLiked(state, track.get('id'))
+  liked: isTrackLiked(state, track.get('id')),
 });
 
 const mergeProps = ({ liked }, { dispatch }, { track }) => ({
@@ -16,7 +15,7 @@ const mergeProps = ({ liked }, { dispatch }, { track }) => ({
   },
   handleCopyToClipboard() {
     dispatch(copyToClipboard(track.get('permaLink')));
-  }
+  },
 });
 
 export default connect(mapStateToProps, null, mergeProps)(SongCardControls);

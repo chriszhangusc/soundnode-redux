@@ -8,6 +8,7 @@ export const DEFAULT_MODE = LOOP;
 export const INITIAL_VOLUME = 0.5;
 export const NEXT = 'NEXT';
 export const PREV = 'PREV';
+
 /* Player Action Types */
 export const PLAY_SONG = 'PLAY_SONG';
 export const PAUSE_SONG = 'PAUSE_SONG';
@@ -28,11 +29,11 @@ export const SAGA_UPDATE_TIME_ON_PLAY = 'SAGA_UPDATE_TIME_ON_PLAY';
 export const SAGA_UPDATE_TIME_ON_SEEK = 'SAGA_UPDATE_TIME_ON_SEEK';
 export const SAGA_UPDATE_TIME_AND_END_SEEK = 'SAGA_UPDATE_TIME_AND_END_SEEK';
 export const SAGA_UPDATE_VOLUME_AND_END_SEEK = 'SAGA_UPDATE_VOLUME_AND_END_SEEK';
-export const SAGA_TOGGLE_MUTE = 'SAGA_TOGGLE_MUTE';
 export const SAGA_PLAY_NEXT_SONG = 'SAGA_PLAY_NEXT_SONG';
 export const SAGA_PLAY_PREV_SONG = 'SAGA_PLAY_PREV_SONG';
 export const SAGA_CHANGE_PLAY_MODE = 'SAGA_CHANGE_PLAY_MODE';
 
+export const SAGA_TOGGLE_MUTE = 'SAGA_TOGGLE_MUTE';
 export const MUTE = 'MUTE';
 export const CLEAR_TIME = 'CLEAR_TIME';
 export const SEARCH_SONGS = 'SEARCH_SONGS';
@@ -80,7 +81,7 @@ export const shuffleDiscard = songId => ({ type: SHUFFLE_DISCARD, payload: songI
 
 export const updateTime = currentTime => ({
   type: UPDATE_TIME,
-  payload: currentTime
+  payload: currentTime,
 });
 
 /**
@@ -90,76 +91,61 @@ export const updateTime = currentTime => ({
  */
 export const changeSong = trackId => ({
   type: CHANGE_SONG,
-  payload: trackId
+  payload: trackId,
 });
 
 export const changeVolume = volume => ({
   type: CHANGE_VOLUME,
-  payload: volume
+  payload: volume,
 });
 
 export const changePlayMode = mode => ({
   type: CHANGE_PLAY_MODE,
-  payload: mode
+  payload: mode,
 });
-
-/* Thunks */
-/**
- * Change current track to new track, and play the new track.
- * @param  {Track(Record)} track        The Track model representing a track object
- * @param  {Boolean} playlist If we should load playlist to state.
- * @return {[type]}                    [description]
- */
-// Maybe we should have a ui state to store currently displayed list of data
-export const changeSongAndPlay = trackId => (dispatch) => {
-  dispatch(pauseSong());
-  dispatch(clearTime());
-  // Change current track to new track.
-  dispatch(changeSong(trackId));
-  dispatch(playSong());
-};
 
 // Saga Actions (Actions that will trigger a saga and execute side effects)
+// Player logic are implemented in sagas
 export const sagaToggleMute = () => ({
-  type: SAGA_TOGGLE_MUTE
+  type: SAGA_TOGGLE_MUTE,
 });
 
-export const sagaChangeSongAndPlay = songId => ({
+export const sagaChangeSongAndPlay = trackId => ({
   type: SAGA_CHANGE_SONG_AND_PLAY,
-  payload: songId
+  payload: trackId,
 });
 
 export const sagaChangePlayMode = mode => ({
   type: SAGA_CHANGE_PLAY_MODE,
-  payload: mode
+  payload: mode,
 });
 
 export const sagaPlayNextSong = () => ({
-  type: SAGA_PLAY_NEXT_SONG
+  type: SAGA_PLAY_NEXT_SONG,
 });
 
 export const sagaPlayPrevSong = () => ({
-  type: SAGA_PLAY_PREV_SONG
+  type: SAGA_PLAY_PREV_SONG,
 });
 
 export const sagaUpdateTimeOnPlay = newTime => ({
   type: SAGA_UPDATE_TIME_ON_PLAY,
-  payload: newTime
+  payload: newTime,
 });
 
 export const sagaUpdateTimeOnSeek = newTime => ({
   type: SAGA_UPDATE_TIME_ON_SEEK,
-  payload: newTime
+  payload: newTime,
 });
 
 export const sagaUpdateTimeAndEndSeek = newTime => ({
   type: SAGA_UPDATE_TIME_AND_END_SEEK,
-  payload: newTime
+  payload: newTime,
 });
 
 export const sagaUpdateVolumeAndEndSeek = newVolume => ({
   type: SAGA_UPDATE_VOLUME_AND_END_SEEK,
-  payload: newVolume
+  payload: newVolume,
 });
 
 /* Player Reducer */
@@ -173,10 +159,10 @@ const INITIAL_STATE = fromJS({
   duration: 0,
   mode: DEFAULT_MODE,
   shuffleDraw: [],
-  shuffleDiscard: []
+  shuffleDiscard: [],
 });
 
-const player = (state = INITIAL_STATE, action) => {
+export default function playerReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case PLAY_SONG:
       return state.set('playing', true);
@@ -218,30 +204,28 @@ const player = (state = INITIAL_STATE, action) => {
       // Initialize shuffleDraw with given playlist represented by songIds
       return state.mergeDeep({
         shuffleDraw: action.payload,
-        shuffleDiscard: []
+        shuffleDiscard: [],
       });
 
     // Remove payload(songId) from shuffleDraw
     case SHUFFLE_DRAW:
       return state.mergeDeep({
-        shuffleDraw: state.get('shuffleDraw').filter(item => item !== action.payload)
+        shuffleDraw: state.get('shuffleDraw').filter(item => item !== action.payload),
       });
 
     // Add payload(songId) to shuffleDiscard
     case SHUFFLE_DISCARD:
       return state.mergeDeep({
-        shuffleDiscard: state.get('shuffleDiscard').push(action.payload)
+        shuffleDiscard: state.get('shuffleDiscard').push(action.payload),
       });
 
     default:
       return state;
   }
-};
-export default player;
+}
 
 
-/* Player Selectors */
-// Return the current trackId in player.
+/* Selectors */
 export const getState = state => state.get('player');
 export const getPlayerTrackId = state => getState(state).get('trackId');
 // export const getShuffleDraw = state => state.get('shuffleDraw').toJS();
@@ -255,10 +239,10 @@ export const isVolumeSeeking = state => getState(state).get('volumeSeeking');
 export const getCurrentVolume = state => getState(state).get('volume');
 
 // (Reselect) Return the current player track (Immutable.Record)
-export const getCurrentPlayerTrack = (state) => {
+export function getCurrentPlayerTrack(state) {
   const trackId = getPlayerTrackId(state);
   return getTrackById(state, trackId);
-};
+}
 
 /**
  * Return if the current track(byId) is loaded in player. (Paused or Playing)
@@ -266,14 +250,14 @@ export const getCurrentPlayerTrack = (state) => {
  * @param  {[type]} id    [description]
  * @return {[type]}       [description]
  */
-export const isTrackActive = (state, trackId) => {
+export function isTrackActive(state, trackId) {
   const playerTrackId = getPlayerTrackId(state);
   if (playerTrackId && trackId) {
     return playerTrackId.toString() === trackId.toString();
   }
   return false;
-};
+}
+
+export const isTrackPlaying = (state, id) => isTrackActive(state, id) && isPlayerPlaying(state);
 
 // Return if the specific song is playing or not
-export const isTrackPlaying = (state, id) =>
-  isTrackActive(state, id) && isPlayerPlaying(state);

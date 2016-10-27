@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getTrackById } from 'client/redux/modules/reducers';
+import { getTrackById } from 'client/redux/modules/entities';
 import defaultImageUrl from 'assets/images/default-artwork.png';
 import NavSearchDropdownItem from '../components/NavSearchDropdownItem';
 
@@ -8,7 +8,7 @@ const mapStateToProps = (state, { trackId }) => {
   return ({
     imageUrl: track.getArtworkUrl() || defaultImageUrl,
     itemLinkUrl: `/track/${track.getId()}`,
-    itemTitle: track.getTitle()
+    itemTitle: track.getTitle(),
   });
 };
 
