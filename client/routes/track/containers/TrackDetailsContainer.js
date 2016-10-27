@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import {
-  getTrackById,
   isTrackFetching,
   isTrackCommentsFetching
-} from 'client/redux/modules/reducers';
+} from 'client/redux/modules/track';
+import { getTrackById } from 'client/redux/modules/entities';
 import TrackDetailsLayout from '../components/TrackDetailsLayout';
 
 const mapStateToProps = (state, { params }) => {

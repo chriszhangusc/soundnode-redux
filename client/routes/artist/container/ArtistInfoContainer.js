@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getArtistById } from 'client/redux/modules/reducers';
+import { getArtistById } from 'client/redux/modules/entities';
 import { t500x500 } from 'client/constants/ImageConstants';
 import { formatImageUrl } from 'client/utils/FormatUtils';
 import ArtistInfo from '../components/ArtistInfo';

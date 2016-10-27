@@ -1,42 +1,40 @@
 import { put, call, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import * as ActionTypes from 'client/constants/ActionTypes';
 import { getLastVolume, setLastVolume } from 'client/utils/LocalStorageUtils';
-import * as selectors from 'client/redux/modules/reducers';
-import { SHUFFLE, NEXT, PREV, DEFAULT_MODE } from 'client/constants/PlayerConstants';
 import { getSongIdByMode } from 'client/utils/SongUtils';
 import { generateRandom } from 'client/utils/GeneralUtils';
-import {
-  updateTime,
-  endSeek,
-  changeVolume,
-  endVolumeSeek,
-  mute,
-  loadPlayerPlaylist,
-  pauseSong,
-  changeSong,
-  clearTime,
-  playSong,
-  initShuffle,
-  sagaChangeSongAndPlay,
-  changePlayMode,
-  shuffleDraw,
-  shuffleDiscard
-} from 'client/redux/modules/player';
+// import {
+//   updateTime,
+//   endSeek,
+//   changeVolume,
+//   endVolumeSeek,
+//   mute,
+//   loadPlayerPlaylist,
+//   pauseSong,
+//   changeSong,
+//   clearTime,
+//   playSong,
+//   initShuffle,
+//   sagaChangeSongAndPlay,
+//   changePlayMode,
+//   shuffleDraw,
+//   shuffleDiscard
+// }  from 'client/redux/modules/player';
+import * as playerDuck from 'client/redux/modules/player';
 /* *****************************************************************************/
 /* ****************************** SUBROUTINES **********************************/
 /* *****************************************************************************/
 
 function* convertAndUpdateTime(rawTime) {
   const newTime = yield call(Math.floor, rawTime); // Convert float to int
-  const currentTime = yield select(selectors.getCurrentTime);
+  const currentTime = yield select(playerDuck.getCurrentTime);
   if (newTime !== currentTime) {
-    yield put(updateTime(newTime));
+    yield put(playerDuck.updateTime(newTime));
   }
 }
 
 function* updateTimeRegular({ payload }) {
-  const seeking = yield select(selectors.isPlayerSeeking);
+  const seeking = yield select(playerDuck.isPlayerSeeking);
   if (!seeking) {
     yield call(convertAndUpdateTime, payload);
   }
@@ -48,91 +46,91 @@ function* updateTimeSeek({ payload }) {
 
 function* updateTimeAndEndSeek({ payload }) {
   yield call(convertAndUpdateTime, payload);
-  yield put(endSeek());
+  yield put(playerDuck.endSeek());
 }
 
 function* updateVolumeAndEndSeek({ payload }) {
-  yield put(changeVolume(payload));
-  yield put(endVolumeSeek());
+  yield put(playerDuck.changeVolume(payload));
+  yield put(playerDuck.endVolumeSeek());
 }
 
 function* toggleMute() {
-  const currVolume = yield select(selectors.getCurrentVolume);
+  const currVolume = yield select(playerDuck.getCurrentVolume);
   if (currVolume === 0) {
     const lastVolume = yield call(getLastVolume);
-    yield put(changeVolume(lastVolume));
+    yield put(playerDuck.changeVolume(lastVolume));
   } else {
     yield call(setLastVolume, currVolume);
-    yield put(mute());
+    yield put(playerDuck.mute());
   }
 }
 
 // Change to new song or just play paused current song.
 function* changeSongAndPlay({ payload }) {
   const newSong = payload;
-  const visiblePlaylistName = yield select(selectors.getVisiblePlaylistName);
-  const playerPlaylistName = yield select(selectors.getPlayerPlaylistName);
+  const visiblePlaylistName = yield select(playerDuck.getVisiblePlaylistName);
+  const playerPlaylistName = yield select(playerDuck.getPlayerPlaylistName);
   if (visiblePlaylistName !== playerPlaylistName) {
-    yield put(loadPlayerPlaylist(visiblePlaylistName));
+    yield put(playerDuck.loadPlayerPlaylist(visiblePlaylistName));
   }
-  yield put(pauseSong());
-  yield put(changeSong(newSong));
-  yield put(clearTime());
-  yield put(playSong());
+  yield put(playerDuck.pauseSong());
+  yield put(playerDuck.changeSong(newSong));
+  yield put(playerDuck.clearTime());
+  yield put(playerDuck.playSong());
 }
 
 function* shuffle() {
-  const shuffleDrawQueue = yield select(selectors.getShuffleDraw);
+  const shuffleDrawQueue = yield select(playerDuck.getShuffleDraw);
   // Generate the array index of the song we are going to play next
   const nextIdx = yield call(generateRandom, 0, shuffleDrawQueue.length - 1);
   const nextSongId = shuffleDrawQueue[nextIdx];
   // Remove nextSongId from shuffleDraw
-  yield put(shuffleDraw(nextSongId));
+  yield put(playerDuck.shuffleDraw(nextSongId));
   // Add nextSongId to shuffleDiscard
-  yield put(shuffleDiscard(nextSongId));
+  yield put(playerDuck.shuffleDiscard(nextSongId));
   // Reshuffle if all cards are played once.
-  if ((yield select(selectors.getShuffleDraw)).length === 0) {
-    const visibleSongIds = yield select(selectors.getVisibleSongIds);
-    yield put(initShuffle(visibleSongIds));
+  if ((yield select(playerDuck.getShuffleDraw)).length === 0) {
+    const visibleSongIds = yield select(playerDuck.getVisibleSongIds);
+    yield put(playerDuck.initShuffle(visibleSongIds));
   }
   return nextSongId;
 }
 
 // action being NEXT or PREV
 function* doPlaySong(action) {
-  const mode = yield select(selectors.getPlayerMode);
-  const currentSongId = yield select(selectors.getCurrentSongId);
+  const mode = yield select(playerDuck.getPlayerMode);
+  const currentSongId = yield select(playerDuck.getCurrentSongId);
   let playlistSongIds = null;
   let nextSongId = null;
-  if (mode === SHUFFLE) {
+  if (mode === playerDuck.SHUFFLE) {
     nextSongId = yield call(shuffle);
   } else {
-    playlistSongIds = yield select(selectors.getPlayerSongIds);
+    playlistSongIds = yield select(playerDuck.getPlayerSongIds);
     nextSongId = yield call(getSongIdByMode, currentSongId, playlistSongIds, mode, action);
   }
 
-  const nextSong = yield select(selectors.getSongByIdFromPlaylist, nextSongId);
-  yield put(sagaChangeSongAndPlay(nextSong));
+  const nextSong = yield select(playerDuck.getSongByIdFromPlaylist, nextSongId);
+  yield put(playerDuck.sagaChangeSongAndPlay(nextSong));
 }
 
 function* doChangePlayMode({ payload }) {
-  const currMode = yield select(selectors.getPlayerMode);
+  const currMode = yield select(playerDuck.getPlayerMode);
   const newMode = payload;
   if (currMode === newMode) {
     // Toggle off
-    yield put(changePlayMode(DEFAULT_MODE));
+    yield put(playerDuck.changePlayMode(playerDuck.DEFAULT_MODE));
   } else {
     // Toggle On
-    if (newMode === SHUFFLE) {
-      const shuffleInitialized = yield select(selectors.shuffleInitialized);
+    if (newMode === playerDuck.SHUFFLE) {
+      const shuffleInitialized = yield select(playerDuck.shuffleInitialized);
       // Init shuffle with current visible playlist / Or should we use player playist?
       if (!shuffleInitialized) {
-        const visibleSongIds = yield select(selectors.getVisibleSongIds);
-        yield put(initShuffle(visibleSongIds));
+        const visibleSongIds = yield select(playerDuck.getVisibleSongIds);
+        yield put(playerDuck.initShuffle(visibleSongIds));
       }
     }
     // Set up two sets for shuffle
-    yield put(changePlayMode(newMode));
+    yield put(playerDuck.changePlayMode(newMode));
   }
 }
 
@@ -141,37 +139,37 @@ function* doChangePlayMode({ payload }) {
 /* *****************************************************************************/
 
 export function* watchRegularTimeUpdate() {
-  yield takeEvery(ActionTypes.SAGA_UPDATE_TIME_ON_PLAY, updateTimeRegular);
+  yield takeEvery(playerDuck.SAGA_UPDATE_TIME_ON_PLAY, updateTimeRegular);
 }
 
 export function* watchSeekTimeUpdate() {
-  yield takeEvery(ActionTypes.SAGA_UPDATE_TIME_ON_SEEK, updateTimeSeek);
+  yield takeEvery(playerDuck.SAGA_UPDATE_TIME_ON_SEEK, updateTimeSeek);
 }
 
 export function* watchEndSeekTime() {
-  yield takeEvery(ActionTypes.SAGA_UPDATE_TIME_AND_END_SEEK, updateTimeAndEndSeek);
+  yield takeEvery(playerDuck.SAGA_UPDATE_TIME_AND_END_SEEK, updateTimeAndEndSeek);
 }
 
 export function* watchEndSeekVolume() {
-  yield takeEvery(ActionTypes.SAGA_UPDATE_VOLUME_AND_END_SEEK, updateVolumeAndEndSeek);
+  yield takeEvery(playerDuck.SAGA_UPDATE_VOLUME_AND_END_SEEK, updateVolumeAndEndSeek);
 }
 
 export function* watchChangePlayMode() {
-  yield takeEvery(ActionTypes.SAGA_CHANGE_PLAY_MODE, doChangePlayMode);
+  yield takeEvery(playerDuck.SAGA_CHANGE_PLAY_MODE, doChangePlayMode);
 }
 
 export function* watchChangeSongAndPlay() {
-  yield takeEvery(ActionTypes.SAGA_CHANGE_SONG_AND_PLAY, changeSongAndPlay);
+  yield takeEvery(playerDuck.SAGA_CHANGE_SONG_AND_PLAY, changeSongAndPlay);
 }
 
 export function* watchToggleMute() {
-  yield takeEvery(ActionTypes.SAGA_TOGGLE_MUTE, toggleMute);
+  yield takeEvery(playerDuck.SAGA_TOGGLE_MUTE, toggleMute);
 }
 
 export function* watchPlayNextSong() {
-  yield takeEvery(ActionTypes.SAGA_PLAY_NEXT_SONG, doPlaySong, NEXT);
+  yield takeEvery(playerDuck.SAGA_PLAY_NEXT_SONG, doPlaySong, playerDuck.NEXT);
 }
 
 export function* watchPlayPrevSong() {
-  yield takeEvery(ActionTypes.SAGA_PLAY_PREV_SONG, doPlaySong, PREV);
+  yield takeEvery(playerDuck.SAGA_PLAY_PREV_SONG, doPlaySong, playerDuck.PREV);
 }

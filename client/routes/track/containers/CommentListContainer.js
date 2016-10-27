@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getTrackCommentIds } from 'client/redux/modules/reducers';
+import { getTrackCommentIds } from 'client/redux/modules/track';
 import CommentList from '../components/CommentList';
 
 const mapStateToProps = (state, { track }) => ({

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { isPlayerPlaying } from 'client/redux/modules/reducers';
 import {
+  isPlayerPlaying,
   playSong,
   pauseSong,
   sagaPlayNextSong,

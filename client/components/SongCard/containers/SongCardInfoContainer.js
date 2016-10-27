@@ -1,6 +1,6 @@
 // import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getArtistByTrackId } from 'client/redux/modules/reducers';
+import { getArtistByTrackId } from 'client/redux/modules/entities';
 import SongCardInfo from '../components/SongCardInfo';
 
 const mapStateToProps = (state, { track }) => {

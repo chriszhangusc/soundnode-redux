@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
-import { getCurrentVolume, isVolumeSeeking } from 'client/redux/modules/reducers';
 import { computeNewVolumeOnSeek } from 'client/utils/PlayerUtils';
 import {
+  getCurrentVolume,
+  isVolumeSeeking,
   beginVolumeSeek,
   changeVolume,
   sagaToggleMute,

@@ -22,7 +22,6 @@ class App extends Component {
               { this.props.children }
             </div>
             <Player />
-            <Playlist />
           </div>
         </div>
         <NotificationContainer />
@@ -30,6 +29,7 @@ class App extends Component {
     );
   }
 }
+// <Player />
 // <Playlist />
 
 App.propTypes = {

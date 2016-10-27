@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import SongCardList from 'client/components/SongCardList';
-import { isChartsFetching, getChartsTrackIds } from 'client/redux/modules/reducers';
-import { loadMoreCharts } from 'client/redux/modules/charts';
+import { isChartsFetching, getChartsTrackIds, loadMoreCharts } from 'client/redux/modules/charts';
 
 // Container for SongCardList
 // Simply providing slices of state for the component to render.

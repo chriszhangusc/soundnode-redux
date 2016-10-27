@@ -1,27 +1,17 @@
 import { connect } from 'react-redux';
-import {
-  isTrackLiked,
-  getArtistByTrackId
-} from 'client/redux/modules/reducers';
+import { getArtistByTrackId } from 'client/redux/modules/entities';
 import {
   startLikeSong,
   startUnlikeSong
 } from 'client/redux/modules/user';
 import TrackInfo from '../components/TrackInfo';
 
-// trackDesc,
-// trackTitle,
-// trackCreatedAt,
-// artistLinkUrl,
-// artistName,
-// liked,
-// handleToggleLike
-
 const mapStateToProps = (state, { track }) => {
   const trackId = track.get('id');
   const artist = getArtistByTrackId(state, trackId);
   return {
-    liked: isTrackLiked(state, trackId),
+    // liked: isTrackLiked(state, trackId),
+    liked: false,
     trackDesc: track.get('description'),
     trackTitle: track.get('title'),
     trackCreatedAt: track.get('createdAt').replace('+0000', ''),

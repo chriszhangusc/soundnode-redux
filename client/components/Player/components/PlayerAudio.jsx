@@ -1,7 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import Track from 'client/models/Track';
-import { REPEAT } from 'client/constants/PlayerConstants';
-import { formatStreamUrl } from 'client/utils/FormatUtils';
+import { REPEAT } from 'client/redux/modules/player';
 
 class PlayerAudio extends Component {
   constructor(props) {

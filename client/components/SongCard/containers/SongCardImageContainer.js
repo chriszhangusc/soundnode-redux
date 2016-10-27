@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import { formatImageUrl } from 'client/utils/FormatUtils';
 
 import {
+  isTrackActive,
+  isTrackPlaying,
   changeSongAndPlay,
   playSong,
   pauseSong
@@ -10,11 +12,6 @@ import {
 import {
   updatePlaylistIfNeeded
 } from 'client/redux/modules/playlist';
-
-import {
-  isTrackActive,
-  isTrackPlaying
-} from 'client/redux/modules/reducers';
 
 import SongCardImage from '../components/SongCardImage';
 

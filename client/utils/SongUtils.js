@@ -1,32 +1,9 @@
-import { TOP_FETCH_URL } from 'client/constants/SongConstants';
-import { LOOP, SHUFFLE, REPEAT, NEXT, PREV } from 'client/constants/PlayerConstants';
+import { LOOP, SHUFFLE, REPEAT, NEXT, PREV } from 'client/redux/modules/player';
 /**
  * Generate fetch url by given query
  * @param {String} rawQuery
  * @return {String} url
  */
-// export const generateFetchUrl = (rawQuery) => {
-//   // const url = `${SEED_FETCH_URL}&tags=${genre}`;
-//   const query = rawQuery.trim().toUpperCase();
-//   let url = null;
-//   if (query in GENRES) {
-//     // Genre search
-//     url = `${SEED_FETCH_URL}&genres=${query}`;
-//   } else {
-//     // Nav bar search
-//     url = `${SEED_FETCH_URL}&q=${query}`;
-//   }
-//   return url;
-// };
-
-export const generateTopGenreFetchUrl = (rawQuery) => {
-  let query = rawQuery.trim().toLowerCase();
-  if (query === 'all') query = 'all-music';
-  // const queryStr = `&genre=soundcloud:genres:${query}`;
-  // const url = `${TOP_FETCH_URL}${queryStr}`;
-  const url = TOP_FETCH_URL;
-  return url;
-};
 
 // const getRandomIntInclusive = (min, max) => {
 //   min = Math.ceil(min);

@@ -2,22 +2,69 @@ import { fromJS } from 'immutable';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { formatGenre } from 'client/utils/FormatUtils';
 import { trackArraySchema } from 'client/schemas';
-import {
-  getChartsOffset,
-  getChartsGenre,
-  isChartsFetching,
-  getChartsTrackIds
-} from 'client/redux/modules/reducers';
 
-const CLEAR_ALL_CHARTS = 'CLEAR_ALL_CHARTS';
+/* Constants */
+export const GENRES = [
+  'All-Music',
+  'Ambient',
+  'Country',
+  'Dance & EDM',
+  'Deep House',
+  'Disco',
+  'Hip-hop & Rap',
+  'Metal',
+  'Pop',
+  'R&B & Soul'
+];
+export const DEFAULT_GENRE = 'All-Music';
 export const CHANGE_GENRE = 'redux-music/charts/CHANGE_GENRE';
 export const CHARTS_REQUEST = 'redux-music/charts/CHARTS_REQUEST';
 export const CHARTS_RECEIVED = 'redux-music/charts/CHARTS_RECEIVED';
 export const CHARTS_FAILURE = 'redux-music/charts/CHARTS_FAILURE';
-
+const CLEAR_ALL_CHARTS = 'redux-music/charts/CLEAR_ALL_CHARTS';
 const TOP_COUNT = 50;
 const LIMIT = 25;
-/* Action */
+
+/* Reducer */
+const INITIAL_STATE = fromJS({
+  genre: '',
+  trackIds: [], // Array of Strings!!!
+  fetching: false,
+  offset: 0
+  // nextHref: ''
+});
+
+const charts = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case CHANGE_GENRE:
+      return state.merge(fromJS({
+        genre: action.payload,
+        offset: 0
+      }));
+    case CHARTS_REQUEST:
+      return state.set('fetching', true);
+    case CHARTS_RECEIVED:
+      return state.merge({
+        trackIds: state.get('trackIds').concat(fromJS(action.payload.result.map(String))).slice(0, TOP_COUNT),
+        offset: state.get('offset') + LIMIT,
+        fetching: false
+      });
+    case CLEAR_ALL_CHARTS:
+      return state.set('trackIds', fromJS([]));
+    default:
+      return state;
+  }
+};
+
+export default charts;
+
+/* Selectors */
+export const getChartsGenre = state => state.get('charts').get('genre');
+export const getChartsTrackIds = state => state.get('charts').get('trackIds');
+export const isChartsFetching = state => state.get('charts').get('fetching');
+export const getChartsOffset = state => state.get('charts').get('offset');
+
+/* Actions */
 const changeGenre = genre => ({
   type: CHANGE_GENRE,
   payload: genre
@@ -74,41 +121,3 @@ export const loadMoreCharts = () => (dispatch, getState) => {
     dispatch(fetchCharts(formattedGenre));
   }
 };
-
-/* Reducer */
-const INITIAL_STATE = fromJS({
-  genre: '',
-  trackIds: [], // Array of Strings!!!
-  fetching: false,
-  offset: 0
-  // nextHref: ''
-});
-
-const charts = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case CHANGE_GENRE:
-      return state.merge(fromJS({
-        genre: action.payload,
-        offset: 0
-      }));
-    case CHARTS_REQUEST:
-      return state.set('fetching', true);
-    case CHARTS_RECEIVED:
-      return state.merge({
-        trackIds: state.get('trackIds').concat(fromJS(action.payload.result.map(String))).slice(0, TOP_COUNT),
-        offset: state.get('offset') + LIMIT,
-        fetching: false
-      });
-    case CLEAR_ALL_CHARTS:
-      return state.set('trackIds', fromJS([]));
-    default:
-      return state;
-  }
-};
-
-export default charts;
-
-export const getGenre = state => state.get('genre');
-export const isFetching = state => state.get('fetching');
-export const getTrackIds = state => state.get('trackIds'); // As Immutable.List
-export const getOffset = state => state.get('offset');

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getArtistByTrackId } from 'client/redux/modules/reducers';
+import { getArtistByTrackId } from 'client/redux/modules/entities';
 import { formatTitle } from 'client/utils/FormatUtils';
 import PlayerTrackInfo from '../components/PlayerTrackInfo';
 

@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
 import {
-  isTrackActive,
   getTrackById
-} from 'client/redux/modules/reducers';
+} from 'client/redux/modules/entities';
+import {
+  isTrackActive
+} from 'client/redux/modules/player';
 import SongCardLayout from '../components/SongCardLayout';
 
 // Layout component just to assemble children presentational components.
