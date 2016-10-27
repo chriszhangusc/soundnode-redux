@@ -27,11 +27,11 @@ import TrackImage from '../components/TrackImage';
 // handleImageClick,
 // handleToggleLike
 const mapStateToProps = (state, { track }) => {
-  const trackId = track.getId();
+  const trackId = track.get('id');
   return {
-    artworkUrl: formatImageUrl(track.getArtworkUrl(), t500x500),
-    playbackCount: formatPlaybacks(track.getPlaybackCount()),
-    likeCount: formatLikes(track.getLikedCount()),
+    artworkUrl: formatImageUrl(track.get('artworkUrl'), t500x500),
+    playbackCount: formatPlaybacks(track.get('playbackCount')),
+    likeCount: formatLikes(track.get('favoritingsCount')),
     playing: isTrackPlaying(state, trackId),
     liked: isTrackLiked(state, trackId),
     active: isTrackActive(state, trackId)
@@ -40,7 +40,7 @@ const mapStateToProps = (state, { track }) => {
 
 const mergeProps = (stateProps, { dispatch }, { track }) => {
   const { playing, active, liked } = stateProps;
-  const trackId = track.getId();
+  const trackId = track.get('id');
   return {
     ...stateProps,
     // Extract the logic: same logic goes in SongCardImage click

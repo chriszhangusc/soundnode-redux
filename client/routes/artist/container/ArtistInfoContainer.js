@@ -7,10 +7,10 @@ import ArtistInfo from '../components/ArtistInfo';
 export const mapStateToProps = (state, { artistId }) => {
   const artist = getArtistById(state, artistId);
   return {
-    avatarUrl: formatImageUrl(artist.getAvatarUrl(), t500x500),
-    artistName: artist.getUsername(),
-    followerCount: artist.getFollowersCount().toLocaleString(),
-    description: artist.getDescription()
+    avatarUrl: formatImageUrl(artist.get('avatarUrl'), t500x500),
+    artistName: artist.get('username'),
+    followerCount: artist.get('followersCount').toLocaleString(),
+    description: artist.get('description')
   };
 };
 

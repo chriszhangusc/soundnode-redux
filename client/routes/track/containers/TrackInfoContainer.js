@@ -18,20 +18,21 @@ import TrackInfo from '../components/TrackInfo';
 // handleToggleLike
 
 const mapStateToProps = (state, { track }) => {
-  const artist = getArtistByTrackId(state, track.getId());
+  const trackId = track.get('id');
+  const artist = getArtistByTrackId(state, trackId);
   return {
-    liked: isTrackLiked(state, track.getId()),
-    trackDesc: track.getDescription(),
-    trackTitle: track.getTitle(),
-    trackCreatedAt: track.getCreatedAt().replace('+0000', ''),
-    artistName: artist.getUsername(),
-    artistLinkUrl: `/artist/${artist.getId()}`
+    liked: isTrackLiked(state, trackId),
+    trackDesc: track.get('description'),
+    trackTitle: track.get('title'),
+    trackCreatedAt: track.get('createdAt').replace('+0000', ''),
+    artistName: artist.get('username'),
+    artistLinkUrl: `/artist/${artist.get('id')}`
   };
 };
 
 const mergeProps = (stateProps, { dispatch }, { track }) => {
   const { liked } = stateProps;
-  const trackId = track.getId();
+  const trackId = track.get('id');
   return {
     ...stateProps,
     handleToggleLike() {

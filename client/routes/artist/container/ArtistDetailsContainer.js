@@ -15,7 +15,7 @@ const mapStateToProps = state => {
   return {
     fetching: isArtistFetching(state) || isArtistTracksFetching(state),
     artistId,
-    trackCount: artist ? artist.getTrackCount().toLocaleString() : '0'
+    trackCount: artist ? artist.get('trackCount').toLocaleString() : '0'
   };
 };
 
