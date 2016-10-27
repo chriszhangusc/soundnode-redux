@@ -25,8 +25,8 @@ const mapStateToProps = (state, { trackId, index }) => {
   return {
     active: isTrackActive(state, trackId),
     liked: isTrackLiked(state, trackId),
-    title: track.getTitle(),
-    artistName: artist.getUsername(),
+    title: track.get('title'),
+    artistName: artist.get('username'),
     index
   };
 };

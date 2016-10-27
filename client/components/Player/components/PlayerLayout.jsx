@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import Track from 'client/models/Track';
+// import Track from 'client/models/Track';
+import { Map } from 'immutable';
 import PlayerAudioContainer from '../containers/PlayerAudioContainer';
 import PlayerControlsContainer from '../containers/PlayerControlsContainer';
 import PlayerDurationBarContainer from '../containers/PlayerDurationBarContainer';
@@ -10,10 +11,9 @@ import PlayerVolumeControlsContainer from '../containers/PlayerVolumeControlsCon
 const PlayerLayout = ({ playerTrack }) => {
 // console.log(playerTrack);
   // Do not display Player if there is no track to play.
-  if (!playerTrack || !playerTrack.getId()) {
+  if (!playerTrack || !playerTrack.get('id')) {
     return null;
   }
-console.log('Render: PlayerContainer(Top level)');
   // Do not pass down specific data required by its children,
   // just pass track down and let the children's container do their job
   return (
@@ -33,7 +33,7 @@ console.log('Render: PlayerContainer(Top level)');
 };
 
 PlayerLayout.propTypes = {
-  playerTrack: PropTypes.instanceOf(Track)
+  playerTrack: PropTypes.instanceOf(Map)
 };
 
 export default PlayerLayout;

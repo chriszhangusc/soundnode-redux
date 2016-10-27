@@ -16,7 +16,7 @@ import PlayerDurationBar from '../components/PlayerDurationBar';
 const mapStateToProps = (state, { playerTrack }) => ({
   seeking: isPlayerSeeking(state),
   currentTime: getCurrentTime(state),
-  duration: playerTrack.getDuration()
+  duration: playerTrack.get('duration') / 1000.0
 });
 
 const mapDispatchToProps = dispatch => ({

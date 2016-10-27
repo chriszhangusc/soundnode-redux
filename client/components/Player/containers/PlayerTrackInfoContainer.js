@@ -4,13 +4,13 @@ import { formatTitle } from 'client/utils/FormatUtils';
 import PlayerTrackInfo from '../components/PlayerTrackInfo';
 
 const mapStateToProps = (state, { playerTrack }) => {
-  const trackId = playerTrack.getId();
+  const trackId = playerTrack.get('id');
   const artist = getArtistByTrackId(state, trackId);
-  const artistId = artist.getId();
+  const artistId = artist.get('id');
   return ({
-    artworkUrl: playerTrack.getArtworkUrl(),
-    trackTitle: playerTrack.getTitle(),
-    artistName: formatTitle(artist.getUsername()),
+    artworkUrl: playerTrack.get('artworkUrl'),
+    trackTitle: playerTrack.get('title'),
+    artistName: formatTitle(artist.get('username')),
     trackUrl: `/track/${trackId}`,
     artistUrl: `/artist/${artistId}`
   });

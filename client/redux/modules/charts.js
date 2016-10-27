@@ -68,7 +68,7 @@ export const loadMoreCharts = () => (dispatch, getState) => {
   const state = getState();
   const chartsFetching = isChartsFetching(state);
   const size = getChartsTrackIds(state).size;
-  if (!chartsFetching && size <= TOP_COUNT) {
+  if (!chartsFetching && size < TOP_COUNT) {
     const genre = getChartsGenre(state);
     const formattedGenre = formatGenre(genre);
     dispatch(fetchCharts(formattedGenre));
@@ -95,7 +95,7 @@ const charts = (state = INITIAL_STATE, action) => {
       return state.set('fetching', true);
     case CHARTS_RECEIVED:
       return state.merge({
-        trackIds: state.get('trackIds').concat(fromJS(action.payload.result.map(String))),
+        trackIds: state.get('trackIds').concat(fromJS(action.payload.result.map(String))).slice(0, TOP_COUNT),
         offset: state.get('offset') + LIMIT,
         fetching: false
       });

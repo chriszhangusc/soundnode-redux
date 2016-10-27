@@ -12,7 +12,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   scrollFunc() {
-    console.log('Scroll Func lol');
     dispatch(loadMoreCharts());
   }
 });

@@ -19,7 +19,7 @@ const mapStateToProps = (state, { playerTrack }) => ({
   playing: isPlayerPlaying(state),
   volume: getCurrentVolume(state),
   mode: getPlayerMode(state),
-  streamUrl: formatStreamUrl(playerTrack.getStreamUrl()),
+  streamUrl: formatStreamUrl(playerTrack.get('streamUrl')),
   currentTime: getCurrentTime(state),
   seeking: isPlayerSeeking(state)
 });
