@@ -13,10 +13,11 @@ import SongCardLayout from '../components/SongCardLayout';
 // When the connected container is told to be re-rendered, it will check if the mapped
 // object is shallowly equal or not.
 
-const mapStateToProps = (state, { trackId }) => ({
+const mapStateToProps = (state, { trackId, trackIds }) => ({
     // Prepare track object for its children
   track: getTrackById(state, trackId),
   active: isTrackActive(state, trackId),
+  trackIds,
 });
 
 export default connect(mapStateToProps)(SongCardLayout);

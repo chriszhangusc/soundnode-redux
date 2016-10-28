@@ -28,5 +28,5 @@ SongCardInfo.propTypes = {
   artistId: PropTypes.number,
   artistAvatar: PropTypes.string,
   title: PropTypes.string,
-  artistName: PropTypes.string
+  artistName: PropTypes.string,
 };

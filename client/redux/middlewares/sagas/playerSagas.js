@@ -20,6 +20,7 @@ import { generateRandom } from 'client/utils/GeneralUtils';
 //   shuffleDraw,
 //   shuffleDiscard
 // }  from 'client/redux/modules/player';
+import { initPlaylistIfNeeded } from 'client/redux/modules/playlist';
 // Not good
 import * as playerDuck from 'client/redux/modules/player';
 /* *****************************************************************************/
@@ -68,10 +69,13 @@ function* toggleMute() {
 
 // Change to new song or just play paused current song.
 function* changeSongAndPlay({ payload }) {
+  // Check if we need to load current list of tracks into the play queue.
+  const { trackId, playlist } = payload;
+  yield put(initPlaylistIfNeeded(playlist));
   yield put(playerDuck.pauseSong());
   yield put(playerDuck.clearTime());
   // Change current track to new track.
-  yield put(playerDuck.changeSong(payload));
+  yield put(playerDuck.changeSong(trackId));
   yield put(playerDuck.playSong());
 }
 

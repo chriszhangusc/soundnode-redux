@@ -6,13 +6,13 @@ import { isChartsFetching, getChartsTrackIds, loadMoreCharts } from 'client/redu
 // Simply providing slices of state for the component to render.
 const mapStateToProps = state => ({
   fetching: isChartsFetching(state),
-  trackIds: getChartsTrackIds(state)
+  trackIds: getChartsTrackIds(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   scrollFunc() {
     dispatch(loadMoreCharts());
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongCardList);

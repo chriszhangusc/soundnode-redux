@@ -110,9 +110,12 @@ export const sagaToggleMute = () => ({
   type: SAGA_TOGGLE_MUTE,
 });
 
-export const sagaChangeSongAndPlay = trackId => ({
+export const sagaChangeSongAndPlay = (trackId, playlist) => ({
   type: SAGA_CHANGE_SONG_AND_PLAY,
-  payload: trackId,
+  payload: {
+    trackId,
+    playlist,
+  },
 });
 
 export const sagaChangePlayMode = mode => ({

@@ -21,19 +21,19 @@ export const CHANGE_GENRE = 'redux-music/charts/CHANGE_GENRE';
 export const CHARTS_REQUEST = 'redux-music/charts/CHARTS_REQUEST';
 export const CHARTS_RECEIVED = 'redux-music/charts/CHARTS_RECEIVED';
 export const CHARTS_FAILURE = 'redux-music/charts/CHARTS_FAILURE';
-const CLEAR_ALL_CHARTS = 'redux-music/charts/CLEAR_ALL_CHARTS';
+export const CLEAR_ALL_CHARTS = 'redux-music/charts/CLEAR_ALL_CHARTS';
 const TOP_COUNT = 50;
 const LIMIT = 25;
 
 /* Reducer */
-const INITIAL_STATE = fromJS({
+const initialState = fromJS({
   genre: '',
   trackIds: [],
   fetching: false,
   offset: 0,
 });
 
-export default function chartsReducer(state = INITIAL_STATE, action) {
+export default function chartsReducer(state = initialState, action) {
   switch (action.type) {
     case CHANGE_GENRE:
       return state.merge(fromJS({
@@ -44,7 +44,7 @@ export default function chartsReducer(state = INITIAL_STATE, action) {
       return state.set('fetching', true);
     case CHARTS_RECEIVED:
       return state.merge({
-        trackIds: state.get('trackIds').concat(fromJS(action.payload.result.map(String))).slice(0, TOP_COUNT),
+        trackIds: state.get('trackIds').concat(fromJS(action.payload.result)).slice(0, TOP_COUNT),
         offset: state.get('offset') + LIMIT,
         fetching: false,
       });
@@ -98,12 +98,7 @@ export function fetchCharts(genre) {
 export function loadCharts(genre) {
   return (dispatch) => {
     const formattedGenre = formatGenre(genre);
-    // console.log(formattedGenre, genre);
-    // v2.fetchCharts(formattedGenre).then(tracks => {
-    //   console.log(tracks);
-    // });
     dispatch(changeGenre(genre));
-    // Clear all charts
     dispatch(clearAllCharts());
     dispatch(fetchCharts(formattedGenre));
   };

@@ -59,23 +59,29 @@ export const addToPlaylist = (trackId, position) => ({
 });
 
 /* Thunks logic */
-export const initPlaylistIfNeeded = trackIds => (dispatch, getState) => {
-  const state = getState();
-  if (isPlaylistEmpty(state)) {
-    dispatch(initPlaylist(trackIds));
-  }
-};
+export function initPlaylistIfNeeded(newPlaylist) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const currentPlaylist = getPlaylistTrackIds(state);
+    // If all trackIds in newPlaylist is included in currentPlaylist, skip...
+    if (!newPlaylist.isSubset(currentPlaylist)) {
+      dispatch(initPlaylist(newPlaylist));
+    }
+  };
+}
 
-export const addToPlaylistIfNeeded = trackId => (dispatch, getState) => {
-  const state = getState();
-  const playlistTrackIds = getPlaylistTrackIds(state);
-  const playerTrackId = getPlayerTrackId(state);
-  if (playlistTrackIds.indexOf(trackId) === -1) {
-    // Add it right after playerTrackId
-    const insertPosition = playlistTrackIds.indexOf(playerTrackId) + 1;
-    dispatch(addToPlaylist(trackId, insertPosition));
-  }
-};
+export function addToPlaylistIfNeeded(trackId) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const playlistTrackIds = getPlaylistTrackIds(state);
+    const playerTrackId = getPlayerTrackId(state);
+    if (playlistTrackIds.indexOf(trackId) === -1) {
+      // Add it right after playerTrackId
+      const insertPosition = playlistTrackIds.indexOf(playerTrackId) + 1;
+      dispatch(addToPlaylist(trackId, insertPosition));
+    }
+  };
+}
 
 /**
  * Logic: When user click a song, if our playlist is empty,

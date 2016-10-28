@@ -16,11 +16,11 @@ export default function entitiesReducer(state = INITIAL_STATE, action) {
   return state;
 }
 
-export const getState = state => state.get('entities');
+export const getEntitiesState = state => state.get('entities');
 
-export const getArtistById = (state, artistId) => artistId && getState(state).get('artists').get(artistId.toString());
-export const getTrackById = (state, trackId) => trackId && getState(state).get('tracks').get(trackId.toString());
-export const getCommentById = (state, commentId) => commentId && getState(state).get('comments').get(commentId.toString());
+export const getArtistById = (state, artistId) => artistId && getEntitiesState(state).get('artists').get(String(artistId));
+export const getTrackById = (state, trackId) => trackId && getEntitiesState(state).get('tracks').get(String(trackId));
+export const getCommentById = (state, commentId) => commentId && getEntitiesState(state).get('comments').get(String(commentId));
 
 export function getArtistByTrackId(state, trackId) {
   const track = getTrackById(state, trackId);

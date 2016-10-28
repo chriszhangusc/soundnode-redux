@@ -3,6 +3,7 @@ import * as v1 from 'client/../api/sc/v1';
 import { fromJS } from 'immutable';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { artistSchema, trackArraySchema } from 'client/schemas';
+import { createStructuredSelector } from 'reselect';
 
 /* Constants */
 export const CLEAR_STATE = 'redux-music/artist/CLEAR_STATE';
@@ -14,7 +15,7 @@ export const TRACKS_RECEIVED = 'redux-music/artist/TRACKS_RECEIVED';
 export const TRACKS_FAILURE = 'redux-music/artist/TRACKS_FAILURE';
 
 /* Reducer */
-const INITIAL_STATE = fromJS({
+const initialState = fromJS({
   artistFetching: false,
   tracksFetching: false,
   artistId: undefined,
@@ -22,10 +23,10 @@ const INITIAL_STATE = fromJS({
   tracksNextHref: undefined,
 });
 
-export default function artistReducer(state = INITIAL_STATE, action) {
+export default function artistReducer(state = initialState, action) {
   switch (action.type) {
     case CLEAR_STATE:
-      return INITIAL_STATE;
+      return initialState;
     case ARTIST_REQUEST:
       return state.set('artistFetching', true);
     case ARTIST_RECEIVED:
@@ -46,20 +47,27 @@ export default function artistReducer(state = INITIAL_STATE, action) {
 }
 
 /* Selectors */
-export const getState = state => state.get('artist');
-export const getArtistId = state => getState(state).get('artistId');
-export const getTrackIds = state => getState(state).get('trackIds');
-export const isArtistFetching = state => getState(state).get('artistFetching');
-export const isTracksFetching = state => getState(state).get('tracksFetching');
-export const getTracksNextHref = state => getState(state).get('tracksNextHref');
+export const getArtistState = state => state.get('artist');
+export const getArtistId = state => getArtistState(state).get('artistId');
+export const getTrackIds = state => getArtistState(state).get('trackIds');
+export const isArtistFetching = state => getArtistState(state).get('artistFetching');
+export const isTracksFetching = state => getArtistState(state).get('tracksFetching');
+export const getTracksNextHref = state => getArtistState(state).get('tracksNextHref');
 
+// export const selectors = createStructuredSelector({
+//   getArtistId,
+//   getTrackIds,
+//   isArtistFetching,
+//   isTracksFetching,
+//   getTracksNextHref,
+// });
 
 /* Actions */
 export const clearArtistState = () => ({
   type: CLEAR_STATE,
 });
 
-const fetchArtist = id => ({
+export const fetchArtist = id => ({
   [CALL_API]: {
     endpoint: `/sc/api-v1/users/${id}`,
     fetchOptions: {
@@ -70,7 +78,7 @@ const fetchArtist = id => ({
   },
 });
 
-const fetchArtistTracks = id => ({
+export const fetchArtistTracks = id => ({
   [CALL_API]: {
     endpoint: `/sc/api-v1/users/${id}/tracks`,
     fetchOptions: {
