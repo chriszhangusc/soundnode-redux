@@ -1,6 +1,4 @@
 import { fromJS } from 'immutable';
-// import { getPlayerTrackId } from './player';
-// import { getVisibleTrackIds } from './ui';
 
 /* Constants */
 export const INIT_PLAYLIST = 'redux-music/playlist/INIT_PLAYLIST';
@@ -8,22 +6,19 @@ export const ADD_TO_PLAYLIST = 'redux-music/playlist/ADD_TO_PLAYLIST';
 export const TOGGLE_PLAYLIST = 'redux-music/playlist/TOGGLE_PLAYLIST';
 export const CLEAR_PLAY_QUEUE = 'redux-music/playlist/CLEAR_PLAY_QUEUE';
 /* Reducer */
-const INITIAL_STATE = fromJS({
+const initialState = fromJS({
   trackIds: [],
   hidden: true,
 });
 
-export default function playlistReducer(state = INITIAL_STATE, action) {
+export default function playlistReducer(state = initialState, action) {
   switch (action.type) {
     case TOGGLE_PLAYLIST:
       return state.set('hidden', !state.get('hidden'));
     case INIT_PLAYLIST:
       return state.set('trackIds', fromJS(action.payload));
-    case ADD_TO_PLAYLIST:
-      return state.set('trackIds',
-        state.get('trackIds').insert(action.payload.position, action.payload.trackId));
     case CLEAR_PLAY_QUEUE:
-      return state.set('trackIds', fromJS([]));
+      return initialState;
     default:
       return state;
   }
@@ -64,5 +59,8 @@ export function initPlaylistIfNeeded(newPlaylist) {
 export function clearPlayQueue() {
   return {
     type: CLEAR_PLAY_QUEUE,
+    payload: {
+      notificationSuccess: 'Play Queue Cleared!',
+    },
   };
 }

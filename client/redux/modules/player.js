@@ -1,5 +1,7 @@
 import { fromJS } from 'immutable';
 import { getTrackById } from 'client/redux/modules/entities';
+import { CLEAR_PLAY_QUEUE } from './playlist';
+
 /* Constants */
 export const LOOP = 'LOOP'; // Loop through the playlist, when it hits the end, start all over from the beginning
 export const REPEAT = 'REPEAT'; // Repeat current song.
@@ -152,7 +154,7 @@ export const sagaUpdateVolumeAndEndSeek = newVolume => ({
 });
 
 /* Player Reducer */
-const INITIAL_STATE = fromJS({
+const initialState = fromJS({
   currentTime: 0,
   volume: INITIAL_VOLUME,
   trackId: undefined,
@@ -165,7 +167,7 @@ const INITIAL_STATE = fromJS({
   shuffleDiscard: [],
 });
 
-export default function playerReducer(state = INITIAL_STATE, action) {
+export default function playerReducer(state = initialState, action) {
   switch (action.type) {
     case PLAY_SONG:
       return state.set('playing', true);
@@ -222,6 +224,8 @@ export default function playerReducer(state = INITIAL_STATE, action) {
         shuffleDiscard: state.get('shuffleDiscard').push(action.payload),
       });
 
+    case CLEAR_PLAY_QUEUE:
+      return initialState;
     default:
       return state;
   }

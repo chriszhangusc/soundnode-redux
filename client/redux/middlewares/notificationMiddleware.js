@@ -6,6 +6,10 @@ const ERROR = 'Error';
 const notificationMiddleware = () => next => (action) => {
   const { type } = action;
   if (!type) return next(action);
+  if (action.payload && action.payload.notificationSuccess) {
+    NotificationManager.success(action.payload.notificationSuccess, SUCCESS);
+  }
+
   if (type.indexOf('SUCCESS') > -1) {
     NotificationManager.success(action.payload.message, SUCCESS);
   } else if (type.indexOf('FAILED') > -1 || type.indexOf('FAILURE') > -1) {
