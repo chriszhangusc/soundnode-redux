@@ -9,16 +9,16 @@ const PlaylistItem = ({
   index,
   handleChangeSong,
   handleLikeSong,
-  handleUnlikeSong
+  handleUnlikeSong,
  }) => (
-  <li
-    className={`playlist-item ${active ? 'active' : ''}`}
-    onClick={(e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (!active) handleChangeSong();
-    }}
-  >
+   <li
+     className={`playlist-item ${active ? 'active' : ''}`}
+     onClick={(e) => {
+       e.preventDefault();
+       e.stopPropagation();
+       if (!active) handleChangeSong();
+     }}
+   >
     <span className="playlist-item-index">{`${index}.`}</span>
     <span className="playlist-item-title">{ title }</span>
     <span className="playlist-item-username">by: { artistName }</span>
@@ -56,7 +56,7 @@ PlaylistItem.propTypes = {
   artistName: PropTypes.string,
   liked: PropTypes.bool,
   active: PropTypes.bool,
-  index: PropTypes.number
+  index: PropTypes.number,
 };
 
 export default PlaylistItem;

@@ -26,8 +26,9 @@ const renderSongCardList = (trackIds) => {
 
 const SongCardList = (props) => {
   const { fetching, trackIds } = props;
+
   return (
-    <div className="container">
+    <div className="container pad-bottom">
       {renderSongCardList(trackIds)}
       { fetching && <Spinner /> }
     </div>

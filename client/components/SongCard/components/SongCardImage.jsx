@@ -6,7 +6,7 @@ export default function SongCardImage({
   active,
   artworkUrl,
   playing,
-  handleImageClick
+  handleImageClick,
 }) {
 // console.log('Render: SongCardImage');
 
@@ -29,5 +29,5 @@ SongCardImage.propTypes = {
   active: PropTypes.bool,
   playing: PropTypes.bool,
   artworkUrl: PropTypes.string,
-  handleImageClick: PropTypes.func.isRequired
+  handleImageClick: PropTypes.func,
 };

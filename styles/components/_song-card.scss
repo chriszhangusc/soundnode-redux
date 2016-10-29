@@ -1,26 +1,15 @@
 .card {
-    background-color: $background-color;
-    border: 1px solid $light-black;
+  background-color: $background-color;
+  border: 1px solid $light-black;
 }
 
 .song-card {
   padding: 10px;
 
   &.active {
-      border-color: $theme-color;
+    border-color: $theme-color;
   }
 }
-//
-// .song-card-image {
-//     display: block;
-//     width: 240px;
-//     height: 220px;
-//     margin-bottom: 10px;
-//
-//     &:hover {
-//         cursor: pointer;
-//     }
-// }
 
 .song-card-image {
     display: block;

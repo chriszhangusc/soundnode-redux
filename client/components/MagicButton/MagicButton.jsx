@@ -19,7 +19,7 @@ MagicButton.propTypes = {
   onClick: PropTypes.func,
   btnClassName: PropTypes.string,
   iconClassName: PropTypes.string,
-  text: PropTypes.string
+  text: PropTypes.string,
 };
 
 export default MagicButton;
