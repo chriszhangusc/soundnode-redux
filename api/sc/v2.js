@@ -1,4 +1,4 @@
-import { constructFetchUrl, makeRequest } from './utils';
+import { constructFetchUrl, makeRequest } from './apiUtils';
 
 const SC_API_V2 = 'https://api-v2.soundcloud.com/';
 

@@ -28,7 +28,7 @@ export default function (InnerComponent) {
   }
 
   InfiniteScrollComponent.propTypes = {
-    scrollFunc: PropTypes.func.isRequired
+    scrollFunc: PropTypes.func.isRequired,
     // dispatch: PropTypes.func.isRequired
   };
   // Connect to redux store only because we need dispatch!

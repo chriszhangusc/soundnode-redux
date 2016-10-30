@@ -1,10 +1,22 @@
 import { connect } from 'react-redux';
-import { getTrackCommentIds } from 'client/redux/modules/track';
+import { getTrackCommentIds, isTrackCommentsFetching, loadMoreComments } from 'client/redux/modules/track';
 import CommentList from '../components/CommentList';
 
-const mapStateToProps = (state, { track }) => ({
-  commentCount: track.get('commentCount'),
-  commentIds: getTrackCommentIds(state),
-});
+function mapStateToProps(state, { track }) {
+  return ({
+    commentCount: track.get('commentCount'),
+    commentIds: getTrackCommentIds(state),
+    commentsFetching: isTrackCommentsFetching(state),
+  });
+}
 
-export default connect(mapStateToProps)(CommentList);
+function mapDispatchToProps(dispatch) {
+  return {
+    scrollFunc() {
+      console.log('Load more comments');
+      dispatch(loadMoreComments());
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentList);

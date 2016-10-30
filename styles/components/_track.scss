@@ -95,6 +95,8 @@
 
 .comments-container {
   font-size: 1.2rem;
+  // Make sure spinner is not hided by player.
+  padding-bottom: 70px;
   .comment-item {
     position: relative;
     display: flex; // To prevent comment body go under the image.

@@ -4,6 +4,7 @@ import { copyToClipboard } from 'client/redux/modules/utils';
 import {
   startLikeSong,
   startUnlikeSong,
+  isTrackLiked,
 } from 'client/redux/modules/user';
 import TrackInfo from '../components/TrackInfo';
 
@@ -11,8 +12,7 @@ const mapStateToProps = (state, { track }) => {
   const trackId = track.get('id');
   const artist = getArtistByTrackId(state, trackId);
   return {
-    // liked: isTrackLiked(state, trackId),
-    liked: false,
+    liked: isTrackLiked(state, trackId),
     trackDesc: track.get('description'),
     trackTitle: track.get('title'),
     trackCreatedAt: track.get('createdAt').replace('+0000', ''),

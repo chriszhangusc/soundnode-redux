@@ -9,7 +9,6 @@ import CommentListContainer from '../containers/CommentListContainer';
 const TrackDetailsLayout = ({
   track,
   trackFetching,
-  commentsFetching,
 }) => {
   if (trackFetching) return <Spinner />;
   return (
@@ -18,7 +17,7 @@ const TrackDetailsLayout = ({
         <TrackImageContainer track={track} />
         <TrackInfoContainer track={track} />
       </div>
-      { commentsFetching || <CommentListContainer track={track} /> }
+      <CommentListContainer track={track} />
     </div>
   );
 };
@@ -27,7 +26,6 @@ const TrackDetailsLayout = ({
 TrackDetailsLayout.propTypes = {
   track: PropTypes.instanceOf(Map),
   trackFetching: PropTypes.bool,
-  commentsFetching: PropTypes.bool,
 };
 
 export default TrackDetailsLayout;

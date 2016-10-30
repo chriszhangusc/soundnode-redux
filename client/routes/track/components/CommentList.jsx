@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react';
 import { List } from 'immutable';
+import infiniteScroll from 'client/components/hocs/InfiniteScroll';
+import Spinner from 'client/components/Spinner';
 import CommentContainer from '../containers/CommentContainer';
 
-const CommentList = ({ commentCount, commentIds }) => {
+const CommentList = ({ commentCount, commentIds, commentsFetching }) => {
   return (
     <div className="comments-container">
       <div className="comment-title">
@@ -11,17 +13,21 @@ const CommentList = ({ commentCount, commentIds }) => {
       <div className="comment-list-container">
         <ul className="comment-list">
           {
-            commentIds.map(commentId => <CommentContainer key={commentId} commentId={commentId} />)
+            // #FIXME: Using idx as key is an anti-pattern,
+            // however using commentId as key would results in children with same key error.
+            commentIds.map((commentId, idx) => <CommentContainer key={idx} commentId={commentId} />)
           }
         </ul>
       </div>
+      { commentsFetching && <Spinner /> }
     </div>
   );
 };
 
 CommentList.propTypes = {
   commentCount: PropTypes.number,
-  commentIds: PropTypes.instanceOf(List)
+  commentIds: PropTypes.instanceOf(List),
+  commentsFetching: PropTypes.bool,
 };
 
-export default CommentList;
+export default infiniteScroll(CommentList);

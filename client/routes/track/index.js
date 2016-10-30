@@ -1,3 +1,3 @@
-import TrackDetailsContainer from './containers/TrackDetailsContainer';
+import TrackDetailsLayoutContainer from './containers/TrackDetailsLayoutContainer';
 
-export default TrackDetailsContainer;
+export default TrackDetailsLayoutContainer;

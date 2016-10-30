@@ -41,6 +41,7 @@ export default function track(state = INITIAL_STATE, action) {
       return state.merge({
         commentIds: state.get('commentIds').concat(fromJS(action.payload.result)),
         commentsFetching: false,
+        commentsNextHref: action.payload.nextHref,
       });
     default:
       return state;
@@ -48,12 +49,12 @@ export default function track(state = INITIAL_STATE, action) {
 }
 
 /* Selectors */
-const getState = state => state.get('track');
-export const getTrackId = state => getState(state).get('trackId');
-export const isTrackFetching = state => getState(state).get('trackFetching');
-export const isTrackCommentsFetching = state => getState(state).get('commentsFetching');
-export const getTrackCommentIds = state => getState(state).get('commentIds');
-
+const getTrackState = state => state.get('track');
+export const getTrackId = state => getTrackState(state).get('trackId');
+export const isTrackFetching = state => getTrackState(state).get('trackFetching');
+export const isTrackCommentsFetching = state => getTrackState(state).get('commentsFetching');
+export const getTrackCommentIds = state => getTrackState(state).get('commentIds');
+export const getTrackCommentsNextHref = state => getTrackState(state).get('commentsNextHref');
 /* Actions */
 export const clearTrackState = () => ({
   type: CLEAR_STATE,
@@ -80,14 +81,67 @@ export const fetchComments = trackId => ({
   },
 });
 
-// Check!!
-export const loadTrackPage = trackId => (dispatch) => {
-  v1.fetchTrack(trackId).then((trackObj) => {
-    console.log(trackObj);
-  }).catch((err) => {
-    console.log('Something wrong', err);
-  });
-  // Clear previous state.
-  dispatch(fetchTrack(trackId));
-  dispatch(fetchComments(trackId));
-};
+export function commentsRequest() {
+  return {
+    type: COMMENTS_REQUEST,
+  };
+}
+
+export function commentsReceived(normalizedResponse) {
+  return {
+    type: COMMENTS_RECEIVED,
+    payload: normalizedResponse,
+    entities: normalizedResponse.entities,
+  };
+}
+
+export function trackRequest() {
+  return {
+    type: TRACK_REQUEST,
+  };
+}
+
+export function trackReceived(normalizedResponse) {
+  return {
+    type: TRACK_RECEIVED,
+    payload: normalizedResponse,
+    entities: normalizedResponse.entities,
+  };
+}
+
+// IMPROVE: Got lots of nested then, should have been cleaner
+export function loadTrackPage(trackId) {
+  return (dispatch) => {
+    dispatch(trackRequest());
+    v1.fetchTrack(trackId)
+      .then((trackResponse) => {
+        dispatch(trackReceived(trackResponse));
+      })
+      .then(() => {
+        dispatch(commentsRequest());
+        v1.fetchTrackComments(trackId)
+          .then((commentsResponse) => {
+            dispatch(commentsReceived(commentsResponse));
+          });
+      })
+      .catch((err) => {
+        // Dispatch error notification
+        console.log(err);
+        throw new Error(err);
+      });
+    // dispatch(fetchTrack(trackId));
+    // dispatch(fetchComments(trackId));
+  };
+}
+
+export function loadMoreComments() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const nextHref = getTrackCommentsNextHref(state);
+    dispatch(commentsRequest());
+    v1.fetchMoreTrackComments(nextHref)
+      .then((commentsResponse) => {
+        dispatch(commentsReceived(commentsResponse));
+      });
+  };
+}
