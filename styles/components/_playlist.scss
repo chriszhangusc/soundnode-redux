@@ -37,10 +37,6 @@
   }
 }
 
-.playlist-list {
-
-}
-
 .playlist-item {
   font-size: 13px;
   color: $font-main-color;
@@ -89,8 +85,23 @@
   }
 }
 
-.playlist-item-options-container {
+.playlist-title-options-container {
+  margin-right: 13px;
   display: inline-block;
+  position: relative;
+  text-align: center;
+  // &:hover {
+  //     .playlist-item-options-list,
+  //     .playlist-item-popup-arrow {
+  //         display: block;
+  //     }
+  // }
+}
+
+
+.playlist-item-options-container {
+
+    display: inline-block;
     position: relative;
     width: 10px;
     text-align: center;
@@ -105,6 +116,9 @@
 }
 
 .playlist-item-options-list {
+    white-space: nowrap;
+    font-size: 13px;
+    color: $font-main-color;
     display: none;
     position: absolute;
     right: 19px;
@@ -143,6 +157,9 @@
 
 .playlist-title-icon-container {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 12px;
   float: right;
+  & i:hover {
+    color: white;
+  }
 }
