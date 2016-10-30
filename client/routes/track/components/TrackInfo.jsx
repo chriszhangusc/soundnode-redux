@@ -9,7 +9,8 @@ const TrackInfo = ({
   artistLinkUrl,
   artistName,
   liked,
-  handleToggleLike
+  handleToggleLike,
+  handleCopyTrackLink,
 }) => (
   <div className="track-details">
     <h1 className="track-title">{ trackTitle }</h1>
@@ -34,13 +35,9 @@ const TrackInfo = ({
       />
       <MagicButton
         btnClassName="button inline"
-        iconClassName="fa fa-external-link"
-        text="PERMALINK"
-      />
-      <MagicButton
-        btnClassName="button inline"
         iconClassName="fa fa-clipboard"
         text="COPY TRACK LINK"
+        onClick={handleCopyTrackLink}
       />
     </div>
   </div>
@@ -54,7 +51,8 @@ TrackInfo.propTypes = {
   trackCreatedAt: PropTypes.string,
   artistLinkUrl: PropTypes.string,
   artistName: PropTypes.string,
-  handleToggleLike: PropTypes.func
+  handleToggleLike: PropTypes.func,
+  handleCopyTrackLink: PropTypes.func,
 };
 
 export default TrackInfo;

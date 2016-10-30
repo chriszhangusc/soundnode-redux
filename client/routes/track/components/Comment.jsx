@@ -7,7 +7,7 @@ const Comment = ({
   artistAvatarUrl,
   commentCreatedAt,
   artistName,
-  commentBody
+  commentBody,
 }) =>
 (<li className="comment-item">
   <img
@@ -35,7 +35,7 @@ Comment.propTypes = {
   artistAvatarUrl: PropTypes.string,
   commentCreatedAt: PropTypes.string,
   artistName: PropTypes.string,
-  commentBody: PropTypes.string
+  commentBody: PropTypes.string,
 };
 
 export default Comment;

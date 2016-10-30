@@ -4,7 +4,7 @@ import CommentList from '../components/CommentList';
 
 const mapStateToProps = (state, { track }) => ({
   commentCount: track.get('commentCount'),
-  commentIds: getTrackCommentIds(state)
+  commentIds: getTrackCommentIds(state),
 });
 
 export default connect(mapStateToProps)(CommentList);

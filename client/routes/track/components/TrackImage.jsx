@@ -9,13 +9,13 @@ const TrackImage = ({
   playing,
   artworkUrl,
   handleImageClick,
-  handleToggleLike
+  handleToggleLike,
 }) => (
   <div className="track-avatar">
     <div
       className="song-card-image track-image"
       style={{
-        backgroundImage: `url(${artworkUrl || defaultArtworkImage})`
+        backgroundImage: `url(${artworkUrl || defaultArtworkImage})`,
       }}
     >
       <MagicButton
@@ -49,7 +49,7 @@ TrackImage.propTypes = {
   artworkUrl: PropTypes.string,
   // active: PropTypes.bool.isRequired,
   handleToggleLike: PropTypes.func,
-  handleImageClick: PropTypes.func
+  handleImageClick: PropTypes.func,
 };
 
 export default TrackImage;

@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import { getArtistByTrackId } from 'client/redux/modules/entities';
+import { copyToClipboard } from 'client/redux/modules/utils';
 import {
   startLikeSong,
-  startUnlikeSong
+  startUnlikeSong,
 } from 'client/redux/modules/user';
 import TrackInfo from '../components/TrackInfo';
 
@@ -16,7 +17,7 @@ const mapStateToProps = (state, { track }) => {
     trackTitle: track.get('title'),
     trackCreatedAt: track.get('createdAt').replace('+0000', ''),
     artistName: artist.get('username'),
-    artistLinkUrl: `/artist/${artist.get('id')}`
+    artistLinkUrl: `/artist/${artist.get('id')}`,
   };
 };
 
@@ -27,7 +28,12 @@ const mergeProps = (stateProps, { dispatch }, { track }) => {
     ...stateProps,
     handleToggleLike() {
       dispatch(liked ? startUnlikeSong(trackId) : startLikeSong(trackId));
-    }
+    },
+    handleCopyTrackLink() {
+      const permalinkUrl = track.get('permalinkUrl');
+      if (permalinkUrl) dispatch(copyToClipboard(permalinkUrl));
+      else console.log('Permalink does not exist');
+    },
   };
 };
 

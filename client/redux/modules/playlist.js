@@ -5,6 +5,7 @@ export const INIT_PLAYLIST = 'redux-music/playlist/INIT_PLAYLIST';
 export const ADD_TO_PLAYLIST = 'redux-music/playlist/ADD_TO_PLAYLIST';
 export const TOGGLE_PLAYLIST = 'redux-music/playlist/TOGGLE_PLAYLIST';
 export const CLEAR_PLAY_QUEUE = 'redux-music/playlist/CLEAR_PLAY_QUEUE';
+export const APPEND_TRACK_TO_PLAYLIST = 'redux-music/playlist/APPEND_TRACK_TO_PLAYLIST';
 /* Reducer */
 const initialState = fromJS({
   trackIds: [],
@@ -19,6 +20,8 @@ export default function playlistReducer(state = initialState, action) {
       return state.set('trackIds', fromJS(action.payload));
     case CLEAR_PLAY_QUEUE:
       return initialState;
+    case APPEND_TRACK_TO_PLAYLIST:
+      return state.set('trackIds', state.get('trackIds').push(action.payload));
     default:
       return state;
   }
@@ -43,8 +46,26 @@ export const initPlaylist = trackIds => ({
   payload: trackIds,
 });
 
+export const appendTrackToPlaylist = trackId => ({
+  type: APPEND_TRACK_TO_PLAYLIST,
+  payload: trackId,
+});
 
 /* Thunks logic */
+
+// For single track
+export function addToPlayQueueIfNeeded(trackId) {
+  // If the track to be added is already in current play queue, do nothing
+  // If not, append it to the end of the list.
+  return (dispatch, getState) => {
+    const state = getState();
+    const currentPlaylist = getPlaylistTrackIds(state);
+    if (currentPlaylist.indexOf(trackId) === -1) {
+      dispatch(appendTrackToPlaylist(trackId));
+    }
+  };
+}
+
 export function initPlaylistIfNeeded(newPlaylist) {
   return (dispatch, getState) => {
     const state = getState();

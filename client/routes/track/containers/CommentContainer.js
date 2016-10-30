@@ -8,11 +8,11 @@ const mapStateToProps = (state, { commentId }) => {
   const artist = getArtistByCommentId(state, commentId);
   return {
     defaultArtistImage,
-    artistLinkUrl: `artist/${artist.get('id')}`,
+    artistLinkUrl: `/artist/${artist.get('id')}`,
     artistName: artist.get('username'),
     artistAvatarUrl: artist.get('avatarUrl'),
     commentCreatedAt: comment.get('createdAt').replace('+0000', ''),
-    commentBody: comment.get('body')
+    commentBody: comment.get('body'),
   };
 };
 
