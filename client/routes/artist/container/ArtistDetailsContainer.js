@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
   getArtistId,
   isArtistFetching,
-  isTracksFetching,
 } from 'client/redux/modules/artist';
 
 import { getArtistById } from 'client/redux/modules/entities';
@@ -14,9 +13,9 @@ const mapStateToProps = (state) => {
   const artistId = getArtistId(state);
   const artist = getArtistById(state, artistId);
   return {
-    fetching: isArtistFetching(state) || isTracksFetching(state),
+    fetching: isArtistFetching(state),
     artistId,
-    trackCount: artist ? artist.get('trackCount').toLocaleString() : '0'
+    trackCount: artist ? artist.get('trackCount').toLocaleString() : '0',
   };
 };
 

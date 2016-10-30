@@ -2,7 +2,7 @@
 import * as v1 from 'client/../api/sc/v1';
 import { fromJS } from 'immutable';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
-import { artistSchema, trackArraySchema } from 'client/schemas';
+import { artistSchema } from 'client/schemas';
 import { createStructuredSelector } from 'reselect';
 
 /* Constants */
@@ -40,6 +40,7 @@ export default function artistReducer(state = initialState, action) {
       return state.merge({
         trackIds: state.get('trackIds').concat(fromJS(action.payload.result)), // concat for scroll to load more
         tracksFetching: false,
+        tracksNextHref: action.payload.nextHref,
       });
     default:
       return state;
@@ -49,18 +50,10 @@ export default function artistReducer(state = initialState, action) {
 /* Selectors */
 export const getArtistState = state => state.get('artist');
 export const getArtistId = state => getArtistState(state).get('artistId');
-export const getTrackIds = state => getArtistState(state).get('trackIds');
+export const getArtistTrackIds = state => getArtistState(state).get('trackIds');
 export const isArtistFetching = state => getArtistState(state).get('artistFetching');
-export const isTracksFetching = state => getArtistState(state).get('tracksFetching');
-export const getTracksNextHref = state => getArtistState(state).get('tracksNextHref');
-
-// export const selectors = createStructuredSelector({
-//   getArtistId,
-//   getTrackIds,
-//   isArtistFetching,
-//   isTracksFetching,
-//   getTracksNextHref,
-// });
+export const isArtistTracksFetching = state => getArtistState(state).get('tracksFetching');
+export const getArtistTracksNextHref = state => getArtistState(state).get('tracksNextHref');
 
 /* Actions */
 export const clearArtistState = () => ({
@@ -78,27 +71,58 @@ export const fetchArtist = id => ({
   },
 });
 
-export const fetchArtistTracks = id => ({
-  [CALL_API]: {
-    endpoint: `/sc/api-v1/users/${id}/tracks`,
-    fetchOptions: {
-      method: 'GET',
-    },
-    query: {
-      limit: 20,
-    },
-    method: 'GET',
-    types: [TRACKS_REQUEST, TRACKS_RECEIVED, TRACKS_FAILURE],
-    schema: trackArraySchema,
-  },
-});
+// export const fetchArtistTracks = id => ({
+//   [CALL_API]: {
+//     endpoint: `/sc/api-v1/users/${id}/tracks`,
+//     fetchOptions: {
+//       method: 'GET',
+//     },
+//     query: {
+//       limit: 20,
+//     },
+//     method: 'GET',
+//     types: [TRACKS_REQUEST, TRACKS_RECEIVED, TRACKS_FAILURE],
+//     schema: trackArraySchema,
+//   },
+// });
 
-export function fetchArtistAndTracks(id) {
+export function artistTracksRequest() {
+  return {
+    type: TRACKS_REQUEST,
+  };
+}
+
+export function artistTracksReceived(normalizedResponse) {
+  return {
+    type: TRACKS_RECEIVED,
+    payload: normalizedResponse,
+    entities: normalizedResponse.entities,
+  };
+}
+
+export function fetchMoreArtistTracks() {
+  return (dispatch, getState) => {
+    const state = getState();
+    // nextHref will be undefined if end has been reached
+    const nextHref = getArtistTracksNextHref(state);
+    if (nextHref) {
+      dispatch(artistTracksRequest());
+      v1.fetchMoreArtistTracks(nextHref)
+        .then(normalizedResponse => dispatch(artistTracksReceived(normalizedResponse)));
+    }
+  };
+}
+
+export function loadArtistPage(artistId) {
+  // Fetch artist and tracks
   return (dispatch) => {
-    v1.fetchArtist(id).then((artistObj) => {
-      console.log(artistObj);
-    });
-    dispatch(fetchArtist(id));
-    dispatch(fetchArtistTracks(id));
+    // v1.fetchArtist(id).then((artistObj) => {
+    //   console.log(artistObj);
+    // });
+    dispatch(fetchArtist(artistId));
+    dispatch(artistTracksRequest());
+    v1.fetchArtistTracks(artistId)
+      .then(normalizedResponse => dispatch(artistTracksReceived(normalizedResponse)));
+    // dispatch(fetchArtistTracks(id));
   };
 }

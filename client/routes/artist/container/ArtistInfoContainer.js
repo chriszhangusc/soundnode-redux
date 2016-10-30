@@ -10,7 +10,7 @@ export const mapStateToProps = (state, { artistId }) => {
     avatarUrl: formatImageUrl(artist.get('avatarUrl'), t500x500),
     artistName: artist.get('username'),
     followerCount: artist.get('followersCount').toLocaleString(),
-    description: artist.get('description')
+    description: artist.get('description'),
   };
 };
 

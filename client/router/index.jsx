@@ -8,7 +8,7 @@ import SearchResultsPage from 'client/routes/search/components/SearchResults';
 import LikesPage from 'client/routes/likes';
 import NotFound from 'client/components/NotFound';
 import { loadCharts, DEFAULT_GENRE } from 'client/redux/modules/charts';
-import { fetchArtistAndTracks, clearArtistState } from 'client/redux/modules/artist';
+import { loadArtistPage, clearArtistState } from 'client/redux/modules/artist';
 import { loadTrackPage, clearTrackState } from 'client/redux/modules/track';
 import { sagaSearch } from 'client/redux/modules/search';
 import { clearVisibleTracks } from 'client/redux/modules/ui';
@@ -31,7 +31,7 @@ const configureRoutes = (store) => {
   const onArtistDetailsPageEnter = (nextState) => {
     const dispatch = store.dispatch;
     const uid = nextState.params.uid;
-    dispatch(fetchArtistAndTracks(uid));
+    dispatch(loadArtistPage(uid));
   };
 
   const onArtistDetailsPageLeave = () => {

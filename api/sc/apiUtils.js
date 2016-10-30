@@ -29,6 +29,7 @@ export function constructFetchUrl(baseUrl, endpoint, queryParams) {
 // Simple wrapper of fetch
 // https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
 export function makeRequest(fetchUrl) {
+  console.log(fetchUrl);
   return fetch(fetchUrl)
           .then(onResponseSuccess)
           .then(json => camelizeKeys(json))

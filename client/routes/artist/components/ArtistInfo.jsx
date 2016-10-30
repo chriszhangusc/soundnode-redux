@@ -4,7 +4,7 @@ const ArtistInfo = ({
   avatarUrl,
   artistName,
   followerCount,
-  description
+  description,
 }) => (
   <div className="artist-info-container">
     <div className="artist-avatar">
@@ -19,13 +19,11 @@ const ArtistInfo = ({
 
 );
 
-// formatImageUrl(artist.getAvatarUrl(), t500x500)
-
 ArtistInfo.propTypes = {
   avatarUrl: PropTypes.string,
   artistName: PropTypes.string,
-  followerCount: PropTypes.string, //formatted number
-  description: PropTypes.string
+  followerCount: PropTypes.string, // Formatted number
+  description: PropTypes.string,
 };
 
 export default ArtistInfo;

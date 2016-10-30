@@ -22,7 +22,7 @@ const ArtistDetailsLayout = ({ fetching, artistId, trackCount }) => {
 ArtistDetailsLayout.propTypes = {
   fetching: PropTypes.bool,
   artistId: PropTypes.number,
-  trackCount: PropTypes.string
+  trackCount: PropTypes.string,
 };
 
 export default ArtistDetailsLayout;
