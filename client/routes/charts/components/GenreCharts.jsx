@@ -7,10 +7,10 @@ import { GENRES, getChartsGenre } from 'client/redux/modules/charts';
 const renderGenres = () => GENRES.map(
   genre =>
     <Link
-      key={genre}
+      key={genre.link}
       className="button inline"
-      to={`/top50/${genre}`}
-    >{genre.toUpperCase()}</Link>
+      to={`/top50/${genre.link}`}
+    >{genre.title}</Link>
 );
 
 const GenreCharts = ({ chartsGenre }) => (
@@ -24,12 +24,12 @@ const GenreCharts = ({ chartsGenre }) => (
 );
 
 GenreCharts.propTypes = {
-  chartsGenre: React.PropTypes.string.isRequired
+  chartsGenre: React.PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    chartsGenre: getChartsGenre(state)
+    chartsGenre: getChartsGenre(state),
   };
 }
 

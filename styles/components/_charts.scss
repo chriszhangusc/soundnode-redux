@@ -51,14 +51,14 @@
 
 .genre-selector {
     width: 100%;
-    // overflow: hidden;
-    height: 75px;
+    overflow: hidden;
+    height: 102px;
     transition: height 0.4s;
     margin: 0 0 20px 0;
 
-    // &:hover{
-    //   height: 230px;
-    // }
+    &:hover{
+      height: 250px;
+    }
 
     .title {
       font-size: 13px;

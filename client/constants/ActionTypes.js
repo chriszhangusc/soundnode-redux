@@ -1,8 +1,3 @@
-// Seperate into different files
-
-/* COPY Actions */
-export const COPY_SUCCESS = 'COPY_SUCCESS';
-
 /* Search Action Types */
 export const FETCH_DROPDOWN_TRACKS = 'FETCH_DROPDOWN_TRACKS';
 export const FETCH_DROPDOWN_ARTISTS = 'FETCH_DROPDOWN_ARTISTS';

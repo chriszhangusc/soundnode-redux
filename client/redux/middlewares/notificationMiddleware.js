@@ -19,6 +19,10 @@ const notificationMiddleware = () => next => (action) => {
     default:
       break;
   }
+  if (type.indexOf('FAILURE') > -1) {
+    // #FIXME: apiMiddleware notification triggering should be rewritten
+    NotificationManager.error('Network Error');
+  }
   return next(action);
 };
 

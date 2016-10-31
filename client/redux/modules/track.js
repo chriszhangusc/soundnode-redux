@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable';
 import { trackSchema, commentArraySchema } from 'client/schemas';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
+import { notificationFailure } from 'client/redux/modules/notification';
 import * as v1 from 'client/../api/sc/v1';
 
 /* Constants */
@@ -126,8 +127,7 @@ export function loadTrackPage(trackId) {
       })
       .catch((err) => {
         // Dispatch error notification
-        console.log(err);
-        throw new Error(err);
+        dispatch(notificationFailure('Failed to load page: ', err));
       });
     // dispatch(fetchTrack(trackId));
     // dispatch(fetchComments(trackId));
@@ -142,6 +142,10 @@ export function loadMoreComments() {
     v1.fetchMoreTrackComments(nextHref)
       .then((commentsResponse) => {
         dispatch(commentsReceived(commentsResponse));
+      })
+      .catch((err) => {
+        // Dispatch error notification
+        dispatch(notificationFailure('Failed to load comments: ', err));
       });
   };
 }
