@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getArtistByTrackId } from 'client/redux/modules/entities';
-import { copyToClipboard } from 'client/redux/modules/utils';
+import { copyToClipboard } from 'client/redux/modules/copy';
 import {
   startLikeSong,
   startUnlikeSong,
@@ -30,9 +30,7 @@ const mergeProps = (stateProps, { dispatch }, { track }) => {
       dispatch(liked ? startUnlikeSong(trackId) : startLikeSong(trackId));
     },
     handleCopyTrackLink() {
-      const permalinkUrl = track.get('permalinkUrl');
-      if (permalinkUrl) dispatch(copyToClipboard(permalinkUrl));
-      else console.log('Permalink does not exist');
+      dispatch(copyToClipboard(track.get('permalinkUrl'), 'Track permalink copied to clipboard!'));
     },
   };
 };

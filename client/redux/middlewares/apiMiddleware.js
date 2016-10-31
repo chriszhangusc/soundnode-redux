@@ -45,12 +45,12 @@ export default store => next => (action) => {
       next(actionWith({
         type: successType,
         payload: response,
-        entities: response.entities
+        entities: response.entities,
       }));
     },
     error => next(actionWith({
       type: failureType,
-      error: error.message || 'Something bad happened'
+      error: error.message || 'Unknown error',
     }))
   );
 };

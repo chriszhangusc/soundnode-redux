@@ -11,11 +11,6 @@ export function onResponseSuccess(response) {
   return response.json();
 }
 
-export function onResponseError(error) {
-  // Dispatch an error notification
-  console.log('Error in make request!!');
-}
-
 // Construct fetch url with baseURL in current config, given endpoint and queryParams
 export function constructFetchUrl(baseUrl, endpoint, queryParams) {
   const finalUrl = url.resolve(baseUrl, endpoint);
@@ -29,11 +24,9 @@ export function constructFetchUrl(baseUrl, endpoint, queryParams) {
 // Simple wrapper of fetch
 // https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
 export function makeRequest(fetchUrl) {
-  console.log(fetchUrl);
   return fetch(fetchUrl)
           .then(onResponseSuccess)
-          .then(json => camelizeKeys(json))
-          .catch(onResponseError);
+          .then(json => camelizeKeys(json));
 }
 
 export function normalizeResponse(camelizedJson, schema) {
