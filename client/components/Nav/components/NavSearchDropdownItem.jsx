@@ -4,11 +4,11 @@ import { Link, browserHistory } from 'react-router';
 const NavSearchDropdownItem = ({
   imageUrl,
   itemLinkUrl,
-  itemTitle
-}) => (<li className="nav-search-result-item">
+  itemTitle,
+}) => (<li className="dropdown-item">
   <img
     alt="user-profile-img"
-    className="nav-search-result-item-image"
+    className="dropdown-item-image"
     src={imageUrl}
   />
   <Link
@@ -18,14 +18,14 @@ const NavSearchDropdownItem = ({
       browserHistory.push(itemLinkUrl);
     }}
   >
-    <span className="nav-search-result-item-username">{itemTitle}</span>
+    <span className="dropdown-item-title">{itemTitle}</span>
   </Link>
 </li>);
 
 NavSearchDropdownItem.propTypes = {
   imageUrl: PropTypes.string,
   itemLinkUrl: PropTypes.string,
-  itemTitle: PropTypes.string
+  itemTitle: PropTypes.string,
 };
 
 export default NavSearchDropdownItem;

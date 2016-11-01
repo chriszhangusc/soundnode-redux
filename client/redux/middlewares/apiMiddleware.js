@@ -6,8 +6,6 @@ import querystring from 'querystring';
 
 export const CALL_API = 'CALL_API';
 
-console.log(process.env.NODE_ENV);
-
 const production = process.env.NODE_ENV;
 
 // #TODO: Change when deploying to heroku
@@ -17,7 +15,7 @@ export const API_HOST = production ? '//redux-music-api.herokuapp.com' : 'http:/
 export const callApi = (endpoint, schema, query, fetchOptions) => {
   const queryString = querystring.stringify({ ...query, client_id: CLIENT_ID });
   const finalUrl = `${API_HOST}${endpoint}?${queryString}`;
-console.log('Request Url: ', finalUrl);
+// console.log('Request Url: ', finalUrl);
   return fetch(finalUrl, fetchOptions)
     .then(response => response.json())
     .then((json) => {

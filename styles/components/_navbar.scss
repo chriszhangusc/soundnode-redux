@@ -1,3 +1,7 @@
+$search-dropdown-input-height: 30px;
+$search-dropdown-width: 400px;
+$search-dropdown-max-height: 600px;
+
 nav {
   background-color: $nav-bar-color;
   height: $navbar-height;
@@ -40,21 +44,27 @@ nav {
   position: absolute;
   background-color: $sidebar-color;
   display: block;
-  width: 400px;
-  height: 500px;
+  width: $search-dropdown-width;
+  max-height: $search-dropdown-max-height;
   padding: 10px;
   z-index: 1;
+
+  & .dropdown-show-all-link {
+    color: $font-sub-color;
+    vertical-align: middle;
+    font-size: 1.3rem;
+  }
 }
 
-.nav-search-result-title {
+.dropdown-title {
   text-align: center;
   font-size: 1.6rem;
   color: $font-sub-color;
   margin-bottom: 10px;
 }
 
-.nav-search-result-list {
-  & .nav-search-result-item {
+.dropdown-list {
+  & .dropdown-item {
     padding: 8px 10px;
     white-space: nowrap;
     cursor: pointer;
@@ -64,7 +74,7 @@ nav {
     }
   }
 
-  & .nav-search-result-item-image {
+  & .dropdown-item-image {
     width: 25px;
     margin-right: 10px;
     border-radius: 50%;
@@ -72,7 +82,8 @@ nav {
     overflow: hidden;
   }
 
-  & .nav-search-result-item-username {
+  & .dropdown-item-title {
+    vertical-align: middle;
     color: $font-main-color;
     display: inline-block;
     width: 300px;
@@ -81,9 +92,13 @@ nav {
   }
 }
 
+.dropdown-item-show-all {
+  text-align: center;
+}
+
 input[type="search"].nav-search-input {
-  height: 30px;
-  width: 400px;
+  height: $search-dropdown-input-height;
+  width: $search-dropdown-width;
   padding: 6px 10px 6px 30px;
   color: #e3e3e3;
   font-weight: 300;

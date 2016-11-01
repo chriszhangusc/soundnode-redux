@@ -4,6 +4,8 @@ import { formatGenre } from 'client/utils/FormatUtils';
 import { trackArraySchema } from 'client/schemas';
 
 /* Constants */
+
+// #FIXME: Move it to a seperate const file
 export const GENRES = [
   {
     link: 'all-music',
@@ -11,124 +13,124 @@ export const GENRES = [
   },
   {
     link: 'alternativerock',
-    title: 'Alternative Rock'
+    title: 'Alternative Rock',
   },
   {
-      link: 'ambient',
-      title: "Ambient"
+    link: 'ambient',
+    title: 'Ambient',
   },
   {
-      link: 'classical',
-      title: "Classical"
+    link: 'classical',
+    title: 'Classical',
   },
   {
-      link: 'country',
-      title: "Country"
+    link: 'country',
+    title: 'Country',
   },
   {
-      link: 'danceedm',
-      title: "Dance & EDM"
+    link: 'danceedm',
+    title: 'Dance & EDM',
   },
   {
-      link: 'dancehall',
-      title: "Dancehall"
+    link: 'dancehall',
+    title: 'Dancehall',
   },
   {
-      link: 'deephouse',
-      title: "Deep House"
+    link: 'deephouse',
+    title: 'Deep House',
   },
   {
-      link: 'disco',
-      title: "Disco"
+    link: 'disco',
+    title: 'Disco',
   },
   {
-      link: 'drumbass',
-      title: "Drum & Bass"
+    link: 'drumbass',
+    title: 'Drum & Bass',
   },
   {
-      link: 'dubstep',
-      title: "Dubstep"
+    link: 'dubstep',
+    title: 'Dubstep',
   },
   {
-      link: 'electronic',
-      title: "Electronic"
+    link: 'electronic',
+    title: 'Electronic',
   },
   {
-      link: 'folksingersongwriter',
-      title: "Folk & Singer-Songwriter"
+    link: 'folksingersongwriter',
+    title: 'Folk & Singer-Songwriter',
   },
   {
-      link: 'hiphoprap',
-      title: "Hip-hop & Rap"
+    link: 'hiphoprap',
+    title: 'Hip-hop & Rap',
   },
   {
-      link: 'house',
-      title: "House"
+    link: 'house',
+    title: 'House',
   },
   {
-      link: 'indie',
-      title: "Indie"
+    link: 'indie',
+    title: 'Indie',
   },
   {
-      link: 'jazzblues',
-      title: "Jazz & Blues"
+    link: 'jazzblues',
+    title: 'Jazz & Blues',
   },
   {
-      link: 'latin',
-      title: "Latin"
+    link: 'latin',
+    title: 'Latin',
   },
   {
-      link: 'metal',
-      title: "Metal"
+    link: 'metal',
+    title: 'Metal',
   },
   {
-      link: 'piano',
-      title: "Piano"
+    link: 'piano',
+    title: 'Piano',
   },
   {
-      link: 'pop',
-      title: "Pop"
+    link: 'pop',
+    title: 'Pop',
   },
   {
-      link: 'rbsoul',
-      title: "R&B & Soul"
+    link: 'rbsoul',
+    title: 'R&B & Soul',
   },
   {
-      link: 'reggae',
-      title: "Reggae"
+    link: 'reggae',
+    title: 'Reggae',
   },
   {
-      link: 'reggaeton',
-      title: "Reggaeton"
+    link: 'reggaeton',
+    title: 'Reggaeton',
   },
   {
-      link: 'rock',
-      title: "Rock"
+    link: 'rock',
+    title: 'Rock',
   },
   {
-      link: 'soundtrack',
-      title: "Soundtrack"
+    link: 'soundtrack',
+    title: 'Soundtrack',
   },
   {
-      link: 'techno',
-      title: "Techno"
+    link: 'techno',
+    title: 'Techno',
   },
   {
-      link: 'trance',
-      title: "Trance"
+    link: 'trance',
+    title: 'Trance',
   },
   {
-      link: 'trap',
-      title: "Trap"
+    link: 'trap',
+    title: 'Trap',
   },
   {
-      link: 'triphop',
-      title: "Triphop"
+    link: 'triphop',
+    title: 'Triphop',
   },
   {
-      link: 'world',
-      title: "World"
-  }
+    link: 'world',
+    title: 'World',
+  },
 ];
 
 export const DEFAULT_GENRE = 'All-Music';

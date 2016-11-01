@@ -1,16 +1,17 @@
 import { put, call } from 'redux-saga/effects';
-import { takeLatest, takeEvery } from 'redux-saga';
+import { takeLatest } from 'redux-saga';
 import { trackArraySchema, artistArraySchema } from 'client/schemas';
-import { SAGA_DROPDOWN_SEARCH, SAGA_SEARCH } from 'client/constants/ActionTypes';
 import {
+  SAGA_DROPDOWN_SEARCH,
+  SAGA_SEARCH,
   startDropdownSearch,
   endDropdownSearch,
   fetchAllSearchResults,
-  fetchDropdownTracks,
-  fetchDropdownArtists,
+  // fetchDropdownTracks,
+  // fetchDropdownArtists,
   dropdownTracksReceived,
   dropdownArtistsReceived,
-  showSearchResults
+  showDropdownSearchResults,
 } from 'client/redux/modules/search';
 import { fetchAndNormalize } from 'client/utils/FetchUtils';
 /* *****************************************************************************/
@@ -23,12 +24,11 @@ function* doDropdownSearch({ payload }) {
   const { keyword, limit } = payload;
   yield put(startDropdownSearch());
   try {
-    // fetchAndNormalize(endpoint, queryParams, normalizeSchema, fetchOptions)
     const trackEndPoint = '/sc/api-v1/tracks';
     const artistEndPoint = '/sc/api-v1/artists';
     const queryParams = {
       limit,
-      q: keyword.trim().toLowerCase()
+      q: keyword.trim().toLowerCase(),
     };
     // Two async run in parallel.
     // When we yield an array of effects, the generator is blocked
@@ -36,7 +36,7 @@ function* doDropdownSearch({ payload }) {
     // or as soon as one is rejected (just like how Promise.all behaves).
     const [normalizedTracks, normalizedArtists] = yield [
       call(fetchAndNormalize, trackEndPoint, queryParams, trackArraySchema),
-      call(fetchAndNormalize, artistEndPoint, queryParams, artistArraySchema)
+      call(fetchAndNormalize, artistEndPoint, queryParams, artistArraySchema),
     ];
     yield put(dropdownTracksReceived(normalizedTracks));
     yield put(dropdownArtistsReceived(normalizedArtists));
@@ -46,7 +46,7 @@ function* doDropdownSearch({ payload }) {
   }
   yield put(endDropdownSearch());
   // yield call(fetchDropdownArtists, keyword, limit);
-  yield put(showSearchResults());
+  yield put(showDropdownSearchResults());
   console.log('Drop down search');
 }
 

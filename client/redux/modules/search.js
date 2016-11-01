@@ -1,35 +1,36 @@
 import { fromJS } from 'immutable';
 import { trackArraySchema } from 'client/schemas';
-import {
-  SAGA_DROPDOWN_SEARCH,
-  START_DROPDOWN_SEARCH,
-  END_DROPDOWN_SEARCH,
-  DROPDOWN_ARTISTS_RECEIVED,
-  DROPDOWN_TRACKS_RECEIVED,
 
-  SAGA_SEARCH,
-  START_SEARCH,
-  END_SEARCH,
-  SEARCH_FAILURE,
-
-  SEARCH_RESULTS_RECEIVED,
-  SHOW_DROPDOWN_SEARCH_RESULTS,
-  HIDE_DROPDOWN_SEARCH_RESULTS,
-  CLEAR_DROPDOWN_SEARCH_RESULTS,
-  // FETCH_DROPDOWN_TRACKS,
-  // FETCH_DROPDOWN_ARTISTS
-} from 'client/constants/ActionTypes';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
+// Dropdown search
+export const SAGA_DROPDOWN_SEARCH = 'redux-music/search/SAGA_DROPDOWN_SEARCH';
+export const START_DROPDOWN_SEARCH = 'redux-music/search/START_DROPDOWN_SEARCH';
+export const END_DROPDOWN_SEARCH = 'redux-music/search/END_DROPDOWN_SEARCH';
+export const DROPDOWN_ARTISTS_RECEIVED = 'redux-music/search/DROPDOWN_ARTISTS_RECEIVED';
+export const DROPDOWN_TRACKS_RECEIVED = 'redux-music/search/DROPDOWN_TRACKS_RECEIVED';
+export const SHOW_DROPDOWN_SEARCH_RESULTS = 'redux-music/search/SHOW_DROPDOWN_SEARCH_RESULTS';
+export const HIDE_DROPDOWN_SEARCH_RESULTS = 'redux-music/search/HIDE_DROPDOWN_SEARCH_RESULTS';
+export const CLEAR_DROPDOWN_SEARCH_RESULTS = 'redux-music/search/CLEAR_DROPDOWN_SEARCH_RESULTS';
+
+// Search page
+export const SAGA_SEARCH = 'redux-music/search/SAGA_SEARCH';
+export const START_SEARCH = 'redux-music/search/START_SEARCH';
+export const END_SEARCH = 'redux-music/search/END_SEARCH';
+export const SEARCH_FAILURE = 'redux-music/search/SEARCH_FAILURE';
+export const SEARCH_RESULTS_RECEIVED = 'redux-music/search/SEARCH_RESULTS_RECEIVED';
+
+export const DROPDOWN_LIMIT = 5;
+export const SEARCH_LIMIT = 20;
 
 /* Reducers */
 const INITIAL_STATE = fromJS({
-  shown: false,
-  fetching: false,
+  dropdownShown: false,
   dropdownFetching: false,
   // Search dropdown list results
   dropdownArtistIds: [],
   dropdownTrackIds: [],
   // Search results page
+  fetching: false,
   searchResultTrackIds: [],
 });
 
@@ -51,9 +52,9 @@ export default function searchReducer(state = INITIAL_STATE, action) {
         fetching: false,
       }));
     case HIDE_DROPDOWN_SEARCH_RESULTS:
-      return state.set('shown', false);
+      return state.set('dropdownShown', false);
     case SHOW_DROPDOWN_SEARCH_RESULTS:
-      return state.set('shown', true);
+      return state.set('dropdownShown', true);
     case CLEAR_DROPDOWN_SEARCH_RESULTS:
       return state.set('dropdownArtistIds', fromJS([])).set('dropdownTrackIds', fromJS([]));
     default:
@@ -64,23 +65,20 @@ export default function searchReducer(state = INITIAL_STATE, action) {
 /* Selectors */
 export const getSearchState = state => state.get('search');
 export const isSearching = state => getSearchState(state).get('fetching');
-export const isSearchResultShown = state => getSearchState(state).get('shown');
+export const isDropdownSearching = state => getSearchState(state).get('dropdownFetching');
+export const isDropdownShown = state => getSearchState(state).get('dropdownShown');
 export const getSearchResultTrackIds = state => getSearchState(state).get('searchResultTrackIds');
 export const getDropdownSearchArtistIds = state => getSearchState(state).get('dropdownArtistIds');
 export const getDropdownSearchTrackIds = state => getSearchState(state).get('dropdownTrackIds');
 
 /* Actions */
-export function startSearch() {
-  return {
-    type: START_SEARCH,
-  };
-}
+export const startSearch = () => ({
+  type: START_SEARCH,
+});
 
-export function endSearch() {
-  return {
-    type: END_SEARCH,
-  };
-}
+export const endSearch = () => ({
+  type: END_SEARCH,
+});
 
 export const startDropdownSearch = () => ({
   type: START_DROPDOWN_SEARCH,
@@ -90,52 +88,42 @@ export const endDropdownSearch = () => ({
   type: END_DROPDOWN_SEARCH,
 });
 
-export function hideSearchResults() {
-  return {
-    type: HIDE_DROPDOWN_SEARCH_RESULTS,
-  };
-}
+export const hideDropdownSearchResults = () => ({
+  type: HIDE_DROPDOWN_SEARCH_RESULTS,
+});
 
-export function showSearchResults() {
-  return {
-    type: SHOW_DROPDOWN_SEARCH_RESULTS,
-  };
-}
+export const showDropdownSearchResults = () => ({
+  type: SHOW_DROPDOWN_SEARCH_RESULTS,
+});
 
-export function clearSearchResults() {
-  return {
-    type: CLEAR_DROPDOWN_SEARCH_RESULTS,
-  };
-}
+export const clearDropdownSearchResults = () => ({
+  type: CLEAR_DROPDOWN_SEARCH_RESULTS,
+});
 
 /* Thunk Actions */
 export function clearAndHideSearchResults() {
   return (dispatch) => {
-    dispatch(hideSearchResults());
-    dispatch(clearSearchResults());
+    dispatch(hideDropdownSearchResults());
+    dispatch(clearDropdownSearchResults());
   };
 }
 
 /* Saga Actions */
-export function sagaDropdownSearch(keyword, limit) {
-  return {
-    type: SAGA_DROPDOWN_SEARCH,
-    payload: {
-      keyword: keyword.trim().toLowerCase(),
-      limit,
-    },
-  };
-}
+export const sagaDropdownSearch = (keyword, limit = DROPDOWN_LIMIT) => ({
+  type: SAGA_DROPDOWN_SEARCH,
+  payload: {
+    keyword: keyword.trim().toLowerCase(),
+    limit,
+  },
+});
 
-export function sagaSearch(keyword, limit) {
-  return {
-    type: SAGA_SEARCH,
-    payload: {
-      keyword: keyword.trim().toLowerCase(),
-      limit,
-    },
-  };
-}
+export const sagaSearch = (keyword, limit = SEARCH_LIMIT) => ({
+  type: SAGA_SEARCH,
+  payload: {
+    keyword: keyword.trim().toLowerCase(),
+    limit,
+  },
+});
 
 export const dropdownArtistsReceived = normalized => ({
   type: DROPDOWN_ARTISTS_RECEIVED,

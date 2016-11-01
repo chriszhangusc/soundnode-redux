@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { List } from 'immutable';
-// import Spinner from 'client/components/Spinner';
+import { Link } from 'react-router';
 import NavSearchDropdownTrackContainer from '../containers/NavSearchDropdownTrackContainer';
 import NavSearchDropdownArtistContainer from '../containers/NavSearchDropdownArtistContainer';
 
@@ -13,9 +13,10 @@ class NavSearch extends Component {
     this.onBlur = this.onBlur.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.renderSearchResults = this.renderSearchResults.bind(this);
+    this.onShowAllClick = this.onShowAllClick.bind(this);
   }
 
-  // When user press enter, the search input form will be submitted
+  // When user press enter, show all results.
   onSubmit(e) {
     e.preventDefault();
     const { handleShowAll } = this.props;
@@ -39,15 +40,22 @@ class NavSearch extends Component {
     this.props.handleBlur();
   }
 
+  onShowAllClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const { handleShowAll } = this.props;
+    handleShowAll(this.searchInput.value.trim());
+  }
+
   renderSearchResults() {
-    const { artistIds, trackIds, shouldShowResults } = this.props;
-    if (shouldShowResults) {
+    const { artistIds, trackIds, isDropdownShown } = this.props;
+    if (isDropdownShown) {
       return (
         <div className="nav-search-result">
-          <div className="nav-search-result-title">
+          <div className="dropdown-title">
             ARTISTS
           </div>
-          <ul className="nav-search-result-list">
+          <ul className="dropdown-list">
             {
               artistIds.map(artistId =>
                 <NavSearchDropdownArtistContainer
@@ -56,10 +64,10 @@ class NavSearch extends Component {
                 />)
             }
           </ul>
-          <div className="nav-search-result-title">
+          <div className="dropdown-title">
             TRACKS
           </div>
-          <ul className="nav-search-result-list">
+          <ul className="dropdown-list">
             {
               trackIds.map(trackId =>
                 <NavSearchDropdownTrackContainer
@@ -68,6 +76,14 @@ class NavSearch extends Component {
                 />)
             }
           </ul>
+          <li className="dropdown-item-show-all">
+            <Link
+              className="dropdown-show-all-link"
+              onMouseDown={this.onShowAllClick}
+            >
+              SHOW ALL
+            </Link>
+          </li>
         </div>
       );
     }
@@ -95,24 +111,17 @@ class NavSearch extends Component {
       </div>
     );
   }
-
 }
 
-
-//
-//
-//
-
-
 NavSearch.propTypes = {
-  shouldShowResults: PropTypes.bool.isRequired,
+  isDropdownShown: PropTypes.bool,
   artistIds: PropTypes.instanceOf(List),
   trackIds: PropTypes.instanceOf(List),
   // isFetching: PropTypes.bool.isRequired,
   handleBlur: PropTypes.func,
   handleFocus: PropTypes.func,
-  handleChange: PropTypes.func.isRequired,
-  handleShowAll: PropTypes.func
+  handleChange: PropTypes.func,
+  handleShowAll: PropTypes.func,
 };
 
 export default NavSearch;
