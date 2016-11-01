@@ -3,4 +3,4 @@
 # The server side is written in ES5 for now
 #server/server.js
 # We do not need to lint webpack.config.
-webpack.config.js
+webpack.*.config.js

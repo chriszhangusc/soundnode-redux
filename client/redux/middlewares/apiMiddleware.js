@@ -5,11 +5,18 @@ import { CLIENT_ID } from 'client/constants/Config';
 import querystring from 'querystring';
 
 export const CALL_API = 'CALL_API';
+
+console.log(process.env.NODE_ENV);
+
+const production = process.env.NODE_ENV;
+
+// #TODO: Change when deploying to heroku
+export const API_HOST = production ? 'http://localhost:3001' : 'http://localhost:3000';
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
 export const callApi = (endpoint, schema, query, fetchOptions) => {
   const queryString = querystring.stringify({ ...query, client_id: CLIENT_ID });
-  const finalUrl = `http://localhost:3000${endpoint}?${queryString}`;
+  const finalUrl = `${API_HOST}${endpoint}?${queryString}`;
 console.log('Request Url: ', finalUrl);
   return fetch(finalUrl, fetchOptions)
     .then(response => response.json())

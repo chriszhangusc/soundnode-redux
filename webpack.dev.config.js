@@ -1,3 +1,4 @@
+// webpack config for development
 var path = require('path');
 var webpack = require('webpack');
 var buildPath = path.resolve(__dirname, 'public', 'build');
@@ -12,14 +13,15 @@ module.exports = {
     path.resolve(__dirname, 'client', 'index.jsx')
   ],
 
-  // Just like app.use(publicPath, express.static(__dirname, contentBase))
+  // If confused: https://github.com/webpack/docs/wiki/configuration#outputpublicpath
   output: {
     // We need to give Webpack a path. It does not actually need it,
     // because files are kept in memory in webpack-dev-server, but an
     // error will occur if nothing is specified. We use the buildPath
     // as that points to where the files will eventually be bundled
     // in production
-    path: '/',
+    // The output directory as an absolute path (required).
+    path: './public/build',
     filename: 'bundle.js',
     // This modified bundle is served from memory at the relative path specified in publicPath (see API).
     // It will not be written to your configured output directory.
@@ -77,5 +79,6 @@ module.exports = {
       }
     ]
   },
-  devtool: 'source-map'
+  // devtool: 'source-map'
+  devtool: 'cheap-module-eval-source-map'
 };
