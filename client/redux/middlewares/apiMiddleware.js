@@ -11,7 +11,7 @@ console.log(process.env.NODE_ENV);
 const production = process.env.NODE_ENV;
 
 // #TODO: Change when deploying to heroku
-export const API_HOST = production ? '//redux-music-api.herokuapp.com/' : 'http://localhost:3000';
+export const API_HOST = production ? '//redux-music-api.herokuapp.com' : 'http://localhost:3000';
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
 export const callApi = (endpoint, schema, query, fetchOptions) => {
