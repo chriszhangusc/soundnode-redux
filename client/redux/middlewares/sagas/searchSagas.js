@@ -12,6 +12,7 @@ import {
   dropdownTracksReceived,
   dropdownArtistsReceived,
   showDropdownSearchResults,
+  clearSearchPageResults,
 } from 'client/redux/modules/search';
 import { fetchAndNormalize } from 'client/utils/FetchUtils';
 /* *****************************************************************************/
@@ -45,14 +46,12 @@ function* doDropdownSearch({ payload }) {
     throw err;
   }
   yield put(endDropdownSearch());
-  // yield call(fetchDropdownArtists, keyword, limit);
   yield put(showDropdownSearchResults());
-  console.log('Drop down search');
 }
 
 function* doSearch({ payload }) {
   const { keyword, limit } = payload;
-  console.log('do search saga: ', keyword, limit);
+  yield put(clearSearchPageResults());
   yield put(fetchAllSearchResults(keyword, limit));
 }
 

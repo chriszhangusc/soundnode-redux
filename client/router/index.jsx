@@ -10,7 +10,7 @@ import NotFound from 'client/components/NotFound';
 import { loadCharts, DEFAULT_GENRE } from 'client/redux/modules/charts';
 import { loadArtistPage, clearArtistState } from 'client/redux/modules/artist';
 import { loadTrackPage, clearTrackState } from 'client/redux/modules/track';
-import { sagaSearch } from 'client/redux/modules/search';
+import { sagaSearch, clearSearchPageResults } from 'client/redux/modules/search';
 import { clearVisibleTracks } from 'client/redux/modules/ui';
 import { fetchAllLikedTracks } from 'client/redux/modules/user';
 
@@ -54,10 +54,17 @@ const configureRoutes = (store) => {
   };
 
   const onSearchPageEnter = (nextState) => {
-    console.log('On Search Page Enter');
+    console.log('On search page enter');
     const dispatch = store.dispatch;
+    // Clear previous results first.
     const query = nextState.location.query;
     dispatch(sagaSearch(query.q, 20));
+  };
+
+  const onSearchPageLeave = () => {
+    console.log('On Search Page Leave');
+    const { dispatch } = store;
+    dispatch(clearSearchPageResults());
   };
 
   const onLikesPageEnter = () => {
@@ -94,7 +101,12 @@ const configureRoutes = (store) => {
             onLeave={onTrackDetailsPageLeave}
           />
         </Route>
-        <Route path="search" component={SearchResultsPage} onEnter={onSearchPageEnter} />
+        <Route
+          path="search"
+          component={SearchResultsPage}
+          onEnter={onSearchPageEnter}
+          onLeave={onSearchPageLeave}
+        />
         <Route path="likes" component={LikesPage} onEnter={onLikesPageEnter} />
         <Route path="*" component={NotFound} />
       </Route>

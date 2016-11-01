@@ -13,6 +13,7 @@ export const HIDE_DROPDOWN_SEARCH_RESULTS = 'redux-music/search/HIDE_DROPDOWN_SE
 export const CLEAR_DROPDOWN_SEARCH_RESULTS = 'redux-music/search/CLEAR_DROPDOWN_SEARCH_RESULTS';
 
 // Search page
+export const CLEAR_SEARCH_RESULTS = 'redux-music/search/CLEAR_SEARCH_RESULTS';
 export const SAGA_SEARCH = 'redux-music/search/SAGA_SEARCH';
 export const START_SEARCH = 'redux-music/search/START_SEARCH';
 export const END_SEARCH = 'redux-music/search/END_SEARCH';
@@ -42,6 +43,8 @@ export default function searchReducer(state = INITIAL_STATE, action) {
       return state.set('dropdownFetching', true);
     case END_DROPDOWN_SEARCH:
       return state.set('dropdownFetching', false);
+    case CLEAR_SEARCH_RESULTS:
+      return state.set('searchResultTrackIds', fromJS([]));
     case DROPDOWN_ARTISTS_RECEIVED:
       return state.set('dropdownArtistIds', fromJS(action.payload.result));
     case DROPDOWN_TRACKS_RECEIVED:
@@ -98,6 +101,10 @@ export const showDropdownSearchResults = () => ({
 
 export const clearDropdownSearchResults = () => ({
   type: CLEAR_DROPDOWN_SEARCH_RESULTS,
+});
+
+export const clearSearchPageResults = () => ({
+  type: CLEAR_SEARCH_RESULTS,
 });
 
 /* Thunk Actions */
