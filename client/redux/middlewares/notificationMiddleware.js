@@ -1,7 +1,5 @@
 import { NotificationManager } from 'react-notifications';
-
-export const NOTIFICATION_SUCCESS = 'redux-music/notification/SUCCESS';
-export const NOTIFICATION_FAILURE = 'redux-music/notification/FAILURE';
+import { NOTIFICATION_SUCCESS, NOTIFICATION_FAILURE } from 'client/redux/modules/notification';
 
 const defaultErrorMessage = 'Action success!';
 const defaultSuccessMessage = 'Action failed!';
@@ -18,10 +16,6 @@ const notificationMiddleware = () => next => (action) => {
       break;
     default:
       break;
-  }
-  if (type.indexOf('FAILURE') > -1) {
-    // #FIXME: apiMiddleware notification triggering should be rewritten
-    NotificationManager.error('Network Error');
   }
   return next(action);
 };

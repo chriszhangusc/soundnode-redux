@@ -1,10 +1,7 @@
 /* artist module */
-import * as v1 from 'client/../api/sc/v1';
+import { fetchArtist, fetchArtistTracks, fetchMoreArtistTracks } from 'client/../api/sc/v1';
 import { fromJS } from 'immutable';
-import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
-import { artistSchema } from 'client/schemas';
-import { createStructuredSelector } from 'reselect';
-
+import { notificationFailure } from './notification';
 /* Constants */
 export const CLEAR_STATE = 'redux-music/artist/CLEAR_STATE';
 export const ARTIST_REQUEST = 'redux-music/artist/ARTIST_REQUEST';
@@ -60,31 +57,19 @@ export const clearArtistState = () => ({
   type: CLEAR_STATE,
 });
 
-export const fetchArtist = id => ({
-  [CALL_API]: {
-    endpoint: `/sc/api-v1/users/${id}`,
-    fetchOptions: {
-      method: 'GET',
-    },
-    types: [ARTIST_REQUEST, ARTIST_RECEIVED, ARTIST_FAILURE],
-    schema: artistSchema,
-  },
-});
+export function artistRequest() {
+  return {
+    type: ARTIST_REQUEST,
+  };
+}
 
-// export const fetchArtistTracks = id => ({
-//   [CALL_API]: {
-//     endpoint: `/sc/api-v1/users/${id}/tracks`,
-//     fetchOptions: {
-//       method: 'GET',
-//     },
-//     query: {
-//       limit: 20,
-//     },
-//     method: 'GET',
-//     types: [TRACKS_REQUEST, TRACKS_RECEIVED, TRACKS_FAILURE],
-//     schema: trackArraySchema,
-//   },
-// });
+export function artistReceived(normalized) {
+  return {
+    type: ARTIST_RECEIVED,
+    payload: normalized,
+    entities: normalized.entities,
+  };
+}
 
 export function artistTracksRequest() {
   return {
@@ -100,29 +85,46 @@ export function artistTracksReceived(normalizedResponse) {
   };
 }
 
-export function fetchMoreArtistTracks() {
-  return (dispatch, getState) => {
-    const state = getState();
-    // nextHref will be undefined if end has been reached
-    const nextHref = getArtistTracksNextHref(state);
-    if (nextHref) {
-      dispatch(artistTracksRequest());
-      v1.fetchMoreArtistTracks(nextHref)
-        .then(normalizedResponse => dispatch(artistTracksReceived(normalizedResponse)));
-    }
+export function artistFailure() {
+  return {
+    type: ARTIST_FAILURE,
   };
 }
 
 export function loadArtistPage(artistId) {
-  // Fetch artist and tracks
-  return (dispatch) => {
-    // v1.fetchArtist(id).then((artistObj) => {
-    //   console.log(artistObj);
-    // });
-    dispatch(fetchArtist(artistId));
-    dispatch(artistTracksRequest());
-    v1.fetchArtistTracks(artistId)
-      .then(normalizedResponse => dispatch(artistTracksReceived(normalizedResponse)));
-    // dispatch(fetchArtistTracks(id));
+  return async (dispatch) => {
+    try {
+      dispatch(artistRequest());
+      dispatch(artistTracksRequest());
+      const [artist, tracks] = await Promise.all(
+        [
+          fetchArtist(artistId),
+          fetchArtistTracks(artistId),
+        ]);
+      // throw new Error('Fail to fetch resource.');
+      dispatch(artistReceived(artist));
+      dispatch(artistTracksReceived(tracks));
+    } catch (err) {
+      // Do we need to stop spinner here ?
+      // dispatch(artistFailure(err.message));
+      dispatch(notificationFailure(err.message));
+    }
+  };
+}
+
+export function loadMoreArtistTracks() {
+  return async (dispatch, getState) => {
+    const state = getState();
+    // nextHref will be undefined if end has been reached
+    const nextHref = getArtistTracksNextHref(state);
+    if (nextHref) {
+      try {
+        dispatch(artistTracksRequest());
+        const tracks = await fetchMoreArtistTracks(nextHref);
+        dispatch(artistTracksReceived(tracks));
+      } catch (err) {
+        dispatch(notificationFailure(err.message));
+      }
+    }
   };
 }

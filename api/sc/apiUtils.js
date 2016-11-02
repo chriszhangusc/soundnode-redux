@@ -2,7 +2,7 @@ import url from 'url';
 import qs from 'querystring';
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
-// Should be moved to a shared place.
+
 // Return a promise
 export function onResponseSuccess(response) {
   if (!response.ok) {

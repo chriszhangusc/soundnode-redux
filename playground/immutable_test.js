@@ -1,4 +1,4 @@
-var Immutable = require('immutable');
+import { fromJS } from 'immutable';
 //
 // var merge = Immutable.merge;
 // var concat = Immutable.concat;
@@ -42,7 +42,7 @@ var Immutable = require('immutable');
 // console.log(r2.merge(r1));
 // console.log(Immutable.fromJS(myRecord));
 
-var a = Immutable.fromJS({
+var a = fromJS({
   artists: {
     1: {
       name: 'a'
@@ -50,7 +50,7 @@ var a = Immutable.fromJS({
   }
 });
 
-var b = Immutable.fromJS({
+var b = fromJS({
   artists: {
     1: {
       name: 'b',
@@ -62,5 +62,5 @@ var b = Immutable.fromJS({
 // console.log(a.mergeDeep(b).toJS());
 // console.log(b.mergeDeep(a).toJS());
 
-var l1 = Immutable.fromJS([1,2,3]);
+var l1 = fromJS([1,2,3]);
 console.log(l1.get(0));
