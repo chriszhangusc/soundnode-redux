@@ -60,27 +60,6 @@ export const mute = () => ({ type: MUTE });
 
 export const clearTime = () => ({ type: CLEAR_TIME });
 
-/**
- * Create INIT_SHUFFLE action
- * @param  {Array}  An array of songIds
- * @return {Object} INIT_SHUFFLE action
- */
-export const initShuffle = songIds => ({ type: INIT_SHUFFLE, payload: songIds });
-
-/**
- * Create SHUFFLE_DRAW action
- * @param  {Number} songId The songId we want to remove from the shuffleDraw list
- * @return {Object}        SHUFFLE_DRAW action
- */
-export const shuffleDraw = songId => ({ type: SHUFFLE_DRAW, payload: songId });
-
-/**
- * Create SHUFFLE_DISCARD action
- * @param  {Number} songId The songId we want to add to the shuffleDiscard list
- * @return {Object}        SHUFFLE_DISCARD
- */
-export const shuffleDiscard = songId => ({ type: SHUFFLE_DISCARD, payload: songId });
-
 export const updateTime = currentTime => ({
   type: UPDATE_TIME,
   payload: currentTime,
@@ -163,8 +142,6 @@ const initialState = fromJS({
   volumeSeeking: false,
   duration: 0,
   mode: DEFAULT_MODE,
-  shuffleDraw: [],
-  shuffleDiscard: [],
 });
 
 export default function playerReducer(state = initialState, action) {
@@ -205,25 +182,6 @@ export default function playerReducer(state = initialState, action) {
     case CLEAR_TIME:
       return state.set('currentTime', 0);
 
-    case INIT_SHUFFLE:
-      // Initialize shuffleDraw with given playlist represented by songIds
-      return state.mergeDeep({
-        shuffleDraw: action.payload,
-        shuffleDiscard: [],
-      });
-
-    // Remove payload(songId) from shuffleDraw
-    case SHUFFLE_DRAW:
-      return state.mergeDeep({
-        shuffleDraw: state.get('shuffleDraw').filter(item => item !== action.payload),
-      });
-
-    // Add payload(songId) to shuffleDiscard
-    case SHUFFLE_DISCARD:
-      return state.mergeDeep({
-        shuffleDiscard: state.get('shuffleDiscard').push(action.payload),
-      });
-
     case CLEAR_PLAY_QUEUE:
       return initialState;
     default:
@@ -233,17 +191,14 @@ export default function playerReducer(state = initialState, action) {
 
 
 /* Selectors */
-export const getState = state => state.get('player');
-export const getPlayerTrackId = state => getState(state).get('trackId');
-// export const getShuffleDraw = state => state.get('shuffleDraw').toJS();
-// export const getShuffleDiscard = state => state.get('shuffleDiscard').toJS();
-// export const shuffleInitialized = state => (getShuffleDraw(state).length > 0);
-export const isPlayerPlaying = state => getState(state).get('playing');
-export const isPlayerSeeking = state => getState(state).get('seeking');
-export const getCurrentTime = state => getState(state).get('currentTime');
-export const getPlayerMode = state => getState(state).get('mode');
-export const isVolumeSeeking = state => getState(state).get('volumeSeeking');
-export const getCurrentVolume = state => getState(state).get('volume');
+export const getPlayerState = state => state.get('player');
+export const getPlayerTrackId = state => getPlayerState(state).get('trackId');
+export const isPlayerPlaying = state => getPlayerState(state).get('playing');
+export const isPlayerSeeking = state => getPlayerState(state).get('seeking');
+export const getCurrentTime = state => getPlayerState(state).get('currentTime');
+export const getPlayerMode = state => getPlayerState(state).get('mode');
+export const isVolumeSeeking = state => getPlayerState(state).get('volumeSeeking');
+export const getCurrentVolume = state => getPlayerState(state).get('volume');
 
 // (Reselect) Return the current player track (Immutable.Record)
 export function getCurrentPlayerTrack(state) {

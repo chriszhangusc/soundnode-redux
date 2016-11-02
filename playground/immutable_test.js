@@ -59,5 +59,8 @@ var b = Immutable.fromJS({
   }
 });
 
-console.log(a.mergeDeep(b).toJS());
-console.log(b.mergeDeep(a).toJS());
+// console.log(a.mergeDeep(b).toJS());
+// console.log(b.mergeDeep(a).toJS());
+
+var l1 = Immutable.fromJS([1,2,3]);
+console.log(l1.get(0));

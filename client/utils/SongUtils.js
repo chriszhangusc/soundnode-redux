@@ -1,16 +1,4 @@
 import { LOOP, SHUFFLE, REPEAT, NEXT, PREV } from 'client/redux/modules/player';
-/**
- * Generate fetch url by given query
- * @param {String} rawQuery
- * @return {String} url
- */
-
-// const getRandomIntInclusive = (min, max) => {
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   let res = Math.floor(Math.random() * (max - min + 1)) + min;
-//   return res;
-// }
 
 const getLoopNext = (songId, songIds) => {
   let nextSongId = null;
@@ -43,18 +31,18 @@ const getLoopPrev = (songId, songIds) => {
 //   return pickRandomProperty(songIds);
 // };
 
-export const getSongIdByMode = (songId, songIds, mode, method) => {
-  if (songIds.length === 0) return null;
+export const getTrackIdByMode = (trackId, playlist, mode, method) => {
+  if (playlist.length === 0) return null;
   switch (mode) {
     case LOOP:
-      if (method === NEXT) return getLoopNext(songId, songIds);
-      if (method === PREV) return getLoopPrev(songId, songIds);
+      if (method === NEXT) return getLoopNext(trackId, playlist);
+      if (method === PREV) return getLoopPrev(trackId, playlist);
       break;
     case SHUFFLE:
 
       break;
     case REPEAT:
-      return songId;
+      return trackId;
     default:
       break;
   }

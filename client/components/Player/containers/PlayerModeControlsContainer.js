@@ -7,13 +7,13 @@ import PlayerModeControls from '../components/PlayerModeControls';
 const mapStateToProps = state => ({
   mode: getPlayerMode(state),
   // playlistHidden: isPlaylistHidden(state)
-  playlistHidden: true
+  playlistHidden: true,
 });
 
 const mapDispatchToProps = dispatch => ({
   onRepeatClick: () => { dispatch(sagaChangePlayMode(REPEAT)); },
   onShuffleClick: () => { dispatch(sagaChangePlayMode(SHUFFLE)); },
-  onTogglePlaylistClick: () => { dispatch(togglePlaylist()); }
+  onTogglePlaylistClick: () => { dispatch(togglePlaylist()); },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerModeControls);

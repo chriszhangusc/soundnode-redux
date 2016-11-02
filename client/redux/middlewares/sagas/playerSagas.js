@@ -1,26 +1,17 @@
 import { put, call, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { getLastVolume, setLastVolume } from 'client/utils/LocalStorageUtils';
-import { getSongIdByMode } from 'client/utils/SongUtils';
+import { getTrackIdByMode } from 'client/utils/SongUtils';
 import { generateRandom } from 'client/utils/GeneralUtils';
-// import {
-//   updateTime,
-//   endSeek,
-//   changeVolume,
-//   endVolumeSeek,
-//   mute,
-//   loadPlayerPlaylist,
-//   pauseSong,
-//   changeSong,
-//   clearTime,
-//   playSong,
-//   initShuffle,
-//   sagaChangeSongAndPlay,
-//   changePlayMode,
-//   shuffleDraw,
-//   shuffleDiscard
-// }  from 'client/redux/modules/player';
-import { initPlaylistIfNeeded, addToPlayQueueIfNeeded } from 'client/redux/modules/playlist';
+import {
+  getPlaylistTrackIds,
+  initPlaylistIfNeeded,
+  addToPlayQueueIfNeeded,
+  getShuffleDraw,
+  shuffleDraw,
+  shuffleDiscard,
+  reshuffle,
+} from 'client/redux/modules/playlist';
 // Not good
 import * as playerDuck from 'client/redux/modules/player';
 /* *****************************************************************************/
@@ -84,37 +75,37 @@ function* changeSongAndPlay({ payload }) {
 }
 
 function* shuffle() {
-  const shuffleDrawQueue = yield select(playerDuck.getShuffleDraw);
+  // Always keep in mind that we are dealing with immutable objects.
+  const shuffleDrawQueue = yield select(getShuffleDraw);
   // Generate the array index of the song we are going to play next
-  const nextIdx = yield call(generateRandom, 0, shuffleDrawQueue.length - 1);
-  const nextSongId = shuffleDrawQueue[nextIdx];
-  // Remove nextSongId from shuffleDraw
-  yield put(playerDuck.shuffleDraw(nextSongId));
-  // Add nextSongId to shuffleDiscard
-  yield put(playerDuck.shuffleDiscard(nextSongId));
-  // Reshuffle if all cards are played once.
-  if ((yield select(playerDuck.getShuffleDraw)).length === 0) {
-    const visibleSongIds = yield select(playerDuck.getVisibleSongIds);
-    yield put(playerDuck.initShuffle(visibleSongIds));
+  const nextIdx = yield call(generateRandom, 0, shuffleDrawQueue.size - 1);
+  const nextTrackId = shuffleDrawQueue.get(nextIdx);
+  console.log(nextTrackId);
+  // Remove nextSongId from shuffleDraw and add it to shuffleDiscard queue
+
+  // Passing idx makes deleting easier
+  yield put(shuffleDraw(nextIdx));
+  yield put(shuffleDiscard(nextTrackId));
+  // // Reshuffle if all cards are played once.
+  if ((yield select(getShuffleDraw)).size === 0) {
+    yield put(reshuffle());
   }
-  return nextSongId;
+  return nextTrackId;
 }
 
-// action being NEXT or PREV
-function* doPlaySong(action) {
+// action being NEXT or PREV, passed in watch function.
+function* doPlaySongByMode(action) {
   const mode = yield select(playerDuck.getPlayerMode);
-  const currentSongId = yield select(playerDuck.getCurrentSongId);
-  let playlistSongIds = null;
-  let nextSongId = null;
+  const playerTrackId = yield select(playerDuck.getPlayerTrackId);
+  let nextTrackId = null;
   if (mode === playerDuck.SHUFFLE) {
-    nextSongId = yield call(shuffle);
+    nextTrackId = yield call(shuffle);
   } else {
-    playlistSongIds = yield select(playerDuck.getPlayerSongIds);
-    nextSongId = yield call(getSongIdByMode, currentSongId, playlistSongIds, mode, action);
+    const playlist = yield select(getPlaylistTrackIds);
+    nextTrackId = yield call(getTrackIdByMode, playerTrackId, playlist.toJS(), mode, action);
   }
 
-  const nextSong = yield select(playerDuck.getSongByIdFromPlaylist, nextSongId);
-  yield put(playerDuck.sagaChangeSongAndPlay(nextSong));
+  yield put(playerDuck.sagaChangeSongAndPlay(nextTrackId));
 }
 
 function* doChangePlayMode({ payload }) {
@@ -124,15 +115,6 @@ function* doChangePlayMode({ payload }) {
     // Toggle off
     yield put(playerDuck.changePlayMode(playerDuck.DEFAULT_MODE));
   } else {
-    // Toggle On
-    if (newMode === playerDuck.SHUFFLE) {
-      const shuffleInitialized = yield select(playerDuck.shuffleInitialized);
-      // Init shuffle with current visible playlist / Or should we use player playist?
-      if (!shuffleInitialized) {
-        const visibleSongIds = yield select(playerDuck.getVisibleSongIds);
-        yield put(playerDuck.initShuffle(visibleSongIds));
-      }
-    }
     // Set up two sets for shuffle
     yield put(playerDuck.changePlayMode(newMode));
   }
@@ -171,9 +153,9 @@ export function* watchToggleMute() {
 }
 
 export function* watchPlayNextSong() {
-  yield takeEvery(playerDuck.SAGA_PLAY_NEXT_SONG, doPlaySong, playerDuck.NEXT);
+  yield takeEvery(playerDuck.SAGA_PLAY_NEXT_SONG, doPlaySongByMode, playerDuck.NEXT);
 }
 
 export function* watchPlayPrevSong() {
-  yield takeEvery(playerDuck.SAGA_PLAY_PREV_SONG, doPlaySong, playerDuck.PREV);
+  yield takeEvery(playerDuck.SAGA_PLAY_PREV_SONG, doPlaySongByMode, playerDuck.PREV);
 }

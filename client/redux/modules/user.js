@@ -37,6 +37,10 @@ const user = (state = INITIAL_STATE, action) => {
     case UNLIKE_SUCCESS:
       // It will fail without toString!!!
       return state.deleteIn(['likes', action.payload.songId.toString()]);
+    case LIKED_TRACKS_REQUEST:
+      return state.set('likesFetching', true);
+    case LIKED_TRACKS_RECEIVED:
+      return state.set('likesFetching', false);
     case LIKE_FAILED:
     case LOGIN_FAILED:
     default:
@@ -54,12 +58,13 @@ export const getDisplayName = state => getUserState(state).get('displayName');
 export const getPhotoUrl = state => getUserState(state).get('photoURL');
 export const getUserLikes = state => getUserState(state).get('likes');
 export const getLikeIds = state => List(getUserState(state).get('likes').keys());
-export const isFetching = state => getUserState(state).get('fetching');
+export const isLikesFetching = state => getUserState(state).get('fetching');
 export const isTrackLiked = (state, trackId) => {
   const likes = getUserLikes(state);
   return likes.has(String(trackId));
 };
-
+// Return all trackIds liked by current logged in user.
+export const getUserLikeIds = state => List(getUserLikes(state).keySeq());
 
 export const loginSuccess = uid => ({
   type: LOGIN_SUCCESS,
@@ -105,9 +110,9 @@ export const fetchTracks = trackIds => ({
  */
 // FIXME: not sure what this function is about
 export const fetchAllLikedTracks = () => (dispatch, getState) => {
-  // const state = getState();
-  // const trackIds = getUserLikeIds(state);
-  // dispatch(fetchTracks(trackIds.toJS()));
+  const state = getState();
+  const trackIds = getUserLikeIds(state);
+  dispatch(fetchTracks(trackIds.toJS()));
 };
 
 export const loadAllLikes = likes => ({
@@ -227,6 +232,3 @@ export function startUnlikeSong(songId) {
     });
   };
 }
-
-// Return all trackIds liked by current logged in user.
-// export const getUserLikeIds = state => List(getUserLikes(state).keySeq());

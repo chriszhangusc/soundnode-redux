@@ -6,13 +6,13 @@ import {
   beginVolumeSeek,
   changeVolume,
   sagaToggleMute,
-  sagaUpdateVolumeAndEndSeek
+  sagaUpdateVolumeAndEndSeek,
 } from 'client/redux/modules/player';
 import PlayerVolumeControls from '../components/PlayerVolumeControls';
 
 const mapStateToProps = state => ({
   volume: getCurrentVolume(state),
-  volumeSeeking: isVolumeSeeking(state)
+  volumeSeeking: isVolumeSeeking(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
   onVolumeMouseUp: (volumeBar, e) => {
     const newVolume = computeNewVolumeOnSeek(volumeBar, e);
     dispatch(sagaUpdateVolumeAndEndSeek(newVolume));
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerVolumeControls);

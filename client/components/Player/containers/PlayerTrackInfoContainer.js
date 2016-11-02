@@ -12,7 +12,7 @@ const mapStateToProps = (state, { playerTrack }) => {
     trackTitle: playerTrack.get('title'),
     artistName: formatTitle(artist.get('username')),
     trackUrl: `/track/${trackId}`,
-    artistUrl: `/artist/${artistId}`
+    artistUrl: `/artist/${artistId}`,
   });
 };
 
