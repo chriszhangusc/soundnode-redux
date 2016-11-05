@@ -4,3 +4,4 @@
 #server/server.js
 # We do not need to lint webpack.config.
 webpack.*.config.js
+karma.conf.js

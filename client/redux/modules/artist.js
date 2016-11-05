@@ -53,9 +53,11 @@ export const isArtistTracksFetching = state => getArtistState(state).get('tracks
 export const getArtistTracksNextHref = state => getArtistState(state).get('tracksNextHref');
 
 /* Actions */
-export const clearArtistState = () => ({
-  type: CLEAR_STATE,
-});
+export function clearArtistState() {
+  return ({
+    type: CLEAR_STATE,
+  });
+}
 
 export function artistRequest() {
   return {

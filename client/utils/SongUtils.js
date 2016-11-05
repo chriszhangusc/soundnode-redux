@@ -31,7 +31,7 @@ const getLoopPrev = (songId, songIds) => {
 //   return pickRandomProperty(songIds);
 // };
 
-export const getTrackIdByMode = (trackId, playlist, mode, method) => {
+export function getTrackIdByMode(trackId, playlist, mode, method) {
   if (playlist.length === 0) return null;
   switch (mode) {
     case LOOP:
@@ -47,4 +47,4 @@ export const getTrackIdByMode = (trackId, playlist, mode, method) => {
       break;
   }
   return null;
-};
+}

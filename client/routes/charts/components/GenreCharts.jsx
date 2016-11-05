@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { GENRES, getChartsGenre } from 'client/redux/modules/charts';
+import { GENRES } from 'client/constants/ChartsConsts';
+import { getChartsGenre } from 'client/redux/modules/charts';
 
 /* Since we only connect to store for playlist name, so no need to wrap it in a container */
 const renderGenres = () => GENRES.map(
