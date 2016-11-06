@@ -12,7 +12,7 @@
     "clean": "rm -rf node-modules",
     "test": "karma start"
   },
-  "author": "AngryBugs",
+  "author": "MiniPekka",
   "license": "ISC",
   "devDependencies": {
     "babel-jest": "^16.0.0",

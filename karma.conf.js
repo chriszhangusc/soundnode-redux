@@ -1,16 +1,14 @@
 var path = require('path');
-const webpackConfigPath = process.env.NODE_ENV === 'production' ?
-                          path.resolve(__dirname, 'webpack.prod.config'):
-                          path.resolve(__dirname, 'webpack.dev.config');
-const webpackConfig = require(webpackConfigPath);
+var webpackConfig = require('./webpack.dev.config');
+
 module.exports = function(config) {
   config.set({
     browsers: ['Chrome'],
     singleRun: true,
     frameworks: ['mocha'],
-    files: ['app/tests/**/*.test.jsx'],
+    files: ['client/**/tests/**/*.test.js'],
     preprocessors: {
-      'app/tests/**/*.test.jsx': ['webpack', 'sourcemap']
+      'client/**/tests/**/*.test.js': ['webpack', 'sourcemap']
     },
     reporters: ['mocha'],
     client: {
