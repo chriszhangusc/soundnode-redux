@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getTrackById, getArtistByTrackId } from 'client/redux/modules/entities';
-import { isTrackActive, changeSongAndPlay } from 'client/redux/modules/player';
+import { isTrackActive, sagaChangeSongAndPlay } from 'client/redux/modules/player';
 import { isTrackLiked, startLikeSong, startUnlikeSong } from 'client/redux/modules/user';
 
 import PlaylistItem from '../components/PlaylistItem';
@@ -20,7 +20,7 @@ const mapStateToProps = (state, { trackId, index }) => {
 const mapDispatchToProps = (dispatch, { trackId }) => ({
   handleChangeSong() {
     // Do not load playlist
-    dispatch(changeSongAndPlay(trackId));
+    dispatch(sagaChangeSongAndPlay(trackId));
   },
   handleLikeSong() {
     dispatch(startLikeSong(trackId));

@@ -79,6 +79,16 @@ module.exports = {
       }
     ]
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
   // devtool: 'cheap-module-eval-source-map'
+
+  // https://github.com/airbnb/enzyme/blob/master/docs/guides/webpack.md
+  // Per the documentation of enzyme, we need to add these lines of code
+  // here for it to play nice with webpack.
+  externals: {
+    'cheerio': 'window',
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+  }
 };
