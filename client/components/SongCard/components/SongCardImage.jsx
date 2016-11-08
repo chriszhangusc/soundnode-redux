@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import MagicButton from 'client/components/MagicButton';
-import defaultArtworkImage from 'assets/images/default-artwork.png';
+import { defaultArtworkImageUrl } from 'client/constants/ImageConstants';
 
 export default function SongCardImage({
   active,
@@ -13,7 +13,7 @@ export default function SongCardImage({
   return (
     <div
       className="song-card-image"
-      style={{ backgroundImage: `url(${artworkUrl || defaultArtworkImage})` }}
+      style={{ backgroundImage: `url(${artworkUrl || defaultArtworkImageUrl})` }}
     >
 
       <MagicButton

@@ -1,3 +1,5 @@
+export const defaultArtworkImageUrl = '/images/default-artwork.png';
+export const defaultArtistImageUrl = '/images/default-artist.png';
 export const t500x500 = 't500x500';
 export const t300x300 = 't300×300';
 export const crop = 'crop';

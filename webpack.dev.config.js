@@ -75,8 +75,8 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
-        loader: 'file-loader?name=[name].[ext]'
-      }
+        loader: 'url?limit=10000', // When file size is greater than 10KB, use file-loader instead
+      },
     ]
   },
   devtool: 'source-map',

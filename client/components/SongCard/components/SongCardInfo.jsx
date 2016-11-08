@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import defaultArtist from 'assets/images/default-artist.png';
+import { defaultArtistImageUrl } from 'client/constants/ImageConstants';
 
 export default function SongCardInfo({ trackId, artistId, artistAvatar, title, artistName }) {
 // console.log('Render: SongCardInfo');
@@ -9,7 +9,7 @@ export default function SongCardInfo({ trackId, artistId, artistAvatar, title, a
       <img
         alt="user-profile-img"
         className="song-card-user-image"
-        src={artistAvatar || defaultArtist}
+        src={artistAvatar || defaultArtistImageUrl}
       />
       <div className="song-card-details">
         <Link to={`/track/${trackId}`} className="song-card-title">
