@@ -1,9 +1,38 @@
 import { CLIENT_ID } from '../../client/constants/Config';
 import { normalizeResponse, constructFetchUrl, makeRequest } from './apiUtils';
-import { artistSchema, trackSchema, commentArraySchema, trackArraySchema } from '../schemas';
+import { artistSchema, trackSchema, commentArraySchema, trackArraySchema, artistArraySchema } from '../schemas';
 
 const SC_API_V1 = 'https://api.soundcloud.com/';
 const LIMIT = 20;
+// filters = { q: 'abc' }
+export function fetchTracks(filters, limit) {
+  const endpoint = '/tracks/';
+  const queryParams = {
+    client_id: CLIENT_ID,
+    linked_partitioning: 1,
+    offset: 0,
+    limit,
+    ...filters,
+  };
+  const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
+  return makeRequest(fetchUrl)
+          .then(response => normalizeResponse(response, trackArraySchema));
+}
+
+export function fetchArtists(filters, limit) {
+  const endpoint = '/users/';
+  const queryParams = {
+    client_id: CLIENT_ID,
+    linked_partitioning: 1,
+    offset: 0,
+    limit,
+    ...filters,
+  };
+  const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
+  return makeRequest(fetchUrl)
+          .then(response => normalizeResponse(response, artistArraySchema));
+}
+
 /**
  * Fetch a single track by id
  * @param  {number} id The id of the track we are fetching

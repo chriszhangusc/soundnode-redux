@@ -132,6 +132,7 @@ export const sagaSearch = (keyword, limit = SEARCH_LIMIT) => ({
   },
 });
 
+
 export const dropdownArtistsReceived = normalized => ({
   type: DROPDOWN_ARTISTS_RECEIVED,
   payload: normalized,
