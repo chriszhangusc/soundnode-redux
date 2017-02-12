@@ -15,7 +15,7 @@ const devServer = new WebpackDevServer(webpack(config), {
   // proxy: {
   //   '*': 'http://localhost: 3001'
   // },
-  stats: { colors: true }
+  stats: { colors: true },
 });
 
 devServer.listen(3000, 'localhost', () => {

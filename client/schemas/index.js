@@ -6,12 +6,12 @@ export const trackSchema = new Schema('tracks');
 
 // Removing it because the user information sent back along with tracks is not intact.
 trackSchema.define({
-  user: artistSchema
+  user: artistSchema,
 });
 
 // Same reason as above
 commentSchema.define({
-  user: artistSchema
+  user: artistSchema,
 });
 
 export const trackArraySchema = arrayOf(trackSchema);

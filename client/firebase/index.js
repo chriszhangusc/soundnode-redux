@@ -5,7 +5,7 @@ const config = {
   authDomain: 'reactivesound-bdd37.firebaseapp.com',
   databaseURL: 'https://reactivesound-bdd37.firebaseio.com',
   storageBucket: 'reactivesound-bdd37.appspot.com',
-  messagingSenderId: '177988574626'
+  messagingSenderId: '177988574626',
 };
 
 firebase.initializeApp(config);

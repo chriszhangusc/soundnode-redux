@@ -1,7 +1,7 @@
 {
   "name": "Redux-Music",
   "version": "1.0.0",
-  "description": "Simple music player based on SoundCloud API",
+  "description": "Music client based on SoundCloud API",
   "main": "index.js",
   "scripts": {
     "start": "node ./server/server.js",
