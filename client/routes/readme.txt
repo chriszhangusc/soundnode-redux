@@ -1,1 +1,1 @@
-Front end routes seperated by features.
+Routes are seperated by features.

@@ -2,6 +2,8 @@
 
 A SoundCloud client written in react and redux
 
+Note that this
+
 ![ReduxMusic](https://www.robinwieruch.de/img/posts/the-soundcloud-client-in-react-redux/banner.jpg)
 
 [Demo](https://redux-music.herokuapp.com/)

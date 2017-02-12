@@ -1,3 +1,7 @@
+// The ui module is managing the UI state. Currently it is only in charge of
+// visible tracks on the current page, like everytime we switch to a new category in charts page,
+// we update the visible tracks.
+
 import { fromJS } from 'immutable';
 import { TRACK_RECEIVED } from 'client/redux/modules/track';
 import { CHARTS_RECEIVED } from 'client/redux/modules/charts';

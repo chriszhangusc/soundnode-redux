@@ -12,8 +12,10 @@
 }
 
 .song-card-image {
+
     display: block;
     width: 100%;
+    -webkit-filter: blur(0px);
     height: 150px;
     margin-bottom: 10px;
     background-position: center center;
