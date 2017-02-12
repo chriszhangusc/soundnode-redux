@@ -2,6 +2,8 @@
 
 A SoundCloud client written in react and redux
 
+Note that this project is still in early stage of development which means things are very likely to break
+
 ![ReduxMusic](https://www.robinwieruch.de/img/posts/the-soundcloud-client-in-react-redux/banner.jpg)
 
 [Demo](https://redux-music.herokuapp.com/)
@@ -16,8 +18,9 @@ Includes:
 * Soundcloud API.
 
 Features:
+* Listen to top music of different styles
 * login to SoundCloud
-* show your personal stream
+* Access your personal sound tracks
 * show favorite tracks, followers and followings
 * inifite scroll + paginated fetching
 * follow people
