@@ -50,10 +50,6 @@ export const GENRES = [
     title: 'Electronic',
   },
   {
-    link: 'folksingersongwriter',
-    title: 'Folk & Singer-Songwriter',
-  },
-  {
     link: 'hiphoprap',
     title: 'Hip-hop & Rap',
   },

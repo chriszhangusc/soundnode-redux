@@ -1,27 +1,22 @@
 import React, { PropTypes } from 'react';
-import chunk from 'lodash/chunk';
 import SongCardContainer from 'client/components/SongCard';
 import Spinner from 'client/components/Spinner';
 import infiniteScroll from 'client/components/hocs/InfiniteScroll';
 import { List } from 'immutable';
 
 const renderSongCardList = (trackIds) => {
-  const COLS = 4;
-
-  // Shallow convert Immutable.List to array for chunking
-  // and preserving the goodness of Track Records
-  const rows = chunk(trackIds.toArray(), COLS);
-  return rows.map((rowItems, i) => (
-    <div className="row" key={i} > {/* anti-pattern here ?*/}
+  // One row is fine
+  return (
+    <div className="row">
       {
-        rowItems.map(trackId => (
-          <div className="col-sm-3" key={trackId}>
+        trackIds.toArray().map(trackId => (
+          <div className="col-sm-6 col-md-4 col-lg-3" key={trackId}>
             <SongCardContainer trackId={trackId} trackIds={trackIds} />
           </div>
         ))
       }
     </div>
-  ));
+  );
 };
 
 const SongCardList = (props) => {

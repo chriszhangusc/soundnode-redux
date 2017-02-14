@@ -1,16 +1,12 @@
 import React, { PropTypes } from 'react';
 import MagicButton from 'client/components/MagicButton';
-import { defaultArtworkImageUrl } from 'client/constants/ImageConstants';
+// import { defaultArtworkImageUrl } from 'client/constants/ImageConstants';
 
 class SongCardImage extends React.Component {
 
   constructor(props) {
     super(props);
     this.handleImageClick = props.handleImageClick.bind(this);
-  }
-
-  componentDidMount() {
-    console.log('Mounted');
   }
 
   render() {
@@ -20,7 +16,6 @@ class SongCardImage extends React.Component {
         className="song-card-image"
         style={{ backgroundImage: `url(${ artworkUrl })` }}
       >
-
         <MagicButton
           btnClassName={`toggle-play-button ${(active ? 'active' : '')}`}
           iconClassName={`toggle-play-button-icon ${playing ? 'ion-ios-pause' : 'ion-ios-play'}`}
@@ -31,18 +26,11 @@ class SongCardImage extends React.Component {
   }
 }
 
-// ({
-//   active,
-//   artworkUrl,
-//   playing,
-//   handleImageClick,
-// }) {
-// // console.log('Render: SongCardImage');
-//
-
 SongCardImage.propTypes = {
-
+  active: PropTypes.bool,
+  playing: PropTypes.bool,
+  artworkUrl: PropTypes.string,
+  handleImageClick: PropTypes.func,
 };
-
 
 export default SongCardImage;

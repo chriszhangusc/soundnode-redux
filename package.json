@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run dev & npm run api & wait",
-    "postinstall": "webpack  --display-error-details --config ./webpack.prod.config.js --progress --colors",
+    "postinstall": "webpack  -- wdisplay-error-details --config ./webpack.prod.config.js --progress --colors",
     "dev": "webpack-dev-server --progress --colors --hot --inline --config ./webpack.dev.config.js",
     "api": "nodemon ./server/api",
     "lint": "eslint scripts",

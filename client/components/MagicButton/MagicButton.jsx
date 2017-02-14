@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 /*
- * All buttons in our app would be MagicButton.
  * It's basically just a generic button with icon options.
  */
 const MagicButton = ({ title, onClick, text, btnClassName, iconClassName }) => (
