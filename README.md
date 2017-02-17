@@ -1,41 +1,7 @@
-# redux-music
+# React Redux version of one of my favorite music app http://www.soundnodeapp.com/.
 
-A SoundCloud client written in react and redux
-
-Note that this project is still in early stage of development which means things are very likely to break.
-
-![ReduxMusic](https://www.robinwieruch.de/img/posts/the-soundcloud-client-in-react-redux/banner.jpg)
-
-[Demo](https://redux-music.herokuapp.com/)
-
-Includes:
-* react
-* react-router
-* redux
-* redux-thunk
-* normalizr
-* redux-saga
-* Soundcloud API
-
-Features:
-* Listen to top music of different styles
-* login to SoundCloud
-* Access your personal sound tracks
-* show favorite tracks, followers and followings
-* inifite scroll + paginated fetching
-* follow people
-* like tracks
-* player play/stop/forward/backward track
-* player with shuffle tracks, share link and volume
-* player with duration bar for tracks and navigation
-* playlist
-* sort tracks by plays, likes, comments, reposts, downloads
-* filter tracks by duration
-* search tracks by name and artist
-
-## Run in your local machine
-
-1. git clone https://github.com/MiniPekka/redux-music.git
+1. git clone
 2. npm install
-3. npm start
-4. Go to http://localhost:3000 in your chrome (Other browser are not tested at this time)
+3. npm run server
+4. npm run dev
+5. http://localhost:3000/
