@@ -3,6 +3,7 @@ import path from 'path';
 import webpack from 'webpack';
 
 const PORT = 3000;
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 module.exports = {
 
@@ -12,7 +13,7 @@ module.exports = {
 
         // bundle the client for webpack-dev-server
         // and connect to the provided endpoint
-        `webpack-dev-server/client?http://localhost:{ PORT }`,
+        'webpack-dev-server/client?http://localhost:3000',
 
         // bundle the client for hot reloading
         // only- means to only hot reload for successful updates
@@ -75,11 +76,10 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'sass-loader'
-                ]
+                use: ExtractTextPlugin.extract({
+                  fallback: 'style-loader',
+                  use: ['css-loader', 'sass-loader']
+                })
             },
             {
                 test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
@@ -96,6 +96,12 @@ module.exports = {
 
         // prints more readable module names in the browser console on HMR updates
         new webpack.NamedModulesPlugin(),
+
+        // separate css code from bundle.js into style.css so that the browser
+        // can load javascript and css asynchrously
+        new ExtractTextPlugin({
+          filename: 'style.css'
+        })
     ],
     devtool: 'source-map'
 };

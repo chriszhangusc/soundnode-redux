@@ -1,16 +1,16 @@
 {
-  "name": "Redux-Music",
+  "name": "redux-music",
   "version": "1.0.0",
   "description": "A Simple Client for SoundCloud",
   "main": "index.js",
   "scripts": {
     "start": "npm run dev & npm run server",
-    "dev": "webpack-dev-server --progress --color",
+    "dev": "webpack-dev-server --progress --colors",
     "server": "nodemon ./server",
     "lint": "eslint scripts",
     "clean": "rm -rf node-modules"
   },
-  "author": "AngryBugs",
+  "author": "MiniPekka",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.16.0",
