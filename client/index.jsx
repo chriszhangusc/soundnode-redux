@@ -1,12 +1,14 @@
-// import 'babel-polyfill';
+// Entry point of our app
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
-import 'react-notifications/src/notifications.scss';
 import configureStore from 'client/redux/configureStore';
 import configureRoutes from './router';
+
 // Import stylesheets(inline)
+import 'react-notifications/src/notifications.scss';
 import '../styles/app.scss';
+
 
 const store = configureStore();
 
