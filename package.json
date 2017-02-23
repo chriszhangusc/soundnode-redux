@@ -4,10 +4,10 @@
   "description": "A Simple Client for SoundCloud",
   "main": "index.js",
   "scripts": {
-    "start": "npm run dev & npm run server",
-    "dev": "webpack-dev-server --progress --colors",
-    "server": "nodemon ./server",
-    "lint": "eslint scripts",
+    "start": "npm run dev & npm run api",
+    "dev": "NODE_ENV=development webpack-dev-server --progress",
+    "build": "NODE_ENV=production webpack",
+    "api": "nodemon ./server",
     "clean": "rm -rf node-modules"
   },
   "author": "MiniPekka",

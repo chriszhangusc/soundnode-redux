@@ -1,14 +1,19 @@
-// This es6 file conflicts with {module:false} in babelrc file will resolve this later
-// To be able to write ES6 in this config file, we rename it to webpack.config.babel.js
-import path from 'path';
-import webpack from 'webpack';
+// ES5 webpack
+var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const PORT = 3000;
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-module.exports = {
+var DEVELOPMENT = process.env.NODE_ENV === 'development';
+var PRODUCTION = process.env.NODE_ENV === 'production';
 
-    entry: [
+
+var entry = PRODUCTION
+    ?
+    [path.resolve(__dirname, 'client', 'index.jsx')]
+    :
+    [
         // activate HMR for React
         'react-hot-loader/patch',
 
@@ -22,7 +27,39 @@ module.exports = {
 
         // the entry point of our app
         path.resolve(__dirname, 'client', 'index.jsx'),
-      ],
+    ];
+
+var plugins = DEVELOPMENT ? [
+    // enable HMR globally
+    new webpack.HotModuleReplacementPlugin(),
+
+    // prints more readable module names in the browser console on HMR updates
+    new webpack.NamedModulesPlugin(),
+
+] : [
+    new webpack.optimize.UglifyJsPlugin(),
+
+];
+
+// Shared plugins among all environments
+plugins = plugins.concat([
+    // separate css code from bundle.js into style.css so that the browser
+    // can load javascript and css asynchrously
+    new ExtractTextPlugin({
+      filename: 'style.css'
+    }),
+    // DefinePlugin makes it possible for us to use env variables in src code
+    new webpack.DefinePlugin({
+        DEVELOPMENT: JSON.stringify(DEVELOPMENT),
+        PRODUCTION: JSON.stringify(PRODUCTION),
+    }),
+]);
+
+console.log(plugins);
+
+module.exports = {
+
+    entry: entry,
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
@@ -91,18 +128,6 @@ module.exports = {
         ]
     },
 
-    plugins: [
-        // enable HMR globally
-        new webpack.HotModuleReplacementPlugin(),
-
-        // prints more readable module names in the browser console on HMR updates
-        new webpack.NamedModulesPlugin(),
-
-        // separate css code from bundle.js into style.css so that the browser
-        // can load javascript and css asynchrously
-        new ExtractTextPlugin({
-          filename: 'style.css'
-        })
-    ],
+    plugins: plugins,
     devtool: 'source-map'
 };

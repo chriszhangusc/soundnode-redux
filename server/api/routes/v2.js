@@ -1,6 +1,9 @@
-import express from 'express';
-import fetch from 'isomorphic-fetch';
-import url from 'url';
+var express = require('express');
+// import express from 'express';
+// import fetch from 'isomorphic-fetch';
+var fetch = require('isomorphic-fetch');
+// import url from 'url';
+var url = require('url');
 
 const SC_API_V2 = 'https://api-v2.soundcloud.com/';
 
@@ -45,4 +48,5 @@ router.get('/charts', (req, res) => {
     });
 });
 
-export default router;
+// export default router;
+module.exports = router;

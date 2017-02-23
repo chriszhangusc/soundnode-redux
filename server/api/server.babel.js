@@ -1,8 +1,8 @@
 // This is the API Server that talks to SoundCloud.
-var express = require('express');
-var bodyParser = require('body-parser');
-var v1 = require('./routes/v1');
-var v2 = require('./routes/v2');
+import express from 'express';
+import bodyParser from 'body-parser';
+import v1 from './routes/v1';
+import v2 from './routes/v2';
 
 const app = express();
 

@@ -1,5 +1,7 @@
-import express from 'express';
-import fetch from 'isomorphic-fetch';
+// import express from 'express';
+// import fetch from 'isomorphic-fetch';
+var express = require('express');
+var fetch = require('isomorphic-fetch');
 const SC_API_V1 = 'https://api.soundcloud.com';
 
 const router = express.Router();
@@ -51,4 +53,5 @@ router.get('/tracks/:trackId', (req, res) => {
     });
 });
 
-export default router;
+// export default router;
+module.exports = router;
