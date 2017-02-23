@@ -60,7 +60,7 @@ module.exports = {
     entry: entry,
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         publicPath: '/dist/'
     },
 
@@ -120,7 +120,7 @@ module.exports = {
             {
                 test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
                 use: [
-                    'url-loader?name=[name].[ext]'
+                    'url-loader?limit=10000&name=images/[hash:12].[ext]'
                 ]
             }
         ]
