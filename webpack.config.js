@@ -55,8 +55,6 @@ plugins = plugins.concat([
     }),
 ]);
 
-console.log(plugins);
-
 module.exports = {
 
     entry: entry,

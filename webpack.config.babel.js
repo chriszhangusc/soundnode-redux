@@ -1,3 +1,4 @@
+// Currently not used
 // This es6 file conflicts with {module:false} in babelrc file will resolve this later
 // To be able to write ES6 in this config file, we rename it to webpack.config.babel.js
 import path from 'path';
