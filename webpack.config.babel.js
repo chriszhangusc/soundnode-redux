@@ -22,7 +22,6 @@ module.exports = {
         // the entry point of our app
         path.resolve(__dirname, 'client', 'index.jsx'),
       ],
-
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
@@ -81,10 +80,16 @@ module.exports = {
                   use: ['css-loader', 'sass-loader']
                 })
             },
+            // {
+            //     test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
+            //     use: [
+            //         'file-loader?name=[name].[ext]'
+            //     ]
+            // }
             {
                 test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
                 use: [
-                    'file-loader?name=[name].[ext]'
+                    'url-loader?name=[name].[ext]'
                 ]
             }
         ]
