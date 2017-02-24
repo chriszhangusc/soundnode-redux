@@ -2,6 +2,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const PORT = 3000;
 
@@ -37,17 +38,20 @@ var plugins = DEVELOPMENT ? [
     new webpack.NamedModulesPlugin(),
 
 ] : [
-    new webpack.optimize.UglifyJsPlugin(),
+    // separate css code from bundle.js into style.css so that the browser
+    // can load javascript and css asynchrously
+    // Note in order to let the browser cache the contentm
+    new ExtractTextPlugin({
+        filename: 'style-[contenthash:10].css'
+    }),
 
+    new HTMLWebpackPlugin({
+        template: path.resolve(__dirname, 'public', 'index-template.html')
+    })
 ];
 
 // Shared plugins among all environments
 plugins = plugins.concat([
-    // separate css code from bundle.js into style.css so that the browser
-    // can load javascript and css asynchrously
-    new ExtractTextPlugin({
-      filename: 'style.css'
-    }),
     // DefinePlugin makes it possible for us to use env variables in src code
     new webpack.DefinePlugin({
         DEVELOPMENT: JSON.stringify(DEVELOPMENT),
@@ -60,8 +64,8 @@ module.exports = {
     entry: entry,
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].bundle.js',
-        publicPath: '/dist/'
+        filename: PRODUCTION ? '[name].bundle.[hash:12].min.js' : '[name].bundle.js',
+        publicPath: PRODUCTION ? '/' : '/dist/',
     },
 
     devServer: {
@@ -121,6 +125,7 @@ module.exports = {
                 test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
                 use: [
                     'url-loader?limit=10000&name=images/[hash:12].[ext]'
+                    // 'url-loader'
                 ]
             }
         ]
