@@ -4,11 +4,11 @@
     "description": "A Simple Client for SoundCloud",
     "main": "index.js",
     "scripts": {
-        "start": "npm run dev & npm run api",
+        "start": "npm run build",
+        "dev-api": "npm run dev & npm run api",
         "api": "node ./server",
         "dev": "NODE_ENV=development webpack-dev-server --progress",
         "build": "rm -rf dist/ & NODE_ENV=production webpack -p",
-        "heroku-postbuild": "npm run build"
     },
     "author": "MiniPekka",
     "license": "ISC",
