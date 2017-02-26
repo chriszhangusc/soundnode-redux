@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { GENRES } from 'client/constants/SongConstants';
+import { GENRES } from 'client/constants/Genres';
 import { getChartsGenre } from 'client/redux/modules/reducers';
 
 /* Since we only connect to store for playlist name, so no need to wrap it in a container */
@@ -10,7 +10,7 @@ const renderGenres = () => GENRES.map(
     <Link
       key={genre}
       className="button inline"
-      to={`/top50/${genre}`}
+      to={`/charts/${genre}`}
     >{genre.toUpperCase()}</Link>
 );
 

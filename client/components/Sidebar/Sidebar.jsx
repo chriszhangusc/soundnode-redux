@@ -6,7 +6,7 @@ const Sidebar = () => {
     <ul className="nav-sidebar">
       <li>
         <Link
-          to="/top50"
+          to="/charts"
           activeClassName="sidebar-link-active"
         >Top 50</Link>
       </li>

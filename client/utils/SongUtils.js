@@ -1,4 +1,3 @@
-import { TOP_FETCH_URL } from 'client/constants/SongConstants';
 import { LOOP, SHUFFLE, REPEAT, NEXT, PREV } from 'client/constants/PlayerConstants';
 /**
  * Generate fetch url by given query
