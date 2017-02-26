@@ -6,13 +6,10 @@ var HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const PORT = process.env.NODE_ENV || 3000;
 
-var DEVELOPMENT = process.env.NODE_ENV === 'development';
-var PRODUCTION = process.env.NODE_ENV === 'production';
+var production = process.env.NODE_ENV === 'production';
 
-
-var entry = PRODUCTION
-    ?
-    [path.resolve(__dirname, 'client', 'index.jsx')]
+var entry = production ?
+    [ path.join(__dirname, 'client', 'index.jsx') ]
     :
     [
         // activate HMR for React
@@ -27,10 +24,26 @@ var entry = PRODUCTION
         'webpack/hot/only-dev-server',
 
         // the entry point of our app
-        path.resolve(__dirname, 'client', 'index.jsx'),
+        path.join(__dirname, 'client', 'index.jsx'),
     ];
 
-var plugins = DEVELOPMENT ? [
+
+var plugins = production ? [
+    // // separate css code from bundle.js into style.css so that the browser
+    // // can load javascript and css asynchrously
+    // // Note in order to let the browser cache the contentm
+    // new ExtractTextPlugin({
+    //     filename: 'style-[contenthash:10].css'
+    // }),
+
+    new HTMLWebpackPlugin({
+        template: path.join(__dirname, 'public', 'index-template.html')
+    }),
+
+    new ExtractTextPlugin({
+        filename: 'style-[contenthash:10].css'
+    }),
+] : [
     // enable HMR globally
     new webpack.HotModuleReplacementPlugin(),
 
@@ -40,29 +53,13 @@ var plugins = DEVELOPMENT ? [
     new ExtractTextPlugin({
         filename: 'style.css'
     }),
-] : [
-    // // separate css code from bundle.js into style.css so that the browser
-    // // can load javascript and css asynchrously
-    // // Note in order to let the browser cache the contentm
-    // new ExtractTextPlugin({
-    //     filename: 'style-[contenthash:10].css'
-    // }),
-
-    new HTMLWebpackPlugin({
-        template: path.resolve(__dirname, 'public', 'index-template.html')
-    }),
-
-    new ExtractTextPlugin({
-        filename: 'style-[contenthash:10].css'
-    }),
 ];
 
 // Shared plugins among all environments
 plugins = plugins.concat([
     // DefinePlugin makes it possible for us to use env variables in src code
     new webpack.DefinePlugin({
-        DEVELOPMENT: JSON.stringify(DEVELOPMENT),
-        PRODUCTION: JSON.stringify(PRODUCTION),
+        PRODUCTION: JSON.stringify(production)
     }),
 
 ]);
@@ -72,8 +69,8 @@ module.exports = {
     entry: entry,
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: PRODUCTION ? '[name].bundle.[hash:12].min.js' : '[name].bundle.js',
-        publicPath: PRODUCTION ? '/' :'/dist/',
+        filename: production ? '[name].bundle.[hash:12].min.js' : '[name].bundle.js',
+        publicPath: production ? '/' :'/dist/',
     },
 
     devServer: {
@@ -84,6 +81,7 @@ module.exports = {
 
         // match the output publicPath
         // will create folder in memory
+        // on server there will be a server-root/dist folder
         publicPath: '/dist/',
         port: PORT,
 
@@ -106,8 +104,8 @@ module.exports = {
             "node_modules"
         ],
         alias: {
-            client: path.resolve(__dirname, './client'),
-            assets: path.resolve(__dirname, './public')
+            client: path.join(__dirname, 'client'),
+            assets: path.join(__dirname, 'public')
         },
         extensions: ['*','.js', '.jsx', 'stage-0']
     },
@@ -115,7 +113,6 @@ module.exports = {
         rules: [
             {
                 test: /\.jsx?$/,
-                // use: ['react-hot', 'babel-loader'],
                 use: [
                     'babel-loader'
                 ],
@@ -133,7 +130,6 @@ module.exports = {
                 test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
                 use: [
                     'url-loader?limit=10000&name=images/[hash:12].[ext]'
-                    // 'url-loader'
                 ]
             }
         ]

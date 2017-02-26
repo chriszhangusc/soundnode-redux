@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 
+// Require from public folder
 import defaultArtworkImage from 'assets/images/default-artwork.png';
 
 export default function SongCardImage(props) {

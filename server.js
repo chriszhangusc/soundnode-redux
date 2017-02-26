@@ -17,6 +17,12 @@ function logger(req, res, next) {
 
 app.use(logger);
 
+// Always serve the index.html page and let the client side handle the routing
+app.use(function (req, res) {
+    // console.log('redirecting to index.html')
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`API Server Started at:${PORT}`);
 });
