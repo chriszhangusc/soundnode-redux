@@ -37,17 +37,24 @@ var plugins = DEVELOPMENT ? [
     // prints more readable module names in the browser console on HMR updates
     new webpack.NamedModulesPlugin(),
 
-] : [
-    // separate css code from bundle.js into style.css so that the browser
-    // can load javascript and css asynchrously
-    // Note in order to let the browser cache the contentm
     new ExtractTextPlugin({
-        filename: 'style-[contenthash:10].css'
+        filename: 'style.css'
     }),
+] : [
+    // // separate css code from bundle.js into style.css so that the browser
+    // // can load javascript and css asynchrously
+    // // Note in order to let the browser cache the contentm
+    // new ExtractTextPlugin({
+    //     filename: 'style-[contenthash:10].css'
+    // }),
 
     new HTMLWebpackPlugin({
         template: path.resolve(__dirname, 'public', 'index-template.html')
-    })
+    }),
+
+    new ExtractTextPlugin({
+        filename: 'style-[contenthash:10].css'
+    }),
 ];
 
 // Shared plugins among all environments
@@ -57,6 +64,7 @@ plugins = plugins.concat([
         DEVELOPMENT: JSON.stringify(DEVELOPMENT),
         PRODUCTION: JSON.stringify(PRODUCTION),
     }),
+
 ]);
 
 module.exports = {
@@ -65,7 +73,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: PRODUCTION ? '[name].bundle.[hash:12].min.js' : '[name].bundle.js',
-        publicPath: PRODUCTION ? '/' : '/dist/',
+        publicPath: PRODUCTION ? '/' :'/dist/',
     },
 
     devServer: {

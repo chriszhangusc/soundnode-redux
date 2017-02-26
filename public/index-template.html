@@ -1,3 +1,10 @@
+<!--
+    For production.
+    Index template page used by HTMLWebpackPlugin to generate
+    index page for production environment.
+    Thanks to extract-text-webpack-plugin we can separate our css code from main.bundle.js
+    it will produce a separate file style.css
+ -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +21,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css">
-    <!-- Thanks to extract-text-webpack-plugin we can separate our css code from bundle.js -->
+
     <title>React Music</title>
   </head>
   <body>

@@ -53,7 +53,9 @@ const configureRoutes = (store) => {
           <Route path=":trackId" component={TrackDetailsPage} onEnter={onTrackDetailsPageEnter} />
         </Route>
         <Route path="search" component={SearchResultsPage} onEnter={onSearchPageEnter} />
-        <Route path="*" component={NotFound} />
+        <Route path="*">
+            <IndexRedirect to="/" />
+        </Route>
       </Route>
     </Router>
   );
