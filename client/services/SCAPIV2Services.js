@@ -1,10 +1,11 @@
 // SoundCloud API V2
 import axios from 'axios';
-import { CLIENT_ID } from 'client/constants/Config';
+import { CLIENT_ID, API_HOST } from 'client/constants/Config';
 import { concatParamsToUrl, formatGenre } from 'client/utils/FormatUtils';
+// This will be redirected to 3001 in dev mode.
+export const SC_API_V2 = `${API_HOST}/sc/api-v2`;
 
-// This will be redirected to 3001! See config in webpack
-export const SC_API_V2 = 'http://localhost:3000/sc/api-v2';
+console.log(SC_API_V2);
 
 export function fetchCharts(genre) {
   let fetchUrl = `${SC_API_V2}/charts`;

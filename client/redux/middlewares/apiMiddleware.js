@@ -1,16 +1,17 @@
 import fetch from 'isomorphic-fetch';
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
-import { CLIENT_ID } from 'client/constants/Config';
+import { CLIENT_ID, API_HOST } from 'client/constants/Config';
 import querystring from 'querystring';
 
 export const CALL_API = 'CALL_API';
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
+
 const callApi = (endpoint, query, schema) => {
   // Append ClientId
   const queryString = querystring.stringify({ ...query, client_id: CLIENT_ID });
-  const finalUrl = `http://localhost:3000${endpoint}?${queryString}`;
+  const finalUrl = `${API_HOST}${endpoint}?${queryString}`;
   return fetch(finalUrl)
     .then(response => response.json())
     .then((json) => {

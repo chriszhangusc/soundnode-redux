@@ -5,10 +5,10 @@
     "main": "index.js",
     "scripts": {
         "start": "npm run dev & npm run api",
-        "api": "nodemon ./server",
+        "api": "node ./server",
         "dev": "NODE_ENV=development webpack-dev-server --progress",
         "build": "rm -rf dist/ & NODE_ENV=production webpack -p",
-        "heroku-postbuild": "npm run build"
+        "heroku-postbuild": "npm run build & npm run api"
     },
     "author": "MiniPekka",
     "license": "ISC",
