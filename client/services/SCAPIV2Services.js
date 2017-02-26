@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { CLIENT_ID, API_HOST } from 'client/constants/Config';
 import { concatParamsToUrl, formatGenre } from 'client/utils/FormatUtils';
-// This will be redirected to 3001 in dev mode.
+
 export const SC_API_V2 = `${API_HOST}/sc/api-v2`;
 
 console.log(SC_API_V2);
