@@ -9,7 +9,7 @@
     "build": "rm -rf dist/ & NODE_ENV=production webpack -p",
     "api": "nodemon ./server",
     "clean": "rm -rf node-modules",
-    "heroku-postbuild": "npm run dev"
+    "heroku-postbuild": "npm run build"
   },
   "author": "MiniPekka",
   "license": "ISC",
