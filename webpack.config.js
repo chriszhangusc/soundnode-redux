@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
 
-const PORT = process.env.NODE_ENV || 3000;
+const PORT = process.env.PORT || 3000;
 
 var production = process.env.NODE_ENV === 'production';
 
@@ -84,7 +84,10 @@ module.exports = {
         // on server there will be a server-root/dist folder
         publicPath: '/dist/',
         port: PORT,
-
+        compress: true,
+        stats: 'errors-only',
+        // Opens new browser window when we run devserer for the first time
+        open: true,
         // http://localhost:3000/api/abc will be redirect to 3001/api/abc
         proxy: {
             // /sc/api-v1/* and /sc/api-v2/*
