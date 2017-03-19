@@ -1,34 +1,34 @@
-import { fromJS } from 'immutable';
+import {fromJS} from 'immutable';
 import Track from 'client/models/Track';
 import CommentMap from 'client/models/CommentMap';
-import { denormalizeTrack } from 'client/models/denormalizr';
-import { trackSchema } from 'client/schemas';
-import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
+import {denormalizeTrack} from 'client/models/denormalizr';
+import {trackSchema} from 'client/schemas';
+import {CALL_API} from 'client/redux/middlewares/apiMiddleware';
 import {
-  TRACK_REQUEST,
-  TRACK_RECEIVE,
-  TRACK_FAILURE,
-  TRACK_COMMENTS_REQUEST,
-  TRACK_COMMENTS_RECEIVE,
-  TRACK_COMMENTS_FAILURE
+    TRACK_REQUEST,
+    TRACK_RECEIVE,
+    TRACK_FAILURE,
+    TRACK_COMMENTS_REQUEST,
+    TRACK_COMMENTS_RECEIVE,
+    TRACK_COMMENTS_FAILURE
 } from 'client/constants/ActionTypes';
 
 /* Actions */
 const fetchTrack = trackId => ({
-  [CALL_API]: {
-    endpoint: `/sc/api-v1/tracks/${trackId}`,
-    method: 'GET',
-    types: [TRACK_REQUEST, TRACK_RECEIVE, TRACK_FAILURE],
-    schema: trackSchema
-  }
+    [CALL_API]: {
+        endpoint: `/sc/api-v1/tracks/${trackId}`,
+        method: 'GET',
+        types: [
+            TRACK_REQUEST, TRACK_RECEIVE, TRACK_FAILURE
+        ],
+        schema: trackSchema
+    }
 });
 
-const fetchComments = (trackId) => {
-
-};
+const fetchComments = (trackId) => {};
 
 export const loadTrackPage = trackId => (dispatch) => {
-  dispatch(fetchTrack(trackId));
+    dispatch(fetchTrack(trackId));
 };
 
 // export const loadTrack = (trackId) => {
@@ -54,26 +54,20 @@ export const loadTrackPage = trackId => (dispatch) => {
 
 /* Reducer */
 
-const INITIAL_STATE = fromJS({
-  isTrackFetching: false,
-  isCommentsFetching: false,
-  track: new Track(),
-  comments: new CommentMap(),
-  commentsNextHref: null
-});
+const INITIAL_STATE = fromJS({isTrackFetching: false, isCommentsFetching: false, track: new Track(), comments: new CommentMap(), commentsNextHref: null});
 
 const track = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
-    case TRACK_REQUEST:
-      return state.set('isTrackFetching', true);
-    case TRACK_RECEIVE:
-      return state.merge({
-        track: denormalizeTrack(action.payload),
-        isTrackFetching: false
-      });
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case TRACK_REQUEST:
+            return state.set('isTrackFetching', true);
+        case TRACK_RECEIVE:
+            return state.merge({
+                track: denormalizeTrack(action.payload),
+                isTrackFetching: false
+            });
+        default:
+            return state;
+    }
 };
 export default track;
 

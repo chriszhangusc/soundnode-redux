@@ -6,11 +6,11 @@ import Track from 'client/models/Track';
  * @param {[type]} trackV2 [description]
  */
 export default function trackMapper(trackV2) {
-  let trackV1 = new Track(trackV2);
-  const streamUrlV2 = `${trackV2.uri}/stream`;
-  // Map different keys
-  trackV1 = trackV1.set('stream_url', streamUrlV2);
-  trackV1 = trackV1.set('favoritings_count', trackV2.likes_count);
-  // console.log(trackV1.toJS());
-  return trackV1;
+    let trackV1 = new Track(trackV2);
+    const streamUrlV2 = `${trackV2.uri}/stream`;
+    // Map different keys
+    trackV1 = trackV1.set('stream_url', streamUrlV2);
+    trackV1 = trackV1.set('favoritings_count', trackV2.likes_count);
+    // console.log(trackV1.toJS());
+    return trackV1;
 }

@@ -1,22 +1,10 @@
-import { fork } from 'redux-saga/effects';
-import * as fromPlayer from './playerSagas';
+import {fork} from 'redux-saga/effects';
+// import * as fromPlayer from './playerSagas';
 import * as fromSearch from './searchSagas';
 
-function* rootSaga() {
-  yield [
-    fork(fromPlayer.watchChangeSongAndPlay),
-    fork(fromPlayer.watchRegularTimeUpdate),
-    fork(fromPlayer.watchSeekTimeUpdate),
-    fork(fromPlayer.watchEndSeekTime),
-    fork(fromPlayer.watchEndSeekVolume),
-    fork(fromPlayer.watchToggleMute),
-    fork(fromPlayer.watchPlayNextSong),
-    fork(fromPlayer.watchPlayPrevSong),
-    fork(fromPlayer.watchChangePlayMode),
-
-    fork(fromSearch.watchDoSearch),
-    fork(fromSearch.watchDoDropdownSearch)
-  ];
+function * rootSaga() {
+    yield[fork(fromSearch.watchDoSearch),
+        fork(fromSearch.watchDoDropdownSearch)];
 }
 
 export default rootSaga;
