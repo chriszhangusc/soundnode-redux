@@ -38,23 +38,24 @@ export function searchResultsReceived(normalizedResults) {
 }
 
 export function tracksReceived(normalizedTracks) {
-  return {
-    type: SEARCH_DROPDOWN_TRACKS_RECEIVED,
-    payload: {
-      trackMap: normalizedTracks.trackMap,
-      nextHref: normalizedTracks.nextHref
-    }
-  };
+    return {
+        type: SEARCH_DROPDOWN_TRACKS_RECEIVED,
+        payload: {
+          trackMap: normalizedTracks.trackMap,
+          nextHref: normalizedTracks.nextHref
+        }
+    };
 }
 
 export function artistsReceived(normalizedArtists) {
-  return {
-    type: SEARCH_DROPDOWN_ARTISTS_RECEIVED,
-    payload: {
-      artistMap: normalizedArtists.artistMap,
-      nextHref: normalizedArtists.nextHref
-    }
-  };
+// console.log('After normalized:', normalizedArtists.artistMap.toJS());
+    return {
+        type: SEARCH_DROPDOWN_ARTISTS_RECEIVED,
+        payload: {
+          artistMap: normalizedArtists.artistMap,
+          nextHref: normalizedArtists.nextHref
+        }
+    };
 }
 
 export function hideSearchResults() {
@@ -125,6 +126,7 @@ const search = (state = INITIAL_STATE, action) => {
       return state.set('isFetching', false);
     case SEARCH_DROPDOWN_ARTISTS_RECEIVED:
       // Set payload(users) to users
+    //   console.log(action.payload.artistMap.toJS());
       return state.set('dropdownArtists', action.payload.artistMap).merge({
         artistNextHref: action.payload.nextHref
       });

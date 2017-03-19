@@ -5,16 +5,20 @@ import Artist from 'client/models/Artist';
 import ArtistMap from 'client/models/ArtistMap';
 import Comment from 'client/models/Comment';
 import CommentMap from 'client/models/CommentMap';
+import { camelizeKeys } from 'humps';
 
 /**
  * Take the data coming back from axios, return an OrderedMap containing Track immutable object.
  * @param  {[type]} data [description]
  * @return {[type]}      [description]
  */
+
+// To be merged into general normalize function
 export function normalizeTracks(data) {
-  const collection = data.collection;
+  const collection = camelizeKeys(data.collection);
   let trackMap = new TrackMap();
   collection.forEach((item) => {
+     
     const obj = item.track ? item.track : item;
     trackMap = trackMap.set(obj.id, item.track ? trackMapper(obj) : new Track(obj));
   });
@@ -25,27 +29,29 @@ export function normalizeTracks(data) {
 }
 
 export function normalizeArtists(data) {
-  const collection = data.collection;
-  let artistMap = new ArtistMap();
-  collection.forEach((item) => {
-    artistMap = artistMap.set(item.id, new Artist(item));
-  });
 
-  return {
-    artistMap,
-    nextHref: data.next_href
-  };
+    const resultMap = normalize(data, ArtistMap, Artist);
+    return {
+        artistMap: resultMap,
+        nextHref: data.next_href
+    };
 }
 
 export function normalizeComments(data) {
-  const collection = data.collection;
-  let resultMap = new CommentMap();
-  collection.forEach((item) => {
-    resultMap = resultMap.set(item.id, new Comment(item));
-  });
 
-  return {
-    resultMap,
-    nextHref: data.next_href
-  };
+    const resultMap = normalize(data, CommentMap, Comment);
+    return {
+        commentMap: resultMap,
+        nextHref: data.next_href
+    };
+}
+
+
+function normalize(data, MapType, Model) {
+    const collection = camelizeKeys(data.collection);
+    let resultMap = new MapType();
+    collection.forEach((item) => {
+        resultMap = resultMap.set(item.id, new Model(item));
+    });
+    return resultMap;
 }

@@ -3,6 +3,7 @@ import { takeLatest } from 'redux-saga';
 import { SAGA_DROPDOWN_SEARCH, SAGA_SEARCH } from 'client/constants/ActionTypes';
 import { fetchUsers, fetchTracks } from 'client/services/SCAPIServices';
 import { normalizeArtists, normalizeTracks } from 'client/utils/NormalizeUtils';
+import humps from 'humps';
 import {
   startSearch,
   endSearch,
@@ -15,21 +16,23 @@ import {
 /* *****************************************************************************/
 /* ****************************** SUBROUTINES **********************************/
 /* *****************************************************************************/
-// Take in action
-// Should add try catch
+
+// When user type in the dropdown search box, this function will be called.
 function* doDropdownSearch({ payload }) {
-  const { keyword, limit } = payload;
-  // yield put(startSearch());
-  const [artistRes, trackRes] = yield [
+    const { keyword, limit } = payload;
+    // yield put(startSearch());
+    const [artistRes, trackRes] = yield [
     call(fetchUsers, keyword, limit),
     call(fetchTracks, keyword, limit)
-  ];
-  const normalizedArtists = yield call(normalizeArtists, artistRes.data);
-  const normalizedTracks = yield call(normalizeTracks, trackRes.data);
-  yield put(artistsReceived(normalizedArtists));
-  yield put(tracksReceived(normalizedTracks));
-  // yield put(endSearch());
-  yield put(showSearchResults());
+    ];
+
+    const normalizedArtists = yield call(normalizeArtists, artistRes.data);
+    const normalizedTracks = yield call(normalizeTracks, trackRes.data);
+
+    yield put(artistsReceived(normalizedArtists));
+    yield put(tracksReceived(normalizedTracks));
+    // yield put(endSearch());
+    yield put(showSearchResults());
 }
 
 function* doSearch({ payload }) {

@@ -16,6 +16,7 @@ const stateTransformer = (state) => {
   return state;
 };
 
+// Not enabled yet, to enable just append logger to the last arguement of applyMiddleware down below.
 const logger = createLogger({
   stateTransformer
 });
@@ -28,7 +29,7 @@ const configureStore = () => {
     persistedState,
     // initialState,
     compose(
-      applyMiddleware(thunk, sagaMiddleware, apiMiddleware, notificationMiddleware, logger),
+      applyMiddleware(thunk, sagaMiddleware, apiMiddleware, notificationMiddleware),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );

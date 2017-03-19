@@ -1,7 +1,7 @@
 {
     "name": "redux-music",
     "version": "1.0.0",
-    "description": "A Simple Client for SoundCloud",
+    "description": "A SoundCloud client built with passion",
     "main": "index.js",
     "scripts": {
         "start": "node server.js",
