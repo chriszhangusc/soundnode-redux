@@ -4,7 +4,7 @@ import { formatGenre } from 'client/utils/FormatUtils';
 import { trackArraySchema } from 'client/schemas';
 import { TOP_COUNT, LIMIT } from 'client/constants/ChartsConsts';
 /* Constants */
-export const DEFAULT_GENRE = 'All-Music';
+export const DEFAULT_GENRE = 'all-music';
 export const CHANGE_GENRE = 'redux-music/charts/CHANGE_GENRE';
 export const CHARTS_REQUEST = 'redux-music/charts/CHARTS_REQUEST';
 export const CHARTS_RECEIVED = 'redux-music/charts/CHARTS_RECEIVED';

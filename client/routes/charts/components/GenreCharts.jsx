@@ -10,7 +10,7 @@ const renderGenres = () => GENRES.map(
     <Link
       key={genre.link}
       className="button inline"
-      to={`/top50/${genre.link}`}
+      to={`/charts/${genre.link}`}
     >{genre.title}</Link>
 );
 

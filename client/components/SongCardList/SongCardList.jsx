@@ -9,8 +9,8 @@ const renderSongCardList = (trackIds) => {
   return (
     <div className="row">
       {
-        trackIds.toArray().map(trackId => (
-          <div className="col-sm-6 col-md-4 col-lg-3" key={trackId}>
+        trackIds.toArray().map((trackId, index) => (
+          <div className="col-sm-6 col-md-4 col-lg-3" key={index}>
             <SongCardContainer trackId={trackId} trackIds={trackIds} />
           </div>
         ))

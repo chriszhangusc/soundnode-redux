@@ -13,52 +13,57 @@ import { loadTrackPage, clearTrackState } from 'client/redux/modules/track';
 import { sagaSearch, clearSearchPageResults } from 'client/redux/modules/search';
 import { clearVisibleTracks } from 'client/redux/modules/ui';
 import { fetchAllLikedTracks } from 'client/redux/modules/user';
+import { GENRES } from 'client/constants/ChartsConsts';
 
 const configureRoutes = (store) => {
   // Move these hooks into seperate files
-  const onChartsPageEnter = (nextState) => {
-    const { dispatch } = store;
-    const genre = nextState.params.genre || DEFAULT_GENRE;
-    dispatch(loadCharts(genre));
+  const onChartsPageEnter = (nextState, replace) => {
+      const { dispatch } = store;
+      const genreFromUrl = nextState.params.genre;
+      const valid = GENRES.filter(item => item.link.indexOf(genreFromUrl) > -1).length > 0;
+
+      // Handle routes that are partially matched but containing
+       // invalid genre like this: http://localhost:3000/top50/All-Music/adfasdfasdfasdf
+      const genre = valid ? genreFromUrl : DEFAULT_GENRE;
+      if (!valid) replace(`/charts/${DEFAULT_GENRE}`);
+      dispatch(loadCharts(genre));
   };
 
   const onChartsPageLeave = () => {
-    console.log('onChartsPageLeave');
-    const { dispatch } = store;
-    dispatch(clearVisibleTracks());
+      console.log('onChartsPageLeave');
+      const { dispatch } = store;
+      dispatch(clearVisibleTracks());
   };
 
   const onArtistDetailsPageEnter = (nextState) => {
-    const dispatch = store.dispatch;
-    const uid = nextState.params.uid;
-    dispatch(loadArtistPage(uid));
+      const dispatch = store.dispatch;
+      const uid = nextState.params.uid;
+      dispatch(loadArtistPage(uid));
   };
 
   const onArtistDetailsPageLeave = () => {
-    const { dispatch } = store;
-    dispatch(clearArtistState());
+      const { dispatch } = store;
+      dispatch(clearArtistState());
   };
 
   const onTrackDetailsPageEnter = (nextState) => {
-    const dispatch = store.dispatch;
-    const trackId = nextState.params.trackId;
-    dispatch(clearVisibleTracks());
-    dispatch(loadTrackPage(trackId));
+      const dispatch = store.dispatch;
+      const trackId = nextState.params.trackId;
+      dispatch(clearVisibleTracks());
+      dispatch(loadTrackPage(trackId));
   };
 
   const onTrackDetailsPageLeave = () => {
-    // Clear state info before leaving the page
-    // console.log('onLeave');
-    const { dispatch } = store;
-    dispatch(clearTrackState());
+      const { dispatch } = store;
+      dispatch(clearTrackState());
   };
 
   const onSearchPageEnter = (nextState) => {
-    console.log('On search page enter');
-    const dispatch = store.dispatch;
-    // Clear previous results first.
-    const query = nextState.location.query;
-    dispatch(sagaSearch(query.q, 20));
+      console.log('On search page enter');
+      const dispatch = store.dispatch;
+      // Clear previous results first.
+      const query = nextState.location.query;
+      dispatch(sagaSearch(query.q, 20));
   };
 
   const onSearchPageLeave = () => {
@@ -73,45 +78,26 @@ const configureRoutes = (store) => {
   };
 
   return (
-    <Router history={browserHistory}>
-      <Route path="/" component={App}>
-        <IndexRedirect to={`top50/${DEFAULT_GENRE}`} />
-        <Route path="top50" component={ChartsPage}>
-          <IndexRedirect to={`${DEFAULT_GENRE}`} />
-          <Route
-            path=":genre"
-            component={ChartsPage}
-            onEnter={onChartsPageEnter}
-            onLeave={onChartsPageLeave}
-          />
-        </Route>
-        <Route path="artist" >
-          <Route
-            path=":uid"
-            component={ArtistDetailsPage}
-            onEnter={onArtistDetailsPageEnter}
-            onLeave={onArtistDetailsPageLeave}
-          />
-        </Route>
-        <Route path="track">
-          <Route
-            path=":trackId"
-            component={TrackDetailsPage}
-            onEnter={onTrackDetailsPageEnter}
-            onLeave={onTrackDetailsPageLeave}
-          />
-        </Route>
-        <Route
-          path="search"
-          component={SearchResultsPage}
-          onEnter={onSearchPageEnter}
-          onLeave={onSearchPageLeave}
-        />
-        <Route path="likes" component={LikesPage} onEnter={onLikesPageEnter} />
-        <Route path="*" component={NotFound} />
-      </Route>
-    </Router>
-  );
-};
+      <Router history={browserHistory}>
+          <Route path="/" component={App}>
+              <IndexRedirect to={`/charts/${DEFAULT_GENRE}`} />
+              <Route path="charts" component={ChartsPage}>
+                  <IndexRedirect to={`${DEFAULT_GENRE}`} />
+                  <Route path=":genre" component={ChartsPage} onEnter={onChartsPageEnter} onLeave={onChartsPageLeave}/>
+              </Route>
+              <Route path="artist" >
+                  <Route path=":uid" component={ArtistDetailsPage} onEnter={onArtistDetailsPageEnter} />
+              </Route>
+              <Route path="track">
+                  <Route path=":trackId" component={TrackDetailsPage} onEnter={onTrackDetailsPageEnter} />
+              </Route>
+              <Route path="search" component={SearchResultsPage} onEnter={onSearchPageEnter} />
+          </Route>
+          <Route path="*">
+              <IndexRedirect to={`/charts`} />
+          </Route>
+      </Router>
+    );
+  };
 
 export default configureRoutes;
