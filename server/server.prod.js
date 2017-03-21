@@ -1,4 +1,5 @@
 // This is the production server hosting files in dist folder.
+// Api server has been separated to another project called redux-music-api
 // Just like in development we use webpack-dev-server.
 var express = require('express');
 var bodyParser = require('body-parser');

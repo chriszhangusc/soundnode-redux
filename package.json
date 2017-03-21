@@ -4,7 +4,7 @@
     "description": "Music client based on SoundCloud API",
     "main": "index.js",
     "scripts": {
-        "start": "node server/server.prod.js",
+        "start": "NODE_ENV=production node server/server.prod.js",
         "dev-webpack1": "webpack-dev-server --progress --colors --hot --inline --config webpack.dev.config.js",
         "dev-server": "NODE_ENV=development webpack-dev-server --config webpack2.config.js",
         "build": "rm -rf dist/ & wait & NODE_ENV=production webpack -p --config webpack2.config.js",
