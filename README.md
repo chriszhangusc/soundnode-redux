@@ -1,7 +1,8 @@
 # React Redux version of one of my favorite music app http://www.soundnodeapp.com/.
 
+To run it in development mode locally:
 1. git clone
-2. yarn install to install dependencies.
-3. npm run api to start backend server.
-4. npm run dev to start application in development mode.
+2. Type in command yarn install to install all dependencies.
+3. npm run dev-api to start api server.
+4. npm run dev-server to start webpack-dev-server.
 5. http://localhost:3000/

@@ -3,4 +3,4 @@ node_modules
 playground
 build
 dist
-npm-debug.log
+*.log

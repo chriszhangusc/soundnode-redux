@@ -7,34 +7,44 @@ import v2 from './routes/v2';
 const app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 const production = process.env.NODE_ENV === 'production';
-const port = production ? process.env.PORT : 3001;
+// Development port 3001
+let port = 3001;
+// Local production test uses port 5001
+// If on heroku, use process.env.PORT
+if (production) port = process.env.PORT || 5001;
 
 // Add headers
 app.use((req, res, next) => {
-   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    var allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:3000'];
+    var origin = req.headers.origin;
 
-  // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    if (allowedOrigins.indexOf(origin) > -1) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
 
-  // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
 
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
 
-  // Pass to next layer of middleware
-  next();
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
 });
 
 // Simple logger
 function logger(req, res, next) {
-  console.log(new Date(), req.method, req.url);
-  next();
+    console.log(new Date(), req.method, req.url);
+    next();
 }
 
 app.use(logger);
@@ -43,5 +53,5 @@ app.use('/sc/api-v1', v1);
 app.use('/sc/api-v2', v2);
 
 app.listen(port, () => {
-  console.log(`API Server Started at:${port}`);
+    console.log(`API Server Started at:${port}`);
 });

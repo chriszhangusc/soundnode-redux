@@ -1,4 +1,10 @@
-<!-- For development environment -->
+<!--
+    For production.
+    Index template page used by HTMLWebpackPlugin to generate
+    index page for production environment.
+    Thanks to extract-text-webpack-plugin we can separate our css code from main.bundle.js
+    it will produce a separate file style.css
+ -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,17 +21,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" rel="stylesheet" type="text/css">
-
     <!-- ionicon cdn -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
-    <!-- Thanks to extract-text-webpack-plugin we can separate our css code from bundle.js -->
-    <link rel="stylesheet" href="/dist/style.css">
     <title>React Music</title>
   </head>
   <body>
     <!-- Main container div -->
     <div id="app"></div>
-    <script src="/dist/main.bundle.js"></script>
   </body>
-</html>
