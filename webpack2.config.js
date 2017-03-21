@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 var production = process.env.NODE_ENV === 'production';
 
 var entry = production ? [path.join(__dirname, 'client', 'index.jsx')] : [
+        'babel-polyfill',
         // activate HMR for React
         'react-hot-loader/patch',
 
