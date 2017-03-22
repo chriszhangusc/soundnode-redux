@@ -8,8 +8,12 @@ const PORT = process.env.PORT || 3000;
 
 var production = process.env.NODE_ENV === 'production';
 
+// On how to correctly import fetch polyfill with babel-polyfill:
+// https://gist.github.com/Couto/b29676dd1ab8714a818f
 var entry = production ? [path.join(__dirname, 'client', 'index.jsx')] : [
         'babel-polyfill',
+        // fetch webApi polyfill
+        'whatwg-fetch',
         // activate HMR for React
         'react-hot-loader/patch',
 
