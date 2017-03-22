@@ -3,13 +3,36 @@ import qs from 'querystring';
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
 
+
+// function status(response) {
+//   if (response.status >= 200 && response.status < 300) {
+//     return Promise.resolve(response)
+//   } else {
+//     return Promise.reject(new Error(response.statusText))
+//   }
+// }
+//
+// function json(response) {
+//   return response.json()
+// }
+//
+// fetch('users.json')
+//   .then(status)
+//   .then(json)
+//   .then(function(data) {
+//     console.log('Request succeeded with JSON response', data);
+//   }).catch(function(error) {
+//     console.log('Request failed', error);
+//   });
+
 // Return a promise
-export function onResponseSuccess(response) {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  // This actually returns a Promise!!
-  return response.json();
+export function handleErrors(response) {
+    // response.ok is true if response status ranges from 200 to 299
+    if (!response.ok) {
+        throw Error(response.statusText);
+        // #TODO: Notification: Server Internal Error
+    }
+    return response.json();
 }
 
 // Construct fetch url with baseURL in current config, given endpoint and queryParams as an object
@@ -28,14 +51,14 @@ export function constructFetchUrl(baseUrl, endpoint, queryParams) {
 // https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
 // If normalizeSchema is specified, we normalize it using the given schema.
 export function makeRequest(fetchUrl, normalizeSchema) {
-  return fetch(fetchUrl)
-          .then(onResponseSuccess)
-          .then(json => camelizeKeys(json))
-          .then(camelizedJson => normalizeResponse(camelizedJson, normalizeSchema))
-          .catch(err => {
-              console.log('Error while making ajax request!');
-              console.log(err);
-          });
+    // fetch will only reject the promise when there is an internet error
+    return fetch(fetchUrl)
+        .catch(err => {
+            throw Error('No Internet Connection!');
+        })
+        .then(handleErrors)
+        .then(json => camelizeKeys(json))
+        .then(camelizedJson => normalizeResponse(camelizedJson, normalizeSchema));
 }
 
 // Normalize

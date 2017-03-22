@@ -4,6 +4,7 @@ import { formatGenre } from 'client/utils/FormatUtils';
 import { trackArraySchema } from 'client/schemas';
 import { TOP_COUNT, LIMIT } from 'client/constants/ChartsConsts';
 import { fetchChartsFromSC } from 'client/api/sc/v2';
+import { notificationFailure } from 'client/redux/modules/notification';
 /* Constants */
 export const DEFAULT_GENRE = 'all-music';
 export const CHANGE_GENRE = 'redux-music/charts/CHANGE_GENRE';
@@ -79,8 +80,15 @@ export function fetchCharts(genre) {
         const state = getState();
         const offset = getChartsOffset(state);
         dispatch(requestCharts());
-        const normalizedCharts = await fetchChartsFromSC(genre);
-        dispatch(receiveCharts(normalizedCharts));
+        try {
+            const normalizedCharts = await fetchChartsFromSC(genre);
+            // #TODO: Verify results!!
+            dispatch(receiveCharts(normalizedCharts));
+        } catch (err) {
+            // console.log('name:', err.name);
+            // console.log('message', err.message);
+            dispatch(notificationFailure(err.message));
+        }
 
         // Removed because of conciseness.
         // dispatch({
