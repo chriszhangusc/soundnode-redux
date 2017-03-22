@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 import { trackSchema, commentArraySchema } from 'client/schemas';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { notificationFailure } from 'client/redux/modules/notification';
-import * as v1 from 'client/../api/sc/v1';
+import * as v1 from 'client/api/sc/v1';
 
 /* Constants */
 export const TRACK_REQUEST = 'redux-music/track/REQUEST';

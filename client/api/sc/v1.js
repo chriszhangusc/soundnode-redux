@@ -1,4 +1,4 @@
-import { CLIENT_ID } from '../../client/constants/Config';
+import { CLIENT_ID } from 'client/constants/Config';
 import { normalizeResponse, constructFetchUrl, makeRequest } from './apiUtils';
 import { artistSchema, trackSchema, commentArraySchema, trackArraySchema, artistArraySchema } from '../schemas';
 

@@ -3,6 +3,7 @@ import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { formatGenre } from 'client/utils/FormatUtils';
 import { trackArraySchema } from 'client/schemas';
 import { TOP_COUNT, LIMIT } from 'client/constants/ChartsConsts';
+import { fetchChartsFromSC } from 'client/api/sc/v2';
 /* Constants */
 export const DEFAULT_GENRE = 'all-music';
 export const CHANGE_GENRE = 'redux-music/charts/CHANGE_GENRE';
@@ -10,6 +11,7 @@ export const CHARTS_REQUEST = 'redux-music/charts/CHARTS_REQUEST';
 export const CHARTS_RECEIVED = 'redux-music/charts/CHARTS_RECEIVED';
 export const CHARTS_FAILURE = 'redux-music/charts/CHARTS_FAILURE';
 export const CLEAR_ALL_CHARTS = 'redux-music/charts/CLEAR_ALL_CHARTS';
+
 
 
 /* Reducer */
@@ -48,7 +50,7 @@ export const getChartsTrackIds = state => state.get('charts').get('trackIds');
 export const isChartsFetching = state => state.get('charts').get('fetching');
 export const getChartsOffset = state => state.get('charts').get('offset');
 
-/* Actions */
+/* Action Creators */
 export const changeGenre = genre => ({
   type: CHANGE_GENRE,
   payload: genre,
@@ -58,48 +60,68 @@ export const clearAllCharts = () => ({
   type: CLEAR_ALL_CHARTS,
 });
 
+const requestCharts = () => ({
+    type: CHARTS_REQUEST
+})
+
+const receiveCharts = (normalizedCharts) => ({
+    type: CHARTS_RECEIVED,
+    payload: normalizedCharts,
+    entities: normalizedCharts.entities,
+});
+
+/* Side Effects */
+
 // http://localhost:3001/sc/api-v2/charts?genre=country&limit=20&offset=0&client_id=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
 // fetchCharts according to current limit
 export function fetchCharts(genre) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const offset = getChartsOffset(state);
-    dispatch({
-      [CALL_API]: {
-        endpoint: '/sc/api-v2/charts',
-        fetchOptions: {
-          method: 'GET',
-        },
-        query: {
-          genre,
-          offset,
-          limit: LIMIT,
-        },
-        types: [CHARTS_REQUEST, CHARTS_RECEIVED, CHARTS_FAILURE],
-        schema: trackArraySchema,
-      },
-    });
-  };
+    return async (dispatch, getState) => {
+        const state = getState();
+        const offset = getChartsOffset(state);
+        dispatch(requestCharts());
+        const normalizedCharts = await fetchChartsFromSC(genre);
+        dispatch(receiveCharts(normalizedCharts));
+
+        // Removed because of conciseness.
+        // dispatch({
+        //     [CALL_API]: {
+        //         endpoint: '/sc/api-v2/charts',
+        //         fetchOptions: {
+        //             method: 'GET',
+        //         },
+        //         query: {
+        //             genre,
+        //             offset,
+        //             limit: LIMIT,
+        //         },
+        //         types: [CHARTS_REQUEST, CHARTS_RECEIVED, CHARTS_FAILURE],
+        //         schema: trackArraySchema,
+        //     },
+        // });
+    };
 }
 
+
+
+
 export function loadCharts(genre) {
-  return (dispatch) => {
-    const formattedGenre = formatGenre(genre);
-    dispatch(changeGenre(genre));
-    dispatch(clearAllCharts());
-    dispatch(fetchCharts(formattedGenre));
-  };
+    return (dispatch) => {
+        dispatch(changeGenre(genre));
+        const formattedGenre = formatGenre(genre);
+        dispatch(clearAllCharts());
+        dispatch(fetchCharts(formattedGenre));
+    };
 }
 
 export function loadMoreCharts() {
-  return (dispatch, getState) => {
-    const state = getState();
-    const chartsFetching = isChartsFetching(state);
-    const size = getChartsTrackIds(state).size;
-    if (!chartsFetching && size < TOP_COUNT) {
-      const genre = getChartsGenre(state);
-      const formattedGenre = formatGenre(genre);
-      dispatch(fetchCharts(formattedGenre));
-    }
-  };
+    return (dispatch, getState) => {
+        const state = getState();
+        const chartsFetching = isChartsFetching(state);
+        const size = getChartsTrackIds(state).size;
+        if (!chartsFetching && size < TOP_COUNT) {
+            const genre = getChartsGenre(state);
+            const formattedGenre = formatGenre(genre);
+            dispatch(fetchCharts(formattedGenre));
+        }
+    };
 }

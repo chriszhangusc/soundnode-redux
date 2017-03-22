@@ -1,6 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
-import { fetchTracks, fetchArtists } from 'client/../api/sc/v1';
+import { fetchTracks, fetchArtists } from 'client/api/sc/v1';
 import {
   SAGA_DROPDOWN_SEARCH,
   SAGA_SEARCH,

@@ -1,5 +1,5 @@
 /* artist module */
-import { fetchArtist, fetchArtistTracks, fetchMoreArtistTracks } from 'client/../api/sc/v1';
+import { fetchArtist, fetchArtistTracks, fetchMoreArtistTracks } from 'client/api/sc/v1';
 import { fromJS } from 'immutable';
 import { notificationFailure } from './notification';
 /* Constants */
@@ -52,7 +52,7 @@ export const isArtistFetching = state => getArtistState(state).get('artistFetchi
 export const isArtistTracksFetching = state => getArtistState(state).get('tracksFetching');
 export const getArtistTracksNextHref = state => getArtistState(state).get('tracksNextHref');
 
-/* Actions */
+/* Action Creators*/
 export function clearArtistState() {
   return ({
     type: CLEAR_STATE,
