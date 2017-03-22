@@ -3,7 +3,6 @@ import qs from 'querystring';
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
 
-
 // function status(response) {
 //   if (response.status >= 200 && response.status < 300) {
 //     return Promise.resolve(response)

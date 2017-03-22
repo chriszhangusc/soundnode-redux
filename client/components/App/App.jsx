@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import { PropTypes } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import Player from 'client/components/Player';
 import Nav from 'client/components/Nav';
