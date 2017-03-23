@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 var production = process.env.NODE_ENV === 'production';
 
-var entry = production ? [path.join(__dirname, 'client', 'index.jsx')] : [
+var mainEntry = production ? ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')] : [
         'babel-polyfill',
         // activate HMR for React
         'react-hot-loader/patch',
@@ -29,15 +29,7 @@ var entry = production ? [path.join(__dirname, 'client', 'index.jsx')] : [
 var plugins = production ? [
     // // separate css code from bundle.js into style.css so that the browser
     // // can load javascript and css asynchrously
-    // // Note in order to let the browser cache the contentm
-    // new ExtractTextPlugin({
-    //     filename: 'style-[contenthash:10].css'
-    // }),
-
-    new HTMLWebpackPlugin({
-        template: path.join(__dirname, 'public', 'index-template.html')
-    }),
-
+    // // Note in order to let the browser cache the content
     new ExtractTextPlugin({
         filename: 'style-[contenthash:10].css'
     }),
@@ -55,6 +47,10 @@ var plugins = production ? [
 
 // Shared plugins among all environments
 plugins = plugins.concat([
+    new HTMLWebpackPlugin({
+        template: path.join(__dirname, 'public', 'index-template.html'),
+        filename: 'index.html'
+    }),
     // DefinePlugin makes it possible for us to use env variables in src code
     new webpack.DefinePlugin({
         PRODUCTION: JSON.stringify(production)
@@ -63,15 +59,25 @@ plugins = plugins.concat([
     new webpack.ProvidePlugin({
         React: 'react'
     }),
-
+    new webpack.optimize.CommonsChunkPlugin({
+        // Name of the entry!
+        name: 'vendor',
+    }),
 ]);
 
 module.exports = {
 
-    entry: entry,
+    entry: {
+        main: mainEntry,
+
+        // The name should match the one in CommonsChunkPlugin defined above
+        vendor: ['react', 'react-dom']
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: production ? '[name].bundle.[hash:12].min.js' : '[name].bundle.js',
+        filename: production ? '[name].[chunkhash].min.js' : '[name].bundle.js',
+        // Production?
+        // chunkFilename: '[name].chunk.js',
         publicPath: production ? '/' : '/dist/',
     },
 

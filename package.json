@@ -5,9 +5,8 @@
     "main": "index.js",
     "scripts": {
         "start": "NODE_ENV=production node server/server.prod.js",
-        "dev-webpack1": "webpack-dev-server --progress --colors --hot --inline --config webpack.dev.config.js",
-        "dev": "NODE_ENV=development webpack-dev-server --config webpack2.config.js",
-        "build": "rm -rf dist/ & wait & NODE_ENV=production webpack -p --config webpack2.config.js",
+        "dev": "NODE_ENV=development webpack-dev-server",
+        "build": "rm -rf dist/ && NODE_ENV=production webpack -p",
         "heroku-postbuild": "npm run build"
     },
     "author": "MiniPekka",
