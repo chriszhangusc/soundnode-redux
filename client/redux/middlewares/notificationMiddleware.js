@@ -5,9 +5,9 @@ const defaultErrorMessage = 'Action success!';
 const defaultSuccessMessage = 'Action failed!';
 
 const notificationMiddleware = () => next => (action) => {
-  const { type } = action;
-  if (!type) return next(action);
-  switch (type) {
+    const { type } = action;
+    if (!type) return next(action);
+    switch (type) {
     case NOTIFICATION_SUCCESS:
       NotificationManager.success(action.payload || defaultSuccessMessage, 'Success');
       break;
@@ -16,8 +16,8 @@ const notificationMiddleware = () => next => (action) => {
       break;
     default:
       break;
-  }
-  return next(action);
+    }
+    return next(action);
 };
 
 export default notificationMiddleware;
