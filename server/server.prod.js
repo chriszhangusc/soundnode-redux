@@ -11,6 +11,7 @@ var PORT = process.env.PORT || 3000;
 
 var distPath = path.join(__dirname, '..', 'dist');
 
+// Here we have to match publicPath in webpack production config file.
 app.use(express.static(distPath));
 
 // Simple logger

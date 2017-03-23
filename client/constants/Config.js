@@ -4,7 +4,7 @@ const API_HOST_DEV = 'http://localhost:3000'; // Will go through proxy and go to
 
 
 // #TODO: Should be heroku api server!!!
-const API_HOST_PROD = 'http://localhost:5001';
+const API_HOST_PROD = 'https://redux-music-api.herokuapp.com';
 
 // PRODUCTION is from DefinePlugin in webpack
 export const API_HOST = PRODUCTION ? API_HOST_PROD : API_HOST_DEV;

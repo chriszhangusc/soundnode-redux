@@ -59,19 +59,23 @@ plugins = plugins.concat([
     new webpack.ProvidePlugin({
         React: 'react'
     }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //     // Name of the entry!
+    //     name: 'vendor',
+    // }),
     new webpack.optimize.CommonsChunkPlugin({
-        // Name of the entry!
         name: 'vendor',
-    }),
+        minChunks: function (module) {
+           // this assumes your vendor imports exist in the node_modules directory
+           return module.context && module.context.indexOf('node_modules') !== -1;
+        }
+    })
 ]);
 
 module.exports = {
 
     entry: {
-        main: mainEntry,
-
-        // The name should match the one in CommonsChunkPlugin defined above
-        vendor: ['react', 'react-dom']
+        main: mainEntry
     },
     output: {
         path: path.resolve(__dirname, 'dist'),

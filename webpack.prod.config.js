@@ -1,65 +1,90 @@
-// Currently not active
-// Webpack1 config for production
-const path = require('path');
-const webpack = require('webpack');
+// For Webpack 2
+var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HTMLWebpackPlugin = require('html-webpack-plugin');
+
+const PORT = process.env.PORT || 3000;
 
 module.exports = {
-    entry: [
-    path.resolve(__dirname, 'client', 'index.jsx'),
-  ],
 
-    // If confused: https://github.com/webpack/docs/wiki/configuration#outputpublicpath
+    entry: {
+        main: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')]
+    },
+
     output: {
-        // Base path: ./public/build/
-        path: path.join(__dirname, 'public', 'build'),
-        filename: 'bundle.js',
-
-        publicPath: '/build/'
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].[chunkhash].min.js',
+        publicPath: '/',
     },
 
+    // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
+    // In every other case use resolve.root.
     resolve: {
-        root: [
-      path.resolve(__dirname, './node_modules')
-    ],
-        alias: {
-            client: path.resolve(__dirname, './client'),
-            assets: path.resolve(__dirname, './public')
-        },
-        extensions: ['', '.js', '.jsx', 'stage-0'],
-    },
-    plugins: [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-            minimize: true,
-            compress: {
-                warnings: false
-            }
-        }),
-    // Make sure environment variables are also accessible in client side.
-    new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        })
-  ],
 
+        modules: [
+            // From documentaton
+            // path.join(__dirname, "src"),
+            "node_modules"
+        ],
+        alias: {
+            client: path.join(__dirname, 'client'),
+            assets: path.join(__dirname, 'public')
+        },
+        extensions: ['*', '.js', '.jsx', 'stage-0']
+    },
     module: {
-        loaders: [
+        rules: [
             {
-                loaders: ['react-hot', 'babel-loader'],
                 test: /\.jsx?$/,
+                use: [
+                    'babel-loader'
+                ],
                 exclude: /node_modules/
-      },
+            },
             {
                 test: /\.scss$/,
-                loaders: ['style', 'css', 'sass']
-      },
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
+                })
+            },
+
             {
                 test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
-                loader: 'file-loader?name=[name].[ext]'
-      }
-    ]
+                use: [
+                    'url-loader?limit=10000&name=images/[hash:12].[ext]'
+                ]
+            }
+        ]
     },
 
-    devtool: 'cheap-module-source-map'
+    plugins: [
+        // // separate css code from bundle.js into style.css so that the browser
+        // // can load javascript and css asynchrously
+        // // Note in order to let the browser cache the content
+        new ExtractTextPlugin({
+            filename: 'style-[contenthash:10].css'
+        }),
+        new HTMLWebpackPlugin({
+            template: path.join(__dirname, 'public', 'index-template.html'),
+            filename: 'index.html'
+        }),
+        // DefinePlugin makes it possible for us to use env variables in src code
+        new webpack.DefinePlugin({
+            PRODUCTION: true
+        }),
+        // ProvidePlugin: automatically load modules.
+        new webpack.ProvidePlugin({
+            React: 'react'
+        }),
+        // From doc: implicit vendor code splitting
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: function (module) {
+               // this assumes your vendor imports exist in the node_modules directory
+               return module.context && module.context.indexOf('node_modules') !== -1;
+            }
+        })
+    ]
 };
