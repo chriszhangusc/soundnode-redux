@@ -1,14 +1,7 @@
-import fetch from 'isomorphic-fetch';
-import {
-    camelizeKeys
-} from 'humps';
-import {
-    normalize
-} from 'normalizr';
-import {
-    CLIENT_ID,
-    API_HOST
-} from 'client/constants/Config';
+// #TODO: To be removed in the future
+import { camelizeKeys } from 'humps';
+import { normalize } from 'normalizr';
+import { CLIENT_ID, API_HOST } from 'client/constants/Config';
 import querystring from 'querystring';
 
 export const CALL_API = 'CALL_API';

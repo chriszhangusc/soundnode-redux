@@ -61,8 +61,7 @@ plugins = plugins.concat([
     }),
     // ProvidePlugin: automatically load modules.
     new webpack.ProvidePlugin({
-        React: 'react',
-        fetch: 'isomorphic-fetch'
+        React: 'react'
     }),
 
 ]);
@@ -88,6 +87,8 @@ module.exports = {
         publicPath: '/dist/',
         port: PORT,
         compress: true,
+
+        // Reduce the amount of console outputs when we run webpack-dev-server
         stats: 'errors-only',
         // Opens new browser window when we run devserer for the first time
         open: true,

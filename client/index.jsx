@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import 'react-notifications/src/notifications.scss';
 import configureStore from 'client/redux/configureStore';
 import configureRoutes from './router';
+import 'isomorphic-fetch';
 // Import stylesheets(inline)
 import '../styles/app.scss';
 
