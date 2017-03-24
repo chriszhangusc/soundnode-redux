@@ -3,33 +3,16 @@ import qs from 'querystring';
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
 
-// function status(response) {
-//   if (response.status >= 200 && response.status < 300) {
-//     return Promise.resolve(response)
-//   } else {
-//     return Promise.reject(new Error(response.statusText))
-//   }
-// }
-//
-// function json(response) {
-//   return response.json()
-// }
-//
-// fetch('users.json')
-//   .then(status)
-//   .then(json)
-//   .then(function(data) {
-//     console.log('Request succeeded with JSON response', data);
-//   }).catch(function(error) {
-//     console.log('Request failed', error);
-//   });
-
-// Return a promise
-export function handleErrors(response) {
+/**
+ * Response success handler
+ * @param  {object} response - response object from fetch web api
+ * @return {Promise}         - response json wrapped in Promise
+ */
+export function onResponseSuccess(response) {
     // response.ok is true if response status ranges from 200 to 299
     if (!response.ok) {
+        // This will be wrapped in a reject promise!
         throw Error(response.statusText);
-        // #TODO: Notification: Server Internal Error
     }
     return response.json();
 }
@@ -46,16 +29,15 @@ export function constructFetchUrl(baseUrl, endpoint, queryParams) {
   return finalUrl;
 }
 
-// Simple wrapper of fetch
-// https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
 // If normalizeSchema is specified, we normalize it using the given schema.
 export function makeRequest(fetchUrl, normalizeSchema) {
     // fetch will only reject the promise when there is an internet error
     return fetch(fetchUrl)
         .catch(err => {
-            throw Error('No Internet Connection!');
+            // Let the user know when there is a connection error!
+            throw Error('Can not make request, please check your internet connection!');
         })
-        .then(handleErrors)
+        .then(onResponseSuccess)
         .then(json => camelizeKeys(json))
         .then(camelizedJson => normalizeResponse(camelizedJson, normalizeSchema));
 }

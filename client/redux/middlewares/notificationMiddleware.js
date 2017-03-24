@@ -8,14 +8,14 @@ const notificationMiddleware = () => next => (action) => {
     const { type } = action;
     if (!type) return next(action);
     switch (type) {
-    case NOTIFICATION_SUCCESS:
-      NotificationManager.success(action.payload || defaultSuccessMessage, 'Success');
-      break;
-    case NOTIFICATION_FAILURE:
-      NotificationManager.error(action.payload || defaultErrorMessage, 'Error');
-      break;
-    default:
-      break;
+        case NOTIFICATION_SUCCESS:
+            NotificationManager.success(action.payload || defaultSuccessMessage, 'Success');
+            break;
+        case NOTIFICATION_FAILURE:
+            NotificationManager.error(action.payload || defaultErrorMessage, 'Error');
+            break;
+        default:
+            break;
     }
     return next(action);
 };
