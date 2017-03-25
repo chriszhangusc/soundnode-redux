@@ -1,7 +1,6 @@
 // Webpack 2 dev config
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const PORT = process.env.PORT || 3000;
@@ -71,13 +70,11 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                       'css-loader',
-                       'sass-loader'
-                    ]
-                })
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
             },
 
             {
@@ -95,10 +92,6 @@ module.exports = {
 
         // From doc: prints more readable module names in the browser console on HMR updates
         new webpack.NamedModulesPlugin(),
-
-        new ExtractTextPlugin({
-            filename: 'style.css'
-        }),
 
         // DefinePlugin makes it possible for us to use env variables in src code
         new webpack.DefinePlugin({
