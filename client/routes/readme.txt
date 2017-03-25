@@ -1,1 +1,1 @@
-Routes are seperated by features.
+Routes / Features specific components.

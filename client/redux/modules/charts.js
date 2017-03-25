@@ -61,7 +61,7 @@ export const getChartsOffset = state => state.get('charts').get('offset');
 
 // Naming convention: VERB_NOUN
 export const changeGenre = genre => ({
-  type: CHANGE_GENRE,
+  type: CHARTS_GENRE_CHANGE,
   payload: genre,
 });
 
