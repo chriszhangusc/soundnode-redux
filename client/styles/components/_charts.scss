@@ -1,59 +1,11 @@
-.genre-charts {
+.charts-header {
   padding: 20px 0 0 20px;
 }
 
-.button {
-    float: right;
-    text-align: center;
-    color: #ededed;
-    background: transparent;
-    border: 1px solid;
-    padding: .75em 0;
-    border-radius: .25em;
-    font-size: 13px;
-    letter-spacing: 1px;
-    margin-left: 1em;
-
-    &.active, &.liked {
-        color: $scColor;
-        &:hover {
-            color: #FFF;
-        }
-    }
-
-    &:hover {
-        color: $defaultColor;
-        cursor: pointer;
-        & span {
-            cursor: pointer;
-        }
-    }
-
-    &:focus {
-        outline: none;
-    }
-}
-
-// Elements with both .button and .show_more
-.button.show_more {
-    padding: .34em 0;
-    font-size: 11px;
-    line-height: 16px;
-}
-
-.button.inline {
-    float: none;
-    display: inline-block;
-    margin: 5px 5px 0 0;
-    padding: .4em .75em;
-    font-size: 10px;
-}
-
-
-.genre-selector {
+.genre-list {
     width: 100%;
     overflow: hidden;
-    height: 102px;
+    height: 105px;
     transition: height 0.4s;
     margin: 0 0 20px 0;
 
@@ -68,7 +20,31 @@
 }
 
 // Elements with .button that are descendant of an element with .genre-selector
-.genre-selector .button {
-  width: 19%;
-  margin-top: 5px;
+.genre-list .button {
+    width: 19%;
+    text-align: center;
+    color: #ededed;
+    background: transparent;
+
+    border: 1px solid;
+    border-radius: .25em;
+
+    font-size: 13px;
+    letter-spacing: 1px;
+
+    margin-top: 5px;
+    margin-left: 1em;
+    padding: .75em 0;
+
+    &:hover {
+        color: $defaultColor;
+        cursor: pointer;
+        & span {
+            cursor: pointer;
+        }
+    }
+
+    &:focus {
+        outline: none;
+    }
 }

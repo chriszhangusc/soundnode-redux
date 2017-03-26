@@ -15,9 +15,9 @@ const renderGenres = () => GENRES.map(
 );
 
 const GenreCharts = ({ chartsGenre }) => (
-  <div className="genre-charts">
+  <div className="charts-header">
     <h1>Top 50 - { chartsGenre.toUpperCase() }</h1>
-    <div className="genre-selector" >
+    <div className="genre-list" >
       <h3 className="title">Charts By Genre</h3>
       { renderGenres() }
     </div>
