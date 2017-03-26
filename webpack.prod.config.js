@@ -3,6 +3,7 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 const PORT = process.env.PORT || 3000;
 
@@ -46,7 +47,7 @@ module.exports = {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader']
+                    use: ['css-loader', 'postcss-loader', 'sass-loader']
                 })
             },
 
@@ -66,24 +67,36 @@ module.exports = {
         new ExtractTextPlugin({
             filename: 'style-[contenthash:10].css'
         }),
+
         new HTMLWebpackPlugin({
             template: path.join(__dirname, 'public', 'index-template.html'),
             filename: 'index.html'
         }),
+
         // DefinePlugin makes it possible for us to use env variables in src code
         new webpack.DefinePlugin({
             PRODUCTION: true
         }),
+
         // ProvidePlugin: automatically load modules.
         new webpack.ProvidePlugin({
             React: 'react'
         }),
+
         // From doc: implicit vendor code splitting
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: function (module) {
                // this assumes your vendor imports exist in the node_modules directory
                return module.context && module.context.indexOf('node_modules') !== -1;
+            }
+        }),
+
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                postcss: [
+                    autoprefixer(),
+                ]
             }
         })
     ]

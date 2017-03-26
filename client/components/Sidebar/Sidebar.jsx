@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link, IndexLink } from 'react-router';
-import styles from './sidebar.scss';
 
 const Sidebar = () => {
-    console.log(styles);
     return (
         <ul className="nav-sidebar">
           <li>

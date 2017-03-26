@@ -2,6 +2,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 const PORT = process.env.PORT || 3000;
 
@@ -73,7 +74,8 @@ module.exports = {
                 use: [
                     'style-loader',
                     'css-loader',
-                    'sass-loader'
+                    'postcss-loader',
+                    'sass-loader',
                 ]
             },
 
@@ -101,7 +103,16 @@ module.exports = {
         // ProvidePlugin: automatically load modules.
         new webpack.ProvidePlugin({
             React: 'react'
+        }),
+
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                postcss: [
+                    autoprefixer(),
+                ]
+            }
         })
+
     ],
 
     devtool: 'source-map'
