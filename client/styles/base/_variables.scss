@@ -1,9 +1,11 @@
-// #TODO: move everything here, what if this file gets really big? 
+// #TODO: move everything here, what if this file gets really big?
 // Colors
 $font-main-color: #d3d3d3;
 $font-sub-color: #939393;
 $light-black: rgb(29, 31, 33);
 $black: rgb(15, 16, 16);
+$nice-gray: #34495e;
+
 $background-color: $light-black;
 $sidebar-color: rgb(22,24,25);
 
@@ -33,3 +35,6 @@ $defaultColor: #949599;
 $separatorCleanColor: #3e3e40;
 $separatorDarkColor: #000;
 $scColor: #f50;
+
+
+$sidebar-width: 250px;

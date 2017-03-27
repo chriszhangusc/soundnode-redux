@@ -1,3 +1,9 @@
+.song-card-list-container {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .card {
   background-color: $background-color;
   border: 1px solid $light-black;
@@ -5,6 +11,7 @@
 
 .song-card {
   padding: 10px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;

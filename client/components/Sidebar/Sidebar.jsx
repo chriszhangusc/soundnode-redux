@@ -3,29 +3,31 @@ import { Link, IndexLink } from 'react-router';
 
 const Sidebar = () => {
     return (
-        <ul className="nav-sidebar">
-          <li>
-            <Link
-              to="/charts"
-              activeClassName="sidebar-link-active"
-            >Top 50</Link>
-          </li>
-          <li>
-            <Link
-              to="/likes"
-              activeClassName="sidebar-link-active"
-            >Likes</Link>
-          </li>
-          <li>
-            <a href="#">Stream</a>
-          </li>
-          <li>
-            <a href="#">Tracks</a>
-          </li>
-          <li>
-            <a href="#">Playlists</a>
-          </li>
-        </ul>
+        <div id="sidebar-wrapper">
+            <ul className="nav-sidebar">
+                <li>
+                    <Link
+                      to="/charts"
+                      activeClassName="sidebar-link-active"
+                    ><i className="fa fa-trophy"></i><span>Top 50</span></Link>
+                </li>
+                <li>
+                    <Link
+                      to="/likes"
+                      activeClassName="sidebar-link-active"
+                    ><i className="fa fa-heart"></i>Likes</Link>
+                </li>
+                <li>
+                    <a href="#"><i className="fa fa-list"></i>Playlists</a>
+                </li>
+                <li>
+                    <a href="#"><i className="fa fa-music"></i>Tracks</a>
+                </li>
+                <li>
+                    <a href="#"><i className="fa fa-cloud"></i>Stream</a>
+                </li>
+            </ul>
+        </div>
     );
 }
 export default Sidebar;

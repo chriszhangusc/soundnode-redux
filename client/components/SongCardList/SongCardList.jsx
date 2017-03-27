@@ -8,12 +8,10 @@ const renderSongCardList = (trackIds) => {
   // We are using index + trackId as the key because sometimes it will have flattenChildren warning
   // issue when using replace to change url in router index.jsx
   return (
-    <div className="row">
+    <div className="song-card-list-container">
       {
         trackIds.toArray().map((trackId, index) => (
-          <div className="col-sm-6 col-md-4 col-lg-3" key={index + trackId}>
-            <SongCardContainer trackId={trackId} trackIds={trackIds} />
-          </div>
+            <SongCardContainer trackId={trackId} trackIds={trackIds} key={index + trackId} />
         ))
       }
     </div>
@@ -24,7 +22,7 @@ const SongCardList = (props) => {
   const { fetching, trackIds } = props;
 
   return (
-    <div className="container pad-bottom">
+    <div className="pad-bottom">
       {renderSongCardList(trackIds)}
       { fetching && <Spinner /> }
     </div>

@@ -20,25 +20,26 @@ class App extends React.Component {
             dispatch(notificationSuccess('Great, you are back online!'));
         });
     }
-
+// <Sidebar />
     render() {
-      return (
-          <div>
-              <Nav />
-              <div className="container-fluid">
-                  <div className="row">
-                  <div className="col-sm-2 sidebar">
-                    <Sidebar />
-                  </div>
-                  <div className="col-sm-8 col-sm-offset-2">
-                    { this.props.children }
-                  </div>
-                  <Player />
-                  <Playlist />
+        return (
+            <div id="main-wrapper">
+                <Nav />
+                <Sidebar />
+                <div id="page-content-wrapper">
+                    <div className="container-fluid">
+                      <div className="row">
+
+                          <div className="col-lg-12">
+                              { this.props.children }
+                          </div>
+                          <Player />
+                          <Playlist />
+                      </div>
+                    </div>
                 </div>
-              </div>
-              <NotificationContainer />
-          </div>
+                <NotificationContainer />
+            </div>
       );
     }
 }
