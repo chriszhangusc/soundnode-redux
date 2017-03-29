@@ -8,6 +8,17 @@
     // position: absolute;
     margin-left: $sidebar-width;
     padding: 20px;
+
+    @include desktop {
+        margin-left: $sidebar-width-md;
+        padding: 15px;
+    }
+
+    @include desktop-lg {
+        margin-left: $sidebar-width-md;
+        padding: 15px;
+    }
+
     overflow-y: scroll;
     overflow-x: hidden;
     height: 100%;

@@ -5,6 +5,14 @@
 #sidebar-wrapper {
     position: fixed;
     width: $sidebar-width;
+
+    @include desktop {
+        width: $sidebar-width-md;
+    }
+
+    @include desktop-lg {
+        width: $sidebar-width-md;
+    }
 }
 
 /* Sidebar navigation */
@@ -34,12 +42,12 @@
     &:hover, &:focus, &:active {
         text-decoration: none;
         color: #fff;
-        background: rgba(255,255,255,0.2);
+        background: $sidebar-link-active-color;
     }
 }
 
 .sidebar-link-active {
   text-decoration: none;
   color: #fff;
-  background: rgba(255,255,255,0.2);
+  background: $sidebar-link-active-color;
 }
