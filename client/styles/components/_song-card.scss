@@ -3,16 +3,16 @@
     display: flex;
     flex-wrap: wrap;
 }
-
-.card {
-    background-color: $background-color;
-    border: 1px solid $light-black;
-}
+//
+// .card {
+//     background-color: $background-color;
+//     border: 1px solid $light-light-black;
+// }
 
 .song-card {
-    padding: 10px;
+    padding: 11px;
     width: $song-card-width;
-
+    background-color: $background-color;
     @include desktop {
         width: $song-card-width-md;
     }
@@ -68,7 +68,7 @@
     }
 
     &.active {
-        background-color: rgba(0, 0, 0, 0.8);
+        background-color: $semi-transparent-bg-dark;
 
         .toggle-play-button-icon {
             position: relative;
@@ -117,7 +117,7 @@
 
 .song-card-username {
     display: block;
-    color: $font-sub-color;
+    color: $sub-font-color;
     margin-right: 30px;
     font-size: 12px;
     overflow: hidden;
@@ -127,7 +127,7 @@
 
 .song-card-title {
     display: block;
-    color: $font-main-color;
+    color: $main-font-color;
     font-size: 13px;
     overflow: hidden;
     text-overflow: ellipsis;

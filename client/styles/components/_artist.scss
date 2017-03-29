@@ -22,7 +22,7 @@
 
     & .artist-followers {
       margin: 10px 0;
-      color: $font-main-color;
+      color: $main-font-color;
     }
 
     & .artist-description {
@@ -31,7 +31,7 @@
       overflow: scroll;
       height: 240px;
       width: 500px;
-      color: $font-sub-color;
+      color: $sub-font-color;
       white-space: pre-wrap;
     }
   }

@@ -6,6 +6,11 @@ import ArtistDetailsPage from 'client/routes/artist';
 import TrackDetailsPage from 'client/routes/track';
 import SearchResultsPage from 'client/routes/search/components/SearchResults';
 import LikesPage from 'client/routes/likes';
+
+// import TracksPage from 'client/routes/tracks';
+// import PlaylistsPage from 'client/routes/playlists';
+// import StreamPage from 'client/routes/stream';
+
 import NotFound from 'client/components/NotFound';
 import { loadCharts, DEFAULT_GENRE } from 'client/redux/modules/charts';
 import { loadArtistPage, clearArtistState } from 'client/redux/modules/artist';
@@ -85,12 +90,18 @@ const configureRoutes = (store) => {
                   <IndexRedirect to={`${DEFAULT_GENRE}`} />
                   <Route path=":genre" component={ChartsPage} onEnter={onChartsPageEnter} onLeave={onChartsPageLeave}/>
               </Route>
-              <Route path="artist" >
+              <Route path="artist">
                   <Route path=":uid" component={ArtistDetailsPage} onEnter={onArtistDetailsPageEnter} />
               </Route>
               <Route path="track">
                   <Route path=":trackId" component={TrackDetailsPage} onEnter={onTrackDetailsPageEnter} />
               </Route>
+              <Route path="likes" component={LikesPage} onEnter={onLikesPageEnter} />
+              {
+            //   <Route path="tracks" component={TracksPage} />
+            //   <Route path="playlists" component={PlaylistsPage} />
+            //   <Route path="stream" component={StreamPage} />
+                }
               <Route path="search" component={SearchResultsPage} onEnter={onSearchPageEnter} />
           </Route>
           <Route path="*">

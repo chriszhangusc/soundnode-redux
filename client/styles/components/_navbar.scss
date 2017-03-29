@@ -3,7 +3,7 @@ $search-dropdown-width: 400px;
 $search-dropdown-max-height: 600px;
 
 nav {
-  background-color: $nav-bar-color;
+  background-color: $navbar-color;
   height: $navbar-height;
 }
 
@@ -21,6 +21,7 @@ nav {
   position: relative;
   padding: 20px 0; // Vertical center
   display: inline-block;
+  // TODO: CHANGE TO FLEX
   float: right;
   border-radius: 3px;
   .form-group {
@@ -42,7 +43,7 @@ nav {
 
 .nav-search-result {
   position: absolute;
-  background-color: $sidebar-color;
+  background-color: $dropdown-search-bg-color;
   display: block;
   width: $search-dropdown-width;
   max-height: $search-dropdown-max-height;
@@ -50,7 +51,7 @@ nav {
   z-index: 1;
 
   & .dropdown-show-all-link {
-    color: $font-sub-color;
+    color: $sub-font-color;
     vertical-align: middle;
     font-size: 1.3rem;
   }
@@ -59,7 +60,7 @@ nav {
 .dropdown-title {
   text-align: center;
   font-size: 1.6rem;
-  color: $font-sub-color;
+  color: $font-color-sub;
   margin-bottom: 10px;
 }
 
@@ -68,9 +69,9 @@ nav {
     padding: 8px 10px;
     white-space: nowrap;
     cursor: pointer;
-    border-bottom: 1px solid $separatorDarkColor;
+    border-bottom: 1px solid $separator-color-dark;
     &:hover {
-      background: $separatorDarkColor;
+      background: $separator-color-dark;
     }
   }
 
@@ -84,7 +85,7 @@ nav {
 
   & .dropdown-item-title {
     vertical-align: middle;
-    color: $font-main-color;
+    color: $font-color-main;
     display: inline-block;
     width: 300px;
     text-overflow: ellipsis;

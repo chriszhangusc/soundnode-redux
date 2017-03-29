@@ -1,24 +1,24 @@
 // For player visible playlist
 
 .playlist {
-  width: 400px;
-  position: fixed;
-  top: 70px;
-  right: 0;
-  bottom: 0;
-  z-index: 1000;
-  display: block;
-  padding: 0;
-  overflow-x: hidden;
-  overflow-y: scroll; /* Scrollable contents if viewport is shorter than content. */
-  /* Transitions */
-  background-color: $sidebar-color;
-  transform: translateX(400px);
-   transition: all .5s ease-in-out;
+    width: 400px;
+    position: fixed;
+    top: 70px;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: block;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: scroll; /* Scrollable contents if viewport is shorter than content. */
+    /* Transitions */
+    background-color: $playlist-bg-color;
+    transform: translateX(400px);
+    transition: all .5s ease-in-out;
 
-   &.show {
+    &.show {
        transform: translateX(0);
-   }
+    }
 }
 
 .playlist-container {
@@ -28,7 +28,7 @@
 .playlist-title {
   margin-bottom: 10px;
   text-align: center;
-  color: $light-gray;
+  color: $playlist-title-font-color;
   font-size: 1.6rem;
   font-weight: bold;// Not working?
 
@@ -39,8 +39,8 @@
 
 .playlist-item {
   font-size: 13px;
-  color: $font-main-color;
-  border-bottom: 1px solid $separatorDarkColor;
+  color: $main-font-color;
+  border-bottom: 1px solid $separator-color-dark;
   padding: 12px 20px;
   white-space: nowrap;
   cursor: pointer;
@@ -51,7 +51,7 @@
 
   &:hover,
   &.active {
-    background: $separatorDarkColor;
+    background: $separator-color-dark;
   }
 
   &:last-child {
@@ -80,7 +80,7 @@
   }
 
   & .playlist-item-username {
-    color: $font-sub-color;
+    color: $sub-font-color;
     width: 140px;
   }
 }
@@ -90,12 +90,6 @@
   display: inline-block;
   position: relative;
   text-align: center;
-  // &:hover {
-  //     .playlist-item-options-list,
-  //     .playlist-item-popup-arrow {
-  //         display: block;
-  //     }
-  // }
 }
 
 
@@ -118,12 +112,12 @@
 .playlist-item-options-list {
     white-space: nowrap;
     font-size: 13px;
-    color: $font-main-color;
+    color: $main-font-color;
     display: none;
     position: absolute;
     right: 19px;
     top: -11px;
-    background: $separatorCleanColor;
+    background: $separator-color-clean;
     z-index: 10;
     border-radius: 2px;
 
@@ -135,10 +129,10 @@
 .playlist-item-options-list_button {
     padding: 10px;
     text-align: center;
-    border-bottom: 1px solid $separatorDarkColor;
+    border-bottom: 1px solid $separator-color-dark;
 
     &:hover {
-        background: $separatorDarkColor;
+        background: $separator-color-dark;
     }
 }
 

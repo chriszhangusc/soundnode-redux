@@ -11,14 +11,14 @@ const SongCardControls = ({
   handleToggleLike,
   handleCopyToClipboard
 }) => {
-// console.log('Render: SongCardControls');
+
   return (
     <div className="song-card-controls">
       <MagicButton
-        title={liked ? 'Unlike' : 'Like'}
+        title={ liked ? 'Unlike' : 'Like' }
         btnClassName="icon-button"
-        iconClassName={`fa fa-heart ${liked && 'active'}`}
-        onClick={handleToggleLike}
+        iconClassName={ `fa fa-heart ${liked && 'active'}` }
+        onClick={ handleToggleLike }
       />
       <MagicButton
         title="Add to playlist"
@@ -36,7 +36,7 @@ const SongCardControls = ({
         title="Copy to clipboard"
         btnClassName="icon-button"
         iconClassName="fa fa-clipboard"
-        onClick={handleCopyToClipboard}
+        onClick={ handleCopyToClipboard }
       />
     </div>
   );

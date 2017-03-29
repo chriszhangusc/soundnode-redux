@@ -2,8 +2,10 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { defaultArtistImageUrl } from 'client/constants/ImageConstants';
 
-export default function SongCardInfo({ trackId, artistId, artistAvatar, title, artistName }) {
-// console.log('Render: SongCardInfo');
+export default function SongCardInfo({
+    trackId, artistId, artistAvatar, title, artistName
+}) {
+
   return (
     <div className="song-card-user clearfix">
       <img

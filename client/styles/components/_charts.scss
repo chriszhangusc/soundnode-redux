@@ -37,7 +37,7 @@
     padding: .75em 0;
 
     &:hover {
-        color: $defaultColor;
+        color: $link-color-hover;
         cursor: pointer;
         & span {
             cursor: pointer;

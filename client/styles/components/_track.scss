@@ -57,12 +57,12 @@
 
     & .track-artist-name {
       margin: 5px 0;
-      color: $font-main-color;
+      color: $main-font-color;
     }
 
     & .track-description {
       margin: 10px 0;
-      color: $font-sub-color;
+      color: $sub-font-color;
       height: 180px;
       width: 500px;
       overflow: scroll; // Should use a ShowMore button.
@@ -77,10 +77,10 @@
 
       > button {
         margin-right: 15px;
-        color: $font-sub-color;
+        color: $sub-font-color;
 
         &:hover {
-          color: $font-main-color;
+          color: $main-font-color;
         }
 
         > i {
@@ -101,7 +101,7 @@
     position: relative;
     display: flex; // To prevent comment body go under the image.
     padding: 5px 5px;
-    border-bottom: 1px solid $separatorDarkColor;
+    border-bottom: 1px solid $separator-color-dark;
   }
 
   .comment-artist-avatar {
@@ -117,12 +117,12 @@
     position: absolute;
     right: 5px;
     top: 5px;
-    color: $font-sub-color;
+    color: $sub-font-color;
   }
 
   .comment-body {
 
-    color: $font-main-color;
+    color: $main-font-color;
   }
 
   .comment-header {

@@ -19,6 +19,18 @@ body {
     padding-top: $navbar-height;
 }
 
+// Override all links
+a {
+    color: $link-color;
+    text-decoration: none;
+
+    &:hover, &:focus, &:active {
+      color: $link-color;
+      cursor: pointer;
+      text-decoration: none;
+    }
+}
+
 .main {
   padding: 10px;
 }
@@ -54,3 +66,46 @@ h1 {
 .pad-bottom {
   padding-bottom: 70px;
 }
+
+.container-fluid {
+    padding: 0;
+}
+
+/* input start */
+input[type="search"] {
+    display: inline-block;
+    padding: 0 0.875rem;
+    border: none;
+    color: #222;
+    text-align: left;
+    font-family: 'Open Sans';
+    font-size: 12px;
+    outline: 0;
+    border-radius: 3px;
+    transition: all 0.2s ease-in-out;
+}
+// Define styles to apply to placeholder attribute
+::-webkit-input-placeholder {
+    color: #6B6B6B;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+
+:-moz-placeholder {
+    color: #6B6B6B;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+
+::-moz-placeholder {
+    color: #6B6B6B;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+
+:-ms-input-placeholder {
+    color: #6B6B6B;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+/* input ends */

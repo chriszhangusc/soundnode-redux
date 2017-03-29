@@ -18,13 +18,22 @@ const Sidebar = () => {
                     ><i className="fa fa-heart"></i>Likes</Link>
                 </li>
                 <li>
-                    <a href="#"><i className="fa fa-list"></i>Playlists</a>
+                    <Link
+                      to="/playlists"
+                      activeClassName="sidebar-link-active"
+                    ><i className="fa fa-list"></i>Playlists</Link>
                 </li>
                 <li>
-                    <a href="#"><i className="fa fa-music"></i>Tracks</a>
+                    <Link
+                      to="/tracks"
+                      activeClassName="sidebar-link-active"
+                    ><i className="fa fa-music"></i>Tracks</Link>
                 </li>
                 <li>
-                    <a href="#"><i className="fa fa-cloud"></i>Stream</a>
+                    <Link
+                      to="/stream"
+                      activeClassName="sidebar-link-active"
+                    ><i className="fa fa-cloud"></i>Stream</Link>
                 </li>
             </ul>
         </div>

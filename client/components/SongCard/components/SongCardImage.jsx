@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import MagicButton from 'client/components/MagicButton';
-// import { defaultArtworkImageUrl } from 'client/constants/ImageConstants';
 
 class SongCardImage extends React.Component {
 
