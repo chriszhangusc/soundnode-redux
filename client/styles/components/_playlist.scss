@@ -1,7 +1,8 @@
 // For player visible playlist
 
 .playlist {
-    width: 400px;
+    // #TODO: Add media query
+    width: $playlist-width;
     position: fixed;
     top: 70px;
     right: 0;

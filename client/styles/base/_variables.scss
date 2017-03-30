@@ -11,8 +11,6 @@ $light-black: #1d1f21;
 $light-light-black: #242728;
 $orange: #f50;
 
-
-
 // Used in nav bar?
 $main-font-color: $white;
 $sub-font-color: $gray;
@@ -23,7 +21,9 @@ $background-color: $light-light-black;
 
 // $theme-color: #ff6600;
 $theme-color: $orange;
-$navbar-color: $black;
+
+// Same as player bg color
+$nav-bg-color: $light-black;
 
 
 $font-color-sub: $light-gray;
@@ -36,9 +36,9 @@ $link-color-hover: $gray;
 
 $button-color-hover: #222;
 
-$navbar-height: 70px;
+$nav-height: 70px;
 
-
+// Same as navbar bg color
 $player-bg-color: $light-black;
 $player-border-color: $black;
 $player-button-color: $white;
@@ -71,3 +71,6 @@ $song-card-image-height-lg: 160px;
 $song-card-image-height-4k: 200px;
 
 $dropdown-search-bg-color: $light-black;
+
+// Playlist
+$playlist-width: 400px;

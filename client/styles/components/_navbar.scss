@@ -3,12 +3,28 @@ $search-dropdown-width: 400px;
 $search-dropdown-max-height: 600px;
 
 nav {
-  background-color: $navbar-color;
-  height: $navbar-height;
+  background-color: $nav-bg-color;
+  height: $nav-height;
+}
+
+.navbar-header {
+    float: none;
+}
+
+.nav-wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+// The wrapper of search input and user info, need a better name?
+.nav-search-user-wrapper {
+    display: flex;
 }
 
 .navbar-brand {
-  height: $navbar-height;
+  height: $nav-height;
   line-height: 35px;
 }
 
@@ -18,11 +34,9 @@ nav {
 
 // // nav-search
 .nav-search {
-  position: relative;
   padding: 20px 0; // Vertical center
   display: inline-block;
   // TODO: CHANGE TO FLEX
-  float: right;
   border-radius: 3px;
   .form-group {
     position: relative;//relative must be put on a block element
@@ -129,4 +143,21 @@ input[type="search"].nav-search-input {
         color: #6B6B6B;
         font-size: 10px;
     }
+}
+
+.nav-user-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-user-profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+.nav-user-display-name {
+  margin-left: 10px;
 }

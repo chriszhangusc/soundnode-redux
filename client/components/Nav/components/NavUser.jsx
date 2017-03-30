@@ -3,14 +3,14 @@ import React, { PropTypes } from 'react';
 const NavUser = ({ uid, displayName, photoUrl, handleLogin }) => {
   if (uid) {
     return (
-      <div className="table-item">
-        <img alt="user profile" className="user-profile-image" src={photoUrl} />
-        <span className="user-display-name">{displayName}</span>
+      <div className="nav-user-wrapper">
+        <img alt="user profile" className="nav-user-profile-image" src={photoUrl} />
+        <span className="nav-user-display-name">{displayName}</span>
       </div>
     );
   }
   return (
-    <div className="table-item">
+    <div className="nav-user-wrapper">
       <div className="nav-user-link">
         <button className="icon-button" onClick={handleLogin}>
           <i className="fa fa-github" aria-hidden="true" />

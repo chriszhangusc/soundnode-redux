@@ -92,7 +92,7 @@ class NavSearch extends Component {
 
   render() {
     return (
-      <div className="table-item nav-search">
+      <div className="nav-search">
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <i className="icon ion-search" />
