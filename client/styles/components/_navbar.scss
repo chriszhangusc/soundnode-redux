@@ -1,11 +1,10 @@
-
-
 nav {
   background-color: $nav-bg-color;
   height: $nav-height;
 }
 
 .nav-wrapper {
+    padding: 0 100px;
     display: flex;
     justify-content: space-between;
 }
@@ -24,6 +23,7 @@ nav {
   margin-right: 20px;
 }
 
+/* Navbar search */
 .nav-search {
   padding: 20px 0;
   display: inline-block;
@@ -64,22 +64,32 @@ nav {
     display: block;
     width: $dropdown-search-width;
 
-
-
     max-height: $dropdown-search-max-height;
-    padding: 10px;
+    padding: 10px 10px 5px 10px;
     z-index: 1;
 
-    & .dropdown-show-all-link {
-        color: $font-color-sub;
-        vertical-align: middle;
-        font-size: 1.3rem;
+    ul:last-child {
+        margin-bottom: 0;
     }
+}
+
+
+.dropdown-item-show-all {
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+}
+
+.dropdown-show-all-link {
+    color: $font-color-sub;
+    vertical-align: middle;
+    font-size: 1.3rem;
+    padding: 10px 10px 0 10px;
 }
 
 .dropdown-title {
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: $font-color-sub;
   margin-bottom: 10px;
 }
@@ -110,7 +120,6 @@ nav {
     color: $font-color-main;
     display: inline-block;
     width: 300px;
-
     @include desktop {
         width: 200px;
     }
@@ -124,9 +133,7 @@ nav {
   }
 }
 
-.dropdown-item-show-all {
-  text-align: center;
-}
+
 
 input[type="search"].nav-search-input {
   height: $dropdown-search-input-height;

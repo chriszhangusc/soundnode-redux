@@ -11,7 +11,7 @@ import {
 import NavSearch from '../components/NavSearch';
 
 const mapStateToProps = state => ({
-  isDropdownShown: isDropdownShown(state),
+  dropdownShown: isDropdownShown(state),
   artistIds: getDropdownSearchArtistIds(state),
   trackIds: getDropdownSearchTrackIds(state),
 });

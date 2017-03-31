@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { List } from 'immutable';
 import { Link } from 'react-router';
+import { dropdownSearchShowCount } from 'client/constants/SearchConsts';
+
 import NavSearchDropdownTrackContainer from '../containers/NavSearchDropdownTrackContainer';
 import NavSearchDropdownArtistContainer from '../containers/NavSearchDropdownArtistContainer';
 
@@ -48,42 +50,48 @@ class NavSearch extends Component {
   }
 
   renderSearchResults() {
-    const { artistIds, trackIds, isDropdownShown } = this.props;
-    if (isDropdownShown) {
+    const { artistIds, trackIds, dropdownShown } = this.props;
+    if (dropdownShown) {
       return (
         <div className="nav-search-result">
-          <div className="dropdown-title">
-            ARTISTS
-          </div>
+          {
+            (artistIds.size !== 0) && (<div className="dropdown-title">
+              ARTISTS
+          </div>)
+            }
           <ul className="dropdown-list">
             {
-              artistIds.map(artistId =>
+              artistIds.slice(0, dropdownSearchShowCount).map(artistId =>
                 <NavSearchDropdownArtistContainer
                   key={artistId}
                   artistId={artistId}
                 />)
             }
           </ul>
-          <div className="dropdown-title">
-            TRACKS
-          </div>
+          {
+              (trackIds.size !== 0) && (<div className="dropdown-title">
+                TRACKS
+            </div>)
+          }
+
           <ul className="dropdown-list">
             {
-              trackIds.map(trackId =>
+              trackIds.slice(0, dropdownSearchShowCount).map(trackId =>
                 <NavSearchDropdownTrackContainer
                   key={trackId}
                   trackId={trackId}
                 />)
             }
+            {
+                (trackIds.size !== 0) && (<li className="dropdown-item-show-all">
+                  <Link
+                      className="dropdown-show-all-link"
+                      onMouseDown={this.onShowAllClick} >
+                    SHOW ALL
+                  </Link>
+              </li>)
+            }
           </ul>
-          <li className="dropdown-item-show-all">
-            <Link
-              className="dropdown-show-all-link"
-              onMouseDown={this.onShowAllClick}
-            >
-              SHOW ALL
-            </Link>
-          </li>
         </div>
       );
     }
@@ -114,7 +122,7 @@ class NavSearch extends Component {
 }
 
 NavSearch.propTypes = {
-  isDropdownShown: PropTypes.bool,
+  dropdownShown: PropTypes.bool,
   artistIds: PropTypes.instanceOf(List),
   trackIds: PropTypes.instanceOf(List),
   // isFetching: PropTypes.bool.isRequired,
