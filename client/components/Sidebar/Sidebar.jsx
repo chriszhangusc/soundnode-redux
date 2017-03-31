@@ -3,7 +3,7 @@ import { Link, IndexLink } from 'react-router';
 
 const Sidebar = () => {
     return (
-        <div id="sidebar-wrapper">
+        <div className="sidebar-wrapper">
             <ul className="nav-sidebar">
                 <li>
                     <Link

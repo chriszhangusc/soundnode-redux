@@ -57,12 +57,12 @@
 
     & .track-artist-name {
       margin: 5px 0;
-      color: $main-font-color;
+      color: $font-color-main;
     }
 
     & .track-description {
       margin: 10px 0;
-      color: $sub-font-color;
+      color: $font-color-sub;
       height: 180px;
       width: 500px;
       overflow: scroll; // Should use a ShowMore button.
@@ -77,10 +77,10 @@
 
       > button {
         margin-right: 15px;
-        color: $sub-font-color;
+        color: $font-color-sub;
 
         &:hover {
-          color: $main-font-color;
+          color: $font-color-main;
         }
 
         > i {
@@ -117,12 +117,12 @@
     position: absolute;
     right: 5px;
     top: 5px;
-    color: $sub-font-color;
+    color: $font-color-sub;
   }
 
   .comment-body {
 
-    color: $main-font-color;
+    color: $font-color-main;
   }
 
   .comment-header {

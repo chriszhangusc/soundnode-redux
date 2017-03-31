@@ -40,7 +40,7 @@
 
 .playlist-item {
   font-size: 13px;
-  color: $main-font-color;
+  color: $font-color-main;
   border-bottom: 1px solid $separator-color-dark;
   padding: 12px 20px;
   white-space: nowrap;
@@ -81,7 +81,7 @@
   }
 
   & .playlist-item-username {
-    color: $sub-font-color;
+    color: $font-color-sub;
     width: 140px;
   }
 }
@@ -113,7 +113,7 @@
 .playlist-item-options-list {
     white-space: nowrap;
     font-size: 13px;
-    color: $main-font-color;
+    color: $font-color-main;
     display: none;
     position: absolute;
     right: 19px;

@@ -2,11 +2,12 @@
  * Sidebar
  */
 
-#sidebar-wrapper {
+.sidebar-wrapper {
     position: fixed;
     width: $sidebar-width;
     height: 100%;
     background-color: $sidebar-bg-color;
+
     @include desktop {
         width: $sidebar-width-md;
     }
@@ -19,9 +20,8 @@
 /* Sidebar navigation */
 .nav-sidebar {
     & > li {
-        line-height: 80px;
+        line-height: $sidebar-item-height;
     }
-    list-style: none;
 }
 
 .nav-sidebar i {

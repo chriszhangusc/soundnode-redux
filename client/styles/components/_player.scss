@@ -11,7 +11,7 @@ $volume-icon-size: 1.5rem;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    z-index: 1001; // Make sure it is always on top
+    z-index: $z-max; // Make sure it is always on top
 
     .song-card-details {
         overflow: hidden;
@@ -20,7 +20,7 @@ $volume-icon-size: 1.5rem;
 
 .player-section {
     display: flex;
-    flex-direction: row;
+    // Vertically center!
     align-items: center;
 
     & + .player-section {
@@ -30,7 +30,6 @@ $volume-icon-size: 1.5rem;
 
 .player-main {
     display: flex;
-    flex-direction: row;
     padding: 8px;
 }
 
@@ -43,6 +42,7 @@ $volume-icon-size: 1.5rem;
     height: 30px;
     float: left;
     margin-right: 8px;
+    // why?
     flex-shrink: 0;
 }
 
@@ -104,14 +104,14 @@ $volume-icon-size: 1.5rem;
     right: -6px;
     width: 12px;
     height: 12px;
-    background-color: #fff;
+    background-color: $white;
     border-radius: 50%;
-    border: 1px solid #e3e3e3;
+    border: 1px solid $white;
 }
 
 .player-time {
     margin-left: 30px;
-    color: #ccc;
+    color: $white;
     font-size: 11px;
 }
 

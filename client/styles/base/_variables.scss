@@ -2,29 +2,22 @@
 
 // Basic colors for other variables to refer.
 $black: #0f1010;
+$light-gray: #CCC;
 $gray: #949599;
 $dark-gray: #4f4f51;
 $white: #ededed;
-$light-gray: #CCC;
 $semi-transparent-bg-dark: rgba(0, 0, 0, 0.8);
 $light-black: #1d1f21;
 $light-light-black: #242728;
 $orange: #f50;
 
-// Used in nav bar?
-$main-font-color: $white;
-$sub-font-color: $gray;
+// z-index max value: always on top
+$z-max: 1001;
 
-$sidebar-bg-color: $light-black;
 // Main bg color
 $background-color: $light-light-black;
 
-// $theme-color: #ff6600;
 $theme-color: $orange;
-
-// Same as player bg color
-$nav-bg-color: $light-black;
-
 
 $font-color-sub: $light-gray;
 $font-color-main: $white;
@@ -32,45 +25,59 @@ $font-color-main: $white;
 // Links
 $link-color: $white;
 $link-color-hover: $gray;
-
-
+// Buttons
 $button-color-hover: #222;
 
-$nav-height: 70px;
 
-// Same as navbar bg color
-$player-bg-color: $light-black;
-$player-border-color: $black;
-$player-button-color: $white;
-
-$playlist-title-color: #d3d3d3;
-$playlist-user-color: #939393;
-
-$playlist-bg-color: $light-black;
-$playlist-title-font-color: $gray;
 // Background color of dropdown list in playlist
 $separator-color-clean: $dark-gray;
 $separator-color-dark: $black;
 
+// Nav
+$nav-height: 70px;
+$nav-bg-color: $light-black;
+$nav-user-font-color: $font-color-main;
 
-// Should define basic colors and refer to those colors here!
+
+// Sidebar
+$sidebar-item-height: 80px;
+$sidebar-bg-color: $light-black;
 $sidebar-width: 250px;
 $sidebar-width-md: 230px;
 $sidebar-width-sm: 180px;
 $sidebar-link-active-bg-color: rgba(255,255,255,0.2);
 
-// SongCard
+
+// Song Card
 $song-card-width: 300px;
 $song-card-width-md: 190px;
 $song-card-width-lg: 230px;
 $song-card-width-4k: 350px;
-
 $song-card-image-height: 180px;
 $song-card-image-height-md: 140px;
 $song-card-image-height-lg: 160px;
 $song-card-image-height-4k: 200px;
 
-$dropdown-search-bg-color: $light-black;
+// Dropdown Search
+$dropdown-search-bg-color: $light-light-black;
+
+$dropdown-search-width-4k: 400px;
+$dropdown-search-width-lg: 350px;
+$dropdown-search-width-md: 300px;
+$dropdown-search-width: 300px;
+
+
+$dropdown-search-input-height: 30px;
+$dropdown-search-max-height: 600px;
 
 // Playlist
 $playlist-width: 400px;
+$playlist-title-color: #d3d3d3;
+$playlist-user-color: #939393;
+$playlist-bg-color: $light-black;
+$playlist-title-font-color: $gray;
+
+// Player
+$player-bg-color: $light-black;
+$player-border-color: $black;
+$player-button-color: $white;

@@ -117,7 +117,7 @@
 
 .song-card-username {
     display: block;
-    color: $sub-font-color;
+    color: $font-color-sub;
     margin-right: 30px;
     font-size: 12px;
     overflow: hidden;
@@ -127,7 +127,7 @@
 
 .song-card-title {
     display: block;
-    color: $main-font-color;
+    color: $font-color-main;
     font-size: 13px;
     overflow: hidden;
     text-overflow: ellipsis;

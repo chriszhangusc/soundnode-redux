@@ -6,7 +6,7 @@ import NavHeader from './NavHeader';
 /* This is our main Nav layout */
 const Nav = () => (
     <nav className="navbar navbar-fixed-top">
-        <div className="nav-wrapper">
+        <div className="container nav-wrapper">
             <NavHeader />
             <div className="nav-search-user-wrapper">
                 <NavSearchContainer />
