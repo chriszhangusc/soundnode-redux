@@ -92,7 +92,7 @@ export function fetchCharts(genre) {
         const offset = getChartsOffset(state);
         dispatch(requestCharts());
         try {
-            const normalizedCharts = await fetchChartsFromSC(genre);
+            const normalizedCharts = await fetchChartsFromSC(genre, offset);
             // #TODO: Verify results!!
             dispatch(receiveCharts(normalizedCharts));
         } catch (err) {

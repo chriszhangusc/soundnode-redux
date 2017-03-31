@@ -5,7 +5,7 @@ const SC_API_V2 = '/sc/api-v2/';
 
 const baseUrl = `${API_HOST}${SC_API_V2}`;
 
-export function fetchChartsFromSC(genre, limit = 20, offset = 0) {
+export function fetchChartsFromSC(genre, offset = 0, limit = 20) {
     const endpoint = 'charts';
 
     // Initial query params: should we extract it to a function or constant?
