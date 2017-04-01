@@ -21,13 +21,16 @@ const mapDispatchToProps = dispatch => ({
     if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
     else dispatch(sagaDropdownSearch(keywords));
   },
+
   handleBlur() {
     dispatch(clearAndHideSearchResults());
   },
+
   handleFocus(keywords) {
     if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
     else dispatch(sagaDropdownSearch(keywords));
   },
+
   handleShowAll(rawKeywords) {
     const keywords = rawKeywords.toLowerCase().trim();
     if (keywords !== '') {

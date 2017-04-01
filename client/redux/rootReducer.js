@@ -8,6 +8,7 @@ import uiReducer from './modules/ui';
 import entitiesReducer from './modules/entities';
 import searchReducer from './modules/search';
 import userReducer from './modules/user';
+import usersReducer from './modules/users';
 
 const rootReducer = combineReducers({
   ui: uiReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   track: trackReducer,
   user: userReducer,
   search: searchReducer,
+  users: usersReducer
 });
 
 export default rootReducer;

@@ -19,6 +19,8 @@ class App extends React.Component {
         window.addEventListener('online', function(e) {
             dispatch(notificationSuccess('Great, you are back online!'));
         });
+        const fetchUser = username => ({ type: 'FETCH_USER', payload: username });
+        dispatch(fetchUser('MiniPekka'));
     }
 // <Sidebar />
     render() {

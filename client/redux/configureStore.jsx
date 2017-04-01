@@ -10,6 +10,8 @@ import notificationMiddleware from './middlewares/notificationMiddleware';
 import rootReducer from './rootReducer';
 import apiMiddleware from './middlewares/apiMiddleware';
 import rootSaga from './middlewares/sagas';
+import { createEpicMiddleware } from 'redux-observable';
+import rootEpic from './middlewares/epics/rootEpic';
 
 const stateTransformer = (state) => {
   // toJS is expensive!
@@ -17,8 +19,10 @@ const stateTransformer = (state) => {
   return state;
 };
 
+const epicMiddleware = createEpicMiddleware(rootEpic);
+
 const logger = createLogger({
-  stateTransformer,
+    stateTransformer,
 });
 
 const configureStore = () => {
@@ -29,7 +33,7 @@ const configureStore = () => {
     persistedState,
     // initialState,
     compose(
-      applyMiddleware(thunk, sagaMiddleware, apiMiddleware, notificationMiddleware),
+      applyMiddleware(thunk, epicMiddleware, sagaMiddleware, apiMiddleware, notificationMiddleware),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
   );
