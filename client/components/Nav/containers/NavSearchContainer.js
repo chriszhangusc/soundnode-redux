@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
   },
 
   handleBlur() {
-    dispatch(clearAndHideSearchResults());
+    // dispatch(clearAndHideSearchResults());
   },
 
   handleFocus(keywords) {

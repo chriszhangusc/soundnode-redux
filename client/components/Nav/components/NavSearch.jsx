@@ -8,13 +8,13 @@ import NavSearchDropdownArtistContainer from '../containers/NavSearchDropdownArt
 class NavSearch extends Component {
 
     constructor(props) {
-    super(props);
-    this.onChange = this.onChange.bind(this);
-    this.onFocus = this.onFocus.bind(this);
-    this.onBlur = this.onBlur.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.renderSearchResults = this.renderSearchResults.bind(this);
-    this.onShowAllClick = this.onShowAllClick.bind(this);
+        super(props);
+        this.onChange = this.onChange.bind(this);
+        this.onFocus = this.onFocus.bind(this);
+        this.onBlur = this.onBlur.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.renderSearchResults = this.renderSearchResults.bind(this);
+        this.onShowAllClick = this.onShowAllClick.bind(this);
     }
 
     // When user press enter, show all results.
@@ -50,7 +50,7 @@ class NavSearch extends Component {
 
     renderSearchResults() {
     const { artistIds, trackIds, dropdownShown } = this.props;
-    if (dropdownShown) {
+    if (true) {
       return (
         <div className="nav-search-result">
           {

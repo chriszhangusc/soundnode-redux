@@ -94,6 +94,11 @@ nav {
   margin-bottom: 10px;
 }
 
+
+.dropdown-item-wrapper {
+    display: block;
+}
+
 .dropdown-list {
 
   & .dropdown-item {
@@ -116,16 +121,17 @@ nav {
   }
 
   & .dropdown-item-title {
+
     vertical-align: middle;
     color: $font-color-main;
     display: inline-block;
-    width: 300px;
+    width: $dropdown-search-title-width;
     @include desktop {
-        width: 200px;
+        width: $dropdown-search-title-width-md;
     }
-
+    //
     @include desktop-lg {
-        width: 250px;
+        width: $dropdown-search-title-width-lg;
     }
 
     text-overflow: ellipsis;
