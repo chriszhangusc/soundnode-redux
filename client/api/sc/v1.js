@@ -15,7 +15,7 @@ export function fetchTracks(filters, limit) {
     ...filters,
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
-console.log(fetchUrl);
+// console.log(fetchUrl);
   return makeRequest(fetchUrl)
           .then(response => normalizeResponse(response, trackArraySchema));
 }

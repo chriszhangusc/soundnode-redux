@@ -1,3 +1,4 @@
+/* #TODO: Separate general search and dropdown search */
 import { fromJS } from 'immutable';
 import { trackArraySchema } from 'client/schemas';
 

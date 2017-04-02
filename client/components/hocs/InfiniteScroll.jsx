@@ -1,24 +1,28 @@
 import React, { Component, PropTypes } from 'react';
+import { debounce } from 'lodash';
 // Higher order component
 export default function (InnerComponent) {
   class InfiniteScrollComponent extends Component {
     constructor(props) {
-      super(props);
-      this.onScroll = this.onScroll.bind(this);
+        super(props);
+        this.onScroll = this.onScroll.bind(this);
+        this.onScroll = debounce(this.onScroll, 250);
     }
 
     componentDidMount() {
-      window.addEventListener('scroll', this.onScroll, false);
+        window.addEventListener('scroll', this.onScroll, false);
     }
 
     componentWillUnmount() {
-      window.removeEventListener('scroll', this.onScroll, false);
+        window.removeEventListener('scroll', this.onScroll, false);
     }
 
     onScroll() {
+        console.log('SCroll');
+        // Should be throttled!
       if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight)) {
-        const { scrollFunc } = this.props;
-        scrollFunc();
+          const { scrollFunc } = this.props;
+          scrollFunc();
       }
     }
 
