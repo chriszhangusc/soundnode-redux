@@ -21,7 +21,6 @@ import {
 // Side effects in saga making actions cleaner. (Not mixing with thunks)
 function* doDropdownSearch({ payload }) {
   const { keyword, limit } = payload;
-
   yield put(startDropdownSearch());
   const [normalizedTracks, normalizedArtists] = yield [
     call(fetchTracks, { q: keyword.trim().toLowerCase() }, limit),

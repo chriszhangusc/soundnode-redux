@@ -6,11 +6,17 @@ import artistReducer from './modules/artist';
 import trackReducer from './modules/track';
 import uiReducer from './modules/ui';
 import entitiesReducer from './modules/entities';
-import searchReducer from './modules/search';
+import searchReducer, { dropdownSearchEpic } from './modules/search';
 import userReducer from './modules/user';
 import usersReducer from './modules/users';
 
-const rootReducer = combineReducers({
+import { combineEpics } from 'redux-observable';
+
+export const rootEpic = combineEpics(
+    dropdownSearchEpic
+);
+
+export const rootReducer = combineReducers({
   ui: uiReducer,
   entities: entitiesReducer,
   charts: chartsReducer,
@@ -22,5 +28,3 @@ const rootReducer = combineReducers({
   search: searchReducer,
   users: usersReducer
 });
-
-export default rootReducer;

@@ -4,10 +4,12 @@ import {
   isDropdownShown,
   getDropdownSearchArtistIds,
   getDropdownSearchTrackIds,
+  requestDropdownSearch,
   sagaSearch,
   sagaDropdownSearch,
   clearAndHideSearchResults,
 } from 'client/redux/modules/search';
+
 import NavSearch from '../components/NavSearch';
 
 const mapStateToProps = state => ({
@@ -18,8 +20,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleChange(keywords) {
-    if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
-    else dispatch(sagaDropdownSearch(keywords));
+      if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
+      else dispatch(requestDropdownSearch(keywords))
+    // else dispatch(sagaDropdownSearch(keywords));
   },
 
   handleBlur() {
@@ -28,7 +31,7 @@ const mapDispatchToProps = dispatch => ({
 
   handleFocus(keywords) {
     if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
-    else dispatch(sagaDropdownSearch(keywords));
+    else dispatch(requestDropdownSearch(keywords));
   },
 
   handleShowAll(rawKeywords) {

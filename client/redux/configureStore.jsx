@@ -7,16 +7,16 @@ import throttle from 'lodash/throttle';
 import createLogger from 'redux-logger';
 import { loadState, saveState } from 'client/utils/LocalStorageUtils';
 import notificationMiddleware from './middlewares/notificationMiddleware';
-import rootReducer from './rootReducer';
 import apiMiddleware from './middlewares/apiMiddleware';
 import rootSaga from './middlewares/sagas';
 import { createEpicMiddleware } from 'redux-observable';
-import rootEpic from './middlewares/epics/rootEpic';
+
+import { rootReducer, rootEpic } from './root';
 
 const stateTransformer = (state) => {
-  // toJS is expensive!
-  if (Iterable.isIterable(state)) return state.toJS();
-  return state;
+    // toJS is expensive!
+    if (Iterable.isIterable(state)) return state.toJS();
+    return state;
 };
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
