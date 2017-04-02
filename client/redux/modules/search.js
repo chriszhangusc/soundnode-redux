@@ -185,6 +185,7 @@ export const fetchAllSearchResults = (keyword, limit) => ({
 /* Search Epic */
 export const dropdownSearchEpic = action$ =>
     action$.ofType(DROPDOWN_SEARCH_REQUEST)
+        .debounceTime(250)
         .switchMap((action) => {
             const tracksPromise = fetchTracks({ q: action.payload.keyword }, action.payload.limit);
             const artistsPromise = fetchArtists({ q: action.payload.keyword }, action.payload.limit);
