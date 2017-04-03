@@ -6,7 +6,7 @@ import {
   getDropdownSearchTrackIds,
   requestDropdownSearch,
   sagaSearch,
-  sagaDropdownSearch,
+  // sagaDropdownSearch,
   clearAndHideSearchResults,
 } from 'client/redux/modules/search';
 
@@ -20,8 +20,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleChange(keywords) {
-      if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
-      else dispatch(requestDropdownSearch(keywords))
+    if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
+    else dispatch(requestDropdownSearch(keywords));
     // else dispatch(sagaDropdownSearch(keywords));
   },
 

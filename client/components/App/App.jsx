@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { NotificationContainer } from 'react-notifications';
 import Player from 'client/components/Player';
 import Nav from 'client/components/Nav';
@@ -8,54 +8,55 @@ import { notificationFailure, notificationSuccess } from 'client/redux/modules/n
 import { connect } from 'react-redux';
 
 // Main container of our app.
-class App extends React.Component {
+class App extends Component {
 
-    componentDidMount() {
-        const { dispatch } = this.props;
-        window.addEventListener('offline', function(e) {
-            dispatch(notificationFailure('Looks like your internet connection is down!'));
-        });
+  componentDidMount() {
+    const { dispatch } = this.props;
 
-        window.addEventListener('online', function(e) {
-            dispatch(notificationSuccess('Great, you are back online!'));
-        });
+    window.addEventListener('offline', () => {
+      dispatch(notificationFailure('Looks like your internet connection is down!'));
+    });
 
-        const fetchUser = username => ({ type: 'FETCH_USER', payload: username });
-        dispatch(fetchUser('MiniPekka'));
-    }
+    window.addEventListener('online', () => {
+      dispatch(notificationSuccess('Great, you are back online!'));
+    });
 
-    componentWillUmmount() {
-        // Remove global listeners
-        window.removeEventListener('offline');
-        window.removeEventListener('online');
-    }
+    const fetchUser = username => ({ type: 'FETCH_USER', payload: username });
+    dispatch(fetchUser('MiniPekka'));
+  }
 
-// <Sidebar />
-    render() {
-        return (
-            <div id="main-wrapper">
-                <Nav />
-                <Sidebar />
-                <div id="page-content-wrapper">
-                    <div className="container-fluid">
-                      <div className="row">
+  componentWillUnmount() {
+    // Remove global listeners
+    window.removeEventListener('offline');
+    window.removeEventListener('online');
+  }
 
-                          <div className="col-lg-12">
-                              { this.props.children }
-                          </div>
-                          <Player />
-                          <Playlist />
-                      </div>
-                    </div>
-                </div>
-                <NotificationContainer />
+  // <Sidebar />
+  render() {
+    return (
+      <div id="main-wrapper">
+        <Nav />
+        <Sidebar />
+        <div id="page-content-wrapper">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-12">
+                {this.props.children}
+              </div>
+              <Player />
+              <Playlist />
             </div>
-      );
-    }
+          </div>
+        </div>
+        <NotificationContainer />
+      </div>
+    );
+  }
 }
 
 
 App.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
 };
 

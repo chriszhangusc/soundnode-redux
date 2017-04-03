@@ -11,7 +11,7 @@ const renderSongCardList = (trackIds) => {
     <div className="song-card-list-container">
       {
         trackIds.toArray().map((trackId, index) => (
-            <SongCardContainer trackId={trackId} trackIds={trackIds} key={index + trackId} />
+          <SongCardContainer trackId={trackId} trackIds={trackIds} key={index + trackId} />
         ))
       }
     </div>
@@ -24,7 +24,7 @@ const SongCardList = (props) => {
   return (
     <div className="pad-bottom">
       {renderSongCardList(trackIds)}
-      { fetching && <Spinner /> }
+      {fetching && <Spinner />}
     </div>
   );
 };

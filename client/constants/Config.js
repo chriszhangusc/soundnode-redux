@@ -11,4 +11,4 @@ const API_HOST_PROD = 'https://redux-music-api.herokuapp.com';
 // PRODUCTION is from DefinePlugin in webpack
 export const API_HOST = PRODUCTION ? API_HOST_PROD : API_HOST_DEV;
 
-export const HOST = PRODUCTION ? HOST_PROD : HOST_DEV ;
+export const HOST = PRODUCTION ? HOST_PROD : HOST_DEV;

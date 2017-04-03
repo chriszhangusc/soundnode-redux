@@ -9,6 +9,7 @@ export const APPEND_TRACK_TO_PLAYLIST = 'redux-music/playlist/APPEND_TRACK_TO_PL
 export const RESHUFFLE = 'redux-music/playlist/RESHUFFLE';
 export const SHUFFLE_DRAW = 'redux-music/playlist/SHUFFLE_DRAW';
 export const SHUFFLE_DISCARD = 'redux-music/playlist/SHUFFLE_DISCARD';
+
 /* Reducer */
 const initialState = fromJS({
   trackIds: [],

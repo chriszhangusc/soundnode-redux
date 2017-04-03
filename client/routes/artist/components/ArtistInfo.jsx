@@ -6,18 +6,18 @@ const ArtistInfo = ({
   followerCount,
   description,
 }) => (
-  <div className="artist-info-container">
-    <div className="artist-avatar">
-      <img alt="User avatar" src={avatarUrl} />
+    <div className="artist-info-container">
+      <div className="artist-avatar">
+        <img alt="User avatar" src={avatarUrl} />
+      </div>
+      <div className="artist-details">
+        <h1 className="artist-name">{artistName}</h1>
+        <div className="artist-followers">Followers: {followerCount}</div>
+        <div className="artist-description">{description}</div>
+      </div>
     </div>
-    <div className="artist-details">
-      <h1 className="artist-name">{artistName}</h1>
-      <div className="artist-followers">Followers: {followerCount}</div>
-      <div className="artist-description">{description}</div>
-    </div>
-  </div>
 
-);
+  );
 
 ArtistInfo.propTypes = {
   avatarUrl: PropTypes.string,

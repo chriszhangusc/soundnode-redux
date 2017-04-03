@@ -24,7 +24,7 @@ NavUser.propTypes = {
   uid: PropTypes.string,
   photoUrl: PropTypes.string,
   displayName: PropTypes.string,
-  handleLogin: PropTypes.func.isRequired
+  handleLogin: PropTypes.func.isRequired,
 };
 
 export default NavUser;

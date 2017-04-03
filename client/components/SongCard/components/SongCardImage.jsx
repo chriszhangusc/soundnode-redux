@@ -13,7 +13,7 @@ class SongCardImage extends React.Component {
     return (
       <div
         className="song-card-image"
-        style={{ backgroundImage: `url(${ artworkUrl })` }}
+        style={{ backgroundImage: `url(${artworkUrl})` }}
       >
         <MagicButton
           btnClassName={`toggle-play-button ${(active ? 'active' : '')}`}

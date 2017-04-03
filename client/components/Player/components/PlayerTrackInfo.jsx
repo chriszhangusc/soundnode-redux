@@ -8,28 +8,26 @@ const PlayerTrackInfo = ({
   trackTitle,
   artistName,
   trackUrl,
-  artistUrl
-}) => {
-  return (
-    <div className="player-section player-info">
-      <Link to={trackUrl} >
-        <img
-          role="presentation"
-          className="player-image"
-          src={artworkUrl || defaultArtworkImage}
-        />
+  artistUrl,
+}) => (
+  <div className="player-section player-info">
+    <Link to={trackUrl} >
+      <img
+        alt="Not Found"
+        className="player-image"
+        src={artworkUrl || defaultArtworkImage}
+      />
+    </Link>
+    <div className="player-song-card-details">
+      <Link to={trackUrl} className="song-card-title">
+        {trackTitle}
       </Link>
-      <div className="player-song-card-details">
-        <Link to={trackUrl} className="song-card-title">
-          {trackTitle}
-        </Link>
-        <Link to={artistUrl} className="song-card-username">
-          {artistName}
-        </Link>
-      </div>
+      <Link to={artistUrl} className="song-card-username">
+        {artistName}
+      </Link>
     </div>
-  );
-};
+  </div>
+);
 
 PlayerTrackInfo.propTypes = {
   artworkUrl: PropTypes.string,

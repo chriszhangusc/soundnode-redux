@@ -11,7 +11,7 @@ const ArtistDetailsLayout = ({ fetching, artistId, trackCount }) => {
 
       <div className="artist-tracks-container">
         <div className="artist-tracks-title">
-          <h3>Tracks ({ trackCount }) :</h3>
+          <h3>Tracks ({trackCount}) :</h3>
           <ArtistTrackListContainer />
         </div>
       </div>

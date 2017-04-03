@@ -27,15 +27,14 @@ export default function artistReducer(state = initialState, action) {
     case ARTIST_REQUEST:
       return state.set('artistFetching', true);
     case ARTIST_RECEIVED:
-      return state.merge({
-        artistId: action.payload.result,
-        artistFetching: false,
-      });
+      return state.merge({ artistId: action.payload.result, artistFetching: false });
     case TRACKS_REQUEST:
       return state.set('tracksFetching', true);
     case TRACKS_RECEIVED:
       return state.merge({
-        trackIds: state.get('trackIds').concat(fromJS(action.payload.result)), // concat for scroll to load more
+        trackIds: state
+          .get('trackIds')
+          .concat(fromJS(action.payload.result)), // concat for scroll to load more
         tracksFetching: false,
         tracksNextHref: action.payload.nextHref,
       });
@@ -60,37 +59,23 @@ export function clearArtistState() {
 }
 
 export function artistRequest() {
-  return {
-    type: ARTIST_REQUEST,
-  };
+  return { type: ARTIST_REQUEST };
 }
 
 export function artistReceived(normalized) {
-  return {
-    type: ARTIST_RECEIVED,
-    payload: normalized,
-    entities: normalized.entities,
-  };
+  return { type: ARTIST_RECEIVED, payload: normalized, entities: normalized.entities };
 }
 
 export function artistTracksRequest() {
-  return {
-    type: TRACKS_REQUEST,
-  };
+  return { type: TRACKS_REQUEST };
 }
 
 export function artistTracksReceived(normalizedResponse) {
-  return {
-    type: TRACKS_RECEIVED,
-    payload: normalizedResponse,
-    entities: normalizedResponse.entities,
-  };
+  return { type: TRACKS_RECEIVED, payload: normalizedResponse, entities: normalizedResponse.entities };
 }
 
 export function artistFailure() {
-  return {
-    type: ARTIST_FAILURE,
-  };
+  return { type: ARTIST_FAILURE };
 }
 
 export function loadArtistPage(artistId) {
@@ -98,17 +83,13 @@ export function loadArtistPage(artistId) {
     try {
       dispatch(artistRequest());
       dispatch(artistTracksRequest());
-      const [artist, tracks] = await Promise.all(
-        [
-          fetchArtist(artistId),
-          fetchArtistTracks(artistId),
-        ]);
+      const [artist,
+        tracks] = await Promise.all([fetchArtist(artistId), fetchArtistTracks(artistId)]);
       // throw new Error('Fail to fetch resource.');
       dispatch(artistReceived(artist));
       dispatch(artistTracksReceived(tracks));
     } catch (err) {
-      // Do we need to stop spinner here ?
-      // dispatch(artistFailure(err.message));
+      // Do we need to stop spinner here ? dispatch(artistFailure(err.message));
       dispatch(notificationFailure(err.message));
     }
   };

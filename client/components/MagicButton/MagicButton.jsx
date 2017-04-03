@@ -8,10 +8,20 @@ const MagicButton = ({ title, onClick, text, btnClassName, iconClassName }) => (
     className={btnClassName}
     onClick={onClick}
   >
-    { iconClassName && <i className={iconClassName} /> }
+    {iconClassName && <i className={iconClassName} />}
     {text && <span>{text.trim()}</span>}
   </button>
 );
+
+// Specifies the default values for props:
+// #TODO: Add default classnames
+MagicButton.defaultProps = {
+  title: '',
+  onClick: () => { console.log('Default Click'); },
+  btnClassName: '',
+  iconClassName: '',
+  text: 'Default Text',
+};
 
 MagicButton.propTypes = {
   title: PropTypes.string,

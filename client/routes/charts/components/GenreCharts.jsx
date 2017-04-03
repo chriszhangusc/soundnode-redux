@@ -6,20 +6,19 @@ import { getChartsGenre } from 'client/redux/modules/charts';
 
 /* Since we only connect to store for playlist name, so no need to wrap it in a container */
 const renderGenres = () => GENRES.map(
-  genre =>
-    <Link
-      key={genre.link}
-      className="button inline"
-      to={`/charts/${genre.link}`}
-    >{genre.title}</Link>
+  genre => (<Link
+    key={genre.link}
+    className="button inline"
+    to={`/charts/${genre.link}`}
+  >{genre.title}</Link>)
 );
 
 const GenreCharts = ({ chartsGenre }) => (
   <div className="charts-header">
-    <h1>Top 50 - { chartsGenre.toUpperCase() }</h1>
+    <h1>Top 50 - {chartsGenre.toUpperCase()}</h1>
     <div className="genre-list" >
       <h3 className="title">Charts By Genre</h3>
-      { renderGenres() }
+      {renderGenres()}
     </div>
   </div>
 );

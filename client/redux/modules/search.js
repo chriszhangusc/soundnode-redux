@@ -6,7 +6,7 @@ import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 
 /* DropdownEpic Imports */
 import { Observable } from 'rxjs/Rx';
-import { ajax } from 'rxjs/observable/dom/ajax';
+// import { ajax } from 'rxjs/observable/dom/ajax';
 import { fetchTracks, fetchArtists } from 'client/api/sc/v1';
 
 // Dropdown search
@@ -47,33 +47,33 @@ const INITIAL_STATE = fromJS({
 });
 
 export default function searchReducer(state = INITIAL_STATE, action) {
-    switch (action.type) {
-        case START_SEARCH:
-            return state.set('fetching', true);
-        case START_DROPDOWN_SEARCH:
-            return state.set('dropdownFetching', true);
-        case END_DROPDOWN_SEARCH:
-            return state.set('dropdownFetching', false);
-        case CLEAR_SEARCH_RESULTS:
-            return state.set('searchResultTrackIds', fromJS([]));
-        case DROPDOWN_ARTISTS_RECEIVED:
-            return state.set('dropdownArtistIds', fromJS(action.payload.result));
-        case DROPDOWN_TRACKS_RECEIVED:
-            return state.set('dropdownTrackIds', fromJS(action.payload.result));
-        case SEARCH_RESULTS_RECEIVED:
-            return state.merge(fromJS({
-                searchResultTrackIds: action.payload.result,
-                fetching: false,
-            }));
-        case HIDE_DROPDOWN_SEARCH_RESULTS:
-            return state.set('dropdownShown', false);
-        case SHOW_DROPDOWN_SEARCH_RESULTS:
-            return state.set('dropdownShown', true);
-        case CLEAR_DROPDOWN_SEARCH_RESULTS:
-            return state.set('dropdownArtistIds', fromJS([])).set('dropdownTrackIds', fromJS([]));
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case START_SEARCH:
+      return state.set('fetching', true);
+    case START_DROPDOWN_SEARCH:
+      return state.set('dropdownFetching', true);
+    case END_DROPDOWN_SEARCH:
+      return state.set('dropdownFetching', false);
+    case CLEAR_SEARCH_RESULTS:
+      return state.set('searchResultTrackIds', fromJS([]));
+    case DROPDOWN_ARTISTS_RECEIVED:
+      return state.set('dropdownArtistIds', fromJS(action.payload.result));
+    case DROPDOWN_TRACKS_RECEIVED:
+      return state.set('dropdownTrackIds', fromJS(action.payload.result));
+    case SEARCH_RESULTS_RECEIVED:
+      return state.merge(fromJS({
+        searchResultTrackIds: action.payload.result,
+        fetching: false,
+      }));
+    case HIDE_DROPDOWN_SEARCH_RESULTS:
+      return state.set('dropdownShown', false);
+    case SHOW_DROPDOWN_SEARCH_RESULTS:
+      return state.set('dropdownShown', true);
+    case CLEAR_DROPDOWN_SEARCH_RESULTS:
+      return state.set('dropdownArtistIds', fromJS([])).set('dropdownTrackIds', fromJS([]));
+    default:
+      return state;
+  }
 }
 
 /* Selectors */
@@ -96,16 +96,16 @@ export const endSearch = () => ({
 
 
 export const requestDropdownSearch = keyword => ({
-    type: DROPDOWN_SEARCH_REQUEST,
-    payload: {
-        keyword,
-        limit: DROPDOWN_SEARCH_LIMIT
-    }
+  type: DROPDOWN_SEARCH_REQUEST,
+  payload: {
+    keyword,
+    limit: DROPDOWN_SEARCH_LIMIT
+  }
 });
 
 export const receiveDropdownSearch = results => ({
-    type: DROPDOWN_SEARCH_RECEIVED,
-    payload: results
+  type: DROPDOWN_SEARCH_RECEIVED,
+  payload: results
 });
 
 // export const startDropdownSearch = () => ({
@@ -185,16 +185,16 @@ export const fetchAllSearchResults = (keyword, limit) => ({
 
 /* Search Epic */
 export const dropdownSearchEpic = action$ =>
-    action$.ofType(DROPDOWN_SEARCH_REQUEST)
-        .debounceTime(250)
-        .switchMap((action) => {
-            const tracksPromise = fetchTracks({ q: action.payload.keyword }, action.payload.limit);
-            const artistsPromise = fetchArtists({ q: action.payload.keyword }, action.payload.limit);
-            return Observable.fromPromise(Promise.all([tracksPromise, artistsPromise]));
-        })
-        .flatMap(res => Observable.concat(
-            Observable.of(dropdownArtistsReceived(res[1])),
-            Observable.of(dropdownTracksReceived(res[0])),
-            Observable.of(endDropdownSearch()),
-            Observable.of(showDropdownSearchResults())
-        ));
+  action$.ofType(DROPDOWN_SEARCH_REQUEST)
+    .debounceTime(250)
+    .switchMap((action) => {
+      const tracksPromise = fetchTracks({ q: action.payload.keyword }, action.payload.limit);
+      const artistsPromise = fetchArtists({ q: action.payload.keyword }, action.payload.limit);
+      return Observable.fromPromise(Promise.all([tracksPromise, artistsPromise]));
+    })
+    .flatMap(res => Observable.concat(
+      Observable.of(dropdownArtistsReceived(res[1])),
+      Observable.of(dropdownTracksReceived(res[0])),
+      Observable.of(endDropdownSearch()),
+      Observable.of(showDropdownSearchResults())
+    ));

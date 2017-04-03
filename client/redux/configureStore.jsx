@@ -5,24 +5,24 @@ import createSagaMiddleware from 'redux-saga';
 // Only load one file so that we don't have to load the whole lodash library
 import throttle from 'lodash/throttle';
 import createLogger from 'redux-logger';
+import { createEpicMiddleware } from 'redux-observable';
 import { loadState, saveState } from 'client/utils/LocalStorageUtils';
+
 import notificationMiddleware from './middlewares/notificationMiddleware';
 import apiMiddleware from './middlewares/apiMiddleware';
 import rootSaga from './middlewares/sagas';
-import { createEpicMiddleware } from 'redux-observable';
-
 import { rootReducer, rootEpic } from './root';
 
 const stateTransformer = (state) => {
-    // toJS is expensive!
-    if (Iterable.isIterable(state)) return state.toJS();
-    return state;
+  // toJS is expensive!
+  if (Iterable.isIterable(state)) return state.toJS();
+  return state;
 };
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
 const logger = createLogger({
-    stateTransformer,
+  stateTransformer,
 });
 
 const configureStore = () => {
@@ -35,7 +35,7 @@ const configureStore = () => {
     compose(
       applyMiddleware(thunk, epicMiddleware, sagaMiddleware, apiMiddleware, notificationMiddleware),
       window.devToolsExtension ? window.devToolsExtension() : f => f
-    )
+    ),
   );
   sagaMiddleware.run(rootSaga);
 

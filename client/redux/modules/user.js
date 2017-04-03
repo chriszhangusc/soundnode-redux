@@ -32,7 +32,7 @@ const user = (state = INITIAL_STATE, action) => {
     case LIKE_SUCCESS:
       return state.setIn(
         ['likes', action.payload.record.songId.toString()],
-        action.payload.record.firebaseKey
+        action.payload.record.firebaseKey,
       );
     case UNLIKE_SUCCESS:
       // It will fail without toString!!!

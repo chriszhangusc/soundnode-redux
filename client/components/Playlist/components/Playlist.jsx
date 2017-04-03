@@ -8,21 +8,21 @@ const Playlist = ({
   playlistHidden,
   handleClearPlayQueue,
  }) => (
-   <div className={`col-sm-2 playlist ${playlistHidden ? '' : 'show'}`} >
-     <div className="playlist-container">
-       <div className="playlist-title">
-         <span className="labelColumn">TRACKS</span> | <span className="labelColumn">ARTIST</span>
-         <div className="playlist-title-icon-container">
-           <MagicButton
-             btnClassName="icon-button"
-             iconClassName="fa fa-trash"
-             title="Clear play queue"
-             onClick={handleClearPlayQueue}
-           />
-         </div>
-       </div>
-       <ul className="playlist-list">
-         {
+  <div className={`col-sm-2 playlist ${playlistHidden ? '' : 'show'}`} >
+    <div className="playlist-container">
+      <div className="playlist-title">
+        <span className="labelColumn">TRACKS</span> | <span className="labelColumn">ARTIST</span>
+        <div className="playlist-title-icon-container">
+          <MagicButton
+            btnClassName="icon-button"
+            iconClassName="fa fa-trash"
+            title="Clear play queue"
+            onClick={handleClearPlayQueue}
+          />
+        </div>
+      </div>
+      <ul className="playlist-list">
+        {
           playlistTrackIds.map(
             (trackId, idx) =>
               <PlaylistItemContainer
@@ -31,10 +31,10 @@ const Playlist = ({
                 key={trackId}
               />
           )
-         }
-       </ul>
-     </div>
-   </div>
+        }
+      </ul>
+    </div>
+  </div>
 );
 
 Playlist.propTypes = {

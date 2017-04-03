@@ -1,5 +1,6 @@
 import url from 'url';
 import qs from 'querystring';
+import fetch from 'isomorphic-fetch';
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
 
@@ -9,12 +10,12 @@ import { normalize } from 'normalizr';
  * @return {Promise}         - response json wrapped in Promise
  */
 export function onResponseSuccess(response) {
-    // response.ok is true if response status ranges from 200 to 299
-    if (!response.ok) {
-        // This will be wrapped in a reject promise!
-        throw Error(response.statusText);
-    }
-    return response.json();
+  // response.ok is true if response status ranges from 200 to 299
+  if (!response.ok) {
+    // This will be wrapped in a reject promise!
+    throw Error(response.statusText);
+  }
+  return response.json();
 }
 
 // Construct fetch url with baseURL in current config, given endpoint and queryParams as an object
@@ -29,25 +30,28 @@ export function constructFetchUrl(baseUrl, endpoint, queryParams) {
   return finalUrl;
 }
 
-// If normalizeSchema is specified, we normalize it using the given schema.
-export function makeRequest(fetchUrl, normalizeSchema) {
-    // fetch will only reject the promise when there is an internet error
-    return fetch(fetchUrl)
-        .catch(err => {
-            // Let the user know when there is a connection error!
-            throw Error('Can not make request, please check your internet connection!');
-        })
-        .then(onResponseSuccess)
-        .then(json => camelizeKeys(json))
-        .then(camelizedJson => normalizeResponse(camelizedJson, normalizeSchema));
-}
-
 // Normalize
 export function normalizeResponse(jsonResponse, schema) {
-    if (!schema) return jsonResponse;
-    if (jsonResponse.collection) {
-        const { nextHref, collection } = jsonResponse;
-        return Object.assign({}, normalize(collection, schema), { nextHref });
-    }
-    return Object.assign({}, normalize(jsonResponse, schema));
+  if (!schema) return jsonResponse;
+  if (jsonResponse.collection) {
+    const { nextHref, collection } = jsonResponse;
+    return Object.assign({}, normalize(collection, schema), { nextHref });
+  }
+  return Object.assign({}, normalize(jsonResponse, schema));
 }
+
+// If normalizeSchema is specified, we normalize it using the given schema.
+export function makeRequest(fetchUrl, normalizeSchema) {
+  // fetch will only reject the promise when there is an internet error
+  return fetch(fetchUrl)
+    .catch((err) => {
+      // Let the user know when there is a connection error!
+      console.log(err);
+      throw Error('Can not make request, please check your internet connection!');
+    })
+    .then(onResponseSuccess)
+    .then(json => camelizeKeys(json))
+    .then(camelizedJson => normalizeResponse(camelizedJson, normalizeSchema));
+}
+
+

@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux-immutable';
+import { combineEpics } from 'redux-observable';
+
 import chartsReducer from './modules/charts';
 import playerReducer from './modules/player';
 import playlistReducer from './modules/playlist';
@@ -8,12 +10,9 @@ import uiReducer from './modules/ui';
 import entitiesReducer from './modules/entities';
 import searchReducer, { dropdownSearchEpic } from './modules/search';
 import userReducer from './modules/user';
-import usersReducer from './modules/users';
-
-import { combineEpics } from 'redux-observable';
 
 export const rootEpic = combineEpics(
-    dropdownSearchEpic
+  dropdownSearchEpic,
 );
 
 export const rootReducer = combineReducers({
@@ -26,5 +25,4 @@ export const rootReducer = combineReducers({
   track: trackReducer,
   user: userReducer,
   search: searchReducer,
-  users: usersReducer
 });
