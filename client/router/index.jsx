@@ -1,3 +1,4 @@
+// Farewell react-router v2, leave it here for future reference.
 import React from 'react';
 import { Route, Router, IndexRedirect, browserHistory } from 'react-router';
 import App from 'client/components/App';
