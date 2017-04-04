@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { GENRES } from 'client/constants/ChartsConsts';
 import { getChartsGenre } from 'client/redux/modules/charts';
 
 /* Since we only connect to store for playlist name, so no need to wrap it in a container */
+/* chartsGenre is fetched from redux store directly */
 const renderGenres = () => GENRES.map(
   genre => (<Link
     key={genre.link}
@@ -24,7 +25,7 @@ const GenreCharts = ({ chartsGenre }) => (
 );
 
 GenreCharts.propTypes = {
-  chartsGenre: React.PropTypes.string.isRequired,
+  chartsGenre: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {

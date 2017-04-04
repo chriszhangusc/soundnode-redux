@@ -24,8 +24,8 @@ const configureRoutes = (store) => {
   const onChartsPageEnter = (nextState, replace) => {
     const { dispatch } = store;
     const genreFromUrl = nextState.params.genre;
-    const valid = GENRES.filter(item => item.link.indexOf(genreFromUrl) > -1).length > 0;
-
+    const valid = GENRES.filter(item => item.link === genreFromUrl).length > 0;
+console.log(valid);
     // Handle routes that are partially matched but containing
     // invalid genre like this: http://localhost:3000/top50/All-Music/adfasdfasdfasdf
     const genre = valid ? genreFromUrl : DEFAULT_GENRE;

@@ -95,11 +95,12 @@ export function fetchCharts(genre) {
   };
 }
 
-export function loadCharts(genre) {
+export function loadChartsPage(genre) {
   return (dispatch) => {
-    dispatch(changeGenre(genre));
     const formattedGenre = formatGenre(genre);
+    // Remove all old search results because we do not want them to interfere the new ones.
     dispatch(clearAllCharts());
+
     dispatch(fetchCharts(formattedGenre));
   };
 }

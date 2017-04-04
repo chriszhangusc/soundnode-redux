@@ -5,21 +5,7 @@
     "node": true
   },
   "rules": {
-    "class-methods-use-this": [
-      2,
-      {
-        "exceptMethods": [
-          "componentDidMount",
-          "componentDidUpdate",
-          "componentWillMount",
-          "componentWillReceiveProps",
-          "componentWillUnmount",
-          "componentWillUpdate",
-          "render",
-          "shouldComponentUpdate"
-        ]
-      }
-    ],
+    "class-methods-use-this": 0,
     "import/extensions": 0,
     "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": 0,

@@ -20,7 +20,7 @@ MagicButton.defaultProps = {
   onClick: () => { console.log('Default Click'); },
   btnClassName: '',
   iconClassName: '',
-  text: 'Default Text',
+  text: '',
 };
 
 MagicButton.propTypes = {

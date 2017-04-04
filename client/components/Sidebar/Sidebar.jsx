@@ -1,38 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => (
   <div className="sidebar-wrapper">
     <ul className="nav-sidebar">
       <li>
-        <Link
+        <NavLink
           to="/charts"
           activeClassName="sidebar-link-active"
-        ><i className="fa fa-trophy" /><span>Top 50</span></Link>
+        ><i className="fa fa-trophy" /><span>Top 50</span></NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="/likes"
           activeClassName="sidebar-link-active"
-        ><i className="fa fa-heart" />Likes</Link>
+        ><i className="fa fa-heart" />Likes</NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="/playlists"
           activeClassName="sidebar-link-active"
-        ><i className="fa fa-list" />Playlists</Link>
+        ><i className="fa fa-list" />Playlists</NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="/tracks"
           activeClassName="sidebar-link-active"
-        ><i className="fa fa-music" />Tracks</Link>
+        ><i className="fa fa-music" />Tracks</NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="/stream"
           activeClassName="sidebar-link-active"
-        ><i className="fa fa-cloud" />Stream</Link>
+        ><i className="fa fa-cloud" />Stream</NavLink>
       </li>
     </ul>
   </div>

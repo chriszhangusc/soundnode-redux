@@ -1,4 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
+import ChartsPage from 'client/routes/charts';
+
 import { NotificationContainer } from 'react-notifications';
 import Player from 'client/components/Player';
 import Nav from 'client/components/Nav';
@@ -34,22 +43,27 @@ class App extends Component {
   // <Sidebar />
   render() {
     return (
-      <div id="main-wrapper">
-        <Nav />
-        <Sidebar />
-        <div id="page-content-wrapper">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-lg-12">
-                {this.props.children}
+      <Router>
+        <div id="main-wrapper">
+          <Nav />
+          <Sidebar />
+          <div id="page-content-wrapper">
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-lg-12">
+                  <Switch>
+                    <Route exact path="/charts/:genre?" component={ChartsPage} />
+                    <Redirect to="/charts" />
+                  </Switch>
+                </div>
+                <Player />
+                <Playlist />
               </div>
-              <Player />
-              <Playlist />
             </div>
           </div>
+          <NotificationContainer />
         </div>
-        <NotificationContainer />
-      </div>
+      </Router>
     );
   }
 }
@@ -57,7 +71,6 @@ class App extends Component {
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired,
 };
 
 export default connect()(App);
