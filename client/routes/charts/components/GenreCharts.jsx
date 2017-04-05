@@ -16,7 +16,7 @@ const renderGenres = () => GENRES.map(
 
 const GenreCharts = ({ chartsGenre }) => (
   <div className="charts-header">
-    <h1>Top 50 - {chartsGenre.toUpperCase()}</h1>
+    <h1>Top 50 - { GENRES.find(g => g.link === chartsGenre).title }</h1>
     <div className="genre-list" >
       <h3 className="title">Charts By Genre</h3>
       {renderGenres()}

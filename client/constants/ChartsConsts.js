@@ -5,7 +5,7 @@ export const DEFAULT_GENRE = 'all-music';
 export const GENRES = [
   {
     link: 'all-music',
-    title: 'All',
+    title: 'All-Music',
   },
   {
     link: 'alternativerock',

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { GENRES } from 'client/constants/ChartsConsts';
-import { DEFAULT_GENRE, loadChartsPage, changeGenre } from 'client/redux/modules/charts';
+import { GENRES, DEFAULT_GENRE } from 'client/constants/ChartsConsts';
+import { loadChartsPage, changeGenre } from 'client/redux/modules/charts';
 import ChartsSongCardListContainer from '../containers/ChartsSongCardListContainer';
 import GenreCharts from './GenreCharts';
 

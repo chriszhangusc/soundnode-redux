@@ -1,7 +1,7 @@
 import { CLIENT_ID } from 'client/constants/Config';
 import {
   t500x500,
-  large
+  large,
 } from 'client/constants/ImageConstants';
 
 export const formatSecondsAsTime = (secs) => {

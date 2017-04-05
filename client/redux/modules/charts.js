@@ -98,7 +98,7 @@ export function fetchCharts(genre) {
       // #TODO: Verify results!!
       dispatch(receiveCharts(normalizedCharts));
     } catch (err) {
-      console.log('error: ', err);
+      // console.log('error: ', err);
       dispatch(notificationFailure(err.message));
     } finally {
       // Stop loading spinner
