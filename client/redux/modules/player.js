@@ -258,5 +258,3 @@ export function isTrackActive(state, trackId) {
 }
 
 export const isTrackPlaying = (state, id) => isTrackActive(state, id) && isPlayerPlaying(state);
-
-// Return if the specific song is playing or not
