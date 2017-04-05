@@ -56,8 +56,8 @@ class App extends Component {
                     <Redirect to="/charts" />
                   </Switch>
                 </div>
-                <Player />
-                <Playlist />
+                {/*<Player />*/}
+                {/*<Playlist />*/}
               </div>
             </div>
           </div>

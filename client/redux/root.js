@@ -1,6 +1,5 @@
-import { combineReducers } from 'redux-immutable';
 import { combineEpics } from 'redux-observable';
-
+import { combineReducers } from 'redux';
 import chartsReducer from './modules/charts';
 import playerReducer from './modules/player';
 import playlistReducer from './modules/playlist';
@@ -21,8 +20,8 @@ export const rootReducer = combineReducers({
   charts: chartsReducer,
   playlist: playlistReducer,
   player: playerReducer,
-  artist: artistReducer,
-  track: trackReducer,
+  // artist: artistReducer,
+  // track: trackReducer,
   user: userReducer,
   search: searchReducer,
 });

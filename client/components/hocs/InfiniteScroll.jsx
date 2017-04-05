@@ -23,7 +23,6 @@ export default function (InnerComponent) {
         scrollFunc();
       }
     }
-
     render() {
       return <InnerComponent {...this.props} />;
     }

@@ -1,5 +1,4 @@
 // Charts duck file
-import { fromJS } from 'immutable';
 // import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { formatGenre } from 'client/utils/FormatUtils';
 // import { trackArraySchema } from 'client/schemas';
@@ -7,9 +6,8 @@ import { TOP_COUNT, LIMIT } from 'client/constants/ChartsConsts';
 import { fetchChartsFromSC } from 'client/api/sc/v2';
 import { notificationFailure } from 'client/redux/modules/notification';
 
-/* Constants */
+/* Action Constants */
 // Naming convention: NOUN_VERB
-export const DEFAULT_GENRE = 'all-music';
 export const CHARTS_GENRE_CHANGE = 'redux-music/charts/CHARTS_GENRE_CHANGE';
 export const CHARTS_REQUEST = 'redux-music/charts/CHARTS_REQUEST';
 export const CHARTS_RECEIVED = 'redux-music/charts/CHARTS_RECEIVED';
@@ -18,46 +16,56 @@ export const CHARTS_CLEAR = 'redux-music/charts/CHARTS_CLEAR';
 export const CHARTS_SPINNER_STOP = 'redux-music/charts/CHARTS_SPINNER_STOP';
 
 /* Reducer */
-const initialState = fromJS({ genre: '', trackIds: [], fetching: false, offset: 0 });
+const initialState = {
+  genre: '',
+  trackIds: [],
+  fetching: false,
+  fetchOffset: 0,
+};
 
+// #TODO: Should we extract fetchOffset?
 export default function chartsReducer(state = initialState, action) {
   switch (action.type) {
     case CHARTS_GENRE_CHANGE:
-      return state.merge(fromJS({ genre: action.payload, offset: 0 }));
+      return {
+        ...state,
+        genre: action.payload,
+        fetchOffset: 0,
+      };
     case CHARTS_REQUEST:
-      return state.set('fetching', true);
+      return {
+        ...state,
+        fetching: true,
+      };
     case CHARTS_RECEIVED:
-      return state.merge({
-        trackIds: state
-          .get('trackIds')
-          .concat(fromJS(action.payload.result))
-          .slice(0, TOP_COUNT),
-        offset: state.get('offset') + LIMIT,
+      return {
+        ...state,
+        trackIds: [...state.trackIds, ...action.payload.result].slice(0, TOP_COUNT),
+        fetchOffset: state.fetchOffset + LIMIT,
         // fetching: false,
-      });
+      };
     // case CHARTS_FAILED:     return state.set('fetching', false);
     case CHARTS_CLEAR:
-      return state.set('trackIds', fromJS([]));
+      return {
+        ...state,
+        trackIds: [],
+      };
     case CHARTS_SPINNER_STOP:
-      return state.set('fetching', false);
+      return {
+        ...state,
+        fetching: false,
+      };
     default:
       return state;
   }
 }
 
 /* Selectors */
-export const getChartsGenre = state => state
-  .get('charts')
-  .get('genre');
-export const getChartsTrackIds = state => state
-  .get('charts')
-  .get('trackIds');
-export const isChartsFetching = state => state
-  .get('charts')
-  .get('fetching');
-export const getChartsOffset = state => state
-  .get('charts')
-  .get('offset');
+const getChartsState = state => state.charts;
+export const getChartsGenre = state => getChartsState(state).genre;
+export const getChartsTrackIds = state => getChartsState(state).trackIds;
+export const isChartsFetching = state => getChartsState(state).fetching;
+export const getChartsFetchOffset = state => getChartsState(state).fetchOffset;
 
 /* Action Creators */
 
@@ -66,9 +74,13 @@ export const changeGenre = genre => ({ type: CHARTS_GENRE_CHANGE, payload: genre
 
 export const clearAllCharts = () => ({ type: CHARTS_CLEAR });
 
-const requestCharts = () => ({ type: CHARTS_REQUEST })
+const requestCharts = () => ({ type: CHARTS_REQUEST });
 
-const receiveCharts = (normalizedCharts) => ({ type: CHARTS_RECEIVED, payload: normalizedCharts, entities: normalizedCharts.entities });
+const receiveCharts = normalizedCharts => ({
+  type: CHARTS_RECEIVED,
+  payload: normalizedCharts,
+  entities: normalizedCharts.entities,
+});
 
 const stopSpinner = () => ({ type: CHARTS_SPINNER_STOP });
 
@@ -79,7 +91,7 @@ const stopSpinner = () => ({ type: CHARTS_SPINNER_STOP });
 export function fetchCharts(genre) {
   return async (dispatch, getState) => {
     const state = getState();
-    const offset = getChartsOffset(state);
+    const offset = getChartsFetchOffset(state);
     dispatch(requestCharts());
     try {
       const normalizedCharts = await fetchChartsFromSC(genre, offset);
@@ -109,7 +121,8 @@ export function loadMoreCharts() {
   return (dispatch, getState) => {
     const state = getState();
     const chartsFetching = isChartsFetching(state);
-    const size = getChartsTrackIds(state).size;
+    // Limit the number of fetched results.
+    const size = getChartsTrackIds(state).length;
     if (!chartsFetching && size < TOP_COUNT) {
       const genre = getChartsGenre(state);
       const formattedGenre = formatGenre(genre);

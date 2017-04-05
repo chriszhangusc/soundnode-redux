@@ -1,5 +1,4 @@
 /* #TODO: Separate general search and dropdown search */
-import { fromJS } from 'immutable';
 import { trackArraySchema } from 'client/schemas';
 
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
@@ -35,7 +34,7 @@ export const DROPDOWN_SEARCH_LIMIT = 4;
 export const SEARCH_LIMIT = 20;
 
 /* Reducers */
-const INITIAL_STATE = fromJS({
+const INITIAL_STATE = {
   dropdownShown: false,
   dropdownFetching: false,
   // Search dropdown list results
@@ -44,46 +43,85 @@ const INITIAL_STATE = fromJS({
   // Search results page
   fetching: false,
   searchResultTrackIds: [],
-});
+};
 
 export default function searchReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case START_SEARCH:
-      return state.set('fetching', true);
+      return {
+        ...state,
+        fetching: true,
+      };
+
     case START_DROPDOWN_SEARCH:
-      return state.set('dropdownFetching', true);
+      return {
+        ...state,
+        dropdownFetching: true,
+      };
+
     case END_DROPDOWN_SEARCH:
-      return state.set('dropdownFetching', false);
+      return {
+        ...state,
+        dropdownFetching: false,
+      };
+
     case CLEAR_SEARCH_RESULTS:
-      return state.set('searchResultTrackIds', fromJS([]));
+      return {
+        ...state,
+        searchResultTrackIds: [],
+      };
+
     case DROPDOWN_ARTISTS_RECEIVED:
-      return state.set('dropdownArtistIds', fromJS(action.payload.result));
+      return {
+        ...state,
+        dropdownArtistIds: [...action.payload.result],
+      };
+
     case DROPDOWN_TRACKS_RECEIVED:
-      return state.set('dropdownTrackIds', fromJS(action.payload.result));
+      return {
+        ...state,
+        dropdownTrackIds: [...action.payload.result],
+      };
+
     case SEARCH_RESULTS_RECEIVED:
-      return state.merge(fromJS({
-        searchResultTrackIds: action.payload.result,
+      return {
+        ...state,
+        searchResultTrackIds: [...action.payload.result],
         fetching: false,
-      }));
+      };
+
     case HIDE_DROPDOWN_SEARCH_RESULTS:
-      return state.set('dropdownShown', false);
+      return {
+        ...state,
+        dropdownShown: false,
+      };
+
     case SHOW_DROPDOWN_SEARCH_RESULTS:
-      return state.set('dropdownShown', true);
+      return {
+        ...state,
+        dropdownShown: true,
+      };
+
     case CLEAR_DROPDOWN_SEARCH_RESULTS:
-      return state.set('dropdownArtistIds', fromJS([])).set('dropdownTrackIds', fromJS([]));
+      return {
+        ...state,
+        dropdownArtistIds: [],
+        dropdownTrackIds: [],
+      };
+
     default:
       return state;
   }
 }
 
 /* Selectors */
-export const getSearchState = state => state.get('search');
-export const isSearching = state => getSearchState(state).get('fetching');
-export const isDropdownSearching = state => getSearchState(state).get('dropdownFetching');
-export const isDropdownShown = state => getSearchState(state).get('dropdownShown');
-export const getSearchResultTrackIds = state => getSearchState(state).get('searchResultTrackIds');
-export const getDropdownSearchArtistIds = state => getSearchState(state).get('dropdownArtistIds');
-export const getDropdownSearchTrackIds = state => getSearchState(state).get('dropdownTrackIds');
+export const getSearchState = state => state.search;
+export const isSearching = state => getSearchState(state).fetching;
+export const isDropdownSearching = state => getSearchState(state).dropdownFetching;
+export const isDropdownShown = state => getSearchState(state).dropdownShown;
+export const getSearchResultTrackIds = state => getSearchState(state).searchResultTrackIds;
+export const getDropdownSearchArtistIds = state => getSearchState(state).dropdownArtistIds;
+export const getDropdownSearchTrackIds = state => getSearchState(state).dropdownTrackIds;
 
 /* Action Creators */
 export const startSearch = () => ({
@@ -99,13 +137,13 @@ export const requestDropdownSearch = keyword => ({
   type: DROPDOWN_SEARCH_REQUEST,
   payload: {
     keyword,
-    limit: DROPDOWN_SEARCH_LIMIT
-  }
+    limit: DROPDOWN_SEARCH_LIMIT,
+  },
 });
 
 export const receiveDropdownSearch = results => ({
   type: DROPDOWN_SEARCH_RECEIVED,
-  payload: results
+  payload: results,
 });
 
 // export const startDropdownSearch = () => ({
@@ -196,5 +234,5 @@ export const dropdownSearchEpic = action$ =>
       Observable.of(dropdownArtistsReceived(res[1])),
       Observable.of(dropdownTracksReceived(res[0])),
       Observable.of(endDropdownSearch()),
-      Observable.of(showDropdownSearchResults())
+      Observable.of(showDropdownSearchResults()),
     ));

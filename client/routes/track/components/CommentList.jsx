@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { List } from 'immutable';
-import infiniteScroll from 'client/components/hocs/InfiniteScroll';
+import infiniteScroll from 'client/components/Hocs/InfiniteScroll';
 import Spinner from 'client/components/Spinner';
 import CommentContainer from '../containers/CommentContainer';
 

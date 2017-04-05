@@ -17,7 +17,7 @@ const MagicButton = ({ title, onClick, text, btnClassName, iconClassName }) => (
 // #TODO: Add default classnames
 MagicButton.defaultProps = {
   title: '',
-  onClick: () => { console.log('Default Click'); },
+  onClick: () => { console.log('You have to specifiy an onclick handler!'); },
   btnClassName: '',
   iconClassName: '',
   text: '',

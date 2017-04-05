@@ -4,17 +4,17 @@ import { copyToClipboard } from 'client/redux/modules/copy';
 import SongCardControls from '../components/SongCardControls';
 
 const mapStateToProps = (state, { track }) => ({
-  liked: isTrackLiked(state, track.get('id')),
+  liked: isTrackLiked(state, track.id),
 });
 
 const mergeProps = ({ liked }, { dispatch }, { track }) => ({
   liked,
   handleToggleLike() {
     const toggleLike = liked ? startUnlikeSong : startLikeSong;
-    dispatch(toggleLike(track.get('id')));
+    dispatch(toggleLike(track.id));
   },
   handleCopyToClipboard() {
-    dispatch(copyToClipboard(track.get('permalinkUrl'), 'Track permalink copied to clipboard!'));
+    dispatch(copyToClipboard(track.permalinkUrl, 'Track permalink copied to clipboard!'));
   },
 });
 
