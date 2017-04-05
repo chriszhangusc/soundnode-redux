@@ -49,7 +49,6 @@ class NavSearch extends Component {
 
   renderSearchResults() {
     const { artistIds, trackIds, dropdownShown } = this.props;
-    console.log(artistIds, trackIds);
     if (dropdownShown) {
       return (
         <div className="nav-search-result">

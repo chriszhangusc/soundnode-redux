@@ -18,7 +18,7 @@ export const rootReducer = combineReducers({
   ui: uiReducer,
   entities: entitiesReducer,
   charts: chartsReducer,
-  // playlist: playlistReducer,
+  playlist: playlistReducer,
   player: playerReducer,
   // artist: artistReducer,
   // track: trackReducer,
