@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import defaultArtworkImage from 'assets/images/default-artwork.png';
 
 // DUMB DUMB DUMB
@@ -34,7 +34,7 @@ PlayerTrackInfo.propTypes = {
   trackUrl: PropTypes.string,
   artistUrl: PropTypes.string,
   artistName: PropTypes.string,
-  trackTitle: PropTypes.string
+  trackTitle: PropTypes.string,
 };
 
 

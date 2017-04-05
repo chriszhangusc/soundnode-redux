@@ -4,7 +4,7 @@ import { formatImageUrl } from 'client/utils/FormatUtils';
 import {
   isTrackActive,
   isTrackPlaying,
-  sagaChangeSongAndPlay,
+  changeSongAndPlay,
   playSong,
   pauseSong,
 } from 'client/redux/modules/player';
@@ -24,7 +24,7 @@ const mergeProps = (stateProps, { dispatch }, { track, trackIds }) => ({
   //  or pass all args into components and assemble there
   handleImageClick() {
     if (!stateProps.active) {
-      dispatch(sagaChangeSongAndPlay(track.id, trackIds));
+      dispatch(changeSongAndPlay(track.id, trackIds));
     } else {
       dispatch(stateProps.playing ? pauseSong() : playSong());
     }

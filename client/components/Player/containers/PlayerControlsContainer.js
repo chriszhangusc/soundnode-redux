@@ -3,8 +3,8 @@ import {
   isPlayerPlaying,
   playSong,
   pauseSong,
-  sagaPlayNextSong,
-  sagaPlayPrevSong,
+  playNextSong,
+  playPrevSong,
 } from 'client/redux/modules/player';
 import PlayerControls from '../components/PlayerControls';
 
@@ -15,8 +15,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onPlayClick: () => { dispatch(playSong()); },
   onPauseClick: () => { dispatch(pauseSong()); },
-  onNextClick: () => { dispatch(sagaPlayNextSong()); },
-  onPrevClick: () => { dispatch(sagaPlayPrevSong()); },
+  onNextClick: () => { dispatch(playNextSong()); },
+  onPrevClick: () => { dispatch(playPrevSong()); },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerControls);

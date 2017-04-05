@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 // import { getPlayerMode, isPlaylistHidden } from 'client/redux/modules/reducers';
-import { getPlayerMode, sagaChangePlayMode, REPEAT, SHUFFLE } from 'client/redux/modules/player';
+import { getPlayerMode, toggleOrChangePlayMode, REPEAT, SHUFFLE } from 'client/redux/modules/player';
 import { togglePlaylist } from 'client/redux/modules/playlist';
 import PlayerModeControls from '../components/PlayerModeControls';
 
@@ -11,8 +11,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onRepeatClick: () => { dispatch(sagaChangePlayMode(REPEAT)); },
-  onShuffleClick: () => { dispatch(sagaChangePlayMode(SHUFFLE)); },
+  onRepeatClick: () => { dispatch(toggleOrChangePlayMode(REPEAT)); },
+  onShuffleClick: () => { dispatch(toggleOrChangePlayMode(SHUFFLE)); },
   onTogglePlaylistClick: () => { dispatch(togglePlaylist()); },
 });
 

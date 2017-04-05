@@ -6,7 +6,7 @@ import {
   getPlayerMode,
   isPlayerPlaying,
   isPlayerSeeking,
-  sagaUpdateTimeOnPlay,
+  updateTimeOnPlay,
   sagaPlayNextSong,
 } from 'client/redux/modules/player';
 
@@ -16,14 +16,14 @@ const mapStateToProps = (state, { playerTrack }) => ({
   playing: isPlayerPlaying(state),
   volume: getCurrentVolume(state),
   mode: getPlayerMode(state),
-  streamUrl: formatStreamUrl(playerTrack.get('streamUrl')), // Append client_id!!
+  streamUrl: formatStreamUrl(playerTrack.streamUrl), // Append client_id!!
   currentTime: getCurrentTime(state),
   seeking: isPlayerSeeking(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   // Update time in store
-  onTimeUpdate: (e) => { dispatch(sagaUpdateTimeOnPlay(e.target.currentTime)); },
+  onTimeUpdate: (e) => { dispatch(updateTimeOnPlay(e.target.currentTime)); },
   onEnded: () => { dispatch(sagaPlayNextSong()); },
 });
 

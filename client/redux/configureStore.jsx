@@ -9,7 +9,7 @@ import { loadState, saveState } from 'client/utils/LocalStorageUtils';
 
 import notificationMiddleware from './middlewares/notificationMiddleware';
 import apiMiddleware from './middlewares/apiMiddleware';
-import rootSaga from './middlewares/sagas';
+// import rootSaga from './middlewares/sagas';
 import { rootReducer, rootEpic } from './root';
 
 // const stateTransformer = (state) => {
@@ -32,11 +32,17 @@ const configureStore = () => {
     // persistedState,
     // initialState,
     compose(
-      applyMiddleware(thunk, epicMiddleware, sagaMiddleware, apiMiddleware, notificationMiddleware),
+      applyMiddleware(
+        thunk,
+        epicMiddleware,
+        // sagaMiddleware,
+        apiMiddleware,
+        notificationMiddleware,
+      ),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     ),
   );
-  sagaMiddleware.run(rootSaga);
+  // sagaMiddleware.run(rootSaga);
 
   // Every time the store changes, save our state to localStorage
   // throttle it because it contains expensive stringify function.

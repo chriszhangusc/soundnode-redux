@@ -5,8 +5,8 @@ import {
   isVolumeSeeking,
   beginVolumeSeek,
   changeVolume,
-  sagaToggleMute,
-  sagaUpdateVolumeAndEndSeek,
+  toggleMute,
+  updateVolumeAndEndSeek,
 } from 'client/redux/modules/player';
 import PlayerVolumeControls from '../components/PlayerVolumeControls';
 
@@ -25,11 +25,11 @@ const mapDispatchToProps = dispatch => ({
 
   onVolumeBarMouseDown: () => { dispatch(beginVolumeSeek()); },
 
-  onToggleMuteClick: () => { dispatch(sagaToggleMute()); },
+  onToggleMuteClick: () => { dispatch(toggleMute()); },
 
   onVolumeMouseUp: (volumeBar, e) => {
     const newVolume = computeNewVolumeOnSeek(volumeBar, e);
-    dispatch(sagaUpdateVolumeAndEndSeek(newVolume));
+    dispatch(updateVolumeAndEndSeek(newVolume));
   },
 });
 

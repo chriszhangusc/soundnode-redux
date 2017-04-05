@@ -44,7 +44,6 @@ class PlayerControls extends Component {
   }
 
   render() {
-  console.log('Render: PlayerControls');
     return (
       <div className="player-section">
         {this.renderBackwardButton()}
@@ -60,7 +59,7 @@ PlayerControls.propTypes = {
   onNextClick: PropTypes.func,
   onPrevClick: PropTypes.func,
   onPlayClick: PropTypes.func,
-  onPauseClick: PropTypes.func
+  onPauseClick: PropTypes.func,
 };
 
 export default PlayerControls;

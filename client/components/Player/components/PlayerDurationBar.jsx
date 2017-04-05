@@ -42,7 +42,7 @@ class PlayerDurationBar extends Component {
       duration,
       currentTime,
       onDurationBarMouseDown,
-      onDurationHandleMouseDown
+      onDurationHandleMouseDown,
     } = this.props;
     const percent = computeSeekBarPercent(currentTime, duration);
 
@@ -77,7 +77,6 @@ class PlayerDurationBar extends Component {
   }
 
   render() {
-console.log('Render: PlayerDurationBar');
     return (
       <div className="player-section player-seek">
         { this.renderDurationBar() }
@@ -94,7 +93,7 @@ PlayerDurationBar.propTypes = {
   onDurationHandleMouseDown: PropTypes.func,
   onDurationHandleMouseMove: PropTypes.func,
   onDurationBarMouseDown: PropTypes.func,
-  onMouseUp: PropTypes.func
+  onMouseUp: PropTypes.func,
 };
 
 export default PlayerDurationBar;
