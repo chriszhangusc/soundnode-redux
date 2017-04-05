@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import SongCardContainer from 'client/components/SongCard';
 import Spinner from 'client/components/Spinner';
-import infiniteScroll from 'client/components/hocs/InfiniteScroll';
-import { List } from 'immutable';
+import infiniteScroll from 'client/components/Hocs/InfiniteScroll';
 
 const renderSongCardList = (trackIds) => {
   // We are using index + trackId as the key because sometimes it will have flattenChildren warning
@@ -10,7 +9,7 @@ const renderSongCardList = (trackIds) => {
   return (
     <div className="song-card-list-container">
       {
-        trackIds.toArray().map((trackId, index) => (
+        trackIds.map((trackId, index) => (
           <SongCardContainer trackId={trackId} trackIds={trackIds} key={index + trackId} />
         ))
       }
@@ -35,7 +34,7 @@ SongCardList.defaultProps = {
 
 SongCardList.propTypes = {
   fetching: PropTypes.bool,
-  trackIds: PropTypes.instanceOf(List),
+  trackIds: PropTypes.array,
 };
 
 export default infiniteScroll(SongCardList);

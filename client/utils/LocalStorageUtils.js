@@ -1,5 +1,3 @@
-import { fromJS } from 'immutable';
-
 export const setLastVolume = (volume) => {
   localStorage.setItem('lastVolume', JSON.stringify(volume));
 };
@@ -13,7 +11,7 @@ export const loadState = () => {
 
     if (serializedState === null) return undefined;
 
-    return fromJS(JSON.parse(serializedState));
+    return JSON.parse(serializedState);
   } catch (err) {
     console.log('Load State Error: ', err);
     return undefined; // Return undefined so that our reducer initialize with default state.
@@ -24,7 +22,7 @@ export const loadState = () => {
 export const saveState = (state, keys) => {
   try {
     // For playlists, we only want to store playerPlaylist
-    let sliceOfState = fromJS({});
+    let sliceOfState = {};
     keys.forEach((key) => {
       const keyPath = key.split('/');
       sliceOfState = sliceOfState.setIn(keyPath, state.getIn(keyPath));

@@ -1,4 +1,3 @@
-import { fromJS } from 'immutable';
 import { getTrackById } from 'client/redux/modules/entities';
 import { CLEAR_PLAY_QUEUE } from './playlist';
 
@@ -133,7 +132,7 @@ export const sagaUpdateVolumeAndEndSeek = newVolume => ({
 });
 
 /* Player Reducer */
-const initialState = fromJS({
+const initialState = {
   currentTime: 0,
   volume: INITIAL_VOLUME,
   trackId: undefined,
@@ -142,48 +141,86 @@ const initialState = fromJS({
   volumeSeeking: false,
   duration: 0,
   mode: DEFAULT_MODE,
-});
+};
 
 export default function playerReducer(state = initialState, action) {
   switch (action.type) {
     case PLAY_SONG:
-      return state.set('playing', true);
+      return {
+        ...state,
+        playing: true,
+      };
 
     case PAUSE_SONG:
-      return state.set('playing', false);
+      return {
+        ...state,
+        playing: false,
+      };
 
     case CHANGE_SONG:
-      return state.set('trackId', action.payload);
+      return {
+        ...state,
+        trackId: action.payload,
+      };
 
     case UPDATE_TIME:
-      return state.set('currentTime', action.payload);
+      return {
+        ...state,
+        currentTime: action.payload,
+      };
 
     case BEGIN_SEEK:
-      return state.set('seeking', true);
+      return {
+        ...state,
+        seeking: true,
+      };
 
     case END_SEEK:
-      return state.set('seeking', false);
+      return {
+        ...state,
+        seeking: false,
+      };
 
     case CHANGE_VOLUME:
-      return state.set('volume', action.payload);
+      return {
+        ...state,
+        volume: action.payload,
+      };
 
     case BEGIN_VOLUME_SEEK:
-      return state.set('volumeSeeking', true);
+      return {
+        ...state,
+        volumeSeeking: true,
+      };
 
     case END_VOLUME_SEEK:
-      return state.set('volumeSeeking', false);
+      return {
+        ...state,
+        volumeSeeking: false,
+      };
 
     case CHANGE_PLAY_MODE:
-      return state.set('mode', action.payload);
+      return {
+        ...state,
+        mode: action.payload,
+      };
 
     case MUTE:
-      return state.set('volume', 0);
+      return {
+        ...state,
+        volume: 0,
+      };
 
     case CLEAR_TIME:
-      return state.set('currentTime', 0);
+      return {
+        ...state,
+        currentTime: 0,
+      };
 
+    // What?
     case CLEAR_PLAY_QUEUE:
       return initialState;
+
     default:
       return state;
   }
@@ -191,14 +228,14 @@ export default function playerReducer(state = initialState, action) {
 
 
 /* Selectors */
-export const getPlayerState = state => state.get('player');
-export const getPlayerTrackId = state => getPlayerState(state).get('trackId');
-export const isPlayerPlaying = state => getPlayerState(state).get('playing');
-export const isPlayerSeeking = state => getPlayerState(state).get('seeking');
-export const getCurrentTime = state => getPlayerState(state).get('currentTime');
-export const getPlayerMode = state => getPlayerState(state).get('mode');
-export const isVolumeSeeking = state => getPlayerState(state).get('volumeSeeking');
-export const getCurrentVolume = state => getPlayerState(state).get('volume');
+export const getPlayerState = state => state.player;
+export const getPlayerTrackId = state => getPlayerState(state).trackId;
+export const isPlayerPlaying = state => getPlayerState(state).playing;
+export const isPlayerSeeking = state => getPlayerState(state).seeking;
+export const getCurrentTime = state => getPlayerState(state).currentTime;
+export const getPlayerMode = state => getPlayerState(state).mode;
+export const isVolumeSeeking = state => getPlayerState(state).volumeSeeking;
+export const getCurrentVolume = state => getPlayerState(state).volume;
 
 // (Reselect) Return the current player track (Immutable.Record)
 export function getCurrentPlayerTrack(state) {

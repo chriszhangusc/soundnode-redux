@@ -12,9 +12,9 @@ import {
 import SongCardImage from '../components/SongCardImage';
 
 const mapStateToProps = (state, { track }) => ({
-  artworkUrl: formatImageUrl(track.get('artworkUrl')),
-  active: isTrackActive(state, track.get('id')),
-  playing: isTrackPlaying(state, track.get('id')),
+  artworkUrl: formatImageUrl(track.artworkUrl),
+  active: isTrackActive(state, track.id),
+  playing: isTrackPlaying(state, track.id),
 });
 
 // This is useful when you need to compute some action using stateProps
@@ -24,7 +24,7 @@ const mergeProps = (stateProps, { dispatch }, { track, trackIds }) => ({
   //  or pass all args into components and assemble there
   handleImageClick() {
     if (!stateProps.active) {
-      dispatch(sagaChangeSongAndPlay(track.get('id'), trackIds));
+      dispatch(sagaChangeSongAndPlay(track.id, trackIds));
     } else {
       dispatch(stateProps.playing ? pauseSong() : playSong());
     }

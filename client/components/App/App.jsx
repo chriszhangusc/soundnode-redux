@@ -43,8 +43,8 @@ class App extends Component {
               <div className="col-lg-12">
                 {this.props.children}
               </div>
-              <Player />
-              <Playlist />
+              {/*<Player />*/}
+              {/*<Playlist />*/}
             </div>
           </div>
         </div>

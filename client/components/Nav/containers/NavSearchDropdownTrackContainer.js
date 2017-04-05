@@ -6,9 +6,9 @@ import NavSearchDropdownItem from '../components/NavSearchDropdownItem';
 const mapStateToProps = (state, { trackId }) => {
   const track = getTrackById(state, trackId);
   return ({
-    imageUrl: track.get('artworkUrl') || defaultImageUrl,
-    itemLinkUrl: `/track/${track.get('id')}`,
-    itemTitle: track.get('title'),
+    imageUrl: track.artworkUrl || defaultImageUrl,
+    itemLinkUrl: `/track/${trackId}`,
+    itemTitle: track.title,
   });
 };
 

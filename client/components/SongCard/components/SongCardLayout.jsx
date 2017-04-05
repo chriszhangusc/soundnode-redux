@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 // import Track from 'client/models/Track';
-import { Map, List } from 'immutable';
 import SongCardInfoContainer from '../containers/SongCardInfoContainer';
 import SongCardControlsContainer from '../containers/SongCardControlsContainer';
 import SongCardImageContainer from '../containers/SongCardImageContainer';
@@ -17,9 +16,9 @@ const SongCardLayout = ({ track, active, trackIds }) => {
 };
 
 SongCardLayout.propTypes = {
-  track: PropTypes.instanceOf(Map),
+  track: PropTypes.object,
   active: PropTypes.bool,
-  trackIds: PropTypes.instanceOf(List),
+  trackIds: PropTypes.array,
 };
 
 export default SongCardLayout;

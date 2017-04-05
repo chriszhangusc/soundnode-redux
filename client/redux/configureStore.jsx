@@ -1,4 +1,3 @@
-import { Iterable } from 'immutable';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
@@ -13,24 +12,24 @@ import apiMiddleware from './middlewares/apiMiddleware';
 import rootSaga from './middlewares/sagas';
 import { rootReducer, rootEpic } from './root';
 
-const stateTransformer = (state) => {
-  // toJS is expensive!
-  if (Iterable.isIterable(state)) return state.toJS();
-  return state;
-};
+// const stateTransformer = (state) => {
+//   // toJS is expensive!
+//   if (Iterable.isIterable(state)) return state.toJS();
+//   return state;
+// };
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
-const logger = createLogger({
-  stateTransformer,
-});
+// const logger = createLogger({
+//   stateTransformer,
+// });
 
 const configureStore = () => {
-  const persistedState = loadState();
+  // const persistedState = loadState();
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     rootReducer,
-    persistedState,
+    // persistedState,
     // initialState,
     compose(
       applyMiddleware(thunk, epicMiddleware, sagaMiddleware, apiMiddleware, notificationMiddleware),
@@ -42,9 +41,9 @@ const configureStore = () => {
   // Every time the store changes, save our state to localStorage
   // throttle it because it contains expensive stringify function.
   // Make sure it does not get called more often than once a second.
-  store.subscribe(throttle(() => {
-    saveState(store.getState(), ['user']);
-  }, 1000));
+  // store.subscribe(throttle(() => {
+  //   saveState(store.getState(), ['user']);
+  // }, 1000));
 
   return store;
 };

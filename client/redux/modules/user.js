@@ -1,4 +1,3 @@
-import { fromJS, List } from 'immutable';
 import firebase, { firebaseRef, githubProvider } from 'client/firebase';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { trackArraySchema } from 'client/schemas';
@@ -16,31 +15,37 @@ const LIKED_TRACKS_FAILURE = 'redux-music/user/LIKED_TRACKS_FAILURE';
 
 /* Reducer */
 
-const INITIAL_STATE = fromJS({
+const INITIAL_STATE = {
   likesFetching: false,
   // Saving map from trackId: firebaseKey
   likes: {},
-});
+};
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      return state.mergeDeep(fromJS(action.payload.uid));
+      return {
+        user: action.payload.uid,
+      };
     case LOGOUT:
-      return fromJS({});
+      return {};
     case LOAD_ALL_LIKES:
-      return state.set('likes', fromJS(action.payload));
+      return {
+        ...state,
+        likes: action.payload,
+      };
     case LIKE_SUCCESS:
-      return state.setIn(
-        ['likes', action.payload.record.songId.toString()],
-        action.payload.record.firebaseKey,
-      );
+      // #TODO: Will fix this later
+      // return state.setIn(
+      //   ['likes', action.payload.record.songId.toString()],
+      //   action.payload.record.firebaseKey,
+      // );
     case UNLIKE_SUCCESS:
       // It will fail without toString!!!
-      return state.deleteIn(['likes', action.payload.songId.toString()]);
+      // return state.deleteIn(['likes', action.payload.songId.toString()]);
     case LIKED_TRACKS_REQUEST:
-      return state.set('likesFetching', true);
+      // return state.set('likesFetching', true);
     case LIKED_TRACKS_RECEIVED:
-      return state.set('likesFetching', false);
+      // return state.set('likesFetching', false);
     case LIKE_FAILED:
     case LOGIN_FAILED:
     default:
@@ -51,17 +56,20 @@ const user = (state = INITIAL_STATE, action) => {
 export default user;
 
 // Selectors
-export const getUserState = state => state.get('user');
+export const getUserState = state => state.user;
 
-export const getUserId = state => getUserState(state).get('uid');
-export const getDisplayName = state => getUserState(state).get('displayName');
-export const getPhotoUrl = state => getUserState(state).get('photoURL');
-export const getUserLikes = state => getUserState(state).get('likes');
-export const getLikeIds = state => List(getUserState(state).get('likes').keys());
-export const isLikesFetching = state => getUserState(state).get('fetching');
+export const getUserId = state => getUserState(state).uid;
+export const getDisplayName = state => getUserState(state).displayName;
+export const getPhotoUrl = state => getUserState(state).photoURL;
+export const getUserLikes = state => getUserState(state).likes;
+// export const getLikeIds = state => List(getUserState(state).get('likes').keys());
+export const getLikeIds = state => [];
+
+export const isLikesFetching = state => getUserState(state).fetching;
 export const isTrackLiked = (state, trackId) => {
-  const likes = getUserLikes(state);
-  return likes.has(String(trackId));
+  // const likes = getUserLikes(state);
+  // return likes.find(String(trackId));
+  return true;
 };
 // Return all trackIds liked by current logged in user.
 export const getUserLikeIds = state => List(getUserLikes(state).keySeq());

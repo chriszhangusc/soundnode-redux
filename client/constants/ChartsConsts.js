@@ -1,5 +1,7 @@
+// These constants should be fetched from the Database!
 export const TOP_COUNT = 50;
 export const LIMIT = 25;
+export const DEFAULT_GENRE = 'all-music';
 export const GENRES = [
   {
     link: 'all-music',

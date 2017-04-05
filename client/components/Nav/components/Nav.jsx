@@ -10,7 +10,7 @@ const Nav = () => (
       <NavHeader />
       <div className="nav-search-user-wrapper">
         <NavSearchContainer />
-        <NavUserContainer />
+        {/*<NavUserContainer />*/}
       </div>
     </div>
   </nav>

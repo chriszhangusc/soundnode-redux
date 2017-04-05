@@ -11,13 +11,13 @@ import LikesPage from 'client/routes/likes';
 // import PlaylistsPage from 'client/routes/playlists';
 // import StreamPage from 'client/routes/stream';
 // import NotFound from 'client/components/NotFound';
-import { loadCharts, DEFAULT_GENRE } from 'client/redux/modules/charts';
+import { loadCharts } from 'client/redux/modules/charts';
 import { loadArtistPage, clearArtistState } from 'client/redux/modules/artist';
 import { loadTrackPage, clearTrackState } from 'client/redux/modules/track';
 import { sagaSearch, clearSearchPageResults } from 'client/redux/modules/search';
 import { clearVisibleTracks } from 'client/redux/modules/ui';
 import { fetchAllLikedTracks } from 'client/redux/modules/user';
-import { GENRES } from 'client/constants/ChartsConsts';
+import { GENRES, DEFAULT_GENRE } from 'client/constants/ChartsConsts';
 
 const configureRoutes = (store) => {
   // Move these hooks into seperate files

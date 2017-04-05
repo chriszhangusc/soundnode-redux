@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { List } from 'immutable';
 import { Link } from 'react-router';
 import { dropdownSearchShowCount } from 'client/constants/SearchConsts';
 import NavSearchDropdownTrackContainer from '../containers/NavSearchDropdownTrackContainer';
@@ -50,11 +49,12 @@ class NavSearch extends Component {
 
   renderSearchResults() {
     const { artistIds, trackIds, dropdownShown } = this.props;
+    console.log(artistIds, trackIds);
     if (dropdownShown) {
       return (
         <div className="nav-search-result">
           {
-            (artistIds.size !== 0) && (<div className="dropdown-title">
+            (artistIds.length !== 0) && (<div className="dropdown-title">
               ARTISTS
           </div>)
           }
@@ -68,7 +68,7 @@ class NavSearch extends Component {
             }
           </ul>
           {
-            (trackIds.size !== 0) && (<div className="dropdown-title">
+            (trackIds.length !== 0) && (<div className="dropdown-title">
               TRACKS
             </div>)
           }
@@ -82,10 +82,11 @@ class NavSearch extends Component {
                 />)
             }
             {
-              (trackIds.size !== 0) && (<li className="dropdown-item-show-all">
+              (trackIds.length !== 0) && (<li className="dropdown-item-show-all">
                 <Link
                   className="dropdown-show-all-link"
-                  onMouseDown={this.onShowAllClick} >
+                  onMouseDown={this.onShowAllClick}
+                >
                   SHOW ALL
                   </Link>
               </li>)
@@ -122,8 +123,8 @@ class NavSearch extends Component {
 
 NavSearch.propTypes = {
   dropdownShown: PropTypes.bool,
-  artistIds: PropTypes.instanceOf(List),
-  trackIds: PropTypes.instanceOf(List),
+  artistIds: PropTypes.array,
+  trackIds: PropTypes.array,
   handleBlur: PropTypes.func,
   handleFocus: PropTypes.func,
   handleChange: PropTypes.func,
