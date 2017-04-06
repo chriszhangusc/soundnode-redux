@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import {
-  getPlaylistTrackIds,
+  getActivePlaylist,
   isPlaylistHidden,
   clearPlayQueue,
 } from 'client/redux/modules/playlist';
@@ -8,7 +8,7 @@ import {
 import Playlist from '../components/Playlist';
 
 const mapStateToProps = state => ({
-  playlistTrackIds: getPlaylistTrackIds(state),
+  playlistTrackIds: getActivePlaylist(state),
   playlistHidden: isPlaylistHidden(state),
 });
 

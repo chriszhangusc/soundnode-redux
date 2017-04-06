@@ -57,7 +57,7 @@ class App extends Component {
                   </Switch>
                 </div>
                 <Player />
-                {/*<Playlist />*/}
+                <Playlist />
               </div>
             </div>
           </div>

@@ -18,6 +18,7 @@ export const CHARTS_SPINNER_STOP = 'redux-music/charts/CHARTS_SPINNER_STOP';
 /* Reducer */
 const initialState = {
   genre: '',
+  // Visible tracks in current charts page.
   trackIds: [],
   fetching: false,
   fetchOffset: 0,
@@ -76,8 +77,9 @@ export const clearAllCharts = () => ({ type: CHARTS_CLEAR });
 
 const requestCharts = () => ({ type: CHARTS_REQUEST });
 
-const receiveCharts = normalizedCharts => ({
+const receiveCharts = (normalizedCharts, playlistName) => ({
   type: CHARTS_RECEIVED,
+  playlistName,
   payload: normalizedCharts,
   entities: normalizedCharts.entities,
 });
@@ -96,7 +98,7 @@ export function fetchCharts(genre) {
     try {
       const normalizedCharts = await fetchChartsFromSC(genre, offset);
       // #TODO: Verify results!!
-      dispatch(receiveCharts(normalizedCharts));
+      dispatch(receiveCharts(normalizedCharts, genre));
     } catch (err) {
       // console.log('error: ', err);
       dispatch(notificationFailure(err.message));

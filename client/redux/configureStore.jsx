@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import createSagaMiddleware from 'redux-saga';
+// import createSagaMiddleware from 'redux-saga';
 // Only load one file so that we don't have to load the whole lodash library
 import throttle from 'lodash/throttle';
 import createLogger from 'redux-logger';
@@ -26,7 +26,7 @@ const epicMiddleware = createEpicMiddleware(rootEpic);
 
 const configureStore = () => {
   // const persistedState = loadState();
-  const sagaMiddleware = createSagaMiddleware();
+  // const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     rootReducer,
     // persistedState,

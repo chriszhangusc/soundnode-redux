@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { List } from 'immutable';
 import MagicButton from 'client/components/MagicButton';
 import PlaylistItemContainer from '../containers/PlaylistItemContainer';
 
@@ -23,12 +22,12 @@ const Playlist = ({
       </div>
       <ul className="playlist-list">
         {
-          playlistTrackIds.map(
+          playlistTrackIds && playlistTrackIds.map(
             (trackId, idx) =>
               <PlaylistItemContainer
                 trackId={trackId}
                 index={idx + 1}
-                key={trackId}
+                key={trackId + idx}
               />
           )
         }
@@ -37,9 +36,15 @@ const Playlist = ({
   </div>
 );
 
+Playlist.defaultProps = {
+  playlistHidden: true,
+  playlistTrackIds: [],
+  handleClearPlayQueue: () => {},
+};
+
 Playlist.propTypes = {
   playlistHidden: PropTypes.bool,
-  playlistTrackIds: PropTypes.instanceOf(List),
+  playlistTrackIds: PropTypes.array,
   handleClearPlayQueue: PropTypes.func,
 };
 

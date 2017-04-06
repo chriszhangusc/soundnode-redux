@@ -89,7 +89,7 @@ PlayerVolumeControls.propTypes = {
   onVolumeHandleMouseDown: PropTypes.func,
   onVolumeMouseUp: PropTypes.func,
   onToggleMuteClick: PropTypes.func,
-  onVolumeHandleMouseMove: PropTypes.func
+  onVolumeHandleMouseMove: PropTypes.func,
 };
 
 export default PlayerVolumeControls;

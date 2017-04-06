@@ -1,10 +1,9 @@
 // The ui module is managing the UI state. Currently it is only in charge of
 // visible tracks on the current page, like everytime we switch to a new category in charts page,
 // we update the visible tracks.
-import { TRACK_RECEIVED } from 'client/redux/modules/track';
 import { CHARTS_RECEIVED } from 'client/redux/modules/charts';
 
-const VISIBLE_TRACK_LIMIT = 50;
+// const VISIBLE_TRACK_LIMIT = 50;
 
 const LOAD_VISIBLE_TRACKS = 'LOAD_VISIBLE_TRACKS';
 const CLEAR_VISIBLE_TRACKS = 'CLEAR_VISIBLE_TRACKS';
@@ -37,7 +36,7 @@ const ui = (state = INITIAL_STATE, action) => {
         visibleTrackIds: [
           ...state.visibleTrackIds,
           ...action.payload.result,
-        ].slice(0, VISIBLE_TRACK_LIMIT),
+        ],
       };
     // case TRACK_RECEIVED:
     //   return state.merge({
@@ -48,7 +47,7 @@ const ui = (state = INITIAL_STATE, action) => {
   }
 };
 
-export const getUIState = state => state.get('ui');
-export const getVisibleTrackIds = state => getUIState(state).get('visibleTrackIds');
+export const getUIState = state => state.ui;
+export const getVisibleTrackIds = state => getUIState(state).visibleTrackIds;
 
 export default ui;

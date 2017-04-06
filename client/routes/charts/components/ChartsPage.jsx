@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { GENRES, DEFAULT_GENRE } from 'client/constants/ChartsConsts';
 import { loadChartsPage, changeGenre } from 'client/redux/modules/charts';
+import { changeActivePlaylistName } from 'client/redux/modules/playlist';
 import ChartsSongCardListContainer from '../containers/ChartsSongCardListContainer';
 import GenreCharts from './GenreCharts';
 
@@ -17,11 +18,11 @@ class ChartsPage extends Component {
     this.onPageMountOrChange = this.onPageMountOrChange.bind(this);
   }
 
-  /* Prepare data for the view */
+  /* First load */
   componentWillMount() {
     this.onPageMountOrChange(this.props);
   }
-
+  /* Change to different routes */
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.genre !== this.props.match.params.genre) {
       this.onPageMountOrChange(nextProps);
@@ -39,6 +40,7 @@ class ChartsPage extends Component {
     const genre = valid ? genreFromUrl : DEFAULT_GENRE;
     if (!valid) history.push(`/charts/${DEFAULT_GENRE}`);
     dispatch(changeGenre(genre));
+    dispatch(changeActivePlaylistName(genre));
     dispatch(loadChartsPage(genre));
   }
 

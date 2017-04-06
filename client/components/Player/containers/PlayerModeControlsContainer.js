@@ -1,18 +1,17 @@
 import { connect } from 'react-redux';
 // import { getPlayerMode, isPlaylistHidden } from 'client/redux/modules/reducers';
-import { getPlayerMode, toggleOrChangePlayMode, REPEAT, SHUFFLE } from 'client/redux/modules/player';
-import { togglePlaylist } from 'client/redux/modules/playlist';
+import { getPlayerMode, togglePlayMode, REPEAT, SHUFFLE } from 'client/redux/modules/player';
+import { togglePlaylist, isPlaylistHidden } from 'client/redux/modules/playlist';
 import PlayerModeControls from '../components/PlayerModeControls';
 
 const mapStateToProps = state => ({
   mode: getPlayerMode(state),
-  // playlistHidden: isPlaylistHidden(state)
-  playlistHidden: true,
+  playlistHidden: isPlaylistHidden(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onRepeatClick: () => { dispatch(toggleOrChangePlayMode(REPEAT)); },
-  onShuffleClick: () => { dispatch(toggleOrChangePlayMode(SHUFFLE)); },
+  onRepeatClick: () => { dispatch(togglePlayMode(REPEAT)); },
+  onShuffleClick: () => { dispatch(togglePlayMode(SHUFFLE)); },
   onTogglePlaylistClick: () => { dispatch(togglePlaylist()); },
 });
 

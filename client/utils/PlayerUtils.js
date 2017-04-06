@@ -13,7 +13,7 @@ export function computeNewTimeOnSeek(seekBar, duration, mouseEvent) {
 
 export function computeNewVolumeOnSeek(volumeBar, mouseEvent) {
   const percent = computeSeekPercent(
-    mouseEvent.clientX, volumeBar.offsetLeft, volumeBar.offsetWidth
+    mouseEvent.clientX, volumeBar.offsetLeft, volumeBar.offsetWidth,
   );
   return percent * 1.0;
 }
