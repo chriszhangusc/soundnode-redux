@@ -86,6 +86,8 @@ export const getActivePlaylist = (state) => {
 
 /* Customized selector creators */
 // create a "selector creator" that uses lodash.isEqual instead of ===
+
+// #TODO: This should be placed elsewhere.
 export const createDeepEqualSelector = createSelectorCreator(
   defaultMemoize,
   isEqual,
@@ -96,6 +98,14 @@ export const getShufflePlaylist = createDeepEqualSelector(
   getActivePlaylist,
   playlist => shuffle(playlist),
 );
+
+// export function getTransformedShufflePlaylist(state) {
+//   const shufflePlaylist = getShufflePlaylist(state);
+//   const playerTrackId = getPlayerTrackId(state);
+//   const idx = shufflePlaylist.indexOf(playerTrackId);
+//   if (idx < 0) return shufflePlaylist;
+//   return concat(playerTrackId, shufflePlaylist.filter(x => x !== playerTrackId));
+// }
 
 // If under shuffle mode, return the shuffled playlist, else return the activePlaylist
 export const getPlaylistByMode = (state) => {

@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import SongCardContainer from 'client/components/SongCard';
 import Spinner from 'client/components/Spinner';
 import infiniteScroll from 'client/components/Hocs/InfiniteScroll';
+import shortid from 'shortid';
 
 const renderSongCardList = (trackIds, playlistName) => {
   // We are using index + trackId as the key because sometimes it will have flattenChildren warning
@@ -9,8 +10,13 @@ const renderSongCardList = (trackIds, playlistName) => {
   return (
     <div className="song-card-list-container">
       {
-        trackIds.map((trackId, index) => (
-          <SongCardContainer trackId={trackId} trackIds={trackIds} playlistName={playlistName} key={index + trackId} />
+        trackIds.map(trackId => (
+          <SongCardContainer
+            trackId={trackId}
+            trackIds={trackIds}
+            playlistName={playlistName}
+            key={shortid.generate()}
+          />
         ))
       }
     </div>

@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import shortid from 'shortid';
 import MagicButton from 'client/components/MagicButton';
 import PlaylistItemContainer from '../containers/PlaylistItemContainer';
 
@@ -27,7 +28,7 @@ const Playlist = ({
               <PlaylistItemContainer
                 trackId={trackId}
                 index={idx + 1}
-                key={trackId + idx}
+                key={shortid.generate()}
               />
           )
         }
