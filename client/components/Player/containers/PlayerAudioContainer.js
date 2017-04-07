@@ -7,7 +7,7 @@ import {
   isPlayerPlaying,
   isPlayerSeeking,
   updateTimeOnPlay,
-  sagaPlayNextSong,
+  playNextSong,
 } from 'client/redux/modules/player';
 
 import PlayerAudio from '../components/PlayerAudio';
@@ -24,7 +24,7 @@ const mapStateToProps = (state, { playerTrack }) => ({
 const mapDispatchToProps = dispatch => ({
   // Update time in store
   onTimeUpdate: (e) => { dispatch(updateTimeOnPlay(e.target.currentTime)); },
-  onEnded: () => { dispatch(sagaPlayNextSong()); },
+  onEnded: () => { dispatch(playNextSong()); },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerAudio);
