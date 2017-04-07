@@ -10,6 +10,7 @@ import entitiesReducer from './modules/entities';
 import searchReducer, { dropdownSearchEpic } from './modules/search';
 import userReducer from './modules/user';
 
+
 export const rootEpic = combineEpics(
   dropdownSearchEpic,
 );

@@ -47,14 +47,14 @@ class PlayerVolumeControls extends Component {
       <button
         title="Mute"
         className="icon-button"
-        onClick={onToggleMuteClick} >
+        onClick={onToggleMuteClick}
+      >
         <i className={`icon ${icon}`} />
       </button>
     );
   }
 
   render() {
-    console.log('Render: PlayerVolumeControls');
     const { volume, onVolumeBarMouseDown, onVolumeHandleMouseDown } = this.props;
 
     return (

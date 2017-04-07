@@ -6,6 +6,7 @@ import {
   shufflePlaylist,
   clearShufflePlaylist,
   getActivePlaylist,
+  getPlaylistByMode,
 } from 'client/redux/modules/playlist';
 
 import { CLEAR_PLAY_QUEUE } from './playlist';
@@ -272,11 +273,7 @@ export function changeSongAndPlay(newTrackId) {
 // When we click play on the song card.
 export function playSongByMode(trackId) {
   return (dispatch, getState) => {
-    const state = getState();
-    const inShuffleMode = isInShuffleMode(state);
-    if (inShuffleMode) {
-      shufflePlaylist();
-    }
+    // const state = getState();
     dispatch(changeSongAndPlay(trackId));
   };
 }
@@ -288,7 +285,7 @@ export function playSongByAction(actionType = NEXT) {
     const mode = getPlayerMode(state);
     let nextTrackId = null;
     const curTrackId = getPlayerTrackId(state);
-    const activePlaylist = getActivePlaylist(state);
+    const activePlaylist = getPlaylistByMode(state);
     if (mode === REPEAT) {
       nextTrackId = curTrackId;
     } else {
@@ -322,10 +319,8 @@ export function togglePlayMode(newMode) {
     const state = getState();
     const currMode = getPlayerMode(state);
     if (currMode === newMode) {
-      if (currMode === SHUFFLE) dispatch(clearShufflePlaylist());
       dispatch(changePlayMode(DEFAULT_MODE));
     } else {
-      if (newMode === SHUFFLE) dispatch(shufflePlaylist());
       dispatch(changePlayMode(newMode));
     }
   };

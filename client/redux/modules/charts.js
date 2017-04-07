@@ -5,8 +5,6 @@ import { formatGenre } from 'client/utils/FormatUtils';
 import { TOP_COUNT, LIMIT } from 'client/constants/ChartsConsts';
 import { fetchChartsFromSC } from 'client/api/sc/v2';
 import { notificationFailure } from 'client/redux/modules/notification';
-import { isInShuffleMode } from 'client/redux/modules/player';
-import { shufflePlaylist, getActivePlaylistName, getVisiblePlaylistName } from 'client/redux/modules/playlist';
 /* Action Constants */
 // Naming convention: NOUN_VERB
 export const CHARTS_GENRE_CHANGE = 'redux-music/charts/CHARTS_GENRE_CHANGE';
@@ -100,14 +98,9 @@ export function fetchChartsAndUpdatePlaylist(genre) {
       const normalizedCharts = await fetchChartsFromSC(genre, offset);
       // #TODO: Verify results!!
       dispatch(receiveCharts(normalizedCharts, genre));
-      // If the current visible playlist is the current active playlist,
-      // and in shuffle mode, we need to reshuffle to keep shuffle playlist up-to-date.
-      if (getActivePlaylistName(state) === genre && isInShuffleMode(state)) {
-        dispatch(shufflePlaylist());
-      }
     } catch (err) {
-      // console.log('error: ', err);
-      dispatch(notificationFailure(err.message));
+      console.log('error: ', err);
+      dispatch(notificationFailure('Something is wrong!'));
     } finally {
       // Stop loading spinner
       dispatch(stopSpinner());
