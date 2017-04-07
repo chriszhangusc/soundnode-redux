@@ -45,11 +45,11 @@ export default store => next => (action) => {
   };
 
   const {
-        endpoint,
+    endpoint,
     types,
     query,
     schema,
-    fetchOptions
+    fetchOptions,
     } = callAPI;
   const [requestType, successType, failureType] = types;
   // Start request
@@ -69,5 +69,5 @@ export default store => next => (action) => {
       type: failureType,
       error: error.message || 'Unknown error',
     })),
-    );
+  );
 };

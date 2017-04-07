@@ -5,7 +5,8 @@ import { formatGenre } from 'client/utils/FormatUtils';
 import { TOP_COUNT, LIMIT } from 'client/constants/ChartsConsts';
 import { fetchChartsFromSC } from 'client/api/sc/v2';
 import { notificationFailure } from 'client/redux/modules/notification';
-
+import { isInShuffleMode } from 'client/redux/modules/player';
+import { shufflePlaylist, getActivePlaylistName, getVisiblePlaylistName } from 'client/redux/modules/playlist';
 /* Action Constants */
 // Naming convention: NOUN_VERB
 export const CHARTS_GENRE_CHANGE = 'redux-music/charts/CHARTS_GENRE_CHANGE';
@@ -90,7 +91,7 @@ const stopSpinner = () => ({ type: CHARTS_SPINNER_STOP });
 
 // http://localhost:3001/sc/api-v2/charts?genre=country&limit=20&offset=0&client
 // _id=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
-export function fetchCharts(genre) {
+export function fetchChartsAndUpdatePlaylist(genre) {
   return async (dispatch, getState) => {
     const state = getState();
     const offset = getChartsFetchOffset(state);
@@ -99,6 +100,11 @@ export function fetchCharts(genre) {
       const normalizedCharts = await fetchChartsFromSC(genre, offset);
       // #TODO: Verify results!!
       dispatch(receiveCharts(normalizedCharts, genre));
+      // If the current visible playlist is the current active playlist,
+      // and in shuffle mode, we need to reshuffle to keep shuffle playlist up-to-date.
+      if (getActivePlaylistName(state) === genre && isInShuffleMode(state)) {
+        dispatch(shufflePlaylist());
+      }
     } catch (err) {
       // console.log('error: ', err);
       dispatch(notificationFailure(err.message));
@@ -115,7 +121,7 @@ export function loadChartsPage(genre) {
     // Remove all old search results because we do not want them to interfere the new ones.
     dispatch(clearAllCharts());
 
-    dispatch(fetchCharts(formattedGenre));
+    dispatch(fetchChartsAndUpdatePlaylist(formattedGenre));
   };
 }
 
@@ -128,7 +134,7 @@ export function loadMoreCharts() {
     if (!chartsFetching && size < TOP_COUNT) {
       const genre = getChartsGenre(state);
       const formattedGenre = formatGenre(genre);
-      dispatch(fetchCharts(formattedGenre));
+      dispatch(fetchChartsAndUpdatePlaylist(formattedGenre));
     }
   };
 }

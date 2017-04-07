@@ -3,15 +3,8 @@ import { getLastVolume, setLastVolume } from 'client/utils/LocalStorageUtils';
 
 // Relies heavily on playlist module
 import {
-  getPlaylistTrackIds,
-  updatePlaylistIfNeeded,
-  addToPlayQueueIfNeeded,
-  getShuffleDraw,
   shufflePlaylist,
   clearShufflePlaylist,
-  getShuffleTrackId,
-  getLastTrackIdFromHistoryStack,
-  getTrackIdByAction,
   getActivePlaylist,
 } from 'client/redux/modules/playlist';
 
@@ -148,6 +141,7 @@ export const getCurrentTime = state => getPlayerState(state).currentTime;
 export const getPlayerMode = state => getPlayerState(state).mode;
 export const isVolumeSeeking = state => getPlayerState(state).volumeSeeking;
 export const getCurrentVolume = state => getPlayerState(state).volume;
+
 /* Return if the current track(byId) is loaded in player. (Paused or Playing) */
 export function isTrackActive(state, trackId) {
   const playerTrackId = getPlayerTrackId(state);
@@ -260,7 +254,6 @@ export function toggleMute() {
   };
 }
 
-
 // Change to new song or just play paused current song.
 export function changeSongAndPlay(newTrackId) {
   return (dispatch, getState) => {
@@ -276,41 +269,19 @@ export function changeSongAndPlay(newTrackId) {
   };
 }
 
-// When we specificly click the song to play, not when we click next or prev
-export function playSongAndUpdatePlaylist(newTrackId) {
-  return (dispatch) => {
-    dispatch(updatePlaylistIfNeeded());
-    dispatch(changeSongAndPlay(newTrackId));
+// When we click play on the song card.
+export function playSongByMode(trackId) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const inShuffleMode = isInShuffleMode(state);
+    if (inShuffleMode) {
+      shufflePlaylist();
+    }
+    dispatch(changeSongAndPlay(trackId));
   };
 }
 
-
-// action being NEXT or PREV, passed in watch function.
-// function playSongByMode(action = NEXT) {
-//   return (dispatch, getState) => {
-//     const state = getState();
-//     const mode = getPlayerMode(state);
-//     const curTrackId = getPlayerTrackId(state);
-//     let nextTrackId = null;
-//     if (action === NEXT) {
-//       // Get next trackId
-//       if (mode === SHUFFLE) {
-//         nextTrackId = getShuffleTrackId(state);
-//       } else if (mode === LOOP) {
-//         const playlist = getPlaylistTrackIds(state);
-//         const curIdx = playlist.indexOf(curTrackId);
-//         nextTrackId = playlist[curIdx === playlist.length - 1 ? 0 : curIdx + 1];
-//       } else if (mode === REPEAT) {
-//         nextTrackId = curTrackId;
-//       }
-//     } else if (action === PREV) {
-//       nextTrackId = getLastTrackIdFromHistoryStack(state);
-//     }
-
-//     dispatch(changeSongAndPlay(nextTrackId));
-//   };
-// }
-
+// When we click on next or prev.
 export function playSongByAction(actionType = NEXT) {
   return (dispatch, getState) => {
     const state = getState();

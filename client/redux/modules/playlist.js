@@ -1,7 +1,7 @@
 import { CHARTS_RECEIVED } from 'client/redux/modules/charts';
-import { concat, last, head, initial, tail, shuffle, find } from 'lodash';
-import { LOOP, REPEAT, SHUFFLE, PREV, NEXT } from 'client/constants/PlayerConsts';
-import { getPlayerTrackId, isInShuffleMode, getPlayerMode } from './player';
+import { concat, shuffle } from 'lodash';
+// import { LOOP, REPEAT, SHUFFLE, PREV, NEXT } from 'client/constants/PlayerConsts';
+import { getPlayerTrackId, isInShuffleMode } from './player';
 /* Constants */
 export const UPDATE_PLAYLIST = 'redux-music/playlist/UPDATE_PLAYLIST';
 export const ADD_TO_PLAYLIST = 'redux-music/playlist/ADD_TO_PLAYLIST';
@@ -11,10 +11,13 @@ export const APPEND_TRACK_TO_PLAYLIST = 'redux-music/playlist/APPEND_TRACK_TO_PL
 export const UPDATE_SHUFFLE_PLAYLIST = 'redux-music/playlist/UPDATE_SHUFFLE_PLAYLIST';
 export const CLEAR_SHUFFLE_PLAYLIST = 'redux-music/playlist/CLEAR_SHUFFLE_PLAYLIST';
 export const CHANGE_ACTIVE_PLAYLIST_NAME = 'redux-music/playlist/CHANGE_ACTIVE_PLAYLIST_NAME';
+export const CHANGE_VISIBLE_PLAYLIST_NAME = 'redux-music/playlist/CHANGE_VISIBLE_PLAYLIST_NAME';
+
 /* Reducer */
 const initialState = {
   // The name of currently active playlist
   activePlaylistName: '',
+  visiblePlaylistName: '',
   // The shuffled or modded playlist
   shufflePlaylist: [],
   hidden: true,
@@ -44,6 +47,13 @@ export default function playlistReducer(state = initialState, action) {
       return {
         ...state,
         [action.playlistName]: (state[action.playlistName] ? [...state[action.playlistName], ...action.payload.result] : [...action.payload.result]).slice(0, 50),
+        // shufflePlaylist: [...state.shufflePlaylist, ...action.payload.result],
+      };
+
+    case CHANGE_VISIBLE_PLAYLIST_NAME:
+      return {
+        ...state,
+        visiblePlaylistName: action.payload,
       };
 
     case CHANGE_ACTIVE_PLAYLIST_NAME:
@@ -71,24 +81,34 @@ export const getPlaylistState = state => state.playlist;
 
 export const isPlaylistHidden = state => getPlaylistState(state).hidden;
 export const getActivePlaylistName = state => getPlaylistState(state).activePlaylistName;
-
+export const getVisiblePlaylistName = state => getVisiblePlaylistName(state).visiblePlaylistName;
 export const getShufflePlaylist = state => getPlaylistState(state).shufflePlaylist;
 
 export const getActivePlaylist = (state) => {
   const key = getActivePlaylistName(state);
   const playlistState = getPlaylistState(state);
-  const shuffleMode = isInShuffleMode(state);
-  // if (!playlistState[key]) return [];
-  return shuffleMode ? getShufflePlaylist(state) : playlistState[key];
+  return playlistState[key];
 };
 
+// If under shuffle mode, return the shuffled playlist, else return the activePlaylist
+export const getPlaylistByMode = (state) => {
+  const inShuffleMode = isInShuffleMode(state);
+  return inShuffleMode ? getShufflePlaylist(state) : getActivePlaylist(state);
+};
 
 /* Actions */
+
+export const changeVisiblePlaylistName = playlistName => ({
+  type: CHANGE_VISIBLE_PLAYLIST_NAME,
+  payload: playlistName,
+});
 
 export const changeActivePlaylistName = playlistName => ({
   type: CHANGE_ACTIVE_PLAYLIST_NAME,
   payload: playlistName,
 });
+
+
 
 export const togglePlaylist = () => ({ type: TOGGLE_PLAYLIST });
 
@@ -103,10 +123,9 @@ export const updateShufflePlaylist = playlist => ({
 });
 
 export const clearShufflePlaylist = () => ({ type: CLEAR_SHUFFLE_PLAYLIST });
-/* Thunks logic */
 
-// For single track
-// On shuffle icon click
+/* Thunks logic */
+// Shuffle playlist, if there is a currently playing song, place it at first place.
 export function shufflePlaylist() {
   return (dispatch, getState) => {
     const state = getState();
@@ -134,31 +153,22 @@ export function addToPlayQueueIfNeeded(trackId) {
   };
 }
 
-// // Pull playlist from ui visibleTrackIds
-// export function updatePlaylistIfNeeded() {
-//   return (dispatch, getState) => {
-//     const state = getState();
-//     // This is the playlist with original order
-//     const originalPlaylist = getOriginalPlaylist(state);
-//     const visibleTrackIds = getVisibleTrackIds(state);
-//     // If all playlist in visibleTrackIds is included in originalPlaylist already, do not update.
-//     const subset = visibleTrackIds.filter(
-//       x => originalPlaylist.indexOf(x) > -1,
-//     ).length === visibleTrackIds.length;
-
-//     if (!subset) {
-//       dispatch(updatePlaylist(visibleTrackIds));
-//       // We need to keep shuffle array up-to-date
-//       // dispatch(shufflePlaylist());
-//     }
-//   };
-// }
-
 export function clearPlayQueue() {
   return {
     type: CLEAR_PLAY_QUEUE,
     payload: {
       notificationSuccess: 'Play Queue Cleared!',
     },
+  };
+}
+
+export function updateActivePlaylist(playlistName) {
+  return (dispatch, getState) => {
+    // Also update shuffle playlist if necessary.
+    const state = getState();
+    if (getVisiblePlaylistName(state) !== getActivePlaylistName(state)) {
+      dispatch(shufflePlaylist());
+    }
+    dispatch(changeActivePlaylistName(playlistName));
   };
 }

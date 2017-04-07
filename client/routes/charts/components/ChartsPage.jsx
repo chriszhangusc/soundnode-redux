@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { GENRES, DEFAULT_GENRE } from 'client/constants/ChartsConsts';
 import { loadChartsPage, changeGenre } from 'client/redux/modules/charts';
-import { changeActivePlaylistName } from 'client/redux/modules/playlist';
+import { changeVisiblePlaylistName } from 'client/redux/modules/playlist';
 import ChartsSongCardListContainer from '../containers/ChartsSongCardListContainer';
 import GenreCharts from './GenreCharts';
 
@@ -39,8 +39,9 @@ class ChartsPage extends Component {
     // invalid genre like this: http://localhost:3000/top50/All-Music/adfasdfasdfasdf
     const genre = valid ? genreFromUrl : DEFAULT_GENRE;
     if (!valid) history.push(`/charts/${DEFAULT_GENRE}`);
+    // On route change, change visible playlist
+    dispatch(changeVisiblePlaylistName(genre));
     dispatch(changeGenre(genre));
-    dispatch(changeActivePlaylistName(genre));
     dispatch(loadChartsPage(genre));
   }
 
@@ -64,24 +65,3 @@ ChartsPage.propTypes = {
 };
 
 export default connect()(ChartsPage);
-
-
-
-// // Move these hooks into seperate files
-//   const onChartsPageEnter = (nextState, replace) => {
-//     const { dispatch } = store;
-//     const genreFromUrl = nextState.params.genre;
-//     const valid = GENRES.filter(item => item.link.indexOf(genreFromUrl) > -1).length > 0;
-
-//     // Handle routes that are partially matched but containing
-//     // invalid genre like this: http://localhost:3000/top50/All-Music/adfasdfasdfasdf
-//     const genre = valid ? genreFromUrl : DEFAULT_GENRE;
-//     if (!valid) replace(`/charts/${DEFAULT_GENRE}`);
-//     dispatch(loadCharts(genre));
-//   };
-
-//   const onChartsPageLeave = () => {
-//     console.log('onChartsPageLeave');
-//     const { dispatch } = store;
-//     dispatch(clearVisibleTracks());
-//   };

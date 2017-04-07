@@ -4,10 +4,14 @@ import { formatImageUrl } from 'client/utils/FormatUtils';
 import {
   isTrackActive,
   isTrackPlaying,
-  changeSongAndPlay,
+  playSongByMode,
   playSong,
   pauseSong,
 } from 'client/redux/modules/player';
+
+import {
+  changeActivePlaylistName,
+} from 'client/redux/modules/playlist';
 
 import SongCardImage from '../components/SongCardImage';
 
@@ -18,13 +22,15 @@ const mapStateToProps = (state, { track }) => ({
 });
 
 // This is useful when you need to compute some action using stateProps
-const mergeProps = (stateProps, { dispatch }, { track }) => ({
+const mergeProps = (stateProps, { dispatch }, { track, playlistName }) => ({
   ...stateProps,
   // Besides doing it this way, we could also do it in a thunk function
   //  or pass all args into components and assemble there
   handleImageClick() {
     if (!stateProps.active) {
-      dispatch(changeSongAndPlay(track.id));
+      // Update activePlaylist name!
+      dispatch(changeActivePlaylistName(playlistName));
+      dispatch(playSongByMode(track.id));
     } else {
       dispatch(stateProps.playing ? pauseSong() : playSong());
     }
