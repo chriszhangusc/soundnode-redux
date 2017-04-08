@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
+import { isPlayerPlaying } from 'client/redux/modules/player/selectors';
 import {
-  isPlayerPlaying,
-  playSong,
-  pauseSong,
   playNextSong,
   playPrevSong,
-} from 'client/redux/modules/player';
+  playSong,
+  pauseSong,
+} from 'client/redux/modules/player/actions';
+
 import PlayerControls from '../components/PlayerControls';
 
 const mapStateToProps = state => ({

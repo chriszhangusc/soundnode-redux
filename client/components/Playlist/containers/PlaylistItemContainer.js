@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { getTrackById, getArtistByTrackId } from 'client/redux/modules/entities';
-import { isTrackActive, changeSongAndPlay } from 'client/redux/modules/player';
+import { isTrackActive } from 'client/redux/modules/player/selectors';
+import { changeSongAndPlay } from 'client/redux/modules/player/actions';
+
 import { isTrackLiked, startLikeSong, startUnlikeSong } from 'client/redux/modules/user';
 
 import PlaylistItem from '../components/PlaylistItem';

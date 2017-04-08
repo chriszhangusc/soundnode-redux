@@ -1,14 +1,17 @@
 import { connect } from 'react-redux';
 import { formatStreamUrl } from 'client/utils/FormatUtils';
 import {
+  updateTimeOnPlay,
+  playNextSong,
+} from 'client/redux/modules/player/actions';
+
+import {
   getCurrentTime,
   getCurrentVolume,
   getPlayerMode,
   isPlayerPlaying,
   isPlayerSeeking,
-  updateTimeOnPlay,
-  playNextSong,
-} from 'client/redux/modules/player';
+} from 'client/redux/modules/player/selectors';
 
 import PlayerAudio from '../components/PlayerAudio';
 

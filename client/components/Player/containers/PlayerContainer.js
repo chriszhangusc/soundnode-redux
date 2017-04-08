@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getCurrentPlayerTrack } from 'client/redux/modules/player';
+import { getCurrentPlayerTrack } from 'client/redux/modules/player/selectors';
 import PlayerLayout from '../components/PlayerLayout';
 
 const mapStateToProps = state => ({

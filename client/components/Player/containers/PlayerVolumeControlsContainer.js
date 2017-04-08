@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
 import { computeNewVolumeOnSeek } from 'client/utils/PlayerUtils';
 import {
-  getCurrentVolume,
-  isVolumeSeeking,
   beginVolumeSeek,
   changeVolume,
   toggleMute,
   updateVolumeAndEndSeek,
-} from 'client/redux/modules/player';
+} from 'client/redux/modules/player/actions';
+import {
+  getCurrentVolume,
+  isVolumeSeeking,
+} from 'client/redux/modules/player/selectors';
 import PlayerVolumeControls from '../components/PlayerVolumeControls';
 
 const mapStateToProps = state => ({

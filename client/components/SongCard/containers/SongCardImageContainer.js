@@ -4,14 +4,17 @@ import { formatImageUrl } from 'client/utils/FormatUtils';
 import {
   isTrackActive,
   isTrackPlaying,
-  playSongByMode,
+} from 'client/redux/modules/player/selectors';
+
+import {
+  changeSongAndPlay,
   playSong,
   pauseSong,
-} from 'client/redux/modules/player';
+} from 'client/redux/modules/player/actions';
 
 import {
   changeActivePlaylistName,
-} from 'client/redux/modules/playlist';
+} from 'client/redux/modules/playlist/actions';
 
 import SongCardImage from '../components/SongCardImage';
 
@@ -30,7 +33,7 @@ const mergeProps = (stateProps, { dispatch }, { track, playlistName }) => ({
     if (!stateProps.active) {
       // Update activePlaylist name!
       dispatch(changeActivePlaylistName(playlistName));
-      dispatch(playSongByMode(track.id));
+      dispatch(changeSongAndPlay(track.id));
     } else {
       dispatch(stateProps.playing ? pauseSong() : playSong());
     }

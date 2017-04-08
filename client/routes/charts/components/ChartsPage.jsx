@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { GENRES, DEFAULT_GENRE } from 'client/constants/ChartsConsts';
 import { loadChartsPage, changeGenre } from 'client/redux/modules/charts';
-import { changeVisiblePlaylistName } from 'client/redux/modules/playlist';
+import { changeVisiblePlaylistName } from 'client/redux/modules/playlist/actions';
 import ChartsSongCardListContainer from '../containers/ChartsSongCardListContainer';
 import GenreCharts from './GenreCharts';
 

@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { REPEAT, SHUFFLE } from 'client/redux/modules/player';
+import { REPEAT, SHUFFLE } from 'client/redux/modules/player/consts';
 // Stateless functional component
 class PlayerModeControls extends Component {
 

@@ -1,8 +1,8 @@
 import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux';
 import chartsReducer from './modules/charts';
-import playerReducer from './modules/player';
-import playlistReducer from './modules/playlist';
+import playerReducer from './modules/player/reducer';
+import playlistReducer from './modules/playlist/reducer';
 import artistReducer from './modules/artist';
 import trackReducer from './modules/track';
 import uiReducer from './modules/ui';
