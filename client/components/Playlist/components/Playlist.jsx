@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import MagicButton from 'client/components/MagicButton';
 import PlaylistItemContainer from '../containers/PlaylistItemContainer';

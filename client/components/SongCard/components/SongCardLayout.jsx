@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
-// import Track from 'client/models/Track';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import SongCardInfoContainer from '../containers/SongCardInfoContainer';
 import SongCardControlsContainer from '../containers/SongCardControlsContainer';
 import SongCardImageContainer from '../containers/SongCardImageContainer';

@@ -1,8 +1,9 @@
+import { clearShufflePlaylist, shufflePlaylist } from 'client/redux/modules/playlist/actions';
 import { getPlaylistByMode } from 'client/redux/modules/playlist/selectors';
 
 import { getLastVolume, setLastVolume } from 'client/utils/LocalStorageUtils';
 
-import { DEFAULT_MODE, REPEAT, NEXT, PREV } from './consts';
+import { DEFAULT_MODE, REPEAT, NEXT, PREV, SHUFFLE } from './consts';
 
 
 import {
@@ -182,10 +183,12 @@ export function togglePlayMode(newMode) {
   return (dispatch, getState) => {
     const state = getState();
     const currMode = getPlayerMode(state);
-    if (currMode === newMode) {
+    if (currMode === newMode) { /* Toggle off current mode, set to default mode */
       dispatch(changePlayMode(DEFAULT_MODE));
-    } else {
+      if (newMode === SHUFFLE) dispatch(clearShufflePlaylist());
+    } else { /* Toggle on new mode */
       dispatch(changePlayMode(newMode));
+      if (newMode === SHUFFLE) dispatch(shufflePlaylist());
     }
   };
 }

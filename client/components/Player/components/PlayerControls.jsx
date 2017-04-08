@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import MagicButton from 'client/components/MagicButton';
 
 class PlayerControls extends Component {

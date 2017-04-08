@@ -23,8 +23,10 @@ export const getActivePlaylist = (state) => {
 //   playlist => shuffle(playlist),
 // );
 
+export const getShufflePlaylist = state => getPlaylistState(state).shufflePlaylist;
+
 /* Old shuffle implementation, concise but hard to manipulate */
-export const getShufflePlaylist = state => shuffle(getActivePlaylist(state));
+// export const getShufflePlaylist = state => shuffle(getActivePlaylist(state));
 
 // If under shuffle mode, return the shuffled playlist, else return the activePlaylist
 export const getPlaylistByMode = (state) => {

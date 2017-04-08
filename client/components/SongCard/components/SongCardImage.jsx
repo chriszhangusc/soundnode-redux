@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import MagicButton from 'client/components/MagicButton';
 
 class SongCardImage extends React.Component {

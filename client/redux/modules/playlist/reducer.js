@@ -5,6 +5,8 @@ import {
   APPEND_TRACK_TO_PLAYLIST,
   CHANGE_VISIBLE_PLAYLIST_NAME,
   CHANGE_ACTIVE_PLAYLIST_NAME,
+  UPDATE_SHUFFLE_PLAYLIST,
+  CLEAR_SHUFFLE_PLAYLIST,
 } from './types';
 /* Reducer */
 const initialState = {
@@ -13,12 +15,23 @@ const initialState = {
   visiblePlaylistName: '',
   // The shuffled or modded playlist
   hidden: true,
-  shuffleDraw: [],
-  shufflePlayed: [],
+  shufflePlaylist: [],
 };
 
 export default function playlistReducer(state = initialState, action) {
   switch (action.type) {
+
+    case UPDATE_SHUFFLE_PLAYLIST:
+      return {
+        ...state,
+        shufflePlaylist: [...action.payload],
+      };
+
+    case CLEAR_SHUFFLE_PLAYLIST:
+      return {
+        ...state,
+        shufflePlaylist: [],
+      };
 
     case TOGGLE_PLAYLIST:
       return {

@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { REPEAT } from 'client/redux/modules/player/consts';
 
 class PlayerAudio extends Component {

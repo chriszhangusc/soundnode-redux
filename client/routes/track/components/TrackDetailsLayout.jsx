@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import Spinner from 'client/components/Spinner';
 // import Track from 'client/models/Track';
 import { Map } from 'immutable';
