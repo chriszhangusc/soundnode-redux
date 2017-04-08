@@ -1,4 +1,6 @@
-import { shuffle } from 'lodash';
+import { getPlayerTrackId, isInShuffleMode } from 'client/redux/modules/player/selectors';
+import { concat, shuffle } from 'lodash';
+
 import {
   CHANGE_VISIBLE_PLAYLIST_NAME,
   CHANGE_ACTIVE_PLAYLIST_NAME,
@@ -9,9 +11,17 @@ import {
   UPDATE_SHUFFLE_PLAYLIST,
 } from './types';
 
-import { getShufflePlaylist } from './selectors';
-
+import { getActivePlaylist, getVisiblePlaylistName, getActivePlaylistName } from './selectors';
 /* Action Creators */
+
+export function clearPlayQueue() {
+  return {
+    type: CLEAR_PLAY_QUEUE,
+    payload: {
+      notificationSuccess: 'Play Queue Cleared!',
+    },
+  };
+}
 
 export const clearShufflePlaylist = () => ({
   type: CLEAR_SHUFFLE_PLAYLIST,
@@ -41,12 +51,36 @@ export const appendTrackToPlaylist = trackId => ({
 
 /* Thunks logic */
 
+
+// Shift an element to the head of the array, if element is not in the array
+function shiftToFront(arr, target) {
+  if (!arr.indexOf(target)) return arr;
+  return concat(target, arr.filter(x => x !== target));
+}
+
 export function shufflePlaylist() {
   return (dispatch, getState) => {
     const state = getState();
-    const activeShufflePlaylist = getShufflePlaylist(state);
-    const shuffled = shuffle(activeShufflePlaylist);
+    const activePlaylist = getActivePlaylist(state);
+    const playerTrackId = getPlayerTrackId(state);
+    // Every time we reshuffle the playlist, we need to move the current playing track to the 
+    // front.
+    const shuffled = shiftToFront(shuffle(activePlaylist), playerTrackId);
+
     dispatch(updateShufflePlaylist(shuffled));
+  };
+}
+
+// Called whenever the original playlist gets updated
+export function updateShufflePlaylistIfNeeded() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const inShuffleMode = isInShuffleMode(state);
+    const visiblePlaylistName = getVisiblePlaylistName(state);
+    const activePlaylistName = getActivePlaylistName(state);
+    if (inShuffleMode && (visiblePlaylistName === activePlaylistName)) {
+      dispatch(shufflePlaylist());
+    }
   };
 }
 
@@ -63,11 +97,19 @@ export function addToPlayQueueIfNeeded(trackId) {
   };
 }
 
-export function clearPlayQueue() {
-  return {
-    type: CLEAR_PLAY_QUEUE,
-    payload: {
-      notificationSuccess: 'Play Queue Cleared!',
-    },
+
+
+// If playlistName is different with activePlaylistName,
+// which means we need to switch to new playlist
+export function switchPlaylistIfNeeded(newPlaylistName) {
+  return (dispatch, getState) => {
+    // Update activePlaylist name!
+    const state = getState();
+    const activePlaylistName = getActivePlaylistName(state);
+    if (activePlaylistName !== newPlaylistName) {
+      dispatch(changeActivePlaylistName(newPlaylistName));
+      dispatch(updateShufflePlaylistIfNeeded());
+    }
   };
 }
+

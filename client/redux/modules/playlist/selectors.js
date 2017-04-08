@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import { shuffle } from 'lodash';
 
 import { isInShuffleMode } from 'client/redux/modules/player/selectors';
 
@@ -7,7 +6,7 @@ import { isInShuffleMode } from 'client/redux/modules/player/selectors';
 export const getPlaylistState = state => state.playlist;
 export const isPlaylistHidden = state => getPlaylistState(state).hidden;
 export const getActivePlaylistName = state => getPlaylistState(state).activePlaylistName;
-export const getVisiblePlaylistName = state => getVisiblePlaylistName(state).visiblePlaylistName;
+export const getVisiblePlaylistName = state => getPlaylistState(state).visiblePlaylistName;
 export const getShuffleDraw = state => getPlaylistState(state).shuffleDraw;
 export const getShufflePlayed = state => getPlaylistState(state).shufflePlayed;
 

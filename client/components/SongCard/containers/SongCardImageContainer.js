@@ -14,6 +14,8 @@ import {
 
 import {
   changeActivePlaylistName,
+  updateShufflePlaylistIfNeeded,
+  switchPlaylistIfNeeded,
 } from 'client/redux/modules/playlist/actions';
 
 import SongCardImage from '../components/SongCardImage';
@@ -32,8 +34,10 @@ const mergeProps = (stateProps, { dispatch }, { track, playlistName }) => ({
   handleImageClick() {
     if (!stateProps.active) {
       // Update activePlaylist name!
-      dispatch(changeActivePlaylistName(playlistName));
+      // If playlistName is different with activePlaylistName,
+      // which means we need to switch to new playlist
       dispatch(changeSongAndPlay(track.id));
+      dispatch(switchPlaylistIfNeeded(playlistName));
     } else {
       dispatch(stateProps.playing ? pauseSong() : playSong());
     }

@@ -68,9 +68,6 @@ export const changePlayMode = mode => ({
   payload: mode,
 });
 
-
-
-
 /* Redux Thunks Domain Logic */
 export function updateTimeIfNeeded(rawTime) {
   return (dispatch, getState) => {
@@ -188,7 +185,9 @@ export function togglePlayMode(newMode) {
       if (newMode === SHUFFLE) dispatch(clearShufflePlaylist());
     } else { /* Toggle on new mode */
       dispatch(changePlayMode(newMode));
-      if (newMode === SHUFFLE) dispatch(shufflePlaylist());
+      if (newMode === SHUFFLE) {
+        dispatch(shufflePlaylist());
+      }
     }
   };
 }

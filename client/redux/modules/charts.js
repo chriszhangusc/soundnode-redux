@@ -5,14 +5,16 @@ import { formatGenre } from 'client/utils/FormatUtils';
 import { TOP_COUNT, LIMIT } from 'client/constants/ChartsConsts';
 import { fetchChartsFromSC } from 'client/api/sc/v2';
 import { notificationFailure } from 'client/redux/modules/notification';
+
+import { updateShufflePlaylistIfNeeded } from 'client/redux/modules/playlist/actions';
 /* Action Constants */
 // Naming convention: NOUN_VERB
-export const CHARTS_GENRE_CHANGE = 'redux-music/charts/CHARTS_GENRE_CHANGE';
-export const CHARTS_REQUEST = 'redux-music/charts/CHARTS_REQUEST';
-export const CHARTS_RECEIVED = 'redux-music/charts/CHARTS_RECEIVED';
+export const CHARTS_GENRE_CHANGE = 'CHARTS_GENRE_CHANGE';
+export const CHARTS_REQUEST = 'CHARTS_REQUEST';
+export const CHARTS_RECEIVED = 'CHARTS_RECEIVED';
 // export const CHARTS_FAILED = 'redux-music/charts/CHARTS_FAILED';
-export const CHARTS_CLEAR = 'redux-music/charts/CHARTS_CLEAR';
-export const CHARTS_SPINNER_STOP = 'redux-music/charts/CHARTS_SPINNER_STOP';
+export const CHARTS_CLEAR = 'CHARTS_CLEAR';
+export const CHARTS_SPINNER_STOP = 'CHARTS_SPINNER_STOP';
 
 /* Reducer */
 const initialState = {
@@ -98,6 +100,10 @@ export function fetchChartsAndUpdatePlaylist(genre) {
       const normalizedCharts = await fetchChartsFromSC(genre, offset);
       // #TODO: Verify results!!
       dispatch(receiveCharts(normalizedCharts, genre));
+// console.log(normalizedCharts);
+      // Update shuffle playlist if visiblePlaylistName is the same as activePlaylistName
+      // which means we are loading more songs to the shuffle playlist
+      dispatch(updateShufflePlaylistIfNeeded());
     } catch (err) {
       console.log('error: ', err);
       dispatch(notificationFailure('Something is wrong!'));
