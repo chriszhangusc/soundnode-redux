@@ -18,8 +18,6 @@ export const changeActivePlaylistName = playlistName => ({
   payload: playlistName,
 });
 
-
-
 export const togglePlaylist = () => ({ type: TOGGLE_PLAYLIST });
 
 export const appendTrackToPlaylist = trackId => ({

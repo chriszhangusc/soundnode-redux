@@ -142,14 +142,6 @@ export function changeSongAndPlay(newTrackId) {
   };
 }
 
-// When we click play on the song card.
-export function playSongByMode(trackId) {
-  return (dispatch, getState) => {
-    // const state = getState();
-    dispatch(changeSongAndPlay(trackId));
-  };
-}
-
 // When we click on next or prev.
 export function playSongByAction(actionType) {
   return (dispatch, getState) => {
