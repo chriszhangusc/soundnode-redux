@@ -13,6 +13,8 @@ const initialState = {
   visiblePlaylistName: '',
   // The shuffled or modded playlist
   hidden: true,
+  shuffleDraw: [],
+  shufflePlayed: [],
 };
 
 export default function playlistReducer(state = initialState, action) {

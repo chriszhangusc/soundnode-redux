@@ -1,3 +1,4 @@
+/* This is for normalizr */
 import { Schema, arrayOf } from 'normalizr';
 
 export const artistSchema = new Schema('artists');
@@ -17,11 +18,3 @@ commentSchema.define({
 export const trackArraySchema = arrayOf(trackSchema);
 export const artistArraySchema = arrayOf(artistSchema);
 export const commentArraySchema = arrayOf(commentSchema);
-// const Schemas = {
-//   artistSchema,
-//   trackSchema,
-//   commentSchema,
-//   trackArraySchema
-// };
-//
-// export default Schemas;

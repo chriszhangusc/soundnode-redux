@@ -25,7 +25,6 @@ export const appendTrackToPlaylist = trackId => ({
   payload: trackId,
 });
 
-
 /* Thunks logic */
 
 // #TODO: Review later
