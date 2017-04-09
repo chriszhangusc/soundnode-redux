@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NotificationManager } from 'react-notifications';
 import MagicButton from 'client/components/MagicButton';
+import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 
 function createInfo(msg) {
   NotificationManager.info(msg);
@@ -40,11 +41,16 @@ const SongCardControls = ({
     </div>
   );
 
+SongCardControls.defaultProps = {
+  liked: false,
+  handleCopyToClipboard: defaultEventHandlerFactory('handleCopyToClipboard'),
+  handleToggleLike: defaultEventHandlerFactory('handleToggleLike'),
+};
 
 SongCardControls.propTypes = {
   liked: PropTypes.bool,
   handleToggleLike: PropTypes.func,
-  handleCopyToClipboard: PropTypes.func
+  handleCopyToClipboard: PropTypes.func,
 };
 
 export default SongCardControls;

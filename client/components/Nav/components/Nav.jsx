@@ -1,6 +1,6 @@
 import React from 'react';
 import NavSearchContainer from '../containers/NavSearchContainer';
-import NavUserContainer from '../containers/NavUserContainer';
+// import NavUserContainer from '../containers/NavUserContainer';
 import NavHeader from './NavHeader';
 
 /* This is our main Nav layout */

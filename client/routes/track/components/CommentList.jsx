@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { List } from 'immutable';
 import infiniteScroll from 'client/components/Hocs/InfiniteScroll';
 import Spinner from 'client/components/Spinner';
 import CommentContainer from '../containers/CommentContainer';
@@ -28,7 +27,7 @@ const CommentList = ({ commentCount, commentIds, commentsFetching }) => {
 
 CommentList.propTypes = {
   commentCount: PropTypes.number,
-  commentIds: PropTypes.instanceOf(List),
+  commentIds: PropTypes.array,
   commentsFetching: PropTypes.bool,
 };
 

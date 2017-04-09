@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MagicButton from 'client/components/MagicButton';
+import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 
 class PlayerControls extends Component {
   constructor(props) {
@@ -54,6 +55,14 @@ class PlayerControls extends Component {
     );
   }
 }
+
+PlayerControls.defaultProps = {
+  playing: false,
+  onNextClick: defaultEventHandlerFactory('onNextClick'),
+  onPrevClick: defaultEventHandlerFactory('onPrevClick'),
+  onPlayClick: defaultEventHandlerFactory('onPlayClick'),
+  onPauseClick: defaultEventHandlerFactory('onPauseClick'),
+};
 
 PlayerControls.propTypes = {
   playing: PropTypes.bool,

@@ -6,8 +6,6 @@ import infiniteScroll from 'client/components/Hocs/InfiniteScroll';
 import shortid from 'shortid';
 
 const renderSongCardList = (trackIds, playlistName) => {
-  // We are using index + trackId as the key because sometimes it will have flattenChildren warning
-  // issue when using replace to change url in router index.jsx
   return (
     <div className="song-card-list-container">
       {
@@ -37,11 +35,12 @@ const SongCardList = (props) => {
 
 SongCardList.defaultProps = {
   fetching: false,
+  playlistName: '',
 };
 
 SongCardList.propTypes = {
   fetching: PropTypes.bool,
-  trackIds: PropTypes.array,
+  trackIds: PropTypes.array.isRequired,
   playlistName: PropTypes.string,
 };
 

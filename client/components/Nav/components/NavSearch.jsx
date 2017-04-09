@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import {
+  BrowserRouter as Router,
+  Link,
+ } from 'react-router-dom';
 import { dropdownSearchShowCount } from 'client/constants/SearchConsts';
+import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 import NavSearchDropdownTrackContainer from '../containers/NavSearchDropdownTrackContainer';
 import NavSearchDropdownArtistContainer from '../containers/NavSearchDropdownArtistContainer';
+
 
 class NavSearch extends Component {
 
@@ -52,6 +57,7 @@ class NavSearch extends Component {
     const { artistIds, trackIds, dropdownShown } = this.props;
     if (dropdownShown) {
       return (
+        <Router>
         <div className="nav-search-result">
           {
             (artistIds.length !== 0) && (<div className="dropdown-title">
@@ -84,6 +90,7 @@ class NavSearch extends Component {
             {
               (trackIds.length !== 0) && (<li className="dropdown-item-show-all">
                 <Link
+                  to=''
                   className="dropdown-show-all-link"
                   onMouseDown={this.onShowAllClick}
                 >
@@ -93,6 +100,7 @@ class NavSearch extends Component {
             }
           </ul>
         </div>
+        </Router>
       );
     }
     return <div />;
@@ -120,6 +128,16 @@ class NavSearch extends Component {
     );
   }
 }
+
+NavSearch.defaultProps = {
+  dropdownShown: false,
+  artistIds: [],
+  trackIds: [],
+  handleBlur: defaultEventHandlerFactory('handleBlur'),
+  handleFocus: defaultEventHandlerFactory('handleFocus'),
+  handleChange: defaultEventHandlerFactory('handleChange'),
+  handleShowAll: defaultEventHandlerFactory('handleShowAll'),
+};
 
 NavSearch.propTypes = {
   dropdownShown: PropTypes.bool,

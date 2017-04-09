@@ -22,6 +22,12 @@ const NavUser = ({ uid, displayName, photoUrl, handleLogin }) => {
   );
 };
 
+NavUser.defaultProps = {
+  uid: '',
+  photoUrl: '',
+  displayName: '',
+};
+
 NavUser.propTypes = {
   uid: PropTypes.string,
   photoUrl: PropTypes.string,

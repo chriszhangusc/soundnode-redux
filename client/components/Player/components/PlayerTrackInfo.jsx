@@ -31,6 +31,14 @@ const PlayerTrackInfo = ({
   </div>
 );
 
+PlayerTrackInfo.defaultProps = {
+  artworkUrl: '',
+  trackUrl: '',
+  artistUrl: '',
+  artistName: '',
+  trackTitle: '',
+};
+
 PlayerTrackInfo.propTypes = {
   artworkUrl: PropTypes.string,
   trackUrl: PropTypes.string,

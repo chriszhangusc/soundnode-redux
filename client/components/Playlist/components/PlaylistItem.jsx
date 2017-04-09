@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Link } from 'react-router';
+import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 import PropTypes from 'prop-types';
 
 const PlaylistItem = ({
@@ -48,11 +48,21 @@ const PlaylistItem = ({
     </li>
   );
 
+PlaylistItem.defaultProps = {
+  handleChangeSong: defaultEventHandlerFactory('handleChangeSong'),
+  handleLikeSong: defaultEventHandlerFactory('handleLikeSong'),
+  handleUnlikeSong: defaultEventHandlerFactory('handleUnlikeSong'),
+  title: '',
+  artistName: '',
+  liked: false,
+  active: false,
+  index: 0,
+};
+
 PlaylistItem.propTypes = {
   handleChangeSong: PropTypes.func,
   handleLikeSong: PropTypes.func,
   handleUnlikeSong: PropTypes.func,
-  // trackId: PropTypes.number,
   title: PropTypes.string,
   artistName: PropTypes.string,
   liked: PropTypes.bool,

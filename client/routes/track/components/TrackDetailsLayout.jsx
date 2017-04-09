@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import Spinner from 'client/components/Spinner';
 // import Track from 'client/models/Track';
-import { Map } from 'immutable';
 import TrackImageContainer from '../containers/TrackImageContainer';
 import TrackInfoContainer from '../containers/TrackInfoContainer';
 import CommentListContainer from '../containers/CommentListContainer';
@@ -26,7 +25,7 @@ const TrackDetailsLayout = ({
 // {/*  */}
 
 TrackDetailsLayout.propTypes = {
-  track: PropTypes.instanceOf(Map),
+  track: PropTypes.object,
   trackFetching: PropTypes.bool,
 };
 

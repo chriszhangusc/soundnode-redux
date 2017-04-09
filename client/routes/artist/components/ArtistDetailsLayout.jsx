@@ -21,6 +21,7 @@ const ArtistDetailsLayout = ({ fetching, artistId, trackCount }) => {
   );
 };
 
+
 ArtistDetailsLayout.propTypes = {
   fetching: PropTypes.bool,
   artistId: PropTypes.number,

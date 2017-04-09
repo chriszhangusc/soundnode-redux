@@ -50,12 +50,12 @@ export default function track(state = INITIAL_STATE, action) {
 }
 
 /* Selectors */
-const getTrackState = state => state.get('track');
-export const getTrackId = state => getTrackState(state).get('trackId');
-export const isTrackFetching = state => getTrackState(state).get('trackFetching');
-export const isTrackCommentsFetching = state => getTrackState(state).get('commentsFetching');
-export const getTrackCommentIds = state => getTrackState(state).get('commentIds');
-export const getTrackCommentsNextHref = state => getTrackState(state).get('commentsNextHref');
+const getTrackState = state => state.track;
+export const getTrackId = state => getTrackState(state).trackId;
+export const isTrackFetching = state => getTrackState(state).trackFetching;
+export const isTrackCommentsFetching = state => getTrackState(state).commentsFetching;
+export const getTrackCommentIds = state => getTrackState(state).commentIds;
+export const getTrackCommentsNextHref = state => getTrackState(state).commentsNextHref;
 /* Actions */
 export const clearTrackState = () => ({
   type: CLEAR_STATE,
@@ -87,6 +87,7 @@ export function commentsRequest() {
     type: COMMENTS_REQUEST,
   };
 }
+
 
 export function commentsReceived(normalizedResponse) {
   return {

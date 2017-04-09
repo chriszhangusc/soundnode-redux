@@ -16,6 +16,13 @@ const SongCardLayout = ({ track, active, trackIds, playlistName }) => {
   );
 };
 
+SongCardLayout.defaultProps = {
+  track: null,
+  active: false,
+  trackIds: [],
+  playlistName: '',
+};
+
 SongCardLayout.propTypes = {
   track: PropTypes.object,
   active: PropTypes.bool,

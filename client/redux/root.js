@@ -5,7 +5,7 @@ import playerReducer from './modules/player/reducer';
 import playlistReducer from './modules/playlist/reducer';
 import artistReducer from './modules/artist';
 import trackReducer from './modules/track';
-import uiReducer from './modules/ui';
+// import uiReducer from './modules/ui';
 import entitiesReducer from './modules/entities';
 import searchReducer, { dropdownSearchEpic } from './modules/search';
 import userReducer from './modules/user';
@@ -16,7 +16,7 @@ export const rootEpic = combineEpics(
 );
 
 export const rootReducer = combineReducers({
-  ui: uiReducer,
+  // ui: uiReducer,
   entities: entitiesReducer,
   charts: chartsReducer,
   playlist: playlistReducer,

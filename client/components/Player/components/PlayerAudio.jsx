@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { REPEAT } from 'client/redux/modules/player/consts';
+import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 
 class PlayerAudio extends Component {
   constructor(props) {
@@ -81,6 +82,18 @@ class PlayerAudio extends Component {
   }
 }
 
+
+PlayerAudio.defaultProps = {
+  seeking: false,
+  currentTime: 0.0,
+  playing: false,
+  volume: 0.5,
+  mode: 'LOOP',
+  streamUrl: '',
+  onTimeUpdate: defaultEventHandlerFactory('onTimeUpdate'),
+  onEnded: defaultEventHandlerFactory('onEnded'),
+};
+
 PlayerAudio.propTypes = {
   seeking: PropTypes.bool,
   currentTime: PropTypes.number,
@@ -88,9 +101,8 @@ PlayerAudio.propTypes = {
   volume: PropTypes.number,
   mode: PropTypes.string,
   streamUrl: PropTypes.string,
-  // track: PropTypes.instanceOf(Track),
   onTimeUpdate: PropTypes.func,
-  onEnded: PropTypes.func
+  onEnded: PropTypes.func,
 };
 
 export default PlayerAudio;

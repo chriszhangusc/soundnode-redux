@@ -53,6 +53,7 @@ class App extends Component {
                 <div className="col-lg-12">
                   <Switch>
                     <Route exact path="/charts/:genre?" component={ChartsPage} />
+                    {/*<Route path="/artist/:artistId" component={} >*/}
                     <Redirect to="/charts" />
                   </Switch>
                 </div>

@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-// import Track from 'client/models/Track';
+import React from 'react';
+import PropTypes from 'prop-types';
 import PlayerAudioContainer from '../containers/PlayerAudioContainer';
 import PlayerControlsContainer from '../containers/PlayerControlsContainer';
 import PlayerDurationBarContainer from '../containers/PlayerDurationBarContainer';
@@ -29,6 +29,10 @@ const PlayerLayout = ({ playerTrack }) => {
       </div>
     </div>
   );
+};
+
+PlayerLayout.defaultProps = {
+  playerTrack: null,
 };
 
 PlayerLayout.propTypes = {

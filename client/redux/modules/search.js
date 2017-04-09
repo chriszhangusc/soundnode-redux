@@ -9,26 +9,25 @@ import { Observable } from 'rxjs/Rx';
 import { fetchTracks, fetchArtists } from 'client/api/sc/v1';
 
 // Dropdown search
-export const SAGA_DROPDOWN_SEARCH = 'redux-music/search/SAGA_DROPDOWN_SEARCH';
-export const START_DROPDOWN_SEARCH = 'redux-music/search/START_DROPDOWN_SEARCH';
-export const END_DROPDOWN_SEARCH = 'redux-music/search/END_DROPDOWN_SEARCH';
+export const START_DROPDOWN_SEARCH = 'START_DROPDOWN_SEARCH';
+export const END_DROPDOWN_SEARCH = 'END_DROPDOWN_SEARCH';
 
-export const DROPDOWN_ARTISTS_RECEIVED = 'redux-music/search/DROPDOWN_ARTISTS_RECEIVED';
-export const DROPDOWN_TRACKS_RECEIVED = 'redux-music/search/DROPDOWN_TRACKS_RECEIVED';
-export const SHOW_DROPDOWN_SEARCH_RESULTS = 'redux-music/search/SHOW_DROPDOWN_SEARCH_RESULTS';
-export const HIDE_DROPDOWN_SEARCH_RESULTS = 'redux-music/search/HIDE_DROPDOWN_SEARCH_RESULTS';
-export const CLEAR_DROPDOWN_SEARCH_RESULTS = 'redux-music/search/CLEAR_DROPDOWN_SEARCH_RESULTS';
+export const DROPDOWN_ARTISTS_RECEIVED = 'DROPDOWN_ARTISTS_RECEIVED';
+export const DROPDOWN_TRACKS_RECEIVED = 'DROPDOWN_TRACKS_RECEIVED';
+export const SHOW_DROPDOWN_SEARCH_RESULTS = 'SHOW_DROPDOWN_SEARCH_RESULTS';
+export const HIDE_DROPDOWN_SEARCH_RESULTS = 'HIDE_DROPDOWN_SEARCH_RESULTS';
+export const CLEAR_DROPDOWN_SEARCH_RESULTS = 'CLEAR_DROPDOWN_SEARCH_RESULTS';
 
-export const DROPDOWN_SEARCH_REQUEST = 'redux-music/search/DROPDOWN_SEARCH_REQUEST';
-export const DROPDOWN_SEARCH_RECEIVED = 'redux-music/search/DROPDOWN_SEARCH_RECEIVED';
+export const DROPDOWN_SEARCH_REQUEST = 'DROPDOWN_SEARCH_REQUEST';
+export const DROPDOWN_SEARCH_RECEIVED = 'DROPDOWN_SEARCH_RECEIVED';
 
 // Search page
-export const CLEAR_SEARCH_RESULTS = 'redux-music/search/CLEAR_SEARCH_RESULTS';
-export const SAGA_SEARCH = 'redux-music/search/SAGA_SEARCH';
-export const START_SEARCH = 'redux-music/search/START_SEARCH';
-export const END_SEARCH = 'redux-music/search/END_SEARCH';
-export const SEARCH_FAILURE = 'redux-music/search/SEARCH_FAILURE';
-export const SEARCH_RESULTS_RECEIVED = 'redux-music/search/SEARCH_RESULTS_RECEIVED';
+export const CLEAR_SEARCH_RESULTS = 'CLEAR_SEARCH_RESULTS';
+export const SAGA_SEARCH = 'SAGA_SEARCH';
+export const START_SEARCH = 'START_SEARCH';
+export const END_SEARCH = 'END_SEARCH';
+export const SEARCH_FAILURE = 'SEARCH_FAILURE';
+export const SEARCH_RESULTS_RECEIVED = 'SEARCH_RESULTS_RECEIVED';
 
 export const DROPDOWN_SEARCH_LIMIT = 4;
 export const SEARCH_LIMIT = 20;
@@ -178,24 +177,6 @@ export function clearAndHideSearchResults() {
   };
 }
 
-/* Saga Actions */
-export const sagaDropdownSearch = (keyword, limit = DROPDOWN_SEARCH_LIMIT) => ({
-  type: SAGA_DROPDOWN_SEARCH,
-  payload: {
-    keyword: keyword.trim().toLowerCase(),
-    limit,
-  },
-});
-
-export const sagaSearch = (keyword, limit = SEARCH_LIMIT) => ({
-  type: SAGA_SEARCH,
-  payload: {
-    keyword: keyword.trim().toLowerCase(),
-    limit,
-  },
-});
-
-
 export const dropdownArtistsReceived = normalized => ({
   type: DROPDOWN_ARTISTS_RECEIVED,
   payload: normalized,
@@ -224,6 +205,7 @@ export const fetchAllSearchResults = (keyword, limit) => ({
 /* Search Epic */
 export const dropdownSearchEpic = action$ =>
   action$.ofType(DROPDOWN_SEARCH_REQUEST)
+  // This will cause initial fetch delay!
     .debounceTime(250)
     .switchMap((action) => {
       const tracksPromise = fetchTracks({ q: action.payload.keyword }, action.payload.limit);

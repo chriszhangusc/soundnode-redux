@@ -1,3 +1,4 @@
+import React from 'react';
 import { HOST } from 'client/constants/Config';
 
 const NavHeader = () => (

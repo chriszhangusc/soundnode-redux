@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
 import PropTypes from 'prop-types';
+import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils'
 
 class PlayerVolumeControls extends Component {
   constructor(props) {
@@ -83,6 +83,18 @@ class PlayerVolumeControls extends Component {
     );
   }
 }
+
+
+
+PlayerVolumeControls.defaultProps = {
+  volume: 0.5,
+  volumeSeeking: false,
+  onVolumeBarMouseDown: defaultEventHandlerFactory('onVolumeBarMouseDown'),
+  onVolumeHandleMouseDown: defaultEventHandlerFactory('onVolumeHandleMouseDown'),
+  onVolumeMouseUp: defaultEventHandlerFactory('onVolumeMouseUp'),
+  onToggleMuteClick: defaultEventHandlerFactory('onToggleMuteClick'),
+  onVolumeHandleMouseMove: defaultEventHandlerFactory('onVolumeHandleMouseMove'),
+};
 
 PlayerVolumeControls.propTypes = {
   volume: PropTypes.number,

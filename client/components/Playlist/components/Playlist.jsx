@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import MagicButton from 'client/components/MagicButton';
+import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 import PlaylistItemContainer from '../containers/PlaylistItemContainer';
 
 const Playlist = ({
@@ -30,7 +31,7 @@ const Playlist = ({
                 trackId={trackId}
                 index={idx + 1}
                 key={shortid.generate()}
-              />
+              />,
           )
         }
       </ul>
@@ -41,7 +42,7 @@ const Playlist = ({
 Playlist.defaultProps = {
   playlistHidden: true,
   playlistTrackIds: [],
-  handleClearPlayQueue: () => {},
+  handleClearPlayQueue: defaultEventHandlerFactory('handleClearPlayQueue'),
 };
 
 Playlist.propTypes = {

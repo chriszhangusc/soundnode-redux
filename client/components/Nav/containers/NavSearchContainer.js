@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+// import { browserHistory } from 'react-router-dom';
 import {
   isDropdownShown,
   getDropdownSearchArtistIds,
@@ -38,10 +38,10 @@ const mapDispatchToProps = dispatch => ({
     const keywords = rawKeywords.toLowerCase().trim();
     if (keywords !== '') {
       dispatch(clearAndHideSearchResults());
-      browserHistory.push({
-        pathname: '/search',
-        query: { q: keywords },
-      });
+      // browserHistory.push({
+      //   pathname: '/search',
+      //   query: { q: keywords },
+      // });
       dispatch(sagaSearch(keywords));
     }
   },

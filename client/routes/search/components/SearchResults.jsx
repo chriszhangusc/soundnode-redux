@@ -15,7 +15,7 @@ const SearchResults = ({ location: { query } }) => {
 };
 
 SearchResults.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
 };
 
 export default SearchResults;

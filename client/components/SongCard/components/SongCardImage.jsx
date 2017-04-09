@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 import MagicButton from 'client/components/MagicButton';
 
 class SongCardImage extends React.Component {
@@ -26,6 +26,13 @@ class SongCardImage extends React.Component {
     );
   }
 }
+
+SongCardImage.defaultProps = {
+  active: false,
+  playing: false,
+  artworkUrl: '',
+  handleImageClick: defaultEventHandlerFactory('handleImageClick'),
+};
 
 SongCardImage.propTypes = {
   active: PropTypes.bool,

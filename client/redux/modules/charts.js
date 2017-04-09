@@ -1,5 +1,3 @@
-// Charts duck file
-// import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { formatGenre } from 'client/utils/FormatUtils';
 // import { trackArraySchema } from 'client/schemas';
 import { TOP_COUNT, LIMIT } from 'client/constants/ChartsConsts';
@@ -93,6 +91,7 @@ const stopSpinner = () => ({ type: CHARTS_SPINNER_STOP });
 // _id=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
 export function fetchChartsAndUpdatePlaylist(genre) {
   return async (dispatch, getState) => {
+
     const state = getState();
     const offset = getChartsFetchOffset(state);
     dispatch(requestCharts());

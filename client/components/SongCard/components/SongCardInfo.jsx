@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { defaultArtistImageUrl } from 'client/constants/ImageConstants';
 
 const SongCardInfo = ({
-    trackId,
+  trackId,
   artistId,
   artistAvatar,
   title,
@@ -27,6 +27,14 @@ const SongCardInfo = ({
     </div>
   </div>
 );
+
+SongCardInfo.defaultProps = {
+  trackId: 0,
+  artistId: 0,
+  artistAvatar: '',
+  title: '',
+  artistName: '',
+};
 
 SongCardInfo.propTypes = {
   trackId: PropTypes.number,
