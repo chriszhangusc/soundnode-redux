@@ -3,7 +3,6 @@ import qs from 'querystring';
 import fetch from 'isomorphic-fetch';
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
-import { convertIdToString } from 'client/utils/FormatUtils';
 /**
  * Response success handler
  * @param  {object} response - response object from fetch web api
