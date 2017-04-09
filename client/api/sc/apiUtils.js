@@ -6,7 +6,7 @@ import { normalize } from 'normalizr';
 /**
  * Response success handler
  * @param  {object} response - response object from fetch web api
- * @return {Promise}         - response json wrapped in Promise
+ * @returns {Promise}         - response json wrapped in Promise
  */
 export function onResponseSuccess(response) {
   // response.ok is true if response status ranges from 200 to 299
@@ -39,16 +39,17 @@ export function normalizeResponse(jsonResponse, schema) {
   return Object.assign({}, normalize(jsonResponse, schema));
 }
 
-// If normalizeSchema is specified, we normalize it using the given schema.
+// Need to decouple data trasformation from making the ajax request
 export function makeRequest(fetchUrl, normalizeSchema) {
   // fetch will only reject the promise when there is an internet error
   return fetch(fetchUrl)
+    .then(onResponseSuccess)
     .catch((err) => {
       // Let the user know when there is a connection error!
 console.log(err);
       throw Error('Can not make request, please check your internet connection!');
     })
-    .then(onResponseSuccess)
+    // The following should not be coupled with this function here.
     .then(json => camelizeKeys(json))
     .then(camelizedJson => normalizeResponse(camelizedJson, normalizeSchema));
 }

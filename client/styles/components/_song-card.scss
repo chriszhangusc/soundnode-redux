@@ -3,16 +3,17 @@
     display: flex;
     flex-wrap: wrap;
 }
-//
-// .card {
-//     background-color: $background-color;
-//     border: 1px solid $light-light-black;
-// }
+
+.card {
+    background-color: $background-color;
+    border: 1px solid $light-light-black;
+}
 
 .song-card {
     padding: 11px;
     width: $song-card-width;
     background-color: $background-color;
+
     @include desktop {
         width: $song-card-width-md;
     }
@@ -95,24 +96,21 @@
 
 
 
-.song-card-user {
-    display: block;
-    width: 100%;
-}
-
-.song-card-user-image {
-    display: block;
-    width: 24px;
-    height: 24px;
-    margin-top: 4px;
-    margin-right: 10px;
-    border-radius: 100%;
-    // NO FLOATING CHANGE IT TO FLEX
-    float: left;
+.song-card-info-wrapper {
+    display: flex;
+    align-items: center;
 }
 
 .song-card-details {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  @include desktop {
+        width: $song-card-details-width-md;
+    }
+
+  @include desktop-lg {
+      width: $song-card-details-width-lg;
+  }
 }
 
 .song-card-username {
@@ -126,7 +124,7 @@
 }
 
 .song-card-title {
-    display: block;
+    // display: block;
     color: $font-color-main;
     font-size: 13px;
     overflow: hidden;

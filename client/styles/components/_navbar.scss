@@ -96,7 +96,7 @@ nav {
 
 
 .dropdown-item-wrapper {
-    display: block;
+    display: flex;
 }
 
 .dropdown-list {
@@ -116,7 +116,6 @@ nav {
     width: 25px;
     margin-right: 10px;
     border-radius: 50%;
-    text-overflow: ellipsis;
     overflow: hidden;
   }
 

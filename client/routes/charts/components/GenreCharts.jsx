@@ -13,7 +13,7 @@ const renderGenres = () => GENRES.map(
     key={genre.link}
     className="button inline"
     to={`/charts/${genre.link}`}
-  >{genre.title}</Link>)
+  >{genre.title}</Link>),
 );
 
 const GenreCharts = ({ chartsGenre }) => (

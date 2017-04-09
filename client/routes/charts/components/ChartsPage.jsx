@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 import { GENRES, DEFAULT_GENRE } from 'client/constants/ChartsConsts';
 import { loadChartsPage, changeGenre } from 'client/redux/modules/charts';

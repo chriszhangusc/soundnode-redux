@@ -89,9 +89,16 @@ const stopSpinner = () => ({ type: CHARTS_SPINNER_STOP });
 
 // http://localhost:3001/sc/api-v2/charts?genre=country&limit=20&offset=0&client
 // _id=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
+
+/**
+ * This is the domain logic of charts page, it gets fired whenever we need to fetch charts
+ * and do other stuffs when results comes back like update the shuffle playlist if we are in
+ * shuffle mode
+ * @param {string} genre The genre of what we need to fetch
+ * @returns Thunk function
+ */
 export function fetchChartsAndUpdatePlaylist(genre) {
   return async (dispatch, getState) => {
-
     const state = getState();
     const offset = getChartsFetchOffset(state);
     dispatch(requestCharts());
@@ -104,7 +111,7 @@ export function fetchChartsAndUpdatePlaylist(genre) {
       // which means we are loading more songs to the shuffle playlist
       dispatch(updateShufflePlaylistIfNeeded());
     } catch (err) {
-      console.log('error: ', err);
+      console.error('error: ', err);
       dispatch(notificationFailure('Something is wrong!'));
     } finally {
       // Stop loading spinner

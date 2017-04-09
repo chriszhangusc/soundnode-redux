@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { 
+import {
   BrowserRouter as Router,
   Link,
 } from 'react-router-dom';
+import Avatar from 'client/components/Avatar';
 
 const NavSearchDropdownItem = ({
   imageUrl,
@@ -13,11 +14,7 @@ const NavSearchDropdownItem = ({
 <Router>
 <li className="dropdown-item">
   <div className="dropdown-item-wrapper">
-    <img
-      alt="user-profile-img"
-      className="dropdown-item-image"
-      src={imageUrl}
-    />
+    <Avatar src={imageUrl} />
     <Link
       to={itemLinkUrl}
       onMouseDown={(e) => {

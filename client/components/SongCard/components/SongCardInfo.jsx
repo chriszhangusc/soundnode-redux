@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import Avatar from 'client/components/Avatar';
 import { Link } from 'react-router-dom';
-import { defaultArtistImageUrl } from 'client/constants/ImageConstants';
 
 const SongCardInfo = ({
   trackId,
@@ -11,12 +10,8 @@ const SongCardInfo = ({
   title,
   artistName,
 }) => (
-  <div className="song-card-user clearfix">
-    <img
-      alt="user-profile-img"
-      className="song-card-user-image"
-      src={artistAvatar || defaultArtistImageUrl}
-    />
+  <div className="song-card-info-wrapper">
+    <Avatar src={artistAvatar} />
     <div className="song-card-details">
       <Link to={`/track/${trackId}`} className="song-card-title">
         {title}
