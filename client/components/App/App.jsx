@@ -7,7 +7,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 import ChartsPage from 'client/routes/charts';
-
 import { NotificationContainer } from 'react-notifications';
 import Player from 'client/components/Player';
 import Nav from 'client/components/Nav';
@@ -40,7 +39,6 @@ class App extends Component {
     window.removeEventListener('online');
   }
 
-  // <Sidebar />
   render() {
     return (
       <Router>

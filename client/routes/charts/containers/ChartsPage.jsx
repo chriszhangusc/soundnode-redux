@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { GENRES, DEFAULT_GENRE } from 'client/constants/ChartsConsts';
 import { loadChartsPage, changeGenre } from 'client/redux/modules/charts';
 import { changeVisiblePlaylistName } from 'client/redux/modules/playlist/actions';
-import ChartsSongCardListContainer from '../containers/ChartsSongCardListContainer';
+import { GENRES, DEFAULT_GENRE, CHARTS_MAIN_TITLE_PREFIX, CHARTS_SUBTITLE } from 'client/constants/ChartsConsts';
+
+import ChartsSongCardListContainer from './ChartsSongCardListContainer';
 import GenreCharts from './GenreCharts';
 
 class ChartsPage extends Component {
@@ -30,17 +31,14 @@ class ChartsPage extends Component {
     }
   }
 
-  /* Execute whenever this page initially loaded or needs update */
   onPageMountOrChange(props) {
     const { match, history, dispatch } = props;
     const genreFromUrl = match.params.genre;
     const valid = GENRES.filter(item => item.link === genreFromUrl).length > 0;
 
-    // Handle routes that are partially matched but containing
     // invalid genre like this: http://localhost:3000/top50/All-Music/adfasdfasdfasdf
     const genre = valid ? genreFromUrl : DEFAULT_GENRE;
     if (!valid) history.push(`/charts/${DEFAULT_GENRE}`);
-    // On route change, change visible playlist
     dispatch(changeVisiblePlaylistName(genre));
     dispatch(changeGenre(genre));
     dispatch(loadChartsPage(genre));
@@ -48,11 +46,9 @@ class ChartsPage extends Component {
 
   render() {
     return (
-      <div>
-        <div className="container-fluid">
-          <GenreCharts />
-          <ChartsSongCardListContainer />
-        </div>
+      <div className="container-fluid">
+        <GenreCharts />
+        <ChartsSongCardListContainer />
       </div>
     );
   }

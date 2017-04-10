@@ -36,11 +36,12 @@ const SongCardList = (props) => {
 SongCardList.defaultProps = {
   fetching: false,
   playlistName: '',
+  trackIds: [],
 };
 
 SongCardList.propTypes = {
   fetching: PropTypes.bool,
-  trackIds: PropTypes.array.isRequired,
+  trackIds: PropTypes.array,
   playlistName: PropTypes.string,
 };
 

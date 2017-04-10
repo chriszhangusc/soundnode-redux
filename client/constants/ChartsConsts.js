@@ -2,6 +2,9 @@
 export const TOP_COUNT = 50;
 export const LIMIT = 25;
 export const DEFAULT_GENRE = 'all-music';
+export const CHARTS_MAIN_TITLE_PREFIX = 'TOP 50 - ';
+export const CHARTS_SUBTITLE = 'Charts By Genre';
+
 export const GENRES = [
   {
     link: 'all-music',

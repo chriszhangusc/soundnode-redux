@@ -19,32 +19,33 @@
     }
 }
 
+// This has been extracted to _link-button.scss
 // Elements with .button that are descendant of an element with .genre-selector
-.genre-list .button {
-    width: 19%;
-    text-align: center;
-    color: #ededed;
-    background: transparent;
+// .genre-list .button {
+//     width: 19%;
+//     text-align: center;
+//     color: #ededed;
+//     background: transparent;
 
-    border: 1px solid;
-    border-radius: .25em;
+//     border: 1px solid;
+//     border-radius: .25em;
 
-    font-size: 13px;
-    letter-spacing: 1px;
+//     font-size: 13px;
+//     letter-spacing: 1px;
 
-    margin-top: 5px;
-    margin-left: 1em;
-    padding: .75em 0;
+//     margin-top: 5px;
+//     margin-left: 1em;
+//     padding: .75em 0;
 
-    &:hover {
-        color: $link-color-hover;
-        cursor: pointer;
-        & span {
-            cursor: pointer;
-        }
-    }
+//     &:hover {
+//         color: $link-color-hover;
+//         cursor: pointer;
+//         & span {
+//             cursor: pointer;
+//         }
+//     }
 
-    &:focus {
-        outline: none;
-    }
-}
+//     &:focus {
+//         outline: none;
+//     }
+// }

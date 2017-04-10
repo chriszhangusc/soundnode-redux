@@ -1,0 +1,16 @@
+.expandable-button-list {
+    width: 100%;
+    overflow: hidden;
+    height: 105px;
+    transition: height 0.4s;
+    margin: 0 0 20px 0;
+
+    &:hover{
+      height: 250px;
+    }
+
+    .title {
+      font-size: 13px;
+      color: #a9aaae;
+    }
+}
