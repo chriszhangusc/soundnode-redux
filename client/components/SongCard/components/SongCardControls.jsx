@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NotificationManager } from 'react-notifications';
-import MagicButton from 'client/components/MagicButton';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
+import IconButton from 'client/components/Buttons/IconButton';
 
 function createInfo(msg) {
   NotificationManager.info(msg);
@@ -14,25 +14,22 @@ const SongCardControls = ({
   handleCopyToClipboard,
 }) => (
   <div className="song-card-controls">
-    <MagicButton
+    <IconButton
       title={liked ? 'Unlike' : 'Like'}
-      btnClassName="icon-button"
       iconClassName={`fa fa-heart ${liked && 'active'}`}
       onClick={handleToggleLike}
     />
-    <MagicButton
+    <IconButton
       title="Add to playlist"
-      btnClassName="icon-button"
       iconClassName="fa fa-bookmark"
       onClick={() => createInfo('Added to playlist')}
     />
-    <MagicButton
+    <IconButton
       title="Repost"
-      btnClassName="icon-button"
       iconClassName="fa fa-external-link"
       onClick={() => createInfo('Added to repose')}
     />
-    <MagicButton
+    <IconButton
       title="Copy to clipboard"
       btnClassName="icon-button"
       iconClassName="fa fa-clipboard"

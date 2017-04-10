@@ -31,6 +31,7 @@ const mergeProps = (stateProps, { dispatch }, { track, playlistName }) => ({
   ...stateProps,
   // Besides doing it this way, we could also do it in a thunk function
   //  or pass all args into components and assemble there
+  // #TODO: Fat container!! Move to redux thunk
   handleImageClick() {
     if (!stateProps.active) {
       // Update activePlaylist name!
