@@ -13,8 +13,8 @@ import {
 } from 'client/redux/modules/player/actions';
 
 import {
-  changeActivePlaylistName,
-  updateShufflePlaylistIfNeeded,
+  // changeActivePlaylistName,
+  // updateShufflePlaylistIfNeeded,
   switchPlaylistIfNeeded,
 } from 'client/redux/modules/playlist/actions';
 

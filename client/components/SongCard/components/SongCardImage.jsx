@@ -3,29 +3,18 @@ import PropTypes from 'prop-types';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 import MagicButton from 'client/components/MagicButton';
 
-class SongCardImage extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.handleImageClick = props.handleImageClick.bind(this);
-  }
-
-  render() {
-    const { active, playing, artworkUrl, handleImageClick } = this.props;
-    return (
-      <div
-        className="song-card-image"
-        style={{ backgroundImage: `url(${artworkUrl})` }}
-      >
-        <MagicButton
-          btnClassName={`toggle-play-button ${(active ? 'active' : '')}`}
-          iconClassName={`toggle-play-button-icon ${playing ? 'ion-ios-pause' : 'ion-ios-play'}`}
-          onClick={handleImageClick}
-        />
-      </div>
-    );
-  }
-}
+const SongCardImage = ({ active, playing, artworkUrl, handleImageClick }) => (
+  <div
+    className="song-card-image"
+    style={{ backgroundImage: `url(${artworkUrl})` }}
+  >
+    <MagicButton
+      btnClassName={`toggle-play-button ${(active ? 'active' : '')}`}
+      iconClassName={`toggle-play-button-icon ${playing ? 'ion-ios-pause' : 'ion-ios-play'}`}
+      onClick={handleImageClick}
+    />
+  </div>
+);
 
 SongCardImage.defaultProps = {
   active: false,
