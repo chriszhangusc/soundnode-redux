@@ -21,7 +21,7 @@ export const rootReducer = combineReducers({
   charts: chartsReducer,
   playlist: playlistReducer,
   player: playerReducer,
-  // artist: artistReducer,
+  artist: artistReducer,
   // track: trackReducer,
   user: userReducer,
   search: searchReducer,

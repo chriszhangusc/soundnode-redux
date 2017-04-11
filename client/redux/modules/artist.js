@@ -1,6 +1,5 @@
 /* artist module */
 import { fetchArtist, fetchArtistTracks, fetchMoreArtistTracks } from 'client/api/sc/v1';
-import { fromJS } from 'immutable';
 import { notificationFailure } from './notification';
 /* Constants */
 export const CLEAR_STATE = 'redux-music/artist/CLEAR_STATE';
@@ -12,44 +11,52 @@ export const TRACKS_RECEIVED = 'redux-music/artist/TRACKS_RECEIVED';
 export const TRACKS_FAILURE = 'redux-music/artist/TRACKS_FAILURE';
 
 /* Reducer */
-const initialState = fromJS({
+const initialState = {
   artistFetching: false,
   tracksFetching: false,
   artistId: undefined,
   trackIds: [],
   tracksNextHref: undefined,
-});
+};
 
 export default function artistReducer(state = initialState, action) {
   switch (action.type) {
     case CLEAR_STATE:
       return initialState;
     case ARTIST_REQUEST:
-      return state.set('artistFetching', true);
+      return {
+        ...state,
+        artistFetching: true,
+      };
     case ARTIST_RECEIVED:
-      return state.merge({ artistId: action.payload.result, artistFetching: false });
+      return {
+        ...state,
+        artistId: action.payload.result,
+        artistFetching: false,
+      };
     case TRACKS_REQUEST:
-      return state.set('tracksFetching', true);
+      return {
+        ...state,
+        tracksFetching: true,
+      };
     case TRACKS_RECEIVED:
-      return state.merge({
-        trackIds: state
-          .get('trackIds')
-          .concat(fromJS(action.payload.result)), // concat for scroll to load more
+      return {
+        ...state,
+        trackIds: [...state.trackIds, ...action.payload.result],
         tracksFetching: false,
-        tracksNextHref: action.payload.nextHref,
-      });
+      };
     default:
       return state;
   }
 }
 
 /* Selectors */
-export const getArtistState = state => state.get('artist');
-export const getArtistId = state => getArtistState(state).get('artistId');
-export const getArtistTrackIds = state => getArtistState(state).get('trackIds');
-export const isArtistFetching = state => getArtistState(state).get('artistFetching');
-export const isArtistTracksFetching = state => getArtistState(state).get('tracksFetching');
-export const getArtistTracksNextHref = state => getArtistState(state).get('tracksNextHref');
+export const getArtistState = state => state.artist;
+export const getArtistId = state => getArtistState(state).artistId;
+export const getArtistTrackIds = state => getArtistState(state).trackIds;
+export const isArtistFetching = state => getArtistState(state).artistFetching;
+export const isArtistTracksFetching = state => getArtistState(state).tracksFetching;
+export const getArtistTracksNextHref = state => getArtistState(state).tracksNextHref;
 
 /* Action Creators*/
 export function clearArtistState() {
@@ -71,7 +78,11 @@ export function artistTracksRequest() {
 }
 
 export function artistTracksReceived(normalizedResponse) {
-  return { type: TRACKS_RECEIVED, payload: normalizedResponse, entities: normalizedResponse.entities };
+  return {
+    type: TRACKS_RECEIVED,
+    payload: normalizedResponse,
+    entities: normalizedResponse.entities,
+  };
 }
 
 export function artistFailure() {

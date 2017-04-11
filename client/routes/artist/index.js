@@ -1,3 +1,3 @@
-import ArtistDetailsContainer from './container/ArtistDetailsContainer';
+import ArtistDetailsPageContainer from './container/ArtistDetailsPageContainer';
 
-export default ArtistDetailsContainer;
+export default ArtistDetailsPageContainer;

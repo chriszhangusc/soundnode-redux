@@ -51,7 +51,6 @@ console.log(err);
     })
     // The following should not be coupled with this function here.
     .then(json => camelizeKeys(json))
+    // Should move out of this function!
     .then(camelizedJson => normalizeResponse(camelizedJson, normalizeSchema));
 }
-
-
