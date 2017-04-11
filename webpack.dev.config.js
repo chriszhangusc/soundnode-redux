@@ -97,13 +97,14 @@ module.exports = {
 
     // DefinePlugin makes it possible for us to use env variables in src code
     new webpack.DefinePlugin({
-      PRODUCTION: false
+      PRODUCTION: false, 
+      PORT,
     }),
 
     // ProvidePlugin: automatically load modules.
-    new webpack.ProvidePlugin({
-      React: 'react'
-    }),
+    // new webpack.ProvidePlugin({
+    //   React: 'react'
+    // }),
 
     new webpack.LoaderOptionsPlugin({
       options: {

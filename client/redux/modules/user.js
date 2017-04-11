@@ -240,3 +240,9 @@ export function startUnlikeSong(songId) {
     });
   };
 }
+
+export const signInToSoundCloud = () => {
+  return (dispatch, getState) => {
+    console.log('Sign in to Sound Cloud!');
+  };
+};

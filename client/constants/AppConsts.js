@@ -1,4 +1,4 @@
-export const CLIENT_ID = 'f9e1e2232182a46705c880554a1011af'; // Sound Cloud ClientID
+// console.log(PORT);
 
 const HOST_DEV = 'http://localhost:3000';
 const HOST_PROD = 'https://redux-music.herokuapp.com';

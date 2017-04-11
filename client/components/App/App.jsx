@@ -13,6 +13,7 @@ import Player from 'client/components/Player';
 import Nav from 'client/components/Nav';
 import Sidebar from 'client/components/Sidebar';
 import Playlist from 'client/components/Playlist';
+import Callback from 'client/components/Callback';
 import { notificationFailure, notificationSuccess } from 'client/redux/modules/notification';
 import { connect } from 'react-redux';
 
@@ -53,6 +54,7 @@ class App extends Component {
                   <Switch>
                     <Route exact path="/charts/:genre?" component={ChartsPage} />
                     <Route exact path="/artist/:artistId" component={ArtistPage} />
+                    <Route path="/callback" component={Callback} />
                     <Redirect to="/charts" />
                   </Switch>
                 </div>

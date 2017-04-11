@@ -1,5 +1,5 @@
 import React from 'react';
-import { HOST } from 'client/constants/Config';
+import { HOST } from 'client/constants/AppConsts';
 
 const NavHeader = () => (
   <div className="navbar-header">

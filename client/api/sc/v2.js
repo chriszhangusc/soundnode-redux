@@ -1,4 +1,6 @@
-import { API_HOST, CLIENT_ID } from 'client/constants/Config';
+import { CLIENT_ID } from 'client/constants/AuthConsts';
+import { API_HOST } from 'client/constants/AppConsts';
+
 import { constructFetchUrl, makeRequest } from './apiUtils';
 import { trackArraySchema } from '../schemas';
 

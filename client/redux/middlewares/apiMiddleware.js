@@ -1,7 +1,8 @@
 // #TODO: To be removed in the future
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
-import { CLIENT_ID, API_HOST } from 'client/constants/Config';
+import { CLIENT_ID } from 'client/constants/AuthConsts';
+import { API_HOST } from 'client/constants/AppConsts';
 import querystring from 'querystring';
 
 export const CALL_API = 'CALL_API';

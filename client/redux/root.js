@@ -9,7 +9,7 @@ import artistReducer from './modules/artist';
 import entitiesReducer from './modules/entities';
 import searchReducer, { dropdownSearchEpic } from './modules/search';
 import userReducer from './modules/user';
-
+// import authReducer from './modules/auth';
 
 export const rootEpic = combineEpics(
   dropdownSearchEpic,
@@ -23,6 +23,7 @@ export const rootReducer = combineReducers({
   player: playerReducer,
   artist: artistReducer,
   // track: trackReducer,
-  user: userReducer,
+  // user: userReducer,
   search: searchReducer,
+  // auth: authReducer,
 });

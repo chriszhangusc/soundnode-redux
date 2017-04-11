@@ -1,4 +1,4 @@
-import { CLIENT_ID } from 'client/constants/Config';
+import { CLIENT_ID } from 'client/constants/AuthConsts';
 import {
   t500x500,
   large,
