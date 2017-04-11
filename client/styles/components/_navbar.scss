@@ -50,6 +50,7 @@ nav {
 .nav-search-result {
 
     width: $dropdown-search-width;
+    box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.2);
 
     @include desktop {
         width: $dropdown-search-width-md;

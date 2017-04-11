@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import Spinner from 'client/components/Spinner';
 import ArtistTrackListContainer from '../container/ArtistTrackListContainer';
 import ArtistInfoContainer from '../container/ArtistInfoContainer';
 
-const ArtistDetailsLayout = ({ fetching, artistId, trackCount }) => {
-  if (fetching) return <Spinner />;
+const ArtistDetailsPage = ({ fetching, artistId, trackCount }) => {
   return (
     <div className="container">
       <ArtistInfoContainer artistId={artistId} />
-
       <div className="artist-tracks-container">
         <div className="artist-tracks-title">
           <h3>Tracks ({trackCount}) :</h3>
@@ -21,11 +18,16 @@ const ArtistDetailsLayout = ({ fetching, artistId, trackCount }) => {
   );
 };
 
-
-ArtistDetailsLayout.propTypes = {
+ArtistDetailsPage.propTypes = {
   fetching: PropTypes.bool,
   artistId: PropTypes.number,
   trackCount: PropTypes.string,
 };
 
-export default ArtistDetailsLayout;
+ArtistDetailsPage.defaultProps = {
+  fetching: false,
+  artistId: null,
+  trackCount: '0',
+};
+
+export default ArtistDetailsPage;

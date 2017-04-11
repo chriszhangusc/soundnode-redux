@@ -22,3 +22,7 @@ export function fetchChartsFromSC(genre, offset = 0, limit = 20) {
 console.log('fetchCharts:', fetchUrl);
   return makeRequest(fetchUrl, trackArraySchema);
 }
+
+
+// Fetch user profile info
+// https://api-v2.soundcloud.com/users/10494998/featured-profiles?client_id=2t9loNQH90kzJcsFCODdigxfp325aq4z
