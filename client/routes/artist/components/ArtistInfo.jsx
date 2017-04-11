@@ -8,13 +8,16 @@ const ArtistInfo = ({
   artistName,
   followerCount,
   description,
+  permalinkUrl,
 }) => (
   <div className="artist-info-container">
-    <ProgressiveImage
-      largeImgUrl={avatarUrl}
-      smallImgUrl={avatarUrlSmall}
-      placeholderClassName="artist-avatar"
-    />
+    <a href={permalinkUrl} target="_black" title="Go to SoundCloud">
+      <ProgressiveImage
+        largeImgUrl={avatarUrl}
+        smallImgUrl={avatarUrlSmall}
+        placeholderClassName="artist-avatar"
+      />
+    </a>
     <div className="artist-details">
       <h1 className="artist-name">{artistName}</h1>
       <div className="artist-followers">Followers: {followerCount}</div>
@@ -24,11 +27,12 @@ const ArtistInfo = ({
 );
 
 ArtistInfo.defaultProps = {
-  avatarUrl: '',
-  avatarUrlSmall: '',
-  artistName: '',
-  followerCount: 0,
-  description: '',
+  avatarUrl: undefined,
+  avatarUrlSmall: undefined,
+  artistName: undefined,
+  followerCount: undefined,
+  description: undefined,
+  permalinkUrl: undefined,
 };
 
 ArtistInfo.propTypes = {
@@ -37,6 +41,7 @@ ArtistInfo.propTypes = {
   artistName: PropTypes.string,
   followerCount: PropTypes.string, // Formatted number
   description: PropTypes.string,
+  permalinkUrl: PropTypes.string,
 };
 
 export default ArtistInfo;

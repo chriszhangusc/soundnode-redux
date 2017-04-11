@@ -8,6 +8,7 @@ export const mapStateToProps = (state, { artistId }) => {
   const artist = getArtistById(state, artistId);
   const avatarUrl = artist.avatarUrl;
   return {
+    permalinkUrl: artist.permalinkUrl,
     avatarUrl: formatImageUrl(avatarUrl, t500x500),
     avatarUrlSmall: formatImageUrl(avatarUrl, mini),
     artistName: artist.username,

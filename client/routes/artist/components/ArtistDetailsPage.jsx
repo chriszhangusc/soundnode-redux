@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Spinner from 'client/components/Spinner';
 import ArtistTrackListContainer from '../container/ArtistTrackListContainer';
 import ArtistInfoContainer from '../container/ArtistInfoContainer';
 
-const ArtistDetailsPage = ({ fetching, artistId, trackCount }) => {
+const ArtistDetailsPage = ({ artistId, trackCount }) => {
   return (
     <div className="container">
       <ArtistInfoContainer artistId={artistId} />
