@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Spinner from 'client/components/Spinner';
+// import Spinner from 'client/components/Spinner';
 import ArtistTrackListContainer from '../container/ArtistTrackListContainer';
 import ArtistInfoContainer from '../container/ArtistInfoContainer';
 

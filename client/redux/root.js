@@ -4,7 +4,7 @@ import chartsReducer from './modules/charts';
 import playerReducer from './modules/player/reducer';
 import playlistReducer from './modules/playlist/reducer';
 import artistReducer from './modules/artist';
-import trackReducer from './modules/track';
+// import trackReducer from './modules/track';
 // import uiReducer from './modules/ui';
 import entitiesReducer from './modules/entities';
 import searchReducer, { dropdownSearchEpic } from './modules/search';

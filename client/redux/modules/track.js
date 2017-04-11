@@ -1,4 +1,3 @@
-import { fromJS } from 'immutable';
 import { trackSchema, commentArraySchema } from 'client/schemas';
 import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 import { notificationFailure } from 'client/redux/modules/notification';
@@ -17,13 +16,13 @@ export const CLEAR_STATE = 'redux-music/track/CLEAR_STATE';
 
 /* Reducer */
 
-const INITIAL_STATE = fromJS({
+const INITIAL_STATE = {
   trackFetching: false,
   commentsFetching: false,
   trackId: undefined,
   commentIds: [],
   commentsNextHref: undefined,
-});
+};
 
 export default function track(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -40,7 +39,7 @@ export default function track(state = INITIAL_STATE, action) {
       return state.set('commentsFetching', true);
     case COMMENTS_RECEIVED:
       return state.merge({
-        commentIds: state.get('commentIds').concat(fromJS(action.payload.result)),
+        commentIds: state.get('commentIds').concat((action.payload.result)),
         commentsFetching: false,
         commentsNextHref: action.payload.nextHref,
       });

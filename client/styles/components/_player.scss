@@ -33,10 +33,6 @@ $volume-icon-size: 1.5rem;
     padding: 8px;
 }
 
-.player-info {
-    width: 200px;
-}
-
 .player-image {
     width: 30px;
     height: 30px;
@@ -139,7 +135,15 @@ $volume-icon-size: 1.5rem;
 }
 
 .player-song-card-details {
+  display: flex;
+  flex-direction: column;
   width: 200px;
+  & .song-card-title {
+  }
+
+  & .song-card-username {
+    width: 180px;
+  }
 }
 
 .ion-ios-list {

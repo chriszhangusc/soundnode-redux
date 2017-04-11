@@ -1,25 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LoadingImage from 'client/components/LoadingImage/LoadingImage';
+import ProgressiveImage from 'client/components/ProgressiveImage';
 
 const ArtistInfo = ({
   avatarUrl,
+  avatarUrlSmall,
   artistName,
   followerCount,
   description,
 }) => (
   <div className="artist-info-container">
-    <LoadingImage /> 
-    
-    <div className="artist-avatar">
-      
-      <img
-        alt="User avatar"
-        src={avatarUrl}
-        onLoad={() => { console.log('Image loaded'); }}
-        onError={() => { console.log('Image failed to load'); }}
-      />
-    </div>
+    <ProgressiveImage
+      largeImgUrl={avatarUrl}
+      smallImgUrl={avatarUrlSmall}
+      placeholderClassName="artist-avatar"
+    />
     <div className="artist-details">
       <h1 className="artist-name">{artistName}</h1>
       <div className="artist-followers">Followers: {followerCount}</div>
@@ -30,12 +25,14 @@ const ArtistInfo = ({
 
 ArtistInfo.defaultProps = {
   avatarUrl: '',
+  avatarUrlSmall: '',
   artistName: '',
   followerCount: 0,
   description: '',
 };
 
 ArtistInfo.propTypes = {
+  avatarUrlSmall: PropTypes.string,
   avatarUrl: PropTypes.string,
   artistName: PropTypes.string,
   followerCount: PropTypes.string, // Formatted number

@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
+import ProgressiveImage from 'client/components/ProgressiveImage';
 import MagicButton from 'client/components/MagicButton';
 
-const SongCardImage = ({ active, playing, artworkUrl, handleImageClick }) => (
+
+  // <ProgressiveImage largeImgUrl={artworkUrl} smallImgUrl={artworkUrlSmall} placeholderClassName="song-card-image" />
+
+const SongCardImage = ({ active, playing, artworkUrl, artworkUrlSmall, handleImageClick }) => (
   <div
     className="song-card-image"
     style={{ backgroundImage: `url(${artworkUrl})` }}
@@ -20,6 +24,7 @@ SongCardImage.defaultProps = {
   active: false,
   playing: false,
   artworkUrl: '',
+  artworkUrlSmall: '',
   handleImageClick: defaultEventHandlerFactory('handleImageClick'),
 };
 
@@ -27,6 +32,7 @@ SongCardImage.propTypes = {
   active: PropTypes.bool,
   playing: PropTypes.bool,
   artworkUrl: PropTypes.string,
+  artworkUrlSmall: PropTypes.string,
   handleImageClick: PropTypes.func,
 };
 
