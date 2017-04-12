@@ -22,8 +22,8 @@
 //     }
 // }
 //
-// @@mixin 4k {
-//     @media (min-width: 2560px) {
-//         @content;
-//     }
-// }
+@mixin desktop-4k {
+    @media (min-width: 2560px) {
+        @content;
+    }
+}

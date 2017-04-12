@@ -1,3 +1,21 @@
+// Song Card
+
+// Variables
+$song-card-width: 300px;
+$song-card-width-md: 190px;
+$song-card-width-lg: 230px;
+$song-card-width-4k: 350px;
+
+$song-card-details-width: 240px;
+$song-card-details-width-md: 130px;
+$song-card-details-width-lg: 170px;
+$song-card-details-width-4k: 290px;
+
+$song-card-image-height: 180px;
+$song-card-image-height-md: 140px;
+$song-card-image-height-lg: 160px;
+$song-card-image-height-4k: 200px;
+
 .song-card-list-container {
     justify-content: center;
     display: flex;
@@ -129,12 +147,14 @@
 }
 
 .song-card-title {
-    // display: block;
     color: $font-color-main;
     font-size: 13px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    @include desktop-4k {
+      width: 240px;
+    }
 }
 
 .song-card-controls {
