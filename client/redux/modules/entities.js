@@ -2,7 +2,7 @@ import { merge } from 'lodash';
 
 const INITIAL_STATE = {
   tracks: {},
-  artists: {},
+  users: {},
   comments: {},
 };
 
@@ -30,13 +30,13 @@ export default function entitiesReducer(state = INITIAL_STATE, action) {
 export const getEntitiesState = state => state.entities;
 
 /**
- * Returns artist object by artistId
+ * Returns user object by userId
  * @param {object} state Global state object
- * @param {number} artistId ArtistId field of an artist object
- * @returns {object} Artist object whose id equals to artistId
+ * @param {number} userId ArtistId field of an user object
+ * @returns {object} Artist object whose id equals to userId
  */
-export const getArtistById = (state, artistId) =>
-  artistId && getEntitiesState(state).artists[String(artistId)];
+export const getUserById = (state, userId) =>
+  userId && getEntitiesState(state).users[String(userId)];
 
 /**
  * Returns track object by trackId
@@ -62,20 +62,20 @@ export const getCommentById = (state, commentId) =>
  * @param {Number} trackId The id of the track
  * @returns {Object} Artist object who is the owner of track specified by trackId
  */
-export function getArtistByTrackId(state, trackId) {
+export function getUserByTrackId(state, trackId) {
   const track = getTrackById(state, trackId);
-  const artistId = track && track.userId;
-  return getArtistById(state, artistId);
+  const userId = track && track.userId;
+  return getUserById(state, userId);
 }
 
 /**
- * Returns artist object who made the comment specified by commentId
+ * Returns user object who made the comment specified by commentId
  * @param {Object} state Global state object
  * @param {Number} commentId The id of the comment
  * @returns {Object} Artist object
  */
-export function getArtistByCommentId(state, commentId) {
+export function getUserByCommentId(state, commentId) {
   const comment = getCommentById(state, commentId);
-  const artistId = comment && comment.userId;
-  return getArtistById(state, artistId);
+  const userId = comment && comment.userId;
+  return getUserById(state, userId);
 }

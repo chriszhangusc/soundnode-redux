@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProgressiveImage from 'client/components/ProgressiveImage';
 
-const ArtistInfo = ({
+const UserInfo = ({
   avatarUrl,
   avatarUrlSmall,
-  artistName,
+  username,
   followerCount,
   description,
   permalinkUrl,
@@ -19,29 +19,29 @@ const ArtistInfo = ({
       />
     </a>
     <div className="artist-details">
-      <h1 className="artist-name">{artistName}</h1>
+      <h1 className="artist-name">{username}</h1>
       <div className="artist-followers">Followers: {followerCount}</div>
       <div className="artist-description">{description}</div>
     </div>
   </div>
 );
 
-ArtistInfo.defaultProps = {
+UserInfo.defaultProps = {
   avatarUrl: undefined,
   avatarUrlSmall: undefined,
-  artistName: undefined,
+  username: undefined,
   followerCount: undefined,
   description: undefined,
   permalinkUrl: undefined,
 };
 
-ArtistInfo.propTypes = {
+UserInfo.propTypes = {
   avatarUrlSmall: PropTypes.string,
   avatarUrl: PropTypes.string,
-  artistName: PropTypes.string,
+  username: PropTypes.string,
   followerCount: PropTypes.string, // Formatted number
   description: PropTypes.string,
   permalinkUrl: PropTypes.string,
 };
 
-export default ArtistInfo;
+export default UserInfo;

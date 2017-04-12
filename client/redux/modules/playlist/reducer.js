@@ -1,4 +1,4 @@
-import { CHARTS_RECEIVED } from 'client/redux/modules/charts';
+import { CHARTS_RECEIVED } from 'client/redux/modules/charts/actionTypes';
 import {
   TOGGLE_PLAYLIST,
   CLEAR_PLAY_QUEUE,

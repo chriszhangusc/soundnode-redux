@@ -1,9 +1,10 @@
 import { CLIENT_ID } from 'client/constants/AuthConsts';
 import { normalizeResponse, constructFetchUrl, makeRequest } from './apiUtils';
-import { artistSchema, trackSchema, commentArraySchema, trackArraySchema, artistArraySchema } from '../schemas';
+import { userSchema, trackSchema, commentArraySchema, trackArraySchema, userArraySchema } from '../schemas';
 
 const SC_API_V1 = 'https://api.soundcloud.com/';
 const LIMIT = 20;
+
 // filters = { q: 'abc' }
 export function fetchTracks(filters, limit) {
   const endpoint = '/tracks/';
@@ -31,7 +32,7 @@ export function fetchArtists(filters, limit) {
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
   return makeRequest(fetchUrl)
-          .then(response => normalizeResponse(response, artistArraySchema));
+          .then(response => normalizeResponse(response, userArraySchema));
 }
 
 /**
@@ -46,16 +47,16 @@ export function fetchTrack(id) {
           // .then(response => normalizeResponse(response, trackSchema));
 }
 
-export function fetchArtist(artistId) {
-  const endpoint = `/users/${artistId}`;
+export function fetchUser(userId) {
+  const endpoint = `/users/${userId}`;
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id: CLIENT_ID });
   console.log(fetchUrl);
-  return makeRequest(fetchUrl, artistSchema);
+  return makeRequest(fetchUrl, userSchema);
           // .then(response => normalizeResponse(response, artistSchema));
 }
 
-export function fetchArtistTracks(artistId) {
-  const endpoint = `/users/${artistId}/tracks`;
+export function fetchUserTracks(userId) {
+  const endpoint = `/users/${userId}/tracks`;
   const queryParams = {
     client_id: CLIENT_ID,
     limit: LIMIT,

@@ -1,23 +1,20 @@
 import { connect } from 'react-redux';
 import SongCardList from 'client/components/SongCardList';
-import {
-  isArtistTracksFetching,
-  getArtistTrackIds,
-  loadMoreArtistTracks,
-} from 'client/redux/modules/artist';
+import { loadMoreUserTracks } from 'client/redux/modules/user/actions';
+import { isUserTracksFetching, getUserTrackIds } from 'client/redux/modules/user/selectors';
 
 // Container for SongCardList
 // Simply providing slices of state for the component to render.
 const mapStateToProps = state => ({
-  fetching: isArtistTracksFetching(state),
-  trackIds: getArtistTrackIds(state),
+  fetching: isUserTracksFetching(state),
+  trackIds: getUserTrackIds(state),
 });
 
 const mapDispatchToProps = dispatch => ({
   // Load more tracks
   scrollFunc() {
-    console.log('Fetch more artist tracks');
-    dispatch(loadMoreArtistTracks());
+    console.log('Fetch more user tracks');
+    dispatch(loadMoreUserTracks());
   },
 });
 

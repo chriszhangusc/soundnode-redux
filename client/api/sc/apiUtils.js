@@ -31,7 +31,9 @@ export function constructFetchUrl(baseUrl, endpoint, queryParams) {
 
 // Normalize
 export function normalizeResponse(jsonResponse, schema) {
-  if (!schema) return jsonResponse;
+  if (!schema) throw new Error('No Schema is provided to normalizeResponse function!');
+
+// console.log(jsonResponse);
   if (jsonResponse.collection) {
     const { nextHref, collection } = jsonResponse;
     return Object.assign({}, normalize(collection, schema), { nextHref });
@@ -47,7 +49,7 @@ export function makeRequest(fetchUrl, normalizeSchema) {
     .catch((err) => {
       // Let the user know when there is a connection error!
 console.log(err);
-      throw Error('Can not make request, please check your internet connection!');
+      throw Error('Can not reach the server!');
     })
     // The following should not be coupled with this function here.
     .then(json => camelizeKeys(json))

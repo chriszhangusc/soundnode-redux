@@ -1,14 +1,13 @@
 import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux';
-import chartsReducer from './modules/charts';
+import chartsReducer from './modules/charts/reducer';
 import playerReducer from './modules/player/reducer';
 import playlistReducer from './modules/playlist/reducer';
-import artistReducer from './modules/artist';
+import userReducer from './modules/user/reducer';
 // import trackReducer from './modules/track';
 // import uiReducer from './modules/ui';
 import entitiesReducer from './modules/entities';
 import searchReducer, { dropdownSearchEpic } from './modules/search';
-import userReducer from './modules/user';
 // import authReducer from './modules/auth';
 
 export const rootEpic = combineEpics(
@@ -21,9 +20,10 @@ export const rootReducer = combineReducers({
   charts: chartsReducer,
   playlist: playlistReducer,
   player: playerReducer,
-  artist: artistReducer,
+  // Single user profile page
+  user: userReducer,
+  // Single track profile page
   // track: trackReducer,
-  // user: userReducer,
   search: searchReducer,
   // auth: authReducer,
 });

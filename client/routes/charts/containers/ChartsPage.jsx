@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadChartsPage, changeGenre } from 'client/redux/modules/charts';
+import { loadChartsPage, changeGenre } from 'client/redux/modules/charts/actions';
 import { changeVisiblePlaylistName } from 'client/redux/modules/playlist/actions';
 import { GENRES, DEFAULT_GENRE, CHARTS_MAIN_TITLE_PREFIX, CHARTS_SUBTITLE } from 'client/constants/ChartsConsts';
 

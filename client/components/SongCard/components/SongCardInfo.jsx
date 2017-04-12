@@ -2,22 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'client/components/Avatar';
 import { Link } from 'react-router-dom';
+import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'client/constants/RouteConsts';
 
 const SongCardInfo = ({
   trackId,
-  artistId,
-  artistAvatar,
+  userId,
+  userAvatar,
   title,
-  artistName,
+  username,
 }) => (
   <div className="song-card-info-wrapper">
-    <Avatar src={artistAvatar} />
+    <Avatar src={userAvatar} />
     <div className="song-card-details">
-      <Link to={`/track/${trackId}`} className="song-card-title">
+      <Link to={`${TRACK_PROFILE_ROUTE}/${trackId}`} className="song-card-title">
         {title}
       </Link>
-      <Link to={`/artist/${artistId}`} className="song-card-username">
-        {artistName}
+      <Link to={`${USER_PROFILE_ROUTE}/${userId}`} className="song-card-username">
+        {username}
       </Link>
     </div>
   </div>
@@ -25,18 +26,18 @@ const SongCardInfo = ({
 
 SongCardInfo.defaultProps = {
   trackId: 0,
-  artistId: 0,
-  artistAvatar: '',
+  userId: undefined,
+  userAvatar: '',
   title: '',
-  artistName: '',
+  username: '',
 };
 
 SongCardInfo.propTypes = {
   trackId: PropTypes.number,
-  artistId: PropTypes.number,
-  artistAvatar: PropTypes.string,
+  userId: PropTypes.number,
+  userAvatar: PropTypes.string,
   title: PropTypes.string,
-  artistName: PropTypes.string,
+  username: PropTypes.string,
 };
 
 export default SongCardInfo;

@@ -4,7 +4,7 @@ import Title from 'client/components/Title';
 import LinkButton from 'client/components/Buttons/LinkButton';
 import { connect } from 'react-redux';
 import { GENRES, CHARTS_MAIN_TITLE_PREFIX, CHARTS_SUBTITLE } from 'client/constants/ChartsConsts';
-import { getChartsGenre } from 'client/redux/modules/charts';
+import { getChartsGenre } from 'client/redux/modules/charts/selectors';
 
 /* Since we only connect to store for playlist name, so no need to wrap it in a container */
 /* chartsGenre is fetched from redux store directly */

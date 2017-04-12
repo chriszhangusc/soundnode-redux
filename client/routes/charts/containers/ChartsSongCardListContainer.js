@@ -3,9 +3,10 @@ import SongCardList from 'client/components/SongCardList';
 import {
   isChartsFetching,
   getChartsTrackIds,
-  loadMoreCharts,
   getChartsGenre,
-} from 'client/redux/modules/charts';
+} from 'client/redux/modules/charts/selectors';
+
+import { loadMoreCharts } from 'client/redux/modules/charts/actions';
 
 // Container for SongCardList
 // Simply providing slices of state for the component to render.
