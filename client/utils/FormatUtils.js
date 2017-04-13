@@ -17,6 +17,13 @@ export const formatSecondsAsTime = (secs) => {
   return `${min}:${sec}`;
 };
 
+export function imageExists(imageUrl) {
+  const http = new XMLHttpRequest();
+  http.open('HEAD', imageUrl, false);
+  http.send();
+  return http.status !== 404;
+}
+
 export function formatImageUrl(rawUrl, size = t500x500) {
   // Check size
   if (rawUrl && rawUrl.indexOf(large) > -1) {

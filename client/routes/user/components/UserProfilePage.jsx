@@ -7,8 +7,8 @@ const UserProfilePage = ({ userId, trackCount }) => {
   return (
     <div className="container">
       <UserInfoContainer userId={userId} />
-      <div className="artist-tracks-container">
-        <div className="artist-tracks-title">
+      <div className="user-tracks-container">
+        <div className="user-tracks-title">
           <h3>Tracks ({trackCount}) :</h3>
           <UserTrackListContainer />
         </div>

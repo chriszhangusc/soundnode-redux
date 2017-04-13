@@ -9,7 +9,6 @@ import {
 import { loadMoreCharts } from 'client/redux/modules/charts/actions';
 
 // Container for SongCardList
-// Simply providing slices of state for the component to render.
 const mapStateToProps = state => ({
   fetching: isChartsFetching(state),
   trackIds: getChartsTrackIds(state),

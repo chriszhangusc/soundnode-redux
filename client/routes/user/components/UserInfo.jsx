@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ProgressiveImage from 'client/components/ProgressiveImage';
+import ImageWithFallback from 'client/components/ImageWithFallback';
+import { DEFAULT_USER_AVATAR } from 'client/constants/ImageConstants';
 
 const UserInfo = ({
   avatarUrl,
@@ -10,18 +12,19 @@ const UserInfo = ({
   description,
   permalinkUrl,
 }) => (
-  <div className="artist-info-container">
+  <div className="user-info-container">
     <a href={permalinkUrl} target="_black" title="Go to SoundCloud">
-      <ProgressiveImage
+      {/*<ProgressiveImage
         largeImgUrl={avatarUrl}
         smallImgUrl={avatarUrlSmall}
-        placeholderClassName="artist-avatar"
-      />
+        placeholderClassName="user-avatar"
+      />*/}
+      <ImageWithFallback alt="user avatar" src={avatarUrl} fallbackImageUrl={DEFAULT_USER_AVATAR} className="user-avatar" />
     </a>
-    <div className="artist-details">
-      <h1 className="artist-name">{username}</h1>
-      <div className="artist-followers">Followers: {followerCount}</div>
-      <div className="artist-description">{description}</div>
+    <div className="user-details">
+      <h1 className="user-name">{username}</h1>
+      <div className="user-followers">Followers: {followerCount}</div>
+      <div className="user-description">{description}</div>
     </div>
   </div>
 );

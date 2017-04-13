@@ -9,11 +9,11 @@ $profile-pic-height-lg: 300px;
 $profile-pic-height-4k: 400px;
 
 
-.artist-info-container {
+.user-info-container {
   padding: 20px 0;
   display: flex;
 
-  & .artist-avatar {
+  & .user-avatar {
 
     display: inline-block;
     
@@ -37,22 +37,22 @@ $profile-pic-height-4k: 400px;
   }
 }
 
-  & .artist-details {
+  & .user-details {
     display: inline-flex;
     flex-direction: column;
     justify-content: flex-start;
     margin-left: 40px;
 
-    & .artist-name {
+    & .user-name {
       margin: 0;
     }
 
-    & .artist-followers {
+    & .user-followers {
       margin: 10px 0;
       color: $font-color-main;
     }
 
-    & .artist-description {
+    & .user-description {
       margin: 10px 0;
       font-size: 1.2rem;
       overflow: scroll;
