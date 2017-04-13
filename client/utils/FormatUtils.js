@@ -2,7 +2,7 @@ import { CLIENT_ID } from 'client/constants/AuthConsts';
 import {
   t500x500,
   large,
-} from 'client/constants/ImageConstants';
+} from 'client/constants/ImageConsts';
 
 export const formatSecondsAsTime = (secs) => {
   const hr = Math.floor(secs / 3600);
@@ -17,20 +17,13 @@ export const formatSecondsAsTime = (secs) => {
   return `${min}:${sec}`;
 };
 
-export function imageExists(imageUrl) {
-  const http = new XMLHttpRequest();
-  http.open('HEAD', imageUrl, false);
-  http.send();
-  return http.status !== 404;
-}
-
-export function formatImageUrl(rawUrl, size = t500x500) {
-  // Check size
-  if (rawUrl && rawUrl.indexOf(large) > -1) {
-    return rawUrl.replace(large, size);
-  }
-  return rawUrl;
-}
+// export function formatImageUrl(rawUrl, size = t500x500) {
+//   // Check size
+//   if (rawUrl && rawUrl.indexOf(large) > -1) {
+//     return rawUrl.replace(large, size);
+//   }
+//   return rawUrl;
+// }
 
 /**
  * Generate stream url given song obj

@@ -1,5 +1,4 @@
 /* Action Creators */
-
 import { formatGenre } from 'client/utils/FormatUtils';
 import { fetchChartsFromSC } from 'client/api/sc/v2';
 import { notificationFailure } from 'client/redux/modules/notification';

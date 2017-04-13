@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { defaultArtistImageUrl } from 'client/constants/ImageConstants';
+import { defaultArtistImageUrl } from 'client/constants/ImageConsts';
 
+// Change to fallback image!
 const Avatar = ({ src, alt }) => (
   <img
     alt={alt}

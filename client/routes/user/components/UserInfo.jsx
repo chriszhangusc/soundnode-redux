@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProgressiveImage from 'client/components/ProgressiveImage';
 import ImageWithFallback from 'client/components/ImageWithFallback';
-import { DEFAULT_USER_AVATAR } from 'client/constants/ImageConstants';
+import { DEFAULT_USER_AVATAR } from 'client/constants/ImageConsts';
 
 const UserInfo = ({
   avatarUrl,

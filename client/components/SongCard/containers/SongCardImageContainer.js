@@ -1,24 +1,13 @@
 import { connect } from 'react-redux';
-import { formatImageUrl } from 'client/utils/FormatUtils';
-import { small } from 'client/constants/ImageConstants';
-import {
-  isTrackActive,
-  isTrackPlaying,
-} from 'client/redux/modules/player/selectors';
-
-import {
-  changeSongAndPlay,
-  playSong,
-  pauseSong,
-} from 'client/redux/modules/player/actions';
-
+import { isTrackActive, isTrackPlaying } from 'client/redux/modules/player/selectors';
+import { changeSongAndPlay, playSong, pauseSong } from 'client/redux/modules/player/actions';
 import { switchPlaylistIfNeeded } from 'client/redux/modules/playlist/actions';
-
+import { getMiniVersion, getLargeVersion } from 'client/utils/ImageUtils';
 import SongCardImage from '../components/SongCardImage';
 
 const mapStateToProps = (state, { track }) => ({
-  artworkUrl: formatImageUrl(track.artworkUrl),
-  artworkUrlSmall: formatImageUrl(track.artworkUrl, small),
+  artworkUrl: getLargeVersion(track.artworkUrl),
+  artworkUrlSmall: getMiniVersion(track.artworkUrl),
   active: isTrackActive(state, track.id),
   playing: isTrackPlaying(state, track.id),
 });
