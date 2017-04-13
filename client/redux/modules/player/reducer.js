@@ -1,9 +1,6 @@
 import { CLEAR_PLAY_QUEUE } from 'client/redux/modules/playlist/actions';
 
-import {
-  DEFAULT_MODE,
-  INITIAL_VOLUME,
-} from './consts';
+import { DEFAULT_MODE, INITIAL_VOLUME } from './consts';
 
 import {
   PLAY_SONG,

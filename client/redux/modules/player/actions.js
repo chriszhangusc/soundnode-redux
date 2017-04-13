@@ -1,11 +1,7 @@
 import { clearShufflePlaylist, shufflePlaylist } from 'client/redux/modules/playlist/actions';
 import { getPlaylistByMode } from 'client/redux/modules/playlist/selectors';
-
 import { getLastVolume, setLastVolume } from 'client/utils/LocalStorageUtils';
-
 import { DEFAULT_MODE, REPEAT, NEXT, PREV, SHUFFLE } from './consts';
-
-
 import {
   isPlayerSeeking,
   getCurrentTime,
@@ -14,7 +10,6 @@ import {
   getPlayerTrackId,
   getPlayerMode,
 } from './selectors';
-
 import {
   BEGIN_SEEK,
   END_SEEK,
@@ -29,7 +24,6 @@ import {
   CHANGE_PLAY_MODE,
   CHANGE_SONG,
 } from './types';
-
 
 /* Action Creators */
 export const beginSeek = () => ({ type: BEGIN_SEEK });
