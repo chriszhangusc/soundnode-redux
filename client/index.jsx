@@ -7,6 +7,7 @@ import 'isomorphic-fetch';
 import 'rxjs';
 import 'react-notifications/src/notifications.scss';
 import App from 'client/components/App';
+import 'normalize.css';
 import './styles/app.scss';
 import { CLIENT_ID, REDIRECT_URI } from './constants/AuthConsts';
 

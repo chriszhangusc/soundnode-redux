@@ -1,7 +1,8 @@
 // Webpack 2 dev config
-var path = require('path');
-var webpack = require('webpack');
-var HTMLWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 const PORT = process.env.PORT || 3000;
@@ -78,7 +79,14 @@ module.exports = {
           'sass-loader',
         ]
       },
-
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader'],
+          // use: 'css-loader',
+        })
+      },
       {
         test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
         use: [
@@ -112,6 +120,7 @@ module.exports = {
     //   React: 'react'
     // }),
 
+    new ExtractTextPlugin('styles.css'),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: [
