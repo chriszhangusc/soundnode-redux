@@ -32,7 +32,7 @@ module.exports = {
     compress: true,
 
     // Reduce the amount of console outputs when we run webpack-dev-server
-    stats: 'errors-only',
+    // stats: 'errors-only',
     // Opens new browser window when we run devserer for the first time
     open: true,
     // http://localhost:3000/api/abc will be redirect to 3001/api/abc
@@ -56,7 +56,7 @@ module.exports = {
     ],
     alias: {
       client: path.join(__dirname, 'client'),
-      assets: path.join(__dirname, 'public')
+      assets: path.join(__dirname, 'public'),
     },
     extensions: ['*', '.js', '.jsx', 'stage-0']
   },
@@ -97,9 +97,15 @@ module.exports = {
 
     // DefinePlugin makes it possible for us to use env variables in src code
     new webpack.DefinePlugin({
-      PRODUCTION: false, 
+      PRODUCTION: false,
       PORT,
     }),
+    // Or do this.
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     NODE_ENV: JSON.stringify('production')
+    //   }
+    // }),
 
     // ProvidePlugin: automatically load modules.
     // new webpack.ProvidePlugin({

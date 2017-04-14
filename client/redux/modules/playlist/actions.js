@@ -1,5 +1,7 @@
 import { getPlayerTrackId, isInShuffleMode } from 'client/redux/modules/player/selectors';
-import { concat, shuffle } from 'lodash';
+// import { concat, shuffle } from 'lodash';
+import concat from 'lodash/concat';
+import shuffle from 'lodash/shuffle';
 
 import {
   CHANGE_VISIBLE_PLAYLIST_NAME,

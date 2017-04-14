@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
-import ProgressiveImage from 'client/components/ProgressiveImage';
+// import FadeInImage from 'client/components/Images/FadeInImage';
 import MagicButton from 'client/components/MagicButton';
 
 
