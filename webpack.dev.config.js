@@ -56,7 +56,7 @@ module.exports = {
     ],
     alias: {
       client: path.join(__dirname, 'client'),
-      assets: path.join(__dirname, 'public')
+      assets: path.join(__dirname, 'public'),
     },
     extensions: ['*', '.js', '.jsx', 'stage-0']
   },

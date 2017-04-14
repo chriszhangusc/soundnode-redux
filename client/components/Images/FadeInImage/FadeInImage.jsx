@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
+import './FadeInImage.scss';
 
-class ProgressiveImage extends Component {
+class FadeInImage extends Component {
 
   constructor(props) {
     super(props);
@@ -18,6 +19,7 @@ class ProgressiveImage extends Component {
     this.onLargeImageLoaded = this.onLargeImageLoaded.bind(this);
   }
 
+  // Not sure if this is necessary
   shouldComponentUpdate(nextProps, nextState) {
     return !isEqual(this.state, nextState);
   }
@@ -41,18 +43,18 @@ class ProgressiveImage extends Component {
   render() {
     const { smallImgUrl, largeImgUrl, placeholderClassName, onClick } = this.props;
     return (
-      <div className={`${placeholderClassName} progressive-img-placeholder`}>
+      <div className={`${placeholderClassName} fadein-img-placeholder`}>
         <img
           alt="Small"
           onLoad={this.onSmallImageLoaded}
           src={smallImgUrl}
-          className={`progressive-img-small ${this.state.smallLoaded ? 'loaded' : ''}`}
+          className={`fadein-img-small ${this.state.smallLoaded ? 'loaded' : ''}`}
         />
         <img
           alt="Large"
           onClick={onClick}
           src={largeImgUrl}
-          className={`progressive-img-large ${this.state.largeLoaded ? 'loaded' : ''}`}
+          className={`fadein-img-large ${this.state.largeLoaded ? 'loaded' : ''}`}
           onLoad={this.onLargeImageLoaded}
         />
       </div>
@@ -60,17 +62,17 @@ class ProgressiveImage extends Component {
   }
 }
 
-ProgressiveImage.defaultProps = {
+FadeInImage.defaultProps = {
   smallImgUrl: 'default img url',
-  placeholderClassName: 'progressive-img-placeholder',
+  placeholderClassName: 'fadein-img-placeholder',
   onClick: () => { console.log('This is default onClick handler'); },
 };
 
-ProgressiveImage.propTypes = {
+FadeInImage.propTypes = {
   smallImgUrl: PropTypes.string,
   largeImgUrl: PropTypes.string.isRequired,
   placeholderClassName: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default ProgressiveImage;
+export default FadeInImage;
