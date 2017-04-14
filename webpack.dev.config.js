@@ -81,11 +81,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader'],
-          // use: 'css-loader',
-        })
+        use: [
+          'style-loader',
+          'css-loader?modules&importLoaders=1&camelCase&localIdentName=[name]__[local]___[hash:base64:5]',
+          'postcss-loader',
+        ]
       },
       {
         test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
@@ -120,7 +120,9 @@ module.exports = {
     //   React: 'react'
     // }),
 
-    new ExtractTextPlugin('styles.css'),
+    // No point to use in development, production instead
+    // new ExtractTextPlugin('styles.css'),
+
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: [

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
-import './FadeInImage.scss';
+import styles from './FadeinImage.css';
+// import './FadeInImage.scss';
 
-class FadeInImage extends Component {
+class FadeinImage extends Component {
 
   constructor(props) {
     super(props);
@@ -25,7 +26,7 @@ class FadeInImage extends Component {
   }
 
   onSmallImageLoaded() {
-    console.log('Small loaded');
+    // console.log('Small loaded');
     this.setState({
       smallLoaded: true,
     });
@@ -41,20 +42,21 @@ class FadeInImage extends Component {
   }
 
   render() {
+    console.log(styles);
     const { smallImgUrl, largeImgUrl, placeholderClassName, onClick } = this.props;
     return (
-      <div className={`${placeholderClassName} fadein-img-placeholder`}>
+      <div className={`${placeholderClassName} ${styles.fadeinImgPlaceholder}`} >
         <img
           alt="Small"
-          onLoad={this.onSmallImageLoaded}
           src={smallImgUrl}
-          className={`fadein-img-small ${this.state.smallLoaded ? 'loaded' : ''}`}
+          className={`${styles.fadeinImgSmall} ${this.state.smallLoaded ? styles.loaded : ''}`}
+          onLoad={this.onSmallImageLoaded}
         />
         <img
           alt="Large"
           onClick={onClick}
           src={largeImgUrl}
-          className={`fadein-img-large ${this.state.largeLoaded ? 'loaded' : ''}`}
+          className={`${styles.fadeinImgLarge} ${this.state.largeLoaded ? styles.loaded : ''}`}
           onLoad={this.onLargeImageLoaded}
         />
       </div>
@@ -62,17 +64,17 @@ class FadeInImage extends Component {
   }
 }
 
-FadeInImage.defaultProps = {
+FadeinImage.defaultProps = {
   smallImgUrl: 'default img url',
   placeholderClassName: 'fadein-img-placeholder',
   onClick: () => { console.log('This is default onClick handler'); },
 };
 
-FadeInImage.propTypes = {
+FadeinImage.propTypes = {
   smallImgUrl: PropTypes.string,
   largeImgUrl: PropTypes.string.isRequired,
   placeholderClassName: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default FadeInImage;
+export default FadeinImage;

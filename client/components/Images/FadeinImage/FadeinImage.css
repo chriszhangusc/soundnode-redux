@@ -2,8 +2,6 @@
   display: inline-block;
   width: 350px;
   height: 350px;
-  // Default to transparent
-  // background-color: #f6f6f6;
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;

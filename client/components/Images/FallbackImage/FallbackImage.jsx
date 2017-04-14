@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { imageExists } from 'client/utils/ImageUtils';
+
 // Enhanced Image component which can fallback to specified fallback
 // image if the original image is not available.
-class ImageWithFallback extends React.Component {
+class FallbackIamge extends React.Component {
   constructor(props) {
     super(props);
     this.state = { fallback: false };
@@ -29,13 +29,13 @@ class ImageWithFallback extends React.Component {
 
 }
 
-ImageWithFallback.defaultProps = {
+FallbackIamge.defaultProps = {
   className: '',
   onError: undefined,
   alt: PropTypes.string,
 };
 
-ImageWithFallback.propTypes = {
+FallbackIamge.propTypes = {
   className: PropTypes.string,
   src: PropTypes.string.isRequired,
   fallbackImageUrl: PropTypes.string,
@@ -44,6 +44,6 @@ ImageWithFallback.propTypes = {
 };
 
 
-export default ImageWithFallback;
+export default FallbackIamge;
 
 

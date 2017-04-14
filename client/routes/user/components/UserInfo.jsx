@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FadeInImage from 'client/components/Images/FadeInImage';
+import FadeinImage from 'client/components/Images/FadeinImage';
 // import ImageWithFallback from 'client/components/Images/ImageWithFallback';
 import { DEFAULT_USER_AVATAR } from 'client/constants/ImageConsts';
 
@@ -14,7 +14,7 @@ const UserInfo = ({
 }) => (
   <div className="user-info-container">
     <a href={permalinkUrl} target="_black" title="Go to SoundCloud">
-      <FadeInImage
+      <FadeinImage
         largeImgUrl={avatarUrl}
         smallImgUrl={avatarUrlSmall}
         placeholderClassName="user-avatar"
