@@ -5,7 +5,7 @@ import UserInfoContainer from '../container/UserInfoContainer';
 
 const UserProfilePage = ({ userId, trackCount }) => {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <UserInfoContainer userId={userId} />
       <div className="user-tracks-container">
         <div className="user-tracks-title">

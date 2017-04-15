@@ -7,16 +7,16 @@
 #page-content-wrapper {
     // position: absolute;
     margin-left: $sidebar-width;
-    padding: 20px;
+    padding: 20px 20px 20px 50px;
 
     @include desktop {
         margin-left: $sidebar-width-md;
-        padding: 15px;
+        padding: 20px 20px 20px 50px;
     }
 
     @include desktop-lg {
         margin-left: $sidebar-width-md;
-        padding: 15px;
+        padding: 20px 20px 20px 50px;
     }
 
     overflow-y: scroll;

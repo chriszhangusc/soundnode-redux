@@ -4,10 +4,11 @@ import SongCardContainer from 'client/components/SongCard';
 import Spinner from 'client/components/Spinner';
 import infiniteScroll from 'client/components/Hocs/InfiniteScroll';
 import shortid from 'shortid';
+import styles from './SongCardList.css';
 
 function renderSongCardList(trackIds, playlistName) {
   return (
-    <div className="song-card-list-container">
+    <div className={styles.songCardListContainer}>
       {
         trackIds.map(trackId => (
           <SongCardContainer
@@ -22,7 +23,7 @@ function renderSongCardList(trackIds, playlistName) {
   );
 }
 
-const SongCardList = (props) => {
+function SongCardList(props) {
   const { fetching, trackIds, playlistName } = props;
 
   return (
@@ -31,7 +32,7 @@ const SongCardList = (props) => {
       {fetching && <Spinner />}
     </div>
   );
-};
+}
 
 SongCardList.defaultProps = {
   fetching: false,
@@ -41,7 +42,7 @@ SongCardList.defaultProps = {
 
 SongCardList.propTypes = {
   fetching: PropTypes.bool,
-  trackIds: PropTypes.array,
+  trackIds: PropTypes.arrayOf(PropTypes.number),
   playlistName: PropTypes.string,
 };
 

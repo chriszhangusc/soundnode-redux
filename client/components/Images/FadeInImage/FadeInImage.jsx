@@ -42,7 +42,6 @@ class FadeinImage extends Component {
   }
 
   render() {
-    console.log(styles);
     const { smallImgUrl, largeImgUrl, placeholderClassName, onClick } = this.props;
     return (
       <div className={`${placeholderClassName} ${styles.fadeinImgPlaceholder}`} >

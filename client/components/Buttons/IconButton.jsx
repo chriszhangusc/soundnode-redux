@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 
-function IconButton({ title, iconClassName, onClick }) {
+function IconButton({ title, btnClassName, iconClassName, onClick }) {
   return (
     <button
       title={title}
-      className="icon-button"
+      className={`icon-button ${btnClassName}`}
       onClick={onClick}
     >
       {iconClassName && <i className={iconClassName} />}
@@ -17,12 +17,14 @@ function IconButton({ title, iconClassName, onClick }) {
 IconButton.defaultProps = {
   title: '',
   iconClassName: '',
+  btnClassName: '',
   onClick: defaultEventHandlerFactory('onClick'),
 };
 
 IconButton.propTypes = {
   title: PropTypes.string,
   iconClassName: PropTypes.string,
+  btnClassName: PropTypes.string,
   onClick: PropTypes.func,
 };
 
