@@ -1,4 +1,4 @@
-import { CHARTS_RECEIVED } from 'client/redux/modules/charts/actionTypes';
+import { CHARTS_RECEIVE } from 'client/redux/modules/charts/actionTypes';
 import {
   TOGGLE_PLAYLIST,
   CLEAR_PLAY_QUEUE,
@@ -49,7 +49,7 @@ export default function playlistReducer(state = initialState, action) {
         playlist: [...state.playlist, action.payload],
       };
 
-    case CHARTS_RECEIVED:
+    case CHARTS_RECEIVE:
       return {
         ...state,
         [action.playlistName]: (state[action.playlistName]

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getTrackById, getArtistByTrackId } from 'client/redux/modules/entities';
+import { getTrackById, getUserByTrackId } from 'client/redux/modules/entities';
 import { isTrackActive } from 'client/redux/modules/player/selectors';
 import { changeSongAndPlay } from 'client/redux/modules/player/actions';
 
@@ -10,7 +10,7 @@ import PlaylistItem from '../components/PlaylistItem';
 const mapStateToProps = (state, { trackId, index }) => {
   // console.log(typeof trackId);
   const track = getTrackById(state, trackId);
-  const artist = getArtistByTrackId(state, trackId);
+  const artist = getUserByTrackId(state, trackId);
   return {
     index,
     active: isTrackActive(state, trackId),

@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { getArtistByTrackId } from 'client/redux/modules/entities';
+import { getUserByTrackId } from 'client/redux/modules/entities';
 import { formatTitle } from 'client/utils/FormatUtils';
 import PlayerTrackInfo from '../components/PlayerTrackInfo';
 
 const mapStateToProps = (state, { playerTrack }) => {
   const trackId = playerTrack.id;
-  const artist = getArtistByTrackId(state, trackId);
+  const artist = getUserByTrackId(state, trackId);
   const artistId = artist.id;
   return ({
     artworkUrl: playerTrack.artworkUrl,
