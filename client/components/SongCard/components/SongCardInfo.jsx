@@ -4,25 +4,27 @@ import Avatar from 'client/components/Avatar';
 import { Link } from 'react-router-dom';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'client/constants/RouteConsts';
 
-const SongCardInfo = ({
+function SongCardInfo({
   trackId,
   userId,
   userAvatar,
   title,
   username,
-}) => (
-  <div className="song-card-info-wrapper">
-    <Avatar src={userAvatar} />
-    <div className="song-card-details">
-      <Link to={`${TRACK_PROFILE_ROUTE}/${trackId}`} className="song-card-title">
-        {title}
-      </Link>
-      <Link to={`${USER_PROFILE_ROUTE}/${userId}`} className="song-card-username">
-        {username}
-      </Link>
+}) {
+  return (
+    <div className="song-card-info-wrapper">
+      <Avatar src={userAvatar} />
+      <div className="song-card-details">
+        <Link to={`${TRACK_PROFILE_ROUTE}/${trackId}`} className="song-card-title">
+          {title}
+        </Link>
+        <Link to={`${USER_PROFILE_ROUTE}/${userId}`} className="song-card-username">
+          {username}
+        </Link>
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
 SongCardInfo.defaultProps = {
   trackId: 0,

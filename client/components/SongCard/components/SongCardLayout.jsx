@@ -5,7 +5,7 @@ import SongCardInfoContainer from '../containers/SongCardInfoContainer';
 import SongCardControlsContainer from '../containers/SongCardControlsContainer';
 import SongCardImageContainer from '../containers/SongCardImageContainer';
 
-const SongCardLayout = ({ track, active, trackIds, playlistName }) => {
+function SongCardLayout({ track, active, trackIds, playlistName }) {
   if (!track) return null;
   return (
     <div className={`card song-card ${(active ? 'active' : '')}`}>
@@ -14,7 +14,7 @@ const SongCardLayout = ({ track, active, trackIds, playlistName }) => {
       <SongCardControlsContainer track={track} />
     </div>
   );
-};
+}
 
 SongCardLayout.defaultProps = {
   track: null,

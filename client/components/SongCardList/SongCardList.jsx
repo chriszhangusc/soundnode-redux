@@ -5,7 +5,7 @@ import Spinner from 'client/components/Spinner';
 import infiniteScroll from 'client/components/Hocs/InfiniteScroll';
 import shortid from 'shortid';
 
-const renderSongCardList = (trackIds, playlistName) => {
+function renderSongCardList(trackIds, playlistName) {
   return (
     <div className="song-card-list-container">
       {
@@ -20,7 +20,7 @@ const renderSongCardList = (trackIds, playlistName) => {
       }
     </div>
   );
-};
+}
 
 const SongCardList = (props) => {
   const { fetching, trackIds, playlistName } = props;

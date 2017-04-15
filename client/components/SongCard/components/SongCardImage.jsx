@@ -5,20 +5,22 @@ import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 import MagicButton from 'client/components/MagicButton';
 
 
-  // <ProgressiveImage largeImgUrl={artworkUrl} smallImgUrl={artworkUrlSmall} placeholderClassName="song-card-image" />
+// <ProgressiveImage largeImgUrl={artworkUrl} smallImgUrl={artworkUrlSmall} placeholderClassName="song-card-image" />
 
-const SongCardImage = ({ active, playing, artworkUrl, artworkUrlSmall, handleImageClick }) => (
-  <div
-    className="song-card-image"
-    style={{ backgroundImage: `url(${artworkUrl})` }}
-  >
-    <MagicButton
-      btnClassName={`toggle-play-button ${(active ? 'active' : '')}`}
-      iconClassName={`toggle-play-button-icon ${playing ? 'ion-ios-pause' : 'ion-ios-play'}`}
-      onClick={handleImageClick}
-    />
-  </div>
-);
+function SongCardImage({ active, playing, artworkUrl, artworkUrlSmall, handleImageClick }) {
+  return (
+    <div
+      className="song-card-image"
+      style={{ backgroundImage: `url(${artworkUrl})` }}
+    >
+      <MagicButton
+        btnClassName={`toggle-play-button ${(active ? 'active' : '')}`}
+        iconClassName={`toggle-play-button-icon ${playing ? 'ion-ios-pause' : 'ion-ios-play'}`}
+        onClick={handleImageClick}
+      />
+    </div>
+  );
+}
 
 SongCardImage.defaultProps = {
   active: false,

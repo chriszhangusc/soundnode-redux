@@ -5,31 +5,33 @@ import { Link } from 'react-router-dom';
 import defaultArtworkImage from 'assets/images/default-artwork.png';
 
 // DUMB DUMB DUMB
-const PlayerTrackInfo = ({
+function PlayerTrackInfo({
   artworkUrl,
   trackTitle,
   artistName,
   trackUrl,
   artistUrl,
-}) => (
-  <div className="player-section player-info">
-    <Link to={trackUrl} >
-      <img
-        alt="Not Found"
-        className="player-image"
-        src={artworkUrl || defaultArtworkImage}
-      />
-    </Link>
-    <div className="player-song-card-details">
-      <Link to={trackUrl} className="song-card-title">
-        {trackTitle}
+}) {
+  return (
+    <div className="player-section player-info">
+      <Link to={trackUrl} >
+        <img
+          alt="Not Found"
+          className="player-image"
+          src={artworkUrl || defaultArtworkImage}
+        />
       </Link>
-      <Link to={artistUrl} className="song-card-username">
-        {artistName}
-      </Link>
+      <div className="player-song-card-details">
+        <Link to={trackUrl} className="song-card-title">
+          {trackTitle}
+        </Link>
+        <Link to={artistUrl} className="song-card-username">
+          {artistName}
+        </Link>
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
 PlayerTrackInfo.defaultProps = {
   artworkUrl: '',

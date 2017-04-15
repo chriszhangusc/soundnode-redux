@@ -2,7 +2,7 @@ import React from 'react';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 import PropTypes from 'prop-types';
 
-const PlaylistItem = ({
+function PlaylistItem({
   title,
   artistName,
   liked,
@@ -11,7 +11,8 @@ const PlaylistItem = ({
   handleChangeSong,
   handleLikeSong,
   handleUnlikeSong,
- }) => (
+ }) {
+  return (
     <li
       className={`playlist-item ${active ? 'active' : ''}`}
       onClick={(e) => {
@@ -47,6 +48,7 @@ const PlaylistItem = ({
       </div>
     </li>
   );
+}
 
 PlaylistItem.defaultProps = {
   handleChangeSong: defaultEventHandlerFactory('handleChangeSong'),

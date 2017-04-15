@@ -7,7 +7,7 @@ import PlayerTrackInfoContainer from '../containers/PlayerTrackInfoContainer';
 import PlayerModeControlsContainer from '../containers/PlayerModeControlsContainer';
 import PlayerVolumeControlsContainer from '../containers/PlayerVolumeControlsContainer';
 
-const PlayerLayout = ({ playerTrack }) => {
+function PlayerLayout({ playerTrack }) {
 // console.log(playerTrack);
   // Do not display Player if there is no track to play.
   if (!playerTrack || !playerTrack.id) {
@@ -29,7 +29,7 @@ const PlayerLayout = ({ playerTrack }) => {
       </div>
     </div>
   );
-};
+}
 
 PlayerLayout.defaultProps = {
   playerTrack: null,

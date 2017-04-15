@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 /*
  * It's basically just a generic button with icon options.
+ * Prefer more specific implementation like LinkButton and IconButton over generic.
  */
 const MagicButton = ({ title, onClick, text, btnClassName, iconClassName }) => (
   <button

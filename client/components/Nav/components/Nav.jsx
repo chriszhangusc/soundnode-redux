@@ -4,16 +4,18 @@ import NavSearchContainer from '../containers/NavSearchContainer';
 import NavHeader from './NavHeader';
 
 /* This is our main Nav layout */
-const Nav = () => (
-  <nav className="navbar navbar-fixed-top">
-    <div className="nav-wrapper">
-      <NavHeader />
-      <div className="nav-search-user-wrapper">
-        <NavSearchContainer />
-        {/*<NavUserContainer />*/}
+function Nav() {
+  return (
+    <nav className="navbar navbar-fixed-top">
+      <div className="nav-wrapper">
+        <NavHeader />
+        <div className="nav-search-user-wrapper">
+          <NavSearchContainer />
+          {/*<NavUserContainer />*/}
+        </div>
       </div>
-    </div>
-  </nav>
-);
+    </nav>
+  );
+}
 
 export default Nav;

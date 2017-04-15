@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
-const NavUser = ({ uid, displayName, photoUrl, handleLogin }) => {
+/* Need rewrite */
+function NavUser({ uid, displayName, photoUrl, handleLogin }) {
   if (uid) {
     return (
       <div className="nav-user-wrapper">
@@ -20,7 +20,7 @@ const NavUser = ({ uid, displayName, photoUrl, handleLogin }) => {
       </div>
     </div>
   );
-};
+}
 
 NavUser.defaultProps = {
   uid: '',

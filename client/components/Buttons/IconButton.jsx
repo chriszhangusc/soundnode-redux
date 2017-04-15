@@ -2,15 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 
-const IconButton = ({ title, iconClassName, onClick }) => (
-  <button
-    title={title}
-    className="icon-button"
-    onClick={onClick}
-  >
-    {iconClassName && <i className={iconClassName} />}
-  </button>
-);
+function IconButton({ title, iconClassName, onClick }) {
+  return (
+    <button
+      title={title}
+      className="icon-button"
+      onClick={onClick}
+    >
+      {iconClassName && <i className={iconClassName} />}
+    </button>
+  );
+}
 
 IconButton.defaultProps = {
   title: '',
