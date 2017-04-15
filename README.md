@@ -18,6 +18,8 @@ selector name: get<Noun>
 From Airbnb style guide: 
 And if you don't have state or refs, prefer normal functions (not arrow functions) over classes:
 
+https://github.com/airbnb/javascript/tree/master/react
+
 // bad
 class Listing extends React.Component {
   render() {

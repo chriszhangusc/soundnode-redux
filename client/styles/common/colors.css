@@ -1,0 +1,13 @@
+@value black: #0f1010;
+@value light-black: #1d1f21;
+@value light-light-black: #242728;
+
+@value dark-gray: #4f4f51;
+@value gray: #949599;
+@value light-gray: #CCC;
+@value semi-transparent-bg-dark: rgba(0, 0, 0, 0.8);
+@value white: #ededed;
+
+@value orange: #f50;
+
+@value theme-color: orange;

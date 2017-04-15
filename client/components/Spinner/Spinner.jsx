@@ -1,15 +1,15 @@
 import React from 'react';
-import './Spinner.scss';
+import styles from './Spinner.css';
 
 function Spinner() {
   return (
-    <div className="spinner-container">
-      <div className="spinner">
-        <div className="rect1" />
-        <div className="rect2" />
-        <div className="rect3" />
-        <div className="rect4" />
-        <div className="rect5" />
+    <div className={styles.spinnerContainer}>
+      <div className={styles.spinner}>
+        <div className={styles.rect1} />
+        <div className={styles.rect2} />
+        <div className={styles.rect3} />
+        <div className={styles.rect4} />
+        <div className={styles.rect5} />
       </div>
     </div>
   );

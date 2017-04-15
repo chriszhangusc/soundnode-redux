@@ -74,11 +74,27 @@ module.exports = {
         test: /\.scss$/,
         use: [
           'style-loader',
+          // 'css-loader?modules&importLoaders=1&camelCase&localIdentName=[name]__[local]___[hash:base64:5]',
           'css-loader',
           'postcss-loader',
           'sass-loader',
         ]
       },
+
+// Dealing with global css: http://stackoverflow.com/questions/35398733/css-modules-how-do-i-disable-local-scope-for-a-file
+// Global CSS
+// loaders.push({
+//     test: /\.css$/,
+//     exclude: /\.module\.css$/,
+//     loader: 'style-loader!css-loader'
+// });
+
+// // CSS modules
+// loaders.push({
+//     test: /\.module\.css$/,
+//     loader: 'style-loader!css-loader?modules'
+// });
+
       {
         test: /\.css$/,
         use: [
