@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { REPEAT, SHUFFLE } from 'client/redux/modules/player/consts';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
+import IconButton from 'client/components/Buttons/IconButton';
 // Stateless functional component
 class PlayerModeControls extends Component {
 
@@ -15,39 +16,36 @@ class PlayerModeControls extends Component {
   renderRepeat() {
     const { onRepeatClick, mode } = this.props;
     return (
-      <button
+      <IconButton
         title="Repeat"
-        className={`icon-button player-button ${(mode === REPEAT ? 'active' : '')}`}
+        btnClassName={`icon-button player-button ${(mode === REPEAT ? 'active' : '')}`}
+        iconClassName="icon ion-loop"
         onClick={onRepeatClick}
-      >
-        <i className="icon ion-loop" />
-      </button>
+      />
     );
   }
 
   renderTogglePlaylist() {
     const { onTogglePlaylistClick, playlistHidden } = this.props;
     return (
-      <button
+      <IconButton
         title="Playlist"
-        className={`icon-button player-button ${(playlistHidden ? '' : 'active')}`}
+        btnClassName={`icon-button player-button ${(playlistHidden ? '' : 'active')}`}
+        iconClassName="icon ion-ios-list"
         onClick={onTogglePlaylistClick}
-      >
-        <i className="icon ion-ios-list" />
-      </button>
+      />
     );
   }
 
   renderShuffle() {
     const { onShuffleClick, mode } = this.props;
     return (
-      <button
+      <IconButton
         title="Shuffle"
-        className={`icon-button player-button ${(mode === SHUFFLE ? 'active' : '')}`}
+        btnClassName={`icon-button player-button ${(mode === SHUFFLE ? 'active' : '')}`}
+        iconClassName="icon ion-shuffle"
         onClick={onShuffleClick}
-      >
-        <i className="icon ion-shuffle" />
-      </button>
+      />
     );
   }
 

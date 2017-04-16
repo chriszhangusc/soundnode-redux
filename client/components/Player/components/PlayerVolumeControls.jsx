@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils'
+import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
+import IconButton from 'client/components/Buttons/IconButton';
 
 class PlayerVolumeControls extends Component {
   constructor(props) {
@@ -46,13 +47,12 @@ class PlayerVolumeControls extends Component {
       icon = 'ion-volume-high';
     }
     return (
-      <button
+      <IconButton
         title="Mute"
-        className="icon-button"
+        btnClassName="icon-button"
+        iconClassName={`icon ${icon}`}
         onClick={onToggleMuteClick}
-      >
-        <i className={`icon ${icon}`} />
-      </button>
+      />
     );
   }
 

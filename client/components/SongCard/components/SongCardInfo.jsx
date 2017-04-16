@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Avatar from 'client/components/Avatar';
 import { Link } from 'react-router-dom';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'client/constants/RouteConsts';
-import styles from './SongCard.css';
 
 function SongCardInfo({
   trackId,
@@ -13,13 +12,13 @@ function SongCardInfo({
   username,
 }) {
   return (
-    <div className={styles.songCardInfoWrapper}>
+    <div className="song-card-info-wrapper">
       <Avatar src={userAvatar} />
-      <div className={styles.songCardDetails}>
-        <Link to={`${TRACK_PROFILE_ROUTE}/${trackId}`} className={styles.songCardTitle}>
+      <div className="song-card-details">
+        <Link to={`${TRACK_PROFILE_ROUTE}/${trackId}`} className="song-card-title">
           {title}
         </Link>
-        <Link to={`${USER_PROFILE_ROUTE}/${userId}`} className={styles.songCardUsername}>
+        <Link to={`${USER_PROFILE_ROUTE}/${userId}`} className="song-card-username">
           {username}
         </Link>
       </div>

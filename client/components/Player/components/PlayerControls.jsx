@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MagicButton from 'client/components/MagicButton';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
+// import FontAwesomeButton from 'client/components/Buttons/FontAwesomeButton';
+import IconButton from 'client/components/Buttons/IconButton';
 
 class PlayerControls extends Component {
   constructor(props) {
@@ -13,18 +15,20 @@ class PlayerControls extends Component {
 
   renderPlayPauseButton() {
     const { playing, onPauseClick, onPlayClick } = this.props;
-    return (<MagicButton
-      title="Play"
-      btnClassName="icon-button player-button"
-      iconClassName={playing ? 'icon ion-ios-pause' : 'icon ion-ios-play'}
-      onClick={playing ? onPauseClick : onPlayClick}
-    />);
+    return (
+      <IconButton
+        title="Play"
+        btnClassName="icon-button player-button"
+        iconClassName={playing ? 'icon ion-ios-pause' : 'icon ion-ios-play'}
+        onClick={playing ? onPauseClick : onPlayClick}
+      />
+    );
   }
 
   renderForwardButton() {
     const { onNextClick } = this.props;
     return (
-      <MagicButton
+      <IconButton
         title="Next"
         btnClassName="icon-button player-button"
         iconClassName="icon ion-ios-fastforward"
@@ -36,7 +40,7 @@ class PlayerControls extends Component {
   renderBackwardButton() {
     const { onPrevClick } = this.props;
     return (
-      <MagicButton
+      <IconButton
         title="Previous"
         btnClassName="icon-button player-button"
         iconClassName="icon ion-ios-rewind"

@@ -17,9 +17,6 @@
     &:hover {
         color: $link-color-hover;
         cursor: pointer;
-        & span {
-            cursor: pointer;
-        }
     }
 
     &:focus {

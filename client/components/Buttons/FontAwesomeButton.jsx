@@ -1,32 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
+import FontAwesome from 'react-fontawesome';
 import styles from './IconButton.css';
 
-function IconButton({ title, btnClassName, iconClassName, onClick }) {
+function FontAwesomeButton({ title, name, active, onClick }) {
   return (
     <button
+      className={active ? styles.iconButtonActive : styles.iconButton}
       title={title}
-      className={`${styles.iconButton} ${btnClassName}`}
       onClick={onClick}
     >
-      {iconClassName && <i className={iconClassName} />}
+      <FontAwesome name={name} />
     </button>
   );
 }
 
-IconButton.defaultProps = {
+FontAwesomeButton.defaultProps = {
+  active: false,
   title: '',
-  iconClassName: '',
-  btnClassName: '',
   onClick: defaultEventHandlerFactory('onClick'),
 };
 
-IconButton.propTypes = {
+FontAwesomeButton.propTypes = {
+  active: PropTypes.bool,
   title: PropTypes.string,
-  iconClassName: PropTypes.string,
-  btnClassName: PropTypes.string,
   onClick: PropTypes.func,
+  name: PropTypes.string.isRequired,
 };
 
-export default IconButton;
+export default FontAwesomeButton;

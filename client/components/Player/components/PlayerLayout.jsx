@@ -8,8 +8,6 @@ import PlayerModeControlsContainer from '../containers/PlayerModeControlsContain
 import PlayerVolumeControlsContainer from '../containers/PlayerVolumeControlsContainer';
 
 function PlayerLayout({ playerTrack }) {
-// console.log(playerTrack);
-  // Do not display Player if there is no track to play.
   if (!playerTrack || !playerTrack.id) {
     return null;
   }

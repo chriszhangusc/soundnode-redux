@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { NotificationManager } from 'react-notifications';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 import IconButton from 'client/components/Buttons/IconButton';
+import FontAwesomeButton from 'client/components/Buttons/FontAwesomeButton';
+import styles from './SongCard.css';
 
 function createInfo(msg) {
   NotificationManager.info(msg);
@@ -11,25 +13,25 @@ function createInfo(msg) {
 function SongCardControls({ liked, handleToggleLike, handleCopyToClipboard }) {
   return (
     <div className="song-card-controls">
-      <IconButton
+      <FontAwesomeButton
         title={liked ? 'Unlike' : 'Like'}
-        iconClassName={`fa fa-heart ${liked && 'active'}`}
+        name="heart"
+        active={liked}
         onClick={handleToggleLike}
       />
-      <IconButton
+      <FontAwesomeButton
         title="Add to playlist"
-        iconClassName="fa fa-bookmark"
+        name="bookmark"
         onClick={() => createInfo('Added to playlist')}
       />
-      <IconButton
+      <FontAwesomeButton
         title="Repost"
-        iconClassName="fa fa-external-link"
+        name="external-link"
         onClick={() => createInfo('Added to repose')}
       />
-      <IconButton
+      <FontAwesomeButton
         title="Copy to clipboard"
-        btnClassName="icon-button"
-        iconClassName="fa fa-clipboard"
+        name="clipboard"
         onClick={handleCopyToClipboard}
       />
     </div>
