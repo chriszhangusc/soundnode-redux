@@ -4,7 +4,7 @@ import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 import FontAwesome from 'react-fontawesome';
 // import styles from './IconButton.css';
 import styled from 'styled-components';
-import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY, THEME_COLOR } from 'client/constants/Colors';
+import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY, THEME_COLOR } from 'client/constants/css/Colors';
 // .icon-button {
 //   color: font-color-primary;
 //   padding: 4px;

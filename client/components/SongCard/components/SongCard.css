@@ -1,5 +1,5 @@
-@value desktop-sm, desktop-md, desktop-lg, desktop-4k from "../../../styles/common/breakpoints.css";
-@value colors: '../../../styles/common/colors.css';
+@value desktop-sm, desktop-md, desktop-lg, desktop-4k "client/styles/common/breakpoints.css";
+@value colors: "client/styles/common/colors.css";
 
 @value song-card-width: 300px;
 @value song-card-width-md: 210px;

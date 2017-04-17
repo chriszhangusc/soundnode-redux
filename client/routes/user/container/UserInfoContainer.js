@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getUserById } from 'client/redux/modules/entities';
 import { getLargeVersion, getMiniVersion } from 'client/utils/ImageUtils';
-import UserInfo from '../components/UserInfo';
+import UserProfile from '../components/UserProfile';
 
 export const mapStateToProps = (state, { userId }) => {
   const user = getUserById(state, userId);
@@ -16,4 +16,4 @@ export const mapStateToProps = (state, { userId }) => {
   };
 };
 
-export default connect(mapStateToProps)(UserInfo);
+export default connect(mapStateToProps)(UserProfile);

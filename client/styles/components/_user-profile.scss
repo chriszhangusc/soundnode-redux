@@ -14,9 +14,6 @@ $profile-pic-height-4k: 400px;
   display: flex;
 
   & .user-avatar {
-
-    display: inline-block;
-    
     width: $profile-pic-width-md;
     height: $profile-pic-height-md;
     @include desktop {
@@ -29,13 +26,13 @@ $profile-pic-height-4k: 400px;
       height: $profile-pic-height-lg;
     }
 
-  height: $profile-pic-height-md;
-  width: $profile-pic-width-md;
+    height: $profile-pic-height-md;
+    width: $profile-pic-width-md;
 
-  &:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
   }
-}
 
   & .user-details {
     display: inline-flex;
@@ -43,23 +40,23 @@ $profile-pic-height-4k: 400px;
     justify-content: flex-start;
     margin-left: 40px;
 
-    & .user-name {
-      margin: 0;
-    }
+    // & .user-name {
+    //   margin: 0;
+    // }
 
-    & .user-followers {
-      margin: 10px 0;
-      color: $font-color-main;
-    }
+    // & .user-followers {
+    //   margin: 10px 0;
+    //   color: $font-color-main;
+    // }
 
-    & .user-description {
-      margin: 10px 0;
-      font-size: 1.2rem;
-      overflow: scroll;
-      height: 240px;
-      width: 500px;
-      color: $font-color-sub;
-      white-space: pre-wrap;
-    }
+    // & .user-description {
+    //   margin: 10px 0;
+    //   font-size: 1.2rem;
+    //   overflow: scroll;
+    //   height: 240px;
+    //   width: 500px;
+    //   color: $font-color-sub;
+    //   white-space: pre-wrap;
+    // }
   }
 }

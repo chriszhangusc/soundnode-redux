@@ -1,4 +1,4 @@
-@value colors: '../../styles/common/colors.css';
+@value colors: "client/styles/common/colors.css";
 @value theme-color, font-color-primary, font-color-secondary from colors;
 
 .icon-button {

@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FadeinImage from 'client/components/Images/FadeinImage';
 // import ImageWithFallback from 'client/components/Images/ImageWithFallback';
 import { DEFAULT_USER_AVATAR } from 'client/constants/ImageConsts';
+import UserAvatar from './UserAvatar';
+import UserName from './UserName';
+import UserFollowers from './UserFollowers';
+import UserDescription from './UserDescription';
 
 const UserInfo = ({
   avatarUrl,
@@ -14,17 +17,12 @@ const UserInfo = ({
 }) => (
   <div className="user-info-container">
     <a href={permalinkUrl} target="_black" title="Go to SoundCloud">
-      <FadeinImage
-        largeImgUrl={avatarUrl}
-        smallImgUrl={avatarUrlSmall}
-        placeholderClassName="user-avatar"
-      />
-      {/*<ImageWithFallback alt="user avatar" src={avatarUrl} fallbackImageUrl={DEFAULT_USER_AVATAR} className="user-avatar" />*/}
+      <UserAvatar src={avatarUrl} placeholderSrc={avatarUrlSmall} />
     </a>
     <div className="user-details">
-      <h1 className="user-name">{username}</h1>
-      <div className="user-followers">Followers: {followerCount}</div>
-      <div className="user-description">{description}</div>
+      <UserName username={username} />
+      <UserFollowers followerCount={followerCount} />
+      <UserDescription text={description} />
     </div>
   </div>
 );

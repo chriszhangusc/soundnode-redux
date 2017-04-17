@@ -1,23 +1,24 @@
-.fadein-img-placeholder {
+.fadein-image-container {
   display: inline-block;
-  width: 350px;
-  height: 350px;
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
 }
 
-.fadein-img-small {
+.fadein-image-placeholder {
   position: absolute;
   opacity: 0;
   top: 0;
   left: 0;
   width: 100%;
   transition: opacity 0.2s linear;
+  filter: blur(25px);
+  /* this is needed so Safari keeps sharp edges */
+  transform: scale(1);
 }
 
-.fadein-img-large {
+.fadein-image {
   position: absolute;
   opacity: 0;
   top: 0;
@@ -26,12 +27,12 @@
   transition: opacity 0.5s linear;
 }
 
-.fadein-img-placeholder .loaded {
+.fadein-image-placeholder-loaded {
+  composes: fadein-image-placeholder;
   opacity: 1;
 }
 
-.fadein-img-small {
-  filter: blur(25px);
-  /* this is needed so Safari keeps sharp edges */
-  transform: scale(1);
+.fadein-image-loaded {
+  composes: fadein-image;
+  opacity: 1;
 }

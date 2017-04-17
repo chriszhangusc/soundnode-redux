@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
+// import isEqual from 'lodash/isEqual';
+import styled from 'styled-components';
+
 import styles from './FadeinImage.css';
 // import './FadeInImage.scss';
+// Create an <Input> component that'll render an <input> tag with some styles
+const FadeinImageContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+`;
 
 class FadeinImage extends Component {
 
@@ -11,69 +23,65 @@ class FadeinImage extends Component {
 
     // Set initial state
     this.state = {
-      smallLoaded: false,
-      largeLoaded: false,
+      placeholderImageLoaded: false,
+      fadeinImageLoaded: false,
     };
 
-    this.onSmallImageLoaded = this.onSmallImageLoaded.bind(this);
-    this.onSmallImageError = this.onSmallImageError.bind(this);
-    this.onLargeImageLoaded = this.onLargeImageLoaded.bind(this);
+    this.onPlaceholderImageLoaded = this.onPlaceholderImageLoaded.bind(this);
+    this.onFadeinImageLoaded = this.onFadeinImageLoaded.bind(this);
   }
 
   // Not sure if this is necessary
-  shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(this.state, nextState);
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return !isEqual(this.state, nextState);
+  // }
 
-  onSmallImageLoaded() {
-    // console.log('Small loaded');
+  onPlaceholderImageLoaded() {
     this.setState({
-      smallLoaded: true,
+      placeholderImageLoaded: true,
     });
   }
 
-  onSmallImageError() {
-  }
-
-  onLargeImageLoaded() {
+  onFadeinImageLoaded() {
     this.setState({
-      largeLoaded: true,
+      fadeinImageLoaded: true,
     });
   }
 
   render() {
-    const { smallImgUrl, largeImgUrl, placeholderClassName, onClick } = this.props;
+    const { placeholderSrc, src, onClick } = this.props;
     return (
-      <div className={`${placeholderClassName} ${styles.fadeinImgPlaceholder}`} >
+      <FadeinImageContainer>
         <img
-          alt="Small"
-          src={smallImgUrl}
-          className={`${styles.fadeinImgSmall} ${this.state.smallLoaded ? styles.loaded : ''}`}
-          onLoad={this.onSmallImageLoaded}
+          alt="Placeholder"
+          src={placeholderSrc}
+          className={this.state.placeholderImageLoaded ? styles.fadeinImagePlaceholderLoaded : styles.fadeinImagePlaceholder}
+          onLoad={this.onPlaceholderImageLoaded}
         />
         <img
-          alt="Large"
+          alt="Main"
           onClick={onClick}
-          src={largeImgUrl}
-          className={`${styles.fadeinImgLarge} ${this.state.largeLoaded ? styles.loaded : ''}`}
-          onLoad={this.onLargeImageLoaded}
+          src={src}
+          className={this.state.fadeinImageLoaded ? styles.fadeinImageLoaded : styles.fadeinImage}
+          onLoad={this.onFadeinImageLoaded}
         />
-      </div>
+      </FadeinImageContainer>
     );
   }
 }
 
 FadeinImage.defaultProps = {
-  smallImgUrl: 'default img url',
-  placeholderClassName: 'fadein-img-placeholder',
+  height: 100,
+  width: 100,
   onClick: () => { console.log('This is default onClick handler'); },
 };
 
 FadeinImage.propTypes = {
-  smallImgUrl: PropTypes.string,
-  largeImgUrl: PropTypes.string.isRequired,
-  placeholderClassName: PropTypes.string,
+  src: PropTypes.string.isRequired,
+  placeholderSrc: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  height: PropTypes.number,
+  width: PropTypes.number,
 };
 
 export default FadeinImage;

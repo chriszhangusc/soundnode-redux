@@ -4,8 +4,8 @@
 /* import multiple from a single file */
 /*@value primary, secondary from colors;*/
 /* make local aliases to imported values */
-@value desktop-sm, desktop-md, desktop-lg, desktop-4k from "../../styles/common/breakpoints.css";
-@value font-color-primary, font-color-secondary from '../../styles/common/colors.css';
+@value desktop-sm, desktop-md, desktop-lg, desktop-4k from "client/styles/common/breakpoints.css";
+@value font-color-primary, font-color-secondary from "client/styles/common/colors.css";
 /*composes: text-primary from colors;*/
 /*$sidebar-item-height: 80px;
 $sidebar-bg-color: $light-black;
