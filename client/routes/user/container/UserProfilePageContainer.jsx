@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadUserProfilePage, clearUserState } from 'client/redux/modules/user/actions';
+import {
+  loadUserProfilePage,
+  clearUserState,
+} from 'client/redux/modules/user/actions';
 import { getUserId, isUserFetching } from 'client/redux/modules/user/selectors';
 import { getUserById } from 'client/redux/modules/entities';
 import Spinner from 'client/components/Spinner';
@@ -9,7 +12,6 @@ import Spinner from 'client/components/Spinner';
 import UserProfilePage from '../components/UserProfilePage';
 
 class UserProfilePageContainer extends Component {
-
   componentWillMount() {
     const { dispatch, match } = this.props;
     const userId = match.params.userId;
@@ -33,7 +35,6 @@ class UserProfilePageContainer extends Component {
       </div>
     );
   }
-
 }
 
 const mapStateToProps = (state) => {

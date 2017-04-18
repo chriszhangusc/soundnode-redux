@@ -9,16 +9,14 @@ import styles from './SongCardList.css';
 function renderSongCardList(trackIds, playlistName) {
   return (
     <div className={styles.songCardListContainer}>
-      {
-        trackIds.map(trackId => (
-          <SongCardContainer
-            trackId={trackId}
-            trackIds={trackIds}
-            playlistName={playlistName}
-            key={shortid.generate()}
-          />
-        ))
-      }
+      {trackIds.map(trackId => (
+        <SongCardContainer
+          trackId={trackId}
+          trackIds={trackIds}
+          playlistName={playlistName}
+          key={shortid.generate()}
+        />
+      ))}
     </div>
   );
 }

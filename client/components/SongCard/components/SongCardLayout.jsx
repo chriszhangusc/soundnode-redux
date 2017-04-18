@@ -8,7 +8,7 @@ import SongCardImageContainer from '../containers/SongCardImageContainer';
 function SongCardLayout({ track, active, trackIds, playlistName }) {
   if (!track) return null;
   return (
-    <div className={`card song-card ${(active ? 'active' : '')}`}>
+    <div className={`card song-card ${active ? 'active' : ''}`}>
       <SongCardImageContainer track={track} trackIds={trackIds} playlistName={playlistName} />
       <SongCardInfoContainer track={track} />
       <SongCardControlsContainer track={track} />

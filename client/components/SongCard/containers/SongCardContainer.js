@@ -14,7 +14,7 @@ import SongCardLayout from '../components/SongCardLayout';
 // object is shallowly equal or not.
 
 const mapStateToProps = (state, { trackId, trackIds }) => ({
-    // Prepare track object for its children
+  // Prepare track object for its children
   track: getTrackById(state, trackId),
   active: isTrackActive(state, trackId),
   // This is passed down by songcard list

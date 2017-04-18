@@ -4,13 +4,7 @@ import Avatar from 'client/components/Avatar';
 import { Link } from 'react-router-dom';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'client/constants/RouteConsts';
 
-function SongCardInfo({
-  trackId,
-  userId,
-  userAvatar,
-  title,
-  username,
-}) {
+function SongCardInfo({ trackId, userId, userAvatar, title, username }) {
   return (
     <div className="song-card-info-wrapper">
       <Avatar src={userAvatar} />

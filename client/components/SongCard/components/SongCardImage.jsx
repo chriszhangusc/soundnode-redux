@@ -9,18 +9,16 @@ import styles from './SongCard.css';
 
 function SongCardImage({ active, playing, artworkUrl, artworkUrlSmall, handleImageClick }) {
   return (
-    <div
-      className={styles.songCardImage}
-      style={{ backgroundImage: `url(${artworkUrl})` }}
-    >
+    <div className={styles.songCardImage} style={{ backgroundImage: `url(${artworkUrl})` }}>
       <button
         className={active ? styles.togglePlayButtonActive : styles.togglePlayButton}
         onClick={handleImageClick}
       >
-        <i className={`${styles.togglePlayButtonIcon} ${playing ? 'ion-ios-pause' : 'ion-ios-play'}`} />
+        <i
+          className={`${styles.togglePlayButtonIcon} ${playing ? 'ion-ios-pause' : 'ion-ios-play'}`}
+        />
       </button>
     </div>
-
   );
 }
 
