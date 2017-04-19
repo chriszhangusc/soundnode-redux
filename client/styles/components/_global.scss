@@ -4,17 +4,21 @@
 }
 
 .float-right {
-  float: right;
+    float: right;
 }
 
 .float-left {
-  float: left;
+    float: left;
+}
+
+html {
+    font-family: 'Open Sans';
+    /* Always put font-size here so that we could apply rem */
+    font-size: 14px;
 }
 
 body {
     color: white;
-    font-family: 'Open Sans';
-    font-size: 14px;
     background-color: $background-color;
     padding-top: $nav-height;
 }
@@ -23,16 +27,17 @@ body {
 a {
     color: $link-color;
     text-decoration: none;
-
-    &:hover, &:focus, &:active {
-      color: $link-color;
-      cursor: pointer;
-      text-decoration: none;
+    &:hover,
+    &:focus,
+    &:active {
+        color: $link-color;
+        cursor: pointer;
+        text-decoration: none;
     }
 }
 
 .main {
-  padding: 10px;
+    padding: 10px;
 }
 
 // Resets container from bootstrap
@@ -45,33 +50,37 @@ a {
 }
 
 .table-display {
-  display: table;
+    display: table;
 }
 
 .table-item {
-  display: table-cell;
-  vertical-align: middle;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 ul {
     list-style-type: none;
 }
 
+// Move it somewhere else
 h1 {
-  margin: 30px 20px;
-  font-weight: 300;
-  font-size: 3rem;
+    margin: 30px 20px;
+    font-weight: 300;
+    font-size: 3rem;
 }
 
 .pad-bottom {
-  padding-bottom: 70px;
+    padding-bottom: 70px;
 }
 
 .container-fluid {
     padding: 0;
 }
 
+
 /* input start */
+
+// This should be moved to search
 input[type="search"] {
     display: inline-block;
     padding: 0 0.875rem;
@@ -84,28 +93,3 @@ input[type="search"] {
     border-radius: 3px;
     transition: all 0.2s ease-in-out;
 }
-// Define styles to apply to placeholder attribute
-::-webkit-input-placeholder {
-    color: #6B6B6B;
-    font-weight: 300;
-    font-family: 'Open Sans';
-}
-
-:-moz-placeholder {
-    color: #6B6B6B;
-    font-weight: 300;
-    font-family: 'Open Sans';
-}
-
-::-moz-placeholder {
-    color: #6B6B6B;
-    font-weight: 300;
-    font-family: 'Open Sans';
-}
-
-:-ms-input-placeholder {
-    color: #6B6B6B;
-    font-weight: 300;
-    font-family: 'Open Sans';
-}
-/* input ends */
