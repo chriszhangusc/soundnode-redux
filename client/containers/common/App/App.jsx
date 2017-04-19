@@ -7,14 +7,14 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { CHARTS_ROUTE, USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE, AUTH_CALLBACK_ROUTE } from 'client/constants/RouteConsts';
-import ChartsPage from 'client/routes/charts';
-import UserProfilePage from 'client/routes/user';
+import ChartsPage from 'client/containers/routes/charts';
+import UserProfilePage from 'client/containers/routes/user';
 import { NotificationContainer } from 'react-notifications';
-import Player from 'client/components/Player';
-import Nav from 'client/components/Nav';
-import Sidebar from 'client/components/Sidebar';
-import Playlist from 'client/components/Playlist';
-import Callback from 'client/components/Callback';
+import Player from 'client/containers/common/Player';
+import Nav from 'client/containers/common/Nav';
+import Sidebar from 'client/containers/common/Sidebar';
+import Playlist from 'client/containers/common/Playlist';
+import Callback from 'client/containers/common/Callback';
 import { notificationFailure, notificationSuccess } from 'client/redux/modules/notification';
 import { connect } from 'react-redux';
 

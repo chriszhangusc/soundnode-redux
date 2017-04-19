@@ -6,9 +6,9 @@ import {
  } from 'react-router-dom';
 import { dropdownSearchShowCount } from 'client/constants/SearchConsts';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
+import styled from 'styled-components';
 import NavSearchDropdownTrackContainer from '../containers/NavSearchDropdownTrackContainer';
 import NavSearchDropdownArtistContainer from '../containers/NavSearchDropdownArtistContainer';
-
 
 class NavSearch extends Component {
 
@@ -57,7 +57,6 @@ class NavSearch extends Component {
     const { artistIds, trackIds, dropdownShown } = this.props;
     if (dropdownShown) {
       return (
-        <Router>
         <div className="nav-search-result">
           {
             (artistIds.length !== 0) && (<div className="dropdown-title">
@@ -100,7 +99,6 @@ class NavSearch extends Component {
             }
           </ul>
         </div>
-        </Router>
       );
     }
     return <div />;

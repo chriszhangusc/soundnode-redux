@@ -1,12 +1,7 @@
 import { connect } from 'react-redux';
-import {
-  clearPlayQueue,
-} from 'client/redux/modules/playlist/actions';
+import { clearPlayQueue } from 'client/redux/modules/playlist/actions';
 
-import {
-  getPlaylistByMode,
-  isPlaylistHidden,
-} from 'client/redux/modules/playlist/selectors';
+import { getPlaylistByMode, isPlaylistHidden } from 'client/redux/modules/playlist/selectors';
 
 import Playlist from '../components/Playlist';
 

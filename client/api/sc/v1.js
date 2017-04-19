@@ -17,11 +17,12 @@ export function fetchTracks(filters, limit) {
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
 // console.log(fetchUrl);
-  return makeRequest(fetchUrl)
-          .then(response => normalizeResponse(response, trackArraySchema));
+  // return makeRequest(fetchUrl)
+  //         .then(response => normalizeResponse(response, trackArraySchema));
+  return makeRequest(fetchUrl, trackArraySchema);
 }
 
-export function fetchArtists(filters, limit) {
+export function fetchUsers(filters, limit) {
   const endpoint = '/users/';
   const queryParams = {
     client_id: CLIENT_ID,
@@ -31,8 +32,9 @@ export function fetchArtists(filters, limit) {
     ...filters,
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
-  return makeRequest(fetchUrl)
-          .then(response => normalizeResponse(response, userArraySchema));
+  // return makeRequest(fetchUrl)
+  //         .then(response => normalizeResponse(response, userArraySchema));
+  return makeRequest(fetchUrl, userArraySchema);
 }
 
 /**

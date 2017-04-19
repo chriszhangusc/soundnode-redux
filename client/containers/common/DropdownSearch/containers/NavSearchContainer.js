@@ -5,8 +5,8 @@ import {
   getDropdownSearchArtistIds,
   getDropdownSearchTrackIds,
   requestDropdownSearch,
-  sagaSearch,
   // sagaDropdownSearch,
+  sagaSearch,
   clearAndHideSearchResults,
 } from 'client/redux/modules/search';
 

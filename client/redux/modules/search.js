@@ -6,7 +6,7 @@ import { CALL_API } from 'client/redux/middlewares/apiMiddleware';
 /* DropdownEpic Imports */
 import { Observable } from 'rxjs/Rx';
 // import { ajax } from 'rxjs/observable/dom/ajax';
-import { fetchTracks, fetchArtists } from 'client/api/sc/v1';
+import { fetchTracks, fetchUsers } from 'client/api/sc/v1';
 
 // Dropdown search
 export const START_DROPDOWN_SEARCH = 'START_DROPDOWN_SEARCH';
@@ -209,8 +209,8 @@ export const dropdownSearchEpic = action$ =>
     .debounceTime(250)
     .switchMap((action) => {
       const tracksPromise = fetchTracks({ q: action.payload.keyword }, action.payload.limit);
-      const artistsPromise = fetchArtists({ q: action.payload.keyword }, action.payload.limit);
-      return Observable.fromPromise(Promise.all([tracksPromise, artistsPromise]));
+      const usersPromise = fetchUsers({ q: action.payload.keyword }, action.payload.limit);
+      return Observable.fromPromise(Promise.all([tracksPromise, usersPromise]));
     })
     .flatMap(res => Observable.concat(
       Observable.of(dropdownArtistsReceived(res[1])),
