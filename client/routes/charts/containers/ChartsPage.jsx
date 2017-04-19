@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadChartsPage, changeGenre } from 'client/redux/modules/charts/actions';
 import { changeVisiblePlaylistName } from 'client/redux/modules/playlist/actions';
-import { GENRES, DEFAULT_GENRE, CHARTS_MAIN_TITLE_PREFIX, CHARTS_SUBTITLE } from 'client/constants/ChartsConsts';
+import {
+  GENRES,
+  DEFAULT_GENRE,
+  // CHARTS_MAIN_TITLE_PREFIX,
+  // CHARTS_SUBTITLE,
+} from 'client/constants/ChartsConsts';
 
+import ChartsHeader from './ChartsHeader';
 import ChartsSongCardListContainer from './ChartsSongCardListContainer';
-import GenreCharts from './GenreCharts';
 
 class ChartsPage extends Component {
-
   // ES7 ESLint will complain not sure why
   // static propTypes = {
   //   match: PropTypes.object.isRequired,
@@ -47,13 +51,12 @@ class ChartsPage extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <GenreCharts />
+        <ChartsHeader />
         <ChartsSongCardListContainer />
       </div>
     );
   }
 }
-
 
 ChartsPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
