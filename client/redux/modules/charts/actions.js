@@ -11,7 +11,7 @@ import {
   CHARTS_RECEIVE,
   CHARTS_CLEAR,
   CHARTS_SPINNER_STOP,
-} from './actionTypes';
+} from './action-types';
 
 export const changeGenre = genre => ({ type: CHARTS_GENRE_CHANGE, payload: genre });
 

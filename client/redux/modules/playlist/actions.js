@@ -11,7 +11,7 @@ import {
   CLEAR_PLAY_QUEUE,
   CLEAR_SHUFFLE_PLAYLIST,
   UPDATE_SHUFFLE_PLAYLIST,
-} from './types';
+} from './action-types';
 
 import { getActivePlaylist, getVisiblePlaylistName, getActivePlaylistName } from './selectors';
 /* Action Creators */

@@ -6,7 +6,7 @@ import {
   CHARTS_RECEIVE,
   CHARTS_CLEAR,
   CHARTS_SPINNER_STOP,
-} from './actionTypes';
+} from './action-types';
 
 /* Reducer */
 const initialState = {

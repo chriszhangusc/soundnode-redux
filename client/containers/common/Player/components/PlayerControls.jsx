@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import MagicButton from 'client/components/MagicButton';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 // import FontAwesomeButton from 'client/components/Buttons/FontAwesomeButton';
 import IconButton from 'client/components/Buttons/IconButton';

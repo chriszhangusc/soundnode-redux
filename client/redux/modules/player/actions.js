@@ -23,7 +23,7 @@ import {
   CHANGE_VOLUME,
   CHANGE_PLAY_MODE,
   CHANGE_SONG,
-} from './types';
+} from './action-types';
 
 /* Action Creators */
 export const beginSeek = () => ({ type: BEGIN_SEEK });

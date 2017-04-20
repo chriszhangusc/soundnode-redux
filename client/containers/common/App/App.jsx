@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
-import { CHARTS_ROUTE, USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE, AUTH_CALLBACK_ROUTE } from 'client/constants/RouteConsts';
-import ChartsPage from 'client/containers/routes/charts';
-import UserProfilePage from 'client/containers/routes/user';
+  CHARTS_ROUTE,
+  USER_PROFILE_ROUTE,
+  TRACK_PROFILE_ROUTE,
+  AUTH_CALLBACK_ROUTE,
+} from 'client/constants/RouteConsts';
+import ChartsPage from 'client/containers/routes/Charts';
+import UserProfilePage from 'client/containers/routes/UserProfile';
 import { NotificationContainer } from 'react-notifications';
 import Player from 'client/containers/common/Player';
 import Nav from 'client/containers/common/Nav';
@@ -18,9 +18,83 @@ import Callback from 'client/containers/common/Callback';
 import { notificationFailure, notificationSuccess } from 'client/redux/modules/notification';
 import { connect } from 'react-redux';
 
+import styled, { injectGlobal } from 'styled-components';
+import { BACKGROUND_COLOR, LIGHTER_GRAY } from 'client/css/colors';
+import { NAV_BAR_HEIGHT } from 'client/css/variables';
+// eslint-disable-next-line no-unused-expressions
+
+// Global CSS
+injectGlobal`
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  html {
+    font-family: 'Open Sans';
+    /* Always put font-size here so that we could apply rem */
+    font-size: 14px;
+  }
+
+  body {
+    color: white;
+    background-color: ${BACKGROUND_COLOR};
+    padding-top: ${NAV_BAR_HEIGHT}px;
+  }
+
+  a {
+      color: ${LIGHTER_GRAY}
+      text-decoration: none;
+      &:hover,
+      &:focus,
+      &:active {
+          color: ${LIGHTER_GRAY};
+          cursor: pointer;
+          text-decoration: none;
+      }
+  }
+
+  .container {
+      padding: 0;
+  }
+
+  .content {
+    margin: 40px 0 80px;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  .pad-bottom {
+    padding-bottom: 70px;
+  }
+
+  .container-fluid {
+      padding: 0;
+  }
+
+  /* input start */
+  input[type="search"] {
+      display: inline-block;
+      padding: 0 0.875rem;
+      border: none;
+      color: #222;
+      text-align: left;
+      font-family: 'Open Sans';
+      font-size: 12px;
+      outline: 0;
+      border-radius: 3px;
+      transition: all 0.2s ease-in-out;
+  }
+`;
+
+const MainWrapper = styled.div`
+`;
+
 // Main container of our app.
 class App extends Component {
-
   componentDidMount() {
     const { dispatch } = this.props;
 
@@ -45,7 +119,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div id="main-wrapper">
+        <div>
           <Nav />
           <Sidebar />
           <div id="page-content-wrapper">
@@ -54,7 +128,11 @@ class App extends Component {
                 <div className="col-lg-12">
                   <Switch>
                     <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={ChartsPage} />
-                    <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfilePage} />
+                    <Route
+                      exact
+                      path={`${USER_PROFILE_ROUTE}/:userId`}
+                      component={UserProfilePage}
+                    />
                     <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} />
                     <Route path={AUTH_CALLBACK_ROUTE} component={Callback} />
                     <Redirect to={CHARTS_ROUTE} />
@@ -71,7 +149,6 @@ class App extends Component {
     );
   }
 }
-
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,

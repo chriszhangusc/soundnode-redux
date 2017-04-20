@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LIGHT_BLACK } from 'client/constants/css/Colors';
-
 import DropdownSearch from 'client/containers/common/DropdownSearch';
 // import NavUserContainer from '../containers/NavUserContainer';
+import { LIGHT_BLACK } from 'client/css/colors';
+
 import NavHeader from './NavHeader';
 
 const NavBar = styled.nav`

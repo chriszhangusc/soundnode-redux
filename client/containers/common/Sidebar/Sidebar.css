@@ -21,7 +21,6 @@ $sidebar-link-active-bg-color: rgba(255,255,255,0.2);*/
 @value sidebar-width-md: 230px;
 @value sidebar-width-lg: 250px;
 
-
 @media desktop-md  {
   .sidebar-wrapper {
     width: sidebar-width-md;

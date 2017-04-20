@@ -1,4 +1,4 @@
-import { CHARTS_RECEIVE } from 'client/redux/modules/charts/actionTypes';
+import { CHARTS_RECEIVE } from 'client/redux/modules/charts/action-types';
 import {
   TOGGLE_PLAYLIST,
   CLEAR_PLAY_QUEUE,
@@ -7,7 +7,8 @@ import {
   CHANGE_ACTIVE_PLAYLIST_NAME,
   UPDATE_SHUFFLE_PLAYLIST,
   CLEAR_SHUFFLE_PLAYLIST,
-} from './types';
+} from './action-types';
+
 /* Reducer */
 const initialState = {
   // The name of currently active playlist

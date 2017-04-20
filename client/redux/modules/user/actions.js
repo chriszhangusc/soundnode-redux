@@ -9,7 +9,7 @@ import {
   USER_TRACKS_REQUEST,
   USER_TRACKS_RECEIVE,
   USER_TRACKS_FETCH_FAIL,
-} from './actionTypes';
+} from './action-types';
 
 import { getUserTracksNextHref } from './selectors';
 

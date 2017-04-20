@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
-import MagicButton from 'client/components/MagicButton';
+import IconButton from 'client/components/Buttons/IconButton';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 import PlaylistItemContainer from '../containers/PlaylistItemContainer';
 
@@ -12,10 +12,10 @@ function Playlist({ playlistTrackIds, playlistHidden, handleClearPlayQueue }) {
         <div className="playlist-title">
           <span className="labelColumn">TRACKS</span> | <span className="labelColumn">ARTIST</span>
           <div className="playlist-title-icon-container">
-            <MagicButton
+            <IconButton
+              title="Clear play queue"
               btnClassName="icon-button"
               iconClassName="fa fa-trash"
-              title="Clear play queue"
               onClick={handleClearPlayQueue}
             />
           </div>

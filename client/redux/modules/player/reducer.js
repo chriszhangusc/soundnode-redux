@@ -15,7 +15,7 @@ import {
   CHANGE_PLAY_MODE,
   MUTE,
   CLEAR_TIME,
-} from './types';
+} from './action-types';
 
 
 

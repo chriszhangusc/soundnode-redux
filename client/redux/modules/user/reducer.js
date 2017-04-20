@@ -4,7 +4,7 @@ import {
   USER_RECEIVE,
   USER_TRACKS_REQUEST,
   USER_TRACKS_RECEIVE,
-} from './actionTypes';
+} from './action-types';
 
 /* Reducer */
 const initialState = {

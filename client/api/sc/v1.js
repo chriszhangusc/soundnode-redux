@@ -1,5 +1,5 @@
 import { CLIENT_ID } from 'client/constants/AuthConsts';
-import { normalizeResponse, constructFetchUrl, makeRequest } from './apiUtils';
+import { normalizeResponse, constructFetchUrl, makeRequest } from './api-utils';
 import { userSchema, trackSchema, commentArraySchema, trackArraySchema, userArraySchema } from '../schemas';
 
 const SC_API_V1 = 'https://api.soundcloud.com/';

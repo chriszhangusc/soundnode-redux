@@ -2,7 +2,7 @@ import SC from 'soundcloud';
 import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
-import configureStore from 'client/redux/configureStore';
+import configureStore from 'client/redux/configure-store';
 import 'isomorphic-fetch';
 import 'rxjs';
 import 'react-notifications/src/notifications.scss';
