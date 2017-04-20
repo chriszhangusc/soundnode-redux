@@ -16,6 +16,7 @@ export const LIGHTER_GRAY = '#ededed';
 // @value lighter-gray: #ededed;
 // @value orange: #f50;
 export const BACKGROUND_COLOR = LIGHTER_BLACK;
+export const BACKGROUND_COLOR_SECONDARY = LIGHT_BLACK;
 export const FONT_COLOR_PRIMARY = LIGHTER_GRAY;
 export const FONT_COLOR_SECONDARY = GRAY;
 export const THEME_COLOR = ORANGE;

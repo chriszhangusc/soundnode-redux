@@ -4,12 +4,12 @@
 @value song-card-width: 300px;
 @value song-card-width-md: 210px;
 @value song-card-width-lg: 230px;
-@value song-card-width-4k: 350px;
+@value song-card-width-4k: 280px;
 
 @value song-card-details-width: 220px;
 @value song-card-details-width-md: 150px;
 @value song-card-details-width-lg: 170px;
-@value song-card-details-width-4k: 290px;
+@value song-card-details-width-4k: 260px;
 
 @value song-card-image-height: 180px;
 @value song-card-image-height-md: 140px;

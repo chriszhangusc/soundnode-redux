@@ -5,14 +5,16 @@ import { Link } from 'react-router-dom';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'client/constants/RouteConsts';
 
 function SongCardInfo({ trackId, userId, userAvatar, title, username }) {
+  const trackUrl = `${TRACK_PROFILE_ROUTE}/${trackId}`;
+  const userUrl = `${USER_PROFILE_ROUTE}/${userId}`;
   return (
     <div className="song-card-info-wrapper">
       <Avatar src={userAvatar} />
       <div className="song-card-details">
-        <Link to={`${TRACK_PROFILE_ROUTE}/${trackId}`} className="song-card-title">
+        <Link to={trackUrl} className="song-card-title" title={title}>
           {title}
         </Link>
-        <Link to={`${USER_PROFILE_ROUTE}/${userId}`} className="song-card-username">
+        <Link to={userUrl} className="song-card-username" title={username}>
           {username}
         </Link>
       </div>

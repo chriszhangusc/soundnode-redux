@@ -9,7 +9,7 @@
     bottom: 0;
     z-index: 1000;
     display: block;
-    padding: 0;
+    padding: 20px 0, 0, 0;
     overflow-x: hidden;
     overflow-y: scroll; /* Scrollable contents if viewport is shorter than content. */
     /* Transitions */
@@ -30,8 +30,8 @@
   margin-bottom: 10px;
   text-align: center;
   color: $playlist-title-font-color;
-  font-size: 1.6rem;
-  font-weight: bold;// Not working?
+  font-size: 1.1rem;
+  // font-weight: bold;// Not working?
 
   & span {
     margin: 10px;

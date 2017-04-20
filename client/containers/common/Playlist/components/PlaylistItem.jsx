@@ -22,8 +22,8 @@ function PlaylistItem({
       }}
     >
       <span className="playlist-item-index">{`${index}.`}</span>
-      <span className="playlist-item-title">{title}</span>
-      <span className="playlist-item-username">by: {artistName}</span>
+      <span className="playlist-item-title" title={title}>{title}</span>
+      <span className="playlist-item-username" title={artistName}>by: {artistName}</span>
       <div className="playlist-item-options-container">
         <i className="fa fa-ellipsis-v" />
         <div className="playlist-item-popup-arrow" />
