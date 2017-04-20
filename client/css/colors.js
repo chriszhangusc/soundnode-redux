@@ -15,7 +15,6 @@ export const LIGHTER_GRAY = '#ededed';
 // @value semi-transparent-dark: rgba(0, 0, 0, 0.7);
 // @value lighter-gray: #ededed;
 // @value orange: #f50;
-
 export const BACKGROUND_COLOR = LIGHTER_BLACK;
 export const FONT_COLOR_PRIMARY = LIGHTER_GRAY;
 export const FONT_COLOR_SECONDARY = GRAY;

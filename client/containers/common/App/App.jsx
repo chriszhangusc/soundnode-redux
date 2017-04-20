@@ -44,19 +44,19 @@ injectGlobal`
   }
 
   a {
-      color: ${LIGHTER_GRAY}
+    color: ${LIGHTER_GRAY}
+    text-decoration: none;
+    &:hover,
+    &:focus,
+    &:active {
+      color: ${LIGHTER_GRAY};
+      cursor: pointer;
       text-decoration: none;
-      &:hover,
-      &:focus,
-      &:active {
-          color: ${LIGHTER_GRAY};
-          cursor: pointer;
-          text-decoration: none;
-      }
+    }
   }
 
   .container {
-      padding: 0;
+    padding: 0;
   }
 
   .content {
@@ -77,16 +77,16 @@ injectGlobal`
 
   /* input start */
   input[type="search"] {
-      display: inline-block;
-      padding: 0 0.875rem;
-      border: none;
-      color: #222;
-      text-align: left;
-      font-family: 'Open Sans';
-      font-size: 12px;
-      outline: 0;
-      border-radius: 3px;
-      transition: all 0.2s ease-in-out;
+    display: inline-block;
+    padding: 0 0.875rem;
+    border: none;
+    color: #222;
+    text-align: left;
+    font-family: 'Open Sans';
+    font-size: 12px;
+    outline: 0;
+    border-radius: 3px;
+    transition: all 0.2s ease-in-out;
   }
 `;
 

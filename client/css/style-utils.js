@@ -1,12 +1,6 @@
 import { css } from 'styled-components';
 
 export const media = {
-  handheld: (...args) => css`
-    @media (max-width: 420px) {
-      ${css(...args)}
-    }
-  `,
-
   tablet: (...args) => css`
     @media (min-width: 768px) and (max-width: 1023px) {
       ${css(...args)}
@@ -19,7 +13,7 @@ export const media = {
     }
   `,
 
-  desktopLg: (...args) => css`
+  desktopLG: (...args) => css`
     @media (min-width: 1440px) and (max-width: 2559px) {
       ${css(...args)}
     }
