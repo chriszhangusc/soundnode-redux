@@ -27,25 +27,23 @@ nav {
 /* Navbar search */
 
 .nav-search {
-    padding: 20px 0;
-    display: inline-block;
-    border-radius: 3px;
-    .form-group {
-        position: relative; //relative must be put on a block element
-        margin-bottom: 0;
-        i {
-            position: absolute;
-            top: 5px;
-            left: 10px;
-            color: $font-color-sub;
-            pointer-events: none;
-        }
-    }
+  padding: 20px 0;
+  display: inline-block;
+  border-radius: 3px;
+  .form-group {
+      position: relative; //relative must be put on a block element
+      margin-bottom: 0;
+      i {
+          position: absolute;
+          top: 5px;
+          left: 10px;
+          color: $font-color-sub;
+          pointer-events: none;
+      }
+  }
 }
 
 .nav-search-result {
-    width: $dropdown-search-width;
-    box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.2);
     @include desktop {
         width: $dropdown-search-width-md;
     }
@@ -56,12 +54,19 @@ nav {
     background-color: $dropdown-search-result-bg-color;
     display: block;
     width: $dropdown-search-width;
-    max-height: $dropdown-search-max-height;
-    padding: 10px 10px 5px 10px;
-    z-index: 1;
+    
     ul:last-child {
         margin-bottom: 0;
     }
+    // transform: translateY(-100%);
+    &.show {
+      box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.2);
+      padding: 10px 10px 5px 10px;
+      transform: translateY(0);
+      max-height: $dropdown-search-max-height;
+    }
+
+    transition: .4s ease-in-out;
 }
 
 .dropdown-item-show-all {

@@ -55,40 +55,37 @@ class NavSearch extends Component {
 
   renderSearchResults() {
     const { artistIds, trackIds, dropdownShown } = this.props;
-    if (dropdownShown) {
-      return (
-        <div className="nav-search-result">
-          {artistIds.length !== 0 &&
-            <div className="dropdown-title">
-              ARTISTS
-            </div>}
-          <ul className="dropdown-list">
-            {artistIds
-              .slice(0, dropdownSearchShowCount)
-              .map(artistId => (
-                <NavSearchDropdownArtistContainer key={artistId} artistId={artistId} />
-              ))}
-          </ul>
-          {trackIds.length !== 0 &&
-            <div className="dropdown-title">
-              TRACKS
-            </div>}
+    return (
+      <div className={`nav-search-result ${dropdownShown && 'show'}`}>
+        {artistIds.length !== 0 &&
+          <div className="dropdown-title">
+            ARTISTS
+          </div>}
+        <ul className="dropdown-list">
+          {artistIds
+            .slice(0, dropdownSearchShowCount)
+            .map(artistId => (
+              <NavSearchDropdownArtistContainer key={artistId} artistId={artistId} />
+            ))}
+        </ul>
+        {trackIds.length !== 0 &&
+          <div className="dropdown-title">
+            TRACKS
+          </div>}
 
-          <ul className="dropdown-list">
-            {trackIds
-              .slice(0, dropdownSearchShowCount)
-              .map(trackId => <NavSearchDropdownTrackContainer key={trackId} trackId={trackId} />)}
-            {trackIds.length !== 0 &&
-              <li className="dropdown-item-show-all">
-                <Link to="" className="dropdown-show-all-link" onMouseDown={this.onShowAllClick}>
-                  SHOW ALL
-                </Link>
-              </li>}
-          </ul>
-        </div>
-      );
-    }
-    return <div />;
+        <ul className="dropdown-list">
+          {trackIds
+            .slice(0, dropdownSearchShowCount)
+            .map(trackId => <NavSearchDropdownTrackContainer key={trackId} trackId={trackId} />)}
+          {trackIds.length !== 0 &&
+            <li className="dropdown-item-show-all">
+              <Link to="" className="dropdown-show-all-link" onMouseDown={this.onShowAllClick}>
+                SHOW ALL
+              </Link>
+            </li>}
+        </ul>
+      </div>
+    );
   }
 
   render() {

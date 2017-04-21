@@ -38,7 +38,7 @@ function PlaylistTitle({ handleClearPlayQueue }) {
   );
 }
 
-PlaylistTitle.defaultProps = {
+PlaylistTitle.propTypes = {
   handleClearPlayQueue: PropTypes.func.isRequired,
 };
 
