@@ -74,20 +74,6 @@ injectGlobal`
   .container-fluid {
       padding: 0;
   }
-
-  /* input start */
-  input[type="search"] {
-    display: inline-block;
-    padding: 0 0.875rem;
-    border: none;
-    color: #222;
-    text-align: left;
-    font-family: 'Open Sans';
-    font-size: 12px;
-    outline: 0;
-    border-radius: 3px;
-    transition: all 0.2s ease-in-out;
-  }
 `;
 
 const MainWrapper = styled.div`

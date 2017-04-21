@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  BrowserRouter as Router,
-  Link,
- } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { dropdownSearchShowCount } from 'client/constants/SearchConsts';
 import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
 import styled from 'styled-components';
 import NavSearchDropdownTrackContainer from '../containers/NavSearchDropdownTrackContainer';
 import NavSearchDropdownArtistContainer from '../containers/NavSearchDropdownArtistContainer';
 
-class NavSearch extends Component {
+const StyledSearchBox = styled.input`
+  border-bottom: 1px solid $light-gray;
+`;
 
+class NavSearch extends Component {
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
@@ -58,45 +58,32 @@ class NavSearch extends Component {
     if (dropdownShown) {
       return (
         <div className="nav-search-result">
-          {
-            (artistIds.length !== 0) && (<div className="dropdown-title">
+          {artistIds.length !== 0 &&
+            <div className="dropdown-title">
               ARTISTS
-          </div>)
-          }
+            </div>}
           <ul className="dropdown-list">
-            {
-              artistIds.slice(0, dropdownSearchShowCount).map(artistId =>
-                <NavSearchDropdownArtistContainer
-                  key={artistId}
-                  artistId={artistId}
-                />)
-            }
+            {artistIds
+              .slice(0, dropdownSearchShowCount)
+              .map(artistId => (
+                <NavSearchDropdownArtistContainer key={artistId} artistId={artistId} />
+              ))}
           </ul>
-          {
-            (trackIds.length !== 0) && (<div className="dropdown-title">
+          {trackIds.length !== 0 &&
+            <div className="dropdown-title">
               TRACKS
-            </div>)
-          }
+            </div>}
 
           <ul className="dropdown-list">
-            {
-              trackIds.slice(0, dropdownSearchShowCount).map(trackId =>
-                <NavSearchDropdownTrackContainer
-                  key={trackId}
-                  trackId={trackId}
-                />)
-            }
-            {
-              (trackIds.length !== 0) && (<li className="dropdown-item-show-all">
-                <Link
-                  to=''
-                  className="dropdown-show-all-link"
-                  onMouseDown={this.onShowAllClick}
-                >
+            {trackIds
+              .slice(0, dropdownSearchShowCount)
+              .map(trackId => <NavSearchDropdownTrackContainer key={trackId} trackId={trackId} />)}
+            {trackIds.length !== 0 &&
+              <li className="dropdown-item-show-all">
+                <Link to="" className="dropdown-show-all-link" onMouseDown={this.onShowAllClick}>
                   SHOW ALL
-                  </Link>
-              </li>)
-            }
+                </Link>
+              </li>}
           </ul>
         </div>
       );
@@ -111,10 +98,12 @@ class NavSearch extends Component {
           <div className="form-group">
             <i className="icon ion-search" />
             <input
-              className="nav-search-input"
-              placeholder="SEARCH"
               type="search"
-              ref={(node) => { this.searchInput = node; }}
+              className="nav-search-input"
+              placeholder="Search SoundCloud"
+              ref={node => {
+                this.searchInput = node;
+              }}
               onChange={this.onChange}
               onFocus={this.onFocus}
               onBlur={this.onBlur}

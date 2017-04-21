@@ -1,6 +1,6 @@
 nav {
-  background-color: $nav-bg-color;
-  height: $nav-height;
+    background-color: $nav-bg-color;
+    height: $nav-height;
 }
 
 .nav-wrapper {
@@ -15,65 +15,54 @@ nav {
 }
 
 .navbar-brand {
-  height: $nav-height;
-  line-height: 35px;
+    height: $nav-height;
+    line-height: 35px;
 }
 
 .nav-icon {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
+
 /* Navbar search */
+
 .nav-search {
-  padding: 20px 0;
-  display: inline-block;
-  border-radius: 3px;
-
-  .form-group {
-    position: relative;//relative must be put on a block element
-    margin-bottom: 0;
-
-    i {
-      position: absolute;
-      top: 5px;
-      left: 10px;
-      color: $font-color-sub;
-      pointer-events: none;
+    padding: 20px 0;
+    display: inline-block;
+    border-radius: 3px;
+    .form-group {
+        position: relative; //relative must be put on a block element
+        margin-bottom: 0;
+        i {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            color: $font-color-sub;
+            pointer-events: none;
+        }
     }
-  }
-
-  .nav-search-input {
-    border-bottom: 1px solid $light-gray;
-  }
 }
 
 .nav-search-result {
-
     width: $dropdown-search-width;
     box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.2);
-
     @include desktop {
         width: $dropdown-search-width-md;
     }
-
     @include desktop-lg {
         width: $dropdown-search-width-lg;
     }
-
     position: absolute;
-    background-color: $dropdown-search-bg-color;
+    background-color: $dropdown-search-result-bg-color;
     display: block;
     width: $dropdown-search-width;
-
     max-height: $dropdown-search-max-height;
     padding: 10px 10px 5px 10px;
     z-index: 1;
-
     ul:last-child {
         margin-bottom: 0;
     }
 }
-
 
 .dropdown-item-show-all {
     height: 35px;
@@ -89,77 +78,71 @@ nav {
 }
 
 .dropdown-title {
-  text-align: center;
-  font-size: 0.9rem;
-  color: $font-color-sub;
-  margin-bottom: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: $font-color-sub;
+    margin-bottom: 10px;
 }
-
 
 .dropdown-item-wrapper {
     display: flex;
 }
 
 .dropdown-list {
-
-  & .dropdown-item {
-    padding: 8px 10px;
-    white-space: nowrap;
-    cursor: pointer;
-    border-bottom: 1px solid $separator-color-dark;
-
-    &:hover {
-      background: $separator-color-dark;
+    & .dropdown-item {
+        padding: 8px 10px;
+        white-space: nowrap;
+        cursor: pointer;
+        border-bottom: 1px solid $separator-color-dark;
+        &:hover {
+            background: $separator-color-dark;
+        }
     }
-  }
+    & .dropdown-item-image {
+        width: 25px;
+        margin-right: 10px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    & .dropdown-item-title {
+        vertical-align: middle;
+        color: $font-color-main;
+        display: inline-block;
+        width: $dropdown-search-title-width;
+        @include desktop {
+            width: $dropdown-search-title-width-md;
+        }
+        //
+        @include desktop-lg {
+            width: $dropdown-search-title-width-lg;
+        }
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}
 
-  & .dropdown-item-image {
-    width: 25px;
-    margin-right: 10px;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-
-  & .dropdown-item-title {
-
-    vertical-align: middle;
-    color: $font-color-main;
+.nav-search-input {
     display: inline-block;
-    width: $dropdown-search-title-width;
+    border: none;
+    text-align: left;
+    font-family: 'Open Sans';
+    font-size: 0.9rem;
+    outline: 0;
+    height: $dropdown-search-input-height;
+    width: $dropdown-search-width;
     @include desktop {
-        width: $dropdown-search-title-width-md;
+        width: $dropdown-search-width-md;
     }
-    //
     @include desktop-lg {
-        width: $dropdown-search-title-width-lg;
+        width: $dropdown-search-width-lg;
     }
-
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
+    border-radius: 5px;
+    padding: 6px 10px 6px 30px;
+    color: $font-color-main;
+    font-weight: 300;
+    background-color: $dropdown-search-bg-color;
+    transition: all 0.2s ease-in-out;
 }
-
-
-
-input[type="search"].nav-search-input {
-  height: $dropdown-search-input-height;
-
-  width: $dropdown-search-width;
-
-  @include desktop {
-      width: $dropdown-search-width-md;
-  }
-
-  @include desktop-lg {
-      width: $dropdown-search-width-lg;
-  }
-
-  padding: 6px 10px 6px 30px;
-  color: $font-color-main;
-  font-weight: 300;
-  background-color: $dropdown-search-bg-color;
-}
-
 
 .nav-user-link {
     display: inline-block;
@@ -168,11 +151,9 @@ input[type="search"].nav-search-input {
         cursor: pointer;
     }
     margin-left: 20px;
-
     .fa-github {
-      font-size: 28px;
+        font-size: 28px;
     }
-
     .ion-person {
         margin-left: 20px;
         font-size: 20px;
@@ -193,5 +174,19 @@ input[type="search"].nav-search-input {
 }
 
 .nav-user-display-name {
-  margin-left: 10px;
+    margin-left: 10px;
 }
+
+// This should be moved to search
+// input[type="search"] {
+//     display: inline-block;
+//     padding: 0 0.875rem;
+//     border: none;
+//     color: #222;
+//     text-align: left;
+//     font-family: 'Open Sans';
+//     font-size: 12px;
+//     outline: 0;
+//     border-radius: 3px;
+//     transition: all 0.2s ease-in-out;
+// }

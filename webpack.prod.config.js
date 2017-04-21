@@ -22,10 +22,7 @@ module.exports = {
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
   // In every other case use resolve.root.
   resolve: {
-
     modules: [
-      // From documentaton
-      // path.join(__dirname, "src"),
       "node_modules"
     ],
     alias: {

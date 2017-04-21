@@ -15,9 +15,9 @@ import { getUserTracksNextHref } from './selectors';
 
 /* Action Creators*/
 export function clearUserState() {
-  return ({
+  return {
     type: USER_STATE_CLEAR,
-  });
+  };
 }
 
 export function requestUser() {
@@ -46,18 +46,17 @@ export function handleUserFetchFail() {
 
 // Should load user first and then the tracks
 export function loadUserProfilePage(userId) {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       dispatch(requestUser());
       dispatch(requestUserTracks());
-      const [user,
-        userTracks] = await Promise.all([fetchUser(userId), fetchUserTracks(userId)]);
+      const [user, userTracks] = await Promise.all([fetchUser(userId), fetchUserTracks(userId)]);
       // throw new Error('Fail to fetch resource.');
       dispatch(receiveUser(user));
       dispatch(receiveUserTracks(userTracks));
     } catch (err) {
       // Do we need to stop spinner here ? dispatch(artistFailure(err.message));
-console.log(err);
+      console.log(err);
       dispatch(notificationFailure(err.message));
     }
   };

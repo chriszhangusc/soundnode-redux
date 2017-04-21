@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SongCardContainer from 'client/components/SongCard';
-import Spinner from 'client/components/Spinner';
+import Loader from 'client/components/Loader';
 import infiniteScroll from 'client/components/Hocs/InfiniteScroll';
 import shortid from 'shortid';
 import styles from './SongCardList.css';
@@ -27,7 +27,7 @@ function SongCardList(props) {
   return (
     <div className="pad-bottom">
       {renderSongCardList(trackIds, playlistName)}
-      {fetching && <Spinner />}
+      {fetching && <Loader />}
     </div>
   );
 }
