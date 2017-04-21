@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
+import throttle from 'lodash/throttle';
 
 export default function (InnerComponent) {
   class InfiniteScrollComponent extends Component {
     constructor(props) {
       super(props);
       this.onScroll = this.onScroll.bind(this);
-      this.onScroll = debounce(this.onScroll, 250);
+      this.onScroll = throttle(this.onScroll, 200);
     }
 
     componentDidMount() {
@@ -19,6 +20,7 @@ export default function (InnerComponent) {
     }
 
     onScroll() {
+      console.log('OnScroll');
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         const { scrollFunc } = this.props;
         scrollFunc();
