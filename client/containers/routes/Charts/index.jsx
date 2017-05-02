@@ -3,16 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadChartsPage, changeGenre } from 'client/redux/modules/charts/actions';
 import { changeVisiblePlaylistName } from 'client/redux/modules/playlist/actions';
-import { GENRES, DEFAULT_GENRE } from 'client/constants/ChartsConsts';
-import styled from 'styled-components';
-
+import { DEFAULT_GENRE } from 'client/constants/ChartsConsts';
+import { getGenreList } from 'client/redux/modules/charts/selectors';
 import ChartsSongCardListContainer from './containers/ChartsSongCardListContainer';
 import GenreListContainer from './containers/GenreListContainer';
 import ChartsTitleContainer from './containers/ChartsTitleContainer';
 
-const ChartsHeaderWrapper = styled.div`
-  padding: 20px 0 0 20px;
-`;
 
 
 class ChartsPageContainer extends Component {
@@ -30,6 +26,7 @@ class ChartsPageContainer extends Component {
   componentWillMount() {
     this.onPageMountOrChange(this.props);
   }
+
   /* Change to different routes */
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.genre !== this.props.match.params.genre) {
@@ -37,12 +34,13 @@ class ChartsPageContainer extends Component {
     }
   }
 
-  onPageMountOrChange({ match, history, dispatch }) {
+  onPageMountOrChange({ match, history, dispatch, genres }) {
     const genreFromUrl = match.params.genre;
-    const valid = GENRES.filter(item => item.link === genreFromUrl).length > 0;
+    const valid = genres.filter(item => item.link === genreFromUrl).length > 0;
 
     // invalid genre like this: http://localhost:3000/top50/All-Music/adfasdfasdfasdf
     const genre = valid ? genreFromUrl : DEFAULT_GENRE;
+    // Redirect to default route if the genre is not valid.
     if (!valid) history.push(`/charts/${DEFAULT_GENRE}`);
     dispatch(changeVisiblePlaylistName(genre));
     dispatch(changeGenre(genre));
@@ -52,20 +50,25 @@ class ChartsPageContainer extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <ChartsHeaderWrapper>
-          <ChartsTitleContainer />
-          <GenreListContainer />
-        </ChartsHeaderWrapper>
+        <ChartsTitleContainer />
+        <GenreListContainer />
         <ChartsSongCardListContainer />
       </div>
     );
   }
 }
 
+// Container prop validation required here?
 ChartsPageContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 };
 
-export default connect()(ChartsPageContainer);
+function mapStateToProps(state) {
+  return {
+    genres: getGenreList(state),
+  };
+}
+
+export default connect(mapStateToProps)(ChartsPageContainer);

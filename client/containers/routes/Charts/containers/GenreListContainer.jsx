@@ -16,8 +16,8 @@ class GenreListContainer extends React.Component {
 
   render() {
     // Validate twice ???
-    const { genreListData } = this.props;
-    return genreListData && <GenreList genreListData={genreListData} />;
+    // const { genreListData } = this.props;
+    return <GenreList {...this.props} />;
   }
 }
 
