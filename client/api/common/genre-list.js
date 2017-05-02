@@ -3,7 +3,7 @@ export function fetchGenreList() {
   return [
     {
       link: 'all-music',
-      title: 'All-Music',
+      title: 'All Music',
     },
     {
       link: 'alternativerock',
