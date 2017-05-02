@@ -4,16 +4,27 @@ import { fetchChartsFromSC } from 'client/api/sc/v2';
 import { notificationFailure } from 'client/redux/modules/notification';
 import { updateShufflePlaylistIfNeeded } from 'client/redux/modules/playlist/actions';
 import { TOP_COUNT } from 'client/constants/ChartsConsts';
-import { isChartsFetching, getChartsFetchOffset, getChartsTrackIds, getChartsGenre } from './selectors';
+import {
+  isChartsFetching,
+  getChartsFetchOffset,
+  getChartsTrackIds,
+  getChartsGenre,
+} from './selectors';
 import {
   CHARTS_GENRE_CHANGE,
   CHARTS_REQUEST,
   CHARTS_RECEIVE,
   CHARTS_CLEAR,
   CHARTS_SPINNER_STOP,
+  CHARTS_GENRE_LIST_UPDATE,
 } from './action-types';
 
 export const changeGenre = genre => ({ type: CHARTS_GENRE_CHANGE, payload: genre });
+
+export const updateGenreList = genreList => ({
+  type: CHARTS_GENRE_LIST_UPDATE,
+  payload: genreList,
+});
 
 export const clearAllCharts = () => ({ type: CHARTS_CLEAR });
 
@@ -49,7 +60,7 @@ export function fetchChartsAndUpdatePlaylist(genre) {
       const normalizedCharts = await fetchChartsFromSC(genre, offset);
       // #TODO: Verify results!!
       dispatch(receiveCharts(normalizedCharts, genre));
-// console.log(normalizedCharts);
+      // console.log(normalizedCharts);
       // Update shuffle playlist if visiblePlaylistName is the same as activePlaylistName
       // which means we are loading more songs to the shuffle playlist
       dispatch(updateShufflePlaylistIfNeeded());
@@ -64,7 +75,7 @@ export function fetchChartsAndUpdatePlaylist(genre) {
 }
 
 export function loadChartsPage(genre) {
-  return (dispatch) => {
+  return dispatch => {
     const formattedGenre = formatGenre(genre);
     // Remove all old search results because we do not want them to interfere the new ones.
     dispatch(clearAllCharts());

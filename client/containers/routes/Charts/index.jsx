@@ -3,17 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadChartsPage, changeGenre } from 'client/redux/modules/charts/actions';
 import { changeVisiblePlaylistName } from 'client/redux/modules/playlist/actions';
-import {
-  GENRES,
-  DEFAULT_GENRE,
-  // CHARTS_MAIN_TITLE_PREFIX,
-  // CHARTS_SUBTITLE,
-} from 'client/constants/ChartsConsts';
+import { GENRES, DEFAULT_GENRE } from 'client/constants/ChartsConsts';
+import styled from 'styled-components';
 
-import ChartsHeader from './ChartsHeader';
-import ChartsSongCardListContainer from './ChartsSongCardListContainer';
+import ChartsSongCardListContainer from './containers/ChartsSongCardListContainer';
+import GenreListContainer from './containers/GenreListContainer';
+import ChartsTitleContainer from './containers/ChartsTitleContainer';
 
-class ChartsPage extends Component {
+const ChartsHeaderWrapper = styled.div`
+  padding: 20px 0 0 20px;
+`;
+
+
+class ChartsPageContainer extends Component {
   // ES7 ESLint will complain not sure why
   // static propTypes = {
   //   match: PropTypes.object.isRequired,
@@ -35,8 +37,7 @@ class ChartsPage extends Component {
     }
   }
 
-  onPageMountOrChange(props) {
-    const { match, history, dispatch } = props;
+  onPageMountOrChange({ match, history, dispatch }) {
     const genreFromUrl = match.params.genre;
     const valid = GENRES.filter(item => item.link === genreFromUrl).length > 0;
 
@@ -51,17 +52,20 @@ class ChartsPage extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <ChartsHeader />
+        <ChartsHeaderWrapper>
+          <ChartsTitleContainer />
+          <GenreListContainer />
+        </ChartsHeaderWrapper>
         <ChartsSongCardListContainer />
       </div>
     );
   }
 }
 
-ChartsPage.propTypes = {
+ChartsPageContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 };
 
-export default connect()(ChartsPage);
+export default connect()(ChartsPageContainer);

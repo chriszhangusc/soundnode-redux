@@ -8,14 +8,12 @@ const Title = styled.h1`
   font-size: 2rem;
 `;
 
-export default function ChartsTitle({ text }) {
-  return <Title>{text}</Title>;
+function ChartsTitle({ genreTitle }) {
+  return <Title>{genreTitle}</Title>;
 }
 
-ChartsTitle.defaultProps = {
-  text: '',
+ChartsTitle.propTypes = {
+  genreTitle: PropTypes.string.isRequired,
 };
 
-ChartsTitle.propTypes = {
-  text: PropTypes.string,
-};
+export default ChartsTitle;

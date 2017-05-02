@@ -6,11 +6,13 @@ import {
   CHARTS_RECEIVE,
   CHARTS_CLEAR,
   CHARTS_SPINNER_STOP,
+  CHARTS_GENRE_LIST_UPDATE,
 } from './action-types';
 
 /* Reducer */
 const initialState = {
   genre: '',
+  genreList: [],
   // Visible tracks in current charts page.
   trackIds: [],
   fetching: false,
@@ -20,6 +22,11 @@ const initialState = {
 // #TODO: Should we extract fetchOffset?
 export default function chartsReducer(state = initialState, action) {
   switch (action.type) {
+    case CHARTS_GENRE_LIST_UPDATE:
+      return {
+        ...state,
+        genreList: [...action.payload],
+      };
     case CHARTS_GENRE_CHANGE:
       return {
         ...state,

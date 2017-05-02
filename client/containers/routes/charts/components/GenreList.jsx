@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LinkButton from 'client/components/Buttons/LinkButton';
-import { GENRES, CHARTS_MAIN_TITLE_PREFIX, CHARTS_SUBTITLE } from 'client/constants/ChartsConsts';
+import { CHARTS_SUBTITLE } from 'client/constants/ChartsConsts';
 import styled from 'styled-components';
-import ChartsSubtitle from './ChartsSubtitle';
+import GenreListTitle from './GenreListTitle';
 
 const GenreListWrapper = styled.div`
   width: 100%;
@@ -16,24 +16,28 @@ const GenreListWrapper = styled.div`
     height: 250px;
   }
 `;
+
 /* Since we only connect to store for playlist name, so no need to wrap it in a container */
 /* chartsGenre is fetched from redux store directly */
-function renderGenreList() {
-  return GENRES.map(genre => (
+function renderGenreList(genreListData) {
+  return genreListData.map(genre => (
     <LinkButton key={genre.link} to={`/charts/${genre.link}`}>{genre.title}</LinkButton>
   ));
 }
 
-export default function GenreList() {
+export default function GenreList({ genreListData }) {
   return (
     <GenreListWrapper>
-      <ChartsSubtitle text={CHARTS_SUBTITLE} />
-      {renderGenreList()}
+      <GenreListTitle>{CHARTS_SUBTITLE}</GenreListTitle>
+      { renderGenreList(genreListData) }
     </GenreListWrapper>
   );
 }
 
 GenreList.propTypes = {
-
+  genreListData: PropTypes.arrayOf(PropTypes.shape({
+    link: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  })).isRequired,
 };
 

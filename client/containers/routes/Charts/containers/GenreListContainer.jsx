@@ -1,0 +1,34 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchGenreList } from 'client/api/common/genre-list';
+import { updateGenreList } from 'client/redux/modules/charts/actions';
+import { getGenreList } from 'client/redux/modules/charts/selectors';
+import GenreList from '../components/GenreList';
+
+class GenreListContainer extends React.Component {
+  componentWillMount() {
+    // Should be fetched from database, but keep it here for simplicity.
+    const { dispatch } = this.props;
+    const genreListData = fetchGenreList();
+    dispatch(updateGenreList(genreListData));
+  }
+
+  render() {
+    // Validate twice ???
+    const { genreListData } = this.props;
+    return genreListData && <GenreList genreListData={genreListData} />;
+  }
+}
+
+GenreListContainer.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    genreListData: getGenreList(state),
+  };
+}
+
+export default connect(mapStateToProps)(GenreListContainer);
