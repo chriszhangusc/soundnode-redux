@@ -75,7 +75,7 @@ export function fetchChartsAndUpdatePlaylist(genre) {
 }
 
 export function loadChartsPage(genre) {
-  return dispatch => {
+  return (dispatch) => {
     const formattedGenre = formatGenre(genre);
     // Remove all old search results because we do not want them to interfere the new ones.
     dispatch(clearAllCharts());
@@ -97,6 +97,15 @@ export function loadMoreCharts() {
     }
   };
 }
+
+// export function handleImageClick(active, trackId, playing) {
+//     if (!active) {
+//       dispatch(changeSongAndPlay(trackId));
+//       dispatch(switchPlaylistIfNeeded());
+//     } else {
+//       dispatch(playing ? pauseSong() : playSong());
+//     }
+//   },
 
 // export function handleChartsFetchFail() {
 //   return {

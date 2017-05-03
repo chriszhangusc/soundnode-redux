@@ -3,31 +3,28 @@ import PropTypes from 'prop-types';
 import SongCardInfoContainer from '../containers/SongCardInfoContainer';
 import SongCardControlsContainer from '../containers/SongCardControlsContainer';
 import SongCardImageContainer from '../containers/SongCardImageContainer';
-// import styles from '';
 
-function SongCardLayout({ track, active, trackIds, playlistName }) {
-  if (!track) return null;
+// playlistName: The name of playlist this track belongs
+function SongCard({ track, active }) {
+  if (!track) throw new Error('Track object should not be null');
   return (
     <div className={`card song-card ${active ? 'active' : ''}`}>
-      <SongCardImageContainer track={track} trackIds={trackIds} playlistName={playlistName} />
+      <SongCardImageContainer track={track} />
       <SongCardInfoContainer track={track} />
       <SongCardControlsContainer track={track} />
     </div>
   );
 }
 
-SongCardLayout.defaultProps = {
+SongCard.defaultProps = {
   track: null,
   active: false,
-  trackIds: [],
-  playlistName: '',
 };
 
-SongCardLayout.propTypes = {
+SongCard.propTypes = {
   track: PropTypes.object,
-  active: PropTypes.bool,
-  trackIds: PropTypes.array,
-  playlistName: PropTypes.string,
+  active: PropTypes.bool.isRequired,
+  // playlistName: PropTypes.string,
 };
 
-export default SongCardLayout;
+export default SongCard;

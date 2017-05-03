@@ -5,6 +5,7 @@ import { loadChartsPage, changeGenre } from 'client/redux/modules/charts/actions
 import { changeVisiblePlaylistName } from 'client/redux/modules/playlist/actions';
 import { DEFAULT_GENRE } from 'client/constants/ChartsConsts';
 import { getGenreList } from 'client/redux/modules/charts/selectors';
+import { CHARTS_ROUTE } from 'client/constants/RouteConsts';
 import ChartsSongCardListContainer from './containers/ChartsSongCardListContainer';
 import GenreListContainer from './containers/GenreListContainer';
 import ChartsTitleContainer from './containers/ChartsTitleContainer';
@@ -41,7 +42,7 @@ class ChartsPageContainer extends Component {
     // invalid genre like this: http://localhost:3000/top50/All-Music/adfasdfasdfasdf
     const genre = valid ? genreFromUrl : DEFAULT_GENRE;
     // Redirect to default route if the genre is not valid.
-    if (!valid) history.push(`/charts/${DEFAULT_GENRE}`);
+    if (!valid) history.push(`${CHARTS_ROUTE}/${DEFAULT_GENRE}`);
     dispatch(changeVisiblePlaylistName(genre));
     dispatch(changeGenre(genre));
     dispatch(loadChartsPage(genre));

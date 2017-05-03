@@ -24,18 +24,18 @@ function SongCardInfo({ trackId, userId, userAvatar, title, username }) {
 
 SongCardInfo.defaultProps = {
   trackId: 0,
-  userId: undefined,
+  userId: null,
   userAvatar: '',
   title: '',
   username: '',
 };
 
 SongCardInfo.propTypes = {
-  trackId: PropTypes.number,
-  userId: PropTypes.number,
-  userAvatar: PropTypes.string,
-  title: PropTypes.string,
-  username: PropTypes.string,
+  trackId: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired,
+  userAvatar: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
 };
 
 export default SongCardInfo;

@@ -101,15 +101,15 @@ export function addToPlayQueueIfNeeded(trackId) {
 
 
 
-// If playlistName is different with activePlaylistName,
+// If newPlaylistName is different from activePlaylistName,
 // which means we need to switch to new playlist
-export function switchPlaylistIfNeeded(newPlaylistName) {
+export function switchPlaylistIfNeeded() {
   return (dispatch, getState) => {
-    // Update activePlaylist name!
     const state = getState();
+    const visiblePlaylistName = getVisiblePlaylistName(state);
     const activePlaylistName = getActivePlaylistName(state);
-    if (activePlaylistName !== newPlaylistName) {
-      dispatch(changeActivePlaylistName(newPlaylistName));
+    if (activePlaylistName !== visiblePlaylistName) {
+      dispatch(changeActivePlaylistName(visiblePlaylistName));
       dispatch(updateShufflePlaylistIfNeeded());
     }
   };

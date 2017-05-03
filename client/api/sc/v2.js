@@ -1,8 +1,8 @@
 import { CLIENT_ID } from 'client/constants/AuthConsts';
 import { API_HOST } from 'client/constants/AppConsts';
+import { trackArraySchema } from 'client/schemas';
 
 import { constructFetchUrl, makeRequest } from './api-utils';
-import { trackArraySchema } from '../schemas';
 
 const SC_API_V2 = '/sc/api-v2/';
 
@@ -21,7 +21,7 @@ export function fetchChartsFromSC(genre, offset = 0, limit = 20) {
   };
 
   const fetchUrl = constructFetchUrl(baseUrl, endpoint, queryParams);
-console.log('fetchCharts:', fetchUrl);
+// console.log('fetchCharts:', fetchUrl);
   return makeRequest(fetchUrl, trackArraySchema);
 }
 

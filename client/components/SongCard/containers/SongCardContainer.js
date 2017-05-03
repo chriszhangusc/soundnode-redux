@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getTrackById } from 'client/redux/modules/entities';
 import { isTrackActive } from 'client/redux/modules/player/selectors';
-import SongCardLayout from '../components/SongCardLayout';
+import SongCard from '../components/SongCard';
 
 // Layout component just to assemble children presentational components.
 
@@ -13,12 +13,9 @@ import SongCardLayout from '../components/SongCardLayout';
 // When the connected container is told to be re-rendered, it will check if the mapped
 // object is shallowly equal or not.
 
-const mapStateToProps = (state, { trackId, trackIds }) => ({
-  // Prepare track object for its children
+const mapStateToProps = (state, { trackId }) => ({
   track: getTrackById(state, trackId),
   active: isTrackActive(state, trackId),
-  // This is passed down by songcard list
-  trackIds,
 });
 
-export default connect(mapStateToProps)(SongCardLayout);
+export default connect(mapStateToProps)(SongCard);

@@ -13,18 +13,14 @@ const mapStateToProps = (state, { track }) => ({
 });
 
 // This is useful when you need to compute some action using stateProps
-const mergeProps = (stateProps, { dispatch }, { track, playlistName }) => ({
+const mergeProps = (stateProps, { dispatch }, { track }) => ({
   ...stateProps,
   // Besides doing it this way, we could also do it in a thunk function
-  //  or pass all args into components and assemble there
-  // #TODO: Fat container!! Move to redux thunk
+  // or pass all args into components and assemble there
   handleImageClick() {
     if (!stateProps.active) {
-      // Update activePlaylist name!
-      // If playlistName is different with activePlaylistName,
-      // which means we need to switch to new playlist
       dispatch(changeSongAndPlay(track.id));
-      dispatch(switchPlaylistIfNeeded(playlistName));
+      dispatch(switchPlaylistIfNeeded());
     } else {
       dispatch(stateProps.playing ? pauseSong() : playSong());
     }

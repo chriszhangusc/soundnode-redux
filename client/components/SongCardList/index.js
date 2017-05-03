@@ -1,3 +1,1 @@
-import SongCardList from './SongCardList';
-
-export default SongCardList;
+export { default } from './SongCardList';

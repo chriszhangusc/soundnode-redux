@@ -157,24 +157,6 @@ $song-card-image-height-4k: 200px;
     }
 }
 
-.song-card-controls {
-  margin-top: 10px;
-
-  button + button {
-    margin-left: 20px;
-  }
-
-  i {
-    color: $light-gray;
-
-    &:hover {
-      color: white;
-    }
-
-    // Move to global in icons.scss
-    &.active {
-      color: $theme-color;
-    }
-  }
-
-}
+// .song-card-controls {
+//   margin-top: 10px;
+// }

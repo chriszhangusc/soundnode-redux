@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
-// import FadeinImage from 'client/components/Images/FadeinImage';
 import styles from './SongCard.css';
 
 // Animating all images would dramatically slow down our app
@@ -23,19 +21,18 @@ function SongCardImage({ active, playing, artworkUrl, artworkUrlSmall, handleIma
 }
 
 SongCardImage.defaultProps = {
-  active: false,
-  playing: false,
+  // Default url?
   artworkUrl: '',
   artworkUrlSmall: '',
-  handleImageClick: defaultEventHandlerFactory('handleImageClick'),
+  // handleImageClick: defaultEventHandlerFactory('handleImageClick'),
 };
 
 SongCardImage.propTypes = {
-  active: PropTypes.bool,
-  playing: PropTypes.bool,
+  active: PropTypes.bool.isRequired,
+  playing: PropTypes.bool.isRequired,
   artworkUrl: PropTypes.string,
   artworkUrlSmall: PropTypes.string,
-  handleImageClick: PropTypes.func,
+  handleImageClick: PropTypes.func.isRequired,
 };
 
 export default SongCardImage;

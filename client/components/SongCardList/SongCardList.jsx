@@ -1,29 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SongCardContainer from 'client/components/SongCard';
+import SongCard from 'client/components/SongCard';
 import Spinner from 'client/components/Spinner';
 import infiniteScroll from 'client/components/Hocs/InfiniteScroll';
-import shortid from 'shortid';
 import styles from './SongCardList.css';
 
 function renderSongCardList(trackIds, playlistName) {
   return (
     <div className={styles.songCardListContainer}>
       {trackIds.map(trackId => (
-        <SongCardContainer
+        <SongCard
           trackId={trackId}
-          trackIds={trackIds}
           playlistName={playlistName}
-          key={shortid.generate()}
+          key={trackId.toString()}
         />
       ))}
     </div>
   );
 }
 
-function SongCardList(props) {
-  const { fetching, trackIds, playlistName } = props;
-
+function SongCardList({ fetching, trackIds, playlistName }) {
   return (
     <div className="pad-bottom">
       {renderSongCardList(trackIds, playlistName)}

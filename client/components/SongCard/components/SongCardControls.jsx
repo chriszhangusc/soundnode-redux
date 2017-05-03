@@ -1,53 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NotificationManager } from 'react-notifications';
-import { defaultEventHandlerFactory } from 'client/utils/FactoryUtils';
-import IconButton from 'client/components/Buttons/IconButton';
-import FontAwesomeButton from 'client/components/Buttons/FontAwesomeButton';
-import styles from './SongCard.css';
+import SongCardButton from './SongCardButton';
+// import styles from './SongCard.css';
+import styled from 'styled-components';
 
 function createInfo(msg) {
   NotificationManager.info(msg);
 }
 
+const Wrapper = styled.div`
+  margin-top: 10px;
+`;
+
 function SongCardControls({ liked, handleToggleLike, handleCopyToClipboard }) {
   return (
-    <div className="song-card-controls">
-      <FontAwesomeButton
+    <Wrapper>
+      <SongCardButton
         title={liked ? 'Unlike' : 'Like'}
         name="heart"
-        active={liked}
+        active={true}
         onClick={handleToggleLike}
       />
-      <FontAwesomeButton
+      <SongCardButton
         title="Add to playlist"
         name="bookmark"
         onClick={() => createInfo('Added to playlist')}
       />
-      <FontAwesomeButton
+      <SongCardButton
         title="Repost"
         name="external-link"
         onClick={() => createInfo('Added to repose')}
       />
-      <FontAwesomeButton
+      <SongCardButton
         title="Copy to clipboard"
         name="clipboard"
         onClick={handleCopyToClipboard}
       />
-    </div>
+    </Wrapper>
   );
 }
 
 SongCardControls.defaultProps = {
-  liked: false,
-  handleCopyToClipboard: defaultEventHandlerFactory('handleCopyToClipboard'),
-  handleToggleLike: defaultEventHandlerFactory('handleToggleLike'),
+  liked: true,
 };
 
 SongCardControls.propTypes = {
-  liked: PropTypes.bool,
-  handleToggleLike: PropTypes.func,
-  handleCopyToClipboard: PropTypes.func,
+  liked: PropTypes.bool.isRequired,
+  handleToggleLike: PropTypes.func.isRequired,
+  handleCopyToClipboard: PropTypes.func.isRequired,
 };
 
 export default SongCardControls;
