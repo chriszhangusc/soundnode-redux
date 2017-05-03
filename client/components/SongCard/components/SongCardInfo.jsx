@@ -3,12 +3,19 @@ import PropTypes from 'prop-types';
 import Avatar from 'client/components/Avatar';
 import { Link } from 'react-router-dom';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'client/constants/RouteConsts';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: left;
+`;
 
 function SongCardInfo({ trackId, userId, userAvatar, title, username }) {
   const trackUrl = `${TRACK_PROFILE_ROUTE}/${trackId}`;
   const userUrl = `${USER_PROFILE_ROUTE}/${userId}`;
   return (
-    <div className="song-card-info-wrapper">
+    <Wrapper>
       <Avatar src={userAvatar} />
       <div className="song-card-details">
         <Link to={trackUrl} className="song-card-title" title={title}>
@@ -18,7 +25,7 @@ function SongCardInfo({ trackId, userId, userAvatar, title, username }) {
           {username}
         </Link>
       </div>
-    </div>
+    </Wrapper>
   );
 }
 
