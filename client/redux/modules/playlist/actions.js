@@ -1,5 +1,4 @@
 import { getPlayerTrackId, isInShuffleMode } from 'client/redux/modules/player/selectors';
-// import { concat, shuffle } from 'lodash';
 import concat from 'lodash/concat';
 import shuffle from 'lodash/shuffle';
 
@@ -65,8 +64,8 @@ export function shufflePlaylist() {
     const state = getState();
     const activePlaylist = getActivePlaylist(state);
     const playerTrackId = getPlayerTrackId(state);
-    // Every time we reshuffle the playlist, we need to move the current playing track to the 
-    // front.
+    // Every time we reshuffle the playlist, we need to move the current playing track to the
+    // first position.
     const shuffled = shiftToFront(shuffle(activePlaylist), playerTrackId);
 
     dispatch(updateShufflePlaylist(shuffled));
@@ -87,17 +86,17 @@ export function updateShufflePlaylistIfNeeded() {
 }
 
 // #TODO: Review later
-export function addToPlayQueueIfNeeded(trackId) {
-  // If the track to be added is already in current play queue, do nothing
-  // If not, append it to the end of the list.
-  return (dispatch, getState) => {
-    // const state = getState();
-    // const currentPlaylist = getActivePlaylist(state);
-    // if (currentPlaylist.indexOf(trackId) === -1) {
-    //   dispatch(appendTrackToPlaylist(trackId));
-    // }
-  };
-}
+// export function addToPlayQueueIfNeeded(trackId) {
+//   // If the track to be added is already in current play queue, do nothing
+//   // If not, append it to the end of the list.
+//   return (dispatch, getState) => {
+//     // const state = getState();
+//     // const currentPlaylist = getActivePlaylist(state);
+//     // if (currentPlaylist.indexOf(trackId) === -1) {
+//     //   dispatch(appendTrackToPlaylist(trackId));
+//     // }
+//   };
+// }
 
 
 

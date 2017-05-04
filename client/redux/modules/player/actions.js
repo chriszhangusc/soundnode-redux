@@ -126,7 +126,6 @@ export function changeSongAndPlay(newTrackId) {
     const curTrackId = getCurrentPlayerTrack(state);
     dispatch(pauseSong());
     dispatch(clearTime());
-
     if (curTrackId !== newTrackId) {
       dispatch(changeSong(newTrackId));
     }
@@ -145,7 +144,6 @@ export function playSongByAction(actionType) {
     if (mode === REPEAT) {
       nextTrackId = curTrackId;
     } else {
-      // debugger;
       const idx = activePlaylist.indexOf(curTrackId);
       let nextIdx = actionType === NEXT ? idx + 1 : idx - 1;
       nextIdx = nextIdx >= activePlaylist.length ? nextIdx = activePlaylist.length - 1 : nextIdx;

@@ -28,16 +28,16 @@ export const updateGenreList = genreList => ({
 
 export const clearAllCharts = () => ({ type: CHARTS_CLEAR });
 
-const requestCharts = () => ({ type: CHARTS_REQUEST });
+export const requestCharts = () => ({ type: CHARTS_REQUEST });
 
-const receiveCharts = (normalized, playlistName) => ({
+export const receiveCharts = (normalized, playlistName) => ({
   type: CHARTS_RECEIVE,
   playlistName,
   payload: normalized,
   entities: normalized.entities,
 });
 
-const stopSpinner = () => ({ type: CHARTS_SPINNER_STOP });
+export const stopSpinner = () => ({ type: CHARTS_SPINNER_STOP });
 
 /* Side Effects */
 
@@ -79,7 +79,6 @@ export function loadChartsPage(genre) {
     const formattedGenre = formatGenre(genre);
     // Remove all old search results because we do not want them to interfere the new ones.
     dispatch(clearAllCharts());
-
     dispatch(fetchChartsAndUpdatePlaylist(formattedGenre));
   };
 }
