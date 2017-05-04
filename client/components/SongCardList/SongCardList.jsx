@@ -3,28 +3,33 @@ import PropTypes from 'prop-types';
 import SongCard from 'client/components/SongCard';
 import Spinner from 'client/components/Spinner';
 import infiniteScroll from 'client/components/Hocs/InfiniteScroll';
-import styles from './SongCardList.css';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  padding-bottom: 70px;
+`;
+
+const SongCardListWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
 
 function renderSongCardList(trackIds, playlistName) {
   return (
-    <div className={styles.songCardListContainer}>
+    <SongCardListWrapper>
       {trackIds.map(trackId => (
-        <SongCard
-          trackId={trackId}
-          playlistName={playlistName}
-          key={trackId.toString()}
-        />
+        <SongCard trackId={trackId} playlistName={playlistName} key={trackId.toString()} />
       ))}
-    </div>
+    </SongCardListWrapper>
   );
 }
 
 function SongCardList({ fetching, trackIds, playlistName }) {
   return (
-    <div className="pad-bottom">
+    <Wrapper>
       {renderSongCardList(trackIds, playlistName)}
       {fetching && <Spinner />}
-    </div>
+    </Wrapper>
   );
 }
 

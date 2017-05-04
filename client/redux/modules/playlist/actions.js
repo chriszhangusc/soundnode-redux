@@ -52,7 +52,6 @@ export const appendTrackToPlaylist = trackId => ({
 
 /* Thunks logic */
 
-
 // Shift an element to the head of the array, if element is not in the array
 function shiftToFront(arr, target) {
   if (!arr.indexOf(target)) return arr;
