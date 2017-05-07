@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getUserById } from 'client/redux/modules/entities/selectors';
+import { getUserById } from 'client/redux/modules/entities/entitiesSelectors';
 import { getLargeVersion, getMiniVersion } from 'client/utils/ImageUtils';
 import UserProfile from '../components/UserProfile';
 

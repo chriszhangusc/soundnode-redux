@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getTrackById, getUserByTrackId } from 'client/redux/modules/entities/selectors';
+import { getTrackById, getUserByTrackId } from 'client/redux/modules/entities/entitiesSelectors';
 import { isTrackActive } from 'client/redux/modules/player/selectors';
 import { changeSongAndPlay } from 'client/redux/modules/player/actions';
 

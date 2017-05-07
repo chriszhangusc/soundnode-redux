@@ -1,4 +1,4 @@
-import { getTrackById } from 'client/redux/modules/entities/selectors';
+import { getTrackById } from 'client/redux/modules/entities/entitiesSelectors';
 import { createSelector } from 'reselect';
 import { SHUFFLE } from './consts';
 

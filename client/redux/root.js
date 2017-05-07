@@ -1,7 +1,7 @@
 import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux';
 import chartsReducer from './modules/charts/chartsReducer';
-import entitiesReducer from './modules/entities/reducer';
+import entitiesReducer from './modules/entities/entitiesReducer';
 import playerReducer from './modules/player/reducer';
 import playlistReducer from './modules/playlist/reducer';
 import userReducer from './modules/user/reducer';

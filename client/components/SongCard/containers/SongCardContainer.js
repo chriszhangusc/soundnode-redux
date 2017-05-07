@@ -1,5 +1,6 @@
+
 import { connect } from 'react-redux';
-import { getTrackById } from 'client/redux/modules/entities/selectors';
+import { getTrackById } from 'client/redux/modules/entities/entitiesSelectors';
 import { isTrackActive } from 'client/redux/modules/player/selectors';
 import SongCard from '../components/SongCard';
 
