@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadChartsPage, changeGenre } from 'client/redux/modules/charts/actions';
+import { loadChartsPage, changeGenre } from 'client/redux/modules/charts/chartsActions';
 import { changeVisiblePlaylistName } from 'client/redux/modules/playlist/actions';
-import { DEFAULT_GENRE } from 'client/constants/ChartsConsts';
-import { getGenreList } from 'client/redux/modules/charts/selectors';
+import { DEFAULT_GENRE } from 'client/redux/modules/charts/chartsConsts';
+import { getGenreList } from 'client/redux/modules/charts/chartsSelectors';
 import { CHARTS_ROUTE } from 'client/constants/RouteConsts';
 import ChartsSongCardListContainer from './containers/ChartsSongCardListContainer';
 import GenreListContainer from './containers/GenreListContainer';

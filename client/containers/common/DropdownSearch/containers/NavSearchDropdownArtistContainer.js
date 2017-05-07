@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getUserById } from 'client/redux/modules/entities';
+import { getUserById } from 'client/redux/modules/entities/selectors';
 import defaultImageUrl from 'assets/images/default-artist.png';
 import NavSearchDropdownItem from '../components/NavSearchDropdownItem';
 

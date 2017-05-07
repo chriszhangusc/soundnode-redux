@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getUserByTrackId } from 'client/redux/modules/entities';
+import { getUserByTrackId } from 'client/redux/modules/entities/selectors';
 import SongCardInfo from '../components/SongCardInfo';
 
 const mapStateToProps = (state, { track }) => {

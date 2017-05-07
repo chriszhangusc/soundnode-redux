@@ -17,8 +17,6 @@ import {
   CLEAR_TIME,
 } from './action-types';
 
-
-
 /* Player Reducer */
 const initialState = {
   currentTime: 0,

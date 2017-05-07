@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { getCurrentGenreTitle } from 'client/redux/modules/charts/selectors';
-import { CHARTS_MAIN_TITLE_PREFIX } from 'client/constants/ChartsConsts';
+import { getCurrentGenreTitle } from 'client/redux/modules/charts/chartsSelectors';
+import { CHARTS_MAIN_TITLE_PREFIX } from 'client/redux/modules/charts/chartsConsts';
 
 import ChartsTitle from '../components/ChartsTitle';
 

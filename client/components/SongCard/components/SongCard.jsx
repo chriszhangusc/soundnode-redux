@@ -10,7 +10,7 @@ const SongCardWrapper = styled.div`
   background-color: ${BACKGROUND_COLOR};
   box-shadow: 0 0 12px 8px ${BOX_SHADOW_COLOR};
   padding: 11px;
-  width: 250px;
+  width: 220px;
   margin: 10px 20px 20px;
   display: flex;
   flex-direction: column;

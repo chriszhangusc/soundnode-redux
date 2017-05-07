@@ -1,4 +1,4 @@
-import { CHARTS_RECEIVE } from 'client/redux/modules/charts/action-types';
+import { CHARTS_RECEIVE } from 'client/redux/modules/charts/chartsConsts';
 import {
   TOGGLE_PLAYLIST,
   CLEAR_PLAY_QUEUE,
@@ -11,7 +11,6 @@ import {
 
 /* Reducer */
 const initialState = {
-  // The name of currently active playlist
   activePlaylistName: '',
   visiblePlaylistName: '',
   // The shuffled or modded playlist
@@ -21,7 +20,6 @@ const initialState = {
 
 export default function playlistReducer(state = initialState, action) {
   switch (action.type) {
-
     case UPDATE_SHUFFLE_PLAYLIST:
       return {
         ...state,
@@ -42,7 +40,6 @@ export default function playlistReducer(state = initialState, action) {
 
     case CLEAR_PLAY_QUEUE:
       return initialState;
-
     // Need to handle shuffle mode!!
     case APPEND_TRACK_TO_PLAYLIST:
       return {
@@ -53,10 +50,9 @@ export default function playlistReducer(state = initialState, action) {
     case CHARTS_RECEIVE:
       return {
         ...state,
-        [action.playlistName]: (state[action.playlistName]
-                                ? [...state[action.playlistName], ...action.payload.result]
-                                : [...action.payload.result]).slice(0, 50),
-        // shufflePlaylist: [...state.shufflePlaylist, ...action.payload.result],
+        [action.payload.playlistName]: (state[action.payload.playlistName]
+          ? [...state[action.payload.playlistName], ...action.payload.normalized.result]
+          : [...action.payload.normalized.result]).slice(0, 50),
       };
 
     case CHANGE_VISIBLE_PLAYLIST_NAME:

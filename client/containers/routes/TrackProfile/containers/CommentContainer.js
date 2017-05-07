@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import defaultArtistImage from 'assets/images/default-artist.png';
-import { getCommentById, getArtistByCommentId } from 'client/redux/modules/entities';
+import { getCommentById, getArtistByCommentId } from 'client/redux/modules/entities/selectors';
 import Comment from '../components/Comment';
 
 const mapStateToProps = (state, { commentId }) => {

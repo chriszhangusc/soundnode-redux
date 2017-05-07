@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getArtistByTrackId } from 'client/redux/modules/entities';
+import { getArtistByTrackId } from 'client/redux/modules/entities/selectors';
 import { copyToClipboard } from 'client/redux/modules/copy';
 import {
   startLikeSong,

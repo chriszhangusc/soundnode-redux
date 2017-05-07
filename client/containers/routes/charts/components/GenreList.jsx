@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LinkButton from 'client/components/Buttons/LinkButton';
-import { CHARTS_SUBTITLE } from 'client/constants/ChartsConsts';
+import { CHARTS_SUBTITLE } from 'client/redux/modules/charts/chartsConsts';
 import styled from 'styled-components';
 import GenreListTitle from './GenreListTitle';
 

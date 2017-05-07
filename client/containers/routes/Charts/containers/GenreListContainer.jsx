@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchGenreList } from 'client/api/common/genre-list';
-import { updateGenreList } from 'client/redux/modules/charts/actions';
-import { getGenreList } from 'client/redux/modules/charts/selectors';
+import { updateGenreList } from 'client/redux/modules/charts/chartsActions';
+import { getGenreList } from 'client/redux/modules/charts/chartsSelectors';
 import GenreList from '../components/GenreList';
 
 class GenreListContainer extends React.Component {

@@ -6,7 +6,7 @@ import {
   clearUserState,
 } from 'client/redux/modules/user/actions';
 import { getUserId, isUserFetching } from 'client/redux/modules/user/selectors';
-import { getUserById } from 'client/redux/modules/entities';
+import { getUserById } from 'client/redux/modules/entities/selectors';
 import Spinner from 'client/components/Spinner';
 
 import UserProfilePage from '../components/UserProfilePage';

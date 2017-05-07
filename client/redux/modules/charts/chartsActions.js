@@ -3,41 +3,67 @@ import { formatGenre } from 'client/utils/FormatUtils';
 import { fetchChartsFromSC } from 'client/api/sc/v2';
 import { notificationFailure } from 'client/redux/modules/notification';
 import { updateShufflePlaylistIfNeeded } from 'client/redux/modules/playlist/actions';
-import { TOP_COUNT } from 'client/constants/ChartsConsts';
+
 import {
   isChartsFetching,
   getChartsFetchOffset,
   getChartsTrackIds,
-  getChartsGenre,
-} from './selectors';
+  getChartsSelectedGenre,
+} from './chartsSelectors';
+
 import {
+  TOP_COUNT,
   CHARTS_GENRE_CHANGE,
   CHARTS_REQUEST,
   CHARTS_RECEIVE,
   CHARTS_CLEAR,
-  CHARTS_SPINNER_STOP,
+  CHARTS_FETCH_STOP,
   CHARTS_GENRE_LIST_UPDATE,
-} from './action-types';
+} from './chartsConsts';
 
-export const changeGenre = genre => ({ type: CHARTS_GENRE_CHANGE, payload: genre });
+export function changeGenre(genre) {
+  return {
+    type: CHARTS_GENRE_CHANGE,
+    payload: genre,
+  };
+}
 
-export const updateGenreList = genreList => ({
-  type: CHARTS_GENRE_LIST_UPDATE,
-  payload: genreList,
-});
+export function updateGenreList(genreList) {
+  return {
+    type: CHARTS_GENRE_LIST_UPDATE,
+    payload: genreList,
+  };
+}
 
-export const clearAllCharts = () => ({ type: CHARTS_CLEAR });
+export function clearAllCharts() {
+  return {
+    type: CHARTS_CLEAR,
+  };
+}
 
-export const requestCharts = () => ({ type: CHARTS_REQUEST });
+export function requestCharts() {
+  return {
+    type: CHARTS_REQUEST,
+  };
+}
 
-export const receiveCharts = (normalized, playlistName) => ({
-  type: CHARTS_RECEIVE,
-  playlistName,
-  payload: normalized,
-  entities: normalized.entities,
-});
+// TODO: Refactor to Flux standard actions
+export function receiveCharts(normalized, playlistName) {
+  return {
+    type: CHARTS_RECEIVE,
+    payload: {
+      normalized,
+      entities: normalized.entities,
+    },
+    playlistName,
+  };
+}
 
-export const stopSpinner = () => ({ type: CHARTS_SPINNER_STOP });
+export function endFetching() {
+  return {
+    type: CHARTS_FETCH_STOP,
+  };
+}
 
 /* Side Effects */
 
@@ -69,7 +95,7 @@ export function fetchChartsAndUpdatePlaylist(genre) {
       dispatch(notificationFailure('Failed to fetch songs!'));
     } finally {
       // Stop loading spinner
-      dispatch(stopSpinner());
+      dispatch(endFetching());
     }
   };
 }
@@ -90,24 +116,9 @@ export function loadMoreCharts() {
     // Limit the number of fetched results.
     const size = getChartsTrackIds(state).length;
     if (!chartsFetching && size < TOP_COUNT) {
-      const genre = getChartsGenre(state);
+      const genre = getChartsSelectedGenre(state);
       const formattedGenre = formatGenre(genre);
       dispatch(fetchChartsAndUpdatePlaylist(formattedGenre));
     }
   };
 }
-
-// export function handleImageClick(active, trackId, playing) {
-//     if (!active) {
-//       dispatch(changeSongAndPlay(trackId));
-//       dispatch(switchPlaylistIfNeeded());
-//     } else {
-//       dispatch(playing ? pauseSong() : playSong());
-//     }
-//   },
-
-// export function handleChartsFetchFail() {
-//   return {
-//     type: CHARTS_FETCH_FAIL,
-//   };
-// }
