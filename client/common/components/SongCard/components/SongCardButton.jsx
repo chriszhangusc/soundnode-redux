@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import styled from 'styled-components';
-import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY, THEME_COLOR } from 'client/css/colors';
+import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY, THEME_COLOR } from 'client/app/css/colors';
 
 const OuterButton = styled.button`
   color: ${props => props.active ? THEME_COLOR : FONT_COLOR_SECONDARY};

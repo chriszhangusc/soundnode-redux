@@ -7,10 +7,10 @@ import {
   SIDEBAR_WIDTH_DESKTOP,
   SIDEBAR_WIDTH_DESKTOP_LG,
   SIDEBAR_WIDTH_4K,
-} from 'client/css/variables';
+} from 'client/app/css/variables';
 
-import { media } from 'client/css/style-utils';
-import { LIGHT_BLACK } from 'client/css/colors';
+import { media } from 'client/app/css/style-utils';
+import { LIGHT_BLACK } from 'client/app/css/colors';
 
 import SidebarItem from './SidebarItem';
 

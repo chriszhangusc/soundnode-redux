@@ -19,8 +19,8 @@ import { notificationFailure, notificationSuccess } from 'client/features/notifi
 import { connect } from 'react-redux';
 
 import styled, { injectGlobal } from 'styled-components';
-import { BACKGROUND_COLOR, LIGHTER_GRAY } from 'client/css/colors';
-import { NAV_BAR_HEIGHT } from 'client/css/variables';
+import { BACKGROUND_COLOR, LIGHTER_GRAY } from 'client/app/css/colors';
+import { NAV_BAR_HEIGHT } from 'client/app/css/variables';
 // eslint-disable-next-line no-unused-expressions
 
 // Global CSS

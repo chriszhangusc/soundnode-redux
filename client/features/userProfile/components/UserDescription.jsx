@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FONT_COLOR_SECONDARY } from 'client/css/colors';
+import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 
 const UserDescriptionWithStyle = styled.div`
   margin: 10px 0;

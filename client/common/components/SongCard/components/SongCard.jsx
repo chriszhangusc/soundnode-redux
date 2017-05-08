@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BACKGROUND_COLOR, BOX_SHADOW_COLOR, THEME_COLOR } from 'client/css/colors';
+import { BACKGROUND_COLOR, BOX_SHADOW_COLOR, THEME_COLOR } from 'client/app/css/colors';
 import SongCardInfoContainer from '../containers/SongCardInfoContainer';
 import SongCardControlsContainer from '../containers/SongCardControlsContainer';
 import SongCardImageContainer from '../containers/SongCardImageContainer';

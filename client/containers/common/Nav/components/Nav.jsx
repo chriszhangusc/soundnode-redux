@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import DropdownSearch from 'client/containers/common/DropdownSearch';
 // import NavUserContainer from '../containers/NavUserContainer';
-import { LIGHT_BLACK } from 'client/css/colors';
+import { LIGHT_BLACK } from 'client/app/css/colors';
 
 import NavHeader from './NavHeader';
 

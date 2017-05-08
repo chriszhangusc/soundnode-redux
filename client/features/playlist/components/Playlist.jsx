@@ -4,9 +4,9 @@ import shortid from 'shortid';
 import IconButton from 'client/common/components/Buttons/IconButton';
 import { defaultEventHandlerFactory } from 'client/common/utils/FactoryUtils';
 import styled from 'styled-components';
-import { BACKGROUND_COLOR_SECONDARY } from 'client/css/colors';
-import { PLAYLIST_WIDTH_DESKTOP, PLAYLIST_WIDTH_DESKTOP_LG, PLAYLIST_WIDTH_DESKTOP_4K } from 'client/css/variables';
-import { media } from 'client/css/style-utils';
+import { BACKGROUND_COLOR_SECONDARY } from 'client/app/css/colors';
+import { PLAYLIST_WIDTH_DESKTOP, PLAYLIST_WIDTH_DESKTOP_LG, PLAYLIST_WIDTH_DESKTOP_4K } from 'client/app/css/variables';
+import { media } from 'client/app/css/style-utils';
 import PlaylistItemContainer from '../containers/PlaylistItemContainer';
 import PlaylistTitle from './PlaylistTitle';
 

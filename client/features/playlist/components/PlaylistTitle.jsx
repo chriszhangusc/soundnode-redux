@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import IconButton from 'client/common/components/Buttons/IconButton';
-import { FONT_COLOR_SECONDARY } from 'client/css/colors';
+import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 import styled from 'styled-components';
 
 const PlaylistTitleWrapper = styled.div`
