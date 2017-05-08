@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Avatar from 'client/components/Avatar';
+import Avatar from 'client/common/components/Avatar';
 
 function NavSearchDropdownItem({ imageUrl, itemLinkUrl, itemTitle }) {
   return (

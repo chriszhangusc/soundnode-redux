@@ -1,5 +1,5 @@
 import React from 'react';
-import { HOST } from 'client/constants/AppConsts';
+import { HOST } from 'client/common/constants/AppConsts';
 import styled from 'styled-components';
 
 const NavHeaderWrapper = styled.div`

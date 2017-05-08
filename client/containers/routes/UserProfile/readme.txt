@@ -1,1 +1,0 @@
-Single artist details route.

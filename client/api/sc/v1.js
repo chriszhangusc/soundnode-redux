@@ -1,5 +1,5 @@
-import { CLIENT_ID } from 'client/constants/AuthConsts';
-import { userSchema, trackSchema, commentArraySchema, trackArraySchema, userArraySchema } from 'client/schemas';
+import { CLIENT_ID } from 'client/common/constants/AuthConsts';
+import { userSchema, trackSchema, commentArraySchema, trackArraySchema, userArraySchema } from 'client/app/schema';
 
 import { normalizeResponse, constructFetchUrl, makeRequest } from './api-utils';
 

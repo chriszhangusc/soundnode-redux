@@ -1,6 +1,6 @@
-import { CLIENT_ID } from 'client/constants/AuthConsts';
-import { API_HOST } from 'client/constants/AppConsts';
-import { trackArraySchema } from 'client/schemas';
+import { CLIENT_ID } from 'client/common/constants/AuthConsts';
+import { API_HOST } from 'client/common/constants/AppConsts';
+import { trackArraySchema } from 'client/app/schema';
 
 import { constructFetchUrl, makeRequest } from './api-utils';
 

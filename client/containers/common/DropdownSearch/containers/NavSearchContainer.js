@@ -8,7 +8,7 @@ import {
   // sagaDropdownSearch,
   sagaSearch,
   clearAndHideSearchResults,
-} from 'client/redux/modules/search';
+} from 'client/features/search';
 
 import NavSearch from '../components/NavSearch';
 
