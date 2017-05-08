@@ -23,26 +23,41 @@ const SidebarWrapper = styled.div`
   ${media.desktop4K`width: ${SIDEBAR_WIDTH_4K}`}
 `;
 
+const SIDEBAR_ITEM_LIST = [
+  {
+    to: '/charts',
+    iconClassName: 'fa fa-trophy',
+    title: 'Top 50',
+  },
+  {
+    to: '/likes',
+    iconClassName: 'fa fa-heart',
+    title: 'Likes',
+  },
+  {
+    to: '/playlists',
+    iconClassName: 'fa fa-list',
+    title: 'Playlists',
+  },
+  {
+    to: '/tracks',
+    iconClassName: 'fa fa-music',
+    title: 'Stream',
+  },
+];
+
 // Should be refactored to take sidebar items as props
-function Sidebar({ sidebarData }) {
+function Sidebar() {
   // The activeClassName thing would need work-around to work with styled-component: https://github.com/styled-components/styled-components/issues/184
   return (
     <SidebarWrapper>
       <ul>
         {
-          sidebarData.map(d => <SidebarItem {...d} key={shortid.generate()} />)
+          SIDEBAR_ITEM_LIST.map(d => <SidebarItem {...d} key={shortid.generate()} />)
         }
       </ul>
     </SidebarWrapper>
   );
 }
-
-Sidebar.propTypes = {
-  sidebarData: PropTypes.arrayOf(PropTypes.shape({
-    to: PropTypes.string.isRequired,
-    iconClassName: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-  })).isRequired,
-};
 
 export default Sidebar;

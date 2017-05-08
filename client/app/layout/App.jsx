@@ -13,8 +13,8 @@ import { NotificationContainer } from 'react-notifications';
 import Player from 'client/features/player';
 import Playlist from 'client/features/playlist';
 import Nav from 'client/containers/common/Nav';
-import Sidebar from 'client/containers/common/Sidebar';
-import Callback from 'client/containers/common/Callback';
+import Sidebar from 'client/common/components/Sidebar';
+import Callback from 'client/common/components/Callback';
 import { notificationFailure, notificationSuccess } from 'client/features/notification';
 import { connect } from 'react-redux';
 
