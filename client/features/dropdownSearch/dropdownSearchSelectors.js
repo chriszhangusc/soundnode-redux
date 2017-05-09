@@ -1,6 +1,23 @@
-/* Selectors */
+import { createSelector } from 'reselect';
+
 export const getDropdownSearchState = state => state.dropdownSearch;
-export const isDropdownSearching = state => getDropdownSearchState(state).dropdownFetching;
-export const isDropdownShown = state => getDropdownSearchState(state).dropdownShown;
-export const getDropdownSearchArtistIds = state => getDropdownSearchState(state).dropdownArtistIds;
-export const getDropdownSearchTrackIds = state => getDropdownSearchState(state).dropdownTrackIds;
+
+export const isDropdownSearching = createSelector(
+  getDropdownSearchState,
+  state => state.dropdownFetching,
+);
+
+export const isDropdownShown = createSelector(
+  getDropdownSearchState,
+  state => state.dropdownShown,
+);
+
+export const getDropdownSearchArtistIds = createSelector(
+  getDropdownSearchState,
+  state => state.dropdownArtistIds,
+);
+
+export const getDropdownSearchTrackIds = createSelector(
+  getDropdownSearchState,
+  state => state.dropdownTrackIds,
+);
