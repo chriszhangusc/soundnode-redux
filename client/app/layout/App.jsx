@@ -12,7 +12,7 @@ import UserProfilePage from 'client/features/userProfile';
 import { NotificationContainer } from 'react-notifications';
 import Player from 'client/features/player';
 import Playlist from 'client/features/playlist';
-import Nav from 'client/containers/common/Nav';
+import Nav from 'client/common/components/Nav';
 import Sidebar from 'client/common/components/Sidebar';
 import Callback from 'client/common/components/Callback';
 import { notificationFailure, notificationSuccess } from 'client/features/notification';

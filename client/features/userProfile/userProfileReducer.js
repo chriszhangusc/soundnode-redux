@@ -27,7 +27,7 @@ export default function userReducer(state = initialState, action) {
     case USER_RECEIVE:
       return {
         ...state,
-        userId: action.payload.result,
+        userId: action.payload.normalized.result,
         userFetching: false,
       };
     case USER_TRACKS_REQUEST:
@@ -38,7 +38,7 @@ export default function userReducer(state = initialState, action) {
     case USER_TRACKS_RECEIVE:
       return {
         ...state,
-        trackIds: [...state.trackIds, ...action.payload.result],
+        trackIds: [...state.trackIds, ...action.payload.normalized.result],
         tracksFetching: false,
       };
     default:

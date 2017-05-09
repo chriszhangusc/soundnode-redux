@@ -25,18 +25,26 @@ export function requestUser() {
 }
 
 export function receiveUser(normalized) {
-  return { type: USER_RECEIVE, payload: normalized, entities: normalized.entities };
+  return {
+    type: USER_RECEIVE,
+    payload: {
+      normalized,
+      entities: normalized.entities,
+    },
+  };
 }
 
 export function requestUserTracks() {
   return { type: USER_TRACKS_REQUEST };
 }
 
-export function receiveUserTracks(normalizedResponse) {
+export function receiveUserTracks(normalized) {
   return {
     type: USER_TRACKS_RECEIVE,
-    payload: normalizedResponse,
-    entities: normalizedResponse.entities,
+    payload: {
+      normalized,
+      entities: normalized.entities,
+    },
   };
 }
 

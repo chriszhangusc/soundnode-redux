@@ -63,7 +63,7 @@ export default store => next => (action) => {
       next(actionWith({
         type: successType,
         payload: response,
-        entities: response.entities,
+        entities: response.normalized.entities,
       }));
     },
     error => next(actionWith({

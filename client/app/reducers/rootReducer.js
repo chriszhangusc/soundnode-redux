@@ -4,8 +4,9 @@ import chartsReducer from 'client/features/charts/chartsReducer';
 import entitiesReducer from 'client/features/entities/entitiesReducer';
 import playerReducer from 'client/features/player/playerReducer';
 import playlistReducer from 'client/features/playlist/playlistReducer';
-import userReducer from 'client/features/userProfile/userProfileReducer';
-import searchReducer, { dropdownSearchEpic } from 'client/features/search';
+import userProfileReducer from 'client/features/userProfile/userProfileReducer';
+import dropdownSearchReducer from 'client/features/dropdownSearch/dropdownSearchReducer';
+import { dropdownSearchEpic } from 'client/features/dropdownSearch/dropdownSearchActions';
 
 export const rootEpic = combineEpics(
   dropdownSearchEpic,
@@ -17,8 +18,8 @@ export const rootReducer = combineReducers({
   playlist: playlistReducer,
   player: playerReducer,
   // Single user profile page
-  user: userReducer,
+  user: userProfileReducer,
   // Single track profile page
   // track: trackReducer,
-  search: searchReducer,
+  dropdownSearch: dropdownSearchReducer,
 });

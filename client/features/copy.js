@@ -1,8 +1,5 @@
 import copy from 'copy-to-clipboard';
-import {
-  notificationSuccess,
-  notificationFailure,
-} from './notification';
+import { notificationSuccess, notificationFailure } from './notification';
 
 export function copyToClipboard(str, successMessage) {
   return (dispatch) => {

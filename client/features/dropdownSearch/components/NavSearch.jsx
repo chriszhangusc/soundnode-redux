@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { dropdownSearchShowCount } from 'client/common/constants/SearchConsts';
+import { Link } from 'react-router-dom';
 import { defaultEventHandlerFactory } from 'client/common/utils/FactoryUtils';
 import styled from 'styled-components';
 import NavSearchDropdownTrackContainer from '../containers/NavSearchDropdownTrackContainer';
 import NavSearchDropdownArtistContainer from '../containers/NavSearchDropdownArtistContainer';
+
 
 const StyledSearchBox = styled.input`
   border-bottom: 1px solid $light-gray;
@@ -53,8 +53,11 @@ class NavSearch extends Component {
     handleShowAll(this.searchInput.value.trim());
   }
 
+
   renderSearchResults() {
     const { artistIds, trackIds, dropdownShown } = this.props;
+    const dropdownSearchShowCount = 3;
+
     return (
       <div className={`nav-search-result ${dropdownShown && 'show'}`}>
         {artistIds.length !== 0 &&
@@ -98,9 +101,7 @@ class NavSearch extends Component {
               type="search"
               className="nav-search-input"
               placeholder="Search SoundCloud"
-              ref={node => {
-                this.searchInput = node;
-              }}
+              ref={(node) => { this.searchInput = node; }}
               onChange={this.onChange}
               onFocus={this.onFocus}
               onBlur={this.onBlur}
@@ -125,8 +126,8 @@ NavSearch.defaultProps = {
 
 NavSearch.propTypes = {
   dropdownShown: PropTypes.bool,
-  artistIds: PropTypes.array,
-  trackIds: PropTypes.array,
+  artistIds: PropTypes.arrayOf(PropTypes.number),
+  trackIds: PropTypes.arrayOf(PropTypes.number),
   handleBlur: PropTypes.func,
   handleFocus: PropTypes.func,
   handleChange: PropTypes.func,

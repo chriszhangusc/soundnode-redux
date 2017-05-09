@@ -13,7 +13,6 @@ function NavSearchDropdownItem({ imageUrl, itemLinkUrl, itemTitle }) {
           onMouseDown={(e) => {
             // This is not working properly
             e.stopPropagation();
-            {/*browserHistory.push(itemLinkUrl);*/ }
           }}
         >
           <span className="dropdown-item-title">{itemTitle}</span>

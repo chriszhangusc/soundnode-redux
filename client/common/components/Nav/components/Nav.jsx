@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import DropdownSearch from 'client/containers/common/DropdownSearch';
+import DropdownSearch from 'client/features/dropdownSearch';
 // import NavUserContainer from '../containers/NavUserContainer';
 import { LIGHT_BLACK } from 'client/app/css/colors';
 

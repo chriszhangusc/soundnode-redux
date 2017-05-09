@@ -1,14 +1,12 @@
 import { connect } from 'react-redux';
-// import { browserHistory } from 'react-router-dom';
+
+import { clearAndHideSearchResults, requestDropdownSearch } from 'client/features/dropdownSearch/dropdownSearchActions';
+
 import {
   isDropdownShown,
   getDropdownSearchArtistIds,
   getDropdownSearchTrackIds,
-  requestDropdownSearch,
-  // sagaDropdownSearch,
-  sagaSearch,
-  clearAndHideSearchResults,
-} from 'client/features/search';
+} from 'client/features/dropdownSearch/dropdownSearchSelectors';
 
 import NavSearch from '../components/NavSearch';
 
@@ -42,7 +40,7 @@ const mapDispatchToProps = dispatch => ({
       //   pathname: '/search',
       //   query: { q: keywords },
       // });
-      dispatch(sagaSearch(keywords));
+      // dispatch(sagaSearch(keywords));
     }
   },
 });
