@@ -50,6 +50,9 @@ nav {
     @include desktop-lg {
         width: $dropdown-search-width-lg;
     }
+    @include desktop-4k {
+        width: $dropdown-search-width-4k;
+    }
     position: absolute;
     background-color: $dropdown-search-result-bg-color;
     display: block;
@@ -117,9 +120,11 @@ nav {
         @include desktop {
             width: $dropdown-search-title-width-md;
         }
-        //
         @include desktop-lg {
             width: $dropdown-search-title-width-lg;
+        }
+        @include desktop-4k {
+          width: $dropdown-search-title-width-4k;
         }
         text-overflow: ellipsis;
         overflow: hidden;
@@ -140,6 +145,10 @@ nav {
     }
     @include desktop-lg {
         width: $dropdown-search-width-lg;
+    }
+
+    @include desktop-4k {
+        width: $dropdown-search-width-4k;
     }
     border-radius: 5px;
     padding: 6px 10px 6px 30px;

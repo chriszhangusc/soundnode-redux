@@ -7,7 +7,7 @@ import { defaultArtistImageUrl } from 'client/common/constants/ImageConsts';
 const Avatar = ({ src, alt }) => {
   // console.log(src);
   return (
-    <img alt="Avatar" className="avatar" src={src || defaultArtistImageUrl} />
+    <img alt="Avatar" className="avatar" src={src} />
   );
 };
 
@@ -17,7 +17,7 @@ Avatar.defaultProps = {
 };
 
 Avatar.propTypes = {
-  src: PropTypes.string,
+  src: PropTypes.string.isRequired,
   alt: PropTypes.string,
 };
 

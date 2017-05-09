@@ -114,24 +114,14 @@ class NavSearch extends Component {
   }
 }
 
-NavSearch.defaultProps = {
-  dropdownShown: false,
-  artistIds: [],
-  trackIds: [],
-  handleBlur: defaultEventHandlerFactory('handleBlur'),
-  handleFocus: defaultEventHandlerFactory('handleFocus'),
-  handleChange: defaultEventHandlerFactory('handleChange'),
-  handleShowAll: defaultEventHandlerFactory('handleShowAll'),
-};
-
 NavSearch.propTypes = {
-  dropdownShown: PropTypes.bool,
-  artistIds: PropTypes.arrayOf(PropTypes.number),
-  trackIds: PropTypes.arrayOf(PropTypes.number),
-  handleBlur: PropTypes.func,
-  handleFocus: PropTypes.func,
-  handleChange: PropTypes.func,
-  handleShowAll: PropTypes.func,
+  dropdownShown: PropTypes.bool.isRequired,
+  artistIds: PropTypes.arrayOf(PropTypes.number).isRequired,
+  trackIds: PropTypes.arrayOf(PropTypes.number).isRequired,
+  handleBlur: PropTypes.func.isRequired,
+  handleFocus: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleShowAll: PropTypes.func.isRequired,
 };
 
 export default NavSearch;

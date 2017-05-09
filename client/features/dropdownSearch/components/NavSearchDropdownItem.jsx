@@ -22,16 +22,10 @@ function NavSearchDropdownItem({ imageUrl, itemLinkUrl, itemTitle }) {
   );
 }
 
-NavSearchDropdownItem.defaultProps = {
-  imageUrl: '',
-  itemLinkUrl: '',
-  itemTitle: '',
-};
-
 NavSearchDropdownItem.propTypes = {
-  imageUrl: PropTypes.string,
-  itemLinkUrl: PropTypes.string,
-  itemTitle: PropTypes.string,
+  imageUrl: PropTypes.string.isRequired,
+  itemLinkUrl: PropTypes.string.isRequired,
+  itemTitle: PropTypes.string.isRequired,
 };
 
 export default NavSearchDropdownItem;

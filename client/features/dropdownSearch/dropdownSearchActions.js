@@ -36,10 +36,6 @@ export const clearDropdownSearchResults = () => ({
   type: TYPES.CLEAR_DROPDOWN_SEARCH_RESULTS,
 });
 
-export const clearSearchPageResults = () => ({
-  type: TYPES.CLEAR_SEARCH_RESULTS,
-});
-
 export const dropdownArtistsReceived = normalized => ({
   type: TYPES.DROPDOWN_ARTISTS_RECEIVED,
   payload: {

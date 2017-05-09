@@ -5,44 +5,33 @@ import thunk from 'redux-thunk';
 // import throttle from 'lodash/throttle';
 // import createLogger from 'redux-logger';
 import { createEpicMiddleware } from 'redux-observable';
+import createSagaMiddleware from 'redux-saga';
 // import { loadState, saveState } from 'client/common/utils/LocalStorageUtils';
-
+import rootSaga from 'client/app/sagas/rootSaga';
 import notificationMiddleware from '../middlewares/notificationMiddleware';
 import apiMiddleware from '../middlewares/apiMiddleware';
-// import rootSaga from './middlewares/sagas';
 import { rootReducer, rootEpic } from '../reducers/rootReducer';
 
-// const stateTransformer = (state) => {
-//   // toJS is expensive!
-//   if (Iterable.isIterable(state)) return state.toJS();
-//   return state;
-// };
-
 const epicMiddleware = createEpicMiddleware(rootEpic);
-
-// const logger = createLogger({
-//   stateTransformer,
-// });
+const sagaMiddleware = createSagaMiddleware();
 
 const configureStore = () => {
   // const persistedState = loadState();
   // const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     rootReducer,
-    // persistedState,
-    // initialState,
     compose(
       applyMiddleware(
         thunk,
-        epicMiddleware,
-        // sagaMiddleware,
+        // epicMiddleware,
+        sagaMiddleware,
         apiMiddleware,
         notificationMiddleware,
       ),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     ),
   );
-  // sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga);
 
   // Every time the store changes, save our state to localStorage
   // throttle it because it contains expensive stringify function.

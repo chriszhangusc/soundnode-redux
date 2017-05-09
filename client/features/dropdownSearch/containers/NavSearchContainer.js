@@ -18,9 +18,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleChange(keywords) {
-    if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
-    else dispatch(requestDropdownSearch(keywords));
-    // else dispatch(sagaDropdownSearch(keywords));
+    dispatch(requestDropdownSearch(keywords));
   },
 
   handleBlur() {

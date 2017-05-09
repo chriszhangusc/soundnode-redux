@@ -5,7 +5,6 @@ import NavSearchDropdownItem from 'client/features/dropdownSearch/components/Nav
 
 const mapStateToProps = (state, { artistId }) => {
   const artist = getUserById(state, artistId);
-  console.log(artist);
   return ({
     imageUrl: artist.avatarUrl || defaultImageUrl,
     itemLinkUrl: `/artist/${artistId}`,
