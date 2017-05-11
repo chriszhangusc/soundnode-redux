@@ -1,8 +1,4 @@
 import { CLIENT_ID } from 'client/common/constants/AuthConsts';
-import {
-  t500x500,
-  large,
-} from 'client/common/constants/ImageConsts';
 
 export const formatSecondsAsTime = (secs) => {
   const hr = Math.floor(secs / 3600);
@@ -69,7 +65,7 @@ export function concatParamsToUrl(url, params) {
 }
 
 
-export function formatPlaybacks(count) {
+export function formatPlaybackCount(count) {
   return count.toLocaleString(count);
 }
 

@@ -24,8 +24,8 @@ class PlayerModeControls extends Component {
     return (
       <IconButton
         title="Repeat"
-        btnClassName={`icon-button player-button ${(mode === REPEAT ? 'active' : '')}`}
-        iconClassName="icon ion-loop"
+        btnClassName={` player-button ${(mode === REPEAT ? 'active' : '')}`}
+        iconClassName="ion-loop"
         onClick={onRepeatClick}
       />
     );
@@ -36,8 +36,8 @@ class PlayerModeControls extends Component {
     return (
       <IconButton
         title="Playlist"
-        btnClassName={`icon-button player-button ${(playlistHidden ? '' : 'active')}`}
-        iconClassName="icon ion-ios-list"
+        btnClassName={` player-button ${(playlistHidden ? '' : 'active')}`}
+        iconClassName="ion-ios-list"
         onClick={onTogglePlaylistClick}
       />
     );
@@ -48,8 +48,8 @@ class PlayerModeControls extends Component {
     return (
       <IconButton
         title="Shuffle"
-        btnClassName={`icon-button player-button ${(mode === SHUFFLE ? 'active' : '')}`}
-        iconClassName="icon ion-shuffle"
+        btnClassName={` player-button ${(mode === SHUFFLE ? 'active' : '')}`}
+        iconClassName="ion-shuffle"
         onClick={onShuffleClick}
       />
     );

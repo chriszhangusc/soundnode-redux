@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { isTrackActive, isTrackPlaying } from 'client/features/player/playerSelectors';
 import { changeSongAndPlay, playSong, pauseSong } from 'client/features/player/playerActions';
 import { switchPlaylistIfNeeded } from 'client/features/playlist/playlistActions';
-import { getMiniVersion, getLargeVersion } from 'client/common/utils/ImageUtils';
+import { getMiniVersion, getLargeVersion } from 'client/common/utils/imageUtils';
 import SongCardImage from './SongCardImage';
 
 const mapStateToProps = (state, { track }) => ({

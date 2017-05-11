@@ -5,7 +5,7 @@ import { DEFAULT_USER_AVATAR } from 'client/common/constants/ImageConsts';
 
 import { connect } from 'react-redux';
 import { getUsers } from 'client/features/entities/entitiesSelectors';
-import { getLargeVersion, getMiniVersion } from 'client/common/utils/ImageUtils';
+import { getLargeVersion, getMiniVersion } from 'client/common/utils/imageUtils';
 import styled from 'styled-components';
 import UserAvatar from './UserAvatar';
 import UserName from './UserName';

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { t500x500 } from 'client/common/constants/ImageConstants';
-import { formatPlaybacks, formatLikes, formatImageUrl } from 'client/common/utils/FormatUtils';
+import { formatPlaybackCount, formatLikes, formatImageUrl } from 'client/common/utils/FormatUtils';
 import { isTrackLiked, startLikeSong, startUnlikeSong } from 'client/features/user';
 
 import {
@@ -17,7 +17,7 @@ const mapStateToProps = (state, { track }) => {
   const trackId = track.get('id');
   return {
     artworkUrl: formatImageUrl(track.get('artworkUrl'), t500x500),
-    playbackCount: formatPlaybacks(track.get('playbackCount')),
+    playbackCount: formatPlaybackCount(track.get('playbackCount')),
     likeCount: formatLikes(track.get('favoritingsCount')),
     playing: isTrackPlaying(state, trackId),
     liked: isTrackLiked(state, trackId),

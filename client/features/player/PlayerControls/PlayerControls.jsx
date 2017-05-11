@@ -25,8 +25,8 @@ class PlayerControls extends Component {
     return (
       <IconButton
         title="Play"
-        btnClassName="icon-button player-button"
-        iconClassName={playing ? 'icon ion-ios-pause' : 'icon ion-ios-play'}
+        btnClassName=" player-button"
+        iconClassName={playing ? 'ion-ios-pause' : 'ion-ios-play'}
         onClick={playing ? onPauseClick : onPlayClick}
       />
     );
@@ -37,8 +37,8 @@ class PlayerControls extends Component {
     return (
       <IconButton
         title="Next"
-        btnClassName="icon-button player-button"
-        iconClassName="icon ion-ios-fastforward"
+        btnClassName=" player-button"
+        iconClassName="ion-ios-fastforward"
         onClick={onNextClick}
       />
     );
@@ -49,8 +49,8 @@ class PlayerControls extends Component {
     return (
       <IconButton
         title="Previous"
-        btnClassName="icon-button player-button"
-        iconClassName="icon ion-ios-rewind"
+        btnClassName=" player-button"
+        iconClassName="ion-ios-rewind"
         onClick={onPrevClick}
       />
     );

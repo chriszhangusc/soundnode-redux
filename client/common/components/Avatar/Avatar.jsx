@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { getNormalVersion } from 'client/common/utils/ImageUtils';
+// import { getNormalVersion } from 'client/common/utils/imageUtils';
 import { defaultArtistImageUrl } from 'client/common/constants/ImageConsts';
 
 // Change to fallback image!

@@ -48,7 +48,7 @@ function PlayerVolumeButton({ volume, onClick }) {
   return (
     <Wrapper>
       <IconButton
-        iconClassName={`icon ${`ion-volume-${type}`}`}
+        iconClassName={`${`ion-volume-${type}`}`}
         onClick={onClick}
         color={WHITE}
         hoverColor={THEME_COLOR}

@@ -29,7 +29,7 @@ function PlaylistTitle({ handleClearPlayQueue }) {
       <PlaylistTitleIconContainer>
         <IconButton
           title="Clear play queue"
-          btnClassName="icon-button"
+          btnClassName=""
           iconClassName="fa fa-trash"
           onClick={handleClearPlayQueue}
         />

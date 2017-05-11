@@ -33,7 +33,7 @@ const TrackImage = ({
       </span>
       <span className="likes-count">
         <MagicButton
-          btnClassName="icon-button"
+          btnClassName=""
           iconClassName={`fa fa-heart ${liked && 'active'}`}
           onClick={handleToggleLike}
         />
