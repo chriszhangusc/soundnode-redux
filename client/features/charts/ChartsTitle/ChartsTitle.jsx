@@ -17,3 +17,4 @@ ChartsTitle.propTypes = {
 };
 
 export default ChartsTitle;
+

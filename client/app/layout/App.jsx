@@ -7,7 +7,7 @@ import {
   TRACK_PROFILE_ROUTE,
   AUTH_CALLBACK_ROUTE,
 } from 'client/common/constants/RouteConsts';
-import ChartsPage from 'client/features/charts';
+import Charts from 'client/features/charts/Charts';
 import UserProfile from 'client/features/userProfile/UserProfile';
 import { NotificationContainer } from 'react-notifications';
 import Player from 'client/features/player';
@@ -109,7 +109,7 @@ class App extends Component {
               <div className="row">
                 <div className="col-lg-12">
                   <Switch>
-                    <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={ChartsPage} />
+                    <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
                     <Route
                       exact
                       path={`${USER_PROFILE_ROUTE}/:userId`}

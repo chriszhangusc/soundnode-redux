@@ -6,11 +6,9 @@ import { changeVisiblePlaylistName } from 'client/features/playlist/playlistActi
 import { DEFAULT_GENRE } from 'client/features/charts/chartsConsts';
 import { getGenreList } from 'client/features/charts/chartsSelectors';
 import { CHARTS_ROUTE } from 'client/common/constants/RouteConsts';
-import ChartsSongCardListContainer from './containers/ChartsSongCardListContainer';
-import GenreListContainer from './containers/GenreListContainer';
-import ChartsTitleContainer from './containers/ChartsTitleContainer';
-
-
+import ChartsTracks from '../ChartsTracks';
+import ChartsGenreList from '../ChartsGenreList';
+import ChartsTitle from '../ChartsTitle';
 
 class ChartsPageContainer extends Component {
   // ES7 ESLint will complain not sure why
@@ -51,9 +49,9 @@ class ChartsPageContainer extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <ChartsTitleContainer />
-        <GenreListContainer />
-        <ChartsSongCardListContainer />
+        <ChartsTitle />
+        <ChartsGenreList />
+        <ChartsTracks />
       </div>
     );
   }
