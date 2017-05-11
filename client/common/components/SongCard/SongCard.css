@@ -1,5 +1,5 @@
-@value desktop-sm, desktop-md, desktop-lg, desktop-4k "../../../../app/styles/common/breakpoints.css";
-@value colors: "../../../../app/styles/common/colors.css";
+@value desktop-sm, desktop-md, desktop-lg, desktop-4k "client/app/styles/common/breakpoints.css";
+@value colors: "client/app/styles/common/colors.css";
 
 @value song-card-width: 300px;
 @value song-card-width-md: 210px;
@@ -17,37 +17,6 @@
 @value song-card-image-height-4k: 220px;
 
 @value background-color-primary, theme-color, semi-transparent-dark, semi-transparent-light, font-color-primary, font-color-secondary from colors;
-
-/*@media desktop-md  {
-  .song-card {
-    width: song-card-width-md;
-  }
-
-  .song-card-details {
-    width: song-card-details-width-md;
-  }
-}
-
-@media desktop-lg {
-  .song-card {
-    width: song-card-width-lg;
-  }
-
-  .song-card-details {
-    width: song-card-details-width-lg;
-  }
-}
-
-@media desktop-4k {
-  .song-card {
-    width: song-card-width-4k;
-  }
-
-  .song-card-details {
-    width: song-card-details-width-4k;
-  }
-}*/
-
 
 .card {
     background-color: background-color-primary;

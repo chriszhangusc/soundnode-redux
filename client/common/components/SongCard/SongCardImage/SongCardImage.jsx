@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './SongCard.css';
+import styles from '../SongCard.css';
 
 // Animating all images would dramatically slow down our app
 // <FadeinImage placeholderClassName="song-card-image" largeImgUrl={artworkUrl} smallImgUrl={artworkUrlSmall} />

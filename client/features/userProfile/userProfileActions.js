@@ -54,7 +54,7 @@ export function handleUserFetchFail() {
 
 // Should load user first and then the tracks
 export function loadUserProfilePage(userId) {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       dispatch(requestUser());
       dispatch(requestUserTracks());

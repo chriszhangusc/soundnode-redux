@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getUserByTrackId } from 'client/features/entities/entitiesSelectors';
-import SongCardInfo from '../components/SongCardInfo';
+import SongCardDetails from './SongCardDetails';
 
 const mapStateToProps = (state, { track }) => {
   const user = getUserByTrackId(state, track.id);
@@ -13,4 +13,4 @@ const mapStateToProps = (state, { track }) => {
   };
 };
 
-export default connect(mapStateToProps)(SongCardInfo);
+export default connect(mapStateToProps)(SongCardDetails);

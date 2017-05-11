@@ -2,9 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BACKGROUND_COLOR, BOX_SHADOW_COLOR, THEME_COLOR } from 'client/app/css/colors';
-import SongCardInfoContainer from '../containers/SongCardInfoContainer';
-import SongCardControlsContainer from '../containers/SongCardControlsContainer';
-import SongCardImageContainer from '../containers/SongCardImageContainer';
+
+import { connect } from 'react-redux';
+import { getTrackById } from 'client/features/entities/entitiesSelectors';
+import { isTrackActive } from 'client/features/player/playerSelectors';
+
+import SongCardDetails from './SongCardDetails';
+import SongCardControls from './SongCardControls';
+import SongCardImage from './SongCardImage';
+
+const mapStateToProps = (state, { trackId }) => ({
+  track: getTrackById(state, trackId),
+  active: isTrackActive(state, trackId),
+});
 
 const SongCardWrapper = styled.div`
   background-color: ${BACKGROUND_COLOR};
@@ -23,9 +33,9 @@ function SongCard({ track, active }) {
   if (!track) throw new Error('Track object should not be null');
   return (
     <SongCardWrapper active={active}>
-      <SongCardImageContainer track={track} />
-      <SongCardInfoContainer track={track} />
-      <SongCardControlsContainer track={track} />
+      <SongCardImage track={track} />
+      <SongCardDetails track={track} />
+      <SongCardControls track={track} />
     </SongCardWrapper>
   );
 }
@@ -41,4 +51,5 @@ SongCard.propTypes = {
   // playlistName: PropTypes.string,
 };
 
-export default SongCard;
+export default connect(mapStateToProps)(SongCard);
+

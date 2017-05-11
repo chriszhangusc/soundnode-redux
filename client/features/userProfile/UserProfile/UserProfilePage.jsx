@@ -6,12 +6,8 @@ import UserProfileDetails from 'client/features/userProfile/UserProfileDetails';
 const UserProfilePage = ({ userId, trackCount }) => (
   <div className="container-fluid">
     <UserProfileDetails userId={userId} />
-    <div className="user-tracks-container">
-      <div className="user-tracks-title">
-        <h3>Tracks ({trackCount}) :</h3>
-        <UserProfileTracks />
-      </div>
-    </div>
+    <h3>Tracks ({trackCount}) :</h3>
+    <UserProfileTracks />
   </div>
 );
 

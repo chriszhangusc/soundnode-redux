@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   justify-content: left;
 `;
 
-function SongCardInfo({ trackId, userId, userAvatar, title, username }) {
+function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
   const trackUrl = `${TRACK_PROFILE_ROUTE}/${trackId}`;
   const userUrl = `${USER_PROFILE_ROUTE}/${userId}`;
   return (
@@ -29,7 +29,7 @@ function SongCardInfo({ trackId, userId, userAvatar, title, username }) {
   );
 }
 
-SongCardInfo.defaultProps = {
+SongCardDetails.defaultProps = {
   trackId: 0,
   userId: null,
   userAvatar: '',
@@ -37,7 +37,7 @@ SongCardInfo.defaultProps = {
   username: '',
 };
 
-SongCardInfo.propTypes = {
+SongCardDetails.propTypes = {
   trackId: PropTypes.number.isRequired,
   userId: PropTypes.number.isRequired,
   userAvatar: PropTypes.string.isRequired,
@@ -45,4 +45,4 @@ SongCardInfo.propTypes = {
   username: PropTypes.string.isRequired,
 };
 
-export default SongCardInfo;
+export default SongCardDetails;

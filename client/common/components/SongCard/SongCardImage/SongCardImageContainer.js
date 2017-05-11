@@ -3,7 +3,7 @@ import { isTrackActive, isTrackPlaying } from 'client/features/player/playerSele
 import { changeSongAndPlay, playSong, pauseSong } from 'client/features/player/playerActions';
 import { switchPlaylistIfNeeded } from 'client/features/playlist/playlistActions';
 import { getMiniVersion, getLargeVersion } from 'client/common/utils/ImageUtils';
-import SongCardImage from '../components/SongCardImage';
+import SongCardImage from './SongCardImage';
 
 const mapStateToProps = (state, { track }) => ({
   artworkUrl: getLargeVersion(track.artworkUrl),

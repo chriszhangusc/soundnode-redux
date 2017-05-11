@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadUserProfilePage, clearUserState } from 'client/features/userProfile/userProfileActions';
 import { getProfiledUserId, getProfiledUser, isUserFetching } from 'client/features/userProfile/userProfileSelectors';
-// import { getUsers } from 'client/features/entities/entitiesSelectors';
 import Spinner from 'client/common/components/Spinner';
 
 import UserProfilePage from './UserProfilePage';

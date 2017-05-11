@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { startLikeSong, startUnlikeSong, isTrackLiked } from 'client/features/user';
 import { copyToClipboard } from 'client/features/copy';
-import SongCardControls from '../components/SongCardControls';
+import SongCardControls from './SongCardControls';
 
 const mapStateToProps = (state, { track }) => ({
   liked: isTrackLiked(state, track.id),

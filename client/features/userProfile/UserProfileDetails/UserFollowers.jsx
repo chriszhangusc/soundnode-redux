@@ -12,9 +12,6 @@ function UserFollowers({ followerCount }) {
   return <UserFollowersContainer>Followers: {followerCount}</UserFollowersContainer>;
 }
 
-// PropTypes.defaultProps = {
-// };
-
 UserFollowers.propTypes = {
   followerCount: PropTypes.string.isRequired,
 };

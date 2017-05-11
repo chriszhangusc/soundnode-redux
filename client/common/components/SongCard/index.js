@@ -1,1 +1,1 @@
-export { default } from './containers/SongCardContainer';
+export { default } from './SongCard';

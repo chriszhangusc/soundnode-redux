@@ -6,7 +6,7 @@ import { DEFAULT_USER_AVATAR } from 'client/common/constants/ImageConsts';
 import { connect } from 'react-redux';
 import { getUsers } from 'client/features/entities/entitiesSelectors';
 import { getLargeVersion, getMiniVersion } from 'client/common/utils/ImageUtils';
-
+import styled from 'styled-components';
 import UserAvatar from './UserAvatar';
 import UserName from './UserName';
 import UserFollowers from './UserFollowers';
@@ -27,6 +27,18 @@ export const mapStateToProps = (state, { userId }) => {
   };
 };
 
+const UserDetailsRowWrapper = styled.div`
+  padding: 20px 0;
+  display: flex;
+`;
+
+const UserDetailsColumnWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 40px;
+`;
+
 const UserProfileDetails = ({
   avatarUrl,
   avatarUrlSmall,
@@ -35,16 +47,16 @@ const UserProfileDetails = ({
   description,
   permalinkUrl,
 }) => (
-  <div className="user-info-container">
+  <UserDetailsRowWrapper>
     <a href={permalinkUrl} target="_black" title="Go to SoundCloud">
       <UserAvatar src={avatarUrl} placeholderSrc={avatarUrlSmall} />
     </a>
-    <div className="user-details">
+    <UserDetailsColumnWrapper>
       <UserName username={username} />
       <UserFollowers followerCount={followerCount} />
       <UserDescription text={description} />
-    </div>
-  </div>
+    </UserDetailsColumnWrapper>
+  </UserDetailsRowWrapper>
 );
 
 UserProfileDetails.propTypes = {
