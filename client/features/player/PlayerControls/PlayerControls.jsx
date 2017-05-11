@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import FontAwesomeButton from 'client/common/components/Buttons/FontAwesomeButton';
 import IconButton from 'client/common/components/Buttons/IconButton';
+import styled from 'styled-components';
+
+const PlayerControlsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  & + .player-section {
+    margin-left: 40px;
+  }
+`;
 
 class PlayerControls extends Component {
   constructor(props) {
@@ -49,11 +58,11 @@ class PlayerControls extends Component {
 
   render() {
     return (
-      <div className="player-section">
+      <PlayerControlsWrapper>
         {this.renderBackwardButton()}
         {this.renderPlayPauseButton()}
         {this.renderForwardButton()}
-      </div>
+      </PlayerControlsWrapper>
     );
   }
 }

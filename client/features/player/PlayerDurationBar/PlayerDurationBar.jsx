@@ -1,7 +1,60 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { WHITE, THEME_COLOR } from 'client/app/css/colors';
 import { formatSecondsAsTime } from 'client/common/utils/FormatUtils';
 import { computeSeekBarPercent } from 'client/common/utils/PlayerUtils';
+import styled from 'styled-components';
+
+const PlayerDurationBarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+  flex: 1;
+`;
+
+const PlayTimeWrapper = styled.div`
+  margin-left: 30px;
+  color: ${WHITE};
+  font-size: 11px;
+`;
+
+const PlayTimeSeparator = styled.span`
+  margin: 0 10px;
+`;
+
+const PlayerSeekBarWrapper = styled.div`
+  padding: 6px 0;
+  flex: 1;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const PlayerSeekBar = styled.div`
+  position: relative;
+  height: 2px;
+  background-color: ${WHITE};
+`;
+
+const PlayerSeekDurationBar = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: ${THEME_COLOR};
+`;
+
+const PlayerSeekHandle = styled.div`
+  position: absolute;
+  top: -5px;
+  right: -6px;
+  width: 12px;
+  height: 12px;
+  background-color: ${WHITE};
+  border-radius: 50%;
+  border: 1px solid ${WHITE};
+`;
 
 class PlayerDurationBar extends Component {
   constructor(props) {
@@ -39,26 +92,17 @@ class PlayerDurationBar extends Component {
   }
 
   renderDurationBar() {
-    const {
-      duration,
-      currentTime,
-      onDurationBarMouseDown,
-      onDurationHandleMouseDown,
-    } = this.props;
+    const { duration, currentTime, onDurationBarMouseDown, onDurationHandleMouseDown } = this.props;
     const percent = computeSeekBarPercent(currentTime, duration);
 
     return (
-      <div
-        className="player-seek-bar-wrap"
-        onMouseDown={onDurationBarMouseDown}
-        onMouseUp={this.handleEndSeek}
-      >
-        <div className="player-seek-bar" ref={(seekBar) => { this.seekBarElement = seekBar; }}>
-          <div className="player-seek-duration-bar" style={{ width: `${percent}%` }} >
-            <div className="player-seek-handle" onMouseDown={onDurationHandleMouseDown} />
-          </div>
-        </div>
-      </div>
+      <PlayerSeekBarWrapper onMouseDown={onDurationBarMouseDown} onMouseUp={this.handleEndSeek}>
+        <PlayerSeekBar innerRef={(seekBar) => { this.seekBarElement = seekBar; }} >
+          <PlayerSeekDurationBar style={{ width: `${percent}%` }}>
+            <PlayerSeekHandle onMouseDown={onDurationHandleMouseDown} />
+          </PlayerSeekDurationBar>
+        </PlayerSeekBar>
+      </PlayerSeekBarWrapper>
     );
   }
 
@@ -69,20 +113,20 @@ class PlayerDurationBar extends Component {
     const currentTimeStr = formatSecondsAsTime(currentTime);
 
     return (
-      <div className="player-time">
+      <PlayTimeWrapper>
         <span>{currentTimeStr}</span>
-        <span className="player-time-divider">/</span>
+        <PlayTimeSeparator>/</PlayTimeSeparator>
         <span>{durationStr}</span>
-      </div>
+      </PlayTimeWrapper>
     );
   }
 
   render() {
     return (
-      <div className="player-section player-seek">
-        { this.renderDurationBar() }
-        { this.renderPlayTime() }
-      </div>
+      <PlayerDurationBarWrapper>
+        {this.renderDurationBar()}
+        {this.renderPlayTime()}
+      </PlayerDurationBarWrapper>
     );
   }
 }

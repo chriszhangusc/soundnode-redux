@@ -10,7 +10,7 @@ import {
 import Charts from 'client/features/charts/Charts';
 import UserProfile from 'client/features/userProfile/UserProfile';
 import { NotificationContainer } from 'react-notifications';
-import Player from 'client/features/player';
+import Player from 'client/features/player/Player';
 import Playlist from 'client/features/playlist';
 import Nav from 'client/common/components/Nav';
 import Sidebar from 'client/common/components/Sidebar';

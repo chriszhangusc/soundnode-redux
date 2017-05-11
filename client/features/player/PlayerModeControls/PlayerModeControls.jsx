@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { REPEAT, SHUFFLE } from 'client/features/player/consts';
+import { REPEAT, SHUFFLE } from 'client/features/player/playerConsts';
 import IconButton from 'client/common/components/Buttons/IconButton';
-// Stateless functional component
+import styled from 'styled-components';
+
+const PlayerModeControlsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+`;
+
 class PlayerModeControls extends Component {
 
   constructor(props) {
@@ -50,11 +57,11 @@ class PlayerModeControls extends Component {
 
   render() {
     return (
-      <div className="player-section">
+      <PlayerModeControlsWrapper>
         {this.renderRepeat()}
         {this.renderShuffle()}
         {this.renderTogglePlaylist()}
-      </div>
+      </PlayerModeControlsWrapper>
     );
   }
 

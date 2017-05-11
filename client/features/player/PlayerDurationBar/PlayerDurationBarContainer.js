@@ -8,7 +8,7 @@ import {
 } from 'client/features/player/playerActions';
 import { getCurrentTime, isPlayerSeeking } from 'client/features/player/playerSelectors';
 
-import PlayerDurationBar from '../components/PlayerDurationBar';
+import PlayerDurationBar from './PlayerDurationBar';
 
 const mapStateToProps = (state, { playerTrack }) => ({
   seeking: isPlayerSeeking(state),

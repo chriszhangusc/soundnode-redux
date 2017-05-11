@@ -1,3 +1,4 @@
+export const WHITE = '#ddd';
 export const BLACK = '#0f1010';
 export const LIGHT_BLACK = '#1d1f21';
 export const LIGHTER_BLACK = '#242728';

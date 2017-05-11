@@ -7,7 +7,7 @@ import {
   pauseSong,
 } from 'client/features/player/playerActions';
 
-import PlayerControls from '../components/PlayerControls';
+import PlayerControls from './PlayerControls';
 
 const mapStateToProps = state => ({
   playing: isPlayerPlaying(state),

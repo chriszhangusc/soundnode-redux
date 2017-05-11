@@ -1,9 +1,6 @@
 import { connect } from 'react-redux';
 import { formatStreamUrl } from 'client/common/utils/FormatUtils';
-import {
-  updateTimeOnPlay,
-  playNextSong,
-} from 'client/features/player/playerActions';
+import { updateTimeOnPlay, playNextSong } from 'client/features/player/playerActions';
 
 import {
   getCurrentTime,
@@ -13,13 +10,13 @@ import {
   isPlayerSeeking,
 } from 'client/features/player/playerSelectors';
 
-import PlayerAudio from '../components/PlayerAudio';
+import PlayerAudio from './PlayerAudio';
 
 const mapStateToProps = (state, { playerTrack }) => ({
   playing: isPlayerPlaying(state),
   volume: getCurrentVolume(state),
   mode: getPlayerMode(state),
-  streamUrl: formatStreamUrl(playerTrack.streamUrl), // Append client_id!!
+  streamUrl: formatStreamUrl(playerTrack.streamUrl),
   currentTime: getCurrentTime(state),
   seeking: isPlayerSeeking(state),
 });

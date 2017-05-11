@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { REPEAT } from 'client/features/player/consts';
+import { REPEAT } from 'client/features/player/playerConsts';
 
 class PlayerAudio extends Component {
   constructor(props) {
@@ -82,22 +82,22 @@ class PlayerAudio extends Component {
 }
 
 
-PlayerAudio.defaultProps = {
-  seeking: false,
-  currentTime: 0.0,
-  playing: false,
-  volume: 0.5,
-  mode: 'LOOP',
-  streamUrl: '',
-};
+// PlayerAudio.defaultProps = {
+//   seeking: false,
+//   currentTime: 0.0,
+//   playing: false,
+//   volume: 0.5,
+//   mode: 'LOOP',
+//   streamUrl: '',
+// };
 
 PlayerAudio.propTypes = {
-  seeking: PropTypes.bool,
-  currentTime: PropTypes.number,
-  playing: PropTypes.bool,
-  volume: PropTypes.number,
-  mode: PropTypes.string,
-  streamUrl: PropTypes.string,
+  seeking: PropTypes.bool.isRequired,
+  currentTime: PropTypes.number.isRequired,
+  playing: PropTypes.bool.isRequired,
+  volume: PropTypes.number.isRequired,
+  mode: PropTypes.string.isRequired,
+  streamUrl: PropTypes.string.isRequired,
   onTimeUpdate: PropTypes.func.isRequired,
   onEnded: PropTypes.func.isRequired,
 };

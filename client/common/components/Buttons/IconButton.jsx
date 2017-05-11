@@ -1,23 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './IconButton.css';
+import styled from 'styled-components';
+import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 
-function IconButton({ title, btnClassName, iconClassName, onClick }) {
+const WrapperButton = styled.button`
+  color: ${props => props.color || FONT_COLOR_PRIMARY};
+  padding: 4px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 0 auto;
+  text-align: center;
+  &:hover {
+    color: ${props => props.hoverColor || FONT_COLOR_SECONDARY};
+  }
+`;
+
+function IconButton({ title, btnClassName, iconClassName, onClick, color, large, hoverColor }) {
   return (
-    <button
-      title={title}
-      className={`${styles.iconButton} ${btnClassName}`}
-      onClick={onClick}
-    >
+    <WrapperButton title={title} className={`${btnClassName}`} onClick={onClick} color={color} hoverColor={hoverColor}>
       {iconClassName && <i className={iconClassName} />}
-    </button>
+    </WrapperButton>
   );
 }
 
+IconButton.defaultProps = {
+  btnClassName: '',
+  title: '',
+};
+
 IconButton.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   iconClassName: PropTypes.string.isRequired,
-  btnClassName: PropTypes.string.isRequired,
+  btnClassName: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };
 

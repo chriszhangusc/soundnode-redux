@@ -1,25 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import defaultArtworkImage from 'assets/images/default-artwork.png';
 
-// DUMB DUMB DUMB
-function PlayerTrackInfo({
-  artworkUrl,
-  trackTitle,
-  artistName,
-  trackUrl,
-  artistUrl,
-}) {
+const PlayerTrackInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+`;
+
+function PlayerTrackInfo({ artworkUrl, trackTitle, artistName, trackUrl, artistUrl }) {
   return (
-    <div className="player-section player-info">
-      <Link to={trackUrl} >
-        <img
-          alt="Not Found"
-          className="player-image"
-          src={artworkUrl || defaultArtworkImage}
-        />
+    <PlayerTrackInfoWrapper>
+      <Link to={trackUrl}>
+        <img alt="Not Found" className="player-image" src={artworkUrl || defaultArtworkImage} />
       </Link>
       <div className="player-song-card-details">
         <Link to={trackUrl} className="song-card-title">
@@ -29,7 +24,7 @@ function PlayerTrackInfo({
           {artistName}
         </Link>
       </div>
-    </div>
+    </PlayerTrackInfoWrapper>
   );
 }
 
@@ -48,6 +43,5 @@ PlayerTrackInfo.propTypes = {
   artistName: PropTypes.string,
   trackTitle: PropTypes.string,
 };
-
 
 export default PlayerTrackInfo;

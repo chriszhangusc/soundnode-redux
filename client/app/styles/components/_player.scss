@@ -12,10 +12,6 @@ $volume-icon-size: 1.5rem;
     -webkit-user-select: none;
     -ms-user-select: none;
     z-index: $z-max; // Make sure it is always on top
-
-    .song-card-details {
-        overflow: hidden;
-    }
 }
 
 .player-section {

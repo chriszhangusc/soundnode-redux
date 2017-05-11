@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
-import IconButton from 'client/common/components/Buttons/IconButton';
+// import IconButton from 'client/common/components/Buttons/IconButton';
 
 import styled from 'styled-components';
 import { BACKGROUND_COLOR_SECONDARY } from 'client/app/css/colors';
@@ -56,9 +56,13 @@ function Playlist(props) {
   );
 }
 
+Playlist.defaultProps = {
+  playlistTrackIds: [],
+};
+
 Playlist.propTypes = {
   playlistHidden: PropTypes.bool.isRequired,
-  playlistTrackIds: PropTypes.array.isRequired,
+  playlistTrackIds: PropTypes.arrayOf(PropTypes.number),
   handleClearPlayQueue: PropTypes.func.isRequired,
 };
 

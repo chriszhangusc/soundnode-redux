@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getUserByTrackId } from 'client/features/entities/entitiesSelectors';
 import { formatTitle } from 'client/common/utils/FormatUtils';
-import PlayerTrackInfo from '../components/PlayerTrackInfo';
+import PlayerTrackInfo from './PlayerTrackInfo';
 
 const mapStateToProps = (state, { playerTrack }) => {
   const trackId = playerTrack.id;

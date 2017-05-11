@@ -1,7 +1,4 @@
 import { CLEAR_PLAY_QUEUE } from 'client/features/playlist/playlistActions';
-
-import { DEFAULT_MODE, INITIAL_VOLUME } from './consts';
-
 import {
   PLAY_SONG,
   PAUSE_SONG,
@@ -15,6 +12,8 @@ import {
   CHANGE_PLAY_MODE,
   MUTE,
   CLEAR_TIME,
+  DEFAULT_MODE,
+  INITIAL_VOLUME,
 } from './playerConsts';
 
 /* Player Reducer */
@@ -31,7 +30,6 @@ const initialState = {
 
 export default function playerReducer(state = initialState, action) {
   switch (action.type) {
-
     case CHANGE_SONG:
       return {
         ...state,
@@ -103,7 +101,6 @@ export default function playerReducer(state = initialState, action) {
         ...state,
         currentTime: 0,
       };
-
     // What?
     case CLEAR_PLAY_QUEUE:
       return initialState;
@@ -112,4 +109,3 @@ export default function playerReducer(state = initialState, action) {
       return state;
   }
 }
-

@@ -1,6 +1,6 @@
 import { getTrackById } from 'client/features/entities/entitiesSelectors';
 import { createSelector } from 'reselect';
-import { SHUFFLE } from './consts';
+import { SHUFFLE } from './playerConsts';
 
 /* Basic Selectors */
 export const getPlayerState = state => state.player;
@@ -25,14 +25,9 @@ export function isTrackActive(state, trackId) {
 export const isTrackPlaying = (state, id) => isTrackActive(state, id) && isPlayerPlaying(state);
 
 // export const isInShuffleMode = state => getPlayerState(state).mode === SHUFFLE;
-export const isInShuffleMode = createSelector(
-  getPlayerMode,
-  mode => (mode === SHUFFLE),
-);
+export const isInShuffleMode = createSelector(getPlayerMode, mode => mode === SHUFFLE);
 
 export function getCurrentPlayerTrack(state) {
   const trackId = getPlayerTrackId(state);
   return getTrackById(state, trackId);
 }
-
-

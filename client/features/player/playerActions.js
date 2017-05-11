@@ -1,7 +1,6 @@
 import { clearShufflePlaylist, shufflePlaylist } from 'client/features/playlist/playlistActions';
 import { getPlaylistByMode } from 'client/features/playlist/playlistSelectors';
 import { getLastVolume, setLastVolume } from 'client/common/utils/LocalStorageUtils';
-import { DEFAULT_MODE, REPEAT, NEXT, PREV, SHUFFLE } from './consts';
 import {
   isPlayerSeeking,
   getCurrentTime,
@@ -23,6 +22,11 @@ import {
   CHANGE_VOLUME,
   CHANGE_PLAY_MODE,
   CHANGE_SONG,
+  DEFAULT_MODE,
+  REPEAT,
+  NEXT,
+  PREV,
+  SHUFFLE,
 } from './playerConsts';
 
 /* Action Creators */
@@ -118,7 +122,6 @@ export function toggleMute() {
   };
 }
 
-
 // Change to new song or just play paused current song.
 export function changeSongAndPlay(newTrackId) {
   return (dispatch, getState) => {
@@ -146,7 +149,7 @@ export function playSongByAction(actionType) {
     } else {
       const idx = activePlaylist.indexOf(curTrackId);
       let nextIdx = actionType === NEXT ? idx + 1 : idx - 1;
-      nextIdx = nextIdx >= activePlaylist.length ? nextIdx = activePlaylist.length - 1 : nextIdx;
+      nextIdx = nextIdx >= activePlaylist.length ? (nextIdx = activePlaylist.length - 1) : nextIdx;
       nextIdx = nextIdx < 0 ? 0 : nextIdx;
       nextTrackId = activePlaylist[nextIdx];
     }
@@ -172,10 +175,12 @@ export function togglePlayMode(newMode) {
   return (dispatch, getState) => {
     const state = getState();
     const currMode = getPlayerMode(state);
-    if (currMode === newMode) { /* Toggle off current mode, set to default mode */
+    if (currMode === newMode) {
+      /* Toggle off current mode, set to default mode */
       dispatch(changePlayMode(DEFAULT_MODE));
       if (newMode === SHUFFLE) dispatch(clearShufflePlaylist());
-    } else { /* Toggle on new mode */
+    } else {
+      /* Toggle on new mode */
       dispatch(changePlayMode(newMode));
       if (newMode === SHUFFLE) {
         dispatch(shufflePlaylist());
@@ -183,4 +188,3 @@ export function togglePlayMode(newMode) {
     }
   };
 }
-

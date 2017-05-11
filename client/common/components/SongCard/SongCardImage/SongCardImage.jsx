@@ -21,10 +21,8 @@ function SongCardImage({ active, playing, artworkUrl, artworkUrlSmall, handleIma
 }
 
 SongCardImage.defaultProps = {
-  // Default url?
   artworkUrl: '',
   artworkUrlSmall: '',
-  // handleImageClick: defaultEventHandlerFactory('handleImageClick'),
 };
 
 SongCardImage.propTypes = {
