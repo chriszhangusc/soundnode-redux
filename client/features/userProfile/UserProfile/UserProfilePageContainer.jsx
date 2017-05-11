@@ -6,7 +6,7 @@ import { getProfiledUserId, getProfiledUser, isUserFetching } from 'client/featu
 // import { getUsers } from 'client/features/entities/entitiesSelectors';
 import Spinner from 'client/common/components/Spinner';
 
-import UserProfilePage from '../components/UserProfilePage';
+import UserProfilePage from './UserProfilePage';
 
 class UserProfilePageContainer extends Component {
   componentWillMount() {
@@ -48,7 +48,7 @@ UserProfilePageContainer.propTypes = {
 };
 
 UserProfilePageContainer.defaultProps = {
-  userId: undefined,
+  userId: null,
   fetching: false,
 };
 

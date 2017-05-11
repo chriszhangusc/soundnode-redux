@@ -8,7 +8,7 @@ import {
   AUTH_CALLBACK_ROUTE,
 } from 'client/common/constants/RouteConsts';
 import ChartsPage from 'client/features/charts';
-import UserProfilePage from 'client/features/userProfile';
+import UserProfile from 'client/features/userProfile/UserProfile';
 import { NotificationContainer } from 'react-notifications';
 import Player from 'client/features/player';
 import Playlist from 'client/features/playlist';
@@ -113,7 +113,7 @@ class App extends Component {
                     <Route
                       exact
                       path={`${USER_PROFILE_ROUTE}/:userId`}
-                      component={UserProfilePage}
+                      component={UserProfile}
                     />
                     <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} />
                     <Route path={AUTH_CALLBACK_ROUTE} component={Callback} />
