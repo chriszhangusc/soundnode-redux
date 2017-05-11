@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { defaultEventHandlerFactory } from 'client/common/utils/FactoryUtils';
 import styled from 'styled-components';
 import NavSearchDropdownTrackContainer from '../containers/NavSearchDropdownTrackContainer';
 import NavSearchDropdownArtistContainer from '../containers/NavSearchDropdownArtistContainer';

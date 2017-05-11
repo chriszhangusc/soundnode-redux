@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { defaultEventHandlerFactory } from 'client/common/utils/FactoryUtils';
+
 import IconButton from 'client/common/components/Buttons/IconButton';
 
 class PlayerVolumeControls extends Component {
@@ -85,25 +85,14 @@ class PlayerVolumeControls extends Component {
 }
 
 
-
-PlayerVolumeControls.defaultProps = {
-  volume: 0.5,
-  volumeSeeking: false,
-  onVolumeBarMouseDown: defaultEventHandlerFactory('onVolumeBarMouseDown'),
-  onVolumeHandleMouseDown: defaultEventHandlerFactory('onVolumeHandleMouseDown'),
-  onVolumeMouseUp: defaultEventHandlerFactory('onVolumeMouseUp'),
-  onToggleMuteClick: defaultEventHandlerFactory('onToggleMuteClick'),
-  onVolumeHandleMouseMove: defaultEventHandlerFactory('onVolumeHandleMouseMove'),
-};
-
 PlayerVolumeControls.propTypes = {
-  volume: PropTypes.number,
-  volumeSeeking: PropTypes.bool,
-  onVolumeBarMouseDown: PropTypes.func,
-  onVolumeHandleMouseDown: PropTypes.func,
-  onVolumeMouseUp: PropTypes.func,
-  onToggleMuteClick: PropTypes.func,
-  onVolumeHandleMouseMove: PropTypes.func,
+  volume: PropTypes.number.isRequired,
+  volumeSeeking: PropTypes.bool.isRequired,
+  onVolumeBarMouseDown: PropTypes.func.isRequired,
+  onVolumeHandleMouseDown: PropTypes.func.isRequired,
+  onVolumeMouseUp: PropTypes.func.isRequired,
+  onToggleMuteClick: PropTypes.func.isRequired,
+  onVolumeHandleMouseMove: PropTypes.func.isRequired,
 };
 
 export default PlayerVolumeControls;

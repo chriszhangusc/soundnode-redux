@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { REPEAT } from 'client/features/player/consts';
-import { defaultEventHandlerFactory } from 'client/common/utils/FactoryUtils';
 
 class PlayerAudio extends Component {
   constructor(props) {
@@ -90,8 +89,6 @@ PlayerAudio.defaultProps = {
   volume: 0.5,
   mode: 'LOOP',
   streamUrl: '',
-  onTimeUpdate: defaultEventHandlerFactory('onTimeUpdate'),
-  onEnded: defaultEventHandlerFactory('onEnded'),
 };
 
 PlayerAudio.propTypes = {
@@ -101,8 +98,8 @@ PlayerAudio.propTypes = {
   volume: PropTypes.number,
   mode: PropTypes.string,
   streamUrl: PropTypes.string,
-  onTimeUpdate: PropTypes.func,
-  onEnded: PropTypes.func,
+  onTimeUpdate: PropTypes.func.isRequired,
+  onEnded: PropTypes.func.isRequired,
 };
 
 export default PlayerAudio;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { defaultEventHandlerFactory } from 'client/common/utils/FactoryUtils';
+
 import PropTypes from 'prop-types';
 
 function PlaylistItem({
@@ -50,26 +50,26 @@ function PlaylistItem({
   );
 }
 
-PlaylistItem.defaultProps = {
-  handleChangeSong: defaultEventHandlerFactory('handleChangeSong'),
-  handleLikeSong: defaultEventHandlerFactory('handleLikeSong'),
-  handleUnlikeSong: defaultEventHandlerFactory('handleUnlikeSong'),
-  title: '',
-  artistName: '',
-  liked: false,
-  active: false,
-  index: 0,
-};
+// PlaylistItem.defaultProps = {
+//   handleChangeSong: defaultEventHandlerFactory('handleChangeSong'),
+//   handleLikeSong: defaultEventHandlerFactory('handleLikeSong'),
+//   handleUnlikeSong: defaultEventHandlerFactory('handleUnlikeSong'),
+//   title: '',
+//   artistName: '',
+//   liked: false,
+//   active: false,
+//   index: 0,
+// };
 
 PlaylistItem.propTypes = {
-  handleChangeSong: PropTypes.func,
-  handleLikeSong: PropTypes.func,
-  handleUnlikeSong: PropTypes.func,
-  title: PropTypes.string,
-  artistName: PropTypes.string,
-  liked: PropTypes.bool,
-  active: PropTypes.bool,
-  index: PropTypes.number,
+  handleChangeSong: PropTypes.func.isRequired,
+  handleLikeSong: PropTypes.func.isRequired,
+  handleUnlikeSong: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  artistName: PropTypes.string.isRequired,
+  liked: PropTypes.bool.isRequired,
+  active: PropTypes.bool.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default PlaylistItem;

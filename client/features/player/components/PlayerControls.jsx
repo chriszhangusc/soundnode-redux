@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { defaultEventHandlerFactory } from 'client/common/utils/FactoryUtils';
 // import FontAwesomeButton from 'client/common/components/Buttons/FontAwesomeButton';
 import IconButton from 'client/common/components/Buttons/IconButton';
 
@@ -59,20 +58,12 @@ class PlayerControls extends Component {
   }
 }
 
-PlayerControls.defaultProps = {
-  playing: false,
-  onNextClick: defaultEventHandlerFactory('onNextClick'),
-  onPrevClick: defaultEventHandlerFactory('onPrevClick'),
-  onPlayClick: defaultEventHandlerFactory('onPlayClick'),
-  onPauseClick: defaultEventHandlerFactory('onPauseClick'),
-};
-
 PlayerControls.propTypes = {
-  playing: PropTypes.bool,
-  onNextClick: PropTypes.func,
-  onPrevClick: PropTypes.func,
-  onPlayClick: PropTypes.func,
-  onPauseClick: PropTypes.func,
+  playing: PropTypes.bool.isRequired,
+  onNextClick: PropTypes.func.isRequired,
+  onPrevClick: PropTypes.func.isRequired,
+  onPlayClick: PropTypes.func.isRequired,
+  onPauseClick: PropTypes.func.isRequired,
 };
 
 export default PlayerControls;

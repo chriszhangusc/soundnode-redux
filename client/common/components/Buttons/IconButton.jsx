@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { defaultEventHandlerFactory } from 'client/common/utils/FactoryUtils';
 import styles from './IconButton.css';
 
 function IconButton({ title, btnClassName, iconClassName, onClick }) {
@@ -15,18 +14,11 @@ function IconButton({ title, btnClassName, iconClassName, onClick }) {
   );
 }
 
-IconButton.defaultProps = {
-  title: '',
-  iconClassName: '',
-  btnClassName: '',
-  onClick: defaultEventHandlerFactory('onClick'),
-};
-
 IconButton.propTypes = {
-  title: PropTypes.string,
-  iconClassName: PropTypes.string,
-  btnClassName: PropTypes.string,
-  onClick: PropTypes.func,
+  title: PropTypes.string.isRequired,
+  iconClassName: PropTypes.string.isRequired,
+  btnClassName: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default IconButton;

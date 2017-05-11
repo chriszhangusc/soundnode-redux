@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import IconButton from 'client/common/components/Buttons/IconButton';
-import { defaultEventHandlerFactory } from 'client/common/utils/FactoryUtils';
+
 import styled from 'styled-components';
 import { BACKGROUND_COLOR_SECONDARY } from 'client/app/css/colors';
 import { PLAYLIST_WIDTH_DESKTOP, PLAYLIST_WIDTH_DESKTOP_LG, PLAYLIST_WIDTH_DESKTOP_4K } from 'client/app/css/variables';
@@ -56,16 +56,10 @@ function Playlist(props) {
   );
 }
 
-Playlist.defaultProps = {
-  playlistHidden: true,
-  playlistTrackIds: [],
-  handleClearPlayQueue: defaultEventHandlerFactory('handleClearPlayQueue'),
-};
-
 Playlist.propTypes = {
-  playlistHidden: PropTypes.bool,
-  playlistTrackIds: PropTypes.array,
-  handleClearPlayQueue: PropTypes.func,
+  playlistHidden: PropTypes.bool.isRequired,
+  playlistTrackIds: PropTypes.array.isRequired,
+  handleClearPlayQueue: PropTypes.func.isRequired,
 };
 
 export default Playlist;

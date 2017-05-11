@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { formatSecondsAsTime } from 'client/common/utils/FormatUtils';
 import { computeSeekBarPercent } from 'client/common/utils/PlayerUtils';
-import { defaultEventHandlerFactory } from 'client/common/utils/FactoryUtils';
 
 class PlayerDurationBar extends Component {
   constructor(props) {
@@ -88,24 +87,14 @@ class PlayerDurationBar extends Component {
   }
 }
 
-PlayerDurationBar.defaultProps = {
-  seeking: false,
-  duration: 0.0,
-  currentTime: 0.0,
-  onDurationHandleMouseDown: defaultEventHandlerFactory('onDurationHandleMouseDown'),
-  onDurationHandleMouseMove: defaultEventHandlerFactory('onDurationHandleMouseMove'),
-  onDurationBarMouseDown: defaultEventHandlerFactory('onDurationBarMouseDown'),
-  onMouseUp: defaultEventHandlerFactory('onMouseUp'),
-};
-
 PlayerDurationBar.propTypes = {
-  seeking: PropTypes.bool,
-  duration: PropTypes.number,
-  currentTime: PropTypes.number,
-  onDurationHandleMouseDown: PropTypes.func,
-  onDurationHandleMouseMove: PropTypes.func,
-  onDurationBarMouseDown: PropTypes.func,
-  onMouseUp: PropTypes.func,
+  seeking: PropTypes.bool.isRequired,
+  duration: PropTypes.number.isRequired,
+  currentTime: PropTypes.number.isRequired,
+  onDurationHandleMouseDown: PropTypes.func.isRequired,
+  onDurationHandleMouseMove: PropTypes.func.isRequired,
+  onDurationBarMouseDown: PropTypes.func.isRequired,
+  onMouseUp: PropTypes.func.isRequired,
 };
 
 export default PlayerDurationBar;

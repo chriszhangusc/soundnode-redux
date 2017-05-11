@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { REPEAT, SHUFFLE } from 'client/features/player/consts';
-import { defaultEventHandlerFactory } from 'client/common/utils/FactoryUtils';
 import IconButton from 'client/common/components/Buttons/IconButton';
 // Stateless functional component
 class PlayerModeControls extends Component {
@@ -61,20 +60,12 @@ class PlayerModeControls extends Component {
 
 }
 
-PlayerModeControls.defaultProps = {
-  mode: 'LOOP',
-  playlistHidden: true,
-  onRepeatClick: defaultEventHandlerFactory('onRepeatClick'),
-  onShuffleClick: defaultEventHandlerFactory('onShuffleClick'),
-  onTogglePlaylistClick: defaultEventHandlerFactory('onTogglePlaylistClick'),
-};
-
 PlayerModeControls.propTypes = {
-  mode: PropTypes.string,
-  playlistHidden: PropTypes.bool,
-  onRepeatClick: PropTypes.func,
-  onShuffleClick: PropTypes.func,
-  onTogglePlaylistClick: PropTypes.func,
+  mode: PropTypes.string.isRequired,
+  playlistHidden: PropTypes.bool.isRequired,
+  onRepeatClick: PropTypes.func.isRequired,
+  onShuffleClick: PropTypes.func.isRequired,
+  onTogglePlaylistClick: PropTypes.func.isRequired,
 };
 
 export default PlayerModeControls;
