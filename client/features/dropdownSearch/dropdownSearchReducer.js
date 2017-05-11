@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   dropdownShown: false,
   dropdownFetching: false,
   // Search dropdown list results
-  dropdownArtistIds: [],
+  dropdownuserIds: [],
   dropdownTrackIds: [],
   // Search results page
   fetching: false,
@@ -35,7 +35,7 @@ export default function dropdownSearchReducer(state = INITIAL_STATE, action) {
     case TYPES.DROPDOWN_ARTISTS_RECEIVED:
       return {
         ...state,
-        dropdownArtistIds: [...action.payload.normalized.result],
+        dropdownuserIds: [...action.payload.normalized.result],
       };
 
     case TYPES.DROPDOWN_TRACKS_RECEIVED:
@@ -59,7 +59,7 @@ export default function dropdownSearchReducer(state = INITIAL_STATE, action) {
     case TYPES.CLEAR_DROPDOWN_SEARCH_RESULTS:
       return {
         ...state,
-        dropdownArtistIds: [],
+        dropdownuserIds: [],
         dropdownTrackIds: [],
       };
 

@@ -17,11 +17,12 @@ function UserDescription({ text }) {
   return <UserDescriptionWithStyle>{text}</UserDescriptionWithStyle>;
 }
 
-// PropTypes.defaultProps = {
-// };
+UserDescription.defaultProps = {
+  text: '',
+};
 
 UserDescription.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 };
 
 export default UserDescription;

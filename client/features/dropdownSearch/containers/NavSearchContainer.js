@@ -4,7 +4,7 @@ import { clearAndHideSearchResults, requestDropdownSearch } from 'client/feature
 
 import {
   isDropdownShown,
-  getDropdownSearchArtistIds,
+  getDropdownSearchuserIds,
   getDropdownSearchTrackIds,
 } from 'client/features/dropdownSearch/dropdownSearchSelectors';
 
@@ -12,7 +12,7 @@ import NavSearch from '../components/NavSearch';
 
 const mapStateToProps = state => ({
   dropdownShown: isDropdownShown(state),
-  artistIds: getDropdownSearchArtistIds(state),
+  userIds: getDropdownSearchuserIds(state),
   trackIds: getDropdownSearchTrackIds(state),
 });
 

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  loadUserProfilePage,
-  clearUserState,
-} from 'client/features/userProfile/userProfileActions';
-import { getUserId, isUserFetching } from 'client/features/userProfile/userProfileSelectors';
-import { getUserById } from 'client/features/entities/entitiesSelectors';
+import { loadUserProfilePage, clearUserState } from 'client/features/userProfile/userProfileActions';
+import { getProfiledUserId, getProfiledUser, isUserFetching } from 'client/features/userProfile/userProfileSelectors';
+// import { getUsers } from 'client/features/entities/entitiesSelectors';
 import Spinner from 'client/common/components/Spinner';
 
 import UserProfilePage from '../components/UserProfilePage';
@@ -17,10 +14,6 @@ class UserProfilePageContainer extends Component {
     const userId = match.params.userId;
     dispatch(loadUserProfilePage(userId));
   }
-
-  // componentWillReceiveProps(newProps) {
-
-  // }
 
   componentWillUnmount() {
     const { dispatch } = this.props;
@@ -38,8 +31,8 @@ class UserProfilePageContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const userId = getUserId(state);
-  const user = getUserById(state, userId);
+  const userId = getProfiledUserId(state);
+  const user = getProfiledUser(state, userId);
   return {
     fetching: isUserFetching(state),
     userId,

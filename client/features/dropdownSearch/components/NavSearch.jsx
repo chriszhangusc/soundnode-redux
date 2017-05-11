@@ -55,20 +55,20 @@ class NavSearch extends Component {
 
 
   renderSearchResults() {
-    const { artistIds, trackIds, dropdownShown } = this.props;
+    const { userIds, trackIds, dropdownShown } = this.props;
     const dropdownSearchShowCount = 3;
 
     return (
       <div className={`nav-search-result ${dropdownShown && 'show'}`}>
-        {artistIds.length !== 0 &&
+        {userIds.length !== 0 &&
           <div className="dropdown-title">
             ARTISTS
           </div>}
         <ul className="dropdown-list">
-          {artistIds
+          {userIds
             .slice(0, dropdownSearchShowCount)
-            .map(artistId => (
-              <NavSearchDropdownArtistContainer key={artistId} artistId={artistId} />
+            .map(userId => (
+              <NavSearchDropdownArtistContainer key={userId} userId={userId} />
             ))}
         </ul>
         {trackIds.length !== 0 &&
@@ -116,7 +116,7 @@ class NavSearch extends Component {
 
 NavSearch.propTypes = {
   dropdownShown: PropTypes.bool.isRequired,
-  artistIds: PropTypes.arrayOf(PropTypes.number).isRequired,
+  userIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   trackIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   handleBlur: PropTypes.func.isRequired,
   handleFocus: PropTypes.func.isRequired,

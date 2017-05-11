@@ -3,11 +3,11 @@ import { getUserById } from 'client/features/entities/entitiesSelectors';
 import defaultImageUrl from 'assets/images/default-artist.png';
 import NavSearchDropdownItem from 'client/features/dropdownSearch/components/NavSearchDropdownItem';
 
-const mapStateToProps = (state, { artistId }) => {
-  const artist = getUserById(state, artistId);
+const mapStateToProps = (state, { userId }) => {
+  const artist = getUserById(state, userId);
   return ({
     imageUrl: artist.avatarUrl || defaultImageUrl,
-    itemLinkUrl: `/artist/${artistId}`,
+    itemLinkUrl: `/artist/${userId}`,
     itemTitle: artist.username,
   });
 };

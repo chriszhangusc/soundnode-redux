@@ -1,7 +1,36 @@
-// TODO: Refactor to reselect
-export const getUserState = state => state.user;
-export const getUserId = state => getUserState(state).userId;
-export const getUserTrackIds = state => getUserState(state).trackIds;
-export const isUserFetching = state => getUserState(state).userFetching;
-export const isUserTracksFetching = state => getUserState(state).tracksFetching;
-export const getUserTracksNextHref = state => getUserState(state).tracksNextHref;
+import { createSelector } from 'reselect';
+import { getUsers } from 'client/features/entities/entitiesSelectors';
+
+const getState = state => state.userProfile;
+
+export const getProfiledUserId = createSelector(
+  getState,
+  state => state.userId,
+);
+
+export const getProfiledUser = createSelector(
+  getUsers,
+  getProfiledUserId,
+  (users, userId) => userId && users[String(userId)],
+);
+
+export const getProfiledUserTrackIds = createSelector(
+  getState,
+  state => state.trackIds,
+);
+
+export const isUserFetching = createSelector(
+  getState,
+  state => state.userFetching,
+);
+
+export const isUserTracksFetching = createSelector(
+  getState,
+  state => state.tracksFetching,
+);
+
+export const getUserTracksNextHref = createSelector(
+  getState,
+  state => state.tracks.tracksNextHref,
+);
+

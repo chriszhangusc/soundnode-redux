@@ -18,7 +18,7 @@ export const rootReducer = combineReducers({
   playlist: playlistReducer,
   player: playerReducer,
   // Single user profile page
-  user: userProfileReducer,
+  userProfile: userProfileReducer,
   // Single track profile page
   // track: trackReducer,
   dropdownSearch: dropdownSearchReducer,

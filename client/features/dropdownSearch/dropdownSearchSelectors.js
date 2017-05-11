@@ -12,9 +12,9 @@ export const isDropdownShown = createSelector(
   state => state.dropdownShown,
 );
 
-export const getDropdownSearchArtistIds = createSelector(
+export const getDropdownSearchuserIds = createSelector(
   getDropdownSearchState,
-  state => state.dropdownArtistIds,
+  state => state.dropdownuserIds,
 );
 
 export const getDropdownSearchTrackIds = createSelector(

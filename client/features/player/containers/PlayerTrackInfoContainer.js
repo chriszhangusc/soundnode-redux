@@ -6,13 +6,13 @@ import PlayerTrackInfo from '../components/PlayerTrackInfo';
 const mapStateToProps = (state, { playerTrack }) => {
   const trackId = playerTrack.id;
   const artist = getUserByTrackId(state, trackId);
-  const artistId = artist.id;
+  const userId = artist.id;
   return ({
     artworkUrl: playerTrack.artworkUrl,
     trackTitle: playerTrack.title,
     artistName: formatTitle(artist.username),
     trackUrl: `/track/${trackId}`,
-    artistUrl: `/artist/${artistId}`,
+    artistUrl: `/artist/${userId}`,
   });
 };
 
