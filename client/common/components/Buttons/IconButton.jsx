@@ -19,7 +19,13 @@ const WrapperButton = styled.button`
 
 function IconButton({ title, btnClassName, iconClassName, onClick, color, large, hoverColor }) {
   return (
-    <WrapperButton title={title} className={`${btnClassName}`} onClick={onClick} color={color} hoverColor={hoverColor}>
+    <WrapperButton
+      title={title}
+      className={`${btnClassName}`}
+      onClick={onClick}
+      color={color}
+      hoverColor={hoverColor}
+    >
       {iconClassName && <i className={iconClassName} />}
     </WrapperButton>
   );

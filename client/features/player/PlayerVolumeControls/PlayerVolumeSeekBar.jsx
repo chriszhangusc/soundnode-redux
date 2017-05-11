@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { computeNewVolumeOnSeek } from 'client/common/utils/PlayerUtils';
+import { computeNewVolumeOnSeek } from 'client/features/player/playerUtils';
 
 import {
   beginVolumeSeek,

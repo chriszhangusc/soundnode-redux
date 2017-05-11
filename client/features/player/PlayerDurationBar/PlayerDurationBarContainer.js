@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { computeNewTimeOnSeek } from 'client/common/utils/PlayerUtils';
+import { computeNewTimeOnSeek } from 'client/features/player/playerUtils';
 
 import {
   beginSeek,

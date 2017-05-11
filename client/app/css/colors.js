@@ -8,15 +8,6 @@ export const LIGHTER_GRAY = '#ededed';
 export const SEMI_TRANSPARENT_LIGHT = 'rgba(0, 0, 0, 0.22)';
 export const SEMI_TRANSPARENT_DARK = 'rgba(0, 0, 0, 0.7)';
 
-// @value light-black: #1d1f21;
-// @value lighter-black: #242728;
-// @value dark-gray: #4f4f51;
-// @value gray: #949599;
-// @value light-gray: #CCC;
-// @value semi-transparent-light: rgba(0, 0, 0, 0.22);
-// @value semi-transparent-dark: rgba(0, 0, 0, 0.7);
-// @value lighter-gray: #ededed;
-// @value orange: #f50;
 export const BACKGROUND_COLOR = LIGHTER_BLACK;
 export const BACKGROUND_COLOR_SECONDARY = LIGHT_BLACK;
 export const FONT_COLOR_PRIMARY = LIGHTER_GRAY;
