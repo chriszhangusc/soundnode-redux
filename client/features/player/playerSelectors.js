@@ -1,33 +1,37 @@
-import { getTrackById } from 'client/features/entities/entitiesSelectors';
+import { getTracks } from 'client/features/entities/entitiesSelectors';
 import { createSelector } from 'reselect';
 import { SHUFFLE } from './playerConsts';
 
 /* Basic Selectors */
 export const getPlayerState = state => state.player;
-export const getPlayerTrackId = state => getPlayerState(state).trackId;
-export const isPlayerPlaying = state => getPlayerState(state).playing;
-export const isPlayerSeeking = state => getPlayerState(state).seeking;
-export const getCurrentTime = state => getPlayerState(state).currentTime;
-export const getPlayerMode = state => getPlayerState(state).mode;
-export const isVolumeSeeking = state => getPlayerState(state).volumeSeeking;
-export const getCurrentVolume = state => getPlayerState(state).volume;
+
+export const getPlayerTrackId = createSelector(getPlayerState, state => state.trackId);
+
+export const isPlayerPlaying = createSelector(getPlayerState, state => state.playing);
+
+export const isPlayerSeeking = createSelector(getPlayerState, state => state.seeking);
+
+export const getCurrentTime = createSelector(getPlayerState, state => state.currentTime);
+
+export const getPlayerMode = createSelector(getPlayerState, state => state.mode);
+
+export const isVolumeSeeking = createSelector(getPlayerState, state => state.volumeSeeking);
+
+export const getCurrentVolume = createSelector(getPlayerState, state => state.volume);
+
+export const isInShuffleMode = createSelector(getPlayerMode, mode => mode === SHUFFLE);
+
+export const getCurrentPlayerTrack = createSelector(
+  getPlayerTrackId,
+  getTracks,
+  (trackId, tracks) => trackId && tracks[String(trackId)],
+);
 
 /* Memoized Selectors by Reselect*/
 /* Return if the current track(byId) is loaded in player. (Paused or Playing) */
 export function isTrackActive(state, trackId) {
   const playerTrackId = getPlayerTrackId(state);
-  if (playerTrackId && trackId) {
-    return playerTrackId.toString() === trackId.toString();
-  }
-  return false;
+  return playerTrackId === trackId;
 }
 
 export const isTrackPlaying = (state, id) => isTrackActive(state, id) && isPlayerPlaying(state);
-
-// export const isInShuffleMode = state => getPlayerState(state).mode === SHUFFLE;
-export const isInShuffleMode = createSelector(getPlayerMode, mode => mode === SHUFFLE);
-
-export function getCurrentPlayerTrack(state) {
-  const trackId = getPlayerTrackId(state);
-  return getTrackById(state, trackId);
-}

@@ -12,6 +12,11 @@ export const getUsers = createSelector(
   entities => entities.users,
 );
 
+export const getTracks = createSelector(
+  getEntities,
+  entities => entities.tracks,
+);
+
 /**
  * Returns user object by userId
  * @param {object} state Global state object

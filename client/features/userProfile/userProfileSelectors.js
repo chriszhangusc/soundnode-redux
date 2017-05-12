@@ -3,10 +3,7 @@ import { getUsers } from 'client/features/entities/entitiesSelectors';
 
 const getState = state => state.userProfile;
 
-export const getProfiledUserId = createSelector(
-  getState,
-  state => state.userId,
-);
+export const getProfiledUserId = createSelector(getState, state => state.userId);
 
 export const getProfiledUser = createSelector(
   getUsers,
@@ -14,23 +11,10 @@ export const getProfiledUser = createSelector(
   (users, userId) => userId && users[String(userId)],
 );
 
-export const getProfiledUserTrackIds = createSelector(
-  getState,
-  state => state.trackIds,
-);
+export const getProfiledUserTrackIds = createSelector(getState, state => state.trackIds);
 
-export const isUserFetching = createSelector(
-  getState,
-  state => state.userFetching,
-);
+export const isUserFetching = createSelector(getState, state => state.userFetching);
 
-export const isUserTracksFetching = createSelector(
-  getState,
-  state => state.tracksFetching,
-);
+export const isUserTracksFetching = createSelector(getState, state => state.tracksFetching);
 
-export const getUserTracksNextHref = createSelector(
-  getState,
-  state => state.tracks.tracksNextHref,
-);
-
+export const getUserTracksNextHref = createSelector(getState, state => state.tracks.tracksNextHref);

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import shortid from 'shortid';
 
@@ -52,9 +51,7 @@ function Sidebar() {
   return (
     <SidebarWrapper>
       <ul>
-        {
-          SIDEBAR_ITEM_LIST.map(d => <SidebarItem {...d} key={shortid.generate()} />)
-        }
+        {SIDEBAR_ITEM_LIST.map(d => <SidebarItem {...d} key={shortid.generate()} />)}
       </ul>
     </SidebarWrapper>
   );

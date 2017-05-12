@@ -19,9 +19,14 @@ import { notificationFailure, notificationSuccess } from 'client/features/notifi
 import { connect } from 'react-redux';
 
 import styled, { injectGlobal } from 'styled-components';
+import {
+  NAV_BAR_HEIGHT,
+  SIDEBAR_WIDTH_DESKTOP,
+  SIDEBAR_WIDTH_DESKTOP_LG,
+  SIDEBAR_WIDTH_4K,
+} from 'client/app/css/variables';
 import { BACKGROUND_COLOR, LIGHTER_GRAY } from 'client/app/css/colors';
-import { NAV_BAR_HEIGHT } from 'client/app/css/variables';
-// eslint-disable-next-line no-unused-expressions
+import { media } from 'client/app/css/style-utils';
 
 // Global CSS
 injectGlobal`
@@ -76,6 +81,17 @@ injectGlobal`
   }
 `;
 
+const PageContentWrapper = styled.div`
+  margin-left: $sidebar-width;
+  padding: 20px 20px 20px 50px;
+  ${media.desktop`margin-left: ${SIDEBAR_WIDTH_DESKTOP}`}
+  ${media.desktopLG`margin-left: ${SIDEBAR_WIDTH_DESKTOP_LG}`}
+  ${media.desktop4K`margin-left: ${SIDEBAR_WIDTH_4K}`}
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+`;
+
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
@@ -104,27 +120,17 @@ class App extends Component {
         <div>
           <Nav />
           <Sidebar />
-          <div id="page-content-wrapper">
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-lg-12">
-                  <Switch>
-                    <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
-                    <Route
-                      exact
-                      path={`${USER_PROFILE_ROUTE}/:userId`}
-                      component={UserProfile}
-                    />
-                    <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} />
-                    <Route path={AUTH_CALLBACK_ROUTE} component={Callback} />
-                    <Redirect to={CHARTS_ROUTE} />
-                  </Switch>
-                </div>
-                <Player />
-                <Playlist />
-              </div>
-            </div>
-          </div>
+          <PageContentWrapper>
+            <Switch>
+              <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
+              <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
+              <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} />
+              <Route path={AUTH_CALLBACK_ROUTE} component={Callback} />
+              <Redirect to={CHARTS_ROUTE} />
+            </Switch>
+            <Player />
+            <Playlist />
+          </PageContentWrapper>
           <NotificationContainer />
         </div>
       </Router>

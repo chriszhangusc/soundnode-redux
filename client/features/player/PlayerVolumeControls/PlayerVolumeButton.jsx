@@ -11,10 +11,6 @@ const Wrapper = styled.div`
   padding: 4px;
   font-size: 1.5rem;
   width: 30px;
-  &.active {
-    color: ${THEME_COLOR};
-  }
-
   margin-left: 20px;
 `;
 
@@ -26,13 +22,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onClick: () => {
+    handleOnClick: () => {
       dispatch(toggleMute());
     },
   };
 }
 
-function PlayerVolumeButton({ volume, onClick }) {
+function PlayerVolumeButton({ volume, handleOnClick }) {
   let type = null;
   switch (true) {
     case (volume <= 0):
@@ -55,7 +51,7 @@ function PlayerVolumeButton({ volume, onClick }) {
     <Wrapper>
       <IconButton
         iconClassName={`${`ion-volume-${type}`}`}
-        onClick={onClick}
+        onClick={handleOnClick}
         color={WHITE}
         hoverColor={THEME_COLOR}
       />

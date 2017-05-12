@@ -6,6 +6,8 @@ import { changeVisiblePlaylistName } from 'client/features/playlist/playlistActi
 import { DEFAULT_GENRE } from 'client/features/charts/chartsConsts';
 import { getGenreList } from 'client/features/charts/chartsSelectors';
 import { CHARTS_ROUTE } from 'client/common/constants/RouteConsts';
+import { Grid } from 'react-bootstrap';
+
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';
 import ChartsTitle from '../ChartsTitle';
@@ -48,11 +50,11 @@ class ChartsPageContainer extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <Grid fluid>
         <ChartsTitle />
         <ChartsGenreList />
         <ChartsTracks />
-      </div>
+      </Grid>
     );
   }
 }
