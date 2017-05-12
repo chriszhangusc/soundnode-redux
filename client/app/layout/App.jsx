@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import {
   CHARTS_ROUTE,
@@ -15,8 +14,7 @@ import Playlist from 'client/features/playlist';
 import Nav from 'client/common/components/Nav';
 import Sidebar from 'client/common/components/Sidebar';
 import Callback from 'client/common/components/Callback';
-import { notificationFailure, notificationSuccess } from 'client/features/notification';
-import { connect } from 'react-redux';
+import GlobalEvents from 'client/features/global/GlobalEvents';
 
 import styled, { injectGlobal } from 'styled-components';
 import {
@@ -77,7 +75,7 @@ injectGlobal`
   }
 
   .container-fluid {
-      padding: 0;
+    padding: 0;
   }
 `;
 
@@ -92,54 +90,28 @@ const PageContentWrapper = styled.div`
   height: 100%;
 `;
 
-class App extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-
-    window.addEventListener('offline', () => {
-      dispatch(notificationFailure('Looks like your internet connection is down!'));
-    });
-
-    window.addEventListener('online', () => {
-      dispatch(notificationSuccess('Great, you are back online!'));
-    });
-
-    const fetchUser = username => ({ type: 'FETCH_USER', payload: username });
-    dispatch(fetchUser('MiniPekka'));
-  }
-
-  componentWillUnmount() {
-    // Remove global listeners
-    window.removeEventListener('offline');
-    window.removeEventListener('online');
-  }
-
-  render() {
-    return (
-      <Router>
-        <div>
-          <Nav />
-          <Sidebar />
-          <PageContentWrapper>
-            <Switch>
-              <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
-              <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
-              <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} />
-              <Route path={AUTH_CALLBACK_ROUTE} component={Callback} />
-              <Redirect to={CHARTS_ROUTE} />
-            </Switch>
-            <Player />
-            <Playlist />
-          </PageContentWrapper>
-          <NotificationContainer />
-        </div>
-      </Router>
-    );
-  }
+function App() {
+  return (
+    <Router>
+      <div>
+        <Nav />
+        <Sidebar />
+        <PageContentWrapper>
+          <Switch>
+            <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
+            <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
+            <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} />
+            <Route path={AUTH_CALLBACK_ROUTE} component={Callback} />
+            <Redirect to={CHARTS_ROUTE} />
+          </Switch>
+          <Player />
+          <Playlist />
+        </PageContentWrapper>
+        <GlobalEvents />
+        <NotificationContainer />
+      </div>
+    </Router>
+  );
 }
 
-App.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
-
-export default connect()(App);
+export default App;
