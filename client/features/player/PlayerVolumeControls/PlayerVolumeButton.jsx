@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     color: ${THEME_COLOR};
   }
 
-  margin-left: 30px;
+  margin-left: 20px;
 `;
 
 function mapStateToProps(state) {
@@ -34,17 +34,23 @@ function mapDispatchToProps(dispatch) {
 
 function PlayerVolumeButton({ volume, onClick }) {
   let type = null;
-
-  if (volume <= 0) {
-    type = 'mute';
-  } else if (volume > 0 && volume < 0.3) {
-    type = 'low';
-  } else if (volume >= 0.3 && volume < 0.7) {
-    type = 'medium';
-  } else {
-    type = 'high';
+  switch (true) {
+    case (volume <= 0):
+      type = 'mute';
+      break;
+    case (volume > 0 && volume < 0.3):
+      type = 'low';
+      break;
+    case (volume >= 0.3 && volume < 0.7):
+      type = 'medium';
+      break;
+    case (volume >= 0.7 && volume <= 1):
+      type = 'high';
+      break;
+    default:
+      throw new Error('volume can not be greater than 1.0');
   }
-
+  
   return (
     <Wrapper>
       <IconButton
