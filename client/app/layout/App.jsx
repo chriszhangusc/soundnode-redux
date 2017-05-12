@@ -24,7 +24,7 @@ import {
   SIDEBAR_WIDTH_4K,
 } from 'client/app/css/variables';
 import { BACKGROUND_COLOR, LIGHTER_GRAY } from 'client/app/css/colors';
-import { media } from 'client/app/css/style-utils';
+import { media } from 'client/app/css/styleUtils';
 
 // Global CSS
 injectGlobal`

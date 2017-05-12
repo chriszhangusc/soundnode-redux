@@ -8,7 +8,7 @@ import {
   SIDEBAR_WIDTH_4K,
 } from 'client/app/css/variables';
 
-import { media } from 'client/app/css/style-utils';
+import { media } from 'client/app/css/styleUtils';
 import { LIGHT_BLACK } from 'client/app/css/colors';
 
 import SidebarItem from './SidebarItem';
