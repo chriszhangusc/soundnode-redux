@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { REPEAT, SHUFFLE } from 'client/features/player/playerConsts';
-import IconButton from 'client/common/components/Buttons/IconButton';
 import styled from 'styled-components';
+import PlayerButton from '../PlayerButton';
 
 const PlayerModeControlsWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 40px;
+  margin-left: 20px;
 `;
 
 class PlayerModeControls extends Component {
-
   constructor(props) {
     super(props);
     this.renderRepeat = this.renderRepeat.bind(this);
@@ -22,9 +21,9 @@ class PlayerModeControls extends Component {
   renderRepeat() {
     const { onRepeatClick, mode } = this.props;
     return (
-      <IconButton
+      <PlayerButton
         title="Repeat"
-        btnClassName={` player-button ${(mode === REPEAT ? 'active' : '')}`}
+        active={mode === REPEAT}
         iconClassName="ion-loop"
         onClick={onRepeatClick}
       />
@@ -34,9 +33,9 @@ class PlayerModeControls extends Component {
   renderTogglePlaylist() {
     const { onTogglePlaylistClick, playlistHidden } = this.props;
     return (
-      <IconButton
+      <PlayerButton
         title="Playlist"
-        btnClassName={` player-button ${(playlistHidden ? '' : 'active')}`}
+        active={!playlistHidden}
         iconClassName="ion-ios-list"
         onClick={onTogglePlaylistClick}
       />
@@ -46,9 +45,9 @@ class PlayerModeControls extends Component {
   renderShuffle() {
     const { onShuffleClick, mode } = this.props;
     return (
-      <IconButton
+      <PlayerButton
         title="Shuffle"
-        btnClassName={` player-button ${(mode === SHUFFLE ? 'active' : '')}`}
+        active={mode === SHUFFLE}
         iconClassName="ion-shuffle"
         onClick={onShuffleClick}
       />
@@ -64,7 +63,6 @@ class PlayerModeControls extends Component {
       </PlayerModeControlsWrapper>
     );
   }
-
 }
 
 PlayerModeControls.propTypes = {

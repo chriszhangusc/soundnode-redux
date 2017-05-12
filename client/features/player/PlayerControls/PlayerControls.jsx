@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import IconButton from 'client/common/components/Buttons/IconButton';
 import styled from 'styled-components';
+import PlayerButton from '../PlayerButton';
 
 const PlayerControlsWrapper = styled.div`
   display: flex;
   align-items: center;
-
-  & + .player-section {
-    margin-left: 40px;
-  }
 `;
 
 class PlayerControls extends Component {
@@ -23,9 +20,8 @@ class PlayerControls extends Component {
   renderPlayPauseButton() {
     const { playing, onPauseClick, onPlayClick } = this.props;
     return (
-      <IconButton
-        title="Play"
-        btnClassName=" player-button"
+      <PlayerButton
+        title={playing ? 'Play' : 'Pause'}
         iconClassName={playing ? 'ion-ios-pause' : 'ion-ios-play'}
         onClick={playing ? onPauseClick : onPlayClick}
       />
@@ -34,26 +30,12 @@ class PlayerControls extends Component {
 
   renderForwardButton() {
     const { onNextClick } = this.props;
-    return (
-      <IconButton
-        title="Next"
-        btnClassName=" player-button"
-        iconClassName="ion-ios-fastforward"
-        onClick={onNextClick}
-      />
-    );
+    return <PlayerButton title="Next" iconClassName="ion-ios-fastforward" onClick={onNextClick} />;
   }
 
   renderBackwardButton() {
     const { onPrevClick } = this.props;
-    return (
-      <IconButton
-        title="Previous"
-        btnClassName=" player-button"
-        iconClassName="ion-ios-rewind"
-        onClick={onPrevClick}
-      />
-    );
+    return <PlayerButton title="Previous" iconClassName="ion-ios-rewind" onClick={onPrevClick} />;
   }
 
   render() {

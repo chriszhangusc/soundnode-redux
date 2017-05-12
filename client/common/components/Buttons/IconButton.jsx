@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 
 const WrapperButton = styled.button`
-  color: ${props => props.color || FONT_COLOR_PRIMARY};
+  color: ${props => props.activeColor || props.color || FONT_COLOR_PRIMARY};
   padding: 4px;
   border: none;
   outline: none;
@@ -17,30 +17,30 @@ const WrapperButton = styled.button`
   }
 `;
 
-function IconButton({ title, btnClassName, iconClassName, onClick, color, large, hoverColor }) {
+function IconButton(props) {
+  const { iconClassName } = props;
+
   return (
-    <WrapperButton
-      title={title}
-      className={`${btnClassName}`}
-      onClick={onClick}
-      color={color}
-      hoverColor={hoverColor}
-    >
-      {iconClassName && <i className={iconClassName} />}
+    <WrapperButton {...props}>
+      <i className={iconClassName} />
     </WrapperButton>
   );
 }
 
 IconButton.defaultProps = {
-  btnClassName: '',
   title: '',
+  color: '',
+  hoverColor: '',
+  activeColor: '',
 };
 
 IconButton.propTypes = {
   title: PropTypes.string,
   iconClassName: PropTypes.string.isRequired,
-  btnClassName: PropTypes.string,
   onClick: PropTypes.func.isRequired,
+  color: PropTypes.string,
+  hoverColor: PropTypes.string,
+  activeColor: PropTypes.string,
 };
 
 export default IconButton;
