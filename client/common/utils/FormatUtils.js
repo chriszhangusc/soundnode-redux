@@ -1,4 +1,4 @@
-import { CLIENT_ID } from 'client/common/constants/AuthConsts';
+import { CLIENT_ID } from 'client/common/constants/authConsts';
 
 export const formatSecondsAsTime = (secs) => {
   const hr = Math.floor(secs / 3600);

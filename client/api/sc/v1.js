@@ -1,4 +1,4 @@
-import { CLIENT_ID } from 'client/common/constants/AuthConsts';
+import { CLIENT_ID } from 'client/common/constants/authConsts';
 import { userSchema, trackSchema, commentArraySchema, trackArraySchema, userArraySchema } from 'client/app/schema';
 
 import { normalizeResponse, constructFetchUrl, makeRequest } from './api-utils';
