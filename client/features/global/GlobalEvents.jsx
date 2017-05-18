@@ -14,9 +14,6 @@ class GlobalEvents extends React.Component {
     window.addEventListener('online', () => {
       dispatch(notificationSuccess('Great, you are back online!'));
     });
-
-    // const fetchUser = username => ({ type: 'FETCH_USER', payload: username });
-    // dispatch(fetchUser('MiniPekka'));
   }
 
   componentWillUnmount() {

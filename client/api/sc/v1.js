@@ -6,7 +6,6 @@ import { normalizeResponse, constructFetchUrl, makeRequest } from './api-utils';
 const SC_API_V1 = 'https://api.soundcloud.com/';
 const LIMIT = 20;
 
-// filters = { q: 'abc' }
 export function fetchTracks(filters, limit) {
   const endpoint = '/tracks/';
   const queryParams = {
