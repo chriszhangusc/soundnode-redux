@@ -8,11 +8,12 @@ import PropTypes from 'prop-types';
 import { login } from '../authActions';
 
 const AuthWrapper = styled.div`
+  display: inline-block;
   padding: 23px 0;
+  margin-left: 20px;
 `;
 
 function Auth({ onLogin }) {
-  // return <Link onClick={onLogin} to="/charts">Login</Link>;
   return (
     <AuthWrapper>
       <a onClick={onLogin}>Login</a>

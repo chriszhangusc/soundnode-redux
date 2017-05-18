@@ -1,21 +1,17 @@
 // Song Card
-
 // Variables
 $song-card-width: 300px;
 $song-card-width-md: 210px;
 $song-card-width-lg: 230px;
 $song-card-width-4k: 350px;
-
 $song-card-details-width: 240px;
 $song-card-details-width-md: 150px;
 $song-card-details-width-lg: 170px;
 $song-card-details-width-4k: 290px;
-
 $song-card-image-height: 180px;
 $song-card-image-height-md: 140px;
 $song-card-image-height-lg: 160px;
 $song-card-image-height-4k: 200px;
-
 .song-card-list-container {
     // justify-content: center;
     display: flex;
@@ -24,8 +20,7 @@ $song-card-image-height-4k: 200px;
 
 .card {
     background-color: $background-color;
-    border: 1px solid $light-light-black;
-    // Border depth effect
+    border: 1px solid $light-light-black; // Border depth effect
     // http://www.cssmatic.com/box-shadow
     box-shadow: 0 0 12px 8px rgba(0, 0, 0, 0.22);
 }
@@ -38,44 +33,35 @@ $song-card-image-height-4k: 200px;
     @include desktop {
         width: $song-card-width-md;
     }
-
     @include desktop-lg {
         width: $song-card-width-lg;
     }
-
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     &.active {
         border-color: $theme-color;
     }
 }
 
 .song-card-image {
-
     display: block;
     width: 100%;
     height: $song-card-image-height;
-
     @include desktop {
         height: $song-card-image-height-md;
     }
-
     @include desktop-lg {
         height: $song-card-image-height-lg;
     }
-
     margin-bottom: 10px;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-
     &:hover {
         cursor: pointer;
     }
 }
-
 
 .toggle-play-button {
     position: relative;
@@ -85,24 +71,19 @@ $song-card-image-height-4k: 200px;
     transition: background-color 0.2s ease-in-out;
     border: none;
     cursor: pointer;
-
     &:focus {
-      outline: 0;
+        outline: 0;
     }
-
     &.active {
         background-color: $semi-transparent-bg-dark;
-
         .toggle-play-button-icon {
             position: relative;
             opacity: 1;
             z-index: 2;
         }
     }
-
     &:hover {
         background-color: rgba(0, 0, 0, 0.8);
-
         .toggle-play-button-icon {
             opacity: 1;
         }
@@ -116,47 +97,25 @@ $song-card-image-height-4k: 200px;
     transition: opacity 0.2s ease-in-out;
 }
 
-
-
-// .song-card-info-wrapper {
-//     display: flex;
-//     align-items: center;
-//     justify-content: left;
-// }
-
-.song-card-details {
-  display: flex;
-  flex-direction: column;
-  @include desktop {
-        width: $song-card-details-width-md;
+// Because of the nature of styled-components, it can not style Link from react-router-dom!!
+.song-card-title {
+    color: $font-color-main;
+    font-size: 1.05rem;
+    font-weight: bold;
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    @include desktop-4k {
+        width: 240px;
     }
-
-  @include desktop-lg {
-      width: $song-card-details-width-lg;
-  }
 }
 
 .song-card-username {
-    display: block;
+    margin-left: 10px;
     color: $font-color-sub;
-    margin-right: 30px;
-    font-size: 12px;
+    font-size: 0.9rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
-.song-card-title {
-    color: $font-color-main;
-    font-size: 13px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    @include desktop-4k {
-      width: 240px;
-    }
-}
-
-// .song-card-controls {
-//   margin-top: 10px;
-// }

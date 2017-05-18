@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import { getNormalVersion } from 'client/common/utils/imageUtils';
 import { defaultArtistImageUrl } from 'client/common/constants/ImageConsts';
+import styled from 'styled-components';
+
+const StyledImage = styled.img`
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+`;
 
 // Change to fallback image!
-const Avatar = ({ src, alt }) => {
-  // console.log(src);
-  return (
-    <img alt="Avatar" className="avatar" src={src} />
-  );
-};
+const Avatar = ({ src, alt }) => <StyledImage alt={alt} src={src} />;
 
 Avatar.defaultProps = {
   alt: 'avatar',

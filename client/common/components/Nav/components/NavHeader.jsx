@@ -1,26 +1,20 @@
 import React from 'react';
 import { HOST } from 'client/common/constants/AppConsts';
 import styled from 'styled-components';
-import Auth from 'client/features/auth/Auth';
-
-const NavHeaderWrapper = styled.div`
-`;
-
-const NavBarBrandIcon = styled.span`
-  margin-right: 15px;
-`;
+import { Glyphicon } from 'react-bootstrap';
 
 const NavBarBrandName = styled.span`
+  margin-left: 15px;
 `;
 
 function NavHeader() {
   return (
-    <NavHeaderWrapper>
+    <div>
       <a className="navbar-brand" href={HOST}>
-        <NavBarBrandIcon className="glyphicon glyphicon-headphones" />
+        <Glyphicon glyph="headphones" />
         <NavBarBrandName>Redux Music</NavBarBrandName>
       </a>
-    </NavHeaderWrapper>
+    </div>
   );
 }
 

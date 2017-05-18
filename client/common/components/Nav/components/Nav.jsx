@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import DropdownSearch from 'client/features/dropdownSearch';
-// import NavUserContainer from '../containers/NavUserContainer';
 import { LIGHT_BLACK } from 'client/app/css/colors';
 import Auth from 'client/features/auth/Auth';
 import NavHeader from './NavHeader';
 
-const NavBar = styled.nav`
+// Pure Navbar no bootstrap
+const Navbar = styled.nav`
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
   background-color: ${LIGHT_BLACK};
   height: 70px;
 `;
@@ -18,15 +22,13 @@ const NavBarContentWrapper = styled.div`
 `;
 
 const InnerWrapper = styled.div`
-  display: flex;
-  width: 470px;
-  justify-content: space-between;
+  padding: 0 15px;
 `;
 
 /* This is our main Nav layout */
 function Nav() {
   return (
-    <NavBar className="navbar navbar-fixed-top">
+    <Navbar>
       <NavBarContentWrapper>
         <NavHeader />
         <InnerWrapper>
@@ -34,7 +36,7 @@ function Nav() {
           <Auth />
         </InnerWrapper>
       </NavBarContentWrapper>
-    </NavBar>
+    </Navbar>
   );
 }
 
