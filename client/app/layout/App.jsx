@@ -90,26 +90,34 @@ const PageContentWrapper = styled.div`
   height: 100%;
 `;
 
+function Main() {
+  return (
+    <div>
+      <Nav />
+      <Sidebar />
+      <PageContentWrapper>
+        <Switch>
+          <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
+          <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
+          <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} />
+          <Redirect to={CHARTS_ROUTE} />
+        </Switch>
+        <Player />
+        <Playlist />
+      </PageContentWrapper>
+      <GlobalEvents />
+      <NotificationContainer />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
-      <div>
-        <Nav />
-        <Sidebar />
-        <PageContentWrapper>
-          <Switch>
-            <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
-            <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
-            <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} />
-            <Route exact path={AUTH_CALLBACK_ROUTE} component={Callback} />
-            <Redirect to={CHARTS_ROUTE} />
-          </Switch>
-          <Player />
-          <Playlist />
-        </PageContentWrapper>
-        <GlobalEvents />
-        <NotificationContainer />
-      </div>
+      <Switch>
+        <Route exact path={AUTH_CALLBACK_ROUTE} component={Callback} />
+        <Route component={Main} />
+      </Switch>
     </Router>
   );
 }
