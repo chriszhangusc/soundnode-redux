@@ -24,20 +24,32 @@ const InnerWrapper = styled.div`
   margin-top: 10px;
 `;
 
+const UsernameWrapper = styled.div`
+  display: inline-block;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  height: 40px;
+`;
+
 function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
   const trackUrl = `${TRACK_PROFILE_ROUTE}/${trackId}`;
   const userUrl = `${USER_PROFILE_ROUTE}/${userId}`;
 
   return (
     <Wrapper>
-      <Link to={trackUrl} className="song-card-title" title={title}>
-        {title}
-      </Link>
+        <Link to={trackUrl} className="song-card-title" title={title}>
+          {title}
+        </Link>
+
       <InnerWrapper>
         <Avatar src={userAvatar} />
-        <Link to={userUrl} className="song-card-username" title={username}>
-          {username}
-        </Link>
+        <UsernameWrapper>
+          <Link to={userUrl} className="song-card-username" title={username}>
+            {username}
+          </Link>
+        </UsernameWrapper>
       </InnerWrapper>
     </Wrapper>
   );

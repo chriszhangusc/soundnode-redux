@@ -99,23 +99,26 @@ $song-card-image-height-4k: 200px;
 
 // Because of the nature of styled-components, it can not style Link from react-router-dom!!
 .song-card-title {
+    display: -webkit-box;
     color: $font-color-main;
     font-size: 1.05rem;
     font-weight: bold;
-    height: 40px;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: pre-wrap;
-    @include desktop-4k {
-        width: 240px;
-    }
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 40px;
 }
+
+/* Multiple line ellipis */
+// .block-with-text {
+//     overflow: hidden;
+//     display: -webkit-box;
+//     -webkit-line-clamp: 3;
+//     -webkit-box-orient: vertical;  
+// }
 
 .song-card-username {
     margin-left: 10px;
     color: $font-color-sub;
     font-size: 0.9rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
