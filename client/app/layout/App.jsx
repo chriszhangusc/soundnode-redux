@@ -101,7 +101,7 @@ function App() {
             <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
             <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
             <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} />
-            <Route path={AUTH_CALLBACK_ROUTE} component={Callback} />
+            <Route exact path={AUTH_CALLBACK_ROUTE} component={Callback} />
             <Redirect to={CHARTS_ROUTE} />
           </Switch>
           <Player />

@@ -1,7 +1,7 @@
 // #TODO: To be removed in the future
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
-import { CLIENT_ID } from 'client/common/constants/AuthConsts';
+import { CLIENT_ID } from 'client/common/constants/authConsts';
 import { API_HOST } from 'client/common/constants/AppConsts';
 import querystring from 'querystring';
 

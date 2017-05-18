@@ -40,10 +40,11 @@ module.exports = {
     proxy: {
       // /sc/api-v1/* and /sc/api-v2/*
       '/sc/*': {
-        target: 'http://localhost:3001',
+        target: 'http://127.0.0.1:3001',
         secure: false
       }
     },
+    host : '127.0.0.1',
     historyApiFallback: true
   },
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.

@@ -1,6 +1,6 @@
 // console.log(PORT);
 
-const HOST_DEV = 'http://localhost:3000';
+const HOST_DEV = 'http://127.0.0.1:3000';
 const HOST_PROD = 'https://redux-music.herokuapp.com';
 
 // #TODO: change to dev
