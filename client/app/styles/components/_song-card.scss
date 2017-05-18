@@ -118,6 +118,7 @@ $song-card-image-height-4k: 200px;
 // }
 
 .song-card-username {
+    display: inline-block;
     margin-left: 10px;
     color: $font-color-sub;
     font-size: 0.9rem;
