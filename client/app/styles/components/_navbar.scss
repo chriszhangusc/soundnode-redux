@@ -55,6 +55,7 @@ nav {
     }
     position: absolute;
     background-color: $dropdown-search-result-bg-color;
+    z-index: 1002;
     display: block;
     width: $dropdown-search-width;
     
@@ -92,10 +93,6 @@ nav {
     margin-bottom: 10px;
 }
 
-.dropdown-item-wrapper {
-    display: flex;
-}
-
 .dropdown-list {
     & .dropdown-item {
         padding: 8px 10px;
@@ -113,6 +110,7 @@ nav {
         overflow: hidden;
     }
     & .dropdown-item-title {
+        margin-left: 10px;
         vertical-align: middle;
         color: $font-color-main;
         display: inline-block;

@@ -3,6 +3,7 @@ export const BLACK = '#0f1010';
 export const LIGHT_BLACK = '#1d1f21';
 export const LIGHTER_BLACK = '#242728';
 export const GRAY = '#949599';
+export const DARK_GRAY = '#4f4f51';
 export const ORANGE = '#f50';
 export const LIGHTER_GRAY = '#ededed';
 export const SEMI_TRANSPARENT_LIGHT = 'rgba(0, 0, 0, 0.22)';
@@ -14,4 +15,6 @@ export const FONT_COLOR_PRIMARY = LIGHTER_GRAY;
 export const FONT_COLOR_SECONDARY = GRAY;
 export const THEME_COLOR = ORANGE;
 export const BOX_SHADOW_COLOR = SEMI_TRANSPARENT_LIGHT;
+export const SEPARATOR_COLOR_DARK = BLACK;
+export const SEPARATOR_COLOR_CLEAN = DARK_GRAY;
 

@@ -59,7 +59,6 @@
 
 
 .toggle-play-button {
-  position: relative;
   height: 100%;
   width: 100%;
   background-color: transparent;
@@ -87,17 +86,16 @@
 }
 
 .toggle-play-button-active .toggle-play-button-icon {
-  position: relative;
   opacity: 1;
-  z-index: 2;
+  z-index: 1;
 }
 
 .toggle-play-button-icon {
   color: theme-color;
   font-size: 24px;
-
   opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+  /* This will cause icon flash on top of dropdown search result list */
+  /*transition: opacity 0.2s ease-in-out;*/
 }
 
 .song-card-info-wrapper {
@@ -129,40 +127,9 @@
   white-space: nowrap;
 }
 
-/*.song-card-controls {
-  margin-top: 10px;
-
-  button + button {
-    margin-left: 20px;
-  }
-
-  i {
-    color: $light-gray;
-
-    &:hover {
-      color: white;
-    }
-
-    // Move to global in icons.scss
-    &.active {
-      color: $theme-color;
-    }
-  }
-
-}*/
-
 .song-card-controls {
   margin-top: 10px;
 }
 .song-card-controls button + button {
   margin-left: 20px;
 }
-/*.song-card-controls i {
-  color: font-color-secondary;
-}
-.song-card-controls i:hover {
-  color: font-color-primary;
-}
-.song-card-controls i.active {
-  color: theme-color;
-}*/
