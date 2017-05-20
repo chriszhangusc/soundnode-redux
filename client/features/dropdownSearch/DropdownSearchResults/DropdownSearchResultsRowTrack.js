@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getTrackById } from 'client/features/entities/entitiesSelectors';
 import defaultImageUrl from 'assets/images/default-artwork.png';
-import NavSearchDropdownItem from '../components/NavSearchDropdownItem';
+import DropdownSearchResultsRow from './DropdownSearchResultsRow';
 
 const mapStateToProps = (state, { trackId }) => {
   const track = getTrackById(state, trackId);
@@ -12,4 +12,4 @@ const mapStateToProps = (state, { trackId }) => {
   });
 };
 
-export default connect(mapStateToProps)(NavSearchDropdownItem);
+export default connect(mapStateToProps)(DropdownSearchResultsRow);

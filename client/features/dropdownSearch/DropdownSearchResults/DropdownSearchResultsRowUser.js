@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getUserById } from 'client/features/entities/entitiesSelectors';
 import defaultImageUrl from 'assets/images/default-artist.png';
-import NavSearchDropdownItem from 'client/features/dropdownSearch/components/NavSearchDropdownItem';
+import DropdownSearchResultsRow from './DropdownSearchResultsRow';
 
 const mapStateToProps = (state, { userId }) => {
   const artist = getUserById(state, userId);
@@ -12,4 +12,4 @@ const mapStateToProps = (state, { userId }) => {
   });
 };
 
-export default connect(mapStateToProps)(NavSearchDropdownItem);
+export default connect(mapStateToProps)(DropdownSearchResultsRow);

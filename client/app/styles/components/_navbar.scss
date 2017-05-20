@@ -27,20 +27,20 @@ nav {
 /* Navbar search */
 
 .nav-search {
-  padding: 20px 0;
-  display: inline-block;
-  border-radius: 3px;
-  .form-group {
-      position: relative; //relative must be put on a block element
-      margin-bottom: 0;
-      i {
-          position: absolute;
-          top: 5px;
-          left: 10px;
-          color: $font-color-sub;
-          pointer-events: none;
-      }
-  }
+    padding: 20px 0;
+    display: inline-block;
+    border-radius: 3px;
+    .content-wrapper {
+        position: relative; //relative must be put on a block element
+        margin-bottom: 0;
+        i {
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            color: $font-color-sub;
+            pointer-events: none;
+        }
+    }
 }
 
 .nav-search-result {
@@ -58,18 +58,15 @@ nav {
     z-index: 1002;
     display: block;
     width: $dropdown-search-width;
-    
     ul:last-child {
         margin-bottom: 0;
-    }
-    // transform: translateY(-100%);
+    } // transform: translateY(-100%);
     &.show {
-      box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.2);
-      padding: 10px 10px 5px 10px;
-      transform: translateY(0);
-      max-height: $dropdown-search-max-height;
+        box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.2);
+        padding: 10px 10px 5px 10px;
+        transform: translateY(0);
+        max-height: $dropdown-search-max-height;
     }
-
     transition: .4s ease-in-out;
 }
 
@@ -93,68 +90,51 @@ nav {
     margin-bottom: 10px;
 }
 
-.dropdown-list {
-    & .dropdown-item {
-        padding: 8px 10px;
-        white-space: nowrap;
-        cursor: pointer;
-        border-bottom: 1px solid $separator-color-dark;
-        &:hover {
-            background: $separator-color-dark;
-        }
-    }
-    & .dropdown-item-image {
-        width: 25px;
-        margin-right: 10px;
-        border-radius: 50%;
-        overflow: hidden;
-    }
-    & .dropdown-item-title {
-        margin-left: 10px;
-        vertical-align: middle;
-        color: $font-color-main;
-        display: inline-block;
-        width: $dropdown-search-title-width;
-        @include desktop {
-            width: $dropdown-search-title-width-md;
-        }
-        @include desktop-lg {
-            width: $dropdown-search-title-width-lg;
-        }
-        @include desktop-4k {
-          width: $dropdown-search-title-width-4k;
-        }
-        text-overflow: ellipsis;
-        overflow: hidden;
-    }
-}
-
-.nav-search-input {
+.dropdown-item-title {
+    margin-left: 10px;
+    vertical-align: middle;
+    color: $font-color-main;
     display: inline-block;
-    border: none;
-    text-align: left;
-    font-family: 'Open Sans';
-    font-size: 0.9rem;
-    outline: 0;
-    height: $dropdown-search-input-height;
-    width: $dropdown-search-width;
+    width: $dropdown-search-title-width;
     @include desktop {
-        width: $dropdown-search-width-md;
+        width: $dropdown-search-title-width-md;
     }
     @include desktop-lg {
-        width: $dropdown-search-width-lg;
+        width: $dropdown-search-title-width-lg;
     }
-
     @include desktop-4k {
-        width: $dropdown-search-width-4k;
+        width: $dropdown-search-title-width-4k;
     }
-    border-radius: 5px;
-    padding: 6px 10px 6px 30px;
-    color: $font-color-main;
-    font-weight: 300;
-    background-color: $dropdown-search-bg-color;
-    transition: all 0.2s ease-in-out;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
+
+// Moved to styled components
+// .nav-search-input {
+//     display: inline-block;
+//     border: none;
+//     text-align: left;
+//     font-family: 'Open Sans';
+//     font-size: 0.9rem;
+//     outline: 0;
+//     height: $dropdown-search-input-height;
+//     width: $dropdown-search-width;
+//     @include desktop {
+//         width: $dropdown-search-width-md;
+//     }
+//     @include desktop-lg {
+//         width: $dropdown-search-width-lg;
+//     }
+//     @include desktop-4k {
+//         width: $dropdown-search-width-4k;
+//     }
+//     border-radius: 5px;
+//     padding: 6px 10px 6px 30px;
+//     color: $font-color-main;
+//     font-weight: 300;
+//     background-color: $dropdown-search-bg-color;
+//     transition: all 0.2s ease-in-out;
+// }
 
 .nav-user-link {
     display: inline-block;

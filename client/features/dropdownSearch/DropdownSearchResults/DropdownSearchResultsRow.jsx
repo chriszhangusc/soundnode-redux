@@ -15,7 +15,7 @@ const StyledListItem = styled.li`
     }
 `;
 
-function DropdownSearchResultItem({ imageUrl, itemLinkUrl, itemTitle }) {
+function DropdownSearchResultsRow({ imageUrl, itemLinkUrl, itemTitle }) {
   return (
     <StyledListItem>
       <Avatar src={imageUrl} />
@@ -33,10 +33,10 @@ function DropdownSearchResultItem({ imageUrl, itemLinkUrl, itemTitle }) {
   );
 }
 
-DropdownSearchResultItem.propTypes = {
+DropdownSearchResultsRow.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   itemLinkUrl: PropTypes.string.isRequired,
   itemTitle: PropTypes.string.isRequired,
 };
 
-export default DropdownSearchResultItem;
+export default DropdownSearchResultsRow;

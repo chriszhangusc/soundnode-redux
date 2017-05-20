@@ -1,15 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { media } from 'client/app/css/styleUtils';
 import { connect } from 'react-redux';
 import {
   clearAndHideSearchResults,
   requestDropdownSearch,
 } from 'client/features/dropdownSearch/dropdownSearchActions';
+import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 
-// const StyledSearchInput = styled.input`
-//   border-bottom: 1px solid $light-gray;
-// `;
+const StyledSearchInput = styled.input`
+    display: inline-block;
+    border: none;
+    text-align: left;
+    font-family: 'Open Sans';
+    font-size: 0.9rem;
+    outline: 0;
+    border-radius: 5px;
+    padding: 6px 10px 6px 30px;
+    font-weight: 300;
+    background-color: #333333;
+    transition: all 0.2s ease-in-out;
+    height: 30px;
+    width: 320px;
+    ${media.desktop`width: 400px`}
+    ${media.desktopLG`width: 470px`}
+    ${media.desktop4K`width: 550px`}
+`;
+
+const InputContentWrapper = styled.div`
+  position: relative;
+  margin-bottom: 0;
+`;
+
+const SearchIcon = styled.i`
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    color: ${FONT_COLOR_SECONDARY};
+    pointer-events: none;
+`;
 
 class DropdownSearchInput extends React.Component {
   constructor(props) {
@@ -48,11 +78,10 @@ class DropdownSearchInput extends React.Component {
   render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <div className="form-group">
-          <i className="icon ion-search" />
-          <input
+        <InputContentWrapper>
+          <SearchIcon className="icon ion-search" />
+          <StyledSearchInput
             type="search"
-            className="nav-search-input"
             placeholder="Search SoundCloud"
             ref={(node) => {
               this.searchInput = node;
@@ -61,16 +90,13 @@ class DropdownSearchInput extends React.Component {
             onFocus={this.onFocus}
             onBlur={this.onBlur}
           />
-        </div>
+        </InputContentWrapper>
       </form>
     );
   }
 }
 
 DropdownSearchInput.propTypes = {
-  // dropdownShown: PropTypes.bool.isRequired,
-  // userIds: PropTypes.arrayOf(PropTypes.number).isRequired,
-  // trackIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   handleBlur: PropTypes.func.isRequired,
   handleFocus: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,

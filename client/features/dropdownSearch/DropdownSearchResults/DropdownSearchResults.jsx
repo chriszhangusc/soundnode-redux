@@ -9,39 +9,48 @@ import {
   getDropdownSearchTrackIds,
 } from 'client/features/dropdownSearch/dropdownSearchSelectors';
 
-import DropdownSearchResultUser from './DropdownSearchResultUser';
-import DropdownSearchResultTrack from './DropdownSearchResultTrack';
+import DropdownSearchResultsRowUser from './DropdownSearchResultsRowUser';
+import DropdownSearchResultsRowTrack from './DropdownSearchResultsRowTrack';
+import DropdownSearchResultsTitle from './DropdownSearchResultsTitle';
+
+const dropdownSearchShowCount = 3;
+
+// Render the artists/users results section.
+function ArtistResults(userIds) {
+  return (
+    <ul>
+      <DropdownSearchResultsTitle>ARTISTS</DropdownSearchResultsTitle>
+      {userIds
+        .slice(0, dropdownSearchShowCount)
+        .map(userId => <DropdownSearchResultsRowUser key={userId} userId={userId} />)}
+    </ul>
+  );
+}
+
+// Render the tracks results section.
+function TrackResults(trackIds) {
+  return (
+    <ul>
+      <DropdownSearchResultsTitle>TRACKS</DropdownSearchResultsTitle>
+      {trackIds
+        .slice(0, dropdownSearchShowCount)
+        .map(trackId => <DropdownSearchResultsRowTrack key={trackId} trackId={trackId} />)}
+      {
+        <li className="dropdown-item-show-all">
+          <Link to="" className="dropdown-show-all-link" onMouseDown={() => {}}>
+            SHOW ALL TRACKS
+          </Link>
+        </li>
+      }
+    </ul>
+  );
+}
 
 function DropdownSearchResults({ userIds, trackIds, dropdownShown }) {
-  const dropdownSearchShowCount = 3;
-
   return (
     <div className={`nav-search-result ${dropdownShown && 'show'}`}>
-      {userIds.length !== 0 &&
-        <div className="dropdown-title">
-          ARTISTS
-        </div>}
-      <ul className="dropdown-list">
-        {userIds
-          .slice(0, dropdownSearchShowCount)
-          .map(userId => <DropdownSearchResultUser key={userId} userId={userId} />)}
-      </ul>
-      {trackIds.length !== 0 &&
-        <div className="dropdown-title">
-          TRACKS
-        </div>}
-
-      <ul className="dropdown-list">
-        {trackIds
-          .slice(0, dropdownSearchShowCount)
-          .map(trackId => <DropdownSearchResultTrack key={trackId} trackId={trackId} />)}
-        {trackIds.length !== 0 &&
-          <li className="dropdown-item-show-all">
-            <Link to="" className="dropdown-show-all-link" onMouseDown={() => {}}>
-              SHOW ALL
-            </Link>
-          </li>}
-      </ul>
+      {userIds.length !== 0 && ArtistResults(userIds)}
+      {trackIds.length !== 0 && TrackResults(trackIds)}
     </div>
   );
 }
