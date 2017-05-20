@@ -4,6 +4,7 @@ import Avatar from 'client/common/components/Avatar';
 import { Link } from 'react-router-dom';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'client/common/constants/RouteConsts';
 import styled from 'styled-components';
+import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,23 +15,40 @@ const InnerWrapper = styled.div`
   margin-top: 10px;
 `;
 
+const Title = styled(Link)`
+    display: -webkit-box;
+    
+    font-size: 1.05rem;
+    font-weight: bold;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 40px;
+`;
+
+const Username = styled(Link)`
+    display: inline-block;
+    margin-left: 10px;
+    color: ${FONT_COLOR_SECONDARY};
+    font-size: 0.9rem;
+`;
+
 function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
   const trackUrl = `${TRACK_PROFILE_ROUTE}/${trackId}`;
   const userUrl = `${USER_PROFILE_ROUTE}/${userId}`;
 
   return (
     <Wrapper>
-      <Link to={trackUrl} className="song-card-title" title={title}>
+      <Title to={trackUrl} title={title}>
         {title}
-      </Link>
-
+      </Title>
       <InnerWrapper>
         <Link to={userUrl} title={username}>
           <Avatar src={userAvatar} />
         </Link>
-        <Link to={userUrl} className="song-card-username" title={username}>
+        <Username to={userUrl} title={username}>
           {username}
-        </Link>
+        </Username>
       </InnerWrapper>
     </Wrapper>
   );

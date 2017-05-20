@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NotificationManager } from 'react-notifications';
+import styled from 'styled-components';
 import SongCardButton from './SongCardButton';
 // import styles from './SongCard.css';
-import styled from 'styled-components';
 
 function createInfo(msg) {
   NotificationManager.info(msg);
@@ -19,7 +19,7 @@ function SongCardControls({ liked, handleToggleLike, handleCopyToClipboard }) {
       <SongCardButton
         title={liked ? 'Unlike' : 'Like'}
         name="heart"
-        active={true}
+        active
         onClick={handleToggleLike}
       />
       <SongCardButton
@@ -32,11 +32,7 @@ function SongCardControls({ liked, handleToggleLike, handleCopyToClipboard }) {
         name="external-link"
         onClick={() => createInfo('Added to repose')}
       />
-      <SongCardButton
-        title="Copy to clipboard"
-        name="clipboard"
-        onClick={handleCopyToClipboard}
-      />
+      <SongCardButton title="Copy to clipboard" name="clipboard" onClick={handleCopyToClipboard} />
     </Wrapper>
   );
 }

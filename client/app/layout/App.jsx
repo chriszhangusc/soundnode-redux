@@ -23,7 +23,7 @@ import {
   SIDEBAR_WIDTH_DESKTOP_LG,
   SIDEBAR_WIDTH_4K,
 } from 'client/app/css/variables';
-import { BACKGROUND_COLOR, LIGHTER_GRAY } from 'client/app/css/colors';
+import { FONT_COLOR_PRIMARY, BACKGROUND_COLOR, LIGHTER_GRAY } from 'client/app/css/colors';
 import { media } from 'client/app/css/styleUtils';
 
 // Global CSS
@@ -41,7 +41,7 @@ injectGlobal`
   }
 
   body {
-    color: white;
+    color: ${FONT_COLOR_PRIMARY};
     background-color: ${BACKGROUND_COLOR};
     padding-top: ${NAV_BAR_HEIGHT}px;
   }

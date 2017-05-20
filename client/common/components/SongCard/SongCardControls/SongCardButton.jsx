@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY, THEME_COLOR } from 'client/app/css/colors';
 
 const OuterButton = styled.button`
-  color: ${props => props.active ? THEME_COLOR : FONT_COLOR_SECONDARY};
+  color: ${props => (props.active ? THEME_COLOR : FONT_COLOR_SECONDARY)};
   padding: 4px;
   border: none;
   outline: none;

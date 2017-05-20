@@ -9,6 +9,11 @@ import {
 } from 'client/features/dropdownSearch/dropdownSearchActions';
 import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 
+const DROPDOWN_SEARCH_INPUT_WIDTH = '320px';
+const DROPDOWN_SEARCH_INPUT_WIDTH_MD = '400px';
+const DROPDOWN_SEARCH_INPUT_WIDTH_LG = '470px';
+const DROPDOWN_SEARCH_INPUT_WIDTH_4K = '550px';
+
 const StyledSearchInput = styled.input`
     display: inline-block;
     border: none;
@@ -19,13 +24,13 @@ const StyledSearchInput = styled.input`
     border-radius: 5px;
     padding: 6px 10px 6px 30px;
     font-weight: 300;
-    background-color: #333333;
     transition: all 0.2s ease-in-out;
+    background-color: #333333;
     height: 30px;
-    width: 320px;
-    ${media.desktop`width: 400px`}
-    ${media.desktopLG`width: 470px`}
-    ${media.desktop4K`width: 550px`}
+    width: ${DROPDOWN_SEARCH_INPUT_WIDTH};
+    ${media.desktop`width: ${DROPDOWN_SEARCH_INPUT_WIDTH_MD}`}
+    ${media.desktopLG`width: ${DROPDOWN_SEARCH_INPUT_WIDTH_LG}`}
+    ${media.desktop4K`width: ${DROPDOWN_SEARCH_INPUT_WIDTH_4K}`}
 `;
 
 const InputContentWrapper = styled.div`

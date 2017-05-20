@@ -3,17 +3,23 @@ import { HOST } from 'client/common/constants/AppConsts';
 import styled from 'styled-components';
 import { Glyphicon } from 'react-bootstrap';
 
-const NavBarBrandName = styled.span`
+const NavbarBrandName = styled.span`
   margin-left: 15px;
 `;
+
+const NavbarBrand = styled.a`
+  line-height: 70px;
+  font-size: 1.3rem;
+`;
+
 
 function NavHeader() {
   return (
     <div>
-      <a className="navbar-brand" href={HOST}>
+      <NavbarBrand href={HOST}>
         <Glyphicon glyph="headphones" />
-        <NavBarBrandName>Redux Music</NavBarBrandName>
-      </a>
+        <NavbarBrandName>Redux Music</NavbarBrandName>
+      </NavbarBrand>
     </div>
   );
 }
