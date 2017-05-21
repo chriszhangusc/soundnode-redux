@@ -1,10 +1,12 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { AUTH_CALLBACK_ROUTE } from 'client/common/constants/RouteConsts';
-// import { Link } from 'react-router-dom';
+import Avatar from 'client/common/components/Avatar';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { USER_PROFILE_ROUTE } from 'client/common/constants/RouteConsts';
+
 import { doLogin, doLogout } from '../authActions';
 import { getMe } from '../authSelectors';
 
@@ -15,7 +17,7 @@ const AuthWrapper = styled.div`
 `;
 
 const Username = styled.span`
-  margin-right: 10px;
+  margin: 0 10px;
 `;
 
 const LogoutButton = styled.a`
@@ -25,6 +27,7 @@ const LogoutButton = styled.a`
 function Auth({ me, onLogin, onLogout }) {
   const loggedIn = () => (
     <div>
+      <Link to={`${USER_PROFILE_ROUTE}/${me.id}`}><Avatar src={me.avatar_url} /></Link>
       <Username>{me.username}</Username>
       <LogoutButton onClick={onLogout}>Logout</LogoutButton>
     </div>

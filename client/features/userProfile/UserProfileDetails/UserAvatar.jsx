@@ -22,7 +22,6 @@ UserAvatar.defaultProps = {
 UserAvatar.propTypes = {
   src: PropTypes.string.isRequired,
   placeholderSrc: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default UserAvatar;

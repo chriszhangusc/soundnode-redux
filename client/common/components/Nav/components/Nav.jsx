@@ -13,6 +13,7 @@ const Navbar = styled.nav`
   left: 0;
   background-color: ${LIGHT_BLACK};
   height: 70px;
+  z-index: 1000;
 `;
 
 const NavBarContentWrapper = styled.div`
