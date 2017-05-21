@@ -1,7 +1,13 @@
 import { CLIENT_ID } from 'client/common/constants/authConsts';
-import { userSchema, trackSchema, commentArraySchema, trackArraySchema, userArraySchema } from 'client/app/schema';
+import {
+  userSchema,
+  trackSchema,
+  commentArraySchema,
+  trackArraySchema,
+  userArraySchema,
+} from 'client/app/schema';
 
-import { normalizeResponse, constructFetchUrl, makeRequest } from './api-utils';
+import { normalizeResponse, constructFetchUrl, makeRequest } from './apiUtils';
 
 const SC_API_V1 = 'https://api.soundcloud.com/';
 const LIMIT = 20;
@@ -16,7 +22,7 @@ export function fetchTracks(filters, limit) {
     ...filters,
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
-// console.log(fetchUrl);
+  // console.log(fetchUrl);
   // return makeRequest(fetchUrl)
   //         .then(response => normalizeResponse(response, trackArraySchema));
   return makeRequest(fetchUrl, trackArraySchema);
@@ -46,7 +52,7 @@ export function fetchTrack(id) {
   const endpoint = `/tracks/${id}`;
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id: CLIENT_ID });
   return makeRequest(fetchUrl, trackSchema);
-          // .then(response => normalizeResponse(response, trackSchema));
+  // .then(response => normalizeResponse(response, trackSchema));
 }
 
 export function fetchUser(userId) {
@@ -54,7 +60,7 @@ export function fetchUser(userId) {
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id: CLIENT_ID });
   console.log(fetchUrl);
   return makeRequest(fetchUrl, userSchema);
-          // .then(response => normalizeResponse(response, artistSchema));
+  // .then(response => normalizeResponse(response, artistSchema));
 }
 
 export function fetchUserTracks(userId) {
@@ -68,29 +74,40 @@ export function fetchUserTracks(userId) {
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
   // console.log(fetchUrl);
   return makeRequest(fetchUrl, trackArraySchema);
-          // .then(response => normalizeResponse(response, trackArraySchema));
+  // .then(response => normalizeResponse(response, trackArraySchema));
 }
 
 export function fetchMoreArtistTracks(nextHref) {
   return makeRequest(nextHref, trackArraySchema);
-          // .then(response => normalizeResponse(response, trackArraySchema));
+  // .then(response => normalizeResponse(response, trackArraySchema));
 }
 
-// This is the initial fetch
-export function fetchTrackComments(trackId) {
-  const endpoint = `/tracks/${trackId}/comments`;
+// http://api.soundcloud.com/users/250047142/favorites?linked_partitioning=1&limit=5000&oauth_token=1-136957-250047142-032114f80b26f
+export function fetchFavoriteTrackIds(userId) {
+  const endpoint = `/users/${userId}/favorites/ids`;
   const queryParams = {
     client_id: CLIENT_ID,
-    limit: LIMIT,
+    limit: 5000, // ALL
     linked_partitioning: 1,
-    offset: 0,
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
-  return makeRequest(fetchUrl)
-          .then(response => normalizeResponse(response, commentArraySchema));
+  return fetch(fetchUrl).then(response => response.json()).then(result => result.collection);
 }
 
-export function fetchMoreTrackComments(nextHref) {
-  return makeRequest(nextHref)
-          .then(response => normalizeResponse(response, commentArraySchema));
+// https://api.soundcloud.com/users/250047142/favorites/322834362?client_id=hV0x3cye6r1htAwy737V22PTsfd7HtOh&oauth_token=1-277537-250047142-4e12bb6dd78bc
+export function likeTrack(userId, trackId) {
+  const endpoint = `/users/${userId}/favorites/${trackId}`;
+  const queryParams = { client_id: CLIENT_ID };
+  const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
+  return fetch(fetchUrl, { method: 'PUT' });
 }
+
+export function dislikeTrack(userId, trackId) {
+  const endpoint = `/users/${userId}/favorites/${trackId}`;
+  const queryParams = { client_id: CLIENT_ID };
+  const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
+  return fetch(fetchUrl, { method: 'DELETE' });
+}
+
+// PUT https://api.soundcloud.com/users/250047142/favorites/322834362?client_id=hV0x3cye6r1htAwy737V22PTsfd7HtOh&oauth_token=1-277537-250047142-4e12bb6dd78bc
+// DELETE https://api.soundcloud.com/users/250047142/favorites/322834362?client_id=hV0x3cye6r1htAwy737V22PTsfd7HtOh&oauth_token=1-277537-250047142-4e12bb6dd78bc

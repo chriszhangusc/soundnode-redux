@@ -19,7 +19,7 @@ function SongCardControls({ liked, handleToggleLike, handleCopyToClipboard }) {
       <SongCardButton
         title={liked ? 'Unlike' : 'Like'}
         name="heart"
-        active
+        active={liked}
         onClick={handleToggleLike}
       />
       <SongCardButton
@@ -36,10 +36,6 @@ function SongCardControls({ liked, handleToggleLike, handleCopyToClipboard }) {
     </Wrapper>
   );
 }
-
-SongCardControls.defaultProps = {
-  liked: true,
-};
 
 SongCardControls.propTypes = {
   liked: PropTypes.bool.isRequired,

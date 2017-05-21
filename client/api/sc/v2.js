@@ -2,7 +2,7 @@ import { CLIENT_ID } from 'client/common/constants/authConsts';
 import { API_HOST } from 'client/common/constants/AppConsts';
 import { trackArraySchema } from 'client/app/schema';
 
-import { constructFetchUrl, makeRequest } from './api-utils';
+import { constructFetchUrl, makeRequest } from './apiUtils';
 
 const SC_API_V2 = '/sc/api-v2/';
 

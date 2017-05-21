@@ -5,7 +5,8 @@ import { AUTH_CALLBACK_ROUTE } from 'client/common/constants/RouteConsts';
 // import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { login } from '../authActions';
+import { doLogin, doLogout } from '../authActions';
+import { getMe } from '../authSelectors';
 
 const AuthWrapper = styled.div`
   display: inline-block;
@@ -13,22 +14,52 @@ const AuthWrapper = styled.div`
   margin-left: 20px;
 `;
 
-function Auth({ onLogin }) {
+const Username = styled.span`
+  margin-right: 10px;
+`;
+
+const LogoutButton = styled.a`
+
+`;
+
+function Auth({ me, onLogin, onLogout }) {
+  const loggedIn = () => (
+    <div>
+      <Username>{me.username}</Username>
+      <LogoutButton onClick={onLogout}>Logout</LogoutButton>
+    </div>
+  );
+
+  const loggedOut = () => <a onClick={onLogin}>Login</a>;
+
   return (
     <AuthWrapper>
-      <a onClick={onLogin}>Login</a>
+      {me ? loggedIn() : loggedOut()}
     </AuthWrapper>
   );
 }
 
-Auth.propTypes = {
-  onLogin: PropTypes.func.isRequired,
+Auth.defaultProps = {
+  me: null,
 };
 
-function mapDispatchToProps(dispatch) {
+Auth.propTypes = {
+  me: PropTypes.object,
+  onLogin: PropTypes.func.isRequired,
+  onLogout: PropTypes.func.isRequired,
+};
+
+function mapStateToProps(state) {
   return {
-    onLogin: bindActionCreators(login, dispatch),
+    me: getMe(state),
   };
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+function mapDispatchToProps(dispatch) {
+  return {
+    onLogin: bindActionCreators(doLogin, dispatch),
+    onLogout: bindActionCreators(doLogout, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

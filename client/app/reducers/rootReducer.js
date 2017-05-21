@@ -6,6 +6,8 @@ import playerReducer from 'client/features/player/playerReducer';
 import playlistReducer from 'client/features/playlist/playlistReducer';
 import userProfileReducer from 'client/features/userProfile/userProfileReducer';
 import dropdownSearchReducer from 'client/features/dropdownSearch/dropdownSearchReducer';
+import authReducer from 'client/features/auth/authReducer';
+
 import { dropdownSearchEpic } from 'client/features/dropdownSearch/dropdownSearchActions';
 
 export const rootEpic = combineEpics(
@@ -22,4 +24,5 @@ export const rootReducer = combineReducers({
   // Single track profile page
   // track: trackReducer,
   dropdownSearch: dropdownSearchReducer,
+  auth: authReducer,
 });
