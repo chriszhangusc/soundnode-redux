@@ -1,6 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
-import { fetchTracks, fetchUsers } from 'client/api/sc/v1';
+import { fetchTracks, fetchUsers } from 'client/common/api/sc/v1';
 
 import {
   dropdownTracksReceived,

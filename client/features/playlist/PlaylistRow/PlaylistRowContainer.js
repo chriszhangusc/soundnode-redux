@@ -5,7 +5,7 @@ import { changeSongAndPlay } from 'client/features/player/playerActions';
 
 import { isTrackLiked, startLikeSong, startUnlikeSong } from 'client/features/user';
 
-import PlaylistItem from '../components/PlaylistItem';
+import PlaylistRow from './PlaylistRow';
 
 const mapStateToProps = (state, { trackId, index }) => {
   // console.log(typeof trackId);
@@ -31,4 +31,4 @@ const mapDispatchToProps = (dispatch, { trackId }) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaylistItem);
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistRow);

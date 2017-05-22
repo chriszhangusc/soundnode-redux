@@ -4,7 +4,7 @@ import IconButton from 'client/common/components/Buttons/IconButton';
 import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 import styled from 'styled-components';
 
-const PlaylistTitleWrapper = styled.div`
+const PlaylistHeaderWrapper = styled.div`
   margin-bottom: 10px;
   text-align: center;
   color: ${FONT_COLOR_SECONDARY};
@@ -16,30 +16,30 @@ const TitleColumn = styled.div`
   margin: 10px;
 `;
 
-const PlaylistTitleIconContainer = styled.div`
+const PlaylistHeaderIconContainer = styled.div`
   display: inline-block;
   margin-right: 12px;
   float: right;
 `;
 
-function PlaylistTitle({ handleClearPlayQueue }) {
+function PlaylistHeader({ handleClearPlayQueue }) {
   return (
-    <PlaylistTitleWrapper>
+    <PlaylistHeaderWrapper>
       <TitleColumn>TRACKS</TitleColumn> | <TitleColumn className="labelColumn">ARTIST</TitleColumn>
-      <PlaylistTitleIconContainer>
+      <PlaylistHeaderIconContainer>
         <IconButton
           title="Clear play queue"
           btnClassName=""
           iconClassName="fa fa-trash"
           onClick={handleClearPlayQueue}
         />
-      </PlaylistTitleIconContainer>
-    </PlaylistTitleWrapper>
+      </PlaylistHeaderIconContainer>
+    </PlaylistHeaderWrapper>
   );
 }
 
-PlaylistTitle.propTypes = {
+PlaylistHeader.propTypes = {
   handleClearPlayQueue: PropTypes.func.isRequired,
 };
 
-export default PlaylistTitle;
+export default PlaylistHeader;

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { clearPlayQueue } from 'client/features/playlist/playlistActions';
 import { getPlaylistByMode, isPlaylistHidden } from 'client/features/playlist/playlistSelectors';
-import Playlist from '../components/Playlist';
+import Playlist from './Playlist';
 
 const mapStateToProps = state => ({
   playlistTrackIds: getPlaylistByMode(state),

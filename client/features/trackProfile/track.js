@@ -1,7 +1,7 @@
 import { trackSchema, commentArraySchema } from 'client/app/schema';
 import { CALL_API } from 'client/app/middlewares/apiMiddleware';
 import { notificationFailure } from 'client/features/notification';
-import * as v1 from 'client/api/sc/v1';
+import * as v1 from 'client/common/api/sc/v1';
 
 /* Constants */
 export const TRACK_REQUEST = 'redux-music/track/REQUEST';

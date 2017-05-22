@@ -1,6 +1,6 @@
 /* Action Creators */
 import { formatGenre } from 'client/common/utils/FormatUtils';
-import { fetchChartsFromSC } from 'client/api/sc/v2';
+import { fetchChartsFromSC } from 'client/common/api/sc/v2';
 import { notificationFailure } from 'client/features/notification';
 import { updateShufflePlaylistIfNeeded } from 'client/features/playlist/playlistActions';
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-function PlaylistItem({
+function PlaylistRow({
   title,
   artistName,
   liked,
@@ -50,18 +50,7 @@ function PlaylistItem({
   );
 }
 
-// PlaylistItem.defaultProps = {
-//   handleChangeSong: defaultEventHandlerFactory('handleChangeSong'),
-//   handleLikeSong: defaultEventHandlerFactory('handleLikeSong'),
-//   handleUnlikeSong: defaultEventHandlerFactory('handleUnlikeSong'),
-//   title: '',
-//   artistName: '',
-//   liked: false,
-//   active: false,
-//   index: 0,
-// };
-
-PlaylistItem.propTypes = {
+PlaylistRow.propTypes = {
   handleChangeSong: PropTypes.func.isRequired,
   handleLikeSong: PropTypes.func.isRequired,
   handleUnlikeSong: PropTypes.func.isRequired,
@@ -72,4 +61,4 @@ PlaylistItem.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
-export default PlaylistItem;
+export default PlaylistRow;

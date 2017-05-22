@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchGenreList } from 'client/api/common/genre-list';
+import { fetchGenreList } from 'client/common/api/common/genre-list';
 import { updateGenreList } from 'client/features/charts/chartsActions';
 import { getGenreList } from 'client/features/charts/chartsSelectors';
 import GenreList from './GenreList';
