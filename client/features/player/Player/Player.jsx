@@ -40,12 +40,15 @@ const PlayerWrapper = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
+  height: 70px;
   background-color: ${LIGHT_BLACK};
   border-top: 1px solid ${BLACK};
   z-index: ${Z_MAX};
 `;
 
 const PlayerLayout = styled.div`
+  width: 70%;
+  margin: 0 auto;
   display: flex;
   padding: 8px;
 `;
@@ -58,7 +61,7 @@ function Player({ playerTrack }) {
   // just pass track down and let the children's  do their job
   return (
     <PlayerWrapper>
-      <PlayerLayout className="container">
+      <PlayerLayout>
         <PlayerAudio playerTrack={playerTrack} />
         <PlayerTrackInfo playerTrack={playerTrack} />
         <PlayerControls />

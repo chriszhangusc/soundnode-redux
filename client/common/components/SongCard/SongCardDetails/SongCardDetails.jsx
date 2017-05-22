@@ -17,7 +17,6 @@ const InnerWrapper = styled.div`
 
 const Title = styled(Link)`
     display: -webkit-box;
-    
     font-size: 1.05rem;
     font-weight: bold;
     overflow: hidden;
