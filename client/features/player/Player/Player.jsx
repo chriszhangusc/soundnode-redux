@@ -47,7 +47,7 @@ const PlayerWrapper = styled.div`
 `;
 
 const PlayerLayout = styled.div`
-  width: 70%;
+  width: 60%;
   margin: 0 auto;
   display: flex;
   padding: 8px;

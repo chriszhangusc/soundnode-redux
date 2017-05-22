@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { THEME_COLOR, WHITE } from 'client/app/css/colors';
 
 const Wrapper = styled.div`
+  font-size: 1rem;
   margin-left: 20px;
 `;
 

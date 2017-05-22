@@ -6,6 +6,7 @@ import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 import defaultArtworkImage from 'assets/images/default-artwork.png';
 
 const PlayerTrackInfoWrapper = styled.div`
+  width: 200px;
   display: flex;
   align-items: center;
   justify-content: right;
@@ -22,8 +23,8 @@ const TrackTitle = styled(Link)`
   overflow: hidden;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  height: 32px;
-  width: 200px;
+  max-height: 32px;
+  max-width: 200px;
   font-size: 0.9rem;
 `;
 
