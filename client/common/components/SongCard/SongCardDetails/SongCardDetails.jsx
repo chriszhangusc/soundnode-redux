@@ -12,7 +12,9 @@ const Wrapper = styled.div`
 `;
 
 const InnerWrapper = styled.div`
+  display: flex;
   margin-top: 10px;
+  align-items: center;
 `;
 
 const Title = styled(Link)`
@@ -29,6 +31,10 @@ const Username = styled(Link)`
     display: inline-block;
     margin-left: 10px;
     color: ${FONT_COLOR_SECONDARY};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px; /* Vertical align!! It should be equal to the height of avatar */
+    max-width: 160px;
     font-size: 0.9rem;
 `;
 
