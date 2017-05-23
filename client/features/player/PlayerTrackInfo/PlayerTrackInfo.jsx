@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 import defaultArtworkImage from 'assets/images/default-artwork.png';
+import { media } from 'client/app/css/styleUtils';
 
 const PlayerTrackInfoWrapper = styled.div`
   width: 200px;
@@ -25,13 +26,15 @@ const TrackTitle = styled(Link)`
   -webkit-box-orient: vertical;
   max-height: 32px;
   max-width: 200px;
-  font-size: 0.9rem;
+  ${media.desktop4K`font-size: 0.9rem;`}
+  ${media.desktopLG`font-size: 0.8rem;`}
 `;
 
 const ArtistName = styled(Link)`
   display: inline-block;
   color: ${FONT_COLOR_SECONDARY};
-  font-size: 0.9rem;
+  ${media.desktop4K`font-size: 0.8rem;`}
+  ${media.desktopLG`font-size: 0.75rem;`}
 `;
 
 const DetailsWrapper = styled.div`
