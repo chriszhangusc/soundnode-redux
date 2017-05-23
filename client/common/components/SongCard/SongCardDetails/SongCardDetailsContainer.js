@@ -7,9 +7,9 @@ const mapStateToProps = (state, { track }) => {
   return {
     trackId: track.id,
     title: track.title,
-    userAvatar: user && user.avatarUrl,
-    username: user && user.username,
-    userId: user && user.id,
+    userAvatar: user.avatarUrl,
+    username: user.username,
+    userId: user.id,
   };
 };
 

@@ -5,6 +5,7 @@ import entitiesReducer from 'client/features/entities/entitiesReducer';
 import playerReducer from 'client/features/player/playerReducer';
 import playlistReducer from 'client/features/playlist/playlistReducer';
 import userProfileReducer from 'client/features/userProfile/userProfileReducer';
+import trackProfileReducer from 'client/features/trackProfile/trackProfileReducer';
 import dropdownSearchReducer from 'client/features/dropdownSearch/dropdownSearchReducer';
 import authReducer from 'client/features/auth/authReducer';
 
@@ -21,8 +22,8 @@ export const rootReducer = combineReducers({
   player: playerReducer,
   // Single user profile page
   userProfile: userProfileReducer,
+  trackProfile: trackProfileReducer,
   // Single track profile page
-  // track: trackReducer,
   dropdownSearch: dropdownSearchReducer,
   auth: authReducer,
 });

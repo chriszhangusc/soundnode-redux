@@ -4,7 +4,6 @@ import SongCard from 'client/common/components/SongCard';
 import Spinner from 'client/common/components/Spinner';
 import infiniteScroll from 'client/common/hocs/InfiniteScroll';
 import styled from 'styled-components';
-import shortid from 'shortid';
 
 const Wrapper = styled.div`
   padding-bottom: 70px;
@@ -19,7 +18,7 @@ function renderSongCardList(trackIds, playlistName) {
   return (
     <SongCardListWrapper>
       {trackIds.map(trackId => (
-        <SongCard trackId={trackId} playlistName={playlistName} key={shortid.generate()} />
+        <SongCard trackId={trackId} playlistName={playlistName} key={trackId.toString()} />
       ))}
     </SongCardListWrapper>
   );

@@ -10,9 +10,9 @@ import {
 const initialState = {
   userFetching: false,
   tracksFetching: false,
-  userId: undefined,
+  userId: null,
   trackIds: [],
-  tracksNextHref: undefined,
+  tracksNextHref: null,
 };
 
 export default function userReducer(state = initialState, action) {

@@ -8,13 +8,14 @@ import {
 } from 'client/common/constants/RouteConsts';
 import Charts from 'client/features/charts/Charts';
 import UserProfile from 'client/features/userProfile/UserProfile';
-import { NotificationContainer } from 'react-notifications';
+import TrackProfile from 'client/features/trackProfile/TrackProfile';
 import Player from 'client/features/player/Player';
 import Playlist from 'client/features/playlist/Playlist';
 import Nav from 'client/common/components/Nav';
 import Sidebar from 'client/common/components/Sidebar';
 import Callback from 'client/common/components/Callback';
 import GlobalEvents from 'client/features/global/GlobalEvents';
+import { NotificationContainer } from 'react-notifications';
 
 import styled, { injectGlobal } from 'styled-components';
 import {
@@ -99,7 +100,7 @@ function Main() {
         <Switch>
           <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
           <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
-          <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} />
+          <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} component={TrackProfile} />
           <Redirect to={CHARTS_ROUTE} />
         </Switch>
         <Player />

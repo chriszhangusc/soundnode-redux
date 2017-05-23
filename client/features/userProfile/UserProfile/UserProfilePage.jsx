@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import UserProfileTracks from 'client/features/userProfile/UserProfileTracks';
 import UserProfileDetails from 'client/features/userProfile/UserProfileDetails';
+import { Grid } from 'react-bootstrap';
 
 const UserProfilePage = ({ userId, trackCount }) => (
-  <div className="container-fluid">
+  <Grid fluid>
     <UserProfileDetails userId={userId} />
     <h3>Tracks ({trackCount}) :</h3>
     <UserProfileTracks />
-  </div>
+  </Grid>
 );
 
 UserProfilePage.propTypes = {
