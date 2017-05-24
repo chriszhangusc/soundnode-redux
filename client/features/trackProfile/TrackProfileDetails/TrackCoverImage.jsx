@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import { getProfiledTrack } from 'client/features/trackProfile/trackProfileSelectors';
 import { getLargeVersion } from 'client/common/utils/imageUtils';
 import { isTrackActive, isTrackPlaying } from 'client/features/player/playerSelectors';
+import { FormattedNumber } from 'react-intl';
 
 const Wrapper = styled.div`
   width: 350px;
   height: 350px;
   position: relative;
-  font-size: 0;
   display: flex;
 `;
 
@@ -43,15 +43,51 @@ const CoverImage = styled.img`
   height: 100%;
 `;
 
-// Extract TrackButton
+const CoverImageDetailsWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  & i {
+    display: inline-block;
+  }
+  align-items: center;
+  justify-content: center;
 
-function TrackCoverImage({ src, playing, active, handleImageClick, liked }) {
+  & span {
+    font-size: 1rem;
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 5px;
+  }
+`;
+
+// Extract TrackButton
+function TrackCoverImage({
+  src,
+  playing,
+  active,
+  handleImageClick,
+  liked,
+  playbackCount,
+  likesCount,
+}) {
   return (
     <Wrapper>
       <TrackButton active={active}>
         {playing ? <i className="fa fa-pause" /> : <i className="fa fa-play" />}
       </TrackButton>
       <CoverImage src={src} />
+      <CoverImageDetailsWrapper>
+        <span>
+          <i className="fa fa-play" /> <FormattedNumber value={playbackCount || 0} />
+        </span>
+        <span>
+          <i className="fa fa-heart" /> <FormattedNumber value={likesCount || 0} />
+        </span>
+      </CoverImageDetailsWrapper>
     </Wrapper>
   );
 }
@@ -73,11 +109,14 @@ TrackCoverImage.propTypes = {
 
 function mapStateToProps(state) {
   const track = getProfiledTrack(state);
+  console.log(track);
   return {
     src: track && getLargeVersion(track.artworkUrl),
     playing: track && isTrackPlaying(state, track.id),
     active: track && isTrackActive(state, track.id),
     liked: false,
+    likesCount: track && track.favoritingsCount,
+    playbackCount: track && track.playbackCount,
   };
 }
 
