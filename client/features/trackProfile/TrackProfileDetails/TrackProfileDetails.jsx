@@ -8,13 +8,15 @@ import TrackTitle from './TrackTitle';
 import TrackUsername from './TrackUsername';
 import TrackCoverImage from './TrackCoverImage';
 import TrackDescription from './TrackDescription';
+import TrackButtonGroup from './TrackButtonGroup';
 
 const Wrapper = styled.div`
   display: flex;
 `;
 
 const ColumnWrapper = styled.div`
-  width: 100%;
+  position: relative;
+  max-width: 800px;
   margin-left: 20px;
   display: inline-flex;
   flex-direction: column;
@@ -26,9 +28,10 @@ function TrackProfileDetails({ title, username, description }) {
     <Wrapper>
       <TrackCoverImage />
       <ColumnWrapper>
-        <TrackTitle>{ title }</TrackTitle>
-        <TrackUsername>{ username }</TrackUsername>
-        <TrackDescription>{ description }</TrackDescription>
+        <TrackTitle>{title}</TrackTitle>
+        <TrackUsername>{username}</TrackUsername>
+        <TrackDescription>{description}</TrackDescription>
+        <TrackButtonGroup />
       </ColumnWrapper>
     </Wrapper>
   );
@@ -48,12 +51,13 @@ TrackProfileDetails.defaultProps = {
 
 function mapStateToProps(state) {
   const track = getProfiledTrack(state);
-console.log(track);
+  console.log(track);
   const user = track && getUserByTrackId(state, track.id);
   // console.log(user);
   return {
     title: track && track.title,
     username: user && user.username,
+    description: track && track.description,
   };
 }
 
