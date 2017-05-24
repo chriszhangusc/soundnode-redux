@@ -1,6 +1,6 @@
 import SC from 'soundcloud';
 import { CLIENT_ID, REDIRECT_URI } from 'client/common/constants/authConsts';
-import { fetchFavoriteTrackIds, likeTrack, dislikeTrack } from 'client/api/sc/v1';
+import { fetchFavoriteTrackIds, likeTrack, dislikeTrack } from 'client/common/api/sc/v1';
 import {
   AUTH_USER_LOGIN_SUCCESS,
   AUTH_USER_LOGOUT,

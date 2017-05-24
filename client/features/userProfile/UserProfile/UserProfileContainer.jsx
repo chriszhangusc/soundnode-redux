@@ -5,9 +5,9 @@ import { loadUserProfilePage, clearUserState } from 'client/features/userProfile
 import { getProfiledUserId, getProfiledUser, isUserFetching } from 'client/features/userProfile/userProfileSelectors';
 import Spinner from 'client/common/components/Spinner';
 
-import UserProfilePage from './UserProfilePage';
+import UserProfile from './UserProfile';
 
-class UserProfilePageContainer extends Component {
+class UserProfileContainer extends Component {
   componentWillMount() {
     const { dispatch, match } = this.props;
     const userId = match.params.userId;
@@ -22,7 +22,7 @@ class UserProfilePageContainer extends Component {
   render() {
     return (
       <div>
-        {this.props.userId && <UserProfilePage {...this.props} />}
+        {this.props.userId && <UserProfile {...this.props} />}
         {this.props.fetching && <Spinner />}
       </div>
     );
@@ -39,16 +39,16 @@ const mapStateToProps = (state) => {
   };
 };
 
-UserProfilePageContainer.propTypes = {
+UserProfileContainer.propTypes = {
   match: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   userId: PropTypes.number,
   fetching: PropTypes.bool,
 };
 
-UserProfilePageContainer.defaultProps = {
+UserProfileContainer.defaultProps = {
   userId: null,
   fetching: false,
 };
 
-export default connect(mapStateToProps)(UserProfilePageContainer);
+export default connect(mapStateToProps)(UserProfileContainer);

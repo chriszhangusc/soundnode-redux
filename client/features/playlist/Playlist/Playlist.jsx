@@ -7,11 +7,10 @@ import styled from 'styled-components';
 import { BACKGROUND_COLOR_SECONDARY } from 'client/app/css/colors';
 import { PLAYLIST_WIDTH_DESKTOP, PLAYLIST_WIDTH_DESKTOP_LG, PLAYLIST_WIDTH_DESKTOP_4K } from 'client/app/css/variables';
 import { media } from 'client/app/css/styleUtils';
-import PlaylistItemContainer from '../containers/PlaylistItemContainer';
-import PlaylistTitle from './PlaylistTitle';
+import PlaylistRow from '../PlaylistRow';
+import PlaylistHeader from '../PlaylistHeader';
 
 const PlaylistWrapper = styled.div`
-    width: 350px;
     ${media.desktop`
       width: ${PLAYLIST_WIDTH_DESKTOP};
       transform: ${props => (props.playlistHidden ? `translateX(${PLAYLIST_WIDTH_DESKTOP})` : 'translateX(0)')};
@@ -45,11 +44,11 @@ function Playlist(props) {
   // Do not forget to pass down props to styled components if necessary.
   return (
     <PlaylistWrapper {...props}>
-      <PlaylistTitle {...props} />
+      <PlaylistHeader {...props} />
       <ul className="playlist-list">
         {playlistTrackIds &&
           playlistTrackIds.map((trackId, idx) => (
-            <PlaylistItemContainer trackId={trackId} index={idx + 1} key={shortid.generate()} />
+            <PlaylistRow trackId={trackId} index={idx + 1} key={shortid.generate()} />
           ))}
       </ul>
     </PlaylistWrapper>

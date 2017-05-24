@@ -5,6 +5,7 @@ import { getCurrentPlayerTrack } from 'client/features/player/playerSelectors';
 import styled from 'styled-components';
 import { BLACK, LIGHT_BLACK } from 'client/app/css/colors';
 import { Z_MAX } from 'client/app/css/variables';
+import { media } from 'client/app/css/styleUtils';
 
 import PlayerAudio from '../PlayerAudio';
 import PlayerControls from '../PlayerControls';
@@ -17,35 +18,21 @@ const mapStateToProps = state => ({
   playerTrack: getCurrentPlayerTrack(state),
 });
 
-// .player {
-//     // Fix it on bottom left.
-//     position: fixed;
-//     left: 0;
-//     bottom: 0;
-//     width: 100%;
-//     background-color: $player-bg-color;
-//     border-top: 1px solid $player-border-color;
-//     -moz-user-select: none;
-//     -webkit-user-select: none;
-//     -ms-user-select: none;
-//     z-index: $z-max; // Make sure it is always on top
-
-//     .song-card-details {
-//         overflow: hidden;
-//     }
-// }
-
 const PlayerWrapper = styled.div`
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
+  height: 70px;
   background-color: ${LIGHT_BLACK};
   border-top: 1px solid ${BLACK};
   z-index: ${Z_MAX};
 `;
 
 const PlayerLayout = styled.div`
+  ${media.desktop4K`width: 60%;`}
+  ${media.desktopLG`width: 70%;`}
+  margin: 0 auto;
   display: flex;
   padding: 8px;
 `;
@@ -58,7 +45,7 @@ function Player({ playerTrack }) {
   // just pass track down and let the children's  do their job
   return (
     <PlayerWrapper>
-      <PlayerLayout className="container">
+      <PlayerLayout>
         <PlayerAudio playerTrack={playerTrack} />
         <PlayerTrackInfo playerTrack={playerTrack} />
         <PlayerControls />

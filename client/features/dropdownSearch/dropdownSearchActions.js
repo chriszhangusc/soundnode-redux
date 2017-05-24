@@ -1,7 +1,7 @@
 /* DropdownEpic Imports */
 import { Observable } from 'rxjs/Rx';
 // import { ajax } from 'rxjs/observable/dom/ajax';
-import { fetchTracks, fetchUsers } from 'client/api/sc/v1';
+import { fetchTracks, fetchUsers } from 'client/common/api/sc/v1';
 
 import * as TYPES from 'client/features/dropdownSearch/dropdownSearchConsts';
 

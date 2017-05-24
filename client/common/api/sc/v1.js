@@ -22,9 +22,6 @@ export function fetchTracks(filters, limit) {
     ...filters,
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
-  // console.log(fetchUrl);
-  // return makeRequestAndNormalize(fetchUrl)
-  //         .then(response => normalizeResponse(response, trackArraySchema));
   return makeRequestAndNormalize(fetchUrl, trackArraySchema);
 }
 
@@ -38,8 +35,6 @@ export function fetchUsers(filters, limit) {
     ...filters,
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
-  // return makeRequestAndNormalize(fetchUrl)
-  //         .then(response => normalizeResponse(response, userArraySchema));
   return makeRequestAndNormalize(fetchUrl, userArraySchema);
 }
 
@@ -52,7 +47,6 @@ export function fetchTrack(id) {
   const endpoint = `/tracks/${id}`;
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id: CLIENT_ID });
   return makeRequestAndNormalize(fetchUrl, trackSchema);
-  // .then(response => normalizeResponse(response, trackSchema));
 }
 
 export function fetchUser(userId) {
@@ -60,7 +54,6 @@ export function fetchUser(userId) {
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id: CLIENT_ID });
   console.log(fetchUrl);
   return makeRequestAndNormalize(fetchUrl, userSchema);
-  // .then(response => normalizeResponse(response, artistSchema));
 }
 
 export function fetchUserTracks(userId) {

@@ -1,4 +1,4 @@
-import { fetchUser, fetchUserTracks, fetchMoreUserTracks } from 'client/api/sc/v1';
+import { fetchUser, fetchUserTracks, fetchMoreUserTracks } from 'client/common/api/sc/v1';
 import { notificationFailure } from 'client/features/notification';
 
 import {
