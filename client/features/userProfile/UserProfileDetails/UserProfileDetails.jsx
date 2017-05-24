@@ -12,21 +12,6 @@ import UserName from './UserName';
 import UserFollowers from './UserFollowers';
 import UserDescription from './UserDescription';
 
-export const mapStateToProps = (state, { userId }) => {
-  const allUsers = getUsers(state);
-  const user = allUsers[String(userId)];
-  const avatarUrl = user.avatarUrl;
-
-  return {
-    permalinkUrl: user.permalinkUrl,
-    avatarUrl: getLargeVersion(avatarUrl),
-    avatarUrlSmall: getMiniVersion(avatarUrl),
-    username: user.username,
-    followerCount: user.followersCount.toLocaleString(),
-    description: user.description,
-  };
-};
-
 const UserDetailsRowWrapper = styled.div`
   padding: 20px 0;
   display: flex;
@@ -66,6 +51,21 @@ UserProfileDetails.propTypes = {
   followerCount: PropTypes.string.isRequired, // Formatted number
   description: PropTypes.string.isRequired,
   permalinkUrl: PropTypes.string.isRequired,
+};
+
+export const mapStateToProps = (state, { userId }) => {
+  const allUsers = getUsers(state);
+  const user = allUsers[String(userId)];
+  const avatarUrl = user.avatarUrl;
+
+  return {
+    permalinkUrl: user.permalinkUrl,
+    avatarUrl: getLargeVersion(avatarUrl),
+    avatarUrlSmall: getMiniVersion(avatarUrl),
+    username: user.username,
+    followerCount: user.followersCount.toLocaleString(),
+    description: user.description,
+  };
 };
 
 export default connect(mapStateToProps)(UserProfileDetails);

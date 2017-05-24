@@ -1,7 +1,13 @@
 import React from 'react';
+import { Grid } from 'react-bootstrap';
+import TrackProfileDetails from '../TrackProfileDetails';
 
 function TrackProfile() {
-  return <div>TrackProfile</div>;
+  return (
+    <Grid fluid>
+      <TrackProfileDetails />
+    </Grid>
+  );
 }
 
 export default TrackProfile;

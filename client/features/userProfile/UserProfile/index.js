@@ -1,1 +1,1 @@
-export { default } from './UserProfilePageContainer';
+export { default } from './UserProfileContainer';

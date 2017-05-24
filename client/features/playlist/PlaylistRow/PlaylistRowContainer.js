@@ -3,7 +3,7 @@ import { getTrackById, getUserByTrackId } from 'client/features/entities/entitie
 import { isTrackActive } from 'client/features/player/playerSelectors';
 import { changeSongAndPlay } from 'client/features/player/playerActions';
 
-import { isTrackLiked, startLikeSong, startUnlikeSong } from 'client/features/user';
+// import { isTrackLiked, startLikeSong, startUnlikeSong } from 'client/features/user';
 
 import PlaylistRow from './PlaylistRow';
 
@@ -14,7 +14,7 @@ const mapStateToProps = (state, { trackId, index }) => {
   return {
     index,
     active: isTrackActive(state, trackId),
-    liked: isTrackLiked(state, trackId),
+    liked: false,
     title: track.title,
     artistName: artist.username,
   };
@@ -24,10 +24,10 @@ const mapDispatchToProps = (dispatch, { trackId }) => ({
     dispatch(changeSongAndPlay(trackId));
   },
   handleLikeSong() {
-    dispatch(startLikeSong(trackId));
+    // dispatch(startLikeSong(trackId));
   },
   handleUnlikeSong() {
-    dispatch(startUnlikeSong(trackId));
+    // dispatch(startUnlikeSong(trackId));
   },
 });
 

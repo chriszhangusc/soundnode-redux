@@ -5,13 +5,8 @@ import {
   loadTrackProfilePage,
   clearTrackState,
 } from 'client/features/trackProfile/trackProfileActions';
-import {
-  getProfiledTrackId,
-  getProfiledTrack,
-  isTrackFetching,
-} from 'client/features/trackProfile/trackProfileSelectors';
+import { isTrackFetching } from 'client/features/trackProfile/trackProfileSelectors';
 import Spinner from 'client/common/components/Spinner';
-
 import TrackProfile from './TrackProfile';
 
 class TrackProfileContainer extends Component {
@@ -30,15 +25,13 @@ class TrackProfileContainer extends Component {
     const { fetching } = this.props;
     return (
       <div>
-        {fetching ? <Spinner /> : <TrackProfile {...this.props} />}
+        {fetching ? <Spinner /> : <TrackProfile />}
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  // const trackId = getProfiledTrackId(state);
-  // const track = getProfiledTrack(state, trackId);
   return {
     fetching: isTrackFetching(state),
   };
@@ -48,10 +41,6 @@ TrackProfileContainer.propTypes = {
   match: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   fetching: PropTypes.bool.isRequired,
-};
-
-TrackProfileContainer.defaultProps = {
-  userId: null,
 };
 
 export default connect(mapStateToProps)(TrackProfileContainer);
