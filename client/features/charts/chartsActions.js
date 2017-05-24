@@ -1,6 +1,6 @@
 /* Action Creators */
 import { formatGenre } from 'client/common/utils/FormatUtils';
-import { fetchChartsFromSC } from 'client/api/sc/v2';
+import { fetchCharts } from 'client/api/sc/v2';
 import { notificationFailure } from 'client/features/notification';
 import { updateShufflePlaylistIfNeeded } from 'client/features/playlist/playlistActions';
 
@@ -83,7 +83,7 @@ export function fetchChartsAndUpdatePlaylist(genre) {
     const offset = getChartsFetchOffset(state);
     dispatch(requestCharts());
     try {
-      const normalizedCharts = await fetchChartsFromSC(genre, offset);
+      const normalizedCharts = await fetchCharts(genre, offset);
       // #TODO: Verify results!!
       dispatch(receiveCharts(normalizedCharts, genre));
       // console.log(normalizedCharts);

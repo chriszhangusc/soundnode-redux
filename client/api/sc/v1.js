@@ -7,7 +7,7 @@ import {
   userArraySchema,
 } from 'client/app/schema';
 
-import { normalizeResponse, constructFetchUrl, makeRequest } from './apiUtils';
+import { normalizeResponse, constructFetchUrl, makeRequestAndNormalize } from './apiUtils';
 
 const SC_API_V1 = 'https://api.soundcloud.com/';
 const LIMIT = 20;
@@ -23,9 +23,9 @@ export function fetchTracks(filters, limit) {
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
   // console.log(fetchUrl);
-  // return makeRequest(fetchUrl)
+  // return makeRequestAndNormalize(fetchUrl)
   //         .then(response => normalizeResponse(response, trackArraySchema));
-  return makeRequest(fetchUrl, trackArraySchema);
+  return makeRequestAndNormalize(fetchUrl, trackArraySchema);
 }
 
 export function fetchUsers(filters, limit) {
@@ -38,9 +38,9 @@ export function fetchUsers(filters, limit) {
     ...filters,
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
-  // return makeRequest(fetchUrl)
+  // return makeRequestAndNormalize(fetchUrl)
   //         .then(response => normalizeResponse(response, userArraySchema));
-  return makeRequest(fetchUrl, userArraySchema);
+  return makeRequestAndNormalize(fetchUrl, userArraySchema);
 }
 
 /**
@@ -51,7 +51,7 @@ export function fetchUsers(filters, limit) {
 export function fetchTrack(id) {
   const endpoint = `/tracks/${id}`;
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id: CLIENT_ID });
-  return makeRequest(fetchUrl, trackSchema);
+  return makeRequestAndNormalize(fetchUrl, trackSchema);
   // .then(response => normalizeResponse(response, trackSchema));
 }
 
@@ -59,7 +59,7 @@ export function fetchUser(userId) {
   const endpoint = `/users/${userId}`;
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id: CLIENT_ID });
   console.log(fetchUrl);
-  return makeRequest(fetchUrl, userSchema);
+  return makeRequestAndNormalize(fetchUrl, userSchema);
   // .then(response => normalizeResponse(response, artistSchema));
 }
 
@@ -73,12 +73,12 @@ export function fetchUserTracks(userId) {
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
   // console.log(fetchUrl);
-  return makeRequest(fetchUrl, trackArraySchema);
+  return makeRequestAndNormalize(fetchUrl, trackArraySchema);
   // .then(response => normalizeResponse(response, trackArraySchema));
 }
 
 export function fetchMoreArtistTracks(nextHref) {
-  return makeRequest(nextHref, trackArraySchema);
+  return makeRequestAndNormalize(nextHref, trackArraySchema);
   // .then(response => normalizeResponse(response, trackArraySchema));
 }
 
