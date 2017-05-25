@@ -1,4 +1,4 @@
-import { CHARTS_RECEIVE } from 'client/features/charts/chartsConsts';
+import { CHARTS_RECEIVE, CHARTS_CLEAR_STATE } from 'client/features/charts/chartsConsts';
 import {
   TOGGLE_PLAYLIST,
   CLEAR_PLAY_QUEUE,
@@ -45,6 +45,11 @@ export default function playlistReducer(state = initialState, action) {
       return {
         ...state,
         playlist: [...state.playlist, action.payload],
+      };
+
+    case CHARTS_CLEAR_STATE:
+      return {
+        ...initialState,
       };
 
     case CHARTS_RECEIVE:

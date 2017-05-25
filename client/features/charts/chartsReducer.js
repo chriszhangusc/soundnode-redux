@@ -7,6 +7,7 @@ import {
   CHARTS_CLEAR,
   CHARTS_FETCH_STOP,
   CHARTS_GENRE_LIST_UPDATE,
+  CHARTS_CLEAR_STATE,
 } from './chartsConsts';
 
 /* Reducer */
@@ -22,6 +23,10 @@ const initialState = {
 // #TODO: Should we extract fetchOffset?
 export default function chartsReducer(state = initialState, action) {
   switch (action.type) {
+    case CHARTS_CLEAR_STATE:
+      return {
+        ...initialState,
+      };
     case CHARTS_GENRE_LIST_UPDATE:
       return {
         ...state,
@@ -43,7 +48,6 @@ export default function chartsReducer(state = initialState, action) {
         ...state,
         trackIds: [...state.trackIds, ...action.payload.normalized.result].slice(0, TOP_COUNT),
         fetchOffset: state.fetchOffset + LIMIT_EACH_FETCH,
-        // fetching: false,
       };
     case CHARTS_CLEAR:
       return {

@@ -19,7 +19,15 @@ import {
   CHARTS_CLEAR,
   CHARTS_FETCH_STOP,
   CHARTS_GENRE_LIST_UPDATE,
+  CHARTS_CLEAR_STATE,
 } from './chartsConsts';
+
+
+export function clearChartsState() {
+  return {
+    type: CHARTS_CLEAR_STATE,
+  };
+}
 
 export function changeGenre(genre) {
   return {

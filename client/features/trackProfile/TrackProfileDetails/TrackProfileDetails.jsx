@@ -34,12 +34,14 @@ function TrackProfileDetails({ title, userId, username, description }) {
 }
 
 TrackProfileDetails.propTypes = {
+  userId: PropTypes.number,
   title: PropTypes.string,
   username: PropTypes.string,
   description: PropTypes.string,
 };
 
 TrackProfileDetails.defaultProps = {
+  userId: null,
   title: '',
   username: '',
   description: '',
@@ -47,7 +49,7 @@ TrackProfileDetails.defaultProps = {
 
 function mapStateToProps(state) {
   const track = getProfiledTrack(state);
-  console.log(track);
+  // console.log(track);
   const user = track && getUserByTrackId(state, track.id);
   // console.log(user);
   return {

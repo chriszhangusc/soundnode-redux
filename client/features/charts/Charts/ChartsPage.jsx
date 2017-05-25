@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadChartsPage, changeGenre } from 'client/features/charts/chartsActions';
+import {
+  loadChartsPage,
+  changeGenre,
+  clearChartsState,
+} from 'client/features/charts/chartsActions';
 import { changeVisiblePlaylistName } from 'client/features/playlist/playlistActions';
 import { DEFAULT_GENRE } from 'client/features/charts/chartsConsts';
 import { getGenreList } from 'client/features/charts/chartsSelectors';
@@ -28,11 +32,21 @@ class ChartsPageContainer extends Component {
     this.onPageMountOrChange(this.props);
   }
 
-  /* Change to different routes */
+  /* Change to different genre routes */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.genre !== this.props.match.params.genre) {
+    const curGenre = this.props.match.params.genre;
+    const nextGenre = nextProps.match.params.genre;
+
+    // If curGenre is undefined, it means we are coming from other routes into Charts route,
+    // we only need to do fetching in componentWillMount.
+    if (curGenre !== nextGenre && curGenre) {
       this.onPageMountOrChange(nextProps);
     }
+  }
+
+  componentWillUnmount() {
+    const { dispatch } = this.props;
+    dispatch(clearChartsState());
   }
 
   onPageMountOrChange({ match, history, dispatch, genres }) {

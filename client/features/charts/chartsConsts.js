@@ -6,6 +6,7 @@ export const CHARTS_FETCH_FAIL = 'CHARTS_FETCH_FAIL';
 export const CHARTS_CLEAR = 'CHARTS_CLEAR';
 export const CHARTS_FETCH_STOP = 'CHARTS_FETCH_STOP';
 export const CHARTS_GENRE_LIST_UPDATE = 'CHARTS_GENRE_LIST_UPDATE';
+export const CHARTS_CLEAR_STATE = 'CHARTS_CLEAR_STATE';
 
 // These constants should be fetched from the Database!
 export const TOP_COUNT = 50;
