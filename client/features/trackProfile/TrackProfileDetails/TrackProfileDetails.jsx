@@ -11,7 +11,7 @@ import TrackButtonGroup from './TrackButtonGroup';
 
 const ColumnWrapper = styled.div`
   position: relative;
-  max-width: 800px;
+  width: 800px;
   margin-left: 20px;
   display: inline-flex;
   flex-direction: column;
