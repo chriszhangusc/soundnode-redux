@@ -19,7 +19,7 @@ const store = configureStore();
 // Use provider to provide our store down to the dom tree
 // so that it can be shared among all components.
 ReactDOM.render(
-  <IntlProvider>
+  <IntlProvider locale="en">
     <Provider store={store}>
       <App />
     </Provider>

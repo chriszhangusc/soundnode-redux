@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getUserByTrackId } from 'client/features/entities/entitiesSelectors';
+import { Link } from 'react-router-dom';
+import { USER_PROFILE_ROUTE } from 'client/common/constants/RouteConsts';
 import { getProfiledTrack } from '../trackProfileSelectors';
 import TrackTitle from './TrackTitle';
 import TrackUsername from './TrackUsername';
@@ -18,11 +20,13 @@ const ColumnWrapper = styled.div`
   justify-content: flex-start;
 `;
 
-function TrackProfileDetails({ title, username, description }) {
+function TrackProfileDetails({ title, userId, username, description }) {
   return (
     <ColumnWrapper>
       <TrackTitle>{title}</TrackTitle>
-      <TrackUsername>{username}</TrackUsername>
+      <Link to={`${USER_PROFILE_ROUTE}/${userId}`}>
+        <TrackUsername>{username}</TrackUsername>
+      </Link>
       <TrackDescription>{description}</TrackDescription>
       <TrackButtonGroup />
     </ColumnWrapper>
@@ -47,6 +51,7 @@ function mapStateToProps(state) {
   const user = track && getUserByTrackId(state, track.id);
   // console.log(user);
   return {
+    userId: user && user.id,
     title: track && track.title,
     username: user && user.username,
     description: track && track.description,

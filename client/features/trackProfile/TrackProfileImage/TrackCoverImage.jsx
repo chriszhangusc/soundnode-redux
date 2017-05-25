@@ -6,6 +6,7 @@ import { getProfiledTrack } from 'client/features/trackProfile/trackProfileSelec
 import { getLargeVersion } from 'client/common/utils/imageUtils';
 import { isTrackActive, isTrackPlaying } from 'client/features/player/playerSelectors';
 import { FormattedNumber } from 'react-intl';
+import { changeSongAndPlay, playSong, pauseSong } from 'client/features/player/playerActions';
 
 const Wrapper = styled.div`
   width: 350px;
@@ -76,11 +77,11 @@ function TrackCoverImage({
 }) {
   return (
     <Wrapper>
-      <TrackButton active={active}>
-        {playing ? <i className="fa fa-pause" /> : <i className="fa fa-play" />}
+      <TrackButton active={active} onClick={handleImageClick}>
+        <i className={`fa ${playing ? 'fa-pause' : 'fa-play'}`} />
       </TrackButton>
-      <CoverImage src={src} />
-      <CoverImageDetailsWrapper>
+      <CoverImage src={src} onClick={handleImageClick} />
+      <CoverImageDetailsWrapper onClick={handleImageClick}>
         <span>
           <i className="fa fa-play" /> <FormattedNumber value={playbackCount || 0} />
         </span>
@@ -97,6 +98,8 @@ TrackCoverImage.defaultProps = {
   playing: false,
   active: false,
   liked: false,
+  playbackCount: 0,
+  likesCount: 0,
 };
 
 TrackCoverImage.propTypes = {
@@ -105,12 +108,14 @@ TrackCoverImage.propTypes = {
   active: PropTypes.bool,
   liked: PropTypes.bool,
   handleImageClick: PropTypes.func.isRequired,
+  playbackCount: PropTypes.number,
+  likesCount: PropTypes.number,
 };
 
 function mapStateToProps(state) {
   const track = getProfiledTrack(state);
-  console.log(track);
   return {
+    trackId: track && track.id,
     src: track && getLargeVersion(track.artworkUrl),
     playing: track && isTrackPlaying(state, track.id),
     active: track && isTrackActive(state, track.id),
@@ -120,12 +125,22 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+// This is useful when you need to compute some action using stateProps
+function mergeProps(stateProps, { dispatch }) {
+  const { trackId, active, playing } = stateProps;
   return {
+    ...stateProps,
+    // Besides doing it this way, we could also do it in a thunk function
+    // or pass all args into components and assemble there
     handleImageClick() {
-      console.log('Play/Pause');
+      if (!trackId) return;
+      if (!active) {
+        dispatch(changeSongAndPlay(trackId));
+      } else {
+        dispatch(playing ? pauseSong() : playSong());
+      }
     },
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrackCoverImage);
+export default connect(mapStateToProps, null, mergeProps)(TrackCoverImage);
