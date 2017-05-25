@@ -6,13 +6,8 @@ import { getUserByTrackId } from 'client/features/entities/entitiesSelectors';
 import { getProfiledTrack } from '../trackProfileSelectors';
 import TrackTitle from './TrackTitle';
 import TrackUsername from './TrackUsername';
-import TrackCoverImage from './TrackCoverImage';
 import TrackDescription from './TrackDescription';
 import TrackButtonGroup from './TrackButtonGroup';
-
-const Wrapper = styled.div`
-  display: flex;
-`;
 
 const ColumnWrapper = styled.div`
   position: relative;
@@ -25,15 +20,12 @@ const ColumnWrapper = styled.div`
 
 function TrackProfileDetails({ title, username, description }) {
   return (
-    <Wrapper>
-      <TrackCoverImage />
-      <ColumnWrapper>
-        <TrackTitle>{title}</TrackTitle>
-        <TrackUsername>{username}</TrackUsername>
-        <TrackDescription>{description}</TrackDescription>
-        <TrackButtonGroup />
-      </ColumnWrapper>
-    </Wrapper>
+    <ColumnWrapper>
+      <TrackTitle>{title}</TrackTitle>
+      <TrackUsername>{username}</TrackUsername>
+      <TrackDescription>{description}</TrackDescription>
+      <TrackButtonGroup />
+    </ColumnWrapper>
   );
 }
 
