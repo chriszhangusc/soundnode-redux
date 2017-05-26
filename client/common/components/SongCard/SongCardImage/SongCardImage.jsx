@@ -1,24 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from '../SongCard.css';
+import styled from 'styled-components';
+import { THEME_COLOR } from 'client/app/css/colors';
 
-// Refactor to styled-components
+const Wrapper = styled.div`
+  width: 100%;
+  height: 200px;
+  position: relative;
+  margin-bottom: 10px;
+`;
 
-// Animating all images would dramatically slow down our app
-// <FadeinImage placeholderClassName="song-card-image" largeImgUrl={artworkUrl} smallImgUrl={artworkUrlSmall} />
+const PlaybackButtonWrapper = styled.span`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  opacity: ${props => (props.active ? 1 : 0)};
+  background: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const PlaybackButtonIcon = styled.i`
+  display: inline-block;
+  font-size: 2rem;
+  color: ${THEME_COLOR}
+`;
+
+const CoverImage = styled.img`
+  width: 100%;
+  height: 100%;
+`;
 
 function SongCardImage({ active, playing, artworkUrl, artworkUrlSmall, handleImageClick }) {
   return (
-    <div className={styles.songCardImage} style={{ backgroundImage: `url(${artworkUrl})` }}>
-      <button
-        className={active ? styles.togglePlayButtonActive : styles.togglePlayButton}
-        onClick={handleImageClick}
-      >
-        <i
-          className={`${styles.togglePlayButtonIcon} ${playing ? 'ion-ios-pause' : 'ion-ios-play'}`}
-        />
-      </button>
-    </div>
+    <Wrapper>
+      <PlaybackButtonWrapper active={active} onClick={handleImageClick}>
+        <PlaybackButtonIcon className={`${playing ? 'ion-ios-pause' : 'ion-ios-play'}`} />
+      </PlaybackButtonWrapper>
+      <CoverImage src={artworkUrl} />
+    </Wrapper>
   );
 }
 

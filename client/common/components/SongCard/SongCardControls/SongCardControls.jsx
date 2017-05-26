@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { NotificationManager } from 'react-notifications';
 import styled from 'styled-components';
 import SongCardButton from './SongCardButton';
-// import styles from './SongCard.css';
 
 function createInfo(msg) {
   NotificationManager.info(msg);

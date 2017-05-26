@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const TrackButton = styled.span`
+const PlaybackButton = styled.span`
   cursor: pointer;
   display: flex;
   font-size: 50px;
@@ -77,9 +77,9 @@ function TrackCoverImage({
 }) {
   return (
     <Wrapper>
-      <TrackButton active={active} onClick={handleImageClick}>
+      <PlaybackButton active={active} onClick={handleImageClick}>
         <i className={`fa ${playing ? 'fa-pause' : 'fa-play'}`} />
-      </TrackButton>
+      </PlaybackButton>
       <CoverImage src={src} onClick={handleImageClick} />
       <CoverImageDetailsWrapper onClick={handleImageClick}>
         <span>

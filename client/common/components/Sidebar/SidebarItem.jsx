@@ -4,24 +4,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { SIDEBAR_ITEM_HEIGHT } from 'client/app/css/variables';
 import { FONT_COLOR_PRIMARY, GRAY } from 'client/app/css/colors';
-import styles from './Sidebar.css';
 
 const ListItem = styled.li`
   line-height: ${SIDEBAR_ITEM_HEIGHT};
-
-  > a {
-    font-size: 1.1rem;
-    padding-right: 20px;
-    padding-left: 20px;
-    display: block;
-    text-align: center;
-    color: ${FONT_COLOR_PRIMARY};
-    transition: color 0.25s ease-out;
-    &:hover, &:focus, &:active {
-      text-decoration: none;
-      color: ${GRAY};
-    }
-  }
 `;
 
 const Icon = styled.i`
@@ -29,12 +14,35 @@ const Icon = styled.i`
   margin-right: 10px;
 `;
 
+const activeClassName = 'sidebarLinkActive';
+const StyledNavLink = styled(NavLink).attrs({
+  activeClassName,
+})`
+  font-size: 1.1rem;
+  padding-right: 20px;
+  padding-left: 20px;
+  display: block;
+  text-align: center;
+  color: ${FONT_COLOR_PRIMARY};
+  transition: color 0.25s ease-out;
+  text-decoration: none;
+
+  &:hover, &:active {
+    text-decoration: none;
+    color: ${GRAY};
+  }
+
+  &.${activeClassName} {
+    background: rgba(255,255,255,0.2);
+  }
+`;
+
 function SidebarItem({ to, iconClassName, title }) {
   return (
     <ListItem>
-      <NavLink to={to} activeClassName={styles.sidebarLinkActive}>
+      <StyledNavLink to={to} activeClassName={activeClassName}>
         <Icon className={iconClassName} /><span>{title}</span>
-      </NavLink>
+      </StyledNavLink>
     </ListItem>
   );
 }
