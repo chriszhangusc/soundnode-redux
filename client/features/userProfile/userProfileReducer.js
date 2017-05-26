@@ -36,7 +36,6 @@ export default function userReducer(state = initialState, action) {
         ...state,
         tracksFetching: true,
       };
-
     // There will be overlap in the data from SoundCloud
     case USER_TRACKS_RECEIVE:
       return {
