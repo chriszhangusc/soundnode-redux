@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { USER_PROFILE_ROUTE } from 'client/common/constants/RouteConsts';
 import Avatar from 'client/common/components/Avatar';
 import { connect } from 'react-redux';
 import { getCommentById, getUserByCommentId } from 'client/features/entities/entitiesSelectors';
@@ -10,9 +12,9 @@ import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 const Wrapper = styled.div`
   width: 90%;
   display: flex;
-  align-items: center;
-  margin: 15px 0;
-  max-height: 50px;
+  align-items: flex-start;
+  margin: 20px 0;
+  max-height: 60px;
   & img {
     width: 35px;
     height: 35px;
@@ -47,13 +49,15 @@ const CommentTimestamp = styled.span`
   font-size: 0.8rem;
 `;
 
-function TrackProfileComment({ commentBody, username, commentTimestamp, userAvatarUrl }) {
+function TrackProfileComment({ commentBody, userId, username, commentTimestamp, userAvatarUrl }) {
   return (
     <Wrapper>
-      <Avatar src={userAvatarUrl} />
+      <Link to={`${USER_PROFILE_ROUTE}/${userId}`}><Avatar src={userAvatarUrl} /></Link>
       <CommentWrapper>
         <CommentHeader>
-          <CommentUsername>{username}</CommentUsername>
+          <Link to={`${USER_PROFILE_ROUTE}/${userId}`}>
+            <CommentUsername>{username}</CommentUsername>
+          </Link>
           <CommentTimestamp>{commentTimestamp}</CommentTimestamp>
         </CommentHeader>
         <CommentBody>{commentBody}</CommentBody>
@@ -72,6 +76,7 @@ function mapStateToProps(state, { commentId }) {
     username: user && user.username,
     commentBody: comment && comment.body,
     commentTimestamp: comment && comment.createdAt.replace('+0000', ''),
+    userId: user && user.id,
   };
 }
 

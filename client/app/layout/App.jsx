@@ -48,7 +48,7 @@ injectGlobal`
   }
 
   a {
-    color: ${LIGHTER_GRAY}
+    color: ${LIGHTER_GRAY};
     text-decoration: none;
     &:hover,
     &:focus,
