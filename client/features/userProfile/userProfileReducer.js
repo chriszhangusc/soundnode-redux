@@ -1,3 +1,4 @@
+import uniq from 'lodash/uniq';
 import {
   USER_STATE_CLEAR,
   USER_REQUEST,
@@ -35,10 +36,12 @@ export default function userReducer(state = initialState, action) {
         ...state,
         tracksFetching: true,
       };
+
+    // There will be overlap in the data from SoundCloud
     case USER_TRACKS_RECEIVE:
       return {
         ...state,
-        trackIds: [...state.trackIds, ...action.payload.result],
+        trackIds: uniq([...state.trackIds, ...action.payload.result]),
         tracksFetching: false,
         tracksNextHref: action.payload.nextHref,
       };

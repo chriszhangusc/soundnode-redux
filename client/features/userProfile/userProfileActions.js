@@ -1,8 +1,4 @@
-import {
-  fetchUser,
-  fetchUserTracks,
-  fetchMoreUserTracks,
-} from 'client/common/api/sc/v1';
+import { fetchUser, fetchUserTracks, fetchMoreUserTracks } from 'client/common/api/sc/v1';
 import { notificationFailure } from 'client/features/notification';
 
 import {
@@ -52,7 +48,7 @@ export function handleUserFetchFail() {
 
 // Should load user first and then the tracks
 export function loadUserProfilePage(userId) {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       dispatch(requestUser());
       dispatch(requestUserTracks());
@@ -68,13 +64,14 @@ export function loadUserProfilePage(userId) {
   };
 }
 
-// This function is broken
 export function loadMoreUserTracks() {
   return async (dispatch, getState) => {
     const state = getState();
     const fetching = isUserTracksFetching(state);
-    // nextHref will be undefined if end has been reached
+
+    // nextHref will be undefined if there is no more data to fetch
     const nextHref = getUserTracksNextHref(state);
+    // console.log('NextHref:', nextHref);
     if (!fetching && nextHref) {
       try {
         dispatch(requestUserTracks());

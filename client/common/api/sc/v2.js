@@ -1,5 +1,5 @@
 import { CLIENT_ID } from 'client/common/constants/authConsts';
-import { API_HOST } from 'client/common/constants/AppConsts';
+import { API_HOST } from 'client/common/constants/appConsts';
 import { trackArraySchema } from 'client/app/schema';
 
 import { constructFetchUrl, makeRequestAndNormalize } from './apiUtils';

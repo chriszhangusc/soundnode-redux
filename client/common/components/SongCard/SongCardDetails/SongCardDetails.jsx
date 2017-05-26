@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'client/common/components/Avatar';
 import { Link } from 'react-router-dom';
-import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'client/common/constants/RouteConsts';
+import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
 import styled from 'styled-components';
 import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { getNormalVersion } from 'client/common/utils/imageUtils';
-import { defaultArtistImageUrl } from 'client/common/constants/ImageConsts';
+import { defaultArtistImageUrl } from 'client/common/constants/imageConsts';
 import styled from 'styled-components';
 
 const StyledImage = styled.img`

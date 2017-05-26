@@ -1,1 +1,1 @@
-export { default } from './ChartsTitleContainer';
+export { default } from './ChartsTitle';

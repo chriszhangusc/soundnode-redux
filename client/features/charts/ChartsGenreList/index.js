@@ -1,1 +1,1 @@
-export { default } from './GenreListContainer';
+export { default } from './ChartsGenreList';

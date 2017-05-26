@@ -5,7 +5,6 @@ export const CHARTS_RECEIVE = 'CHARTS_RECEIVE';
 export const CHARTS_FETCH_FAIL = 'CHARTS_FETCH_FAIL';
 export const CHARTS_CLEAR = 'CHARTS_CLEAR';
 export const CHARTS_FETCH_STOP = 'CHARTS_FETCH_STOP';
-export const CHARTS_GENRE_LIST_UPDATE = 'CHARTS_GENRE_LIST_UPDATE';
 export const CHARTS_CLEAR_STATE = 'CHARTS_CLEAR_STATE';
 
 // These constants should be fetched from the Database!
@@ -15,3 +14,126 @@ export const LIMIT_EACH_FETCH = 25;
 export const DEFAULT_GENRE = 'all-music';
 export const CHARTS_MAIN_TITLE_PREFIX = 'TOP 50 - ';
 export const CHARTS_SUBTITLE = 'Charts By Genre';
+
+export const genreListData = [
+  {
+    link: 'all-music',
+    title: 'All Music',
+  },
+  {
+    link: 'alternativerock',
+    title: 'Alternative Rock',
+  },
+  {
+    link: 'ambient',
+    title: 'Ambient',
+  },
+  {
+    link: 'classical',
+    title: 'Classical',
+  },
+  {
+    link: 'country',
+    title: 'Country',
+  },
+  {
+    link: 'danceedm',
+    title: 'Dance & EDM',
+  },
+  {
+    link: 'dancehall',
+    title: 'Dancehall',
+  },
+  {
+    link: 'deephouse',
+    title: 'Deep House',
+  },
+  {
+    link: 'disco',
+    title: 'Disco',
+  },
+  {
+    link: 'drumbass',
+    title: 'Drum & Bass',
+  },
+  {
+    link: 'dubstep',
+    title: 'Dubstep',
+  },
+  {
+    link: 'electronic',
+    title: 'Electronic',
+  },
+  {
+    link: 'hiphoprap',
+    title: 'Hip-hop & Rap',
+  },
+  {
+    link: 'house',
+    title: 'House',
+  },
+  {
+    link: 'indie',
+    title: 'Indie',
+  },
+  {
+    link: 'jazzblues',
+    title: 'Jazz & Blues',
+  },
+  {
+    link: 'latin',
+    title: 'Latin',
+  },
+  {
+    link: 'metal',
+    title: 'Metal',
+  },
+  {
+    link: 'piano',
+    title: 'Piano',
+  },
+  {
+    link: 'pop',
+    title: 'Pop',
+  },
+  {
+    link: 'rbsoul',
+    title: 'R&B & Soul',
+  },
+  {
+    link: 'reggae',
+    title: 'Reggae',
+  },
+  {
+    link: 'reggaeton',
+    title: 'Reggaeton',
+  },
+  {
+    link: 'rock',
+    title: 'Rock',
+  },
+  {
+    link: 'soundtrack',
+    title: 'Soundtrack',
+  },
+  {
+    link: 'techno',
+    title: 'Techno',
+  },
+  {
+    link: 'trance',
+    title: 'Trance',
+  },
+  {
+    link: 'trap',
+    title: 'Trap',
+  },
+  {
+    link: 'triphop',
+    title: 'Triphop',
+  },
+  {
+    link: 'world',
+    title: 'World',
+  },
+];

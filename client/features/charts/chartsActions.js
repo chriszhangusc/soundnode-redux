@@ -18,10 +18,8 @@ import {
   CHARTS_RECEIVE,
   CHARTS_CLEAR,
   CHARTS_FETCH_STOP,
-  CHARTS_GENRE_LIST_UPDATE,
   CHARTS_CLEAR_STATE,
 } from './chartsConsts';
-
 
 export function clearChartsState() {
   return {
@@ -33,13 +31,6 @@ export function changeGenre(genre) {
   return {
     type: CHARTS_GENRE_CHANGE,
     payload: genre,
-  };
-}
-
-export function updateGenreList(genreList) {
-  return {
-    type: CHARTS_GENRE_LIST_UPDATE,
-    payload: genreList,
   };
 }
 

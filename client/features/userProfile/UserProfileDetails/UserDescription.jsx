@@ -5,7 +5,7 @@ import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 
 const UserDescriptionWithStyle = styled.div`
   margin: 10px 0;
-  font-size: 1.2rem;
+  font-size: 1rem;
   overflow: scroll;
   height: 240px;
   width: 500px;

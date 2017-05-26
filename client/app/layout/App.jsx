@@ -5,7 +5,7 @@ import {
   USER_PROFILE_ROUTE,
   TRACK_PROFILE_ROUTE,
   AUTH_CALLBACK_ROUTE,
-} from 'client/common/constants/RouteConsts';
+} from 'client/common/constants/routeConsts';
 import Charts from 'client/features/charts/Charts';
 import UserProfile from 'client/features/userProfile/UserProfile';
 import TrackProfile from 'client/features/trackProfile/TrackProfile';

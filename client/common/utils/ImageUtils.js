@@ -1,4 +1,4 @@
-import { SIZES } from 'client/common/constants/ImageConsts';
+import { SIZES } from 'client/common/constants/imageConsts';
 
 function imageSizeFactory(size) {
   return (imageUrl) => {

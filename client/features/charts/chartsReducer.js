@@ -1,3 +1,4 @@
+import uniq from 'lodash/uniq';
 import {
   TOP_COUNT,
   LIMIT_EACH_FETCH,
@@ -27,11 +28,6 @@ export default function chartsReducer(state = initialState, action) {
       return {
         ...initialState,
       };
-    case CHARTS_GENRE_LIST_UPDATE:
-      return {
-        ...state,
-        genreList: [...action.payload],
-      };
     case CHARTS_GENRE_CHANGE:
       return {
         ...state,
@@ -46,7 +42,9 @@ export default function chartsReducer(state = initialState, action) {
     case CHARTS_RECEIVE:
       return {
         ...state,
-        trackIds: [...state.trackIds, ...action.payload.normalized.result].slice(0, TOP_COUNT),
+        trackIds: uniq(
+          [...state.trackIds, ...action.payload.normalized.result].slice(0, TOP_COUNT),
+        ),
         fetchOffset: state.fetchOffset + LIMIT_EACH_FETCH,
       };
     case CHARTS_CLEAR:

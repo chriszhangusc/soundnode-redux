@@ -2,7 +2,7 @@
 import { camelizeKeys } from 'humps';
 import { normalize } from 'normalizr';
 import { CLIENT_ID } from 'client/common/constants/authConsts';
-import { API_HOST } from 'client/common/constants/AppConsts';
+import { API_HOST } from 'client/common/constants/appConsts';
 import querystring from 'querystring';
 
 export const CALL_API = 'CALL_API';

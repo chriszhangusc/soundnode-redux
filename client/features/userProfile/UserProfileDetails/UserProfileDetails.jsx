@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import ImageWithFallback from 'client/common/components/Images/ImageWithFallback';
-import { DEFAULT_USER_AVATAR } from 'client/common/constants/ImageConsts';
+import { DEFAULT_USER_AVATAR } from 'client/common/constants/imageConsts';
 
 import { connect } from 'react-redux';
 import { getUsers } from 'client/features/entities/entitiesSelectors';
@@ -45,13 +45,22 @@ const UserProfileDetails = ({
   </UserDetailsRowWrapper>
 );
 
+UserProfileDetails.defaultProps = {
+  avatarUrlSmall: '',
+  avatarUrl: '',
+  username: '',
+  followerCount: 0, // Formatted number
+  description: '',
+  permalinkUrl: '',
+};
+
 UserProfileDetails.propTypes = {
-  avatarUrlSmall: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-  followerCount: PropTypes.string.isRequired, // Formatted number
-  description: PropTypes.string.isRequired,
-  permalinkUrl: PropTypes.string.isRequired,
+  avatarUrlSmall: PropTypes.string,
+  avatarUrl: PropTypes.string,
+  username: PropTypes.string,
+  followerCount: PropTypes.string, // Formatted number
+  description: PropTypes.string,
+  permalinkUrl: PropTypes.string,
 };
 
 export const mapStateToProps = (state, { userId }) => {

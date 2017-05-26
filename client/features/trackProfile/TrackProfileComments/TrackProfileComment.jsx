@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { USER_PROFILE_ROUTE } from 'client/common/constants/RouteConsts';
+import { USER_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
 import Avatar from 'client/common/components/Avatar';
 import { connect } from 'react-redux';
 import { getCommentById, getUserByCommentId } from 'client/features/entities/entitiesSelectors';

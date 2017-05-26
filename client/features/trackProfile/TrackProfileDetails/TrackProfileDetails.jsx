@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getUserByTrackId } from 'client/features/entities/entitiesSelectors';
-import { USER_PROFILE_ROUTE } from 'client/common/constants/RouteConsts';
+import { USER_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
 import { getProfiledTrack } from '../trackProfileSelectors';
 import TrackTitle from './TrackTitle';
 import TrackUsername from './TrackUsername';

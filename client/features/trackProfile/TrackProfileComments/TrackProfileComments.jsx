@@ -13,7 +13,7 @@ import Spinner from 'client/common/components/Spinner';
 import TrackProfileComment from './TrackProfileComment';
 
 const Title = styled.h3`
-  margin: 20px;
+  margin: 25px 0;
 `;
 
 const CommentList = styled.ul`

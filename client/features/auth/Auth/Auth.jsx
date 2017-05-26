@@ -5,7 +5,7 @@ import Avatar from 'client/common/components/Avatar';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { USER_PROFILE_ROUTE } from 'client/common/constants/RouteConsts';
+import { USER_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
 
 import { doLogin, doLogout } from '../authActions';
 import { getMe } from '../authSelectors';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { HOST } from 'client/common/constants/AppConsts';
+import { HOST } from 'client/common/constants/appConsts';
 import styled from 'styled-components';
 import { Glyphicon } from 'react-bootstrap';
 
