@@ -17,6 +17,7 @@ const ColumnWrapper = styled.div`
   margin-left: 20px;
   display: inline-flex;
   flex-direction: column;
+  align-items: left; /* This is important or the children of this container would strech to have the full width of their parent */
   justify-content: flex-start;
 `;
 
@@ -24,9 +25,7 @@ function TrackProfileDetails({ title, userId, username, description }) {
   return (
     <ColumnWrapper>
       <TrackTitle>{title}</TrackTitle>
-      <Link to={`${USER_PROFILE_ROUTE}/${userId}`}>
-        <TrackUsername>{username}</TrackUsername>
-      </Link>
+      <TrackUsername to={`${USER_PROFILE_ROUTE}/${userId}`}>{username}</TrackUsername>
       <TrackDescription>{description}</TrackDescription>
       <TrackButtonGroup />
     </ColumnWrapper>

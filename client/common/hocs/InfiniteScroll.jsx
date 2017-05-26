@@ -8,7 +8,7 @@ export default function (InnerComponent) {
     constructor(props) {
       super(props);
       this.onScroll = this.onScroll.bind(this);
-      this.onScroll = throttle(this.onScroll, 200);
+      this.onScroll = debounce(this.onScroll, 300);
     }
 
     componentDidMount() {

@@ -65,12 +65,11 @@ export function fetchUserTracks(userId) {
     offset: 0,
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
-  // console.log(fetchUrl);
+  console.log('Fetch user tracks:', fetchUrl);
   return makeRequestAndNormalize(fetchUrl, trackArraySchema);
-  // .then(response => normalizeResponse(response, trackArraySchema));
 }
 
-export function fetchMoreArtistTracks(nextHref) {
+export function fetchMoreUserTracks(nextHref) {
   return makeRequestAndNormalize(nextHref, trackArraySchema);
   // .then(response => normalizeResponse(response, trackArraySchema));
 }

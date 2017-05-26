@@ -1,4 +1,8 @@
-import { fetchUser, fetchUserTracks, fetchMoreUserTracks } from 'client/common/api/sc/v1';
+import {
+  fetchUser,
+  fetchUserTracks,
+  fetchMoreUserTracks,
+} from 'client/common/api/sc/v1';
 import { notificationFailure } from 'client/features/notification';
 
 import {
@@ -11,7 +15,7 @@ import {
   USER_TRACKS_FETCH_FAIL,
 } from './userProfileConsts';
 
-import { getUserTracksNextHref } from './userProfileSelectors';
+import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelectors';
 
 /* Action Creators*/
 export function clearUserState() {
@@ -27,10 +31,7 @@ export function requestUser() {
 export function receiveUser(normalized) {
   return {
     type: USER_RECEIVE,
-    payload: {
-      normalized,
-      entities: normalized.entities,
-    },
+    payload: normalized,
   };
 }
 
@@ -41,10 +42,7 @@ export function requestUserTracks() {
 export function receiveUserTracks(normalized) {
   return {
     type: USER_TRACKS_RECEIVE,
-    payload: {
-      normalized,
-      entities: normalized.entities,
-    },
+    payload: normalized,
   };
 }
 
@@ -54,7 +52,7 @@ export function handleUserFetchFail() {
 
 // Should load user first and then the tracks
 export function loadUserProfilePage(userId) {
-  return async (dispatch) => {
+  return async dispatch => {
     try {
       dispatch(requestUser());
       dispatch(requestUserTracks());
@@ -74,14 +72,16 @@ export function loadUserProfilePage(userId) {
 export function loadMoreUserTracks() {
   return async (dispatch, getState) => {
     const state = getState();
+    const fetching = isUserTracksFetching(state);
     // nextHref will be undefined if end has been reached
     const nextHref = getUserTracksNextHref(state);
-    if (nextHref) {
+    if (!fetching && nextHref) {
       try {
         dispatch(requestUserTracks());
         const tracks = await fetchMoreUserTracks(nextHref);
         dispatch(receiveUserTracks(tracks));
       } catch (err) {
+        console.log(err);
         dispatch(notificationFailure(err.message));
       }
     }

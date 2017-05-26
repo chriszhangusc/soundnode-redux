@@ -17,4 +17,4 @@ export const isUserFetching = createSelector(getState, state => state.userFetchi
 
 export const isUserTracksFetching = createSelector(getState, state => state.tracksFetching);
 
-export const getUserTracksNextHref = createSelector(getState, state => state.tracks.tracksNextHref);
+export const getUserTracksNextHref = createSelector(getState, state => state.tracksNextHref);

@@ -21,7 +21,8 @@ const UserDetailsColumnWrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-left: 40px;
+  align-items: left;
+  margin-left: 20px;
 `;
 
 const UserProfileDetails = ({
