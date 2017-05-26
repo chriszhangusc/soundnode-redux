@@ -36,18 +36,17 @@ export function receiveComments(normalized) {
 
 export function loadTrackProfilePage(trackId) {
   return (dispatch, getState) => {
-    console.log('Load Track Profile Page Data');
     const commentsNextHref = getCommentsNextHref(getState());
     dispatch(requestTrack());
     dispatch(requestComments());
     Promise.all([fetchTrack(trackId), fetchComments(trackId, commentsNextHref)])
-      .then(res => {
+      .then((res) => {
         const track = res[0];
         const comments = res[1];
         dispatch(receiveTrack(track));
         dispatch(receiveComments(comments));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -57,15 +56,13 @@ export function fetchMoreComments() {
   return (dispatch, getState) => {
     const state = getState();
     const commentsNextHref = getCommentsNextHref(state);
-    console.log(commentsNextHref);
     if (!commentsNextHref) return;
     dispatch(requestComments());
-    console.log(commentsNextHref);
     fetchComments(null, commentsNextHref)
-      .then(comments => {
+      .then((comments) => {
         dispatch(receiveComments(comments));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };

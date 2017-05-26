@@ -35,7 +35,7 @@ export function constructFetchUrl(baseUrl, endpoint, queryParams) {
   }
 
   const queryStr = qs.stringify(finalParams); // queryStr will be "" if queryParams is undefined
-  console.log(queryStr);
+  // console.log(queryStr);
   if (queryStr) {
     return `${finalUrl}?${queryStr}`;
   }
@@ -65,7 +65,7 @@ export function makeRequestAndNormalize(fetchUrl, normalizeSchema) {
   return (
     fetch(fetchUrl)
       .then(onResponseSuccess)
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         // Let the user know when there is a connection error!
         throw Error('Can not reach the server!');

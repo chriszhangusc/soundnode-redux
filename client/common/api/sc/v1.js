@@ -52,7 +52,7 @@ export function fetchTrack(id) {
 export function fetchUser(userId) {
   const endpoint = `/users/${userId}`;
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { client_id: CLIENT_ID });
-  console.log(fetchUrl);
+  // console.log(fetchUrl);
   return makeRequestAndNormalize(fetchUrl, userSchema);
 }
 
@@ -65,7 +65,7 @@ export function fetchUserTracks(userId) {
     offset: 0,
   };
   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
-  console.log('Fetch user tracks:', fetchUrl);
+  // console.log('Fetch user tracks:', fetchUrl);
   return makeRequestAndNormalize(fetchUrl, trackArraySchema);
 }
 
