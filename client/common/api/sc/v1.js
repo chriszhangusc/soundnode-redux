@@ -95,6 +95,7 @@ export function likeTrack(userId, trackId) {
   return fetch(fetchUrl, { method: 'PUT' });
 }
 
+// DELETE https://api.soundcloud.com/users/250047142/favorites/322834362?client_id=hV0x3cye6r1htAwy737V22PTsfd7HtOh&oauth_token=1-277537-250047142-4e12bb6dd78bc
 export function dislikeTrack(userId, trackId) {
   const endpoint = `/users/${userId}/favorites/${trackId}`;
   const queryParams = { client_id: CLIENT_ID };
@@ -102,5 +103,17 @@ export function dislikeTrack(userId, trackId) {
   return fetch(fetchUrl, { method: 'DELETE' });
 }
 
-// PUT https://api.soundcloud.com/users/250047142/favorites/322834362?client_id=hV0x3cye6r1htAwy737V22PTsfd7HtOh&oauth_token=1-277537-250047142-4e12bb6dd78bc
-// DELETE https://api.soundcloud.com/users/250047142/favorites/322834362?client_id=hV0x3cye6r1htAwy737V22PTsfd7HtOh&oauth_token=1-277537-250047142-4e12bb6dd78bc
+// https://api.soundcloud.com/tracks/257659076/comments/?linked_partitioning=1&offset=0&limit=50&client_id=f9e1e2232182a46705c880554a1011af
+export function fetchComments(trackId, nextHref) {
+  const endpoint = `/tracks/${trackId}/comments`;
+  let fetchUrl = null;
+  if (!nextHref) {
+    const queryParams = { client_id: CLIENT_ID, linked_partitioning: 1, offset: 0, limit: 20 };
+    fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
+  } else {
+    fetchUrl = nextHref;
+  }
+
+  console.log(fetchUrl);
+  return makeRequestAndNormalize(fetchUrl, commentArraySchema);
+}

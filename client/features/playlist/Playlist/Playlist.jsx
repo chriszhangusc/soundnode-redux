@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import shortid from 'shortid';
 // import IconButton from 'client/common/components/Buttons/IconButton';
-
 import styled from 'styled-components';
 import { BACKGROUND_COLOR_SECONDARY } from 'client/app/css/colors';
-import { PLAYLIST_WIDTH_DESKTOP, PLAYLIST_WIDTH_DESKTOP_LG, PLAYLIST_WIDTH_DESKTOP_4K } from 'client/app/css/variables';
+import {
+  PLAYLIST_WIDTH_DESKTOP,
+  PLAYLIST_WIDTH_DESKTOP_LG,
+  PLAYLIST_WIDTH_DESKTOP_4K,
+} from 'client/app/css/variables';
 import { media } from 'client/app/css/styleUtils';
 import PlaylistRow from '../PlaylistRow';
 import PlaylistHeader from '../PlaylistHeader';
@@ -48,7 +50,7 @@ function Playlist(props) {
       <ul className="playlist-list">
         {playlistTrackIds &&
           playlistTrackIds.map((trackId, idx) => (
-            <PlaylistRow trackId={trackId} index={idx + 1} key={shortid.generate()} />
+            <PlaylistRow trackId={trackId} index={idx + 1} key={trackId.toString()} />
           ))}
       </ul>
     </PlaylistWrapper>

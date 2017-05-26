@@ -45,12 +45,18 @@ export function constructFetchUrl(baseUrl, endpoint, queryParams) {
 // Normalize
 export function normalizeResponse(jsonResponse, schema) {
   if (!schema) throw new Error('No Schema is provided to normalizeResponse function!');
-
   if (jsonResponse.collection) {
     const { nextHref, collection } = jsonResponse;
-    return Object.assign({}, normalize(collection, schema), { nextHref });
+    // return Object.assign({}, normalize(collection, schema), { nextHref });
+    return {
+      ...normalize(collection, schema),
+      nextHref,
+    };
   }
-  return Object.assign({}, normalize(jsonResponse, schema));
+
+  return {
+    ...normalize(jsonResponse, schema),
+  };
 }
 
 // Need to decouple data trasformation from making the ajax request

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import shortid from 'shortid';
 
 import {
   SIDEBAR_WIDTH_DESKTOP,
@@ -51,7 +50,7 @@ function Sidebar() {
   return (
     <SidebarWrapper>
       <ul>
-        {SIDEBAR_ITEM_LIST.map(d => <SidebarItem {...d} key={shortid.generate()} />)}
+        {SIDEBAR_ITEM_LIST.map(d => <SidebarItem {...d} key={d.title} />)}
       </ul>
     </SidebarWrapper>
   );

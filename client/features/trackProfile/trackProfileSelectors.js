@@ -21,3 +21,7 @@ export const getProfiledTrack = createSelector(
 );
 
 export const isTrackFetching = createSelector(getState, state => state.trackFetching);
+
+export const getCommentIds = createSelector(getState, state => state.commentIds);
+export const getCommentsNextHref = createSelector(getState, state => state.commentsNextHref);
+export const isCommentsFetching = createSelector(getState, state => state.commentsFetching);

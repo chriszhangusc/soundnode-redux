@@ -35,7 +35,12 @@ export default function track(state = INITIAL_STATE, action) {
         commentsFetching: true,
       };
     case COMMENTS_RECEIVE:
-      return state;
+      return {
+        ...state,
+        commentsFetching: false,
+        commentIds: [...state.commentIds, ...action.payload.result],
+        commentsNextHref: action.payload.nextHref,
+      };
     default:
       return state;
   }

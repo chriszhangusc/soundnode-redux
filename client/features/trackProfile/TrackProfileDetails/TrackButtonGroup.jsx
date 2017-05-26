@@ -75,6 +75,7 @@ TrackButtonGroup.defaultProps = {
 
 function mapStateToProps(state) {
   const track = getProfiledTrack(state);
+  console.log(track);
   return {
     downloadable: track && track.downloadable,
     downloadUrl: track && track.downloadUrl,
