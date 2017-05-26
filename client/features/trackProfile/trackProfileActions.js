@@ -41,13 +41,13 @@ export function loadTrackProfilePage(trackId) {
     dispatch(requestTrack());
     dispatch(requestComments());
     Promise.all([fetchTrack(trackId), fetchComments(trackId, commentsNextHref)])
-      .then(res => {
+      .then((res) => {
         const track = res[0];
         const comments = res[1];
         dispatch(receiveTrack(track));
         dispatch(receiveComments(comments));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -62,10 +62,10 @@ export function fetchMoreComments() {
     dispatch(requestComments());
     console.log(commentsNextHref);
     fetchComments(null, commentsNextHref)
-      .then(comments => {
+      .then((comments) => {
         dispatch(receiveComments(comments));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
