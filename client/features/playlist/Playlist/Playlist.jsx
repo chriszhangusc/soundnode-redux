@@ -36,7 +36,7 @@ const PlaylistWrapper = styled.div`
     padding: 20px 0 0 0;
     overflow-x: hidden;
     overflow-y: scroll;
-    transform: ${props => (props.playlistHidden ? 'translateX(500px)' : 'translateX(0)')};
+    transform: translateX(${props => (props.playlistHidden ? '500px' : '0')});
     background-color: ${BACKGROUND_COLOR_SECONDARY};
     transition: all .5s ease-in-out;
 `;

@@ -24,8 +24,11 @@ import {
   SIDEBAR_WIDTH_DESKTOP_LG,
   SIDEBAR_WIDTH_4K,
 } from 'client/app/css/variables';
+
 import { FONT_COLOR_PRIMARY, BACKGROUND_COLOR, LIGHTER_GRAY } from 'client/app/css/colors';
 import { media } from 'client/app/css/styleUtils';
+
+import Notification from 'client/features/notification/Notification';
 
 // Global CSS
 injectGlobal`
@@ -107,6 +110,7 @@ function Main() {
         <Playlist />
       </PageContentWrapper>
       <GlobalEvents />
+      <Notification />
       <NotificationContainer />
     </div>
   );

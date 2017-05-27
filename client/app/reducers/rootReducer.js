@@ -8,6 +8,7 @@ import userProfileReducer from 'client/features/userProfile/userProfileReducer';
 import trackProfileReducer from 'client/features/trackProfile/trackProfileReducer';
 import dropdownSearchReducer from 'client/features/dropdownSearch/dropdownSearchReducer';
 import authReducer from 'client/features/auth/authReducer';
+import notificationReducer from 'client/features/notification/notificationReducer';
 
 import { dropdownSearchEpic } from 'client/features/dropdownSearch/dropdownSearchActions';
 
@@ -26,4 +27,5 @@ export const rootReducer = combineReducers({
   // Single track profile page
   dropdownSearch: dropdownSearchReducer,
   auth: authReducer,
+  notification: notificationReducer,
 });
