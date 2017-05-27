@@ -8,15 +8,15 @@ import {
 } from 'client/features/charts/chartsActions';
 import { changeVisiblePlaylistName } from 'client/features/playlist/playlistActions';
 import { DEFAULT_GENRE } from 'client/features/charts/chartsConsts';
-import { getGenreList } from 'client/features/charts/chartsSelectors';
 import { CHARTS_ROUTE } from 'client/common/constants/routeConsts';
+import { validateGenre } from 'client/features/charts/chartsUtils';
 import { Grid } from 'react-bootstrap';
 
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';
 import ChartsTitle from '../ChartsTitle';
 
-class ChartsPageContainer extends Component {
+class ChartsPage extends Component {
   // ES7 ESLint will complain not sure why
   // static propTypes = {
   //   match: PropTypes.object.isRequired,
@@ -49,9 +49,9 @@ class ChartsPageContainer extends Component {
     dispatch(clearChartsState());
   }
 
-  onPageMountOrChange({ match, history, dispatch, genres }) {
+  onPageMountOrChange({ match, history, dispatch }) {
     const genreFromUrl = match.params.genre;
-    const valid = genres.filter(item => item.link === genreFromUrl).length > 0;
+    const valid = validateGenre(genreFromUrl);
 
     // invalid genre like this: http://localhost:3000/top50/All-Music/adfasdfasdfasdf
     const genre = valid ? genreFromUrl : DEFAULT_GENRE;
@@ -74,16 +74,11 @@ class ChartsPageContainer extends Component {
 }
 
 // Container prop validation required here?
-ChartsPageContainer.propTypes = {
+ChartsPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    genres: getGenreList(state),
-  };
-}
 
-export default connect(mapStateToProps)(ChartsPageContainer);
+export default connect()(ChartsPage);

@@ -7,14 +7,12 @@ import {
   CHARTS_RECEIVE,
   CHARTS_CLEAR,
   CHARTS_FETCH_STOP,
-  CHARTS_GENRE_LIST_UPDATE,
   CHARTS_CLEAR_STATE,
 } from './chartsConsts';
 
 /* Reducer */
 const initialState = {
   selectedGenre: '',
-  genreList: [],
   // Visible tracks in current charts page.
   trackIds: [],
   fetching: false,

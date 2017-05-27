@@ -1,8 +1,8 @@
 import React from 'react';
-import LinkButton from 'client/common/components/Buttons/LinkButton';
 import { genreListData, CHARTS_SUBTITLE } from 'client/features/charts/chartsConsts';
 import styled from 'styled-components';
 import GenreListTitle from './GenreListTitle';
+import GenreLinkButton from './GenreLinkButton';
 
 const GenreListWrapper = styled.div`
   width: 100%;
@@ -20,7 +20,7 @@ const GenreListWrapper = styled.div`
 /* chartsGenre is fetched from redux store directly */
 function renderGenreList() {
   return genreListData.map(genre => (
-    <LinkButton key={genre.link} to={`/charts/${genre.link}`}>{genre.title}</LinkButton>
+    <GenreLinkButton key={genre.link} to={`/charts/${genre.link}`}>{genre.title}</GenreLinkButton>
   ));
 }
 
