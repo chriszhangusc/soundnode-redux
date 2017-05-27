@@ -10,7 +10,6 @@ import configureStore from 'client/app/store/configureStore';
 import App from 'client/app/layout/App';
 import 'isomorphic-fetch';
 import 'rxjs';
-import 'react-notifications/src/notifications.scss';
 import 'normalize.css';
 import 'client/app/styles/app.scss';
 

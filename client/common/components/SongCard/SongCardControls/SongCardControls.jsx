@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NotificationManager } from 'react-notifications';
 import styled from 'styled-components';
 import SongCardButton from './SongCardButton';
-
-function createInfo(msg) {
-  NotificationManager.info(msg);
-}
 
 const Wrapper = styled.div`
   margin-top: 10px;

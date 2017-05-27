@@ -8,8 +8,6 @@ import { createEpicMiddleware } from 'redux-observable';
 import createSagaMiddleware from 'redux-saga';
 // import { loadState, saveState } from 'client/common/utils/LocalStorageUtils';
 import rootSaga from 'client/app/sagas/rootSaga';
-import notificationMiddleware from '../middlewares/notificationMiddleware';
-import apiMiddleware from '../middlewares/apiMiddleware';
 import { rootReducer, rootEpic } from '../reducers/rootReducer';
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
@@ -25,8 +23,6 @@ const configureStore = () => {
         thunk,
         // epicMiddleware,
         sagaMiddleware,
-        apiMiddleware,
-        notificationMiddleware,
       ),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     ),

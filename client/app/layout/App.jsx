@@ -15,7 +15,6 @@ import Nav from 'client/common/components/Nav';
 import Sidebar from 'client/common/components/Sidebar';
 import Callback from 'client/common/components/Callback';
 import GlobalEvents from 'client/features/global/GlobalEvents';
-import { NotificationContainer } from 'react-notifications';
 
 import styled, { injectGlobal } from 'styled-components';
 import {
@@ -111,7 +110,6 @@ function Main() {
       </PageContentWrapper>
       <GlobalEvents />
       <Notification />
-      <NotificationContainer />
     </div>
   );
 }
