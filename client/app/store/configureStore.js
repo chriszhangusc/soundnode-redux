@@ -1,21 +1,16 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-// import createSagaMiddleware from 'redux-saga';
-// Only load one file so that we don't have to load the whole lodash library
-// import throttle from 'lodash/throttle';
-// import createLogger from 'redux-logger';
-import { createEpicMiddleware } from 'redux-observable';
+// import { createEpicMiddleware } from 'redux-observable';
 import createSagaMiddleware from 'redux-saga';
 // import { loadState, saveState } from 'client/common/utils/LocalStorageUtils';
 import rootSaga from 'client/app/sagas/rootSaga';
+import logger from 'redux-logger';
 import { rootReducer, rootEpic } from '../reducers/rootReducer';
 
-const epicMiddleware = createEpicMiddleware(rootEpic);
+// const epicMiddleware = createEpicMiddleware(rootEpic);
 const sagaMiddleware = createSagaMiddleware();
 
-const configureStore = () => {
-  // const persistedState = loadState();
-  // const sagaMiddleware = createSagaMiddleware();
+function configureStore() {
   const store = createStore(
     rootReducer,
     compose(
@@ -23,8 +18,9 @@ const configureStore = () => {
         thunk,
         // epicMiddleware,
         sagaMiddleware,
+        // logger,
       ),
-      window.devToolsExtension ? window.devToolsExtension() : f => f
+      window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   );
   sagaMiddleware.run(rootSaga);
@@ -37,7 +33,6 @@ const configureStore = () => {
   // }, 1000));
 
   return store;
-};
-
+}
 
 export default configureStore;

@@ -8,6 +8,8 @@ import { GRAY } from 'client/app/css/colors';
 const StyledLinkButton = styled(Link)`
   display: inline-block;
   width: 19%;
+  color: #ededed;
+  letter-spacing: 1px;
   border: 1px solid;
   border-radius: 3px;
   margin: 5px;

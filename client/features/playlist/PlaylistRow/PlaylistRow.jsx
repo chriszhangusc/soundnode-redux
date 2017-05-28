@@ -1,6 +1,58 @@
 import React from 'react';
-
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import {
+  FONT_COLOR_PRIMARY,
+  SEPARATOR_COLOR_DARK,
+  FONT_COLOR_SECONDARY,
+  LIGHT_GRAY,
+} from 'client/app/css/colors';
+import PlaylistTooltips from './PlaylistTooltips';
+
+const PlaylistItem = styled.li`
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  height: 50px;
+  line-height: 50px;
+  max-height: 50px;
+  min-height: 50px;
+  color: ${FONT_COLOR_PRIMARY};
+  border-bottom: 1px solid ${SEPARATOR_COLOR_DARK};
+  padding: 12px 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: ${props => props.active && SEPARATOR_COLOR_DARK};
+  &:hover {
+    background-color: ${SEPARATOR_COLOR_DARK};
+  }
+`;
+
+const PlaylistItemTitle = styled.span`
+  flex-grow: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 180px;
+  text-align: left;
+  margin-right: 10px;
+  color: ${LIGHT_GRAY};
+  font-size: 1rem;
+  & span {
+    margin: 10px;
+  }
+`;
+
+const PlaylistItemArtistName = styled.span`
+  flex-grow: 1;
+  
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: left;
+  color: ${FONT_COLOR_SECONDARY};
+    width: 140px;
+`;
 
 function PlaylistRow({
   title,
@@ -11,42 +63,20 @@ function PlaylistRow({
   handleChangeSong,
   handleLikeSong,
   handleUnlikeSong,
- }) {
+}) {
   return (
-    <li
-      className={`playlist-item ${active ? 'active' : ''}`}
+    <PlaylistItem
+      active={active}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
         if (!active) handleChangeSong();
       }}
     >
-      <span className="playlist-item-index">{`${index}.`}</span>
-      <span className="playlist-item-title" title={title}>{title}</span>
-      <span className="playlist-item-username" title={artistName}>by: {artistName}</span>
-      <div className="playlist-item-options-container">
-        <i className="fa fa-ellipsis-v" />
-        <div className="playlist-item-popup-arrow" />
-        <ul className="playlist-item-options-list">
-          <li className="playlist-item-options-list_button">Go to track</li>
-          <li
-            className="playlist-item-options-list_button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              if (liked) {
-                handleUnlikeSong();
-              } else {
-                handleLikeSong();
-              }
-            }}
-          >{liked ? 'Unlike' : 'Like'}</li>
-          <li className="playlist-item-options-list_button">Add to playlist</li>
-          <li className="playlist-item-options-list_button">Remove</li>
-          <li className="playlist-item-options-list_button">Repost</li>
-        </ul>
-      </div>
-    </li>
+      <PlaylistItemTitle>{`${index}. ${title}`}</PlaylistItemTitle>
+      <PlaylistItemArtistName title={artistName}>by: {artistName}</PlaylistItemArtistName>
+      {/*<PlaylistTooltips />*/}
+    </PlaylistItem>
   );
 }
 

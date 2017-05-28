@@ -86,16 +86,11 @@
   }
 }
 
-.playlist-title-options-container {
-  margin-right: 13px;
+.playlist-item-options-container {
+    margin-right: 13px;
   display: inline-block;
   position: relative;
   text-align: center;
-}
-
-
-.playlist-item-options-container {
-
     display: inline-block;
     position: relative;
     width: 10px;
@@ -138,15 +133,15 @@
 }
 
 .playlist-item-popup-arrow {
-    display: none;
-    position: absolute;
-    top: -3px;
-    right: 8px;
-    width: 0;
-    height: 0;
-    border-top: 12px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 12px solid #3E3E40;
+  display: none;
+  position: absolute;
+  top: -3px;
+  right: 8px;
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 12px solid #3E3E40;
 }
 
 

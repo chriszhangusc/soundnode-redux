@@ -11,7 +11,6 @@ import App from 'client/app/layout/App';
 import 'isomorphic-fetch';
 import 'rxjs';
 import 'normalize.css';
-// import 'client/app/styles/app.scss';
 
 const store = configureStore();
 

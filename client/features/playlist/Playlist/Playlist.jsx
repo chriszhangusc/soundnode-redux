@@ -3,29 +3,29 @@ import PropTypes from 'prop-types';
 // import IconButton from 'client/common/components/Buttons/IconButton';
 import styled from 'styled-components';
 import { BACKGROUND_COLOR_SECONDARY } from 'client/app/css/colors';
-import {
-  PLAYLIST_WIDTH_DESKTOP,
-  PLAYLIST_WIDTH_DESKTOP_LG,
-  PLAYLIST_WIDTH_DESKTOP_4K,
-} from 'client/app/css/variables';
+
 import { media } from 'client/app/css/styleUtils';
 import PlaylistRow from '../PlaylistRow';
 import PlaylistHeader from '../PlaylistHeader';
 
+const PLAYLIST_WIDTH_DESKTOP = '300px';
+const PLAYLIST_WIDTH_DESKTOP_LG = '400px';
+const PLAYLIST_WIDTH_DESKTOP_4K = '500px';
+
 const PlaylistWrapper = styled.div`
     ${media.desktop`
       width: ${PLAYLIST_WIDTH_DESKTOP};
-      transform: ${props => (props.playlistHidden ? `translateX(${PLAYLIST_WIDTH_DESKTOP})` : 'translateX(0)')};
+      transform: translateX${props => (props.playlistHidden ? PLAYLIST_WIDTH_DESKTOP : '0')};
     `}
 
     ${media.desktopLG`
       width: ${PLAYLIST_WIDTH_DESKTOP_LG};
-      transform: ${props => (props.playlistHidden ? `translateX(${PLAYLIST_WIDTH_DESKTOP_LG})` : 'translateX(0)')};
+      transform: translateX${props => (props.playlistHidden ? PLAYLIST_WIDTH_DESKTOP_LG : '0')};
     `}
 
     ${media.desktop4K`
       width: ${PLAYLIST_WIDTH_DESKTOP_4K};
-      transform: ${props => (props.playlistHidden ? `translateX(${PLAYLIST_WIDTH_DESKTOP_4K})` : 'translateX(0)')};
+      transform: translateX${props => (props.playlistHidden ? PLAYLIST_WIDTH_DESKTOP_4K : '0')};
     `}
     position: fixed;
     top: 70px;

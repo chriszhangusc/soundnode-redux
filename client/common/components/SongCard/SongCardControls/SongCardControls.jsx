@@ -19,12 +19,12 @@ function SongCardControls({ liked, handleToggleLike, handleCopyToClipboard }) {
       <SongCardButton
         title="Add to playlist"
         name="bookmark"
-        onClick={() => createInfo('Added to playlist')}
+        onClick={() => {}}
       />
       <SongCardButton
         title="Repost"
         name="external-link"
-        onClick={() => createInfo('Added to repose')}
+        onClick={() => {}}
       />
       <SongCardButton title="Copy to clipboard" name="clipboard" onClick={handleCopyToClipboard} />
     </Wrapper>

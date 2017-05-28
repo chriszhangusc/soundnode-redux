@@ -12,7 +12,7 @@ const PlaylistHeaderWrapper = styled.div`
 `;
 
 const TitleColumn = styled.div`
-  display: inline-block
+  display: inline-block;
   margin: 10px;
 `;
 
@@ -25,7 +25,7 @@ const PlaylistHeaderIconContainer = styled.div`
 function PlaylistHeader({ handleClearPlayQueue }) {
   return (
     <PlaylistHeaderWrapper>
-      <TitleColumn>TRACKS</TitleColumn> | <TitleColumn className="labelColumn">ARTIST</TitleColumn>
+      <TitleColumn>TRACKS</TitleColumn> | <TitleColumn>ARTIST</TitleColumn>
       <PlaylistHeaderIconContainer>
         <IconButton
           title="Clear play queue"
