@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {
   FONT_COLOR_PRIMARY,
+  SEPARATOR_COLOR_CLEAN,
   SEPARATOR_COLOR_DARK,
   FONT_COLOR_SECONDARY,
   LIGHT_GRAY,
@@ -73,13 +74,25 @@ function PlaylistRow({
         if (!active) handleChangeSong();
       }}
     >
-      <PlaylistItemTitle>{`${index}. ${title}`}</PlaylistItemTitle>
+      <PlaylistItemTitle title={title}>{`${index}. ${title}`}</PlaylistItemTitle>
       <PlaylistItemArtistName title={artistName}>by: {artistName}</PlaylistItemArtistName>
-      {/*<PlaylistTooltips />*/}
+      <PlaylistTooltips index={index} />
     </PlaylistItem>
   );
 }
 
+/*
+<TooltipsIconWrapper>
+          <i className="fa fa-ellipsis-v" />
+          <TooltipsArrowLeft />
+        </TooltipsIconWrapper>
+        <OptionsList>
+          <OptionsListItem>Remove</OptionsListItem>
+          <OptionsListItem>Like</OptionsListItem>
+          <OptionsListItem>Repost</OptionsListItem>
+          <OptionsListItem>Add to playlist</OptionsListItem>
+          <OptionsListItem>Go to track</OptionsListItem>
+        </OptionsList>*/
 PlaylistRow.propTypes = {
   handleChangeSong: PropTypes.func.isRequired,
   handleLikeSong: PropTypes.func.isRequired,
