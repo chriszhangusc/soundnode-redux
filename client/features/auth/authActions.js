@@ -1,6 +1,18 @@
 import SC from 'soundcloud';
 import { CLIENT_ID, REDIRECT_URI } from 'client/common/constants/authConsts';
-import { fetchFavoriteTrackIds, likeTrack, dislikeTrack } from 'client/common/api/sc/v1';
+import {
+  fetchFavoriteTrackIds,
+  likeTrack,
+  dislikeTrack,
+  fetchMeByToken,
+} from 'client/common/api/sc/v1';
+import {
+  notificationRequireLogin,
+  notificationLoginSuccess,
+  notificationLoginFailed,
+  notificationDislikeSuccess,
+  notificationLikeSuccess,
+} from 'client/features/notification/notificationActions';
 import {
   AUTH_USER_LOGIN_SUCCESS,
   AUTH_USER_LOGOUT,
@@ -35,14 +47,16 @@ export function fetchFavorites(userId) {
 
 export function fetchMe(session) {
   return (dispatch) => {
-    fetch(`//api.soundcloud.com/me?oauth_token=${session.oauth_token}`)
+    fetchMeByToken(session.oauth_token)
       .then(response => response.json())
       .then((me) => {
         dispatch(fetchFavorites(me.id));
         dispatch(loginSuccess(me));
+        dispatch(notificationLoginSuccess());
       })
       .catch((err) => {
-        console.log('Can not fetch Me', err);
+        dispatch(notificationLoginFailed());
+        console.log('Login Error', err);
       });
   };
 }
@@ -56,13 +70,12 @@ export function setOAuthToken(token) {
 
 export function doLogin() {
   return (dispatch) => {
-    console.log('Login');
     SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI });
     SC.connect().then((session) => {
       dispatch(fetchMe(session));
       // console.log(session);
       sessionStorage.setItem(OAUTH_TOKEN, session.oauth_token);
-      dispatch(setOAuthToken(session));
+      dispatch(setOAuthToken(session.oauth_token));
       // dispatch(fetchUser());
     });
   };
@@ -80,13 +93,15 @@ export function doLikeTrack(trackId) {
       const userId = getMyId(state);
       likeTrack(userId, trackId)
         .then(() => {
+          dispatch(notificationLikeSuccess());
+          // Update user favorite list after liking a track
           dispatch(fetchFavorites(userId));
         })
         .catch((err) => {
           console.log('Failed to add this track to favorite list', err);
         });
     } else {
-      console.log('Please Login First!');
+      dispatch(notificationRequireLogin());
     }
   };
 }
@@ -99,13 +114,15 @@ export function doDislikeTrack(trackId) {
       const userId = getMyId(state);
       dislikeTrack(userId, trackId)
         .then(() => {
+          dispatch(notificationDislikeSuccess());
+          // Update user favorite list after liking a track
           dispatch(fetchFavorites(userId));
         })
         .catch((err) => {
           console.log('Failed to add this track to favorite list', err);
         });
     } else {
-      console.log('Please Login First!');
+      dispatch(notificationRequireLogin());
     }
   };
 }

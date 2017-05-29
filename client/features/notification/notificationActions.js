@@ -17,7 +17,6 @@ export function createNotificationWarning(message) {
   };
 }
 
-
 export function createNotificationSuccess(message) {
   return {
     type: 'NOTIFICATION_SUCCESS_CREATE',
@@ -51,3 +50,39 @@ export function notificationWarning(message) {
   };
 }
 
+export function notificationRequireLogin() {
+  return dispatch =>
+    dispatch(notificationWarning('Please signin to your SoundCloud account first'));
+}
+
+export function notificationLoginSuccess() {
+  return dispatch => dispatch(notificationSuccess('Login success'));
+}
+
+export function notificationLoginFailed() {
+  return dispatch => dispatch(notificationWarning('Login failed'));
+}
+
+export function notificationLikeSuccess() {
+  return dispatch => dispatch(notificationSuccess('Song added to your favorites'));
+}
+
+export function notificationLikeFailed() {
+  return dispatch => dispatch(notificationWarning('Failed to like the song'));
+}
+
+export function notificationDislikeSuccess() {
+  return dispatch => dispatch(notificationSuccess('Song removed from your favorites'));
+}
+
+export function notificationDislikeFailed() {
+  return dispatch => dispatch(notificationWarning('Failed to remove the song from your favorites'));
+}
+
+export function notificationCopySuccess() {
+  return dispatch => dispatch(notificationSuccess('Copied to clipboard'));
+}
+
+export function notificationCopyFailed() {
+  return dispatch => dispatch(notificationWarning('Failed to copy to clipboard'));
+}

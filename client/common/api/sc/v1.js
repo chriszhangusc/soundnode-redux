@@ -113,6 +113,13 @@ export function fetchComments(trackId, nextHref) {
     fetchUrl = nextHref;
   }
 
-  console.log(fetchUrl);
+  // console.log(fetchUrl);
   return makeRequestAndNormalize(fetchUrl, commentArraySchema);
+}
+
+export function fetchMeByToken(token) {
+  const endpoint = '/me';
+  const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, { oauth_token: token });
+  console.log(fetchUrl);
+  return fetch(fetchUrl);
 }

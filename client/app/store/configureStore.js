@@ -5,10 +5,12 @@ import createSagaMiddleware from 'redux-saga';
 // import { loadState, saveState } from 'client/common/utils/LocalStorageUtils';
 import rootSaga from 'client/app/sagas/rootSaga';
 import logger from 'redux-logger';
+import { persistStore, autoRehydrate } from 'redux-persist';
 import { rootReducer, rootEpic } from '../reducers/rootReducer';
 
 // const epicMiddleware = createEpicMiddleware(rootEpic);
 const sagaMiddleware = createSagaMiddleware();
+
 
 function configureStore() {
   const store = createStore(
@@ -18,11 +20,15 @@ function configureStore() {
         thunk,
         // epicMiddleware,
         sagaMiddleware,
-        // logger,
+        logger,
       ),
+      autoRehydrate(),
       window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   );
+  persistStore(store, {
+    debounce: 1000,
+  });
   sagaMiddleware.run(rootSaga);
 
   // Every time the store changes, save our state to localStorage

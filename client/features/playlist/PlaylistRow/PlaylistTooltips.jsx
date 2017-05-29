@@ -42,7 +42,6 @@ const OptionsList = styled.ul`
     top: -128px;
     display: block;
     background: ${SEPARATOR_COLOR_CLEAN};
-    z-index: 99999;
     border-radius: 2px;
 
     & li:last-child {

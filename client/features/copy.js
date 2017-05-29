@@ -1,13 +1,16 @@
 import copy from 'copy-to-clipboard';
-import { notificationSuccess, notificationFailure } from './notification';
+import {
+  notificationCopySuccess,
+  notificationCopyFailed,
+} from 'client/features/notification/notificationActions';
 
-export function copyToClipboard(str, successMessage = 'Copy Success!') {
+export function copyToClipboard(str) {
   return (dispatch) => {
     if (!str) {
-      dispatch(notificationFailure('String is empty'));
+      dispatch(notificationCopyFailed());
     } else {
       copy(str);
-      dispatch(notificationSuccess(successMessage));
+      dispatch(notificationCopySuccess());
     }
   };
 }
