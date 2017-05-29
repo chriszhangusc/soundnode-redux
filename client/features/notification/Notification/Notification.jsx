@@ -1,3 +1,4 @@
+// Need better implementation!
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -71,13 +72,13 @@ const Message = styled.p`
 
 class Notification extends React.Component {
   componentWillUnmount() {
-    const { handlePageLeave } = this.props;
-    handlePageLeave();
+    const { handleNotificationDismiss } = this.props;
+    handleNotificationDismiss();
   }
 
   render() {
     const { type, hidden, message, handleHideNotification } = this.props;
-    console.log(type, hidden);
+    // console.log(type, hidden);
     // if (!type) return null;
     return (
       <Wrapper type={type} onClick={handleHideNotification} notificationHidden={hidden}>
@@ -105,7 +106,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    handlePageLeave() {
+    handleNotificationDismiss() {
       dispatch(clearNotificationState());
     },
   };

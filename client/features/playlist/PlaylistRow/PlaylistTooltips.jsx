@@ -6,24 +6,27 @@ import { connect } from 'react-redux';
 // Tooltips styling is not working!!
 const Wrapper = styled.span`
   flex-grow: 1;
-  position: relative;
   text-align: center;
   &:hover {
     /* Better ideas? */
     & > div {
-      display: block;
+      transform: scale(1,1);
     }
   }
 `;
 
 const OptionsListWrapper = styled.div`
-  display: none;
+  position: relative;
+  /* This is for testing */
+  /* transform: ${props => (props.index === 1 ? 'scale(1, 1)' : 'scale(0, 0)')}; */
+  transform: scale(0, 0);
+  transition: all .3s;
 `;
 
 const TooltipsArrowLeft = styled.div`
   display: block;
   position: absolute;
-  top: 11px;
+  top: -38px;
   width: 0;
   height: 0;
   border-top: 12px solid transparent;
@@ -34,7 +37,7 @@ const TooltipsArrowLeft = styled.div`
 const OptionsList = styled.ul`
     position: absolute;
     right: 45px;
-    top: -78px;
+    top: -128px;
     display: block;
     background: ${SEPARATOR_COLOR_CLEAN};
     z-index: 99999;
@@ -81,11 +84,11 @@ function PlaylistTooltips({ index }) {
 }
 
 function mapStateToProps(state) {
-
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {
-
+  return {};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaylistTooltips);
+export default connect()(PlaylistTooltips);
