@@ -61,6 +61,7 @@ function PlaylistRow({
   liked,
   active,
   index,
+  trackId,
   handleChangeSong,
   handleLikeSong,
   handleUnlikeSong,
@@ -76,23 +77,11 @@ function PlaylistRow({
     >
       <PlaylistItemTitle title={title}>{`${index}. ${title}`}</PlaylistItemTitle>
       <PlaylistItemArtistName title={artistName}>by: {artistName}</PlaylistItemArtistName>
-      <PlaylistTooltips index={index} />
+      <PlaylistTooltips index={index} trackId={trackId} />
     </PlaylistItem>
   );
 }
 
-/*
-<TooltipsIconWrapper>
-          <i className="fa fa-ellipsis-v" />
-          <TooltipsArrowLeft />
-        </TooltipsIconWrapper>
-        <OptionsList>
-          <OptionsListItem>Remove</OptionsListItem>
-          <OptionsListItem>Like</OptionsListItem>
-          <OptionsListItem>Repost</OptionsListItem>
-          <OptionsListItem>Add to playlist</OptionsListItem>
-          <OptionsListItem>Go to track</OptionsListItem>
-        </OptionsList>*/
 PlaylistRow.propTypes = {
   handleChangeSong: PropTypes.func.isRequired,
   handleLikeSong: PropTypes.func.isRequired,

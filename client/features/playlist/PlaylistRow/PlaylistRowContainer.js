@@ -2,9 +2,6 @@ import { connect } from 'react-redux';
 import { getTrackById, getUserByTrackId } from 'client/features/entities/entitiesSelectors';
 import { isTrackActive } from 'client/features/player/playerSelectors';
 import { changeSongAndPlay } from 'client/features/player/playerActions';
-
-// import { isTrackLiked, startLikeSong, startUnlikeSong } from 'client/features/user';
-
 import PlaylistRow from './PlaylistRow';
 
 const mapStateToProps = (state, { trackId, index }) => {
@@ -13,6 +10,7 @@ const mapStateToProps = (state, { trackId, index }) => {
   const artist = getUserByTrackId(state, trackId);
   return {
     index,
+    trackId,
     active: isTrackActive(state, trackId),
     liked: false,
     title: track.title,

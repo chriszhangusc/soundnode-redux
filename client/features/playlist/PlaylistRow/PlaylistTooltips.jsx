@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { SEPARATOR_COLOR_CLEAN, SEPARATOR_COLOR_DARK } from 'client/app/css/colors';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { TRACK_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
 
 // Tooltips styling is not working!!
 const Wrapper = styled.span`
@@ -54,11 +56,12 @@ const OptionsListItem = styled.li`
     text-align: center;
     border-bottom: 1px solid ${SEPARATOR_COLOR_DARK};
     &:hover {
+      cursor: pointer;
       background: ${SEPARATOR_COLOR_DARK};
     }
 `;
 
-function PlaylistTooltips({ index }) {
+function PlaylistTooltips({ index, trackId }) {
   return (
     <Wrapper>
       <i className="fa fa-ellipsis-v" />
@@ -76,7 +79,16 @@ function PlaylistTooltips({ index }) {
           <OptionsListItem>Like</OptionsListItem>
           <OptionsListItem>Repost</OptionsListItem>
           <OptionsListItem>Add to playlist</OptionsListItem>
-          <OptionsListItem>Go to track</OptionsListItem>
+          <OptionsListItem>
+            <Link
+              to={`${TRACK_PROFILE_ROUTE}/${trackId}`}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              Go to track
+            </Link>
+          </OptionsListItem>
         </OptionsList>
       </OptionsListWrapper>
     </Wrapper>
