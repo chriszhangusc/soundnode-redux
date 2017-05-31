@@ -106,7 +106,6 @@ export function loadMoreCharts() {
     const state = getState();
     const chartsFetching = isChartsFetching(state);
     const nextHref = getChartsNextHref(state);
-
     const size = getChartsTrackIds(state).length;
 
     if (!chartsFetching && size < TOP_COUNT && nextHref) {

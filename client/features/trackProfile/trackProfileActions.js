@@ -57,11 +57,12 @@ export function loadMoreComments() {
   return (dispatch, getState) => {
     const state = getState();
     const commentsNextHref = getCommentsNextHref(state);
-    if (!isCommentsFetching && commentsNextHref) {
+    const commentsFetching = isCommentsFetching(state);
+    if (!commentsFetching && commentsNextHref) {
       dispatch(requestComments());
       makeRequestAndNormalize(commentsNextHref, commentArraySchema)
-        .then((comments) => {
-          dispatch(receiveComments(comments));
+        .then((normalizedComments) => {
+          dispatch(receiveComments(normalizedComments));
         })
         .catch((err) => {
           console.log(err);

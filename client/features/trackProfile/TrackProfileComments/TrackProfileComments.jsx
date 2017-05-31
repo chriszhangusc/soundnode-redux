@@ -57,7 +57,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     scrollFunc() {
-      console.log('fetchMore');
       dispatch(loadMoreComments());
     },
   };

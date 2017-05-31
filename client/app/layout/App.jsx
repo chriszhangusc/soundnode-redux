@@ -29,7 +29,7 @@ import { media } from 'client/app/css/styleUtils';
 
 import Notification from 'client/features/notification/Notification';
 
-/* Init SC */
+/* Initialze SC which will be available all over the app */
 import SC from 'soundcloud';
 import { CLIENT_ID, REDIRECT_URI } from 'client/common/constants/authConsts';
 

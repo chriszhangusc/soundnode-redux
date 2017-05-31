@@ -21,13 +21,9 @@ export const formatSecondsAsTime = (secs) => {
 //   return rawUrl;
 // }
 
-/**
- * Generate stream url given song obj
- * @param  {String} rawUrl Stream url comming from the song object
- * @return {String} Stream url appended by client_id
- */
-export function formatStreamUrl(rawUrl) {
-  return rawUrl && `${rawUrl}?client_id=${CLIENT_ID}`;
+
+export function getStreamUrlFromUri(uri) {
+  return `${uri}/stream?client_id=${CLIENT_ID}`;
 }
 
 export const formatTitle = (title) => {

@@ -19,7 +19,7 @@ function transform(response) {
 
 export function fetchCharts(genre, limit = 20) {
   // const fetchUrl = constructFetchUrl(baseUrl, endpoint, queryParams);
-  const initialFetchUrl = `${API_HOST}/charts?kind=top&genre=soundcloud:genres:${genre}&linked_partitioning=1&limit=${limit}&offset=0&client_id=${CLIENT_ID}`;
+  const initialFetchUrl = `${API_HOST}/charts?kind=top&genre=soundcloud:genres:${genre}&linked_partitioning=1&limit=${limit}&offset=0`;
   return (
     makeRequest(initialFetchUrl)
       // transform collection: [{score, track}] to collection: [track]

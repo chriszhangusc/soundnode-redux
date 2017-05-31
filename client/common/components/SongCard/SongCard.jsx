@@ -30,14 +30,16 @@ const SongCardWrapper = styled.div`
 
 // playlistName: The name of playlist this track belongs
 function SongCard({ track, active }) {
-  if (!track) throw new Error('Track object should not be null');
-  return (
-    <SongCardWrapper active={active}>
-      <SongCardImage track={track} />
-      <SongCardDetails track={track} />
-      <SongCardControls track={track} />
-    </SongCardWrapper>
-  );
+  if (track.streamable) {
+    return (
+      <SongCardWrapper active={active}>
+        <SongCardImage track={track} />
+        <SongCardDetails track={track} />
+        <SongCardControls track={track} />
+      </SongCardWrapper>
+    );
+  }
+  return null;
 }
 
 SongCard.defaultProps = {
@@ -52,4 +54,3 @@ SongCard.propTypes = {
 };
 
 export default connect(mapStateToProps)(SongCard);
-

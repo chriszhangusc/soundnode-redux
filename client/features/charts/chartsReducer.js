@@ -40,7 +40,7 @@ export default function chartsReducer(state = initialState, action) {
       return {
         ...state,
         trackIds: uniq([...state.trackIds, ...action.payload.result].slice(0, TOP_COUNT)),
-        nextHref: appendClientIdToUrl(toProxyHost(action.payload.nextHref)),
+        nextHref: toProxyHost(action.payload.nextHref),
       };
     case CHARTS_CLEAR:
       return {

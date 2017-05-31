@@ -20,12 +20,6 @@ export function getUnauthUrl(originalUrl) {
   return newUrl.toString();
 }
 
-export function appendClientIdToUrl(fetchUrl) {
-  const url = new URL(fetchUrl);
-  url.searchParams.set('client_id', CLIENT_ID);
-  return url.toString();
-}
-
 /**
  * Response success handler
  * @param  {object} response - response object from fetch web api
@@ -66,13 +60,13 @@ export function constructFetchUrl(baseUrl, endpoint, queryParams) {
 }
 
 export function makeRequest(fetchUrl, requireAuth = false) {
-  console.log(fetchUrl);
   let finalUrl = null;
   if (requireAuth) {
     // Get auth token and attach to url
   } else {
     finalUrl = getUnauthUrl(fetchUrl);
   }
+  console.log('Request: ', finalUrl);
   return (
     fetch(finalUrl)
       .then(onResponseSuccess)
