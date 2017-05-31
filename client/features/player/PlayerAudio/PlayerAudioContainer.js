@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { formatStreamUrl } from 'client/common/utils/FormatUtils';
+import { formatStreamUrl } from 'client/common/utils/formatUtils';
 import { updateTimeOnPlay, playNextSong } from 'client/features/player/playerActions';
 
 import {

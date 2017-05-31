@@ -17,7 +17,6 @@ const mapDispatchToProps = dispatch => ({
   // Load more tracks
   scrollFunc() {
     console.log('Fetch more user tracks');
-    // dispatch(loadMoreUserTracks());
     dispatch(loadMoreUserTracks());
   },
 });

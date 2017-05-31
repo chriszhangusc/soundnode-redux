@@ -1,7 +1,7 @@
 import uniq from 'lodash/uniq';
+import { toProxyHost, appendClientIdToUrl } from 'client/common/utils/apiUtils';
 import {
   TOP_COUNT,
-  LIMIT_EACH_FETCH,
   CHARTS_GENRE_CHANGE,
   CHARTS_REQUEST,
   CHARTS_RECEIVE,
@@ -16,7 +16,7 @@ const initialState = {
   // Visible tracks in current charts page.
   trackIds: [],
   fetching: false,
-  fetchOffset: 0,
+  nextHref: null,
 };
 
 // #TODO: Should we extract fetchOffset?
@@ -30,7 +30,6 @@ export default function chartsReducer(state = initialState, action) {
       return {
         ...state,
         selectedGenre: action.payload,
-        fetchOffset: 0,
       };
     case CHARTS_REQUEST:
       return {
@@ -40,10 +39,8 @@ export default function chartsReducer(state = initialState, action) {
     case CHARTS_RECEIVE:
       return {
         ...state,
-        trackIds: uniq(
-          [...state.trackIds, ...action.payload.normalized.result].slice(0, TOP_COUNT),
-        ),
-        fetchOffset: state.fetchOffset + LIMIT_EACH_FETCH,
+        trackIds: uniq([...state.trackIds, ...action.payload.result].slice(0, TOP_COUNT)),
+        nextHref: appendClientIdToUrl(toProxyHost(action.payload.nextHref)),
       };
     case CHARTS_CLEAR:
       return {

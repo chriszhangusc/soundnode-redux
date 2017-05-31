@@ -5,7 +5,6 @@ const HOST_PROD = 'https://redux-music.herokuapp.com';
 
 // #TODO: change to dev
 const API_HOST_DEV = 'http://localhost:3001'; // Will go through proxy and go to 3001, see config in webpack
-
 const API_HOST_PROD = 'https://redux-music-api.herokuapp.com';
 
 // PRODUCTION is from DefinePlugin in webpack

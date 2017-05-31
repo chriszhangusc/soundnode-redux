@@ -27,7 +27,7 @@ export const formatSecondsAsTime = (secs) => {
  * @return {String} Stream url appended by client_id
  */
 export function formatStreamUrl(rawUrl) {
-  return (rawUrl ? `${rawUrl}?client_id=${CLIENT_ID}` : null);
+  return rawUrl && `${rawUrl}?client_id=${CLIENT_ID}`;
 }
 
 export const formatTitle = (title) => {
@@ -35,9 +35,9 @@ export const formatTitle = (title) => {
   return res.length === 1 ? res[0] : res[1];
 };
 
-export function formatGenre(genre) {
-  // Get rid of everything that is not a letter, and convert to lowercase
-  //  e.g. Hip-hop & Rap will be hiphoprap
-  const lowercase = genre.toLowerCase();
-  return lowercase === 'all-music' ? lowercase : lowercase.replace(/[^a-z]+/g, '');
-}
+// export function formatGenre(genre) {
+//   // Get rid of everything that is not a letter, and convert to lowercase
+//   //  e.g. Hip-hop & Rap will be hiphoprap
+//   const lowercase = genre.toLowerCase();
+//   return lowercase === 'all-music' ? lowercase : lowercase.replace(/[^a-z]+/g, '');
+// }

@@ -56,8 +56,8 @@ export default function playlistReducer(state = initialState, action) {
       return {
         ...state,
         [action.payload.playlistName]: (state[action.payload.playlistName]
-          ? [...state[action.payload.playlistName], ...action.payload.normalized.result]
-          : [...action.payload.normalized.result]).slice(0, 50),
+          ? [...state[action.payload.playlistName], ...action.payload.result]
+          : [...action.payload.result]).slice(0, 50),
       };
 
     case CHANGE_VISIBLE_PLAYLIST_NAME:

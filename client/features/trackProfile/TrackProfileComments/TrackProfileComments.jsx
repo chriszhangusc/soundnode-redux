@@ -7,7 +7,7 @@ import {
   getCommentIds,
   isCommentsFetching,
 } from 'client/features/trackProfile/trackProfileSelectors';
-import { fetchMoreComments } from 'client/features/trackProfile/trackProfileActions';
+import { loadMoreComments } from 'client/features/trackProfile/trackProfileActions';
 import infiniteScroll from 'client/common/hocs/InfiniteScroll';
 import Spinner from 'client/common/components/Spinner';
 import TrackProfileComment from './TrackProfileComment';
@@ -58,7 +58,7 @@ function mapDispatchToProps(dispatch) {
   return {
     scrollFunc() {
       console.log('fetchMore');
-      dispatch(fetchMoreComments());
+      dispatch(loadMoreComments());
     },
   };
 }

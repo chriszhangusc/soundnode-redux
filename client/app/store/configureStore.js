@@ -11,7 +11,6 @@ import { rootReducer, rootEpic } from '../reducers/rootReducer';
 // const epicMiddleware = createEpicMiddleware(rootEpic);
 const sagaMiddleware = createSagaMiddleware();
 
-
 function configureStore() {
   const store = createStore(
     rootReducer,
@@ -28,7 +27,7 @@ function configureStore() {
   );
   persistStore(store, {
     whitelist: ['auth'],
-    debounce: 1000,
+    debounce: 2000,
   });
   sagaMiddleware.run(rootSaga);
 

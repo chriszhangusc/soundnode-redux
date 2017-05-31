@@ -10,7 +10,6 @@ const baseUrl = `${API_HOST}${SC_API_V2}`;
 
 export function fetchCharts(genre, offset = 0, limit = 20) {
   const endpoint = 'charts';
-
   // Initial query params: should we extract it to a function or constant?
   const queryParams = {
     genre,
@@ -24,7 +23,3 @@ export function fetchCharts(genre, offset = 0, limit = 20) {
 // console.log('fetchCharts:', fetchUrl);
   return makeRequestAndNormalize(fetchUrl, trackArraySchema);
 }
-
-
-// Fetch user profile info
-// https://api-v2.soundcloud.com/users/10494998/featured-profiles?client_id=2t9loNQH90kzJcsFCODdigxfp325aq4z

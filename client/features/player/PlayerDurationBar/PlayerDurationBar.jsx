@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { WHITE, THEME_COLOR } from 'client/app/css/colors';
-import { formatSecondsAsTime } from 'client/common/utils/FormatUtils';
+import { formatSecondsAsTime } from 'client/common/utils/formatUtils';
 import { computeSeekBarPercent } from 'client/features/player/playerUtils';
 import styled from 'styled-components';
 

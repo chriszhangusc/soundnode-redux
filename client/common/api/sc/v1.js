@@ -12,31 +12,31 @@ import { constructFetchUrl, makeRequestAndNormalize, makeRequest } from './apiUt
 const SC_API_V1 = 'https://api.soundcloud.com/';
 const LIMIT = 20;
 
-export function fetchTracks(filters, limit = LIMIT) {
-  const endpoint = '/tracks/';
-  const queryParams = {
-    client_id: CLIENT_ID,
-    linked_partitioning: 1,
-    offset: 0,
-    limit,
-    ...filters,
-  };
-  const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
-  return makeRequestAndNormalize(fetchUrl, trackArraySchema);
-}
+// export function fetchTracks(filters, limit = LIMIT) {
+//   const endpoint = '/tracks/';
+//   const queryParams = {
+//     client_id: CLIENT_ID,
+//     linked_partitioning: 1,
+//     offset: 0,
+//     limit,
+//     ...filters,
+//   };
+//   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
+//   return makeRequestAndNormalize(fetchUrl, trackArraySchema);
+// }
 
-export function fetchUsers(filters, limit = LIMIT) {
-  const endpoint = '/users/';
-  const queryParams = {
-    client_id: CLIENT_ID,
-    linked_partitioning: 1,
-    offset: 0,
-    limit,
-    ...filters,
-  };
-  const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
-  return makeRequestAndNormalize(fetchUrl, userArraySchema);
-}
+// export function fetchUsers(filters, limit = LIMIT) {
+//   const endpoint = '/users/';
+//   const queryParams = {
+//     client_id: CLIENT_ID,
+//     linked_partitioning: 1,
+//     offset: 0,
+//     limit,
+//     ...filters,
+//   };
+//   const fetchUrl = constructFetchUrl(SC_API_V1, endpoint, queryParams);
+//   return makeRequestAndNormalize(fetchUrl, userArraySchema);
+// }
 
 /**
  * Fetch a single track by id

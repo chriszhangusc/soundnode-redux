@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Avatar from 'client/common/components/Avatar';
 import styled from 'styled-components';
 import { media } from 'client/app/css/styleUtils';
 import { SEPARATOR_COLOR_DARK } from 'client/app/css/colors';
-import { Redirect } from 'react-router';
 
 const StyledListItem = styled.li`
     padding: 8px 10px;

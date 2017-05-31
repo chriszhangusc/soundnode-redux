@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getUserByTrackId } from 'client/features/entities/entitiesSelectors';
-import { formatTitle } from 'client/common/utils/FormatUtils';
+import { formatTitle } from 'client/common/utils/formatUtils';
 import PlayerTrackInfo from './PlayerTrackInfo';
 
 const mapStateToProps = (state, { playerTrack }) => {

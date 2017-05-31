@@ -1,14 +1,13 @@
 /* Action Creators */
-import { formatGenre } from 'client/common/utils/FormatUtils';
-import { fetchCharts } from 'client/common/api/sc/v2';
 import { notificationFailure } from 'client/features/notification';
 import { updateShufflePlaylistIfNeeded } from 'client/features/playlist/playlistActions';
+import { fetchCharts, fetchMoreCharts } from './chartsApi';
 
 import {
   isChartsFetching,
-  getChartsFetchOffset,
   getChartsTrackIds,
   getChartsSelectedGenre,
+  getChartsNextHref,
 } from './chartsSelectors';
 
 import {
@@ -46,13 +45,11 @@ export function requestCharts() {
   };
 }
 
-// TODO: Refactor to Flux standard actions
 export function receiveCharts(normalized, playlistName) {
   return {
     type: CHARTS_RECEIVE,
     payload: {
-      normalized,
-      entities: normalized.entities,
+      ...normalized,
       playlistName,
     },
   };
@@ -77,13 +74,10 @@ export function endFetching() {
  * @returns Thunk function
  */
 export function fetchChartsAndUpdatePlaylist(genre) {
-  return async (dispatch, getState) => {
-    const state = getState();
-    const offset = getChartsFetchOffset(state);
+  return async (dispatch) => {
     dispatch(requestCharts());
     try {
-      const normalizedCharts = await fetchCharts(genre, offset);
-      // #TODO: Verify results!!
+      const normalizedCharts = await fetchCharts(genre);
       dispatch(receiveCharts(normalizedCharts, genre));
       // console.log(normalizedCharts);
       // Update shuffle playlist if visiblePlaylistName is the same as activePlaylistName
@@ -101,23 +95,33 @@ export function fetchChartsAndUpdatePlaylist(genre) {
 
 export function loadChartsPage(genre) {
   return (dispatch) => {
-    const formattedGenre = formatGenre(genre);
     // Remove all old search results because we do not want them to interfere the new ones.
     dispatch(clearAllCharts());
-    dispatch(fetchChartsAndUpdatePlaylist(formattedGenre));
+    dispatch(fetchChartsAndUpdatePlaylist(genre));
   };
 }
 
 export function loadMoreCharts() {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const state = getState();
     const chartsFetching = isChartsFetching(state);
-    // Limit the number of fetched results.
+    const nextHref = getChartsNextHref(state);
+
     const size = getChartsTrackIds(state).length;
-    if (!chartsFetching && size < TOP_COUNT) {
+
+    if (!chartsFetching && size < TOP_COUNT && nextHref) {
+      dispatch(requestCharts());
       const genre = getChartsSelectedGenre(state);
-      const formattedGenre = formatGenre(genre);
-      dispatch(fetchChartsAndUpdatePlaylist(formattedGenre));
+      try {
+        const normalizedCharts = await fetchMoreCharts(nextHref);
+        dispatch(receiveCharts(normalizedCharts, genre));
+        dispatch(updateShufflePlaylistIfNeeded());
+      } catch (err) {
+        console.log(err);
+      } finally {
+        dispatch(endFetching());
+      }
+      // dispatch(fetchChartsAndUpdatePlaylist(formattedGenre));
     }
   };
 }

@@ -54,11 +54,10 @@ class UserProfileContainer extends Component {
 
 const mapStateToProps = (state) => {
   const userId = getProfiledUserId(state);
-  const user = getProfiledUser(state, userId);
+  // const user = getProfiledUser(state, userId);
   return {
     fetching: isUserFetching(state),
     userId,
-    trackCount: user ? user.trackCount.toLocaleString() : '0',
   };
 };
 

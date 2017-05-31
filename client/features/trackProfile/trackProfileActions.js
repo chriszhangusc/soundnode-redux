@@ -1,5 +1,7 @@
-import { fetchTrack, fetchComments } from 'client/common/api/sc/v1';
-import { getCommentsNextHref } from './trackProfileSelectors';
+import { makeRequestAndNormalize } from 'client/common/utils/apiUtils';
+import { commentArraySchema } from 'client/app/schema';
+import { fetchProfiledTrack, fetchTrackComments } from './trackProfileApi';
+import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import {
   TRACK_REQUEST,
   TRACK_RECEIVE,
@@ -35,11 +37,10 @@ export function receiveComments(normalized) {
 }
 
 export function loadTrackProfilePage(trackId) {
-  return (dispatch, getState) => {
-    const commentsNextHref = getCommentsNextHref(getState());
+  return (dispatch) => {
     dispatch(requestTrack());
     dispatch(requestComments());
-    Promise.all([fetchTrack(trackId), fetchComments(trackId, commentsNextHref)])
+    Promise.all([fetchProfiledTrack(trackId), fetchTrackComments(trackId)])
       .then((res) => {
         const track = res[0];
         const comments = res[1];
@@ -52,18 +53,19 @@ export function loadTrackProfilePage(trackId) {
   };
 }
 
-export function fetchMoreComments() {
+export function loadMoreComments() {
   return (dispatch, getState) => {
     const state = getState();
     const commentsNextHref = getCommentsNextHref(state);
-    if (!commentsNextHref) return;
-    dispatch(requestComments());
-    fetchComments(null, commentsNextHref)
-      .then((comments) => {
-        dispatch(receiveComments(comments));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (!isCommentsFetching && commentsNextHref) {
+      dispatch(requestComments());
+      makeRequestAndNormalize(commentsNextHref, commentArraySchema)
+        .then((comments) => {
+          dispatch(receiveComments(comments));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 }

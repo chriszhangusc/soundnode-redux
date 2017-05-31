@@ -1,4 +1,4 @@
-import { fetchUser, fetchUserTracks, fetchMoreUserTracks } from 'client/common/api/sc/v1';
+import { fetchUserTracks, fetchMoreUserTracks } from 'client/common/api/sc/v1';
 import { notificationFailure } from 'client/features/notification';
 
 import {
@@ -10,6 +10,8 @@ import {
   USER_TRACKS_RECEIVE,
   USER_TRACKS_FETCH_FAIL,
 } from './userProfileConsts';
+
+import { fetchProfiledUser, fetchProfiledUserTracks } from './userProfileApi';
 
 import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelectors';
 
@@ -52,9 +54,12 @@ export function loadUserProfilePage(userId) {
     try {
       dispatch(requestUser());
       dispatch(requestUserTracks());
-      const [user, userTracks] = await Promise.all([fetchUser(userId), fetchUserTracks(userId)]);
-      // throw new Error('Fail to fetch resource.');
+      const [user, userTracks] = await Promise.all([
+        fetchProfiledUser(userId),
+        fetchProfiledUserTracks(userId),
+      ]);
       dispatch(receiveUser(user));
+      console.log(userTracks);
       dispatch(receiveUserTracks(userTracks));
     } catch (err) {
       // Do we need to stop spinner here ? dispatch(artistFailure(err.message));
