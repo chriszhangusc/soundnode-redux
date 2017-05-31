@@ -42,7 +42,6 @@ export function constructFetchUrl(baseUrl, endpoint, queryParams) {
   return finalUrl;
 }
 
-// Normalize
 export function normalizeResponse(jsonResponse, schema) {
   if (!schema) throw new Error('No Schema is provided to normalizeResponse function!');
   if (jsonResponse.collection) {
@@ -57,6 +56,18 @@ export function normalizeResponse(jsonResponse, schema) {
   return {
     ...normalize(jsonResponse, schema),
   };
+}
+
+export function makeRequest(fetchUrl) {
+  fetch(fetchUrl)
+    .then(onResponseSuccess)
+    .catch((err) => {
+      console.log(err);
+      // Let the user know when there is a connection error!
+      throw Error('Can not reach the server!');
+    })
+    // The following should not be coupled with this function here.
+    .then(json => camelizeKeys(json));
 }
 
 // Need to decouple data trasformation from making the ajax request

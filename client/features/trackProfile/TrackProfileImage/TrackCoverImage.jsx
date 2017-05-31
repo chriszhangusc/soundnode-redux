@@ -120,7 +120,7 @@ function mapStateToProps(state) {
     playing: track && isTrackPlaying(state, track.id),
     active: track && isTrackActive(state, track.id),
     liked: false,
-    likesCount: track && track.favoritingsCount,
+    likesCount: track && (track.favoritingsCount || track.likesCount),
     playbackCount: track && track.playbackCount,
   };
 }

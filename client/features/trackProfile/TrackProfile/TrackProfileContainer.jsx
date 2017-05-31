@@ -10,10 +10,27 @@ import Spinner from 'client/common/components/Spinner';
 import TrackProfile from './TrackProfile';
 
 class TrackProfileContainer extends Component {
+  // Initial Loading
   componentWillMount() {
     const { dispatch, match } = this.props;
     const trackId = match.params.trackId;
     dispatch(loadTrackProfilePage(trackId));
+  }
+
+  // Change from different single track routes.
+  componentWillReceiveProps(nextProps) {
+    const { dispatch } = this.props;
+    const curTrackId = this.props.match.params.trackId;
+    const newTrackId = nextProps.match.params.trackId;
+
+    // If curTrackId is undefined, it means this is the initial loading which is already
+    // handled by CWM,
+    // Check curTrackId and newTrackId to detect jumping from one track to another track.
+    if (curTrackId !== newTrackId && curTrackId) {
+      // Before jumping to new track profile page, clear old state.
+      dispatch(clearTrackState());
+      dispatch(loadTrackProfilePage(newTrackId));
+    }
   }
 
   componentWillUnmount() {

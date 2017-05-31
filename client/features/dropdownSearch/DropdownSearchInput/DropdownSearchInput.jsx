@@ -114,7 +114,10 @@ const mapDispatchToProps = dispatch => ({
   },
 
   handleBlur() {
-    dispatch(clearAndHideSearchResults());
+    // Delay??
+    setTimeout(() => {
+      dispatch(clearAndHideSearchResults());
+    }, 250);
   },
 
   handleFocus(keywords) {

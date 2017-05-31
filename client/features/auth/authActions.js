@@ -1,5 +1,3 @@
-import SC from 'soundcloud';
-import { CLIENT_ID, REDIRECT_URI } from 'client/common/constants/authConsts';
 import {
   fetchFavoriteTrackIds,
   likeTrack,
@@ -70,7 +68,8 @@ export function setOAuthToken(token) {
 
 export function doLogin() {
   return (dispatch) => {
-    SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI });
+    // SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI });
+    // SC is defined in global scope
     SC.connect().then((session) => {
       dispatch(fetchMe(session));
       // console.log(session);

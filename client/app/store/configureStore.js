@@ -20,13 +20,14 @@ function configureStore() {
         thunk,
         // epicMiddleware,
         sagaMiddleware,
-        logger,
+        // logger,
       ),
       autoRehydrate(),
       window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   );
   persistStore(store, {
+    whitelist: ['auth'],
     debounce: 1000,
   });
   sagaMiddleware.run(rootSaga);

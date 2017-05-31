@@ -35,13 +35,13 @@ export default function dropdownSearchReducer(state = INITIAL_STATE, action) {
     case TYPES.DROPDOWN_ARTISTS_RECEIVED:
       return {
         ...state,
-        dropdownuserIds: [...action.payload.normalized.result],
+        dropdownuserIds: [...action.payload.result],
       };
 
     case TYPES.DROPDOWN_TRACKS_RECEIVED:
       return {
         ...state,
-        dropdownTrackIds: [...action.payload.normalized.result],
+        dropdownTrackIds: [...action.payload.result],
       };
 
     case TYPES.HIDE_DROPDOWN_SEARCH_RESULTS:

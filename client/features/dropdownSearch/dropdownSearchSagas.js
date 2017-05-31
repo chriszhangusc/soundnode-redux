@@ -1,6 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
 import { fetchTracks, fetchUsers } from 'client/common/api/sc/v1';
+import pick from 'lodash/pick';
 
 import {
   dropdownTracksReceived,
@@ -11,6 +12,7 @@ import {
 
 import { DROPDOWN_SEARCH_REQUEST } from 'client/features/dropdownSearch/dropdownSearchConsts';
 
+import { fetchDropdownSearchTracks, fetchDropdownSearchUsers } from './dropdownSearchApi';
 /* *****************************************************************************/
 /* ****************************** SUBROUTINES **********************************/
 /* *****************************************************************************/
@@ -25,10 +27,13 @@ function* doDropdownSearch({ payload }) {
     yield put(clearAndHideSearchResults());
     return;
   }
+  const finalKeyword = keyword.trim();
+  // yield call(doDropdownTrackSearch, finalKeyword);
 
+  // How about error handling??
   const [normalizedTracks, normalizedArtists] = yield [
-    call(fetchTracks, { q: keyword.trim().toLowerCase() }, limit),
-    call(fetchUsers, { q: keyword.trim().toLowerCase() }, limit),
+    call(fetchDropdownSearchTracks, finalKeyword),
+    call(fetchDropdownSearchUsers, finalKeyword),
   ];
 
   yield put(dropdownTracksReceived(normalizedTracks));

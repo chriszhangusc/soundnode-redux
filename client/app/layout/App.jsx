@@ -29,6 +29,12 @@ import { media } from 'client/app/css/styleUtils';
 
 import Notification from 'client/features/notification/Notification';
 
+/* Init SC */
+import SC from 'soundcloud';
+import { CLIENT_ID, REDIRECT_URI } from 'client/common/constants/authConsts';
+
+SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI });
+
 // Global CSS
 injectGlobal`
 

@@ -7,12 +7,12 @@ import {
   userArraySchema,
 } from 'client/app/schema';
 
-import { normalizeResponse, constructFetchUrl, makeRequestAndNormalize } from './apiUtils';
+import { constructFetchUrl, makeRequestAndNormalize, makeRequest } from './apiUtils';
 
 const SC_API_V1 = 'https://api.soundcloud.com/';
 const LIMIT = 20;
 
-export function fetchTracks(filters, limit) {
+export function fetchTracks(filters, limit = LIMIT) {
   const endpoint = '/tracks/';
   const queryParams = {
     client_id: CLIENT_ID,
@@ -25,7 +25,7 @@ export function fetchTracks(filters, limit) {
   return makeRequestAndNormalize(fetchUrl, trackArraySchema);
 }
 
-export function fetchUsers(filters, limit) {
+export function fetchUsers(filters, limit = LIMIT) {
   const endpoint = '/users/';
   const queryParams = {
     client_id: CLIENT_ID,

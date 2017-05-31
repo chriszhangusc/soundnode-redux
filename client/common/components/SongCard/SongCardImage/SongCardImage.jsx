@@ -47,7 +47,7 @@ function SongCardImage({ active, playing, artworkUrl, artworkUrlSmall, handleIma
       <PlaybackButtonWrapper active={active} onClick={handleImageClick}>
         <PlaybackButtonIcon className={`${playing ? 'ion-ios-pause' : 'ion-ios-play'}`} />
       </PlaybackButtonWrapper>
-      <CoverImage src={artworkUrl} />
+      { artworkUrl && <CoverImage src={artworkUrl} /> }
     </Wrapper>
   );
 }

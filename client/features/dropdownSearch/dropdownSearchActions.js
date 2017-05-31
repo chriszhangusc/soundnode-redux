@@ -38,18 +38,12 @@ export const clearDropdownSearchResults = () => ({
 
 export const dropdownArtistsReceived = normalized => ({
   type: TYPES.DROPDOWN_ARTISTS_RECEIVED,
-  payload: {
-    normalized,
-    entities: normalized.entities,
-  },
+  payload: normalized,
 });
 
 export const dropdownTracksReceived = normalized => ({
   type: TYPES.DROPDOWN_TRACKS_RECEIVED,
-  payload: {
-    normalized,
-    entities: normalized.entities,
-  },
+  payload: normalized,
 });
 
 export function clearAndHideSearchResults() {
@@ -59,7 +53,7 @@ export function clearAndHideSearchResults() {
   };
 }
 
-/* Search Epic */
+/* Search Epic (Not currently active)*/
 export const dropdownSearchEpic = action$ =>
   action$
     .ofType(TYPES.DROPDOWN_SEARCH_REQUEST)
