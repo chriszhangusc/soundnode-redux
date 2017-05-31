@@ -8,8 +8,13 @@ import { normalizeResponse } from './normalizeUtils';
 
 const SC_API_V2 = 'https://api-v2.soundcloud.com';
 
-// https://api-v2.soundcloud.com
-export function toProxyHost(fetchUrl) {
+export function getStreamUrl(track) {
+  const streamUrl = track && track.streamUrl && `${track.uri}/stream`;
+  return streamUrl && `${streamUrl}?client_id=${CLIENT_ID}`;
+}
+
+// Transform requests like https://api-v2.soundcloud.com to http://localhost:3001(Our proxy server)
+export function transformSCV2Request(fetchUrl) {
   return fetchUrl && fetchUrl.replace(`${SC_API_V2}`, `${API_HOST}`);
 }
 

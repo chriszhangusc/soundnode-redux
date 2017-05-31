@@ -55,7 +55,7 @@ export function receiveCharts(normalized, playlistName) {
   };
 }
 
-export function endFetching() {
+export function endChartsFetching() {
   return {
     type: CHARTS_FETCH_STOP,
   };
@@ -63,18 +63,10 @@ export function endFetching() {
 
 /* Side Effects */
 
-// http://localhost:3001/sc/api-v2/charts?genre=country&limit=20&offset=0&client
-// _id=02gUJC0hH2ct1EGOcYXQIzRFU91c72Ea
-
-/**
- * This is the domain logic of charts page, it gets fired whenever we need to fetch charts
- * and do other stuffs when results comes back like update the shuffle playlist if we are in
- * shuffle mode
- * @param {string} genre The genre of what we need to fetch
- * @returns Thunk function
- */
-export function fetchChartsAndUpdatePlaylist(genre) {
+export function loadChartsPage(genre) {
   return async (dispatch) => {
+    // Remove all old search results because we do not want them to interfere the new ones.
+    dispatch(clearAllCharts());
     dispatch(requestCharts());
     try {
       const normalizedCharts = await fetchCharts(genre);
@@ -88,16 +80,8 @@ export function fetchChartsAndUpdatePlaylist(genre) {
       dispatch(notificationFailure('Failed to fetch songs!'));
     } finally {
       // Stop loading spinner
-      dispatch(endFetching());
+      dispatch(endChartsFetching());
     }
-  };
-}
-
-export function loadChartsPage(genre) {
-  return (dispatch) => {
-    // Remove all old search results because we do not want them to interfere the new ones.
-    dispatch(clearAllCharts());
-    dispatch(fetchChartsAndUpdatePlaylist(genre));
   };
 }
 
@@ -118,9 +102,8 @@ export function loadMoreCharts() {
       } catch (err) {
         console.log(err);
       } finally {
-        dispatch(endFetching());
+        dispatch(endChartsFetching());
       }
-      // dispatch(fetchChartsAndUpdatePlaylist(formattedGenre));
     }
   };
 }

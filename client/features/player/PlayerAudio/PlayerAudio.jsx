@@ -74,13 +74,14 @@ class PlayerAudio extends Component {
       <audio
         id="audio"
         loop={mode === REPEAT}
-        ref={(ref) => { this.audioElement = ref; }}
+        ref={(ref) => {
+          this.audioElement = ref;
+        }}
         src={streamUrl}
       />
     );
   }
 }
-
 
 // PlayerAudio.defaultProps = {
 //   seeking: false,

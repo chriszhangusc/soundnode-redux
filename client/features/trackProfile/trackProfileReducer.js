@@ -1,9 +1,9 @@
 import {
   TRACK_PROFILE_STATE_CLEAR,
-  TRACK_REQUEST,
-  TRACK_RECEIVE,
-  COMMENTS_REQUEST,
-  COMMENTS_RECEIVE,
+  TRACK_PROFILE_TRACK_REQUEST,
+  TRACK_PROFILE_TRACK_RECEIVE,
+  TRACK_PROFILE_COMMENTS_REQUEST,
+  TRACK_PROFILE_COMMENTS_RECEIVE,
 } from './trackProfileConsts';
 
 const INITIAL_STATE = {
@@ -18,29 +18,30 @@ export default function track(state = INITIAL_STATE, action) {
   switch (action.type) {
     case TRACK_PROFILE_STATE_CLEAR:
       return INITIAL_STATE;
-    case TRACK_REQUEST:
+    case TRACK_PROFILE_TRACK_REQUEST:
       return {
         ...state,
         trackFetching: true,
       };
-    case TRACK_RECEIVE:
+    case TRACK_PROFILE_TRACK_RECEIVE:
       return {
         ...state,
         trackFetching: false,
         trackId: action.payload.result,
       };
-    case COMMENTS_REQUEST:
+    case TRACK_PROFILE_COMMENTS_REQUEST:
       return {
         ...state,
         commentsFetching: true,
       };
-    case COMMENTS_RECEIVE:
+    case TRACK_PROFILE_COMMENTS_RECEIVE:
       return {
         ...state,
         commentsFetching: false,
         commentIds: [...state.commentIds, ...action.payload.result],
         commentsNextHref: action.payload.nextHref,
       };
+
     default:
       return state;
   }

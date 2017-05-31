@@ -3,10 +3,10 @@ import { commentArraySchema } from 'client/app/schema';
 import { fetchProfiledTrack, fetchTrackComments } from './trackProfileApi';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import {
-  TRACK_REQUEST,
-  TRACK_RECEIVE,
-  COMMENTS_REQUEST,
-  COMMENTS_RECEIVE,
+  TRACK_PROFILE_TRACK_REQUEST,
+  TRACK_PROFILE_TRACK_RECEIVE,
+  TRACK_PROFILE_COMMENTS_REQUEST,
+  TRACK_PROFILE_COMMENTS_RECEIVE,
   TRACK_PROFILE_STATE_CLEAR,
 } from './trackProfileConsts';
 
@@ -15,23 +15,23 @@ export const clearTrackState = () => ({
 });
 
 export function requestTrack() {
-  return { type: TRACK_REQUEST };
+  return { type: TRACK_PROFILE_TRACK_REQUEST };
 }
 
 export function requestComments() {
-  return { type: COMMENTS_REQUEST };
+  return { type: TRACK_PROFILE_COMMENTS_REQUEST };
 }
 
 export function receiveTrack(normalized) {
   return {
-    type: TRACK_RECEIVE,
+    type: TRACK_PROFILE_TRACK_RECEIVE,
     payload: normalized,
   };
 }
 
 export function receiveComments(normalized) {
   return {
-    type: COMMENTS_RECEIVE,
+    type: TRACK_PROFILE_COMMENTS_RECEIVE,
     payload: normalized,
   };
 }

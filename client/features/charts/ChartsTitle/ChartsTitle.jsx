@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import { connect } from 'react-redux';
 import { getCurrentGenreTitle } from 'client/features/charts/chartsSelectors';
-import { CHARTS_MAIN_TITLE_PREFIX } from 'client/features/charts/chartsConsts';
 
 const Title = styled.h1`
   margin: 30px 20px;
@@ -13,7 +12,7 @@ const Title = styled.h1`
 `;
 
 function ChartsTitle({ genreTitle }) {
-  return <Title>{genreTitle}</Title>;
+  return <Title>Top 50 - {genreTitle}</Title>;
 }
 
 ChartsTitle.propTypes = {
@@ -22,7 +21,7 @@ ChartsTitle.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    genreTitle: `${CHARTS_MAIN_TITLE_PREFIX}${getCurrentGenreTitle(state)}`,
+    genreTitle: `${getCurrentGenreTitle(state)}`,
   };
 }
 

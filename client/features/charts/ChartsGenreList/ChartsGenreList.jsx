@@ -1,5 +1,5 @@
 import React from 'react';
-import { genreListData, CHARTS_SUBTITLE } from 'client/features/charts/chartsConsts';
+import { genreListData } from 'client/features/charts/chartsConsts';
 import styled from 'styled-components';
 import GenreListTitle from './GenreListTitle';
 import GenreLinkButton from './GenreLinkButton';
@@ -27,7 +27,7 @@ function renderGenreList() {
 export default function ChartsGenreList() {
   return (
     <GenreListWrapper>
-      <GenreListTitle>{CHARTS_SUBTITLE}</GenreListTitle>
+      <GenreListTitle>Charts By Genre</GenreListTitle>
       {renderGenreList(genreListData)}
     </GenreListWrapper>
   );

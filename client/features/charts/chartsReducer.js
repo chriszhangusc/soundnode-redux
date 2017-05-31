@@ -1,5 +1,5 @@
 import uniq from 'lodash/uniq';
-import { toProxyHost, appendClientIdToUrl } from 'client/common/utils/apiUtils';
+import { transformSCV2Request } from 'client/common/utils/apiUtils';
 import {
   TOP_COUNT,
   CHARTS_GENRE_CHANGE,
@@ -40,7 +40,7 @@ export default function chartsReducer(state = initialState, action) {
       return {
         ...state,
         trackIds: uniq([...state.trackIds, ...action.payload.result].slice(0, TOP_COUNT)),
-        nextHref: toProxyHost(action.payload.nextHref),
+        nextHref: transformSCV2Request(action.payload.nextHref),
       };
     case CHARTS_CLEAR:
       return {
