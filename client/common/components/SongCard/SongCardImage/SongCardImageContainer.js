@@ -18,7 +18,6 @@ const mergeProps = (stateProps, { dispatch }, { track }) => ({
   // Besides doing it this way, we could also do it in a thunk function
   // or pass all args into components and assemble there
   handleImageClick() {
-    console.log('track', track);
     if (!stateProps.active) {
       dispatch(changeSongAndPlay(track.id));
       dispatch(switchPlaylistIfNeeded());

@@ -12,7 +12,11 @@ import {
   PLAYLIST_SHUFFLE_PLAYLIST_UPDATE,
 } from './playlistConsts';
 
-import { getActivePlaylist, getVisiblePlaylistName, getActivePlaylistName } from './playlistSelectors';
+import {
+  getActivePlaylist,
+  getVisiblePlaylistName,
+  getActivePlaylistName,
+} from './playlistSelectors';
 /* Action Creators */
 
 export function clearPlayQueue() {
@@ -78,7 +82,7 @@ export function updateShufflePlaylistIfNeeded() {
     const inShuffleMode = isInShuffleMode(state);
     const visiblePlaylistName = getVisiblePlaylistName(state);
     const activePlaylistName = getActivePlaylistName(state);
-    if (inShuffleMode && (visiblePlaylistName === activePlaylistName)) {
+    if (inShuffleMode && visiblePlaylistName === activePlaylistName) {
       dispatch(shufflePlaylist());
     }
   };
@@ -97,8 +101,6 @@ export function updateShufflePlaylistIfNeeded() {
 //   };
 // }
 
-
-
 // If newPlaylistName is different from activePlaylistName,
 // which means we need to switch to new playlist
 export function switchPlaylistIfNeeded() {
@@ -112,4 +114,3 @@ export function switchPlaylistIfNeeded() {
     }
   };
 }
-

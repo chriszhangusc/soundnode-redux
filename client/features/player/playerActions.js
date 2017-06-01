@@ -10,18 +10,18 @@ import {
   getPlayerMode,
 } from './playerSelectors';
 import {
-  BEGIN_SEEK,
-  END_SEEK,
-  PLAY_SONG,
-  PAUSE_SONG,
-  BEGIN_VOLUME_SEEK,
-  END_VOLUME_SEEK,
-  MUTE,
-  CLEAR_TIME,
-  UPDATE_TIME,
-  CHANGE_VOLUME,
-  CHANGE_PLAY_MODE,
-  CHANGE_SONG,
+  PLAYER_SEEK_BEGIN,
+  PLAYER_SEEK_END,
+  PLAYER_SONG_PLAY,
+  PLAYER_SONG_PAUSE,
+  PLAYER_VOLUME_SEEK_BEGIN,
+  PLAYER_VOLUME_SEEK_END,
+  PLAYER_MUTE,
+  PLAYER_TIME_CLEAR,
+  PLAYER_TIME_UPDATE,
+  PLAYER_VOLUME_CHANGE,
+  PLAYER_PLAY_MODE_CHANGE,
+  PLAYER_SONG_CHANGE,
   DEFAULT_MODE,
   REPEAT,
   NEXT,
@@ -30,39 +30,39 @@ import {
 } from './playerConsts';
 
 /* Action Creators */
-export const beginSeek = () => ({ type: BEGIN_SEEK });
+export const beginSeek = () => ({ type: PLAYER_SEEK_BEGIN });
 
-export const endSeek = () => ({ type: END_SEEK });
+export const endSeek = () => ({ type: PLAYER_SEEK_END });
 
-export const playSong = () => ({ type: PLAY_SONG });
+export const playSong = () => ({ type: PLAYER_SONG_PLAY });
 
-export const pauseSong = () => ({ type: PAUSE_SONG });
+export const pauseSong = () => ({ type: PLAYER_SONG_PAUSE });
 
-export const beginVolumeSeek = () => ({ type: BEGIN_VOLUME_SEEK });
+export const beginVolumeSeek = () => ({ type: PLAYER_VOLUME_SEEK_BEGIN });
 
-export const endVolumeSeek = () => ({ type: END_VOLUME_SEEK });
+export const endVolumeSeek = () => ({ type: PLAYER_VOLUME_SEEK_END });
 
-export const mute = () => ({ type: MUTE });
+export const mute = () => ({ type: PLAYER_MUTE });
 
-export const clearTime = () => ({ type: CLEAR_TIME });
+export const clearTime = () => ({ type: PLAYER_TIME_CLEAR });
 
 export const changeSong = trackId => ({
-  type: CHANGE_SONG,
+  type: PLAYER_SONG_CHANGE,
   payload: trackId,
 });
 
 export const updateTime = currentTime => ({
-  type: UPDATE_TIME,
+  type: PLAYER_TIME_UPDATE,
   payload: currentTime,
 });
 
 export const changeVolume = volume => ({
-  type: CHANGE_VOLUME,
+  type: PLAYER_VOLUME_CHANGE,
   payload: volume,
 });
 
 export const changePlayMode = mode => ({
-  type: CHANGE_PLAY_MODE,
+  type: PLAYER_PLAY_MODE_CHANGE,
   payload: mode,
 });
 
