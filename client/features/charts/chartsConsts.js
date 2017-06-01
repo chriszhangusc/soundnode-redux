@@ -1,10 +1,9 @@
 /* Action types for charts */
-export const CHARTS_GENRE_CHANGE = 'GENRE_CHANGE';
+export const CHARTS_GENRE_CHANGE = 'CHARTS_GENRE_CHANGE';
 export const CHARTS_REQUEST = 'CHARTS_REQUEST';
 export const CHARTS_RECEIVE = 'CHARTS_RECEIVE';
-export const CHARTS_FETCH_FAIL = 'CHARTS_FETCH_FAIL';
-export const CHARTS_CLEAR = 'CHARTS_CLEAR';
-export const CHARTS_FETCH_STOP = 'CHARTS_FETCH_STOP';
+export const CHARTS_FAIL = 'CHARTS_FAIL';
+export const CHARTS_CLEAR_CHARTS = 'CHARTS_CLEAR_CHARTS';
 export const CHARTS_CLEAR_STATE = 'CHARTS_CLEAR_STATE';
 
 export const TOP_COUNT = 50;

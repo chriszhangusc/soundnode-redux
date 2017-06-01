@@ -2,6 +2,7 @@ import { camelizeKeys } from 'humps';
 import SC from 'soundcloud';
 import { userSchema, trackArraySchema } from 'client/app/schema';
 import { normalizeResponse } from 'client/common/utils/normalizeUtils';
+import { makeRequest } from 'client/common/utils/apiUtils';
 
 export function fetchProfiledUser(userId) {
   return SC.get(`/users/${userId}`)
@@ -16,4 +17,8 @@ export function fetchProfiledUserTracks(userId, limit = 20) {
   })
     .then(tracks => camelizeKeys(tracks))
     .then(transformed => normalizeResponse(transformed, trackArraySchema));
+}
+
+export function fetchMoreProfiledUserTracks(nextHref) {
+  return makeRequest(nextHref).then(response => normalizeResponse(response, trackArraySchema));
 }

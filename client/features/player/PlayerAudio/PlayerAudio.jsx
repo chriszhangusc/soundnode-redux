@@ -49,8 +49,13 @@ class PlayerAudio extends Component {
   togglePlayIfNeeded(audioElement) {
     // This also covers change song and play logic
     if (audioElement.paused === this.props.playing) {
-      if (audioElement.paused) audioElement.play();
-      else audioElement.pause();
+      if (audioElement.paused) {
+        audioElement.play().then(() => {
+          console.log();
+        });
+      } else {
+        audioElement.pause();
+      }
     }
   }
 

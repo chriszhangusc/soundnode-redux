@@ -5,8 +5,8 @@ import {
   CHARTS_GENRE_CHANGE,
   CHARTS_REQUEST,
   CHARTS_RECEIVE,
-  CHARTS_CLEAR,
-  CHARTS_FETCH_STOP,
+  CHARTS_FAIL,
+  CHARTS_CLEAR_CHARTS,
   CHARTS_CLEAR_STATE,
 } from './chartsConsts';
 
@@ -41,13 +41,14 @@ export default function chartsReducer(state = initialState, action) {
         ...state,
         trackIds: uniq([...state.trackIds, ...action.payload.result].slice(0, TOP_COUNT)),
         nextHref: transformSCV2Request(action.payload.nextHref),
+        fetching: false,
       };
-    case CHARTS_CLEAR:
+    case CHARTS_CLEAR_CHARTS:
       return {
         ...state,
         trackIds: [],
       };
-    case CHARTS_FETCH_STOP:
+    case CHARTS_FAIL:
       return {
         ...state,
         fetching: false,

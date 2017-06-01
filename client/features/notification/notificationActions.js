@@ -1,32 +1,30 @@
-export function toggleNotification() {
-  return { type: 'NOTIFICATION_TOGGLE' };
-}
+import * as TYPES from './notificationConsts';
 
 export function showNotification() {
-  return { type: 'NOTIFICATION_SHOW' };
+  return { type: TYPES.NOTIFICATION_SHOW };
 }
 
 export function hideNotification() {
-  return { type: 'NOTIFICATION_HIDE' };
+  return { type: TYPES.NOTIFICATION_HIDE };
 }
 
 export function createNotificationWarning(message) {
   return {
-    type: 'NOTIFICATION_WARNING_CREATE',
+    type: TYPES.NOTIFICATION_WARNING_CREATE,
     payload: message,
   };
 }
 
 export function createNotificationSuccess(message) {
   return {
-    type: 'NOTIFICATION_SUCCESS_CREATE',
+    type: TYPES.NOTIFICATION_SUCCESS_CREATE,
     payload: message,
   };
 }
 
 export function clearNotificationState() {
   return {
-    type: 'CLEAR_NOTIFICATION_STATE',
+    type: TYPES.NOTIFICATION_STATE_CLEAR,
   };
 }
 
@@ -50,6 +48,8 @@ export function notificationWarning(message) {
   };
 }
 
+
+// Move these to the relating domains
 export function notificationRequireLogin() {
   return dispatch =>
     dispatch(notificationWarning('Please signin to your SoundCloud account first'));

@@ -9,15 +9,27 @@ import {
 
 import PlayerControls from './PlayerControls';
 
-const mapStateToProps = state => ({
-  playing: isPlayerPlaying(state),
-});
+function mapStateToProps(state) {
+  return {
+    playing: isPlayerPlaying(state),
+  };
+}
 
-const mapDispatchToProps = dispatch => ({
-  onPlayClick: () => { dispatch(playSong()); },
-  onPauseClick: () => { dispatch(pauseSong()); },
-  onNextClick: () => { dispatch(playNextSong()); },
-  onPrevClick: () => { dispatch(playPrevSong()); },
-});
+function mapDispatchToProps(dispatch) {
+  return {
+    onPlayClick: () => {
+      dispatch(playSong());
+    },
+    onPauseClick: () => {
+      dispatch(pauseSong());
+    },
+    onNextClick: () => {
+      dispatch(playNextSong());
+    },
+    onPrevClick: () => {
+      dispatch(playPrevSong());
+    },
+  };
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerControls);

@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import {
-  isDropdownShown,
-  getDropdownSearchuserIds,
+  isDropdownSearchResultsHidden,
+  getDropdownSearchUserIds,
   getDropdownSearchTrackIds,
 } from 'client/features/dropdownSearch/dropdownSearchSelectors';
 
@@ -75,15 +75,15 @@ const Wrapper = styled.div`
     z-index: 1002;
     display: block;
     transition: .4s ease-in-out;
-    box-shadow: ${props => props.dropdownShown && '0 0 10px 8px rgba(0, 0, 0, 0.2)'};
-    padding: ${props => props.dropdownShown && '10px 10px 5px 10px'};
-    transform: ${props => props.dropdownShown && 'translateY(0)'};
-    max-height: ${props => props.dropdownShown && '600px'};
+    box-shadow: ${props => !props.hidden && '0 0 10px 8px rgba(0, 0, 0, 0.2)'};
+    padding: ${props => !props.hidden && '10px 10px 5px 10px'};
+    transform: ${props => !props.hidden && 'translateY(0)'};
+    max-height: ${props => !props.hidden && '600px'};
 `;
 
-function DropdownSearchResults({ userIds, trackIds, dropdownShown }) {
+function DropdownSearchResults({ userIds, trackIds, hidden }) {
   return (
-    <Wrapper dropdownShown={dropdownShown}>
+    <Wrapper hidden={hidden}>
       {userIds.length !== 0 && ArtistResults(userIds)}
       {trackIds.length !== 0 && TrackResults(trackIds)}
     </Wrapper>
@@ -93,13 +93,13 @@ function DropdownSearchResults({ userIds, trackIds, dropdownShown }) {
 DropdownSearchResults.propTypes = {
   userIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   trackIds: PropTypes.arrayOf(PropTypes.number).isRequired,
-  dropdownShown: PropTypes.bool.isRequired,
+  hidden: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    dropdownShown: isDropdownShown(state),
-    userIds: getDropdownSearchuserIds(state),
+    hidden: isDropdownSearchResultsHidden(state),
+    userIds: getDropdownSearchUserIds(state),
     trackIds: getDropdownSearchTrackIds(state),
   };
 }

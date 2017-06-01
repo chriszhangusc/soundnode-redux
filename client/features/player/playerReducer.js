@@ -1,17 +1,17 @@
-import { CLEAR_PLAY_QUEUE } from 'client/features/playlist/playlistActions';
+import { PLAYLIST_CLEAR_QUEUE } from 'client/features/playlist/playlistActions';
 import {
-  PLAY_SONG,
-  PAUSE_SONG,
-  UPDATE_TIME,
-  BEGIN_SEEK,
-  END_SEEK,
-  CHANGE_VOLUME,
-  CHANGE_SONG,
-  BEGIN_VOLUME_SEEK,
-  END_VOLUME_SEEK,
-  CHANGE_PLAY_MODE,
-  MUTE,
-  CLEAR_TIME,
+  PLAYER_SONG_PLAY,
+  PLAYER_SONG_PAUSE,
+  PLAYER_TIME_UPDATE,
+  PLAYER_SEEK_BEGIN,
+  PLAYER_SEEK_END,
+  PLAYER_VOLUME_CHANGE,
+  PLAYER_SONG_CHANGE,
+  PLAYER_VOLUME_SEEK_BEGIN,
+  PLAYER_VOLUME_SEEK_END,
+  PLAYER_PLAY_MODE_CHANGE,
+  PLAYER_MUTE,
+  PLAYER_TIME_CLEAR,
   DEFAULT_MODE,
   INITIAL_VOLUME,
 } from './playerConsts';
@@ -30,79 +30,79 @@ const initialState = {
 
 export default function playerReducer(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_SONG:
+    case PLAYER_SONG_CHANGE:
       return {
         ...state,
         trackId: action.payload,
       };
 
-    case PLAY_SONG:
+    case PLAYER_SONG_PLAY:
       return {
         ...state,
         playing: true,
       };
 
-    case PAUSE_SONG:
+    case PLAYER_SONG_PAUSE:
       return {
         ...state,
         playing: false,
       };
 
-    case UPDATE_TIME:
+    case PLAYER_TIME_UPDATE:
       return {
         ...state,
         currentTime: action.payload,
       };
 
-    case BEGIN_SEEK:
+    case PLAYER_SEEK_BEGIN:
       return {
         ...state,
         seeking: true,
       };
 
-    case END_SEEK:
+    case PLAYER_SEEK_END:
       return {
         ...state,
         seeking: false,
       };
 
-    case CHANGE_VOLUME:
+    case PLAYER_VOLUME_CHANGE:
       return {
         ...state,
         volume: action.payload,
       };
 
-    case BEGIN_VOLUME_SEEK:
+    case PLAYER_VOLUME_SEEK_BEGIN:
       return {
         ...state,
         volumeSeeking: true,
       };
 
-    case END_VOLUME_SEEK:
+    case PLAYER_VOLUME_SEEK_END:
       return {
         ...state,
         volumeSeeking: false,
       };
 
-    case CHANGE_PLAY_MODE:
+    case PLAYER_PLAY_MODE_CHANGE:
       return {
         ...state,
         mode: action.payload,
       };
 
-    case MUTE:
+    case PLAYER_MUTE:
       return {
         ...state,
         volume: 0,
       };
 
-    case CLEAR_TIME:
+    case PLAYER_TIME_CLEAR:
       return {
         ...state,
         currentTime: 0,
       };
     // What?
-    case CLEAR_PLAY_QUEUE:
+    case PLAYLIST_CLEAR_QUEUE:
       return initialState;
 
     default:

@@ -1,13 +1,13 @@
 import { put, call } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
-import { fetchTracks, fetchUsers } from 'client/common/api/sc/v1';
-import pick from 'lodash/pick';
 
 import {
-  dropdownTracksReceived,
-  dropdownArtistsReceived,
+  receiveDropdownSearchTracks,
+  receiveDropdownSearchUsers,
   showDropdownSearchResults,
   clearAndHideSearchResults,
+  endDropdownSearch,
+  failedToFetchSearchResults,
 } from 'client/features/dropdownSearch/dropdownSearchActions';
 
 import { DROPDOWN_SEARCH_REQUEST } from 'client/features/dropdownSearch/dropdownSearchConsts';
@@ -28,17 +28,20 @@ function* doDropdownSearch({ payload }) {
     return;
   }
   const finalKeyword = keyword.trim();
-  // yield call(doDropdownTrackSearch, finalKeyword);
 
-  // How about error handling??
-  const [normalizedTracks, normalizedArtists] = yield [
-    call(fetchDropdownSearchTracks, finalKeyword),
-    call(fetchDropdownSearchUsers, finalKeyword),
-  ];
-
-  yield put(dropdownTracksReceived(normalizedTracks));
-  yield put(dropdownArtistsReceived(normalizedArtists));
-  yield put(showDropdownSearchResults());
+  try {
+    const [normalizedTracks, normalizedUsers] = yield [
+      call(fetchDropdownSearchTracks, finalKeyword),
+      call(fetchDropdownSearchUsers, finalKeyword),
+    ];
+    yield put(receiveDropdownSearchTracks(normalizedTracks));
+    yield put(receiveDropdownSearchUsers(normalizedUsers));
+    yield put(endDropdownSearch());
+    yield put(showDropdownSearchResults());
+  } catch (err) {
+    yield put(failedToFetchSearchResults());
+    console.log(err);
+  }
 }
 
 /* *****************************************************************************/

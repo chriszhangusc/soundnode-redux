@@ -19,6 +19,12 @@ const Title = styled.h3`
 const CommentList = styled.ul`
 `;
 
+const SpinnerWrapper = styled.div`
+  padding: 20px 0;
+  margin: 0px auto;
+  width: 100%;
+`;
+
 function TrackProfileComments({ commentCount, commentIds, commentsFetching }) {
   return (
     <div>
@@ -30,7 +36,7 @@ function TrackProfileComments({ commentCount, commentIds, commentsFetching }) {
           </li>
         ))}
       </CommentList>
-      {commentsFetching && <Spinner />}
+      {commentsFetching && <SpinnerWrapper><Spinner /></SpinnerWrapper>}
     </div>
   );
 }
@@ -38,10 +44,12 @@ function TrackProfileComments({ commentCount, commentIds, commentsFetching }) {
 TrackProfileComments.defaultProps = {
   commentCount: 0,
   commentIds: [],
+  commentsFetching: false,
 };
 
 TrackProfileComments.propTypes = {
   commentCount: PropTypes.number,
+  commentsFetching: PropTypes.bool,
   commentIds: PropTypes.arrayOf(PropTypes.number),
 };
 

@@ -9,8 +9,11 @@ import { normalizeResponse } from './normalizeUtils';
 const SC_API_V2 = 'https://api-v2.soundcloud.com';
 
 export function getStreamUrl(track) {
-  const streamUrl = track && track.streamUrl && `${track.uri}/stream`;
-  return streamUrl && `${streamUrl}?client_id=${CLIENT_ID}`;
+  if (track && (track.streamUrl || track.uri)) {
+    const streamUrl = track.streamUrl || `${track.uri}/stream`;
+    return `${streamUrl}?client_id=${CLIENT_ID}`;
+  }
+  return null;
 }
 
 // Transform requests like https://api-v2.soundcloud.com to http://localhost:3001(Our proxy server)

@@ -1,51 +1,58 @@
-import { fetchUserTracks, fetchMoreUserTracks } from 'client/common/api/sc/v1';
-import { notificationFailure } from 'client/features/notification';
-
 import {
-  USER_STATE_CLEAR,
-  USER_REQUEST,
-  USER_RECEIVE,
-  USER_FETCH_FAIL,
-  USER_TRACKS_REQUEST,
-  USER_TRACKS_RECEIVE,
-  USER_TRACKS_FETCH_FAIL,
+  USER_PROFILE_STATE_CLEAR,
+  USER_PROFILE_USER_REQUEST,
+  USER_PROFILE_USER_RECEIVED,
+  USER_PROFILE_USER_FAILED,
+  USER_PROFILE_TRACKS_REQUEST,
+  USER_PROFILE_TRACKS_RECEIVED,
+  USER_PROFILE_TRACKS_FAILED,
 } from './userProfileConsts';
 
-import { fetchProfiledUser, fetchProfiledUserTracks } from './userProfileApi';
+import {
+  fetchProfiledUser,
+  fetchProfiledUserTracks,
+  fetchMoreProfiledUserTracks,
+} from './userProfileApi';
 
 import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelectors';
 
 /* Action Creators*/
 export function clearUserState() {
   return {
-    type: USER_STATE_CLEAR,
+    type: USER_PROFILE_STATE_CLEAR,
   };
 }
 
 export function requestUser() {
-  return { type: USER_REQUEST };
+  return { type: USER_PROFILE_USER_REQUEST };
 }
 
 export function receiveUser(normalized) {
   return {
-    type: USER_RECEIVE,
+    type: USER_PROFILE_USER_RECEIVED,
     payload: normalized,
   };
 }
 
+export function failedToFetchUser() {
+  return { type: USER_PROFILE_USER_FAILED };
+}
+
 export function requestUserTracks() {
-  return { type: USER_TRACKS_REQUEST };
+  return { type: USER_PROFILE_TRACKS_REQUEST };
 }
 
 export function receiveUserTracks(normalized) {
   return {
-    type: USER_TRACKS_RECEIVE,
+    type: USER_PROFILE_TRACKS_RECEIVED,
     payload: normalized,
   };
 }
 
-export function handleUserFetchFail() {
-  return { type: USER_FETCH_FAIL };
+export function failedToFetchUserTracks() {
+  return {
+    type: USER_PROFILE_TRACKS_FAILED,
+  };
 }
 
 // Should load user first and then the tracks
@@ -59,12 +66,12 @@ export function loadUserProfilePage(userId) {
         fetchProfiledUserTracks(userId),
       ]);
       dispatch(receiveUser(user));
-      console.log(userTracks);
       dispatch(receiveUserTracks(userTracks));
     } catch (err) {
       // Do we need to stop spinner here ? dispatch(artistFailure(err.message));
       console.log(err);
-      dispatch(notificationFailure(err.message));
+      dispatch(failedToFetchUserTracks());
+      dispatch(failedToFetchUser());
     }
   };
 }
@@ -80,11 +87,11 @@ export function loadMoreUserTracks() {
     if (!fetching && nextHref) {
       try {
         dispatch(requestUserTracks());
-        const tracks = await fetchMoreUserTracks(nextHref);
+        const tracks = await fetchMoreProfiledUserTracks(nextHref);
         dispatch(receiveUserTracks(tracks));
       } catch (err) {
         console.log(err);
-        dispatch(notificationFailure(err.message));
+        dispatch(failedToFetchUserTracks());
       }
     }
   };

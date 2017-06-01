@@ -3,13 +3,13 @@ import concat from 'lodash/concat';
 import shuffle from 'lodash/shuffle';
 
 import {
-  CHANGE_VISIBLE_PLAYLIST_NAME,
-  CHANGE_ACTIVE_PLAYLIST_NAME,
-  TOGGLE_PLAYLIST,
+  PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE,
+  PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE,
+  PLAYLIST_TOGGLE,
   APPEND_TRACK_TO_PLAYLIST,
-  CLEAR_PLAY_QUEUE,
-  CLEAR_SHUFFLE_PLAYLIST,
-  UPDATE_SHUFFLE_PLAYLIST,
+  PLAYLIST_CLEAR_QUEUE,
+  PLAYLIST_SHUFFLE_PLAYLIST_CLEAR,
+  PLAYLIST_SHUFFLE_PLAYLIST_UPDATE,
 } from './playlistConsts';
 
 import { getActivePlaylist, getVisiblePlaylistName, getActivePlaylistName } from './playlistSelectors';
@@ -17,7 +17,7 @@ import { getActivePlaylist, getVisiblePlaylistName, getActivePlaylistName } from
 
 export function clearPlayQueue() {
   return {
-    type: CLEAR_PLAY_QUEUE,
+    type: PLAYLIST_CLEAR_QUEUE,
     payload: {
       notificationSuccess: 'Play Queue Cleared!',
     },
@@ -25,25 +25,25 @@ export function clearPlayQueue() {
 }
 
 export const clearShufflePlaylist = () => ({
-  type: CLEAR_SHUFFLE_PLAYLIST,
+  type: PLAYLIST_SHUFFLE_PLAYLIST_CLEAR,
 });
 
 export const updateShufflePlaylist = playlist => ({
-  type: UPDATE_SHUFFLE_PLAYLIST,
+  type: PLAYLIST_SHUFFLE_PLAYLIST_UPDATE,
   payload: playlist,
 });
 
 export const changeVisiblePlaylistName = playlistName => ({
-  type: CHANGE_VISIBLE_PLAYLIST_NAME,
+  type: PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE,
   payload: playlistName,
 });
 
 export const changeActivePlaylistName = playlistName => ({
-  type: CHANGE_ACTIVE_PLAYLIST_NAME,
+  type: PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE,
   payload: playlistName,
 });
 
-export const togglePlaylist = () => ({ type: TOGGLE_PLAYLIST });
+export const togglePlaylist = () => ({ type: PLAYLIST_TOGGLE });
 
 export const appendTrackToPlaylist = trackId => ({
   type: APPEND_TRACK_TO_PLAYLIST,

@@ -1,3 +1,5 @@
+import * as TYPES from './notificationConsts';
+
 /* Reducer */
 const initialState = {
   hidden: true,
@@ -7,27 +9,22 @@ const initialState = {
 
 export default function notificationReducer(state = initialState, action) {
   switch (action.type) {
-    case 'CLEAR_NOTIFICATION_STATE':
+    case TYPES.NOTIFICATION_STATE_CLEAR:
       return {
         ...initialState,
       };
-    case 'NOTIFICATION_TOGGLE':
-      return {
-        ...state,
-        hidden: !state.hidden,
-      };
 
-    case 'NOTIFICATION_SHOW':
+    case TYPES.NOTIFICATION_SHOW:
       return {
         ...state,
         hidden: false,
       };
-    case 'NOTIFICATION_HIDE':
+    case TYPES.NOTIFICATION_HIDE:
       return {
         ...state,
         hidden: true,
       };
-    case 'NOTIFICATION_SUCCESS_CREATE':
+    case TYPES.NOTIFICATION_SUCCESS_CREATE:
       return {
         ...state,
         hidden: false,
@@ -35,7 +32,7 @@ export default function notificationReducer(state = initialState, action) {
         message: action.payload,
       };
 
-    case 'NOTIFICATION_WARNING_CREATE':
+    case TYPES.NOTIFICATION_WARNING_CREATE:
       return {
         ...state,
         hidden: false,

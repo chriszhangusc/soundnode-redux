@@ -1,66 +1,62 @@
 import * as TYPES from 'client/features/dropdownSearch/dropdownSearchConsts';
+
 /* Reducers */
 const INITIAL_STATE = {
-  dropdownShown: false,
-  dropdownFetching: false,
-  // Search dropdown list results
-  dropdownuserIds: [],
-  dropdownTrackIds: [],
-  // Search results page
+  hidden: true,
   fetching: false,
-  searchResultTrackIds: [],
+  userIds: [],
+  trackIds: [],
 };
 
 export default function dropdownSearchReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-
-    case TYPES.START_DROPDOWN_SEARCH:
+    case TYPES.DROPDOWN_SEARCH_REQUEST:
       return {
         ...state,
-        dropdownFetching: true,
+        fetching: true,
       };
 
-    case TYPES.END_DROPDOWN_SEARCH:
+    case TYPES.DROPDOWN_SEARCH_END:
       return {
         ...state,
-        dropdownFetching: false,
+        fetching: false,
       };
 
-    case TYPES.CLEAR_SEARCH_RESULTS:
+    case TYPES.DROPDOWN_SEARCH_FAILED:
       return {
         ...state,
-        searchResultTrackIds: [],
+        fetching: false,
       };
 
-    case TYPES.DROPDOWN_ARTISTS_RECEIVED:
+    case TYPES.DROPDOWN_SEARCH_USERS_RECEIVED:
       return {
         ...state,
-        dropdownuserIds: [...action.payload.result],
+        userIds: [...action.payload.result],
       };
 
-    case TYPES.DROPDOWN_TRACKS_RECEIVED:
+    case TYPES.DROPDOWN_SEARCH_TRACKS_RECEIVED:
       return {
         ...state,
-        dropdownTrackIds: [...action.payload.result],
+        trackIds: [...action.payload.result],
       };
 
-    case TYPES.HIDE_DROPDOWN_SEARCH_RESULTS:
+    case TYPES.DROPDOWN_SEARCH_RESULTS_HIDE:
       return {
         ...state,
-        dropdownShown: false,
+        hidden: true,
       };
 
-    case TYPES.SHOW_DROPDOWN_SEARCH_RESULTS:
+    case TYPES.DROPDOWN_SEARCH_RESULTS_SHOW:
       return {
         ...state,
-        dropdownShown: true,
+        hidden: false,
       };
 
-    case TYPES.CLEAR_DROPDOWN_SEARCH_RESULTS:
+    case TYPES.DROPDOWN_SEARCH_RESULTS_CLEAR:
       return {
         ...state,
-        dropdownuserIds: [],
-        dropdownTrackIds: [],
+        userIds: [],
+        trackIds: [],
       };
 
     default:

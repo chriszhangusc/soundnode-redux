@@ -4,20 +4,20 @@ export const getDropdownSearchState = state => state.dropdownSearch;
 
 export const isDropdownSearching = createSelector(
   getDropdownSearchState,
-  state => state.dropdownFetching,
+  state => state.fetching,
 );
 
-export const isDropdownShown = createSelector(
+export const isDropdownSearchResultsHidden = createSelector(
   getDropdownSearchState,
-  state => state.dropdownShown,
+  state => state.hidden,
 );
 
-export const getDropdownSearchuserIds = createSelector(
+export const getDropdownSearchUserIds = createSelector(
   getDropdownSearchState,
-  state => state.dropdownuserIds,
+  state => state.userIds,
 );
 
 export const getDropdownSearchTrackIds = createSelector(
   getDropdownSearchState,
-  state => state.dropdownTrackIds,
+  state => state.trackIds,
 );

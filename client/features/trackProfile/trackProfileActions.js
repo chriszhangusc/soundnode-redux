@@ -1,12 +1,12 @@
-import { makeRequestAndNormalize } from 'client/common/utils/apiUtils';
-import { commentArraySchema } from 'client/app/schema';
-import { fetchProfiledTrack, fetchTrackComments } from './trackProfileApi';
+import { fetchProfiledTrack, fetchTrackComments, fetchMoreComments } from './trackProfileApi';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import {
   TRACK_PROFILE_TRACK_REQUEST,
-  TRACK_PROFILE_TRACK_RECEIVE,
+  TRACK_PROFILE_TRACK_RECEIVED,
+  TRACK_PROFILE_TRACK_FAILED,
   TRACK_PROFILE_COMMENTS_REQUEST,
-  TRACK_PROFILE_COMMENTS_RECEIVE,
+  TRACK_PROFILE_COMMENTS_RECEIVED,
+  TRACK_PROFILE_COMMENTS_FAILED,
   TRACK_PROFILE_STATE_CLEAR,
 } from './trackProfileConsts';
 
@@ -18,21 +18,33 @@ export function requestTrack() {
   return { type: TRACK_PROFILE_TRACK_REQUEST };
 }
 
-export function requestComments() {
-  return { type: TRACK_PROFILE_COMMENTS_REQUEST };
-}
-
 export function receiveTrack(normalized) {
   return {
-    type: TRACK_PROFILE_TRACK_RECEIVE,
+    type: TRACK_PROFILE_TRACK_RECEIVED,
     payload: normalized,
   };
 }
 
+export function failedToFetchTrack() {
+  return {
+    type: TRACK_PROFILE_TRACK_FAILED,
+  };
+}
+
+export function requestComments() {
+  return { type: TRACK_PROFILE_COMMENTS_REQUEST };
+}
+
 export function receiveComments(normalized) {
   return {
-    type: TRACK_PROFILE_COMMENTS_RECEIVE,
+    type: TRACK_PROFILE_COMMENTS_RECEIVED,
     payload: normalized,
+  };
+}
+
+export function failedToFetchComments() {
+  return {
+    type: TRACK_PROFILE_COMMENTS_FAILED,
   };
 }
 
@@ -48,6 +60,8 @@ export function loadTrackProfilePage(trackId) {
         dispatch(receiveComments(comments));
       })
       .catch((err) => {
+        dispatch(failedToFetchTrack());
+        dispatch(failedToFetchComments());
         console.log(err);
       });
   };
@@ -60,11 +74,12 @@ export function loadMoreComments() {
     const commentsFetching = isCommentsFetching(state);
     if (!commentsFetching && commentsNextHref) {
       dispatch(requestComments());
-      makeRequestAndNormalize(commentsNextHref, commentArraySchema)
+      fetchMoreComments(commentsNextHref)
         .then((normalizedComments) => {
           dispatch(receiveComments(normalizedComments));
         })
         .catch((err) => {
+          dispatch(failedToFetchComments());
           console.log(err);
         });
     }

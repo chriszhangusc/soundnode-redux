@@ -1,12 +1,12 @@
 import { CHARTS_RECEIVE, CHARTS_CLEAR_STATE } from 'client/features/charts/chartsConsts';
 import {
-  TOGGLE_PLAYLIST,
-  CLEAR_PLAY_QUEUE,
+  PLAYLIST_TOGGLE,
+  PLAYLIST_CLEAR_QUEUE,
   APPEND_TRACK_TO_PLAYLIST,
-  CHANGE_VISIBLE_PLAYLIST_NAME,
-  CHANGE_ACTIVE_PLAYLIST_NAME,
-  UPDATE_SHUFFLE_PLAYLIST,
-  CLEAR_SHUFFLE_PLAYLIST,
+  PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE,
+  PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE,
+  PLAYLIST_SHUFFLE_PLAYLIST_UPDATE,
+  PLAYLIST_SHUFFLE_PLAYLIST_CLEAR,
 } from './playlistConsts';
 
 /* Reducer */
@@ -20,25 +20,25 @@ const initialState = {
 
 export default function playlistReducer(state = initialState, action) {
   switch (action.type) {
-    case UPDATE_SHUFFLE_PLAYLIST:
+    case PLAYLIST_SHUFFLE_PLAYLIST_UPDATE:
       return {
         ...state,
         shufflePlaylist: [...action.payload],
       };
 
-    case CLEAR_SHUFFLE_PLAYLIST:
+    case PLAYLIST_SHUFFLE_PLAYLIST_CLEAR:
       return {
         ...state,
         shufflePlaylist: [],
       };
 
-    case TOGGLE_PLAYLIST:
+    case PLAYLIST_TOGGLE:
       return {
         ...state,
         hidden: !state.hidden,
       };
 
-    case CLEAR_PLAY_QUEUE:
+    case PLAYLIST_CLEAR_QUEUE:
       return initialState;
     // Need to handle shuffle mode!!
     case APPEND_TRACK_TO_PLAYLIST:
@@ -60,13 +60,13 @@ export default function playlistReducer(state = initialState, action) {
           : [...action.payload.result]).slice(0, 50),
       };
 
-    case CHANGE_VISIBLE_PLAYLIST_NAME:
+    case PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE:
       return {
         ...state,
         visiblePlaylistName: action.payload,
       };
 
-    case CHANGE_ACTIVE_PLAYLIST_NAME:
+    case PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE:
       return {
         ...state,
         activePlaylistName: action.payload,

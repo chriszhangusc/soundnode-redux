@@ -14,6 +14,12 @@ const SongCardListWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
+const SpinnerWrapper = styled.div`
+  padding: 20px 0;
+  margin: 0px auto;
+  width: 100%;
+`;
+
 function renderSongCardList(trackIds, playlistName) {
   return (
     <SongCardListWrapper>
@@ -28,7 +34,7 @@ function SongCardList({ fetching, trackIds, playlistName }) {
   return (
     <Wrapper>
       {renderSongCardList(trackIds, playlistName)}
-      {fetching && <Spinner />}
+      {fetching && <SpinnerWrapper><Spinner /></SpinnerWrapper>}
     </Wrapper>
   );
 }

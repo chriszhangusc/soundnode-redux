@@ -1,5 +1,4 @@
 /* Action Creators */
-import { notificationFailure } from 'client/features/notification';
 import { updateShufflePlaylistIfNeeded } from 'client/features/playlist/playlistActions';
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
 
@@ -15,8 +14,8 @@ import {
   CHARTS_GENRE_CHANGE,
   CHARTS_REQUEST,
   CHARTS_RECEIVE,
-  CHARTS_CLEAR,
-  CHARTS_FETCH_STOP,
+  CHARTS_FAIL,
+  CHARTS_CLEAR_CHARTS,
   CHARTS_CLEAR_STATE,
 } from './chartsConsts';
 
@@ -35,7 +34,7 @@ export function changeGenre(genre) {
 
 export function clearAllCharts() {
   return {
-    type: CHARTS_CLEAR,
+    type: CHARTS_CLEAR_CHARTS,
   };
 }
 
@@ -55,14 +54,13 @@ export function receiveCharts(normalized, playlistName) {
   };
 }
 
-export function endChartsFetching() {
+export function failedToFetchCharts() {
   return {
-    type: CHARTS_FETCH_STOP,
+    type: CHARTS_FAIL,
   };
 }
 
 /* Side Effects */
-
 export function loadChartsPage(genre) {
   return async (dispatch) => {
     // Remove all old search results because we do not want them to interfere the new ones.
@@ -77,10 +75,8 @@ export function loadChartsPage(genre) {
       dispatch(updateShufflePlaylistIfNeeded());
     } catch (err) {
       console.error('error: ', err);
+      dispatch(failedToFetchCharts());
       dispatch(notificationFailure('Failed to fetch songs!'));
-    } finally {
-      // Stop loading spinner
-      dispatch(endChartsFetching());
     }
   };
 }
@@ -101,8 +97,8 @@ export function loadMoreCharts() {
         dispatch(updateShufflePlaylistIfNeeded());
       } catch (err) {
         console.log(err);
-      } finally {
-        dispatch(endChartsFetching());
+        dispatch(failedToFetchCharts());
+        dispatch(notificationFailure('Failed to fetch more songs!'));
       }
     }
   };

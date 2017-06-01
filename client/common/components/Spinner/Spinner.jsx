@@ -13,11 +13,11 @@ const strechDelay = keyframes`
   }
 `;
 
-const MainWrapper = styled.div`
-  padding: 20px 0;
-  margin: 0px auto;
-  width: 100%;
-`;
+// const MainWrapper = styled.div`
+//   padding: 20px 0;
+//   margin: 0px auto;
+//   width: 100%;
+// `;
 
 const SpinnerWrapper = styled.div`
   height: 30px;
@@ -26,7 +26,7 @@ const SpinnerWrapper = styled.div`
 `;
 
 const Rect = styled.div`
-  background-color: ${THEME_COLOR};
+  background-color: ${props => props.color || THEME_COLOR};
   height: 100%;
   width: 7px;
   margin: 0 3px 0 0;
@@ -37,13 +37,11 @@ const Rect = styled.div`
 
 const delays = [0, -1.1, -1.0, -0.9, -0.8];
 
-function Spinner() {
+function Spinner({ color }) {
   return (
-    <MainWrapper>
-      <SpinnerWrapper>
-        {delays.map((delay, idx) => <Rect delay={delay} key={idx} />)}
-      </SpinnerWrapper>
-    </MainWrapper>
+    <SpinnerWrapper>
+      {delays.map((delay, idx) => <Rect color={color} delay={delay} key={idx} />)}
+    </SpinnerWrapper>
   );
 }
 

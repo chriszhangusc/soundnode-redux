@@ -7,6 +7,7 @@ import { getLargeVersion } from 'client/common/utils/imageUtils';
 import { isTrackActive, isTrackPlaying } from 'client/features/player/playerSelectors';
 import { FormattedNumber } from 'react-intl';
 import { changeSongAndPlay, playSong, pauseSong } from 'client/features/player/playerActions';
+import Spinner from 'client/common/components/Spinner';
 
 const Wrapper = styled.div`
   width: 350px;

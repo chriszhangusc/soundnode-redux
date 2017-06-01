@@ -1,9 +1,9 @@
 import {
   TRACK_PROFILE_STATE_CLEAR,
   TRACK_PROFILE_TRACK_REQUEST,
-  TRACK_PROFILE_TRACK_RECEIVE,
+  TRACK_PROFILE_TRACK_RECEIVED,
   TRACK_PROFILE_COMMENTS_REQUEST,
-  TRACK_PROFILE_COMMENTS_RECEIVE,
+  TRACK_PROFILE_COMMENTS_RECEIVED,
 } from './trackProfileConsts';
 
 const INITIAL_STATE = {
@@ -23,7 +23,7 @@ export default function track(state = INITIAL_STATE, action) {
         ...state,
         trackFetching: true,
       };
-    case TRACK_PROFILE_TRACK_RECEIVE:
+    case TRACK_PROFILE_TRACK_RECEIVED:
       return {
         ...state,
         trackFetching: false,
@@ -34,7 +34,7 @@ export default function track(state = INITIAL_STATE, action) {
         ...state,
         commentsFetching: true,
       };
-    case TRACK_PROFILE_COMMENTS_RECEIVE:
+    case TRACK_PROFILE_COMMENTS_RECEIVED:
       return {
         ...state,
         commentsFetching: false,

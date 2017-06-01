@@ -1,14 +1,17 @@
 import React from 'react';
-import { notificationFailure, notificationSuccess } from 'client/features/notification';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {
+  notificationSuccess,
+  notificationWarning,
+} from 'client/features/notification/notificationActions';
 
 class GlobalEvents extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
 
     window.addEventListener('offline', () => {
-      dispatch(notificationFailure('Looks like your internet connection is down!'));
+      dispatch(notificationWarning('Looks like your internet connection is down!'));
     });
 
     window.addEventListener('online', () => {
