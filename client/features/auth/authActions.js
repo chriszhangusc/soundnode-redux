@@ -1,24 +1,30 @@
+import SC from 'soundcloud';
 import {
-  fetchFavoriteTrackIds,
-  likeTrack,
-  dislikeTrack,
-  fetchMeByToken,
-} from 'client/common/api/sc/v1';
-import {
+  notificationSuccess,
+  notificationWarning,
   notificationRequireLogin,
-  notificationLoginSuccess,
-  notificationLoginFailed,
-  notificationDislikeSuccess,
-  notificationLikeSuccess,
 } from 'client/features/notification/notificationActions';
+
 import {
   AUTH_USER_LOGIN_SUCCESS,
-  AUTH_USER_LOGOUT,
+  AUTH_USER_LOGOUT_SUCCESS,
+  AUTH_FAVORITES_SET,
+  AUTH_SESSION_SET,
   OAUTH_TOKEN,
-  SET_OAUTH_TOKEN,
-  SET_FAVORITE_TRACK_IDS,
+  AUTH_FAVORITES_ADD,
+  AUTH_FAVORITES_REMOVE,
 } from './authConsts';
-import { isLoggedIn, getMyId } from './authSelectors';
+
+import { isLoggedIn } from './authSelectors';
+
+import { fetchMe, fetchMyFacorites, likeTrack, unlikeTrack } from './authApi';
+
+export function setFavorites(normalized) {
+  return {
+    type: AUTH_FAVORITES_SET,
+    payload: normalized,
+  };
+}
 
 export function loginSuccess(me) {
   return {
@@ -27,61 +33,64 @@ export function loginSuccess(me) {
   };
 }
 
-export function setFavoriteTrackIds(trackIds) {
-  return {
-    type: SET_FAVORITE_TRACK_IDS,
-    payload: trackIds,
-  };
+export function logoutSuccess() {
+  return { type: AUTH_USER_LOGOUT_SUCCESS };
 }
 
-// http://api.soundcloud.com/users/250047142/favorites?linked_partitioning=1&limit=20&offset=0&oauth_token=1-136957-250047142-032114f80b26f
-export function fetchFavorites(userId) {
-  return (dispatch) => {
-    fetchFavoriteTrackIds(userId).then((trackIds) => {
-      dispatch(setFavoriteTrackIds(trackIds));
-    });
-  };
-}
-
-export function fetchMe(session) {
-  return (dispatch) => {
-    fetchMeByToken(session.oauth_token)
-      .then(response => response.json())
-      .then((me) => {
-        dispatch(fetchFavorites(me.id));
-        dispatch(loginSuccess(me));
-        dispatch(notificationLoginSuccess());
-      })
-      .catch((err) => {
-        dispatch(notificationLoginFailed());
-        console.log('Login Error', err);
-      });
-  };
-}
-
-export function setOAuthToken(token) {
-  return {
-    type: SET_OAUTH_TOKEN,
-    payload: token,
-  };
+export function setSession(session) {
+  return { type: AUTH_SESSION_SET, payload: session };
 }
 
 export function doLogin() {
   return (dispatch) => {
-    // SC.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI });
-    // SC is defined in global scope
-    SC.connect().then((session) => {
-      dispatch(fetchMe(session));
-      // console.log(session);
-      sessionStorage.setItem(OAUTH_TOKEN, session.oauth_token);
-      dispatch(setOAuthToken(session.oauth_token));
-      // dispatch(fetchUser());
+    SC.connect()
+      .then((session) => {
+        // Initialize Session
+        dispatch(setSession(session));
+        // Set OAuthToken
+        sessionStorage.setItem(OAUTH_TOKEN, session.oauth_token);
+        return fetchMe();
+      })
+      .then((me) => {
+        console.log(me);
+        // Fetch my favorite songs
+        fetchMyFacorites().then((favorites) => {
+          dispatch(setFavorites(favorites));
+          dispatch(loginSuccess(me));
+          dispatch(notificationSuccess('Login Success'));
+        });
+      });
+  };
+}
+
+export function syncFavorites() {
+  return (dispatch) => {
+    fetchMyFacorites().then((favorites) => {
+      dispatch(setFavorites(favorites));
     });
   };
 }
 
 export function doLogout() {
-  return { type: AUTH_USER_LOGOUT };
+  return (dispatch) => {
+    sessionStorage.removeItem(OAUTH_TOKEN);
+    dispatch(logoutSuccess());
+    dispatch(notificationSuccess('Logout Success'));
+  };
+}
+
+export function addToFavorites(trackId) {
+  return {
+    type: AUTH_FAVORITES_ADD,
+    payload: trackId,
+  };
+}
+
+export function removeFromFavorites(trackId) {
+  return {
+    type: AUTH_FAVORITES_REMOVE,
+    payload: trackId,
+  };
 }
 
 export function doLikeTrack(trackId) {
@@ -89,12 +98,11 @@ export function doLikeTrack(trackId) {
     const state = getState();
     const loggedIn = isLoggedIn(state);
     if (loggedIn) {
-      const userId = getMyId(state);
-      likeTrack(userId, trackId)
+      likeTrack(trackId)
         .then(() => {
-          dispatch(notificationLikeSuccess());
-          // Update user favorite list after liking a track
-          dispatch(fetchFavorites(userId));
+          dispatch(notificationSuccess('Added to your favorites'));
+          dispatch(addToFavorites(trackId));
+          dispatch(syncFavorites());
         })
         .catch((err) => {
           console.log('Failed to add this track to favorite list', err);
@@ -110,12 +118,12 @@ export function doDislikeTrack(trackId) {
     const state = getState();
     const loggedIn = isLoggedIn(state);
     if (loggedIn) {
-      const userId = getMyId(state);
-      dislikeTrack(userId, trackId)
+      unlikeTrack(trackId)
         .then(() => {
-          dispatch(notificationDislikeSuccess());
           // Update user favorite list after liking a track
-          dispatch(fetchFavorites(userId));
+          dispatch(removeFromFavorites(trackId));
+          dispatch(syncFavorites());
+          dispatch(notificationSuccess('Removed from your favorites'));
         })
         .catch((err) => {
           console.log('Failed to add this track to favorite list', err);

@@ -1,14 +1,16 @@
 import {
   AUTH_USER_LOGIN_SUCCESS,
-  AUTH_USER_LOGOUT,
-  SET_OAUTH_TOKEN,
-  SET_FAVORITE_TRACK_IDS,
+  AUTH_USER_LOGOUT_SUCCESS,
+  AUTH_FAVORITES_SET,
+  AUTH_SESSION_SET,
+  AUTH_FAVORITES_ADD,
+  AUTH_FAVORITES_REMOVE,
 } from './authConsts';
 
 /* Reducer */
 const initialState = {
   me: null,
-  oauth_token: '',
+  session: null,
   favoriteTracks: [],
 };
 
@@ -20,18 +22,32 @@ export default function authReducer(state = initialState, action) {
         ...state,
         me: { ...action.payload },
       };
-    case AUTH_USER_LOGOUT:
+
+    case AUTH_SESSION_SET:
+      return {
+        ...state,
+        session: { ...action.payload },
+      };
+
+    case AUTH_USER_LOGOUT_SUCCESS:
       return { ...initialState };
 
-    case SET_OAUTH_TOKEN:
+    case AUTH_FAVORITES_SET:
       return {
         ...state,
-        oauth_token: action.payload,
+        favoriteTracks: [...action.payload.result],
       };
-    case SET_FAVORITE_TRACK_IDS:
+
+    case AUTH_FAVORITES_ADD:
       return {
         ...state,
-        favoriteTracks: [...action.payload],
+        favoriteTracks: [...state.favoriteTracks, action.payload],
+      };
+
+    case AUTH_FAVORITES_REMOVE:
+      return {
+        ...state,
+        favoriteTracks: state.favoriteTracks.filter(x => x !== action.payload),
       };
     default:
       return state;
