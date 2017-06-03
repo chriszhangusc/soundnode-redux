@@ -27,7 +27,7 @@ const LogoutButton = styled.a`
 function Auth({ me, onLogin, onLogout }) {
   const loggedIn = () => (
     <div>
-      <Link to={`${USER_PROFILE_ROUTE}/${me.id}`}><Avatar src={me.avatar_url} /></Link>
+      <Link to={`${USER_PROFILE_ROUTE}/${me.id}`}><Avatar src={me.avatarUrl} /></Link>
       <Username>{me.username}</Username>
       <LogoutButton onClick={onLogout}>Logout</LogoutButton>
     </div>

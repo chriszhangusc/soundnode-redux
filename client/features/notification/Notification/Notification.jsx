@@ -1,5 +1,6 @@
 // Need better implementation!
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
@@ -7,7 +8,7 @@ import {
   getNotificationMessage,
   getNotificationType,
 } from 'client/features/notification/notificationSelectors';
-import { clearNotificationState } from 'client/features/notification/notificationActions';
+import { hideNotification } from 'client/features/notification/notificationActions';
 
 const colorSuccess = '#51a351';
 const colorWarning = '#f89406';
@@ -71,17 +72,12 @@ const Message = styled.p`
 `;
 
 class Notification extends React.Component {
-  componentWillUnmount() {
-    const { handleNotificationDismiss } = this.props;
-    handleNotificationDismiss();
-  }
-
   render() {
-    const { type, hidden, message, handleHideNotification } = this.props;
+    const { type, hidden, message, handleNotificationHide } = this.props;
     // console.log(type, hidden);
     // if (!type) return null;
     return (
-      <Wrapper type={type} onClick={handleHideNotification} notificationHidden={hidden}>
+      <Wrapper type={type} onClick={handleNotificationHide} notificationHidden={hidden}>
         <IconWrapper>
           <Icon
             className={type === 'success' ? 'fa fa-check-circle' : 'fa fa-exclamation-triangle'}
@@ -96,6 +92,13 @@ class Notification extends React.Component {
   }
 }
 
+Notification.propTypes = {
+  handleNotificationHide: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  hidden: PropTypes.bool.isRequired,
+  message: PropTypes.string.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
     hidden: isNotificationHidden(state),
@@ -106,8 +109,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleNotificationDismiss() {
-      dispatch(clearNotificationState());
+    handleNotificationHide() {
+      dispatch(hideNotification());
     },
   };
 }

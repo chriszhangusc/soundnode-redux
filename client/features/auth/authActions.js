@@ -2,20 +2,21 @@ import SC from 'soundcloud';
 import {
   notificationSuccess,
   notificationWarning,
-  notificationRequireLogin,
 } from 'client/features/notification/notificationActions';
 
+import { setOAuthToken, removeOAuthToken, isUnauthError } from './authUtils';
+
 import {
-  AUTH_USER_LOGIN_SUCCESS,
-  AUTH_USER_LOGOUT_SUCCESS,
+  AUTH_USER_LOGIN_STARTED,
+  AUTH_USER_LOGIN_SUCCEEDED,
+  AUTH_USER_LOGIN_FAILED,
+  AUTH_USER_LOGOUT_SUCCEEDED,
   AUTH_FAVORITES_SET,
   AUTH_SESSION_SET,
   OAUTH_TOKEN,
   AUTH_FAVORITES_ADD,
   AUTH_FAVORITES_REMOVE,
 } from './authConsts';
-
-import { isLoggedIn } from './authSelectors';
 
 import { fetchMe, fetchMyFacorites, likeTrack, unlikeTrack } from './authApi';
 
@@ -26,29 +27,54 @@ export function setFavorites(normalized) {
   };
 }
 
-export function loginSuccess(me) {
+export function loginSucceed(me) {
   return {
-    type: AUTH_USER_LOGIN_SUCCESS,
+    type: AUTH_USER_LOGIN_SUCCEEDED,
     payload: me,
   };
 }
 
-export function logoutSuccess() {
-  return { type: AUTH_USER_LOGOUT_SUCCESS };
+export function logoutSucceed() {
+  return { type: AUTH_USER_LOGOUT_SUCCEEDED };
 }
 
 export function setSession(session) {
   return { type: AUTH_SESSION_SET, payload: session };
 }
 
+export function doAuth() {
+  return (dispatch) => {
+    SC.connect().then((session) => {
+      // Initialize Session
+      dispatch(setSession(session));
+      // Set OAuthToken
+      sessionStorage.setItem(OAUTH_TOKEN, session.oauth_token);
+    });
+  };
+}
+
+export function startLogin() {
+  return {
+    type: AUTH_USER_LOGIN_STARTED,
+  };
+}
+
+export function loginFailed(error) {
+  return {
+    type: AUTH_USER_LOGIN_FAILED,
+    error,
+  };
+}
+
 export function doLogin() {
   return (dispatch) => {
+    dispatch(startLogin());
     SC.connect()
       .then((session) => {
         // Initialize Session
         dispatch(setSession(session));
         // Set OAuthToken
-        sessionStorage.setItem(OAUTH_TOKEN, session.oauth_token);
+        setOAuthToken(session.oauth_token);
         return fetchMe();
       })
       .then((me) => {
@@ -56,9 +82,14 @@ export function doLogin() {
         // Fetch my favorite songs
         fetchMyFacorites().then((favorites) => {
           dispatch(setFavorites(favorites));
-          dispatch(loginSuccess(me));
+          dispatch(loginSucceed(me));
           dispatch(notificationSuccess('Login Success'));
         });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(loginFailed(err));
+        dispatch(notificationWarning('Failed to login to SoundCloud'));
       });
   };
 }
@@ -73,8 +104,8 @@ export function syncFavorites() {
 
 export function doLogout() {
   return (dispatch) => {
-    sessionStorage.removeItem(OAUTH_TOKEN);
-    dispatch(logoutSuccess());
+    removeOAuthToken();
+    dispatch(logoutSucceed());
     dispatch(notificationSuccess('Logout Success'));
   };
 }
@@ -94,42 +125,36 @@ export function removeFromFavorites(trackId) {
 }
 
 export function doLikeTrack(trackId) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const loggedIn = isLoggedIn(state);
-    if (loggedIn) {
-      likeTrack(trackId)
-        .then(() => {
-          dispatch(notificationSuccess('Added to your favorites'));
-          dispatch(addToFavorites(trackId));
-          dispatch(syncFavorites());
-        })
-        .catch((err) => {
-          console.log('Failed to add this track to favorite list', err);
-        });
-    } else {
-      dispatch(notificationRequireLogin());
-    }
+  return (dispatch) => {
+    likeTrack(trackId)
+      .then(() => {
+        dispatch(addToFavorites(trackId));
+        dispatch(notificationSuccess('Track added to your favorites'));
+        dispatch(syncFavorites());
+      })
+      .catch((err) => {
+        console.log('Failed to like track: ', err);
+        if (isUnauthError(err)) {
+          dispatch(notificationWarning('Please Signin with SoundCloud'));
+        }
+      });
   };
 }
 
-export function doDislikeTrack(trackId) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const loggedIn = isLoggedIn(state);
-    if (loggedIn) {
-      unlikeTrack(trackId)
-        .then(() => {
-          // Update user favorite list after liking a track
-          dispatch(removeFromFavorites(trackId));
-          dispatch(syncFavorites());
-          dispatch(notificationSuccess('Removed from your favorites'));
-        })
-        .catch((err) => {
-          console.log('Failed to add this track to favorite list', err);
-        });
-    } else {
-      dispatch(notificationRequireLogin());
-    }
+export function doUnlikeTrack(trackId) {
+  return (dispatch) => {
+    unlikeTrack(trackId)
+      .then(() => {
+        // Update user favorite list after liking a track
+        dispatch(removeFromFavorites(trackId));
+        dispatch(notificationSuccess('Track removed from your favorites'));
+        dispatch(syncFavorites());
+      })
+      .catch((err) => {
+        console.log('Failed to add this track to favorite list', err);
+        if (isUnauthError(err)) {
+          dispatch(notificationWarning('Please Signin with SoundCloud'));
+        }
+      });
   };
 }

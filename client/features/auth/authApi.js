@@ -1,19 +1,21 @@
-import SC from 'soundcloud';
 import { normalizeResponse } from 'client/common/utils/normalizeUtils';
 import { trackArraySchema } from 'client/app/schema';
+import { makeSCV1Request } from 'client/common/utils/apiUtils';
 
 export function fetchMe() {
-  return SC.get('/me');
+  return makeSCV1Request('/me');
 }
 
 export function fetchMyFacorites() {
-  return SC.get('/me/favorites').then(tracks => normalizeResponse(tracks, trackArraySchema));
+  return makeSCV1Request('/me/favorites').then(tracks =>
+    normalizeResponse(tracks, trackArraySchema),
+  );
 }
 
 export function likeTrack(trackId) {
-  return SC.put(`/me/favorites/${trackId}`);
+  return makeSCV1Request(`/me/favorites/${trackId}`, { method: 'PUT' });
 }
 
 export function unlikeTrack(trackId) {
-  return SC.delete(`/me/favorites/${trackId}`);
+  return makeSCV1Request(`/me/favorites/${trackId}`, { method: 'DELETE' });
 }

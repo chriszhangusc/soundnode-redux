@@ -8,22 +8,21 @@ const initialState = {
 };
 
 export default function notificationReducer(state = initialState, action) {
+  if (action.error) {
+    return {
+      ...state,
+      hidden: false,
+      type: 'warning',
+      message: 'Something is wrong',
+    };
+  }
+
   switch (action.type) {
-    case TYPES.NOTIFICATION_STATE_CLEAR:
+    case TYPES.NOTIFICATION_HIDE:
       return {
         ...initialState,
       };
 
-    case TYPES.NOTIFICATION_SHOW:
-      return {
-        ...state,
-        hidden: false,
-      };
-    case TYPES.NOTIFICATION_HIDE:
-      return {
-        ...state,
-        hidden: true,
-      };
     case TYPES.NOTIFICATION_SUCCESS_CREATE:
       return {
         ...state,

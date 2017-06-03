@@ -1,5 +1,6 @@
 /* Action Creators */
 import { updateShufflePlaylistIfNeeded } from 'client/features/playlist/playlistActions';
+import { notificationWarning } from 'client/features/notification/notificationActions';
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
 
 import {
@@ -76,7 +77,7 @@ export function loadChartsPage(genre) {
     } catch (err) {
       console.error('error: ', err);
       dispatch(failedToFetchCharts());
-      dispatch(notificationFailure('Failed to fetch songs!'));
+      dispatch(notificationWarning('Failed to fetch songs!'));
     }
   };
 }
@@ -98,7 +99,7 @@ export function loadMoreCharts() {
       } catch (err) {
         console.log(err);
         dispatch(failedToFetchCharts());
-        dispatch(notificationFailure('Failed to fetch more songs!'));
+        dispatch(notificationWarning('Failed to fetch more songs!'));
       }
     }
   };

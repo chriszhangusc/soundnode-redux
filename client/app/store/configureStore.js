@@ -26,7 +26,7 @@ function configureStore() {
     ),
   );
   persistStore(store, {
-    whitelist: ['auth'],
+    whitelist: [],
     debounce: 2000,
   });
   sagaMiddleware.run(rootSaga);
