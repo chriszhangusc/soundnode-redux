@@ -74,7 +74,7 @@ class EnhancedImage extends Component {
 }
 
 EnhancedImage.defaultProps = {
-  src: '',
+  src: null,
   onClick: null,
   circle: false,
   onError: null,

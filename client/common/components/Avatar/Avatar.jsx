@@ -2,16 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import { getNormalVersion } from 'client/common/utils/imageUtils';
 import { defaultArtistImageUrl } from 'client/common/constants/imageConsts';
-import styled from 'styled-components';
-
-const StyledImage = styled.img`
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-`;
+import EnhancedImage from 'client/common/components/images/EnhancedImage';
 
 // Change to fallback image!
-const Avatar = ({ src, alt }) => <StyledImage alt={alt} src={src} />;
+const Avatar = ({ src, alt }) => <EnhancedImage alt={alt} src={src} circle />;
 
 Avatar.defaultProps = {
   alt: 'avatar',

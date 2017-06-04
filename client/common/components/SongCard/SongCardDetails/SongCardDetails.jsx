@@ -38,6 +38,11 @@ const Username = styled(Link)`
     font-size: 0.9rem;
 `;
 
+const AvatarWrapper = styled.div`
+  height: 25px;
+  width: 25px;
+`;
+
 function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
   const trackUrl = `${TRACK_PROFILE_ROUTE}/${trackId}`;
   const userUrl = `${USER_PROFILE_ROUTE}/${userId}`;
@@ -49,7 +54,7 @@ function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
       </Title>
       <InnerWrapper>
         <Link to={userUrl} title={username}>
-          <Avatar src={userAvatar} />
+          <AvatarWrapper><Avatar src={userAvatar} /></AvatarWrapper>
         </Link>
         <Username to={userUrl} title={username}>
           {username}

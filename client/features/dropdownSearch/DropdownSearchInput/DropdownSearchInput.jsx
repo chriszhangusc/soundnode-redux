@@ -116,9 +116,9 @@ const mapDispatchToProps = dispatch => ({
   handleBlur() {
     // Delay onblur to make sure when user click on the search result it will redirect first
     // and then do onblur
-    setTimeout(() => {
-      dispatch(clearAndHideSearchResults());
-    }, 250);
+    // setTimeout(() => {
+    //   dispatch(clearAndHideSearchResults());
+    // }, 250);
   },
 
   handleFocus(keywords) {

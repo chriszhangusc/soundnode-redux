@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import ImageWithFallback from 'client/common/components/Images/ImageWithFallback';
-import { DEFAULT_USER_AVATAR } from 'client/common/constants/imageConsts';
-
 import { connect } from 'react-redux';
-import { getUsers } from 'client/features/entities/entitiesSelectors';
-import { getLargeVersion, getMiniVersion } from 'client/common/utils/imageUtils';
+import { getUserById } from 'client/features/entities/entitiesSelectors';
+import { getLargeVersion } from 'client/common/utils/imageUtils';
 import styled from 'styled-components';
 import UserAvatar from './UserAvatar';
 import UserName from './UserName';
@@ -25,14 +22,7 @@ const UserDetailsColumnWrapper = styled.div`
   margin-left: 20px;
 `;
 
-const UserProfileDetails = ({
-  avatarUrl,
-  // avatarUrlBlurry,
-  username,
-  followerCount,
-  description,
-  permalinkUrl,
-}) => (
+const UserProfileDetails = ({ avatarUrl, username, followerCount, description, permalinkUrl }) => (
   <UserDetailsRowWrapper>
     <a href={permalinkUrl} target="_black" title="Go to SoundCloud">
       <UserAvatar src={avatarUrl} />
@@ -55,7 +45,6 @@ UserProfileDetails.defaultProps = {
 };
 
 UserProfileDetails.propTypes = {
-  // avatarUrlBlurry: PropTypes.string,
   avatarUrl: PropTypes.string,
   username: PropTypes.string,
   followerCount: PropTypes.string, // Formatted number
@@ -64,14 +53,12 @@ UserProfileDetails.propTypes = {
 };
 
 export const mapStateToProps = (state, { userId }) => {
-  const allUsers = getUsers(state);
-  const user = allUsers[String(userId)];
+  const user = getUserById(state, userId);
   const avatarUrl = user.avatarUrl;
 
   return {
     permalinkUrl: user.permalinkUrl,
     avatarUrl: getLargeVersion(avatarUrl),
-    // avatarUrlBlurry: getMiniVersion(avatarUrl),
     username: user.username,
     followerCount: user.followersCount.toLocaleString(),
     description: user.description,

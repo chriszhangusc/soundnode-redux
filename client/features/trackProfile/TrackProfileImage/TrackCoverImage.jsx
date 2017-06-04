@@ -7,7 +7,7 @@ import { getLargeVersion } from 'client/common/utils/imageUtils';
 import { isTrackActive, isTrackPlaying } from 'client/features/player/playerSelectors';
 import { FormattedNumber } from 'react-intl';
 import { changeSongAndPlay, playSong, pauseSong } from 'client/features/player/playerActions';
-import EnhancedImage from 'client/common/components/Images/EnhancedImage';
+import EnhancedImage from 'client/common/components/images/EnhancedImage';
 
 const Wrapper = styled.div`
   width: 350px;
