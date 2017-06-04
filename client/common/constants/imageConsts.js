@@ -3,8 +3,8 @@ export const defaultArtworkImageUrl = '/images/default-artwork.png';
 export const DEFAULT_USER_AVATAR = 'https://i1.sndcdn.com/avatars-000249624208-d5jr2v-t500x500.jpg';
 
 export const t500x500 = 't500x500';
-export const t300x300 = 't300×300';
 export const crop = 'crop';
+export const t300x300 = 't300×300';
 export const large = 'large';
 export const t67x67 = 't67x67'; // Only on artworks
 export const badge = 'badge';

@@ -20,19 +20,18 @@ class FallbackIamge extends React.Component {
   }
 
   render() {
-    const { src, fallbackImageUrl, onError, ...otherProps } = this.props;
+    const { src, fallbackImageUrl, onError, alt, ...otherProps } = this.props;
     if (this.state.fallback) {
-      return <img src={fallbackImageUrl} {...otherProps} />;
+      return <img alt={alt} src={fallbackImageUrl} {...otherProps} />;
     }
-    return <img src={src} onError={this.handleError} {...otherProps} />;
+    return <img alt={alt} src={src} onError={this.handleError} {...otherProps} />;
   }
-
 }
 
 FallbackIamge.defaultProps = {
   className: '',
   onError: undefined,
-  alt: PropTypes.string,
+  alt: 'Fallback Img',
 };
 
 FallbackIamge.propTypes = {
@@ -43,7 +42,4 @@ FallbackIamge.propTypes = {
   onError: PropTypes.func,
 };
 
-
 export default FallbackIamge;
-
-

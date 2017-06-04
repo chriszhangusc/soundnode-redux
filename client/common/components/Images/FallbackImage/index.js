@@ -1,3 +1,1 @@
-import FallbackIamge from './FallbackIamge';
-
-export default FallbackIamge;
+export { default } from './FallbackIamge';

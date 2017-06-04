@@ -27,7 +27,7 @@ const UserDetailsColumnWrapper = styled.div`
 
 const UserProfileDetails = ({
   avatarUrl,
-  avatarUrlSmall,
+  // avatarUrlBlurry,
   username,
   followerCount,
   description,
@@ -35,7 +35,7 @@ const UserProfileDetails = ({
 }) => (
   <UserDetailsRowWrapper>
     <a href={permalinkUrl} target="_black" title="Go to SoundCloud">
-      <UserAvatar src={avatarUrl} placeholderSrc={avatarUrlSmall} />
+      <UserAvatar src={avatarUrl} />
     </a>
     <UserDetailsColumnWrapper>
       <UserName username={username} />
@@ -46,7 +46,7 @@ const UserProfileDetails = ({
 );
 
 UserProfileDetails.defaultProps = {
-  avatarUrlSmall: '',
+  avatarUrlBlurry: '',
   avatarUrl: '',
   username: '',
   followerCount: 0, // Formatted number
@@ -55,7 +55,7 @@ UserProfileDetails.defaultProps = {
 };
 
 UserProfileDetails.propTypes = {
-  avatarUrlSmall: PropTypes.string,
+  // avatarUrlBlurry: PropTypes.string,
   avatarUrl: PropTypes.string,
   username: PropTypes.string,
   followerCount: PropTypes.string, // Formatted number
@@ -71,7 +71,7 @@ export const mapStateToProps = (state, { userId }) => {
   return {
     permalinkUrl: user.permalinkUrl,
     avatarUrl: getLargeVersion(avatarUrl),
-    avatarUrlSmall: getMiniVersion(avatarUrl),
+    // avatarUrlBlurry: getMiniVersion(avatarUrl),
     username: user.username,
     followerCount: user.followersCount.toLocaleString(),
     description: user.description,

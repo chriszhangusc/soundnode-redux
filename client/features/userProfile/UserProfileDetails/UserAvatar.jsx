@@ -1,27 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FadeinImage from 'client/common/components/Images/FadeinImage';
+import EnhancedImage from 'client/common/components/Images/EnhancedImage';
 import styled from 'styled-components';
 
 const Avatar = styled.div`
   height: 350px;
   width: 350px;
+  margin-right: 50px;
 `;
 
 function UserAvatar(props) {
   return (
     <Avatar>
-      <FadeinImage {...props} />
+      <EnhancedImage circle {...props} />
     </Avatar>
   );
 }
 
-UserAvatar.defaultProps = {
-};
+UserAvatar.defaultProps = {};
 
 UserAvatar.propTypes = {
   src: PropTypes.string.isRequired,
-  placeholderSrc: PropTypes.string.isRequired,
 };
 
 export default UserAvatar;

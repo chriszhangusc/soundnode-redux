@@ -7,7 +7,7 @@ import { getLargeVersion } from 'client/common/utils/imageUtils';
 import { isTrackActive, isTrackPlaying } from 'client/features/player/playerSelectors';
 import { FormattedNumber } from 'react-intl';
 import { changeSongAndPlay, playSong, pauseSong } from 'client/features/player/playerActions';
-import Spinner from 'client/common/components/Spinner';
+import EnhancedImage from 'client/common/components/Images/EnhancedImage';
 
 const Wrapper = styled.div`
   width: 350px;
@@ -38,11 +38,6 @@ const PlaybackButton = styled.span`
   &:hover {
     opacity: 1;
   }
-`;
-
-const CoverImage = styled.img`
-  width: 100%;
-  height: 100%;
 `;
 
 const CoverImageDetailsWrapper = styled.div`
@@ -81,7 +76,7 @@ function TrackCoverImage({
       <PlaybackButton active={active} onClick={handleImageClick}>
         <i className={`fa ${playing ? 'fa-pause' : 'fa-play'}`} />
       </PlaybackButton>
-      <CoverImage src={src} onClick={handleImageClick} />
+      <EnhancedImage src={src} onClick={handleImageClick} />
       <CoverImageDetailsWrapper onClick={handleImageClick}>
         <span>
           <i className="fa fa-play" /> <FormattedNumber value={playbackCount || 0} />
