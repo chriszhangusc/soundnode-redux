@@ -1,3 +1,4 @@
+import uniq from 'lodash/uniq';
 import { CHARTS_RECEIVE, CHARTS_CLEAR_STATE } from 'client/features/charts/chartsConsts';
 import {
   PLAYLIST_TOGGLE,
@@ -17,6 +18,16 @@ const initialState = {
   hidden: true,
   shufflePlaylist: [],
 };
+
+function receiveCharts(state, action) {
+  const playlist = state[action.payload.playlistName];
+  return {
+    ...state,
+    [action.payload.playlistName]: (playlist
+      ? uniq([...playlist, ...action.payload.result])
+      : [...action.payload.result]).slice(0, 50),
+  };
+}
 
 export default function playlistReducer(state = initialState, action) {
   switch (action.type) {
@@ -53,12 +64,7 @@ export default function playlistReducer(state = initialState, action) {
       };
 
     case CHARTS_RECEIVE:
-      return {
-        ...state,
-        [action.payload.playlistName]: (state[action.payload.playlistName]
-          ? [...state[action.payload.playlistName], ...action.payload.result]
-          : [...action.payload.result]).slice(0, 50),
-      };
+      return receiveCharts(state, action);
 
     case PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE:
       return {
@@ -76,3 +82,4 @@ export default function playlistReducer(state = initialState, action) {
       return state;
   }
 }
+
