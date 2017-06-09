@@ -8,14 +8,7 @@ export const getChartsSelectedGenre = createSelector(
   chartsState => chartsState.selectedGenre,
 );
 
-export const getChartsTrackIds = createSelector(
-  getChartsState,
-  chartsState => chartsState.trackIds,
-);
-
 export const isChartsFetching = createSelector(getChartsState, chartsState => chartsState.fetching);
-
-export const getGenreList = createSelector(getChartsState, chartsState => chartsState.genreList);
 
 export const getCurrentGenreTitle = createSelector(getChartsSelectedGenre, (selectedGenre) => {
   const genreObj = genreListData && genreListData.find(g => g.link === selectedGenre);
@@ -26,3 +19,13 @@ export const getChartsNextHref = createSelector(
   getChartsState,
   chartsState => chartsState.nextHref,
 );
+
+export const getCurrentCharts = createSelector(
+  getChartsState,
+  getChartsSelectedGenre,
+  (state, selectedGenre) => selectedGenre && state[selectedGenre],
+);
+
+export function getChartsByGenre(state, genre) {
+  return genre && state[genre];
+}

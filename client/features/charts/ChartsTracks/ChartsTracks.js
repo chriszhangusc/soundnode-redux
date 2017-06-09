@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import SongCardList from 'client/common/components/SongCardList';
 import {
   isChartsFetching,
-  getChartsTrackIds,
+  getCurrentCharts,
   getChartsSelectedGenre,
 } from 'client/features/charts/chartsSelectors';
 
@@ -11,7 +11,7 @@ import { loadMoreCharts } from 'client/features/charts/chartsActions';
 // Container for SongCardList
 const mapStateToProps = state => ({
   fetching: isChartsFetching(state),
-  trackIds: getChartsTrackIds(state),
+  trackIds: getCurrentCharts(state),
   playlistName: getChartsSelectedGenre(state),
 });
 

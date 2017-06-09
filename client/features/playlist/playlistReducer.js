@@ -19,13 +19,11 @@ const initialState = {
   shufflePlaylist: [],
 };
 
-function receiveCharts(state, action) {
-  const playlist = state[action.payload.playlistName];
+function receiveCharts(state, { playlistName, result }) {
+  const playlist = state[playlistName];
   return {
     ...state,
-    [action.payload.playlistName]: (playlist
-      ? uniq([...playlist, ...action.payload.result])
-      : [...action.payload.result]).slice(0, 50),
+    [playlistName]: playlist ? uniq([...playlist, ...result]) : [...result],
   };
 }
 
@@ -64,7 +62,7 @@ export default function playlistReducer(state = initialState, action) {
       };
 
     case CHARTS_RECEIVE:
-      return receiveCharts(state, action);
+      return receiveCharts(state, action.payload);
 
     case PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE:
       return {
@@ -82,4 +80,3 @@ export default function playlistReducer(state = initialState, action) {
       return state;
   }
 }
-

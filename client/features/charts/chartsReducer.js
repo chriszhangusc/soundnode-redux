@@ -1,12 +1,10 @@
 import uniq from 'lodash/uniq';
 import { transformSCV2Request } from 'client/common/utils/apiUtils';
 import {
-  TOP_COUNT,
   CHARTS_GENRE_CHANGE,
   CHARTS_REQUEST,
   CHARTS_RECEIVE,
   CHARTS_FAIL,
-  CHARTS_CLEAR_CHARTS,
   CHARTS_CLEAR_STATE,
 } from './chartsConsts';
 
@@ -14,45 +12,57 @@ import {
 const initialState = {
   selectedGenre: '',
   // Visible tracks in current charts page.
-  trackIds: [],
   fetching: false,
   nextHref: null,
 };
 
-// #TODO: Should we extract fetchOffset?
+function receiveCharts(state, { result, nextHref }) {
+  const { selectedGenre } = state;
+  const oldCharts = state[selectedGenre] || [];
+  return {
+    ...state,
+    [selectedGenre]: uniq([...oldCharts, ...result]),
+    nextHref: transformSCV2Request(nextHref),
+    fetching: false,
+  };
+}
+
+function changeGenre(state, { genre }) {
+  return {
+    ...state,
+    selectedGenre: genre,
+  };
+}
+
+function requestCharts(state) {
+  return {
+    ...state,
+    fetching: true,
+  };
+}
+
 export default function chartsReducer(state = initialState, action) {
   switch (action.type) {
     case CHARTS_CLEAR_STATE:
       return {
         ...initialState,
       };
+
     case CHARTS_GENRE_CHANGE:
-      return {
-        ...state,
-        selectedGenre: action.payload,
-      };
+      return changeGenre(state, action.payload);
+
     case CHARTS_REQUEST:
-      return {
-        ...state,
-        fetching: true,
-      };
+      return requestCharts(state);
+
     case CHARTS_RECEIVE:
-      return {
-        ...state,
-        trackIds: uniq([...state.trackIds, ...action.payload.result].slice(0, TOP_COUNT)),
-        nextHref: transformSCV2Request(action.payload.nextHref),
-        fetching: false,
-      };
-    case CHARTS_CLEAR_CHARTS:
-      return {
-        ...state,
-        trackIds: [],
-      };
+      return receiveCharts(state, action.payload);
+
     case CHARTS_FAIL:
       return {
         ...state,
         fetching: false,
       };
+
     default:
       return state;
   }
