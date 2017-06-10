@@ -27,7 +27,7 @@ class ChartsPage extends Component {
     this.onPageMountOrChange = this.onPageMountOrChange.bind(this);
   }
 
-  /* First load maybe remove it?*/
+  /* First load maybe remove it? */
   componentWillMount() {
     this.onPageMountOrChange(this.props);
   }

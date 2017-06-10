@@ -1,16 +1,23 @@
 import copy from 'copy-to-clipboard';
 import {
-  notificationCopySuccess,
-  notificationCopyFailed,
+  notificationSuccess,
+  notificationWarning,
 } from 'client/features/notification/notificationActions';
 
-export function copyToClipboard(str) {
+const defaultSuccessMessage = 'Successfully copied to clipboard';
+const defaultFailureMessage = 'Failed to copy to clipboard';
+
+export function copyToClipboard(
+  str,
+  successMessage = defaultSuccessMessage,
+  failureMessage = defaultFailureMessage,
+) {
   return (dispatch) => {
     if (!str) {
-      dispatch(notificationCopyFailed());
+      dispatch(notificationWarning(failureMessage));
     } else {
       copy(str);
-      dispatch(notificationCopySuccess());
+      dispatch(notificationSuccess(successMessage));
     }
   };
 }

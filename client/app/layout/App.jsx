@@ -56,7 +56,7 @@ injectGlobal`
   body {
     color: ${FONT_COLOR_PRIMARY};
     background-color: ${BACKGROUND_COLOR};
-    padding-top: ${NAV_BAR_HEIGHT}px;
+    padding-top: 80px;
   }
 
   a {

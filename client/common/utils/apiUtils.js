@@ -3,7 +3,6 @@ import { camelizeKeys } from 'humps';
 import { API_HOST } from 'client/common/constants/appConsts';
 import { CLIENT_ID } from 'client/common/constants/authConsts';
 import { getOAuthToken } from 'client/features/auth/authUtils';
-import { notificationWarning } from 'client/features/notification/notificationActions';
 import { setUrlParams } from './urlUtils';
 import { normalizeResponse } from './normalizeUtils';
 
@@ -51,15 +50,20 @@ export function getSCApiUrl(fetchUrl) {
 
 export function makeRequest(fetchUrl, fetchOptions) {
   const finalUrl = getSCApiUrl(fetchUrl);
-
   return (
     fetch(finalUrl, fetchOptions)
       .then(checkStatus)
+      // Should be removed!!
       .then(parseJson)
-      // The following should not be coupled with this function here.
       .then(json => camelizeKeys(json))
   );
 }
+
+export function makeRequestTemp(fetchUrl, fetchOptions) {
+  const finalUrl = getSCApiUrl(fetchUrl);
+  return fetch(finalUrl, fetchOptions).then(checkStatus);
+}
+
 
 export function makeSCV1Request(url, fetchOptions) {
   const fetchUrl = `${SC_API_V1}${url}`;

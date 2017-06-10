@@ -12,17 +12,18 @@ const Navbar = styled.nav`
   top: 0;
   left: 0;
   background-color: ${LIGHT_BLACK};
-  height: 70px;
+  height: 80px;
+  max-height: 80px;
   z-index: 1000;
-`;
 
-const NavBarContentWrapper = styled.div`
   padding: 0 100px;
   display: flex;
   justify-content: space-between;
 `;
 
 const InnerWrapper = styled.div`
+  display: inline-flex;
+  align-items: center;
   padding: 0 15px;
 `;
 
@@ -30,13 +31,11 @@ const InnerWrapper = styled.div`
 function Nav() {
   return (
     <Navbar>
-      <NavBarContentWrapper>
-        <NavHeader />
-        <InnerWrapper>
-          <DropdownSearch />
-          <Auth />
-        </InnerWrapper>
-      </NavBarContentWrapper>
+      <NavHeader />
+      <InnerWrapper>
+        <DropdownSearch />
+        <Auth />
+      </InnerWrapper>
     </Navbar>
   );
 }

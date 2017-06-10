@@ -8,19 +8,22 @@ const NavbarBrandName = styled.span`
 `;
 
 const NavbarBrand = styled.a`
-  line-height: 70px;
   font-size: 1.3rem;
 `;
 
+const NavHeaderWrapper = styled.div`
+  display: inline-flex;
+  align-items: center;
+`;
 
 function NavHeader() {
   return (
-    <div>
+    <NavHeaderWrapper>
       <NavbarBrand href={HOST}>
         <Glyphicon glyph="headphones" />
         <NavbarBrandName>Redux Music</NavbarBrandName>
       </NavbarBrand>
-    </div>
+    </NavHeaderWrapper>
   );
 }
 

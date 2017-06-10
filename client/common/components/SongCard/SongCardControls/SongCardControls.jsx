@@ -7,24 +7,33 @@ const Wrapper = styled.div`
   margin-top: 10px;
 `;
 
-function SongCardControls({ liked, handleToggleLike, handleCopyToClipboard }) {
+function SongCardControls({
+  liked,
+  reposted,
+  handleToggleLike,
+  handleRepost,
+  handleCopyToClipboard,
+}) {
   return (
     <Wrapper>
       <SongCardButton
         title={liked ? 'Unlike' : 'Like'}
         name="heart"
         active={liked}
-        onClick={handleToggleLike}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleToggleLike();
+        }}
       />
-      <SongCardButton
-        title="Add to playlist"
-        name="bookmark"
-        onClick={() => {}}
-      />
+      <SongCardButton title="Add to playlist" name="bookmark" onClick={() => {}} />
       <SongCardButton
         title="Repost"
-        name="external-link"
-        onClick={() => {}}
+        name="retweet"
+        active={reposted}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleRepost();
+        }}
       />
       <SongCardButton title="Copy to clipboard" name="clipboard" onClick={handleCopyToClipboard} />
     </Wrapper>
@@ -33,7 +42,9 @@ function SongCardControls({ liked, handleToggleLike, handleCopyToClipboard }) {
 
 SongCardControls.propTypes = {
   liked: PropTypes.bool.isRequired,
+  reposted: PropTypes.bool.isRequired,
   handleToggleLike: PropTypes.func.isRequired,
+  handleRepost: PropTypes.func.isRequired,
   handleCopyToClipboard: PropTypes.func.isRequired,
 };
 

@@ -7,6 +7,9 @@ import {
   AUTH_USER_LOGIN_STARTED,
   AUTH_USER_LOGIN_SUCCEEDED,
   AUTH_USER_LOGIN_FAILED,
+  AUTH_REPOSTS_ADD,
+  AUTH_REPOSTS_REMOVE,
+  AUTH_REPOSTS_SET,
 } from './authConsts';
 
 /* Reducer */
@@ -15,6 +18,7 @@ const initialState = {
   loginInProgress: false,
   session: null,
   favoriteTracks: [],
+  reposts: [],
 };
 
 // #TODO: Should we extract fetchOffset?
@@ -60,6 +64,22 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         favoriteTracks: state.favoriteTracks.filter(x => x !== action.payload),
+      };
+
+    case AUTH_REPOSTS_ADD:
+      return {
+        ...state,
+        reposts: [...state.reposts, action.payload.trackId],
+      };
+    case AUTH_REPOSTS_REMOVE:
+      return {
+        ...state,
+        reposts: state.reposts.filter(x => x !== action.payload.trackId),
+      };
+    case AUTH_REPOSTS_SET:
+      return {
+        ...state,
+        reposts: [...action.payload.reposts],
       };
     default:
       return state;

@@ -30,7 +30,6 @@ const TooltipsArrowLeft = styled.div`
   display: block;
   position: absolute;
   top: -38px;
-
   ${media.desktopLG`right: 10px;`}
 
   width: 0;
