@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { SEPARATOR_COLOR_CLEAN, SEPARATOR_COLOR_DARK } from 'client/app/css/colors';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { TRACK_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
+import { media } from 'client/app/css/styleUtils';
 
 // Tooltips styling is not working!!
 const Wrapper = styled.span`
@@ -18,7 +20,6 @@ const Wrapper = styled.span`
 `;
 
 const OptionsListWrapper = styled.div`
-  position: relative;
   /* This is for testing */
   /* transform: ${props => (props.index === 1 ? 'scale(1, 1)' : 'scale(0, 0)')}; */
   transform: scale(0, 0);
@@ -29,6 +30,9 @@ const TooltipsArrowLeft = styled.div`
   display: block;
   position: absolute;
   top: -38px;
+
+  ${media.desktopLG`right: 10px;`}
+
   width: 0;
   height: 0;
   border-top: 12px solid transparent;
@@ -38,7 +42,10 @@ const TooltipsArrowLeft = styled.div`
 
 const OptionsList = styled.ul`
     position: absolute;
-    right: 45px;
+
+    ${media.desktopLG`right: 22px;`}
+    ${media.desktop4K`right: 45px;`}
+
     top: -128px;
     display: block;
     background: ${SEPARATOR_COLOR_CLEAN};
@@ -101,5 +108,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {};
 }
+
+PlaylistTooltips.propTypes = {
+  index: PropTypes.number.isRequired,
+  trackId: PropTypes.number.isRequired,
+};
 
 export default connect()(PlaylistTooltips);
