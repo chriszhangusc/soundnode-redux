@@ -6,7 +6,7 @@ import {
   SIDEBAR_WIDTH_DESKTOP_LG,
   SIDEBAR_WIDTH_4K,
 } from 'client/app/css/variables';
-
+import * as routes from 'client/common/constants/routeConsts';
 import { media } from 'client/app/css/styleUtils';
 import { LIGHT_BLACK } from 'client/app/css/colors';
 
@@ -23,14 +23,14 @@ const SidebarWrapper = styled.div`
 
 const SIDEBAR_ITEM_LIST = [
   {
-    to: '/charts',
+    to: routes.CHARTS_ROUTE,
     iconClassName: 'fa fa-trophy',
     title: 'Top 50',
   },
   {
-    to: '/likes',
+    to: routes.FAVORITES_ROUTE,
     iconClassName: 'fa fa-heart',
-    title: 'Likes',
+    title: 'Favorites',
   },
   {
     to: '/playlists',

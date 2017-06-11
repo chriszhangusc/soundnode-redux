@@ -9,12 +9,11 @@ import trackProfileReducer from 'client/features/trackProfile/trackProfileReduce
 import dropdownSearchReducer from 'client/features/dropdownSearch/dropdownSearchReducer';
 import authReducer from 'client/features/auth/authReducer';
 import notificationReducer from 'client/features/notification/notificationReducer';
+import favoritesReducer from 'client/features/favorites/favoritesReducer';
 
 import { dropdownSearchEpic } from 'client/features/dropdownSearch/dropdownSearchActions';
 
-export const rootEpic = combineEpics(
-  dropdownSearchEpic,
-);
+export const rootEpic = combineEpics(dropdownSearchEpic);
 
 export const rootReducer = combineReducers({
   entities: entitiesReducer,
@@ -28,4 +27,5 @@ export const rootReducer = combineReducers({
   dropdownSearch: dropdownSearchReducer,
   auth: authReducer,
   notification: notificationReducer,
+  favorites: favoritesReducer,
 });

@@ -13,7 +13,6 @@ import {
   AUTH_USER_LOGOUT_SUCCEEDED,
   AUTH_FAVORITES_SET,
   AUTH_SESSION_SET,
-  OAUTH_TOKEN,
   AUTH_FAVORITES_ADD,
   AUTH_FAVORITES_REMOVE,
   AUTH_REPOSTS_ADD,
@@ -23,7 +22,7 @@ import {
 
 import {
   fetchMe,
-  fetchMyFacorites,
+  fetchMyFavoritesIds,
   likeTrack,
   unlikeTrack,
   repost,
@@ -42,10 +41,12 @@ export function setReposts(reposts) {
   };
 }
 
-export function setFavorites(normalized) {
+export function setFavorites(favorites) {
   return {
     type: AUTH_FAVORITES_SET,
-    payload: normalized,
+    payload: {
+      favorites,
+    },
   };
 }
 
@@ -79,7 +80,7 @@ export function loginFailed(error) {
 
 export function syncFavorites() {
   return dispatch =>
-    fetchMyFacorites().then((favorites) => {
+    fetchMyFavoritesIds().then((favorites) => {
       dispatch(setFavorites(favorites));
     });
 }

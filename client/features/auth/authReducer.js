@@ -51,7 +51,7 @@ export default function authReducer(state = initialState, action) {
     case AUTH_FAVORITES_SET:
       return {
         ...state,
-        favoriteTracks: [...action.payload.result],
+        favoriteTracks: [...action.payload.favorites],
       };
 
     case AUTH_FAVORITES_ADD:

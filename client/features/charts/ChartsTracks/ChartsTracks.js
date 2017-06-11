@@ -9,17 +9,21 @@ import {
 import { loadMoreCharts } from 'client/features/charts/chartsActions';
 
 // Container for SongCardList
-const mapStateToProps = state => ({
-  fetching: isChartsFetching(state),
-  trackIds: getCurrentCharts(state),
-  playlistName: getChartsSelectedGenre(state),
-});
+function mapStateToProps(state) {
+  return {
+    fetching: isChartsFetching(state),
+    trackIds: getCurrentCharts(state),
+    playlistName: getChartsSelectedGenre(state),
+  };
+}
 
-const mapDispatchToProps = dispatch => ({
-  scrollFunc() {
-    console.log('More charts');
-    dispatch(loadMoreCharts());
-  },
-});
+function mapDispatchToProps(dispatch) {
+  return {
+    scrollFunc() {
+      console.log('More charts');
+      dispatch(loadMoreCharts());
+    },
+  };
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongCardList);

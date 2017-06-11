@@ -12,7 +12,7 @@ const Title = styled.h1`
 `;
 
 function ChartsTitle({ genreTitle }) {
-  return <Title>Top 50 - {genreTitle}</Title>;
+  return <Title>Top Charts - {genreTitle}</Title>;
 }
 
 ChartsTitle.propTypes = {

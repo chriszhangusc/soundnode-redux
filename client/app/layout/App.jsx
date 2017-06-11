@@ -5,11 +5,13 @@ import {
   USER_PROFILE_ROUTE,
   TRACK_PROFILE_ROUTE,
   AUTH_CALLBACK_ROUTE,
+  FAVORITES_ROUTE,
 } from 'client/common/constants/routeConsts';
 import Charts from 'client/features/charts/Charts';
 import UserProfile from 'client/features/userProfile/UserProfile';
 import TrackProfile from 'client/features/trackProfile/TrackProfile';
 import Player from 'client/features/player/Player';
+import Favorites from 'client/features/favorites/Favorites';
 import Playlist from 'client/features/playlist/Playlist';
 import Nav from 'client/common/components/Nav';
 import Sidebar from 'client/common/components/Sidebar';
@@ -113,6 +115,7 @@ function Main() {
           <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
           <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
           <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} component={TrackProfile} />
+          <Route exact path={`${FAVORITES_ROUTE}`} component={Favorites} />
           <Redirect to={CHARTS_ROUTE} />
         </Switch>
         <Player />

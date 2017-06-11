@@ -35,7 +35,7 @@ function SongCardControls({
           handleRepost();
         }}
       />
-      <SongCardButton title="Copy to clipboard" name="clipboard" onClick={handleCopyToClipboard} />
+      <SongCardButton title="Copy permalink" name="clipboard" onClick={handleCopyToClipboard} />
     </Wrapper>
   );
 }

@@ -50,6 +50,7 @@ export function getSCApiUrl(fetchUrl) {
 
 export function makeRequest(fetchUrl, fetchOptions) {
   const finalUrl = getSCApiUrl(fetchUrl);
+  console.log(finalUrl);
   return (
     fetch(finalUrl, fetchOptions)
       .then(checkStatus)
