@@ -23,9 +23,11 @@ const SpinnerWrapper = styled.div`
 function renderSongCardList(trackIds, playlistName) {
   return (
     <SongCardListWrapper>
-      {trackIds.map(trackId => (
-        <SongCard trackId={trackId} playlistName={playlistName} key={trackId.toString()} />
-      ))}
+      {trackIds.map(
+        trackId =>
+          trackId &&
+          <SongCard trackId={trackId} playlistName={playlistName} key={trackId.toString()} />,
+      )}
     </SongCardListWrapper>
   );
 }

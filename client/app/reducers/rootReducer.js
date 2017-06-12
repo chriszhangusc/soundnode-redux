@@ -10,6 +10,7 @@ import dropdownSearchReducer from 'client/features/dropdownSearch/dropdownSearch
 import authReducer from 'client/features/auth/authReducer';
 import notificationReducer from 'client/features/notification/notificationReducer';
 import favoritesReducer from 'client/features/favorites/favoritesReducer';
+import streamReducer from 'client/features/stream/streamReducer';
 
 import { dropdownSearchEpic } from 'client/features/dropdownSearch/dropdownSearchActions';
 
@@ -28,4 +29,5 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   notification: notificationReducer,
   favorites: favoritesReducer,
+  stream: streamReducer,
 });

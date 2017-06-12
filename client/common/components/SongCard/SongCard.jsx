@@ -30,7 +30,7 @@ const SongCardWrapper = styled.div`
 
 // playlistName: The name of playlist this track belongs
 function SongCard({ track, active }) {
-  if (track.streamable) {
+  if (track && track.streamable) {
     return (
       <SongCardWrapper active={active}>
         <SongCardImage track={track} />

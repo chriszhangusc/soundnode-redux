@@ -38,7 +38,7 @@ const SIDEBAR_ITEM_LIST = [
     title: 'Playlists',
   },
   {
-    to: '/tracks',
+    to: routes.STREAM_ROUTE,
     iconClassName: 'fa fa-music',
     title: 'Stream',
   },

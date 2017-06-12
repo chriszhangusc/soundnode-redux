@@ -7,6 +7,7 @@ import { setUrlParams } from './urlUtils';
 import { normalizeResponse } from './normalizeUtils';
 
 const SC_API_V2 = 'https://api-v2.soundcloud.com';
+
 const SC_API_V1 = 'https://api.soundcloud.com';
 
 export function getStreamUrl(track) {
@@ -65,7 +66,6 @@ export function makeRequestTemp(fetchUrl, fetchOptions) {
   return fetch(finalUrl, fetchOptions).then(checkStatus);
 }
 
-
 export function makeSCV1Request(url, fetchOptions) {
   const fetchUrl = `${SC_API_V1}${url}`;
   return makeRequest(fetchUrl, fetchOptions);
@@ -73,7 +73,8 @@ export function makeSCV1Request(url, fetchOptions) {
 
 export function makeSCV2Request(url) {
   const fetchUrl = `${SC_API_V2}${url}`;
-  return makeRequest(fetchUrl);
+  const finalFetchUrl = transformSCV2Request(fetchUrl);
+  return makeRequest(finalFetchUrl);
 }
 
 // Remove it..
