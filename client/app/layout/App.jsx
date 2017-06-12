@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+// import PrivateRoute from 'client/common/components/routing/PrivateRoute';
 import {
   CHARTS_ROUTE,
   USER_PROFILE_ROUTE,
