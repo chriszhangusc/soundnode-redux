@@ -15,3 +15,7 @@ export function removeOAuthToken() {
 export function isUnauthError(err) {
   return err && err.response && err.response.status === 401;
 }
+
+export function isAuthenticated() {
+  return getOAuthToken();
+}
