@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
-import throttle from 'lodash/throttle';
 
-export default function (InnerComponent) {
-  class InfiniteScrollComponent extends Component {
+export default function withFetchingOnScroll(WrappedComponent) {
+  class EnhancedComponent extends Component {
     constructor(props) {
       super(props);
       this.onScroll = this.onScroll.bind(this);
@@ -26,13 +25,13 @@ export default function (InnerComponent) {
       }
     }
     render() {
-      return <InnerComponent {...this.props} />;
+      return <WrappedComponent {...this.props} />;
     }
   }
 
-  InfiniteScrollComponent.propTypes = {
+  EnhancedComponent.propTypes = {
     scrollFunc: PropTypes.func.isRequired,
   };
-  // Connect to redux store only because we need dispatch!
-  return InfiniteScrollComponent;
+
+  return EnhancedComponent;
 }

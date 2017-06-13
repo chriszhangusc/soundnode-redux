@@ -8,7 +8,7 @@ import {
   isCommentsFetching,
 } from 'client/features/trackProfile/trackProfileSelectors';
 import { loadMoreComments } from 'client/features/trackProfile/trackProfileActions';
-import infiniteScroll from 'client/common/hocs/InfiniteScroll';
+import withFetchingOnScroll from 'client/common/hocs/withFetchingOnScroll';
 import Spinner from 'client/common/components/Spinner';
 import TrackProfileComment from './TrackProfileComment';
 
@@ -70,4 +70,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(infiniteScroll(TrackProfileComments));
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withFetchingOnScroll(TrackProfileComments),
+);
