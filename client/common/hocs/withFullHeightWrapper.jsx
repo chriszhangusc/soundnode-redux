@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
-export default function withFullScreenHeight(WrappedComponent) {
+export default function withFullHeightWrapper(WrappedComponent) {
   function EnhancedComponent(props) {
     return (
       <Wrapper>

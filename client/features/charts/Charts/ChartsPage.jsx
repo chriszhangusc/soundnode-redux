@@ -11,7 +11,7 @@ import { DEFAULT_GENRE } from 'client/features/charts/chartsConsts';
 import { CHARTS_ROUTE } from 'client/common/constants/routeConsts';
 import { validateGenre } from 'client/features/charts/chartsUtils';
 import { Grid } from 'react-bootstrap';
-import withFullScreenHeight from 'client/common/hocs/withFullScreenHeight';
+import withFullHeightWrapper from 'client/common/hocs/withFullHeightWrapper';
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';
 import ChartsTitle from '../ChartsTitle';
@@ -80,4 +80,4 @@ ChartsPage.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export default connect()(withFullScreenHeight(ChartsPage));
+export default connect()(withFullHeightWrapper(ChartsPage));
