@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { USER_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
-import { doLogin, doLogout, loginIfNeeded } from '../authActions';
+import { doLogin, loginIfNeeded } from '../authActions';
 import { getMe } from '../authSelectors';
+import LogoutButton from './LogoutButton';
 
 const AuthWrapper = styled.div`
   display: inline-flex;
@@ -18,10 +19,6 @@ const AuthWrapper = styled.div`
 
 const Username = styled.span`
   margin: 0 10px;
-`;
-
-const LogoutButton = styled.a`
-
 `;
 
 const AvatarWrapper = styled.div`
@@ -38,7 +35,7 @@ class Auth extends React.Component {
   }
 
   render() {
-    const { me, onLogin, onLogout } = this.props;
+    const { me, onLogin } = this.props;
 
     const loggedIn = () => (
       <AuthWrapper>
@@ -48,7 +45,7 @@ class Auth extends React.Component {
           </Link>
         </AvatarWrapper>
         <Username>{me.username}</Username>
-        <LogoutButton onClick={onLogout}>Logout</LogoutButton>
+        <LogoutButton />
       </AuthWrapper>
     );
 
@@ -67,9 +64,12 @@ Auth.defaultProps = {
 };
 
 Auth.propTypes = {
-  me: PropTypes.object,
+  me: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+  }),
   onLogin: PropTypes.func.isRequired,
-  onLogout: PropTypes.func.isRequired,
   syncLoginIfNeeded: PropTypes.func.isRequired,
 };
 
@@ -82,7 +82,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onLogin: bindActionCreators(doLogin, dispatch),
-    onLogout: bindActionCreators(doLogout, dispatch),
     syncLoginIfNeeded: bindActionCreators(loginIfNeeded, dispatch),
   };
 }

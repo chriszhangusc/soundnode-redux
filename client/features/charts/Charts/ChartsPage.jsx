@@ -12,6 +12,7 @@ import { CHARTS_ROUTE } from 'client/common/constants/routeConsts';
 import { validateGenre } from 'client/features/charts/chartsUtils';
 import { Grid } from 'react-bootstrap';
 import withFullHeightWrapper from 'client/common/hocs/withFullHeightWrapper';
+import { compose } from 'recompose';
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';
 import ChartsTitle from '../ChartsTitle';
@@ -76,8 +77,13 @@ class ChartsPage extends Component {
 // Container prop validation required here?
 ChartsPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-export default connect()(withFullHeightWrapper(ChartsPage));
+// export default connect()(withFullHeightWrapper(ChartsPage));
+export default compose(connect(), withFullHeightWrapper)(ChartsPage);

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import SongCard from 'client/common/components/SongCard';
 import withLoadingSpinnerAfter from 'client/common/hocs/withLoadingSpinnerAfter';
 import withFetchingOnScroll from 'client/common/hocs/withFetchingOnScroll';
+import { compose } from 'recompose';
 import styled from 'styled-components';
 
 const SongCardListWrapper = styled.div`
@@ -30,9 +31,10 @@ SongCardList.defaultProps = {
 };
 
 SongCardList.propTypes = {
-  fetching: PropTypes.bool,
+  // fetching: PropTypes.bool,
   trackIds: PropTypes.arrayOf(PropTypes.number),
   playlistName: PropTypes.string,
 };
 
-export default withLoadingSpinnerAfter(withFetchingOnScroll(SongCardList));
+// export default withLoadingSpinnerAfter(withFetchingOnScroll(SongCardList));
+export default compose(withLoadingSpinnerAfter, withFetchingOnScroll)(SongCardList);
