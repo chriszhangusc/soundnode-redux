@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Spinner from 'client/common/components/Spinner';
 import styled from 'styled-components';
+import { getDisplayName } from 'client/common/utils/hocUtils';
 
 const SpinnerWrapper = styled.div`
   padding: 20px 0;
@@ -9,12 +11,20 @@ const SpinnerWrapper = styled.div`
 `;
 
 export default function withLoadingSpinnerAfter(WrappedComponent) {
-  return function ComposedComponent({ fetching, ...rest }) {
+  function EnhancedComponent({ fetching, ...rest }) {
     return (
       <div>
         <WrappedComponent {...rest} />
         {fetching && <SpinnerWrapper><Spinner /></SpinnerWrapper>}
       </div>
     );
+  }
+
+  EnhancedComponent.displayName = `WithLoadingSpinnerAfter(${getDisplayName(WrappedComponent)})`;
+
+  EnhancedComponent.propTypes = {
+    fetching: PropTypes.bool.isRequired,
   };
+
+  return EnhancedComponent;
 }
