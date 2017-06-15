@@ -10,6 +10,7 @@ import {
   AUTH_REPOSTS_ADD,
   AUTH_REPOSTS_REMOVE,
   AUTH_REPOSTS_SET,
+  AUTH_USER_ME_SET,
 } from './authConsts';
 
 /* Reducer */
@@ -24,6 +25,11 @@ const initialState = {
 // #TODO: Should we extract fetchOffset?
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
+    case AUTH_USER_ME_SET:
+      return {
+        ...state,
+        me: { ...action.payload.me },
+      };
     case AUTH_USER_LOGIN_STARTED:
       return {
         ...state,
@@ -33,7 +39,6 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         loginInProgress: false,
-        me: { ...action.payload },
       };
     case AUTH_USER_LOGIN_FAILED:
       return {

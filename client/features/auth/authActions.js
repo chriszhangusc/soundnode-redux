@@ -18,6 +18,7 @@ import {
   AUTH_REPOSTS_ADD,
   AUTH_REPOSTS_REMOVE,
   AUTH_REPOSTS_SET,
+  AUTH_USER_ME_SET,
 } from './authConsts';
 
 import {
@@ -50,10 +51,18 @@ export function setFavorites(favorites) {
   };
 }
 
-export function loginSucceed(me) {
+export function setMe(me) {
+  return {
+    type: AUTH_USER_ME_SET,
+    payload: {
+      me,
+    },
+  };
+}
+
+export function loginSucceed() {
   return {
     type: AUTH_USER_LOGIN_SUCCEEDED,
-    payload: me,
   };
 }
 
@@ -140,10 +149,11 @@ export function loadMe() {
   return dispatch =>
     fetchMe()
       .then((me) => {
-        dispatch(loginSucceed(me));
+        dispatch(setMe(me));
         return Promise.all([dispatch(syncFavorites()), dispatch(syncReposts())]);
       })
       .then(() => {
+        dispatch(loginSucceed());
         dispatch(notificationSuccess('Login Success'));
       })
       .catch((err) => {
