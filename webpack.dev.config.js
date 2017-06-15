@@ -36,14 +36,12 @@ module.exports = {
     // stats: 'errors-only',
     // Opens new browser window when we run devserer for the first time
     open: true,
-    // http://localhost:3000/api/abc will be redirect to 3001/api/abc
-    proxy: {
-      // /sc/api-v1/* and /sc/api-v2/*
-      '/sc/*': {
-        target: 'http://127.0.0.1:3001',
-        secure: false
-      }
-    },
+    // proxy: {
+    //   '/sc/*': {
+    //     target: 'http://127.0.0.1:3001',
+    //     secure: false
+    //   }
+    // },
     host : '127.0.0.1',
     historyApiFallback: true
   },

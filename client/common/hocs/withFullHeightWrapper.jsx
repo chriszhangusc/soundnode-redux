@@ -6,8 +6,8 @@ import { getDisplayName } from 'client/common/utils/hocUtils';
 // this is to solve fetch on scroll not triggering when there is too few content.
 
 const Wrapper = styled.div`
-  position: absolute;
-  height: 100%;
+  min-height: 100vh;
+  padding-bottom: 80px;
 `;
 
 export default function withFullHeightWrapper(WrappedComponent) {
