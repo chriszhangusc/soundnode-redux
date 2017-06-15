@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-// import PrivateRoute from 'client/common/components/routing/PrivateRoute';
+
 import {
   CHARTS_ROUTE,
   USER_PROFILE_ROUTE,
@@ -20,6 +20,7 @@ import Nav from 'client/common/components/Nav';
 import Sidebar from 'client/common/components/Sidebar';
 import Callback from 'client/common/components/Callback';
 import GlobalEvents from 'client/features/global/GlobalEvents';
+import Loadable from 'react-loading-overlay';
 
 import styled, { injectGlobal } from 'styled-components';
 import {
@@ -33,7 +34,9 @@ import { FONT_COLOR_PRIMARY, BACKGROUND_COLOR, LIGHTER_GRAY } from 'client/app/c
 import { media } from 'client/app/css/styleUtils';
 
 import Notification from 'client/features/notification/Notification';
-
+import { isLoginInProgress } from 'client/features/auth/authSelectors';
+// import OverlayLoader from 'client/features/overlayLoader/OverlayLoader';
+import { connect } from 'react-redux';
 /* Initialze SC which will be available all over the app */
 import SC from 'soundcloud';
 import { CLIENT_ID, REDIRECT_URI } from 'client/common/constants/authConsts';
@@ -61,7 +64,6 @@ injectGlobal`
   body {
     color: ${FONT_COLOR_PRIMARY};
     background-color: ${BACKGROUND_COLOR};
-    padding-top: 80px;
   }
 
   a {
@@ -105,39 +107,54 @@ const PageContentWrapper = styled.div`
   ${media.desktop4K`margin-left: ${SIDEBAR_WIDTH_4K}`}
   overflow-y: scroll;
   overflow-x: hidden;
+  /* Making space for music player */
   padding-bottom: 70px;
   min-height: 100vh;
 `;
 
-function Main() {
+const MainWrapper = styled.div`
+  padding-top: 80px;
+`;
+
+function Main({ loginInProgress }) {
   return (
-    <div>
-      <Nav />
-      <Sidebar />
-      <PageContentWrapper>
-        <Switch>
-          <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
-          <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
-          <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} component={TrackProfile} />
-          <Route exact path={`${FAVORITES_ROUTE}`} component={Favorites} />
-          <Route exact path={`${STREAM_ROUTE}`} component={Stream} />
-          <Redirect to={CHARTS_ROUTE} />
-        </Switch>
-        <Player />
-        <Playlist />
-      </PageContentWrapper>
-      <GlobalEvents />
-      <Notification />
-    </div>
+    <Loadable active={loginInProgress} spinner text="Authenticating..." animate zIndex={9999}>
+      <MainWrapper>
+        <Nav />
+        <Sidebar />
+        <PageContentWrapper>
+          <Switch>
+            <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
+            <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
+            <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} component={TrackProfile} />
+            <Route exact path={`${FAVORITES_ROUTE}`} component={Favorites} />
+            <Route exact path={`${STREAM_ROUTE}`} component={Stream} />
+            <Redirect to={CHARTS_ROUTE} />
+          </Switch>
+          <Player />
+          <Playlist />
+        </PageContentWrapper>
+        <GlobalEvents />
+        <Notification />
+      </MainWrapper>
+    </Loadable>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    loginInProgress: isLoginInProgress(state),
+  };
+}
+
+const ConnectedMain = connect(mapStateToProps)(Main);
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route exact path={AUTH_CALLBACK_ROUTE} component={Callback} />
-        <Route component={Main} />
+        <Route component={ConnectedMain} />
       </Switch>
     </Router>
   );

@@ -13,3 +13,5 @@ export const isLoggedIn = createSelector(getSession, session => session);
 export const getFavoriteTrackIds = createSelector(getAuthState, state => state.favoriteTracks);
 
 export const getReposts = createSelector(getAuthState, state => state.reposts);
+
+export const isLoginInProgress = createSelector(getAuthState, state => state.loginInProgress);
