@@ -105,7 +105,8 @@ const PageContentWrapper = styled.div`
   ${media.desktop4K`margin-left: ${SIDEBAR_WIDTH_4K}`}
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 100%;
+  padding-bottom: 70px;
+  min-height: 100vh;
 `;
 
 function Main() {

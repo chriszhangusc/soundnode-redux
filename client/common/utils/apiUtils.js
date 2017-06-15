@@ -4,7 +4,6 @@ import { API_HOST } from 'client/common/constants/appConsts';
 import { CLIENT_ID } from 'client/common/constants/authConsts';
 import { getOAuthToken } from 'client/features/auth/authUtils';
 import { setUrlParams } from './urlUtils';
-import { normalizeResponse } from './normalizeUtils';
 
 const SC_API_V2 = 'https://api-v2.soundcloud.com';
 
@@ -37,8 +36,9 @@ export function checkStatus(response) {
   return response;
 }
 
+// Transform json response
 export function parseJson(response) {
-  return response.json();
+  return response.json().then(json => camelizeKeys(json));
 }
 
 // If we have authed already, use oauth_token, otherwise use client_id
@@ -57,13 +57,7 @@ export function makeRequest(fetchUrl, fetchOptions) {
       .then(checkStatus)
       // Should be removed!!
       .then(parseJson)
-      .then(json => camelizeKeys(json))
   );
-}
-
-export function makeRequestTemp(fetchUrl, fetchOptions) {
-  const finalUrl = getSCApiUrl(fetchUrl);
-  return fetch(finalUrl, fetchOptions).then(checkStatus);
 }
 
 export function makeSCV1Request(url, fetchOptions) {
@@ -71,14 +65,8 @@ export function makeSCV1Request(url, fetchOptions) {
   return makeRequest(fetchUrl, fetchOptions);
 }
 
-export function makeSCV2Request(url) {
+export function makeSCV2Request(url, fetchOptions) {
   const fetchUrl = `${SC_API_V2}${url}`;
   const finalFetchUrl = transformSCV2Request(fetchUrl);
-  return makeRequest(finalFetchUrl);
-}
-
-// Remove it..
-// Need to decouple data trasformation from making the ajax request
-export function makeRequestAndNormalize(fetchUrl, normalizeSchema) {
-  return makeRequest(fetchUrl).then(json => normalizeResponse(json, normalizeSchema));
+  return makeRequest(finalFetchUrl, fetchOptions);
 }
