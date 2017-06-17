@@ -20,20 +20,29 @@ export function createNotificationSuccess(message) {
 
 export function notificationSuccess(message) {
   return (dispatch) => {
-    dispatch(createNotificationSuccess(message));
+    const createNotification = () => {
+      dispatch(createNotificationSuccess(message));
+    };
+
     const clearNotification = () => {
       dispatch(hideNotification());
     };
+
+    setTimeout(createNotification, 200);
     setTimeout(clearNotification, 5000);
   };
 }
 
 export function notificationWarning(message) {
   return (dispatch) => {
-    dispatch(createNotificationWarning(message));
+    const createNotification = () => {
+      dispatch(createNotificationWarning(message));
+    };
     const clearNotification = () => {
       dispatch(hideNotification());
     };
+
+    setTimeout(createNotification, 200);
     setTimeout(clearNotification, 5000);
   };
 }

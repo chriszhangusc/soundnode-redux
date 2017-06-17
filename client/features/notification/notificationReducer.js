@@ -20,7 +20,8 @@ export default function notificationReducer(state = initialState, action) {
   switch (action.type) {
     case TYPES.NOTIFICATION_HIDE:
       return {
-        ...initialState,
+        ...state,
+        hidden: true,
       };
 
     case TYPES.NOTIFICATION_SUCCESS_CREATE:

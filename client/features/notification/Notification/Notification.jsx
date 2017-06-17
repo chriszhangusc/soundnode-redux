@@ -10,17 +10,24 @@ import {
 } from 'client/features/notification/notificationSelectors';
 import { hideNotification } from 'client/features/notification/notificationActions';
 
-const colorSuccess = '#51a351';
+const colorSuccess = '#51A351';
 const colorWarning = '#f89406';
+const colorInfo = '#58abc3';
 const width = '300px';
 
 const Wrapper = styled.div`
   display: flex;
   background-color: ${(props) => {
-    if (props.type) {
-      return props.type === 'success' ? colorSuccess : colorWarning;
+    switch (props.type) {
+      case 'success':
+        return colorSuccess;
+      case 'warning':
+        return colorWarning;
+      case 'info':
+        return colorInfo;
+      default:
+        return 'transparent';
     }
-    return 'transparent';
   }};
   opacity: ${props => !props.type && 0};
   box-sizing: border-box;
@@ -32,7 +39,6 @@ const Wrapper = styled.div`
   position: fixed;
   right: 0;
   top: 100px;
-  opacity: 0.9;
   margin-top: 15px;
   width: ${width};
   transform: translateX(${props => (props.notificationHidden ? width : '0')});
@@ -74,8 +80,6 @@ const Message = styled.p`
 class Notification extends React.Component {
   render() {
     const { type, hidden, message, handleNotificationHide } = this.props;
-    // console.log(type, hidden);
-    // if (!type) return null;
     return (
       <Wrapper type={type} onClick={handleNotificationHide} notificationHidden={hidden}>
         <IconWrapper>
