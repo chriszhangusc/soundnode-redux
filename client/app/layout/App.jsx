@@ -21,8 +21,7 @@ import Sidebar from 'client/common/components/Sidebar';
 import Callback from 'client/common/components/Callback';
 import GlobalEvents from 'client/features/global/GlobalEvents';
 import Loadable from 'react-loading-overlay';
-
-import styled, { injectGlobal } from 'styled-components';
+import styled from 'styled-components';
 import {
   NAV_BAR_HEIGHT,
   SIDEBAR_WIDTH_DESKTOP,
@@ -30,10 +29,9 @@ import {
   SIDEBAR_WIDTH_4K,
 } from 'client/app/css/variables';
 
-import { FONT_COLOR_PRIMARY, BACKGROUND_COLOR, LIGHTER_GRAY } from 'client/app/css/colors';
 import { media } from 'client/app/css/styleUtils';
 
-import Notification from 'client/features/notification/Notification';
+import NotificationCenter from 'client/features/notification/NotificationCenter';
 import { isLoginInProgress } from 'client/features/auth/authSelectors';
 // import OverlayLoader from 'client/features/overlayLoader/OverlayLoader';
 import { connect } from 'react-redux';
@@ -41,63 +39,13 @@ import { connect } from 'react-redux';
 import SC from 'soundcloud';
 import { CLIENT_ID, REDIRECT_URI } from 'client/common/constants/authConsts';
 
+import 'client/app/css/global';
+
 SC.initialize({
   client_id: CLIENT_ID,
   redirect_uri: REDIRECT_URI,
   scope: 'non-expiring',
 });
-
-// Global CSS
-injectGlobal`
-
-  * {
-    padding: 0;
-    margin: 0;
-  }
-
-  html {
-    font-family: 'Open Sans';
-    /* Always put font-size here so that we could apply rem */
-    font-size: 14px;
-  }
-
-  body {
-    color: ${FONT_COLOR_PRIMARY};
-    background-color: ${BACKGROUND_COLOR};
-  }
-
-  a {
-    color: ${LIGHTER_GRAY};
-    text-decoration: none;
-    &:hover,
-    &:focus,
-    &:active {
-      color: ${LIGHTER_GRAY};
-      cursor: pointer;
-      text-decoration: none;
-    }
-  }
-
-  .container {
-    padding: 0;
-  }
-
-  .content {
-    margin: 40px 0 80px;
-  }
-
-  ul {
-    list-style-type: none;
-  }
-
-  .pad-bottom {
-    padding-bottom: 70px;
-  }
-
-  .container-fluid {
-    padding: 0;
-  }
-`;
 
 const PageContentWrapper = styled.div`
   margin-left: $sidebar-width;
@@ -135,7 +83,7 @@ function Main({ loginInProgress }) {
           <Playlist />
         </PageContentWrapper>
         <GlobalEvents />
-        <Notification />
+        <NotificationCenter />
       </MainWrapper>
     </Loadable>
   );
