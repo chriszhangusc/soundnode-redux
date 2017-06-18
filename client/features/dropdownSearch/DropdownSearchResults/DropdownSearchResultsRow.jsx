@@ -54,8 +54,12 @@ function DropdownSearchResultsRow({ imageUrl, itemLinkUrl, itemTitle }) {
   );
 }
 
+DropdownSearchResultsRow.defaultProps = {
+  imageUrl: null,
+};
+
 DropdownSearchResultsRow.propTypes = {
-  imageUrl: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string,
   itemLinkUrl: PropTypes.string.isRequired,
   itemTitle: PropTypes.string.isRequired,
 };

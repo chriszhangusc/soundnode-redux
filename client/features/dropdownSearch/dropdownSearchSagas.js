@@ -20,7 +20,7 @@ import { fetchDropdownSearchTracks, fetchDropdownSearchUsers } from './dropdownS
 // Take in action
 // Should add try catch
 // Side effects in saga making actions cleaner. (Not mixing with thunks)
-function* doDropdownSearch({ payload }) {
+export function* doDropdownSearch({ payload }) {
   const { keyword, limit } = payload;
 
   if (!keyword || keyword.trim() === '') {

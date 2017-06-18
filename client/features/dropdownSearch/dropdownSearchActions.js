@@ -39,14 +39,20 @@ export const clearDropdownSearchResults = () => ({
   type: TYPES.DROPDOWN_SEARCH_RESULTS_CLEAR,
 });
 
-export const receiveDropdownSearchUsers = normalized => ({
+export const receiveDropdownSearchUsers = ({ result, entities }) => ({
   type: TYPES.DROPDOWN_SEARCH_USERS_RECEIVED,
-  payload: normalized,
+  payload: {
+    userIds: result,
+    entities,
+  },
 });
 
-export const receiveDropdownSearchTracks = normalized => ({
+export const receiveDropdownSearchTracks = ({ result, entities }) => ({
   type: TYPES.DROPDOWN_SEARCH_TRACKS_RECEIVED,
-  payload: normalized,
+  payload: {
+    trackIds: result,
+    entities,
+  },
 });
 
 export function clearAndHideSearchResults() {

@@ -9,8 +9,6 @@ const colorWarning = '#f89406';
 const colorInfo = '#58abc3';
 const colorDanger = '#bd362f';
 
-const width = '300px';
-
 const Wrapper = styled.div`
   display: flex;
   background-color: ${(props) => {
@@ -27,7 +25,6 @@ const Wrapper = styled.div`
         return 'transparent';
     }
   }};
-  opacity: ${props => !props.type && 0};
   box-sizing: border-box;
   padding: 20px;
   border-radius: 2px;
@@ -35,8 +32,7 @@ const Wrapper = styled.div`
   font-size: 1em;
   line-height: 1.2em;
   margin-bottom: 15px;
-  width: ${width};
-  /* transform: translateX(${props => (props.dismiss ? width : 0)}); */
+  width: 300px;
   transition: all .5s ease-in-out;
 `;
 
@@ -59,14 +55,14 @@ const ContentWrapper = styled.div`
 
 const Header = styled.h1`
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: bold;
   margin: 0 0 5px 0;
 `;
 
 const Message = styled.p`
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 1rem;
 `;
 
 class Notification extends React.Component {
@@ -81,12 +77,12 @@ class Notification extends React.Component {
       case 'danger':
         return 'fa fa-times';
       default:
-        return '';
+        return 'fa fa-question-circle';
     }
   }
 
   render() {
-    const { id, type, title, message, handleOnClick } = this.props;
+    const { type, title, message, handleOnClick } = this.props;
     return (
       <Wrapper
         type={type}
@@ -107,9 +103,8 @@ class Notification extends React.Component {
 }
 
 Notification.propTypes = {
-  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['success', 'info', 'warning']).isRequired,
+  type: PropTypes.oneOf(['success', 'info', 'warning', 'danger']).isRequired,
   message: PropTypes.string.isRequired,
   handleOnClick: PropTypes.func.isRequired,
 };

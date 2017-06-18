@@ -16,7 +16,7 @@ const initialState = {
   nextHref: null,
 };
 
-function receiveCharts(state, { result, nextHref }) {
+export function receiveCharts(state, { result, nextHref }) {
   const { selectedGenre } = state;
   const oldCharts = state[selectedGenre] || [];
   return {
@@ -27,14 +27,14 @@ function receiveCharts(state, { result, nextHref }) {
   };
 }
 
-function changeGenre(state, { genre }) {
+export function changeGenre(state, { genre }) {
   return {
     ...state,
     selectedGenre: genre,
   };
 }
 
-function requestCharts(state) {
+export function requestCharts(state) {
   return {
     ...state,
     fetching: true,

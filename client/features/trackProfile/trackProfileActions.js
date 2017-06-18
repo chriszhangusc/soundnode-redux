@@ -21,7 +21,10 @@ export function requestTrack() {
 export function receiveTrack(normalized) {
   return {
     type: TRACK_PROFILE_TRACK_RECEIVED,
-    payload: normalized,
+    payload: {
+      ...normalized,
+      trackId: normalized.result,
+    },
   };
 }
 
@@ -38,7 +41,10 @@ export function requestComments() {
 export function receiveComments(normalized) {
   return {
     type: TRACK_PROFILE_COMMENTS_RECEIVED,
-    payload: normalized,
+    payload: {
+      ...normalized,
+      commentIds: normalized.result,
+    },
   };
 }
 

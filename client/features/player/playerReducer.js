@@ -28,82 +28,127 @@ const initialState = {
   trackId: null,
 };
 
+export function changeSong(state, { trackId }) {
+  return {
+    ...state,
+    trackId,
+  };
+}
+
+export function playSong(state) {
+  return {
+    ...state,
+    playing: true,
+  };
+}
+
+export function pauseSong(state) {
+  return {
+    ...state,
+    playing: false,
+  };
+}
+
+export function updateCurrentTime(state, { currentTime }) {
+  return {
+    ...state,
+    currentTime,
+  };
+}
+
+export function startSeek(state) {
+  return {
+    ...state,
+    seeking: true,
+  };
+}
+
+export function endSeek(state) {
+  return {
+    ...state,
+    seeking: false,
+  };
+}
+
+export function updateVolume(state, { volume }) {
+  return {
+    ...state,
+    volume,
+  };
+}
+
+export function startVolumeSeek(state) {
+  return {
+    ...state,
+    volumeSeeking: true,
+  };
+}
+
+export function endVolumeSeek(state) {
+  return {
+    ...state,
+    volumeSeeking: false,
+  };
+}
+
+export function updatePlayMode(state, { mode }) {
+  return {
+    ...state,
+    mode,
+  };
+}
+
+export function mute(state) {
+  return {
+    ...state,
+    volume: 0,
+  };
+}
+
+export function clearTime(state) {
+  return {
+    ...state,
+    currentTime: 0,
+  };
+}
+
 export default function playerReducer(state = initialState, action) {
   switch (action.type) {
     case PLAYER_SONG_CHANGE:
-      return {
-        ...state,
-        trackId: action.payload,
-      };
+      return changeSong(state, action.payload);
 
     case PLAYER_SONG_PLAY:
-      return {
-        ...state,
-        playing: true,
-      };
+      return playSong(state);
 
     case PLAYER_SONG_PAUSE:
-      return {
-        ...state,
-        playing: false,
-      };
+      return pauseSong(state);
 
     case PLAYER_TIME_UPDATE:
-      return {
-        ...state,
-        currentTime: action.payload,
-      };
+      return updateCurrentTime(state, action.payload);
 
     case PLAYER_SEEK_BEGIN:
-      return {
-        ...state,
-        seeking: true,
-      };
+      return startSeek(state);
 
     case PLAYER_SEEK_END:
-      return {
-        ...state,
-        seeking: false,
-      };
+      return endSeek(state);
 
     case PLAYER_VOLUME_CHANGE:
-      return {
-        ...state,
-        volume: action.payload,
-      };
+      return updateVolume(state, action.payload);
 
     case PLAYER_VOLUME_SEEK_BEGIN:
-      return {
-        ...state,
-        volumeSeeking: true,
-      };
+      return startVolumeSeek(state);
 
     case PLAYER_VOLUME_SEEK_END:
-      return {
-        ...state,
-        volumeSeeking: false,
-      };
+      return endVolumeSeek(state);
 
     case PLAYER_PLAY_MODE_CHANGE:
-      return {
-        ...state,
-        mode: action.payload,
-      };
+      return updatePlayMode(state, action.payload);
 
     case PLAYER_MUTE:
-      return {
-        ...state,
-        volume: 0,
-      };
+      return mute(state);
 
     case PLAYER_TIME_CLEAR:
-      return {
-        ...state,
-        currentTime: 0,
-      };
-    // What?
-    case PLAYLIST_CLEAR_QUEUE:
-      return initialState;
+      return clearTime(state);
 
     default:
       return state;

@@ -11,14 +11,14 @@ const initialState = {
   nextHref: null,
 };
 
-function requestFavorites(state) {
+export function requestFavorites(state) {
   return {
     ...state,
     fetching: true,
   };
 }
 
-function setFavorites(state, { favoritesIds, nextHref }) {
+export function setFavorites(state, { favoritesIds, nextHref }) {
   return {
     ...state,
     fetching: false,
@@ -27,7 +27,7 @@ function setFavorites(state, { favoritesIds, nextHref }) {
   };
 }
 
-function appendFavorites(state, { favoritesIds, nextHref }) {
+export function appendFavorites(state, { favoritesIds, nextHref }) {
   return {
     ...state,
     fetching: false,
@@ -36,7 +36,7 @@ function appendFavorites(state, { favoritesIds, nextHref }) {
   };
 }
 
-function clearFavoritesState() {
+export function clearFavoritesState() {
   return {
     ...initialState,
   };

@@ -48,22 +48,30 @@ export const clearTime = () => ({ type: PLAYER_TIME_CLEAR });
 
 export const changeSong = trackId => ({
   type: PLAYER_SONG_CHANGE,
-  payload: trackId,
+  payload: {
+    trackId,
+  },
 });
 
 export const updateTime = currentTime => ({
   type: PLAYER_TIME_UPDATE,
-  payload: currentTime,
+  payload: {
+    currentTime,
+  },
 });
 
 export const changeVolume = volume => ({
   type: PLAYER_VOLUME_CHANGE,
-  payload: volume,
+  payload: {
+    volume,
+  },
 });
 
 export const changePlayMode = mode => ({
   type: PLAYER_PLAY_MODE_CHANGE,
-  payload: mode,
+  payload: {
+    mode,
+  },
 });
 
 /* Redux Thunks Domain Logic */

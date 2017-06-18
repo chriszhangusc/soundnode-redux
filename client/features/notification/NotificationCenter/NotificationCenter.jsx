@@ -19,11 +19,13 @@ function NotificationCenter({ notifications }) {
     <Wrapper>
       <CSSTransitionGroup
         transitionName="notification-transition"
-        transitionEnterTimeout={100}
+        transitionAppear
+        transitionAppearTimeout={500}
+        transitionEnterTimeout={300}
         transitionLeaveTimeout={300}
       >
         {notifications.map(({ id, type, title, message }, idx) => (
-          <Notification id={id} type={type} title={title} message={message} key={idx} />
+          <Notification id={id} type={type} key={idx} title={title} message={message} />
         ))}
       </CSSTransitionGroup>
     </Wrapper>

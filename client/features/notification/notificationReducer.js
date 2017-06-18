@@ -2,15 +2,10 @@ import * as TYPES from './notificationConsts';
 
 /* Reducer */
 const initialState = {
-  notifications: [
-    // Fake datas
-    // { id: 0, type: 'success', title: 'Success', message: 'Login Success' },
-    // { id: 1, type: 'warning', title: 'Warning', message: 'Login Failed' },
-    // { id: 2, type: 'info', title: 'Info', message: 'This is an info' },
-  ],
+  notifications: [],
 };
 
-function addNotification(state, { notification }) {
+export function addNotification(state, { notification }) {
   return {
     ...state,
     // Add new notification to the front
@@ -18,7 +13,7 @@ function addNotification(state, { notification }) {
   };
 }
 
-function removeNotification(state, { id }) {
+export function removeNotification(state, { id }) {
   return {
     ...state,
     notifications: state.notifications.filter(item => item.id !== id),

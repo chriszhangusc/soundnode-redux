@@ -30,7 +30,10 @@ export function requestUser() {
 export function receiveUser(normalized) {
   return {
     type: USER_PROFILE_USER_RECEIVED,
-    payload: normalized,
+    payload: {
+      ...normalized,
+      userId: normalized.result,
+    },
   };
 }
 
@@ -45,7 +48,11 @@ export function requestUserTracks() {
 export function receiveUserTracks(normalized) {
   return {
     type: USER_PROFILE_TRACKS_RECEIVED,
-    payload: normalized,
+    payload: {
+      ...normalized,
+      trackIds: normalized.result,
+      nextHref: normalized.nextHref,
+    },
   };
 }
 

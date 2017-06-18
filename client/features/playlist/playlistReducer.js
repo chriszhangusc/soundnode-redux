@@ -19,7 +19,8 @@ const initialState = {
   shufflePlaylist: [],
 };
 
-function receiveCharts(state, { playlistName, result }) {
+// ????
+export function receiveCharts(state, { playlistName, result }) {
   const playlist = state[playlistName];
   return {
     ...state,
@@ -27,33 +28,65 @@ function receiveCharts(state, { playlistName, result }) {
   };
 }
 
+export function updateShufflePlaylist(state, { shufflePlaylist }) {
+  return {
+    ...state,
+    shufflePlaylist,
+  };
+}
+
+export function clearShufflePlaylist(state) {
+  return {
+    ...state,
+    shufflePlaylist: [],
+  };
+}
+
+export function togglePlaylist(state) {
+  return {
+    ...state,
+    hidden: !state.hidden,
+  };
+}
+
+export function appendToPlaylist(state, { trackId }) {
+  return {
+    ...state,
+    playlist: [...state.playlist, trackId],
+  };
+}
+
+export function changeVisiblePlaylistName(state, { visiblePlaylistName }) {
+  return {
+    ...state,
+    visiblePlaylistName,
+  };
+}
+
+export function changeActivePlaylistName(state, { activePlaylistName }) {
+  return {
+    ...state,
+    activePlaylistName,
+  };
+}
+
 export default function playlistReducer(state = initialState, action) {
   switch (action.type) {
     case PLAYLIST_SHUFFLE_PLAYLIST_UPDATE:
-      return {
-        ...state,
-        shufflePlaylist: [...action.payload],
-      };
+      return updateShufflePlaylist(state, action.payload);
 
     case PLAYLIST_SHUFFLE_PLAYLIST_CLEAR:
-      return {
-        ...state,
-        shufflePlaylist: [],
-      };
+      return clearShufflePlaylist(state);
 
     case PLAYLIST_TOGGLE:
-      return {
-        ...state,
-        hidden: !state.hidden,
-      };
-
-    case PLAYLIST_CLEAR_QUEUE:
-      return initialState;
+      return togglePlaylist(state);
     // Need to handle shuffle mode!!
     case APPEND_TRACK_TO_PLAYLIST:
+      return appendToPlaylist(state, action.payload);
+
+    case PLAYLIST_CLEAR_QUEUE:
       return {
-        ...state,
-        playlist: [...state.playlist, action.payload],
+        ...initialState,
       };
 
     case CHARTS_CLEAR_STATE:
@@ -65,16 +98,10 @@ export default function playlistReducer(state = initialState, action) {
       return receiveCharts(state, action.payload);
 
     case PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE:
-      return {
-        ...state,
-        visiblePlaylistName: action.payload,
-      };
+      return changeVisiblePlaylistName(state, action.payload);
 
     case PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE:
-      return {
-        ...state,
-        activePlaylistName: action.payload,
-      };
+      return changeActivePlaylistName(state, action.payload);
 
     default:
       return state;

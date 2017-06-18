@@ -32,26 +32,34 @@ export const clearShufflePlaylist = () => ({
   type: PLAYLIST_SHUFFLE_PLAYLIST_CLEAR,
 });
 
-export const updateShufflePlaylist = playlist => ({
+export const updateShufflePlaylist = shufflePlaylist => ({
   type: PLAYLIST_SHUFFLE_PLAYLIST_UPDATE,
-  payload: playlist,
+  payload: {
+    shufflePlaylist,
+  },
 });
 
-export const changeVisiblePlaylistName = playlistName => ({
+export const changeVisiblePlaylistName = visiblePlaylistName => ({
   type: PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE,
-  payload: playlistName,
+  payload: {
+    visiblePlaylistName,
+  },
 });
 
-export const changeActivePlaylistName = playlistName => ({
+export const changeActivePlaylistName = activePlaylistName => ({
   type: PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE,
-  payload: playlistName,
+  payload: {
+    activePlaylistName,
+  },
 });
 
 export const togglePlaylist = () => ({ type: PLAYLIST_TOGGLE });
 
 export const appendTrackToPlaylist = trackId => ({
   type: APPEND_TRACK_TO_PLAYLIST,
-  payload: trackId,
+  payload: {
+    trackId,
+  },
 });
 
 /* Thunks logic */
