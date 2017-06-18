@@ -1,4 +1,3 @@
-export const defaultArtworkImageUrl = '/images/default-artwork.png';
 // export const defaultArtistImageUrl = '/images/default-artist.png';
 export const DEFAULT_USER_AVATAR = 'https://i1.sndcdn.com/avatars-000249624208-d5jr2v-t500x500.jpg';
 

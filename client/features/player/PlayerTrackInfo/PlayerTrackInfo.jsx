@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
-import defaultArtworkImage from 'assets/images/default-artwork.png';
 import { media } from 'client/app/css/styleUtils';
 
 const PlayerTrackInfoWrapper = styled.div`

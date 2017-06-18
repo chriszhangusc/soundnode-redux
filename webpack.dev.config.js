@@ -8,9 +8,8 @@ const autoprefixer = require('autoprefixer');
 const PORT = process.env.PORT || 3000;
 
 module.exports = {
-
   entry: {
-    main: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')]
+    main: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')],
   },
 
   output: {
@@ -42,32 +41,29 @@ module.exports = {
     //     secure: false
     //   }
     // },
-    host : '127.0.0.1',
-    historyApiFallback: true
+    host: '127.0.0.1',
+    historyApiFallback: true,
   },
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
   // In every other case use resolve.root.
   resolve: {
-
     modules: [
       // From documentaton
       // path.join(__dirname, "src"),
-      "node_modules"
+      'node_modules',
     ],
     alias: {
       client: path.join(__dirname, 'client'),
       assets: path.join(__dirname, 'public'),
     },
-    extensions: ['*', '.js', '.jsx', 'stage-0']
+    extensions: ['*', '.js', '.jsx', 'stage-0'],
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
-        use: [
-          'babel-loader'
-        ],
-        exclude: /node_modules/
+        use: ['babel-loader'],
+        exclude: /node_modules/,
       },
       {
         test: /\.scss$/,
@@ -77,38 +73,40 @@ module.exports = {
           'css-loader',
           'postcss-loader',
           'sass-loader',
-        ]
+        ],
       },
 
-// Dealing with global css: http://stackoverflow.com/questions/35398733/css-modules-how-do-i-disable-local-scope-for-a-file
-// Global CSS
-// loaders.push({
-//     test: /\.css$/,
-//     exclude: /\.module\.css$/,
-//     loader: 'style-loader!css-loader'
-// });
+      // Dealing with global css: http://stackoverflow.com/questions/35398733/css-modules-how-do-i-disable-local-scope-for-a-file
+      // Global CSS
+      // loaders.push({
+      //     test: /\.css$/,
+      //     exclude: /\.module\.css$/,
+      //     loader: 'style-loader!css-loader'
+      // });
 
-// // CSS modules
-// loaders.push({
-//     test: /\.module\.css$/,
-//     loader: 'style-loader!css-loader?modules'
-// });
+      // // CSS modules
+      // loaders.push({
+      //     test: /\.module\.css$/,
+      //     loader: 'style-loader!css-loader?modules'
+      // });
 
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     'style-loader',
+      //     'css-loader?modules&importLoaders=1&camelCase&localIdentName=[name]__[local]___[hash:base64:5]',
+      //     'postcss-loader',
+      //   ]
+      // },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader?modules&importLoaders=1&camelCase&localIdentName=[name]__[local]___[hash:base64:5]',
-          'postcss-loader',
-        ]
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
-        use: [
-          'url-loader?limit=10000&name=images/[hash:12].[ext]'
-        ]
-      }
-    ]
+        use: ['url-loader?limit=10000&name=images/[hash:12].[ext]'],
+      },
+    ],
   },
 
   plugins: [
@@ -140,13 +138,10 @@ module.exports = {
 
     new webpack.LoaderOptionsPlugin({
       options: {
-        postcss: [
-          autoprefixer(),
-        ]
-      }
-    })
-
+        postcss: [autoprefixer()],
+      },
+    }),
   ],
 
-  devtool: 'source-map'
+  devtool: 'source-map',
 };

@@ -1,26 +1,31 @@
-// Need better implementation!
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import {
-  isNotificationHidden,
-  getNotificationMessage,
-  getNotificationType,
-} from 'client/features/notification/notificationSelectors';
-import { hideNotification } from 'client/features/notification/notificationActions';
+import { removeNotification } from '../notificationActions';
 
-const colorSuccess = '#51a351';
+const colorSuccess = '#51A351';
 const colorWarning = '#f89406';
+const colorInfo = '#58abc3';
+const colorDanger = '#bd362f';
+
 const width = '300px';
 
 const Wrapper = styled.div`
   display: flex;
   background-color: ${(props) => {
-    if (props.type) {
-      return props.type === 'success' ? colorSuccess : colorWarning;
+    switch (props.type) {
+      case 'success':
+        return colorSuccess;
+      case 'warning':
+        return colorWarning;
+      case 'info':
+        return colorInfo;
+      case 'danger':
+        return colorDanger;
+      default:
+        return 'transparent';
     }
-    return 'transparent';
   }};
   opacity: ${props => !props.type && 0};
   box-sizing: border-box;
@@ -29,17 +34,10 @@ const Wrapper = styled.div`
   cursor: pointer;
   font-size: 1em;
   line-height: 1.2em;
-  position: fixed;
-  right: 0;
-  top: 100px;
-  opacity: 0.9;
-  margin-top: 15px;
+  margin-bottom: 15px;
   width: ${width};
-  transform: translateX(${props => (props.notificationHidden ? width : '0')});
+  /* transform: translateX(${props => (props.dismiss ? width : 0)}); */
   transition: all .5s ease-in-out;
-  &:hover, &:focus {
-    opacity: 1;
-  }
 `;
 
 const IconWrapper = styled.div`
@@ -72,19 +70,35 @@ const Message = styled.p`
 `;
 
 class Notification extends React.Component {
+  getIconByType(type) {
+    switch (type) {
+      case 'success':
+        return 'fa fa-check-circle';
+      case 'warning':
+        return 'fa fa-exclamation-triangle';
+      case 'info':
+        return 'fa fa-info-circle';
+      case 'danger':
+        return 'fa fa-times';
+      default:
+        return '';
+    }
+  }
+
   render() {
-    const { type, hidden, message, handleNotificationHide } = this.props;
-    // console.log(type, hidden);
-    // if (!type) return null;
+    const { id, type, title, message, handleOnClick } = this.props;
     return (
-      <Wrapper type={type} onClick={handleNotificationHide} notificationHidden={hidden}>
+      <Wrapper
+        type={type}
+        onClick={() => {
+          handleOnClick();
+        }}
+      >
         <IconWrapper>
-          <Icon
-            className={type === 'success' ? 'fa fa-check-circle' : 'fa fa-exclamation-triangle'}
-          />
+          <Icon className={this.getIconByType(type)} />
         </IconWrapper>
         <ContentWrapper>
-          <Header>{type.toUpperCase()}</Header>
+          <Header>{title}</Header>
           <Message>{message}</Message>
         </ContentWrapper>
       </Wrapper>
@@ -93,26 +107,19 @@ class Notification extends React.Component {
 }
 
 Notification.propTypes = {
-  handleNotificationHide: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired,
-  hidden: PropTypes.bool.isRequired,
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['success', 'info', 'warning']).isRequired,
   message: PropTypes.string.isRequired,
+  handleOnClick: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state) {
+function mapDispatchToProps(dispatch, { id }) {
   return {
-    hidden: isNotificationHidden(state),
-    type: getNotificationType(state),
-    message: getNotificationMessage(state),
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    handleNotificationHide() {
-      dispatch(hideNotification());
+    handleOnClick() {
+      dispatch(removeNotification(id));
     },
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Notification);
+export default connect(null, mapDispatchToProps)(Notification);
