@@ -20,18 +20,3 @@ export const getChartsNextHref = createSelector(
   chartsState => chartsState.nextHref,
 );
 
-export const getCurrentCharts = createSelector(
-  getChartsState,
-  getChartsSelectedGenre,
-  (state, selectedGenre) => selectedGenre && state[selectedGenre],
-);
-
-export function getChartsByGenre(state, genre) {
-  return genre && state[genre];
-}
-
-export const getSelectedGenreCharts = createSelector(
-  getChartsState,
-  getChartsSelectedGenre,
-  (state, genre) => genre && state[genre],
-);

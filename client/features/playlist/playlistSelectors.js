@@ -37,3 +37,7 @@ export const getPlaylistByMode = createSelector(
   (inShuffleMode, shufflePlaylist, activePlaylist) =>
     (inShuffleMode ? shufflePlaylist : activePlaylist),
 );
+
+export function getPlaylistByName(state, name) {
+  return name && state[name];
+}

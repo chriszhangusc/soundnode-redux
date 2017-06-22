@@ -3,15 +3,13 @@ import {
   updateVisiblePlaylist,
   appendToVisiblePlaylist,
 } from 'client/features/playlist/playlistActions';
+import { getVisiblePlaylist, getPlaylistByName } from 'client/features/playlist/playlistSelectors';
 import { notificationWarning } from 'client/features/notification/notificationActions';
 
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
 
 import {
   isChartsFetching,
-  getChartsByGenre,
-  getCurrentCharts,
-  getChartsSelectedGenre,
   getChartsNextHref,
 } from './chartsSelectors';
 
@@ -45,12 +43,11 @@ export function requestCharts() {
   };
 }
 
-export function receiveCharts(normalized, playlistName) {
+export function receiveCharts(normalized) {
   return {
     type: CHARTS_RECEIVE,
     payload: {
       ...normalized,
-      playlistName,
     },
   };
 }
@@ -65,12 +62,13 @@ export function failedToFetchCharts() {
 export function loadChartsPage(genre) {
   return async (dispatch, getState) => {
     const state = getState();
-    if (!getChartsByGenre(state, genre)) {
+    if (!getPlaylistByName(state, genre)) {
       dispatch(requestCharts());
       try {
         const normalizedCharts = await fetchCharts(genre);
-        dispatch(receiveCharts(normalizedCharts, genre));
-        dispatch(updateVisiblePlaylist(normalizedCharts.result));
+        dispatch(receiveCharts(normalizedCharts));
+        const trackIds = normalizedCharts.result;
+        dispatch(updateVisiblePlaylist(trackIds));
       } catch (err) {
         console.error(err);
         dispatch(failedToFetchCharts());
@@ -85,15 +83,15 @@ export function loadMoreCharts() {
     const state = getState();
     const chartsFetching = isChartsFetching(state);
     const nextHref = getChartsNextHref(state);
-    const currentCharts = getCurrentCharts(state);
+    const currentCharts = getVisiblePlaylist(state);
 
     if (!chartsFetching && currentCharts.length < TOP_COUNT && nextHref) {
       dispatch(requestCharts());
-      const genre = getChartsSelectedGenre(state);
       try {
         const normalizedCharts = await fetchMoreCharts(nextHref);
-        dispatch(receiveCharts(normalizedCharts, genre));
-        dispatch(appendToVisiblePlaylist(normalizedCharts.result));
+        dispatch(receiveCharts(normalizedCharts));
+        const trackId = normalizedCharts.result;
+        dispatch(appendToVisiblePlaylist(trackId));
       } catch (err) {
         console.error(err);
         dispatch(failedToFetchCharts());

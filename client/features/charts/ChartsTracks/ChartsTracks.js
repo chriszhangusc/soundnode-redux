@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import SongCardList from 'client/common/components/SongCardList';
 import {
   isChartsFetching,
-  getCurrentCharts,
   getChartsSelectedGenre,
 } from 'client/features/charts/chartsSelectors';
+
+import { getVisiblePlaylist } from 'client/features/playlist/playlistSelectors';
 
 import { loadMoreCharts } from 'client/features/charts/chartsActions';
 
@@ -12,7 +13,7 @@ import { loadMoreCharts } from 'client/features/charts/chartsActions';
 function mapStateToProps(state) {
   return {
     fetching: isChartsFetching(state),
-    trackIds: getCurrentCharts(state),
+    trackIds: getVisiblePlaylist(state),
     playlistName: getChartsSelectedGenre(state),
   };
 }

@@ -1,4 +1,3 @@
-import uniq from 'lodash/uniq';
 import { transformSCV2Request } from 'client/common/utils/apiUtils';
 import {
   CHARTS_GENRE_CHANGE,
@@ -16,12 +15,9 @@ const initialState = {
   nextHref: null,
 };
 
-export function receiveCharts(state, { result, nextHref }) {
-  const { selectedGenre } = state;
-  const oldCharts = state[selectedGenre] || [];
+export function receiveCharts(state, { nextHref }) {
   return {
     ...state,
-    [selectedGenre]: uniq([...oldCharts, ...result]),
     nextHref: transformSCV2Request(nextHref),
     fetching: false,
   };
