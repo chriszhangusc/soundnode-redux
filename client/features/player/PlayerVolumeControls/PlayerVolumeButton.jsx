@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { THEME_COLOR, WHITE } from 'client/app/css/colors';
 import IconButton from 'client/common/components/Buttons/IconButton';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { getCurrentVolume } from '../playerSelectors';
 import { toggleMute } from '../playerActions';
 
@@ -46,15 +47,17 @@ function PlayerVolumeButton({ volume, handleOnClick }) {
     default:
       throw new Error('volume can not be greater than 1.0');
   }
-
+  const tooltip = <Tooltip id="tooltip">Adjust volume</Tooltip>;
   return (
     <Wrapper>
-      <IconButton
-        iconClassName={`${`ion-volume-${type}`}`}
-        onClick={handleOnClick}
-        color={WHITE}
-        hoverColor={THEME_COLOR}
-      />
+      <OverlayTrigger placement="top" overlay={tooltip}>
+        <IconButton
+          iconClassName={`${`ion-volume-${type}`}`}
+          onClick={handleOnClick}
+          color={WHITE}
+          hoverColor={THEME_COLOR}
+        />
+      </OverlayTrigger>
     </Wrapper>
   );
 }

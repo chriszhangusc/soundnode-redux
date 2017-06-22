@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import IconButton from 'client/common/components/Buttons/IconButton';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import styled from 'styled-components';
 import PlayerButton from '../PlayerButton';
 
@@ -19,23 +19,36 @@ class PlayerControls extends Component {
 
   renderPlayPauseButton() {
     const { playing, onPauseClick, onPlayClick } = this.props;
+    const tooltip = <Tooltip id="tooltip-play-pause">{playing ? 'Pause' : 'Play'}</Tooltip>;
     return (
-      <PlayerButton
-        title={playing ? 'Play' : 'Pause'}
-        iconClassName={playing ? 'ion-ios-pause' : 'ion-ios-play'}
-        onClick={playing ? onPauseClick : onPlayClick}
-      />
+      <OverlayTrigger placement="top" overlay={tooltip}>
+        <PlayerButton
+          title={playing ? 'Play' : 'Pause'}
+          iconClassName={playing ? 'ion-ios-pause' : 'ion-ios-play'}
+          onClick={playing ? onPauseClick : onPlayClick}
+        />
+      </OverlayTrigger>
     );
   }
 
   renderForwardButton() {
     const { onNextClick } = this.props;
-    return <PlayerButton title="Next" iconClassName="ion-ios-fastforward" onClick={onNextClick} />;
+    const tooltip = <Tooltip id="tooltip-next">Next</Tooltip>;
+    return (
+      <OverlayTrigger placement="top" overlay={tooltip}>
+        <PlayerButton title="Next" iconClassName="ion-ios-fastforward" onClick={onNextClick} />
+      </OverlayTrigger>
+    );
   }
 
   renderBackwardButton() {
     const { onPrevClick } = this.props;
-    return <PlayerButton title="Previous" iconClassName="ion-ios-rewind" onClick={onPrevClick} />;
+    const tooltip = <Tooltip id="tooltip-previous">Previous</Tooltip>;
+    return (
+      <OverlayTrigger placement="top" overlay={tooltip}>
+        <PlayerButton title="Previous" iconClassName="ion-ios-rewind" onClick={onPrevClick} />
+      </OverlayTrigger>
+    );
   }
 
   render() {
