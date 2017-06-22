@@ -35,10 +35,8 @@ import NotificationCenter from 'client/features/notification/NotificationCenter'
 import { isLoginInProgress } from 'client/features/auth/authSelectors';
 // import OverlayLoader from 'client/features/overlayLoader/OverlayLoader';
 import { connect } from 'react-redux';
-/* Initialze SC which will be available all over the app */
 import SC from 'soundcloud';
 import { CLIENT_ID, REDIRECT_URI } from 'client/common/constants/authConsts';
-
 import 'client/app/css/global';
 
 SC.initialize({
