@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { THEME_COLOR, WHITE } from 'client/app/css/colors';
-import IconButton from 'client/common/components/Buttons/IconButton';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import IconButton from 'client/common/components/buttons/IconButton';
 import { getCurrentVolume } from '../playerSelectors';
 import { toggleMute } from '../playerActions';
 
@@ -14,20 +13,6 @@ const Wrapper = styled.div`
   width: 30px;
   margin-left: 20px;
 `;
-
-function mapStateToProps(state) {
-  return {
-    volume: getCurrentVolume(state),
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    handleOnClick: () => {
-      dispatch(toggleMute());
-    },
-  };
-}
 
 function PlayerVolumeButton({ volume, handleOnClick }) {
   let type = null;
@@ -47,29 +32,40 @@ function PlayerVolumeButton({ volume, handleOnClick }) {
     default:
       throw new Error('volume can not be greater than 1.0');
   }
-  const tooltip = <Tooltip id="tooltip">Adjust volume</Tooltip>;
   return (
     <Wrapper>
-      <OverlayTrigger placement="top" overlay={tooltip}>
-        <IconButton
-          iconClassName={`${`ion-volume-${type}`}`}
-          onClick={handleOnClick}
-          color={WHITE}
-          hoverColor={THEME_COLOR}
-        />
-      </OverlayTrigger>
+      <IconButton
+        tooltipText="Adjust volume"
+        iconClassName={`${`ion-volume-${type}`}`}
+        onClick={handleOnClick}
+        color={WHITE}
+        hoverColor={THEME_COLOR}
+      />
     </Wrapper>
   );
 }
 
 PlayerVolumeButton.defaultProps = {
-  title: '',
+  volume: 0.5,
 };
 
 PlayerVolumeButton.propTypes = {
-  volume: PropTypes.number.isRequired,
-  // title: PropTypes.string,
+  volume: PropTypes.number,
   handleOnClick: PropTypes.func.isRequired,
 };
+
+function mapStateToProps(state) {
+  return {
+    volume: getCurrentVolume(state),
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    handleOnClick: () => {
+      dispatch(toggleMute());
+    },
+  };
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerVolumeButton);

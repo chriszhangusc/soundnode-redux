@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import styled from 'styled-components';
 import PlayerButton from '../PlayerButton';
 
@@ -19,35 +18,37 @@ class PlayerControls extends Component {
 
   renderPlayPauseButton() {
     const { playing, onPauseClick, onPlayClick } = this.props;
-    const tooltip = <Tooltip id="tooltip-play-pause">{playing ? 'Pause' : 'Play'}</Tooltip>;
     return (
-      <OverlayTrigger placement="top" overlay={tooltip}>
-        <PlayerButton
-          title={playing ? 'Play' : 'Pause'}
-          iconClassName={playing ? 'ion-ios-pause' : 'ion-ios-play'}
-          onClick={playing ? onPauseClick : onPlayClick}
-        />
-      </OverlayTrigger>
+      <PlayerButton
+        tooltipText={playing ? 'Pause' : 'Play'}
+        title={playing ? 'Play' : 'Pause'}
+        iconClassName={playing ? 'ion-ios-pause' : 'ion-ios-play'}
+        onClick={playing ? onPauseClick : onPlayClick}
+      />
     );
   }
 
   renderForwardButton() {
     const { onNextClick } = this.props;
-    const tooltip = <Tooltip id="tooltip-next">Next</Tooltip>;
     return (
-      <OverlayTrigger placement="top" overlay={tooltip}>
-        <PlayerButton title="Next" iconClassName="ion-ios-fastforward" onClick={onNextClick} />
-      </OverlayTrigger>
+      <PlayerButton
+        tooltipText="Next"
+        title="Next"
+        iconClassName="ion-ios-fastforward"
+        onClick={onNextClick}
+      />
     );
   }
 
   renderBackwardButton() {
     const { onPrevClick } = this.props;
-    const tooltip = <Tooltip id="tooltip-previous">Previous</Tooltip>;
     return (
-      <OverlayTrigger placement="top" overlay={tooltip}>
-        <PlayerButton title="Previous" iconClassName="ion-ios-rewind" onClick={onPrevClick} />
-      </OverlayTrigger>
+      <PlayerButton
+        tooltipText="Previous"
+        title="Previous"
+        iconClassName="ion-ios-rewind"
+        onClick={onPrevClick}
+      />
     );
   }
 

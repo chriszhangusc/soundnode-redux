@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY } from 'client/app/css/colors';
+import shortid from 'shortid';
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 const WrapperButton = styled.button`
   color: ${props => props.activeColor || props.color || FONT_COLOR_PRIMARY};
@@ -17,13 +19,26 @@ const WrapperButton = styled.button`
   }
 `;
 
-function IconButton(props) {
-  const { iconClassName } = props;
-
+function IconButton({
+  tooltipText,
+  tooltipPlacement,
+  tooltipDelayShow,
+  tooltipDelayHide,
+  iconClassName,
+  ...rest
+}) {
+  const tooltip = <Tooltip id={`tooltip-${shortid.generate()}`}>{tooltipText}</Tooltip>;
   return (
-    <WrapperButton {...props}>
-      <i className={iconClassName} />
-    </WrapperButton>
+    <OverlayTrigger
+      placement={tooltipPlacement}
+      delayShow={tooltipDelayShow}
+      delayHide={tooltipDelayHide}
+      overlay={tooltip}
+    >
+      <WrapperButton {...rest}>
+        <i className={iconClassName} />
+      </WrapperButton>
+    </OverlayTrigger>
   );
 }
 
@@ -32,15 +47,22 @@ IconButton.defaultProps = {
   color: '',
   hoverColor: '',
   activeColor: '',
+  tooltipText: '',
+  tooltipPlacement: 'top',
+  tooltipDelayHide: 200,
+  tooltipDelayShow: 1000,
 };
 
 IconButton.propTypes = {
-  title: PropTypes.string,
+  tooltipText: PropTypes.string,
+  tooltipPlacement: PropTypes.string,
   iconClassName: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   color: PropTypes.string,
   hoverColor: PropTypes.string,
   activeColor: PropTypes.string,
+  tooltipDelayShow: PropTypes.number,
+  tooltipDelayHide: PropTypes.number,
 };
 
 export default IconButton;

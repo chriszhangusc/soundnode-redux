@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import IconButton from 'client/common/components/Buttons/IconButton';
+// import IconButton from 'client/common/components/buttons/IconButton';
 import styled from 'styled-components';
 import { BACKGROUND_COLOR_SECONDARY } from 'client/app/css/colors';
 
