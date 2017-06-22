@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import {
   CHARTS_ROUTE,
@@ -23,7 +24,7 @@ import GlobalEvents from 'client/features/global/GlobalEvents';
 import Loadable from 'react-loading-overlay';
 import styled from 'styled-components';
 import {
-  NAV_BAR_HEIGHT,
+  // NAV_BAR_HEIGHT,
   SIDEBAR_WIDTH_DESKTOP,
   SIDEBAR_WIDTH_DESKTOP_LG,
   SIDEBAR_WIDTH_4K,
@@ -86,6 +87,10 @@ function Main({ loginInProgress }) {
     </Loadable>
   );
 }
+
+Main.propTypes = {
+  loginInProgress: PropTypes.bool.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

@@ -17,6 +17,12 @@ export const getVisiblePlaylistName = createSelector(
 
 export const getShufflePlaylist = createSelector(getPlaylistState, state => state.shufflePlaylist);
 
+export const getVisiblePlaylist = createSelector(
+  getPlaylistState,
+  getVisiblePlaylistName,
+  (state, playlistName) => playlistName && state[playlistName],
+);
+
 /* Memoize Selectors By Reselect */
 export const getActivePlaylist = createSelector(
   getActivePlaylistName,

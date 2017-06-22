@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { isTrackActive, isTrackPlaying } from 'client/features/player/playerSelectors';
 import { changeSongAndPlay, playSong, pauseSong } from 'client/features/player/playerActions';
-import { switchPlaylistIfNeeded } from 'client/features/playlist/playlistActions';
+import { switchActivePlaylistIfNeeded } from 'client/features/playlist/playlistActions';
 import { getMiniVersion, getLargeVersion } from 'client/common/utils/imageUtils';
 import { getUserById } from 'client/features/entities/entitiesSelectors';
 import SongCardImage from './SongCardImage';
@@ -24,8 +24,8 @@ function mergeProps(stateProps, { dispatch }, { track }) {
     // or pass all args into components and assemble there
     handleImageClick() {
       if (!stateProps.active) {
+        dispatch(switchActivePlaylistIfNeeded());
         dispatch(changeSongAndPlay(track.id));
-        dispatch(switchPlaylistIfNeeded());
       } else {
         dispatch(stateProps.playing ? pauseSong() : playSong());
       }

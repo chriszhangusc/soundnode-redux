@@ -29,3 +29,9 @@ export const getCurrentCharts = createSelector(
 export function getChartsByGenre(state, genre) {
   return genre && state[genre];
 }
+
+export const getSelectedGenreCharts = createSelector(
+  getChartsState,
+  getChartsSelectedGenre,
+  (state, genre) => genre && state[genre],
+);

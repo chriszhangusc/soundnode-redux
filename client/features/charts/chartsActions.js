@@ -1,6 +1,10 @@
 /* Action Creators */
-import { updateShufflePlaylistIfNeeded } from 'client/features/playlist/playlistActions';
+import {
+  updateVisiblePlaylist,
+  appendToVisiblePlaylist,
+} from 'client/features/playlist/playlistActions';
 import { notificationWarning } from 'client/features/notification/notificationActions';
+
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
 
 import {
@@ -59,18 +63,16 @@ export function failedToFetchCharts() {
 
 /* Side Effects */
 export function loadChartsPage(genre) {
-  return async (dispatch, state) => {
-    // Remove all old search results because we do not want them to interfere the new ones.
+  return async (dispatch, getState) => {
+    const state = getState();
     if (!getChartsByGenre(state, genre)) {
       dispatch(requestCharts());
       try {
         const normalizedCharts = await fetchCharts(genre);
         dispatch(receiveCharts(normalizedCharts, genre));
-        // Update shuffle playlist if visiblePlaylistName is the same as activePlaylistName
-        // which means we are loading more songs to the shuffle playlist
-        dispatch(updateShufflePlaylistIfNeeded());
+        dispatch(updateVisiblePlaylist(normalizedCharts.result));
       } catch (err) {
-        console.error('error: ', err);
+        console.error(err);
         dispatch(failedToFetchCharts());
         dispatch(notificationWarning('Failed to fetch songs!'));
       }
@@ -91,9 +93,9 @@ export function loadMoreCharts() {
       try {
         const normalizedCharts = await fetchMoreCharts(nextHref);
         dispatch(receiveCharts(normalizedCharts, genre));
-        dispatch(updateShufflePlaylistIfNeeded());
+        dispatch(appendToVisiblePlaylist(normalizedCharts.result));
       } catch (err) {
-        console.log(err);
+        console.error(err);
         dispatch(failedToFetchCharts());
         dispatch(notificationWarning('Failed to fetch more songs!'));
       }

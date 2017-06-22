@@ -14,7 +14,6 @@ function configureStore() {
     compose(
       applyMiddleware(
         thunk,
-        // epicMiddleware,
         sagaMiddleware,
         // logger,
       ),

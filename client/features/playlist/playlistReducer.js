@@ -1,5 +1,4 @@
-import uniq from 'lodash/uniq';
-import { CHARTS_RECEIVE, CHARTS_CLEAR_STATE } from 'client/features/charts/chartsConsts';
+import { CHARTS_CLEAR_STATE } from 'client/features/charts/chartsConsts';
 import {
   PLAYLIST_TOGGLE,
   PLAYLIST_CLEAR_QUEUE,
@@ -8,30 +7,35 @@ import {
   PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE,
   PLAYLIST_SHUFFLE_PLAYLIST_UPDATE,
   PLAYLIST_SHUFFLE_PLAYLIST_CLEAR,
+  PLAYLIST_UPDATE,
+  PLAYLIST_APPEND,
 } from './playlistConsts';
 
-/* Reducer */
 const initialState = {
   activePlaylistName: '',
   visiblePlaylistName: '',
-  // The shuffled or modded playlist
   hidden: true,
-  shufflePlaylist: [],
+  shuffledPlaylist: [],
 };
 
-// ????
-export function receiveCharts(state, { playlistName, result }) {
-  const playlist = state[playlistName];
+export function appendVisiblePlaylist(state, { newPlaylist }) {
   return {
     ...state,
-    [playlistName]: playlist ? uniq([...playlist, ...result]) : [...result],
+    visiblePlaylist: [...state.visiblePlaylist, ...newPlaylist],
   };
 }
 
-export function updateShufflePlaylist(state, { shufflePlaylist }) {
+export function updateVisiblePlaylist(state, { visiblePlaylist }) {
   return {
     ...state,
-    shufflePlaylist,
+    [state.visiblePlaylistName]: [...visiblePlaylist],
+  };
+}
+
+export function updateShuffledPlaylist(state, { shuffledPlaylist }) {
+  return {
+    ...state,
+    shuffledPlaylist: [...shuffledPlaylist],
   };
 }
 
@@ -49,13 +53,6 @@ export function togglePlaylist(state) {
   };
 }
 
-export function appendToPlaylist(state, { trackId }) {
-  return {
-    ...state,
-    playlist: [...state.playlist, trackId],
-  };
-}
-
 export function changeVisiblePlaylistName(state, { visiblePlaylistName }) {
   return {
     ...state,
@@ -70,10 +67,31 @@ export function changeActivePlaylistName(state, { activePlaylistName }) {
   };
 }
 
+export function updatePlaylist(state, { playlistName, trackIds }) {
+  return {
+    ...state,
+    [playlistName]: [...trackIds],
+  };
+}
+
+export function appendToPlaylist(state, { playlistName, trackIds }) {
+  const newPlaylist = state[playlistName] ? [...state[playlistName], ...trackIds] : [...trackIds];
+  return {
+    ...state,
+    [playlistName]: newPlaylist,
+  };
+}
+
 export default function playlistReducer(state = initialState, action) {
   switch (action.type) {
+    case PLAYLIST_UPDATE:
+      return updatePlaylist(state, action.payload);
+
+    case PLAYLIST_APPEND:
+      return appendToPlaylist(state, action.payload);
+
     case PLAYLIST_SHUFFLE_PLAYLIST_UPDATE:
-      return updateShufflePlaylist(state, action.payload);
+      return updateShuffledPlaylist(state, action.payload);
 
     case PLAYLIST_SHUFFLE_PLAYLIST_CLEAR:
       return clearShufflePlaylist(state);
@@ -93,9 +111,6 @@ export default function playlistReducer(state = initialState, action) {
       return {
         ...initialState,
       };
-
-    case CHARTS_RECEIVE:
-      return receiveCharts(state, action.payload);
 
     case PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE:
       return changeVisiblePlaylistName(state, action.payload);
