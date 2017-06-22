@@ -12,13 +12,13 @@ const SongCardListWrapper = styled.div`
   margin-bottom: 30px;
 `;
 
-function SongCardList({ trackIds, playlistName }) {
+function SongCardList({ trackIds }) {
   return (
     <SongCardListWrapper>
       {trackIds.map(
         trackId =>
           trackId &&
-          <SongCard trackId={trackId} playlistName={playlistName} key={trackId.toString()} />,
+          <SongCard trackId={trackId} key={trackId.toString()} />,
       )}
     </SongCardListWrapper>
   );
@@ -26,14 +26,12 @@ function SongCardList({ trackIds, playlistName }) {
 
 SongCardList.defaultProps = {
   fetching: false,
-  playlistName: '',
   trackIds: [],
 };
 
 SongCardList.propTypes = {
   // fetching: PropTypes.bool,
   trackIds: PropTypes.arrayOf(PropTypes.number),
-  playlistName: PropTypes.string,
 };
 
 // export default withLoadingSpinnerAfter(withFetchingOnScroll(SongCardList));

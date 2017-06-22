@@ -17,7 +17,7 @@ function SongCardControls({
   return (
     <Wrapper>
       <SongCardButton
-        title={liked ? 'Unlike' : 'Like'}
+        tooltipText={liked ? 'Unlike' : 'Like'}
         name="heart"
         active={liked}
         onClick={(e) => {
@@ -25,9 +25,9 @@ function SongCardControls({
           handleToggleLike();
         }}
       />
-      <SongCardButton title="Add to playlist" name="bookmark" onClick={() => {}} />
+      <SongCardButton tooltipText="Add to playlist" name="bookmark" onClick={() => {}} />
       <SongCardButton
-        title="Repost"
+        tooltipText="Repost"
         name="retweet"
         active={reposted}
         onClick={(e) => {
@@ -35,7 +35,11 @@ function SongCardControls({
           handleRepost();
         }}
       />
-      <SongCardButton title="Copy permalink" name="clipboard" onClick={handleCopyToClipboard} />
+      <SongCardButton
+        tooltipText="Copy permalink"
+        name="clipboard"
+        onClick={handleCopyToClipboard}
+      />
     </Wrapper>
   );
 }

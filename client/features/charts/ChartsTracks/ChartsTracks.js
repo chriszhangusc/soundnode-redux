@@ -1,9 +1,6 @@
 import { connect } from 'react-redux';
 import SongCardList from 'client/common/components/SongCardList';
-import {
-  isChartsFetching,
-  getChartsSelectedGenre,
-} from 'client/features/charts/chartsSelectors';
+import { isChartsFetching } from 'client/features/charts/chartsSelectors';
 
 import { getVisiblePlaylist } from 'client/features/playlist/playlistSelectors';
 
@@ -14,7 +11,6 @@ function mapStateToProps(state) {
   return {
     fetching: isChartsFetching(state),
     trackIds: getVisiblePlaylist(state),
-    playlistName: getChartsSelectedGenre(state),
   };
 }
 
