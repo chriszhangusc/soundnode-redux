@@ -13,17 +13,11 @@ import ChartsGenreList from '../ChartsGenreList';
 import ChartsTitle from '../ChartsTitle';
 
 class ChartsPage extends Component {
-  // ES7 ESLint will complain not sure why
-  // static propTypes = {
-  //   match: PropTypes.object.isRequired,
-  // };
-
   constructor(props) {
     super(props);
     this.onPageMountOrChange = this.onPageMountOrChange.bind(this);
   }
 
-  /* First load maybe remove it? */
   componentWillMount() {
     this.onPageMountOrChange(this.props);
   }
@@ -32,24 +26,20 @@ class ChartsPage extends Component {
   componentWillReceiveProps(nextProps) {
     const curGenre = this.props.match.params.genre;
     const nextGenre = nextProps.match.params.genre;
-
-    // If curGenre is undefined, it means we are coming from other routes into Charts route,
-    // we only need to do fetching in componentWillMount.
     if (curGenre !== nextGenre && curGenre) {
       this.onPageMountOrChange(nextProps);
     }
   }
 
   componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch(clearChartsState());
+    this.props.clearChartsState();
   }
 
-  onPageMountOrChange({ match, dispatch }) {
+  onPageMountOrChange({ match }) {
     const genre = match.params.genre;
-    dispatch(changeVisiblePlaylistName(genre));
-    dispatch(changeGenre(genre));
-    dispatch(loadChartsPage(genre));
+    this.props.changeVisiblePlaylistName(genre);
+    this.props.changeGenre(genre);
+    this.props.loadChartsPage(genre);
   }
 
   render() {
@@ -65,10 +55,20 @@ class ChartsPage extends Component {
 
 // Container prop validation required here?
 ChartsPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  loadChartsPage: PropTypes.func.isRequired,
+  changeGenre: PropTypes.func.isRequired,
+  clearChartsState: PropTypes.func.isRequired,
+  changeVisiblePlaylistName: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.object,
   }).isRequired,
 };
 
-export default connect()(ChartsPage);
+const actions = {
+  loadChartsPage,
+  changeGenre,
+  clearChartsState,
+  changeVisiblePlaylistName,
+};
+
+export default connect(null, actions)(ChartsPage);
