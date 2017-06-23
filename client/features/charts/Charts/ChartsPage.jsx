@@ -7,9 +7,6 @@ import {
   clearChartsState,
 } from 'client/features/charts/chartsActions';
 import { changeVisiblePlaylistName } from 'client/features/playlist/playlistActions';
-import { DEFAULT_GENRE } from 'client/features/charts/chartsConsts';
-import { CHARTS_ROUTE } from 'client/common/constants/routeConsts';
-import { validateGenre } from 'client/features/charts/chartsUtils';
 import { Grid } from 'react-bootstrap';
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';
@@ -48,14 +45,8 @@ class ChartsPage extends Component {
     dispatch(clearChartsState());
   }
 
-  onPageMountOrChange({ match, history, dispatch }) {
-    const genreFromUrl = match.params.genre;
-    const valid = validateGenre(genreFromUrl);
-
-    // invalid genre like this: http://localhost:3000/top50/All-Music/adfasdfasdfasdf
-    const genre = valid ? genreFromUrl : DEFAULT_GENRE;
-    // Redirect to default route if the genre is not valid.
-    if (!valid) history.push(`${CHARTS_ROUTE}/${DEFAULT_GENRE}`);
+  onPageMountOrChange({ match, dispatch }) {
+    const genre = match.params.genre;
     dispatch(changeVisiblePlaylistName(genre));
     dispatch(changeGenre(genre));
     dispatch(loadChartsPage(genre));
@@ -77,9 +68,6 @@ ChartsPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.object,
-  }).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
   }).isRequired,
 };
 

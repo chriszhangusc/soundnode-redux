@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import { DEFAULT_GENRE } from 'client/features/charts/chartsConsts';
 import {
   CHARTS_ROUTE,
   USER_PROFILE_ROUTE,
@@ -40,6 +40,8 @@ import SC from 'soundcloud';
 import { CLIENT_ID, REDIRECT_URI } from 'client/common/constants/authConsts';
 import 'client/app/css/global';
 
+import { validateGenre } from 'client/features/charts/chartsUtils';
+
 SC.initialize({
   client_id: CLIENT_ID,
   redirect_uri: REDIRECT_URI,
@@ -64,6 +66,7 @@ const MainWrapper = styled.div`
 `;
 
 function Main({ loginInProgress }) {
+  const defaultRedirect = <Redirect to={`${CHARTS_ROUTE}/${DEFAULT_GENRE}`} />;
   return (
     <Loadable active={loginInProgress} spinner text="Authenticating..." animate zIndex={9999}>
       <MainWrapper>
@@ -71,12 +74,22 @@ function Main({ loginInProgress }) {
         <Sidebar />
         <PageContentWrapper>
           <Switch>
-            <Route exact path={`${CHARTS_ROUTE}/:genre?`} component={Charts} />
+            <Route
+              exact
+              path={`${CHARTS_ROUTE}/:genre?`}
+              render={(routeProps) => {
+                // Validate route on route change
+                const { match } = routeProps;
+                const genreFromUrl = match.params.genre;
+                const valid = validateGenre(genreFromUrl);
+                return valid ? <Charts {...routeProps} /> : defaultRedirect;
+              }}
+            />
             <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
             <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} component={TrackProfile} />
             <Route exact path={`${FAVORITES_ROUTE}`} component={Favorites} />
             <Route exact path={`${STREAM_ROUTE}`} component={Stream} />
-            <Redirect to={CHARTS_ROUTE} />
+            {defaultRedirect}
           </Switch>
           <Player />
           <Playlist />
