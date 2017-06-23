@@ -6,7 +6,7 @@ import {
   changeGenre,
   clearChartsState,
 } from 'client/features/charts/chartsActions';
-import { changeVisiblePlaylistName } from 'client/features/playlist/playlistActions';
+import { updateVisiblePlaylistName } from 'client/features/playlist/playlistActions';
 import { Grid } from 'react-bootstrap';
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';
@@ -37,7 +37,7 @@ class ChartsPage extends Component {
 
   onPageMountOrChange({ match }) {
     const genre = match.params.genre;
-    this.props.changeVisiblePlaylistName(genre);
+    this.props.updateVisiblePlaylistName(genre);
     this.props.changeGenre(genre);
     this.props.loadChartsPage(genre);
   }
@@ -58,7 +58,7 @@ ChartsPage.propTypes = {
   loadChartsPage: PropTypes.func.isRequired,
   changeGenre: PropTypes.func.isRequired,
   clearChartsState: PropTypes.func.isRequired,
-  changeVisiblePlaylistName: PropTypes.func.isRequired,
+  updateVisiblePlaylistName: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.object,
   }).isRequired,
@@ -68,7 +68,7 @@ const actions = {
   loadChartsPage,
   changeGenre,
   clearChartsState,
-  changeVisiblePlaylistName,
+  updateVisiblePlaylistName,
 };
 
 export default connect(null, actions)(ChartsPage);

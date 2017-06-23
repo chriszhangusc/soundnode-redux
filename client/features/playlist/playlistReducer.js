@@ -43,14 +43,14 @@ export function togglePlaylist(state) {
   };
 }
 
-export function changeVisiblePlaylistName(state, { visiblePlaylistName }) {
+export function updateVisiblePlaylistName(state, { visiblePlaylistName }) {
   return {
     ...state,
     visiblePlaylistName,
   };
 }
 
-export function changeActivePlaylistName(state, { activePlaylistName }) {
+export function updateActivePlaylistName(state, { activePlaylistName }) {
   return {
     ...state,
     activePlaylistName,
@@ -98,10 +98,10 @@ export default function playlistReducer(state = initialState, action) {
       };
 
     case types.PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE:
-      return changeVisiblePlaylistName(state, action.payload);
+      return updateVisiblePlaylistName(state, action.payload);
 
     case types.PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE:
-      return changeActivePlaylistName(state, action.payload);
+      return updateActivePlaylistName(state, action.payload);
 
     case CHARTS_CLEAR_STATE:
       return {

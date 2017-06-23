@@ -30,14 +30,14 @@ export const updateShuffledPlaylist = shuffledPlaylist => ({
   },
 });
 
-export const changeVisiblePlaylistName = visiblePlaylistName => ({
+export const updateVisiblePlaylistName = visiblePlaylistName => ({
   type: types.PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE,
   payload: {
     visiblePlaylistName,
   },
 });
 
-export const changeActivePlaylistName = activePlaylistName => ({
+export const updateActivePlaylistName = activePlaylistName => ({
   type: types.PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE,
   payload: {
     activePlaylistName,
@@ -138,7 +138,7 @@ export function switchActivePlaylistIfNeeded() {
     const visiblePlaylistName = getVisiblePlaylistName(state);
     const activePlaylistName = getActivePlaylistName(state);
     if (activePlaylistName !== visiblePlaylistName) {
-      dispatch(changeActivePlaylistName(visiblePlaylistName));
+      dispatch(updateActivePlaylistName(visiblePlaylistName));
       dispatch(updateShuffledPlaylistIfNeeded());
       // Update shuffled playlist
       // Reshuffle the new active playlist if in shuffle mode
