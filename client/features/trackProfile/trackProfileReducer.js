@@ -1,10 +1,4 @@
-import {
-  TRACK_PROFILE_STATE_CLEAR,
-  TRACK_PROFILE_TRACK_REQUEST,
-  TRACK_PROFILE_TRACK_RECEIVED,
-  TRACK_PROFILE_COMMENTS_REQUEST,
-  TRACK_PROFILE_COMMENTS_RECEIVED,
-} from './trackProfileConsts';
+import * as types from './trackProfileConsts';
 
 const initialState = {
   trackFetching: false,
@@ -47,21 +41,21 @@ export function updateProfiledTrackComments(state, { commentIds, nextHref }) {
 
 export default function track(state = initialState, action) {
   switch (action.type) {
-    case TRACK_PROFILE_STATE_CLEAR:
+    case types.TRACK_PROFILE_STATE_CLEAR:
       return {
         ...initialState,
       };
 
-    case TRACK_PROFILE_TRACK_REQUEST:
+    case types.TRACK_PROFILE_TRACK_REQUEST:
       return requestProfiledTrack(state);
 
-    case TRACK_PROFILE_TRACK_RECEIVED:
+    case types.TRACK_PROFILE_TRACK_RECEIVED:
       return updateProfiledTrack(state, action.payload);
 
-    case TRACK_PROFILE_COMMENTS_REQUEST:
+    case types.TRACK_PROFILE_COMMENTS_REQUEST:
       return requestProfiledTrackComments(state);
 
-    case TRACK_PROFILE_COMMENTS_RECEIVED:
+    case types.TRACK_PROFILE_COMMENTS_RECEIVED:
       return updateProfiledTrackComments(state, action.payload);
 
     default:

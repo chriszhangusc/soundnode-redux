@@ -1,9 +1,4 @@
-import {
-  FAVORITES_REQUEST,
-  FAVORITES_SET,
-  FAVORITES_APPEND,
-  FAVORITES_STATE_CLEAR,
-} from './favoritesConsts.js';
+import * as types from './favoritesConsts.js';
 
 const initialState = {
   fetching: false,
@@ -44,16 +39,16 @@ export function clearFavoritesState() {
 
 export default function favoritesReducer(state = initialState, action) {
   switch (action.type) {
-    case FAVORITES_REQUEST:
+    case types.FAVORITES_REQUEST:
       return requestFavorites(state);
 
-    case FAVORITES_SET:
+    case types.FAVORITES_SET:
       return setFavorites(state, action.payload);
 
-    case FAVORITES_APPEND:
+    case types.FAVORITES_APPEND:
       return appendFavorites(state, action.payload);
 
-    case FAVORITES_STATE_CLEAR:
+    case types.FAVORITES_STATE_CLEAR:
       return clearFavoritesState();
 
     default:

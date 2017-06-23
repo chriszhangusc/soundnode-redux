@@ -2,14 +2,14 @@
 // import { Observable } from 'rxjs/Rx';
 // import { ajax } from 'rxjs/observable/dom/ajax';
 
-import * as TYPES from 'client/features/dropdownSearch/dropdownSearchConsts';
+import * as types from 'client/features/dropdownSearch/dropdownSearchConsts';
 
 export const DROPDOWN_SEARCH_LIMIT = 4;
 
 // Trigger saga
 export function requestDropdownSearch(keyword) {
   return {
-    type: TYPES.DROPDOWN_SEARCH_REQUEST,
+    type: types.DROPDOWN_SEARCH_REQUEST,
     payload: {
       keyword,
       limit: DROPDOWN_SEARCH_LIMIT,
@@ -19,28 +19,28 @@ export function requestDropdownSearch(keyword) {
 
 export function failedToFetchSearchResults() {
   return {
-    type: TYPES.DROPDOWN_SEARCH_REQUEST_FAILED,
+    type: types.DROPDOWN_SEARCH_REQUEST_FAILED,
   };
 }
 
 export const endDropdownSearch = () => ({
-  type: TYPES.DROPDOWN_SEARCH_END,
+  type: types.DROPDOWN_SEARCH_END,
 });
 
 export const hideDropdownSearchResults = () => ({
-  type: TYPES.DROPDOWN_SEARCH_RESULTS_HIDE,
+  type: types.DROPDOWN_SEARCH_RESULTS_HIDE,
 });
 
 export const showDropdownSearchResults = () => ({
-  type: TYPES.DROPDOWN_SEARCH_RESULTS_SHOW,
+  type: types.DROPDOWN_SEARCH_RESULTS_SHOW,
 });
 
 export const clearDropdownSearchResults = () => ({
-  type: TYPES.DROPDOWN_SEARCH_RESULTS_CLEAR,
+  type: types.DROPDOWN_SEARCH_RESULTS_CLEAR,
 });
 
 export const receiveDropdownSearchUsers = ({ result, entities }) => ({
-  type: TYPES.DROPDOWN_SEARCH_USERS_RECEIVED,
+  type: types.DROPDOWN_SEARCH_USERS_RECEIVED,
   payload: {
     userIds: result,
     entities,
@@ -48,7 +48,7 @@ export const receiveDropdownSearchUsers = ({ result, entities }) => ({
 });
 
 export const receiveDropdownSearchTracks = ({ result, entities }) => ({
-  type: TYPES.DROPDOWN_SEARCH_TRACKS_RECEIVED,
+  type: types.DROPDOWN_SEARCH_TRACKS_RECEIVED,
   payload: {
     trackIds: result,
     entities,
@@ -65,7 +65,7 @@ export function clearAndHideSearchResults() {
 /* Search Epic (Not currently active)*/
 // export const dropdownSearchEpic = action$ =>
 //   action$
-//     .ofType(TYPES.DROPDOWN_SEARCH_REQUEST)
+//     .ofType(types.DROPDOWN_SEARCH_REQUEST)
 //     // This will cause initial fetch delay!
 //     .debounceTime(250)
 //     .switchMap((action) => {

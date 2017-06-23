@@ -1,11 +1,5 @@
 import { transformSCV2Request } from 'client/common/utils/apiUtils';
-import {
-  CHARTS_GENRE_CHANGE,
-  CHARTS_REQUEST,
-  CHARTS_RECEIVE,
-  CHARTS_FAIL,
-  CHARTS_CLEAR_STATE,
-} from './chartsConsts';
+import * as types from './chartsConsts';
 
 /* Reducer */
 const initialState = {
@@ -39,21 +33,21 @@ export function requestCharts(state) {
 
 export default function chartsReducer(state = initialState, action) {
   switch (action.type) {
-    case CHARTS_CLEAR_STATE:
+    case types.CHARTS_CLEAR_STATE:
       return {
         ...initialState,
       };
 
-    case CHARTS_GENRE_CHANGE:
+    case types.CHARTS_GENRE_CHANGE:
       return changeGenre(state, action.payload);
 
-    case CHARTS_REQUEST:
+    case types.CHARTS_REQUEST:
       return requestCharts(state);
 
-    case CHARTS_RECEIVE:
+    case types.CHARTS_RECEIVE:
       return receiveCharts(state, action.payload);
 
-    case CHARTS_FAIL:
+    case types.CHARTS_FAIL:
       return {
         ...state,
         fetching: false,

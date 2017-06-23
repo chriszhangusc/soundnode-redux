@@ -1,12 +1,3 @@
-// State
-// const INITIAL_STATE = {
-//   trackFetching: false,
-//   commentsFetching: false,
-//   trackId: null,
-//   commentIds: [],
-//   commentsNextHref: null,
-// };
-
 import { createSelector } from 'reselect';
 import { getTracks } from 'client/features/entities/entitiesSelectors';
 

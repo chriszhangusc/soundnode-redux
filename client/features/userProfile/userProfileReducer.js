@@ -1,13 +1,5 @@
 import uniq from 'lodash/uniq';
-import {
-  USER_PROFILE_STATE_CLEAR,
-  USER_PROFILE_USER_REQUEST,
-  USER_PROFILE_USER_RECEIVED,
-  USER_PROFILE_USER_FAILED,
-  USER_PROFILE_TRACKS_REQUEST,
-  USER_PROFILE_TRACKS_RECEIVED,
-  USER_PROFILE_TRACKS_FAILED,
-} from './userProfileConsts';
+import * as types from './userProfileConsts';
 
 /* Reducer */
 const initialState = {
@@ -66,27 +58,27 @@ export function updateProfiledUserTracks(state, { trackIds, nextHref }) {
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    case USER_PROFILE_STATE_CLEAR:
+    case types.USER_PROFILE_STATE_CLEAR:
       return {
         ...initialState,
       };
 
-    case USER_PROFILE_USER_REQUEST:
+    case types.USER_PROFILE_USER_REQUEST:
       return requestProfiledUser(state);
 
-    case USER_PROFILE_USER_RECEIVED:
+    case types.USER_PROFILE_USER_RECEIVED:
       return updateProfiledUser(state, action.payload);
 
-    case USER_PROFILE_USER_FAILED:
+    case types.USER_PROFILE_USER_FAILED:
       return endProfiledUserRequest(state);
 
-    case USER_PROFILE_TRACKS_REQUEST:
+    case types.USER_PROFILE_TRACKS_REQUEST:
       return startProfiledUserTracksRequest(state);
 
-    case USER_PROFILE_TRACKS_RECEIVED:
+    case types.USER_PROFILE_TRACKS_RECEIVED:
       return updateProfiledUserTracks(state, action.payload);
 
-    case USER_PROFILE_TRACKS_FAILED:
+    case types.USER_PROFILE_TRACKS_FAILED:
       return endProfiledUserTracksRequest(state);
     default:
       return state;

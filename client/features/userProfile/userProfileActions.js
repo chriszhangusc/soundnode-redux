@@ -1,12 +1,4 @@
-import {
-  USER_PROFILE_STATE_CLEAR,
-  USER_PROFILE_USER_REQUEST,
-  USER_PROFILE_USER_RECEIVED,
-  USER_PROFILE_USER_FAILED,
-  USER_PROFILE_TRACKS_REQUEST,
-  USER_PROFILE_TRACKS_RECEIVED,
-  USER_PROFILE_TRACKS_FAILED,
-} from './userProfileConsts';
+import * as types from './userProfileConsts';
 
 import {
   fetchProfiledUser,
@@ -19,17 +11,17 @@ import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelect
 /* Action Creators*/
 export function clearUserState() {
   return {
-    type: USER_PROFILE_STATE_CLEAR,
+    type: types.USER_PROFILE_STATE_CLEAR,
   };
 }
 
 export function requestUser() {
-  return { type: USER_PROFILE_USER_REQUEST };
+  return { type: types.USER_PROFILE_USER_REQUEST };
 }
 
 export function receiveUser(normalized) {
   return {
-    type: USER_PROFILE_USER_RECEIVED,
+    type: types.USER_PROFILE_USER_RECEIVED,
     payload: {
       ...normalized,
       userId: normalized.result,
@@ -38,16 +30,16 @@ export function receiveUser(normalized) {
 }
 
 export function failedToFetchUser() {
-  return { type: USER_PROFILE_USER_FAILED };
+  return { type: types.USER_PROFILE_USER_FAILED };
 }
 
 export function requestUserTracks() {
-  return { type: USER_PROFILE_TRACKS_REQUEST };
+  return { type: types.USER_PROFILE_TRACKS_REQUEST };
 }
 
 export function receiveUserTracks(normalized) {
   return {
-    type: USER_PROFILE_TRACKS_RECEIVED,
+    type: types.USER_PROFILE_TRACKS_RECEIVED,
     payload: {
       ...normalized,
       trackIds: normalized.result,
@@ -58,7 +50,7 @@ export function receiveUserTracks(normalized) {
 
 export function failedToFetchUserTracks() {
   return {
-    type: USER_PROFILE_TRACKS_FAILED,
+    type: types.USER_PROFILE_TRACKS_FAILED,
   };
 }
 

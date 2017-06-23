@@ -13,24 +13,17 @@ import {
   getChartsNextHref,
 } from './chartsSelectors';
 
-import {
-  TOP_COUNT,
-  CHARTS_GENRE_CHANGE,
-  CHARTS_REQUEST,
-  CHARTS_RECEIVE,
-  CHARTS_FAIL,
-  CHARTS_CLEAR_STATE,
-} from './chartsConsts';
+import * as types from './chartsConsts';
 
 export function clearChartsState() {
   return {
-    type: CHARTS_CLEAR_STATE,
+    type: types.CHARTS_CLEAR_STATE,
   };
 }
 
 export function changeGenre(genre) {
   return {
-    type: CHARTS_GENRE_CHANGE,
+    type: types.CHARTS_GENRE_CHANGE,
     payload: {
       genre,
     },
@@ -39,13 +32,13 @@ export function changeGenre(genre) {
 
 export function requestCharts() {
   return {
-    type: CHARTS_REQUEST,
+    type: types.CHARTS_REQUEST,
   };
 }
 
 export function receiveCharts(normalized) {
   return {
-    type: CHARTS_RECEIVE,
+    type: types.CHARTS_RECEIVE,
     payload: {
       ...normalized,
     },
@@ -54,7 +47,7 @@ export function receiveCharts(normalized) {
 
 export function failedToFetchCharts() {
   return {
-    type: CHARTS_FAIL,
+    type: types.CHARTS_FAIL,
   };
 }
 
@@ -85,7 +78,7 @@ export function loadMoreCharts() {
     const nextHref = getChartsNextHref(state);
     const currentCharts = getVisiblePlaylist(state);
 
-    if (!chartsFetching && currentCharts.length < TOP_COUNT && nextHref) {
+    if (!chartsFetching && currentCharts.length < 50 && nextHref) {
       dispatch(requestCharts());
       try {
         const normalizedCharts = await fetchMoreCharts(nextHref);

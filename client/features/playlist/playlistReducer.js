@@ -1,15 +1,5 @@
 import { CHARTS_CLEAR_STATE } from 'client/features/charts/chartsConsts';
-import {
-  PLAYLIST_TOGGLE,
-  PLAYLIST_CLEAR_QUEUE,
-  APPEND_TRACK_TO_PLAYLIST,
-  PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE,
-  PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE,
-  PLAYLIST_SHUFFLE_PLAYLIST_UPDATE,
-  PLAYLIST_SHUFFLE_PLAYLIST_CLEAR,
-  PLAYLIST_UPDATE,
-  PLAYLIST_APPEND,
-} from './playlistConsts';
+import * as types from './playlistConsts';
 
 const initialState = {
   activePlaylistName: '',
@@ -84,39 +74,39 @@ export function appendToPlaylist(state, { playlistName, trackIds }) {
 
 export default function playlistReducer(state = initialState, action) {
   switch (action.type) {
-    case PLAYLIST_UPDATE:
+    case types.PLAYLIST_UPDATE:
       return updatePlaylist(state, action.payload);
 
-    case PLAYLIST_APPEND:
+    case types.PLAYLIST_APPEND:
       return appendToPlaylist(state, action.payload);
 
-    case PLAYLIST_SHUFFLE_PLAYLIST_UPDATE:
+    case types.PLAYLIST_SHUFFLE_PLAYLIST_UPDATE:
       return updateShuffledPlaylist(state, action.payload);
 
-    case PLAYLIST_SHUFFLE_PLAYLIST_CLEAR:
+    case types.PLAYLIST_SHUFFLE_PLAYLIST_CLEAR:
       return clearShufflePlaylist(state);
 
-    case PLAYLIST_TOGGLE:
+    case types.PLAYLIST_TOGGLE:
       return togglePlaylist(state);
     // Need to handle shuffle mode!!
-    case APPEND_TRACK_TO_PLAYLIST:
+    case types.APPEND_TRACK_TO_PLAYLIST:
       return appendToPlaylist(state, action.payload);
 
-    case PLAYLIST_CLEAR_QUEUE:
+    case types.PLAYLIST_CLEAR_QUEUE:
       return {
         ...initialState,
       };
+
+    case types.PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE:
+      return changeVisiblePlaylistName(state, action.payload);
+
+    case types.PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE:
+      return changeActivePlaylistName(state, action.payload);
 
     case CHARTS_CLEAR_STATE:
       return {
         ...initialState,
       };
-
-    case PLAYLIST_VISIBLE_PLAYLIST_NAME_CHANGE:
-      return changeVisiblePlaylistName(state, action.payload);
-
-    case PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE:
-      return changeActivePlaylistName(state, action.payload);
 
     default:
       return state;
