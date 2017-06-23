@@ -24,8 +24,9 @@ function mergeProps(stateProps, { dispatch }, { track }) {
     // or pass all args into components and assemble there
     handleImageClick() {
       if (!stateProps.active) {
-        dispatch(switchActivePlaylistIfNeeded());
+        // Change song first and then switch active playlist
         dispatch(changeSongAndPlay(track.id));
+        dispatch(switchActivePlaylistIfNeeded());
       } else {
         dispatch(stateProps.playing ? pauseSong() : playSong());
       }

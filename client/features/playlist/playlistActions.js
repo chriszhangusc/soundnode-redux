@@ -7,12 +7,9 @@ import {
   PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE,
   PLAYLIST_TOGGLE,
   PLAYLIST_UPDATE,
-  APPEND_TRACK_TO_PLAYLIST,
   PLAYLIST_CLEAR_QUEUE,
   PLAYLIST_SHUFFLE_PLAYLIST_CLEAR,
   PLAYLIST_SHUFFLE_PLAYLIST_UPDATE,
-  VISIBLE_PLAYLIST_UPDATE,
-  VISIBLE_PLAYLIST_APPEND,
   PLAYLIST_APPEND,
 } from './playlistConsts';
 
@@ -58,13 +55,6 @@ export const changeActivePlaylistName = activePlaylistName => ({
 
 export const togglePlaylist = () => ({ type: PLAYLIST_TOGGLE });
 
-export const appendTrackToPlaylist = trackId => ({
-  type: APPEND_TRACK_TO_PLAYLIST,
-  payload: {
-    trackId,
-  },
-});
-
 export function updatePlaylist(playlistName, trackIds) {
   return {
     type: PLAYLIST_UPDATE,
@@ -87,24 +77,7 @@ export function appendToPlaylist(playlistName, trackIds) {
 
 /* Thunks logic */
 
-export function updateVisiblePlaylist(trackIds) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const visiblePlaylistName = getVisiblePlaylistName(state);
-    // Keep the side effects in the thunks
-    dispatch(updatePlaylist(visiblePlaylistName, uniq(trackIds)));
-  };
-}
-
-export function appendToVisiblePlaylist(trackIds) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const visiblePlaylistName = getVisiblePlaylistName(state);
-    // Keep the side effects in the thunks
-    dispatch(appendToPlaylist(visiblePlaylistName, uniq(trackIds)));
-  };
-}
-
+// Shuffle the current active playlist and update shuffled playlist with it
 export function shufflePlaylist() {
   return (dispatch, getState) => {
     const state = getState();
@@ -113,12 +86,11 @@ export function shufflePlaylist() {
     // Every time we reshuffle the playlist, we need to move the current playing track to the
     // first position.
     const shuffled = shiftToFront(shuffle(activePlaylist), playerTrackId);
-
     dispatch(updateShuffledPlaylist(shuffled));
   };
 }
 
-export function updateShufflePlaylistIfNeeded() {
+export function updateShuffledPlaylistIfNeeded() {
   return (dispatch, getState) => {
     const state = getState();
     const inShuffleMode = isInShuffleMode(state);
@@ -130,23 +102,43 @@ export function updateShufflePlaylistIfNeeded() {
   };
 }
 
-export function updatePlaylistIfNeeded(playlistName, playlistIds) {
+export function updateVisiblePlaylist(trackIds) {
   return (dispatch, getState) => {
     const state = getState();
-    const inShuffleMode = isInShuffleMode(state);
     const visiblePlaylistName = getVisiblePlaylistName(state);
-    const activePlaylistName = getActivePlaylistName(state);
-    if (visiblePlaylistName !== activePlaylistName) return;
-    if (inShuffleMode) {
-      // Fix later
-      dispatch(shufflePlaylist());
-    } else {
-      // Normal playlist update
-      dispatch(updatePlaylist(playlistName, playlistIds));
-    }
+    // Keep the side effects in the thunks
+    dispatch(updatePlaylist(visiblePlaylistName, uniq(trackIds)));
+    dispatch(updateShuffledPlaylistIfNeeded());
   };
 }
 
+export function appendToVisiblePlaylist(trackIds) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const visiblePlaylistName = getVisiblePlaylistName(state);
+    // Keep the side effects in the thunks
+    dispatch(appendToPlaylist(visiblePlaylistName, uniq(trackIds)));
+    dispatch(updateShuffledPlaylistIfNeeded());
+  };
+}
+
+// export function updatePlaylistIfNeeded(playlistName, playlistIds) {
+//   return (dispatch, getState) => {
+//     const state = getState();
+//     const inShuffleMode = isInShuffleMode(state);
+//     const visiblePlaylistName = getVisiblePlaylistName(state);
+//     const activePlaylistName = getActivePlaylistName(state);
+//     if (visiblePlaylistName !== activePlaylistName) return;
+//     if (inShuffleMode) {
+//       console.log('Update shuffle playlist');
+//       // Fix later
+//       // dispatch(shufflePlaylist());
+//     } else {
+//       // Normal playlist update
+//       dispatch(updatePlaylist(playlistName, playlistIds));
+//     }
+//   };
+// }
 
 // Called when playing song through song cards list
 export function switchActivePlaylistIfNeeded() {
@@ -156,7 +148,9 @@ export function switchActivePlaylistIfNeeded() {
     const activePlaylistName = getActivePlaylistName(state);
     if (activePlaylistName !== visiblePlaylistName) {
       dispatch(changeActivePlaylistName(visiblePlaylistName));
+      dispatch(updateShuffledPlaylistIfNeeded());
+      // Update shuffled playlist
+      // Reshuffle the new active playlist if in shuffle mode
     }
   };
 }
-

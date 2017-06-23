@@ -15,7 +15,10 @@ export const getVisiblePlaylistName = createSelector(
   state => state.visiblePlaylistName,
 );
 
-export const getShufflePlaylist = createSelector(getPlaylistState, state => state.shufflePlaylist);
+export const getShuffledPlaylist = createSelector(
+  getPlaylistState,
+  state => state.shuffledPlaylist,
+);
 
 export const getVisiblePlaylist = createSelector(
   getPlaylistState,
@@ -32,7 +35,7 @@ export const getActivePlaylist = createSelector(
 
 export const getPlaylistByMode = createSelector(
   isInShuffleMode,
-  getShufflePlaylist,
+  getShuffledPlaylist,
   getActivePlaylist,
   (inShuffleMode, shufflePlaylist, activePlaylist) =>
     (inShuffleMode ? shufflePlaylist : activePlaylist),

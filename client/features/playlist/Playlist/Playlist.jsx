@@ -42,7 +42,7 @@ const PlaylistWrapper = styled.div`
 `;
 
 function Playlist(props) {
-  const { playlistTrackIds, handleClearPlayQueue } = props;
+  const { playlistTrackIds } = props;
   // Do not forget to pass down props to styled components if necessary.
   return (
     <PlaylistWrapper {...props}>
@@ -62,9 +62,7 @@ Playlist.defaultProps = {
 };
 
 Playlist.propTypes = {
-  playlistHidden: PropTypes.bool.isRequired,
   playlistTrackIds: PropTypes.arrayOf(PropTypes.number),
-  handleClearPlayQueue: PropTypes.func.isRequired,
 };
 
 export default Playlist;

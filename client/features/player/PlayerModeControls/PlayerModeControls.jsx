@@ -35,7 +35,6 @@ class PlayerModeControls extends Component {
     const { onTogglePlaylistClick, playlistHidden } = this.props;
     return (
       <PlayerButton
-        title="Playlist"
         tooltipText="Toggle playlist"
         active={!playlistHidden}
         iconClassName="ion-ios-list"
