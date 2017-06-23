@@ -1,5 +1,5 @@
 import shortid from 'shortid';
-import * as TYPES from './notificationConsts';
+import * as types from './notificationConsts';
 
 export function notificationSuccessFactory(message) {
   return {
@@ -30,7 +30,7 @@ export function notificationInfoFactory(message) {
 
 export function addNotification(notification) {
   return {
-    type: TYPES.NOTIFICATION_ADD,
+    type: types.NOTIFICATION_ADD,
     payload: {
       notification,
     },
@@ -39,7 +39,7 @@ export function addNotification(notification) {
 
 export function removeNotification(id) {
   return {
-    type: TYPES.NOTIFICATION_REMOVE,
+    type: types.NOTIFICATION_REMOVE,
     payload: {
       id,
     },

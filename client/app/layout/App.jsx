@@ -2,14 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { DEFAULT_GENRE } from 'client/features/charts/chartsConsts';
-import {
-  CHARTS_ROUTE,
-  USER_PROFILE_ROUTE,
-  TRACK_PROFILE_ROUTE,
-  AUTH_CALLBACK_ROUTE,
-  FAVORITES_ROUTE,
-  STREAM_ROUTE,
-} from 'client/common/constants/routeConsts';
+import * as routes from 'client/common/constants/routeConsts';
 import Charts from 'client/features/charts/Charts';
 import UserProfile from 'client/features/userProfile/UserProfile';
 import TrackProfile from 'client/features/trackProfile/TrackProfile';
@@ -34,7 +27,6 @@ import { media } from 'client/app/css/styleUtils';
 
 import NotificationCenter from 'client/features/notification/NotificationCenter';
 import { isLoginInProgress } from 'client/features/auth/authSelectors';
-// import OverlayLoader from 'client/features/overlayLoader/OverlayLoader';
 import { connect } from 'react-redux';
 import SC from 'soundcloud';
 import { CLIENT_ID, REDIRECT_URI } from 'client/common/constants/authConsts';
@@ -66,7 +58,8 @@ const MainWrapper = styled.div`
 `;
 
 function Main({ loginInProgress }) {
-  const defaultRedirect = <Redirect to={`${CHARTS_ROUTE}/${DEFAULT_GENRE}`} />;
+  const defaultRedirect = <Redirect to={`${routes.CHARTS_ROUTE}/${DEFAULT_GENRE}`} />;
+
   return (
     <Loadable active={loginInProgress} spinner text="Authenticating..." animate zIndex={9999}>
       <MainWrapper>
@@ -76,7 +69,7 @@ function Main({ loginInProgress }) {
           <Switch>
             <Route
               exact
-              path={`${CHARTS_ROUTE}/:genre?`}
+              path={`${routes.CHARTS_ROUTE}/:genre?`}
               render={(routeProps) => {
                 // Validate route on route change
                 const { match } = routeProps;
@@ -85,10 +78,10 @@ function Main({ loginInProgress }) {
                 return valid ? <Charts {...routeProps} /> : defaultRedirect;
               }}
             />
-            <Route exact path={`${USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
-            <Route exact path={`${TRACK_PROFILE_ROUTE}/:trackId`} component={TrackProfile} />
-            <Route exact path={`${FAVORITES_ROUTE}`} component={Favorites} />
-            <Route exact path={`${STREAM_ROUTE}`} component={Stream} />
+            <Route exact path={`${routes.USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
+            <Route exact path={`${routes.TRACK_PROFILE_ROUTE}/:trackId`} component={TrackProfile} />
+            <Route exact path={`${routes.FAVORITES_ROUTE}`} component={Favorites} />
+            <Route exact path={`${routes.STREAM_ROUTE}`} component={Stream} />
             {defaultRedirect}
           </Switch>
           <Player />
@@ -117,7 +110,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path={AUTH_CALLBACK_ROUTE} component={Callback} />
+        <Route exact path={routes.AUTH_CALLBACK_ROUTE} component={Callback} />
         <Route component={ConnectedMain} />
       </Switch>
     </Router>
