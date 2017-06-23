@@ -24,25 +24,40 @@ export function changeGenre(state, { genre }) {
   };
 }
 
-export function requestCharts(state) {
+export function startFetchingCharts(state) {
   return {
     ...state,
     fetching: true,
   };
 }
 
+export function stopFetchingCharts(state) {
+  return {
+    ...state,
+    fetching: false,
+  };
+}
+
+export function updateNextHref(state, { nextHref }) {
+  return {
+    ...state,
+    nextHref,
+  };
+}
+
 export default function chartsReducer(state = initialState, action) {
   switch (action.type) {
-    case types.CHARTS_CLEAR_STATE:
-      return {
-        ...initialState,
-      };
+    case types.CHARTS_FETCH_START:
+      return startFetchingCharts(state);
+
+    case types.CHARTS_FETCH_STOP:
+      return stopFetchingCharts(state);
 
     case types.CHARTS_GENRE_CHANGE:
       return changeGenre(state, action.payload);
 
-    case types.CHARTS_REQUEST:
-      return requestCharts(state);
+    case types.CHARTS_NEXT_HREF_UPDATE:
+      return updateNextHref(state, action.payload);
 
     case types.CHARTS_RECEIVE:
       return receiveCharts(state, action.payload);
@@ -51,6 +66,11 @@ export default function chartsReducer(state = initialState, action) {
       return {
         ...state,
         fetching: false,
+      };
+
+    case types.CHARTS_CLEAR_STATE:
+      return {
+        ...initialState,
       };
 
     default:

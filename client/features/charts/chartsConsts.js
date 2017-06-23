@@ -1,9 +1,11 @@
 /* Action types for charts */
 export const CHARTS_GENRE_CHANGE = 'CHARTS_GENRE_CHANGE';
-export const CHARTS_REQUEST = 'CHARTS_REQUEST';
 export const CHARTS_RECEIVE = 'CHARTS_RECEIVE';
 export const CHARTS_FAIL = 'CHARTS_FAIL';
 export const CHARTS_CLEAR_STATE = 'CHARTS_CLEAR_STATE';
+export const CHARTS_FETCH_START = 'CHARTS_FETCH_START';
+export const CHARTS_FETCH_STOP = 'CHARTS_FETCH_STOP';
+export const CHARTS_NEXT_HREF_UPDATE = 'CHARTS_NEXT_HREF_UPDATE';
 
 export const TOP_COUNT = 50;
 // Number of items to fetch each time.

@@ -8,7 +8,7 @@ import { isAuthenticated } from 'client/features/auth/authUtils';
 import { notificationWarning } from 'client/features/notification/notificationActions';
 import FavoritesList from './FavoritesList';
 import { getFavoritesIds } from '../favoritesSelectors';
-import * as favoritesActionCreators from '../favoritesActions';
+import * as favActions from '../favoritesActions';
 
 const Title = styled.h1`
   margin: 30px 20px;
@@ -56,7 +56,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(favoritesActionCreators, dispatch),
+    actions: bindActionCreators(favActions, dispatch),
     showSigninRequired() {
       dispatch(notificationWarning('Please signin with SoundCloud first'));
     },

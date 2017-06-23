@@ -1,0 +1,1 @@
+export const ENTITIES_MERGE = 'ENTITIES_MERGE';

@@ -16,7 +16,6 @@ export function requestFavorites(state) {
 export function setFavorites(state, { favoritesIds, nextHref }) {
   return {
     ...state,
-    fetching: false,
     favoritesIds: [...favoritesIds],
     nextHref,
   };
@@ -25,8 +24,7 @@ export function setFavorites(state, { favoritesIds, nextHref }) {
 export function appendFavorites(state, { favoritesIds, nextHref }) {
   return {
     ...state,
-    fetching: false,
-    favoritesIds: [...state.favorites, ...favoritesIds],
+    favoritesIds: [...state.favoritesIds, ...favoritesIds],
     nextHref,
   };
 }
@@ -34,6 +32,13 @@ export function appendFavorites(state, { favoritesIds, nextHref }) {
 export function clearFavoritesState() {
   return {
     ...initialState,
+  };
+}
+
+export function stopFetchingFavorites(state) {
+  return {
+    ...state,
+    fetching: false,
   };
 }
 
@@ -47,6 +52,9 @@ export default function favoritesReducer(state = initialState, action) {
 
     case types.FAVORITES_APPEND:
       return appendFavorites(state, action.payload);
+
+    case types.FAVORITES_FETCH_STOP:
+      return stopFetchingFavorites(state);
 
     case types.FAVORITES_STATE_CLEAR:
       return clearFavoritesState();
