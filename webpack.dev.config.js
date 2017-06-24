@@ -64,16 +64,17 @@ module.exports = {
         use: ['babel-loader'],
         exclude: /node_modules/,
       },
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          // 'css-loader?modules&importLoaders=1&camelCase&localIdentName=[name]__[local]___[hash:base64:5]',
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
-      },
+      // Removed in favor of styled-components
+      // {
+      //   test: /\.scss$/,
+      //   use: [
+      //     'style-loader',
+      //     // 'css-loader?modules&importLoaders=1&camelCase&localIdentName=[name]__[local]___[hash:base64:5]',
+      //     'css-loader',
+      //     'postcss-loader',
+      //     'sass-loader',
+      //   ],
+      // },
 
       // Dealing with global css: http://stackoverflow.com/questions/35398733/css-modules-how-do-i-disable-local-scope-for-a-file
       // Global CSS

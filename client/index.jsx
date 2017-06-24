@@ -9,9 +9,7 @@ import ReactDOM from 'react-dom';
 import configureStore from 'app/store/configureStore';
 import App from 'app/layout/App';
 import 'isomorphic-fetch';
-import 'rxjs';
 import 'normalize.css';
-import 'app/styles/app.scss';
 
 const store = configureStore();
 
