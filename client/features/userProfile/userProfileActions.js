@@ -57,7 +57,9 @@ export function appendUserTracks(trackIds) {
 export function updateUserTracksNextHref(nextHref) {
   return {
     type: types.USER_PROFILE_TRACKS_NEXT_HREF_UPDATE,
-    nextHref,
+    payload: {
+      nextHref,
+    },
   };
 }
 

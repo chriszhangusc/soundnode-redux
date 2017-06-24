@@ -53,6 +53,13 @@ export function appendUserTracks(state, { trackIds }) {
   };
 }
 
+export function updateUserTracksNextHref(state, { nextHref }) {
+  return {
+    ...state,
+    tracksNextHref: nextHref,
+  };
+}
+
 export function resetProfiledUserState() {
   return {
     ...initialState,
@@ -72,9 +79,9 @@ export default function userReducer(state = initialState, action) {
 
     case types.USER_PROFILE_USER_UPDATE:
       return updateProfiledUser(state, action.payload);
-
     // case types.USER_PROFILE_USER_FAIL:
     //   return endProfiledUserRequest(state);
+
 
     case types.USER_PROFILE_TRACKS_FETCH_START:
       return startFetchingUserTracks(state);
@@ -85,8 +92,11 @@ export default function userReducer(state = initialState, action) {
     case types.USER_PROFILE_TRACKS_APPEND:
       return appendUserTracks(state, action.payload);
 
+    case types.USER_PROFILE_TRACKS_NEXT_HREF_UPDATE:
+      return updateUserTracksNextHref(state, action.payload);
     // case types.USER_PROFILE_TRACKS_FAILED:
     //   return endProfiledUserTracksRequest(state);
+
 
     default:
       return state;
