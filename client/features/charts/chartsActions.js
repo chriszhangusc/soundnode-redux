@@ -34,7 +34,7 @@ export function stopFetchingCharts() {
   };
 }
 
-export function updateNextHref(nextHref) {
+export function updateChartsNextHref(nextHref) {
   return {
     type: types.CHARTS_NEXT_HREF_UPDATE,
     payload: {
@@ -66,7 +66,7 @@ export function loadChartsPage(genre) {
         const { entities, result, nextHref } = normalizedCharts;
         dispatch(mergeEntities(entities));
         dispatch(updateVisiblePlaylist(result));
-        dispatch(updateNextHref(transformSCV2Request(nextHref)));
+        dispatch(updateChartsNextHref(transformSCV2Request(nextHref)));
         dispatch(stopFetchingCharts());
       } catch (err) {
         console.error(err);
@@ -90,7 +90,7 @@ export function loadMoreCharts() {
         const { entities, result, nextHref } = await fetchMoreCharts(curNextHref);
         dispatch(mergeEntities(entities));
         dispatch(appendToVisiblePlaylist(result));
-        dispatch(updateNextHref(transformSCV2Request(nextHref)));
+        dispatch(updateChartsNextHref(transformSCV2Request(nextHref)));
         dispatch(stopFetchingCharts());
       } catch (err) {
         console.error(err);

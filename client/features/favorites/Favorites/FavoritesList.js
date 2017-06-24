@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 import SongCardList from 'client/common/components/SongCardList';
-import { isFavoritesFetching, getFavoritesIds } from 'client/features/favorites/favoritesSelectors';
+import { isFavoritesFetching } from 'client/features/favorites/favoritesSelectors';
+import { getVisiblePlaylist } from 'client/features/playlist/playlistSelectors';
 import { loadMoreFavorites } from 'client/features/favorites/favoritesActions';
 
 function mapStateToProps(state) {
   return {
     fetching: isFavoritesFetching(state),
-    trackIds: getFavoritesIds(state),
+    trackIds: getVisiblePlaylist(state),
   };
 }
 

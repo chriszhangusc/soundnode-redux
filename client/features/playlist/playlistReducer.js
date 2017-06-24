@@ -2,8 +2,8 @@ import { CHARTS_CLEAR_STATE } from 'client/features/charts/chartsConsts';
 import * as types from './playlistConsts';
 
 const initialState = {
-  activePlaylistName: '',
-  visiblePlaylistName: '',
+  activePlaylistName: undefined,
+  visiblePlaylistName: undefined,
   hidden: true,
   shuffledPlaylist: [],
 };

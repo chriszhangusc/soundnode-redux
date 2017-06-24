@@ -15,24 +15,6 @@ export function startFetchingFavorites() {
   };
 }
 
-export function updateFavorites(trackIds) {
-  return {
-    type: types.FAVORITES_UPDATE,
-    payload: {
-      trackIds,
-    },
-  };
-}
-
-export function appendFavorites(trackIds) {
-  return {
-    type: types.FAVORITES_APPEND,
-    payload: {
-      trackIds,
-    },
-  };
-}
-
 export function stopFetchingFavorites() {
   return {
     type: types.FAVORITES_FETCH_STOP,
@@ -57,14 +39,13 @@ export function resetFavoritesState() {
 export function loadFavorites() {
   return (dispatch) => {
     dispatch(startFetchingFavorites());
+    dispatch(updateVisiblePlaylistName('favorites'));
+
     fetchMyFavorites()
       .then((normalized) => {
         const { entities, nextHref, result } = normalized;
         dispatch(mergeEntities(entities));
-        // Remove it because it is now moved to playlsit state?
-        dispatch(updateFavorites(result));
         dispatch(updateFavoritesNextHref(nextHref));
-        dispatch(updateVisiblePlaylistName('favorites'));
         dispatch(updateVisiblePlaylist(result));
         dispatch(stopFetchingFavorites());
       })
@@ -85,7 +66,6 @@ export function loadMoreFavorites() {
         .then((normalized) => {
           const { entities, nextHref, result } = normalized;
           dispatch(mergeEntities(entities));
-          dispatch(appendFavorites(result));
           dispatch(updateFavoritesNextHref(nextHref));
           // Append new songs to the favorites/currently visible playlist
           dispatch(appendToVisiblePlaylist(result));

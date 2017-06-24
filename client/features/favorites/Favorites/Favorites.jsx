@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import { isAuthenticated } from 'client/features/auth/authUtils';
 import { notificationWarning } from 'client/features/notification/notificationActions';
+import { updateVisiblePlaylistName } from 'client/features/playlist/playlistActions';
 import FavoritesList from './FavoritesList';
 import { getFavoritesIds } from '../favoritesSelectors';
 import * as favActions from '../favoritesActions';
@@ -23,6 +24,7 @@ class Favorites extends React.Component {
       showSigninRequired();
     } else {
       const { actions } = this.props;
+      actions.updateVisiblePlaylistName('favorites');
       actions.loadFavorites();
     }
   }
@@ -56,7 +58,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(favActions, dispatch),
+    actions: bindActionCreators(
+      {
+        ...favActions,
+        updateVisiblePlaylistName,
+      },
+      dispatch,
+    ),
     showSigninRequired() {
       dispatch(notificationWarning('Please signin with SoundCloud first'));
     },
