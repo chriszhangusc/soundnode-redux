@@ -1,7 +1,0 @@
-/* breakpoints.css */
-/* Mobile phones and tablet are not handled yet */
-@value desktop-sm: (min-width: 786px) and (max-width: 1023px);
-@value desktop-md: (min-width: 1024px) and (max-width: 1439px);
-@value desktop-lg: (min-width: 1440px) and (max-width: 2559px);
-/*@value desktop-hd: (min-width: 1900px) and (max-width: 2559px);*/
-@value desktop-4k: (min-width: 2560px);

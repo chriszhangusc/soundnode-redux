@@ -1,1 +1,0 @@
-Global css styles for css modules
