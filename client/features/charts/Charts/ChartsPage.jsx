@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   loadChartsPage,
   changeGenre,
-  clearChartsState,
+  resetChartsState,
 } from 'client/features/charts/chartsActions';
 import { updateVisiblePlaylistName } from 'client/features/playlist/playlistActions';
 import { Grid } from 'react-bootstrap';
@@ -32,7 +32,7 @@ class ChartsPage extends Component {
   }
 
   componentWillUnmount() {
-    this.props.clearChartsState();
+    this.props.resetChartsState();
   }
 
   onPageMountOrChange({ match }) {
@@ -57,7 +57,7 @@ class ChartsPage extends Component {
 ChartsPage.propTypes = {
   loadChartsPage: PropTypes.func.isRequired,
   changeGenre: PropTypes.func.isRequired,
-  clearChartsState: PropTypes.func.isRequired,
+  resetChartsState: PropTypes.func.isRequired,
   updateVisiblePlaylistName: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.object,
@@ -67,7 +67,7 @@ ChartsPage.propTypes = {
 const actions = {
   loadChartsPage,
   changeGenre,
-  clearChartsState,
+  resetChartsState,
   updateVisiblePlaylistName,
 };
 

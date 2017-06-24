@@ -6,6 +6,8 @@ import {
 import { getVisiblePlaylist, getPlaylistByName } from 'client/features/playlist/playlistSelectors';
 import { notificationWarning } from 'client/features/notification/notificationActions';
 import { mergeEntities } from 'client/features/entities/entitiesActions';
+import { transformSCV2Request } from 'client/common/utils/apiUtils';
+
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
 
 import { isChartsFetching, getChartsNextHref } from './chartsSelectors';
@@ -33,15 +35,6 @@ export function stopFetchingCharts() {
   };
 }
 
-export function receiveCharts(normalized) {
-  return {
-    type: types.CHARTS_RECEIVE,
-    payload: {
-      ...normalized,
-    },
-  };
-}
-
 export function updateNextHref(nextHref) {
   return {
     type: types.CHARTS_NEXT_HREF_UPDATE,
@@ -53,13 +46,13 @@ export function updateNextHref(nextHref) {
 
 export function failedToFetchCharts() {
   return {
-    type: types.CHARTS_FAIL,
+    type: types.CHARTS_FETCH_FAIL,
   };
 }
 
-export function clearChartsState() {
+export function resetChartsState() {
   return {
-    type: types.CHARTS_CLEAR_STATE,
+    type: types.CHARTS_STATE_RESET,
   };
 }
 
@@ -74,7 +67,7 @@ export function loadChartsPage(genre) {
         const { entities, result, nextHref } = normalizedCharts;
         dispatch(mergeEntities(entities));
         dispatch(updateVisiblePlaylist(result));
-        dispatch(updateNextHref(nextHref));
+        dispatch(updateNextHref(transformSCV2Request(nextHref)));
         dispatch(stopFetchingCharts());
       } catch (err) {
         console.error(err);
@@ -98,7 +91,7 @@ export function loadMoreCharts() {
         const { entities, result, nextHref } = await fetchMoreCharts(curNextHref);
         dispatch(mergeEntities(entities));
         dispatch(appendToVisiblePlaylist(result));
-        dispatch(updateNextHref(nextHref));
+        dispatch(updateNextHref(transformSCV2Request(nextHref)));
         dispatch(stopFetchingCharts());
       } catch (err) {
         console.error(err);

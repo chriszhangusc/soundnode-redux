@@ -1,7 +1,3 @@
-/* DropdownEpic Imports */
-// import { Observable } from 'rxjs/Rx';
-// import { ajax } from 'rxjs/observable/dom/ajax';
-
 import * as types from 'client/features/dropdownSearch/dropdownSearchConsts';
 
 export const DROPDOWN_SEARCH_LIMIT = 4;
