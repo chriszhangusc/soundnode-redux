@@ -10,10 +10,17 @@ const initialState = {
   tracksNextHref: null,
 };
 
-export function requestProfiledUser(state) {
+export function startFetchingProfiledUser(state) {
   return {
     ...state,
     userFetching: true,
+  };
+}
+
+export function stopFetchingProfiledUser(state) {
+  return {
+    ...state,
+    userFetching: false,
   };
 }
 
@@ -21,65 +28,66 @@ export function updateProfiledUser(state, { userId }) {
   return {
     ...state,
     userId,
-    userFetching: false,
   };
 }
 
-export function endProfiledUserRequest(state) {
-  return {
-    ...state,
-    userFetching: true,
-  };
-}
-
-export function startProfiledUserTracksRequest(state) {
+export function startFetchingUserTracks(state) {
   return {
     ...state,
     tracksFetching: true,
   };
 }
 
-export function endProfiledUserTracksRequest(state) {
+export function stopFetchingUserTracks(state) {
   return {
     ...state,
     tracksFetching: false,
   };
 }
 
-export function updateProfiledUserTracks(state, { trackIds, nextHref }) {
+export function appendUserTracks(state, { trackIds }) {
   return {
     ...state,
     // There will be overlap in the data from SoundCloud
     trackIds: uniq([...state.trackIds, ...trackIds]),
-    tracksFetching: false,
-    tracksNextHref: nextHref,
+  };
+}
+
+export function resetProfiledUserState() {
+  return {
+    ...initialState,
   };
 }
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    case types.USER_PROFILE_STATE_CLEAR:
-      return {
-        ...initialState,
-      };
+    case types.USER_PROFILE_STATE_RESET:
+      return resetProfiledUserState();
 
-    case types.USER_PROFILE_USER_REQUEST:
-      return requestProfiledUser(state);
+    case types.USER_PROFILE_USER_FETCH_START:
+      return startFetchingProfiledUser(state);
 
-    case types.USER_PROFILE_USER_RECEIVED:
+    case types.USER_PROFILE_USER_FETCH_STOP:
+      return stopFetchingProfiledUser(state);
+
+    case types.USER_PROFILE_USER_UPDATE:
       return updateProfiledUser(state, action.payload);
 
-    case types.USER_PROFILE_USER_FAILED:
-      return endProfiledUserRequest(state);
+    // case types.USER_PROFILE_USER_FAIL:
+    //   return endProfiledUserRequest(state);
 
-    case types.USER_PROFILE_TRACKS_REQUEST:
-      return startProfiledUserTracksRequest(state);
+    case types.USER_PROFILE_TRACKS_FETCH_START:
+      return startFetchingUserTracks(state);
 
-    case types.USER_PROFILE_TRACKS_RECEIVED:
-      return updateProfiledUserTracks(state, action.payload);
+    case types.USER_PROFILE_TRACKS_FETCH_STOP:
+      return stopFetchingUserTracks(state);
 
-    case types.USER_PROFILE_TRACKS_FAILED:
-      return endProfiledUserTracksRequest(state);
+    case types.USER_PROFILE_TRACKS_APPEND:
+      return appendUserTracks(state, action.payload);
+
+    // case types.USER_PROFILE_TRACKS_FAILED:
+    //   return endProfiledUserTracksRequest(state);
+
     default:
       return state;
   }
