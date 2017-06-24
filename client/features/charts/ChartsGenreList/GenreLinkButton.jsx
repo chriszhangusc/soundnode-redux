@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { GRAY } from 'client/app/css/colors';
+import { GRAY } from 'app/css/colors';
 
 // className="button inline link-button"
 const StyledLinkButton = styled(Link)`

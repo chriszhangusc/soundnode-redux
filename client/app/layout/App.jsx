@@ -1,19 +1,20 @@
 import React from 'react';
+import SC from 'soundcloud';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { DEFAULT_GENRE } from 'client/features/charts/chartsConsts';
-import * as routes from 'client/common/constants/routeConsts';
-import Charts from 'client/features/charts/Charts';
-import UserProfile from 'client/features/userProfile/UserProfile';
-import TrackProfile from 'client/features/trackProfile/TrackProfile';
-import Player from 'client/features/player/Player';
-import Favorites from 'client/features/favorites/Favorites';
-import Stream from 'client/features/stream/Stream';
-import Playlist from 'client/features/playlist/Playlist';
-import Nav from 'client/common/components/Nav';
-import Sidebar from 'client/common/components/Sidebar';
-import Callback from 'client/common/components/Callback';
-import GlobalEvents from 'client/features/global/GlobalEvents';
+import { DEFAULT_GENRE } from 'features/charts/chartsConsts';
+import * as routes from 'common/constants/routeConsts';
+import Charts from 'features/charts/Charts';
+import UserProfile from 'features/userProfile/UserProfile';
+import TrackProfile from 'features/trackProfile/TrackProfile';
+import Player from 'features/player/Player';
+import Favorites from 'features/favorites/Favorites';
+import Stream from 'features/stream/Stream';
+import Playlist from 'features/playlist/Playlist';
+import Nav from 'common/components/Nav';
+import Sidebar from 'common/components/Sidebar';
+import Callback from 'common/components/Callback';
+import GlobalEvents from 'features/global/GlobalEvents';
 import Loadable from 'react-loading-overlay';
 import styled from 'styled-components';
 import {
@@ -21,18 +22,17 @@ import {
   SIDEBAR_WIDTH_DESKTOP,
   SIDEBAR_WIDTH_DESKTOP_LG,
   SIDEBAR_WIDTH_4K,
-} from 'client/app/css/variables';
+} from 'app/css/variables';
 
-import { media } from 'client/app/css/styleUtils';
+import { media } from 'app/css/styleUtils';
 
-import NotificationCenter from 'client/features/notification/NotificationCenter';
-import { isLoginInProgress } from 'client/features/auth/authSelectors';
+import NotificationCenter from 'features/notification/NotificationCenter';
+import { isLoginInProgress } from 'features/auth/authSelectors';
 import { connect } from 'react-redux';
-import SC from 'soundcloud';
-import { CLIENT_ID, REDIRECT_URI } from 'client/common/constants/authConsts';
-import 'client/app/css/global';
+import { CLIENT_ID, REDIRECT_URI } from 'common/constants/authConsts';
+import 'app/css/global';
 
-import { validateGenre } from 'client/features/charts/chartsUtils';
+import { validateGenre } from 'features/charts/chartsUtils';
 
 SC.initialize({
   client_id: CLIENT_ID,

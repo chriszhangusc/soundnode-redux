@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { isTrackActive, isTrackPlaying } from 'client/features/player/playerSelectors';
-import { changeSongAndPlay, playSong, pauseSong } from 'client/features/player/playerActions';
-import { switchActivePlaylistIfNeeded } from 'client/features/playlist/playlistActions';
-import { getMiniVersion, getLargeVersion } from 'client/common/utils/imageUtils';
-import { getUserById } from 'client/features/entities/entitiesSelectors';
+import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
+import { changeSongAndPlay, playSong, pauseSong } from 'features/player/playerActions';
+import { switchActivePlaylistIfNeeded } from 'features/playlist/playlistActions';
+import { getMiniVersion, getLargeVersion } from 'common/utils/imageUtils';
+import { getUserById } from 'features/entities/entitiesSelectors';
 import SongCardImage from './SongCardImage';
 
 function mapStateToProps(state, { track }) {

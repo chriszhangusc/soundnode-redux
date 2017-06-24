@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getUsers } from 'client/features/entities/entitiesSelectors';
+import { getUsers } from 'features/entities/entitiesSelectors';
 
 const getState = state => state.userProfile;
 

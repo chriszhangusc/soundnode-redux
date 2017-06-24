@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
-import { getDisplayName } from 'client/common/utils/hocUtils';
+import { getDisplayName } from 'common/utils/hocUtils';
 
 export default function withFetchingOnScroll(WrappedComponent) {
   class EnhancedComponent extends Component {

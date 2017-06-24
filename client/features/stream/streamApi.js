@@ -1,6 +1,6 @@
-import { trackArraySchema } from 'client/app/schema';
-import { makeSCV2Request } from 'client/common/utils/apiUtils';
-import { normalizeResponse } from 'client/common/utils/normalizeUtils';
+import { trackArraySchema } from 'app/schema';
+import { makeSCV2Request } from 'common/utils/apiUtils';
+import { normalizeResponse } from 'common/utils/normalizeUtils';
 
 // https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud%3Agenres%3Aall-music&linked_partitioning=1&limit=25&offset=0&client_id=f9e1e2232182a46705c880554a1011af
 

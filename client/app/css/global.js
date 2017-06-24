@@ -1,5 +1,5 @@
 import { injectGlobal } from 'styled-components';
-import { FONT_COLOR_PRIMARY, BACKGROUND_COLOR, LIGHTER_GRAY } from 'client/app/css/colors';
+import { FONT_COLOR_PRIMARY, BACKGROUND_COLOR, LIGHTER_GRAY } from 'app/css/colors';
 
 // Global CSS
 injectGlobal`

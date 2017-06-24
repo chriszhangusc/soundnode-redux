@@ -8,9 +8,9 @@ import {
   clearAndHideSearchResults,
   stopDropdownSearch,
   failedToFetchSearchResults,
-} from 'client/features/dropdownSearch/dropdownSearchActions';
-import { mergeEntities } from 'client/features/entities/entitiesActions';
-import { DROPDOWN_SEARCH_START } from 'client/features/dropdownSearch/dropdownSearchConsts';
+} from 'features/dropdownSearch/dropdownSearchActions';
+import { mergeEntities } from 'features/entities/entitiesActions';
+import { DROPDOWN_SEARCH_START } from 'features/dropdownSearch/dropdownSearchConsts';
 
 import { fetchDropdownSearchTracks, fetchDropdownSearchUsers } from './dropdownSearchApi';
 /* *****************************************************************************/

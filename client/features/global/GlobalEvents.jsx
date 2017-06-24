@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {
   notificationSuccess,
   notificationWarning,
-} from 'client/features/notification/notificationActions';
+} from 'features/notification/notificationActions';
 
 class GlobalEvents extends React.Component {
   componentDidMount() {

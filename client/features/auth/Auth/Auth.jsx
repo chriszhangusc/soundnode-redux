@@ -1,11 +1,11 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Avatar from 'client/common/components/Avatar';
+import Avatar from 'common/components/Avatar';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { USER_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
+import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import { doLogin, loginIfNeeded } from '../authActions';
 import { getMe } from '../authSelectors';
 import LogoutButton from './LogoutButton';

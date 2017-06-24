@@ -5,8 +5,8 @@ import {
   loadChartsPage,
   changeGenre,
   resetChartsState,
-} from 'client/features/charts/chartsActions';
-import { updateVisiblePlaylistName } from 'client/features/playlist/playlistActions';
+} from 'features/charts/chartsActions';
+import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 import { Grid } from 'react-bootstrap';
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';

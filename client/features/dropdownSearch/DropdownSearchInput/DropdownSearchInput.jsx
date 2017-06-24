@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { media } from 'client/app/css/styleUtils';
+import { media } from 'app/css/styleUtils';
 import { connect } from 'react-redux';
 import {
   clearAndHideSearchResults,
   startDropdownSearch,
-} from 'client/features/dropdownSearch/dropdownSearchActions';
-import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
+} from 'features/dropdownSearch/dropdownSearchActions';
+import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 
 const DROPDOWN_SEARCH_INPUT_WIDTH = '320px';
 const DROPDOWN_SEARCH_INPUT_WIDTH_MD = '400px';

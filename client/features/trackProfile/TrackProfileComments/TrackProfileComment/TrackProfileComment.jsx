@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { USER_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
+import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import { connect } from 'react-redux';
-import { getCommentById, getUserByCommentId } from 'client/features/entities/entitiesSelectors';
-import { getSmallVersion } from 'client/common/utils/imageUtils';
+import { getCommentById, getUserByCommentId } from 'features/entities/entitiesSelectors';
+import { getSmallVersion } from 'common/utils/imageUtils';
 
-import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
+import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 
 import CommentUserAvatar from './CommentUserAvatar';
 import CommentUsername from './CommentUsername';

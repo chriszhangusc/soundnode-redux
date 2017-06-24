@@ -2,7 +2,7 @@ import { camelizeKeys } from 'humps';
 import pick from 'lodash/pick';
 import SC from 'soundcloud';
 import { normalize } from 'normalizr';
-import { trackArraySchema, userArraySchema } from 'client/app/schema';
+import { trackArraySchema, userArraySchema } from 'app/schema';
 
 export function fetchDropdownSearchTracks(keyword, limit = 5) {
   return SC.get('/tracks', {

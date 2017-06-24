@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import SongCardList from 'client/common/components/SongCardList';
-import { isStreamFetching, getStreamIds } from 'client/features/stream/streamSelectors';
-import { loadMoreStream } from 'client/features/stream/streamActions';
+import SongCardList from 'common/components/SongCardList';
+import { isStreamFetching, getStreamIds } from 'features/stream/streamSelectors';
+import { loadMoreStream } from 'features/stream/streamActions';
 
 // Container for SongCardList
 function mapStateToProps(state) {

@@ -1,4 +1,4 @@
-import { mergeEntities } from 'client/features/entities/entitiesActions';
+import { mergeEntities } from 'features/entities/entitiesActions';
 import { fetchProfiledTrack, fetchTrackComments, fetchMoreComments } from './trackProfileApi';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import * as types from './trackProfileConsts';

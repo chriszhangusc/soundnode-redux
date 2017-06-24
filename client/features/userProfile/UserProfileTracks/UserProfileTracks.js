@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import SongCardList from 'client/common/components/SongCardList';
-import { loadMoreUserTracks } from 'client/features/userProfile/userProfileActions';
+import SongCardList from 'common/components/SongCardList';
+import { loadMoreUserTracks } from 'features/userProfile/userProfileActions';
 import {
   isUserTracksFetching,
   getProfiledUserTrackIds,
-} from 'client/features/userProfile/userProfileSelectors';
+} from 'features/userProfile/userProfileSelectors';
 
 // Container for SongCardList
 // Simply providing slices of state for the component to render.

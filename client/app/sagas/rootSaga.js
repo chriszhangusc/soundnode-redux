@@ -1,5 +1,5 @@
 import { fork } from 'redux-saga/effects';
-import * as fromDropdownSearch from 'client/features/dropdownSearch/dropdownSearchSagas';
+import * as fromDropdownSearch from 'features/dropdownSearch/dropdownSearchSagas';
 
 function* rootSaga() {
   yield [

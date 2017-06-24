@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EnhancedImage from 'client/common/components/images/EnhancedImage';
+import EnhancedImage from 'common/components/images/EnhancedImage';
 import styled from 'styled-components';
 
 const Avatar = styled.div`

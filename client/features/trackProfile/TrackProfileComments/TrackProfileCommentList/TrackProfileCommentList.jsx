@@ -6,10 +6,10 @@ import { compose } from 'recompose';
 import {
   getCommentIds,
   isCommentsFetching,
-} from 'client/features/trackProfile/trackProfileSelectors';
-import withFetchingOnScroll from 'client/common/hocs/withFetchingOnScroll';
-import withLoadingSpinnerAfter from 'client/common/hocs/withLoadingSpinnerAfter';
-import { loadMoreComments } from 'client/features/trackProfile/trackProfileActions';
+} from 'features/trackProfile/trackProfileSelectors';
+import withFetchingOnScroll from 'common/hocs/withFetchingOnScroll';
+import withLoadingSpinnerAfter from 'common/hocs/withLoadingSpinnerAfter';
+import { loadMoreComments } from 'features/trackProfile/trackProfileActions';
 
 import TrackProfileComment from '../TrackProfileComment';
 

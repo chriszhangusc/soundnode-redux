@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { REPEAT, SHUFFLE } from 'client/features/player/playerConsts';
+import { REPEAT, SHUFFLE } from 'features/player/playerConsts';
 import styled from 'styled-components';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import PlayerButton from '../PlayerButton';

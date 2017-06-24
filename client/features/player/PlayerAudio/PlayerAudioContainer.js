@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { getStreamUrl } from 'client/common/utils/apiUtils';
-import { updateTimeOnPlay, playNextSong } from 'client/features/player/playerActions';
+import { getStreamUrl } from 'common/utils/apiUtils';
+import { updateTimeOnPlay, playNextSong } from 'features/player/playerActions';
 
 import {
   getCurrentTime,
@@ -8,7 +8,7 @@ import {
   getPlayerMode,
   isPlayerPlaying,
   isPlayerSeeking,
-} from 'client/features/player/playerSelectors';
+} from 'features/player/playerSelectors';
 
 import PlayerAudio from './PlayerAudio';
 

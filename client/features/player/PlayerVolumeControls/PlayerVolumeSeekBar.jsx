@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { computeNewVolumeOnSeek } from 'client/features/player/playerUtils';
+import { computeNewVolumeOnSeek } from 'features/player/playerUtils';
 
 import {
   beginVolumeSeek,
   changeVolume,
   toggleMute,
   updateVolumeAndEndSeek,
-} from 'client/features/player/playerActions';
-import { getCurrentVolume, isVolumeSeeking } from 'client/features/player/playerSelectors';
+} from 'features/player/playerActions';
+import { getCurrentVolume, isVolumeSeeking } from 'features/player/playerSelectors';
 
 function mapStateToProps(state) {
   return {

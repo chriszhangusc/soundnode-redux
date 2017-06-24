@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import IconButton from 'client/common/components/buttons/IconButton';
+import IconButton from 'common/components/buttons/IconButton';
 import styled from 'styled-components';
-import { THEME_COLOR, WHITE } from 'client/app/css/colors';
+import { THEME_COLOR, WHITE } from 'app/css/colors';
 
 const Wrapper = styled.div`
   font-size: 1.3rem;

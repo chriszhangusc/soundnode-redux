@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import UserProfileTracks from 'client/features/userProfile/UserProfileTracks';
-import UserProfileDetails from 'client/features/userProfile/UserProfileDetails';
+import UserProfileTracks from 'features/userProfile/UserProfileTracks';
+import UserProfileDetails from 'features/userProfile/UserProfileDetails';
 import { Grid } from 'react-bootstrap';
 
 const UserProfile = ({ userId }) => (

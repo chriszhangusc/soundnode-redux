@@ -1,5 +1,5 @@
 import React from 'react';
-import { genreListData } from 'client/features/charts/chartsConsts';
+import { genreListData } from 'features/charts/chartsConsts';
 import styled from 'styled-components';
 import GenreListTitle from './GenreListTitle';
 import GenreLinkButton from './GenreLinkButton';

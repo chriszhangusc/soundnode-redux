@@ -1,4 +1,4 @@
-import { getPlayerTrackId, isInShuffleMode } from 'client/features/player/playerSelectors';
+import { getPlayerTrackId, isInShuffleMode } from 'features/player/playerSelectors';
 import shuffle from 'lodash/shuffle';
 import uniq from 'lodash/uniq';
 import { shiftToFront } from './PlaylistUtils';

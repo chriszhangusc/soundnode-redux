@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import { getFavoriteTrackIds, getReposts } from 'client/features/auth/authSelectors';
+import { getFavoriteTrackIds, getReposts } from 'features/auth/authSelectors';
 import {
   doLikeTrack,
   doUnlikeTrack,
   createRepost,
   removeRepost,
-} from 'client/features/auth/authActions';
-import { copyToClipboard } from 'client/features/copy';
+} from 'features/auth/authActions';
+import { copyToClipboard } from 'features/copy';
 import SongCardControls from './SongCardControls';
 
 function mapStateToProps(state, { track }) {

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import DropdownSearch from 'client/features/dropdownSearch/DropdownSearch';
-import { LIGHT_BLACK } from 'client/app/css/colors';
-import Auth from 'client/features/auth/Auth';
+import DropdownSearch from 'features/dropdownSearch/DropdownSearch';
+import { LIGHT_BLACK } from 'app/css/colors';
+import Auth from 'features/auth/Auth';
 import NavHeader from './NavHeader';
 
 // Pure Navbar no bootstrap

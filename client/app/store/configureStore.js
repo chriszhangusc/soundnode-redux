@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from 'client/app/sagas/rootSaga';
+import rootSaga from 'app/sagas/rootSaga';
 // import logger from 'redux-logger';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import { rootReducer } from '../reducers/rootReducer';

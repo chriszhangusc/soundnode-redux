@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentPlayerTrack } from 'client/features/player/playerSelectors';
+import { getCurrentPlayerTrack } from 'features/player/playerSelectors';
 import styled from 'styled-components';
-import { BLACK, LIGHT_BLACK } from 'client/app/css/colors';
-import { Z_MAX } from 'client/app/css/variables';
-import { media } from 'client/app/css/styleUtils';
+import { BLACK, LIGHT_BLACK } from 'app/css/colors';
+import { Z_MAX } from 'app/css/variables';
+import { media } from 'app/css/styleUtils';
 
 import PlayerAudio from '../PlayerAudio';
 import PlayerControls from '../PlayerControls';

@@ -7,7 +7,7 @@ import {
   SEPARATOR_COLOR_DARK,
   FONT_COLOR_SECONDARY,
   LIGHT_GRAY,
-} from 'client/app/css/colors';
+} from 'app/css/colors';
 import PlaylistTooltips from './PlaylistTooltips';
 
 const PlaylistItem = styled.li`

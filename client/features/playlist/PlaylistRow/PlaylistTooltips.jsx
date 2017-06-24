@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { SEPARATOR_COLOR_CLEAN, SEPARATOR_COLOR_DARK } from 'client/app/css/colors';
+import { SEPARATOR_COLOR_CLEAN, SEPARATOR_COLOR_DARK } from 'app/css/colors';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { TRACK_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
-import { media } from 'client/app/css/styleUtils';
+import { TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
+import { media } from 'app/css/styleUtils';
 
 // Tooltips styling is not working!!
 const Wrapper = styled.span`

@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import {
   loadTrackProfilePage,
   clearTrackState,
-} from 'client/features/trackProfile/trackProfileActions';
-import { isTrackFetching } from 'client/features/trackProfile/trackProfileSelectors';
-import Spinner from 'client/common/components/Spinner';
+} from 'features/trackProfile/trackProfileActions';
+import { isTrackFetching } from 'features/trackProfile/trackProfileSelectors';
+import Spinner from 'common/components/Spinner';
 import TrackProfile from './TrackProfile';
 
 class TrackProfileContainer extends Component {

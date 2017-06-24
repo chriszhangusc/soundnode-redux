@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import SongCardList from 'client/common/components/SongCardList';
-import { isChartsFetching } from 'client/features/charts/chartsSelectors';
+import SongCardList from 'common/components/SongCardList';
+import { isChartsFetching } from 'features/charts/chartsSelectors';
 
-import { getVisiblePlaylist } from 'client/features/playlist/playlistSelectors';
+import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
 
-import { loadMoreCharts } from 'client/features/charts/chartsActions';
+import { loadMoreCharts } from 'features/charts/chartsActions';
 
 // Container for SongCardList
 function mapStateToProps(state) {

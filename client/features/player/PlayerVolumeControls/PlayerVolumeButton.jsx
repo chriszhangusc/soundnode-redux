@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { THEME_COLOR, WHITE } from 'client/app/css/colors';
-import IconButton from 'client/common/components/buttons/IconButton';
+import { THEME_COLOR, WHITE } from 'app/css/colors';
+import IconButton from 'common/components/buttons/IconButton';
 import { getCurrentVolume } from '../playerSelectors';
 import { toggleMute } from '../playerActions';
 

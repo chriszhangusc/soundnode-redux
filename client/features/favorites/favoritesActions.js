@@ -2,9 +2,9 @@ import {
   updateVisiblePlaylistName,
   updateVisiblePlaylist,
   appendToVisiblePlaylist,
-} from 'client/features/playlist/playlistActions';
+} from 'features/playlist/playlistActions';
 
-import { mergeEntities } from 'client/features/entities/entitiesActions';
+import { mergeEntities } from 'features/entities/entitiesActions';
 import * as types from './favoritesConsts';
 import { fetchMyFavorites, fetchFavoritesByNextHref } from './favoritesApi';
 import { getFavoritesNextHref, isFavoritesFetching } from './favoritesSelectors';

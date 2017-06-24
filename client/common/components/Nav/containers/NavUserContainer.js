@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { startLogin, getUserId, getDisplayName, getPhotoUrl } from 'client/features/user';
-// import { auth } from 'client/features/auth';
+import { startLogin, getUserId, getDisplayName, getPhotoUrl } from 'features/user';
+// import { auth } from 'features/auth';
 import NavUser from '../components/NavUser';
 
 const mapStateToProps = state => ({

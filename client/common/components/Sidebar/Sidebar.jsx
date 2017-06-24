@@ -5,10 +5,10 @@ import {
   SIDEBAR_WIDTH_DESKTOP,
   SIDEBAR_WIDTH_DESKTOP_LG,
   SIDEBAR_WIDTH_4K,
-} from 'client/app/css/variables';
-import * as routes from 'client/common/constants/routeConsts';
-import { media } from 'client/app/css/styleUtils';
-import { LIGHT_BLACK } from 'client/app/css/colors';
+} from 'app/css/variables';
+import * as routes from 'common/constants/routeConsts';
+import { media } from 'app/css/styleUtils';
+import { LIGHT_BLACK } from 'app/css/colors';
 
 import SidebarItem from './SidebarItem';
 

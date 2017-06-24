@@ -1,8 +1,8 @@
 import { camelizeKeys } from 'humps';
 import SC from 'soundcloud';
-import { userSchema, trackArraySchema } from 'client/app/schema';
-import { normalizeResponse } from 'client/common/utils/normalizeUtils';
-import { makeRequest } from 'client/common/utils/apiUtils';
+import { userSchema, trackArraySchema } from 'app/schema';
+import { normalizeResponse } from 'common/utils/normalizeUtils';
+import { makeRequest } from 'common/utils/apiUtils';
 
 export function fetchProfiledUser(userId) {
   return SC.get(`/users/${userId}`)

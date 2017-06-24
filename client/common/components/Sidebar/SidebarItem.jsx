@@ -2,8 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { SIDEBAR_ITEM_HEIGHT } from 'client/app/css/variables';
-import { FONT_COLOR_PRIMARY, GRAY } from 'client/app/css/colors';
+import { SIDEBAR_ITEM_HEIGHT } from 'app/css/variables';
+import { FONT_COLOR_PRIMARY, GRAY } from 'app/css/colors';
 
 const ListItem = styled.li`
   line-height: ${SIDEBAR_ITEM_HEIGHT};

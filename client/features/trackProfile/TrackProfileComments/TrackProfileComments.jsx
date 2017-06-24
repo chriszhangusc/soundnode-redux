@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { getProfiledTrack } from 'client/features/trackProfile/trackProfileSelectors';
+import { getProfiledTrack } from 'features/trackProfile/trackProfileSelectors';
 import TrackProfileCommentList from './TrackProfileCommentList';
 
 const Title = styled.h3`

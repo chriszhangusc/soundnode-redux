@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Spinner from 'client/common/components/Spinner';
+import Spinner from 'common/components/Spinner';
 import styled from 'styled-components';
-import { getDisplayName } from 'client/common/utils/hocUtils';
+import { getDisplayName } from 'common/utils/hocUtils';
 
 const SpinnerWrapper = styled.div`
   padding: 20px 0;

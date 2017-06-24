@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
-import { media } from 'client/app/css/styleUtils';
+import { FONT_COLOR_SECONDARY } from 'app/css/colors';
+import { media } from 'app/css/styleUtils';
 
 const PlayerTrackInfoWrapper = styled.div`
   width: 200px;

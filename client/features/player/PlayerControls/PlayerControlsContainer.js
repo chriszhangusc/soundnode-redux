@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { isPlayerPlaying } from 'client/features/player/playerSelectors';
+import { isPlayerPlaying } from 'features/player/playerSelectors';
 import {
   playNextSong,
   playPrevSong,
   playSong,
   pauseSong,
-} from 'client/features/player/playerActions';
+} from 'features/player/playerActions';
 
 import PlayerControls from './PlayerControls';
 

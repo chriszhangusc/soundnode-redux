@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import {
   loadUserProfilePage,
   clearUserState,
-} from 'client/features/userProfile/userProfileActions';
+} from 'features/userProfile/userProfileActions';
 import {
   getProfiledUserId,
   getProfiledUser,
   isUserFetching,
-} from 'client/features/userProfile/userProfileSelectors';
-import Spinner from 'client/common/components/Spinner';
+} from 'features/userProfile/userProfileSelectors';
+import Spinner from 'common/components/Spinner';
 
 import UserProfile from './UserProfile';
 

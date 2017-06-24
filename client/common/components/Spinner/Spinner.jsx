@@ -1,5 +1,5 @@
 import React from 'react';
-import { THEME_COLOR } from 'client/app/css/colors';
+import { THEME_COLOR } from 'app/css/colors';
 import styled, { keyframes } from 'styled-components';
 
 const strechDelay = keyframes`

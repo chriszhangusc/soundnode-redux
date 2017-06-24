@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import { camelizeKeys } from 'humps';
-import { API_HOST } from 'client/common/constants/appConsts';
-import { CLIENT_ID } from 'client/common/constants/authConsts';
-import { getOAuthToken } from 'client/features/auth/authUtils';
+import { API_HOST } from 'common/constants/appConsts';
+import { CLIENT_ID } from 'common/constants/authConsts';
+import { getOAuthToken } from 'features/auth/authUtils';
 import { setUrlParams } from './urlUtils';
 
 const SC_API_V2 = 'https://api-v2.soundcloud.com';

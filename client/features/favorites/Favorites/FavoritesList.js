@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import SongCardList from 'client/common/components/SongCardList';
-import { isFavoritesFetching } from 'client/features/favorites/favoritesSelectors';
-import { getVisiblePlaylist } from 'client/features/playlist/playlistSelectors';
-import { loadMoreFavorites } from 'client/features/favorites/favoritesActions';
+import SongCardList from 'common/components/SongCardList';
+import { isFavoritesFetching } from 'features/favorites/favoritesSelectors';
+import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
+import { loadMoreFavorites } from 'features/favorites/favoritesActions';
 
 function mapStateToProps(state) {
   return {

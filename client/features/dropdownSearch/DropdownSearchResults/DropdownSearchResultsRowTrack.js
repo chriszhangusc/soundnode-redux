@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { getTrackById } from 'client/features/entities/entitiesSelectors';
-import { TRACK_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
+import { getTrackById } from 'features/entities/entitiesSelectors';
+import { TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import DropdownSearchResultsRow from './DropdownSearchResultsRow';
 
 const mapStateToProps = (state, { trackId }) => {

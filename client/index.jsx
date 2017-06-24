@@ -6,12 +6,12 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 
 import ReactDOM from 'react-dom';
-import configureStore from 'client/app/store/configureStore';
-import App from 'client/app/layout/App';
+import configureStore from 'app/store/configureStore';
+import App from 'app/layout/App';
 import 'isomorphic-fetch';
 import 'rxjs';
 import 'normalize.css';
-import 'client/app/styles/app.scss';
+import 'app/styles/app.scss';
 
 const store = configureStore();
 

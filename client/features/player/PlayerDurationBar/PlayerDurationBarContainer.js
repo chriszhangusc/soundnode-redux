@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import { computeNewTimeOnSeek } from 'client/features/player/playerUtils';
+import { computeNewTimeOnSeek } from 'features/player/playerUtils';
 
 import {
   beginSeek,
   updateTimeOnSeek,
   updateTimeAndEndSeek,
-} from 'client/features/player/playerActions';
-import { getCurrentTime, isPlayerSeeking } from 'client/features/player/playerSelectors';
+} from 'features/player/playerActions';
+import { getCurrentTime, isPlayerSeeking } from 'features/player/playerSelectors';
 
 import PlayerDurationBar from './PlayerDurationBar';
 

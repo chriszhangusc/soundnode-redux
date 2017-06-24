@@ -48,12 +48,11 @@ module.exports = {
   // In every other case use resolve.root.
   resolve: {
     modules: [
-      // From documentaton
-      // path.join(__dirname, "src"),
+      path.join(__dirname, "client"),
       'node_modules',
     ],
     alias: {
-      client: path.join(__dirname, 'client'),
+      // client: path.join(__dirname, 'client'),
       assets: path.join(__dirname, 'public'),
     },
     extensions: ['*', '.js', '.jsx', 'stage-0'],

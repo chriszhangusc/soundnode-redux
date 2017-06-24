@@ -1,4 +1,4 @@
-import { makeSCV1Request, checkStatus, getSCApiUrl } from 'client/common/utils/apiUtils';
+import { makeSCV1Request, checkStatus, getSCApiUrl } from 'common/utils/apiUtils';
 
 export function fetchMe() {
   return makeSCV1Request('/me');

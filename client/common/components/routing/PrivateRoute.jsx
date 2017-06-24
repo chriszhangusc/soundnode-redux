@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { isAuthenticated } from 'client/features/auth/authUtils';
+import { isAuthenticated } from 'features/auth/authUtils';
 
 function PrivateRoute({ component: Component, ...rest }) {
   return (

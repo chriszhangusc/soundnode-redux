@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { WHITE, THEME_COLOR } from 'client/app/css/colors';
-import { formatSecondsAsTime } from 'client/common/utils/formatUtils';
-import { computeSeekBarPercent } from 'client/features/player/playerUtils';
+import { WHITE, THEME_COLOR } from 'app/css/colors';
+import { formatSecondsAsTime } from 'common/utils/formatUtils';
+import { computeSeekBarPercent } from 'features/player/playerUtils';
 import styled from 'styled-components';
 
 const PlayerDurationBarWrapper = styled.div`

@@ -1,11 +1,11 @@
 import {
   updateVisiblePlaylist,
   appendToVisiblePlaylist,
-} from 'client/features/playlist/playlistActions';
-import { getVisiblePlaylist, getPlaylistByName } from 'client/features/playlist/playlistSelectors';
-import { notificationWarning } from 'client/features/notification/notificationActions';
-import { mergeEntities } from 'client/features/entities/entitiesActions';
-import { transformSCV2Request } from 'client/common/utils/apiUtils';
+} from 'features/playlist/playlistActions';
+import { getVisiblePlaylist, getPlaylistByName } from 'features/playlist/playlistSelectors';
+import { notificationWarning } from 'features/notification/notificationActions';
+import { mergeEntities } from 'features/entities/entitiesActions';
+import { transformSCV2Request } from 'common/utils/apiUtils';
 
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
 

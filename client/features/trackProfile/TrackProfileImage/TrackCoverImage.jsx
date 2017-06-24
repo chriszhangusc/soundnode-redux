@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { getProfiledTrack } from 'client/features/trackProfile/trackProfileSelectors';
-import { getLargeVersion } from 'client/common/utils/imageUtils';
-import { isTrackActive, isTrackPlaying } from 'client/features/player/playerSelectors';
+import { getProfiledTrack } from 'features/trackProfile/trackProfileSelectors';
+import { getLargeVersion } from 'common/utils/imageUtils';
+import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
 import { FormattedNumber } from 'react-intl';
-import { changeSongAndPlay, playSong, pauseSong } from 'client/features/player/playerActions';
-import EnhancedImage from 'client/common/components/images/EnhancedImage';
+import { changeSongAndPlay, playSong, pauseSong } from 'features/player/playerActions';
+import EnhancedImage from 'common/components/images/EnhancedImage';
 
 const Wrapper = styled.div`
   width: 350px;

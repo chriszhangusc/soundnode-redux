@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { getUserById } from 'client/features/entities/entitiesSelectors';
+import { getUserById } from 'features/entities/entitiesSelectors';
 import defaultAvatarUrl from 'assets/images/default-artist.png';
-import { USER_PROFILE_ROUTE } from 'client/common/constants/routeConsts';
+import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import DropdownSearchResultsRow from './DropdownSearchResultsRow';
 
 const mapStateToProps = (state, { userId }) => {

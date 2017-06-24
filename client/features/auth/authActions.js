@@ -2,7 +2,7 @@ import SC from 'soundcloud';
 import {
   notificationSuccess,
   notificationWarning,
-} from 'client/features/notification/notificationActions';
+} from 'features/notification/notificationActions';
 
 import { getOAuthToken, setOAuthToken, removeOAuthToken, isUnauthError } from './authUtils';
 

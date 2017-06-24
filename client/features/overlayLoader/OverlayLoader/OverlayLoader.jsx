@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Loadable from 'react-loading-overlay';
 import { connect } from 'react-redux';
-import { isLoginInProgress } from 'client/features/auth/authSelectors';
+import { isLoginInProgress } from 'features/auth/authSelectors';
 
 const OverlayWrapper = styled.div`
   position: fixed;

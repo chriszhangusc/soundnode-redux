@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY } from 'client/app/css/colors';
+import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY } from 'app/css/colors';
 import { connect } from 'react-redux';
-import { copyToClipboard } from 'client/features/copy';
+import { copyToClipboard } from 'features/copy';
 import { getProfiledTrack } from '../trackProfileSelectors';
 
 const Wrapper = styled.div`

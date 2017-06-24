@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { getTrackById, getUserByTrackId } from 'client/features/entities/entitiesSelectors';
-import { isTrackActive } from 'client/features/player/playerSelectors';
-import { changeSongAndPlay } from 'client/features/player/playerActions';
+import { getTrackById, getUserByTrackId } from 'features/entities/entitiesSelectors';
+import { isTrackActive } from 'features/player/playerSelectors';
+import { changeSongAndPlay } from 'features/player/playerActions';
 import PlaylistRow from './PlaylistRow';
 
 const mapStateToProps = (state, { trackId, index }) => {

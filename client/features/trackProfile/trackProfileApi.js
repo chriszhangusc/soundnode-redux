@@ -1,9 +1,9 @@
 import { camelizeKeys } from 'humps';
 import SC from 'soundcloud';
 import { normalize } from 'normalizr';
-import { trackSchema, commentArraySchema } from 'client/app/schema';
-import { normalizeResponse } from 'client/common/utils/normalizeUtils';
-import { makeRequest } from 'client/common/utils/apiUtils';
+import { trackSchema, commentArraySchema } from 'app/schema';
+import { normalizeResponse } from 'common/utils/normalizeUtils';
+import { makeRequest } from 'common/utils/apiUtils';
 
 export function fetchProfiledTrack(trackId) {
   return SC.get(`/tracks/${trackId}`)

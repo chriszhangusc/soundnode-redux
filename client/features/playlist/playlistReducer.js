@@ -1,4 +1,4 @@
-import { CHARTS_CLEAR_STATE } from 'client/features/charts/chartsConsts';
+import { CHARTS_CLEAR_STATE } from 'features/charts/chartsConsts';
 import * as types from './playlistConsts';
 
 const initialState = {

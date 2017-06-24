@@ -1,4 +1,4 @@
-import { getTracks } from 'client/features/entities/entitiesSelectors';
+import { getTracks } from 'features/entities/entitiesSelectors';
 import { createSelector } from 'reselect';
 import { SHUFFLE } from './playerConsts';
 

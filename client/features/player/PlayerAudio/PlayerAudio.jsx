@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { REPEAT } from 'client/features/player/playerConsts';
+import { REPEAT } from 'features/player/playerConsts';
 
 class PlayerAudio extends Component {
   constructor(props) {

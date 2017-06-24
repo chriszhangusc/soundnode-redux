@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { THEME_COLOR } from 'client/app/css/colors';
-import EnhancedImage from 'client/common/components/images/EnhancedImage';
+import { THEME_COLOR } from 'app/css/colors';
+import EnhancedImage from 'common/components/images/EnhancedImage';
 
 const Wrapper = styled.div`
   width: 100%;

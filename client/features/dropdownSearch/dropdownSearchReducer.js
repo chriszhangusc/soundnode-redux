@@ -1,4 +1,4 @@
-import * as types from 'client/features/dropdownSearch/dropdownSearchConsts';
+import * as types from 'features/dropdownSearch/dropdownSearchConsts';
 
 /* Reducers */
 const initialState = {

@@ -2,7 +2,7 @@ import copy from 'copy-to-clipboard';
 import {
   notificationSuccess,
   notificationWarning,
-} from 'client/features/notification/notificationActions';
+} from 'features/notification/notificationActions';
 
 const defaultSuccessMessage = 'Successfully copied to clipboard';
 const defaultFailureMessage = 'Failed to copy to clipboard';

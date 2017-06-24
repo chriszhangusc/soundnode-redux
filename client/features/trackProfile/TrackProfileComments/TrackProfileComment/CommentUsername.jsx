@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
+import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 
 const StyledUsername = styled.span`
   color: ${FONT_COLOR_SECONDARY};

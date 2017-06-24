@@ -1,4 +1,4 @@
-import { mergeEntities } from 'client/features/entities/entitiesActions';
+import { mergeEntities } from 'features/entities/entitiesActions';
 import * as types from './userProfileConsts';
 
 import {

@@ -1,18 +1,18 @@
 import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux';
-import chartsReducer from 'client/features/charts/chartsReducer';
-import entitiesReducer from 'client/features/entities/entitiesReducer';
-import playerReducer from 'client/features/player/playerReducer';
-import playlistReducer from 'client/features/playlist/playlistReducer';
-import userProfileReducer from 'client/features/userProfile/userProfileReducer';
-import trackProfileReducer from 'client/features/trackProfile/trackProfileReducer';
-import dropdownSearchReducer from 'client/features/dropdownSearch/dropdownSearchReducer';
-import authReducer from 'client/features/auth/authReducer';
-import notificationReducer from 'client/features/notification/notificationReducer';
-import favoritesReducer from 'client/features/favorites/favoritesReducer';
-import streamReducer from 'client/features/stream/streamReducer';
+import chartsReducer from 'features/charts/chartsReducer';
+import entitiesReducer from 'features/entities/entitiesReducer';
+import playerReducer from 'features/player/playerReducer';
+import playlistReducer from 'features/playlist/playlistReducer';
+import userProfileReducer from 'features/userProfile/userProfileReducer';
+import trackProfileReducer from 'features/trackProfile/trackProfileReducer';
+import dropdownSearchReducer from 'features/dropdownSearch/dropdownSearchReducer';
+import authReducer from 'features/auth/authReducer';
+import notificationReducer from 'features/notification/notificationReducer';
+import favoritesReducer from 'features/favorites/favoritesReducer';
+import streamReducer from 'features/stream/streamReducer';
 
-import { dropdownSearchEpic } from 'client/features/dropdownSearch/dropdownSearchActions';
+import { dropdownSearchEpic } from 'features/dropdownSearch/dropdownSearchActions';
 
 export const rootEpic = combineEpics(dropdownSearchEpic);
 

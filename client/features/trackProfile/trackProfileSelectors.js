@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getTracks } from 'client/features/entities/entitiesSelectors';
+import { getTracks } from 'features/entities/entitiesSelectors';
 
 const getState = state => state.trackProfile;
 

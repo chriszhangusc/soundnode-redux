@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { isInShuffleMode } from 'client/features/player/playerSelectors';
+import { isInShuffleMode } from 'features/player/playerSelectors';
 
 export const getPlaylistState = state => state.playlist;
 

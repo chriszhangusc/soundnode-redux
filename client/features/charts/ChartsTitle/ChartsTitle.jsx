@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { connect } from 'react-redux';
-import { getCurrentGenreTitle } from 'client/features/charts/chartsSelectors';
+import { getCurrentGenreTitle } from 'features/charts/chartsSelectors';
 
 const Title = styled.h1`
   margin: 30px 20px;

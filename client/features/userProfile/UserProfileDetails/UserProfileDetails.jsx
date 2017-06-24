@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getUserById } from 'client/features/entities/entitiesSelectors';
-import { getLargeVersion } from 'client/common/utils/imageUtils';
+import { getUserById } from 'features/entities/entitiesSelectors';
+import { getLargeVersion } from 'common/utils/imageUtils';
 import styled from 'styled-components';
 import UserAvatar from './UserAvatar';
 import UserName from './UserName';

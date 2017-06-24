@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SongCard from 'client/common/components/SongCard';
-import withLoadingSpinnerAfter from 'client/common/hocs/withLoadingSpinnerAfter';
-import withFetchingOnScroll from 'client/common/hocs/withFetchingOnScroll';
+import SongCard from 'common/components/SongCard';
+import withLoadingSpinnerAfter from 'common/hocs/withLoadingSpinnerAfter';
+import withFetchingOnScroll from 'common/hocs/withFetchingOnScroll';
 import { compose } from 'recompose';
 import styled from 'styled-components';
 

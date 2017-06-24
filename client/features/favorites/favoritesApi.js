@@ -1,6 +1,6 @@
-import { normalizeResponse } from 'client/common/utils/normalizeUtils';
-import { trackArraySchema } from 'client/app/schema';
-import { makeRequest, makeSCV1Request } from 'client/common/utils/apiUtils';
+import { normalizeResponse } from 'common/utils/normalizeUtils';
+import { trackArraySchema } from 'app/schema';
+import { makeRequest, makeSCV1Request } from 'common/utils/apiUtils';
 
 export function fetchMyFavorites(pageSize = 25) {
   return makeSCV1Request(

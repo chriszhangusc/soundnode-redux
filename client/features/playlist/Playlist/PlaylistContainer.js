@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { clearPlayQueue } from 'client/features/playlist/playlistActions';
-import { getPlaylistByMode, isPlaylistHidden } from 'client/features/playlist/playlistSelectors';
+import { clearPlayQueue } from 'features/playlist/playlistActions';
+import { getPlaylistByMode, isPlaylistHidden } from 'features/playlist/playlistSelectors';
 import Playlist from './Playlist';
 
 const mapStateToProps = state => ({

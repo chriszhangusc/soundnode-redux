@@ -1,4 +1,4 @@
-import { getMyId } from 'client/features/auth/authSelectors';
+import { getMyId } from 'features/auth/authSelectors';
 import { STREAM_SET, STREAM_APPEND, STREAM_REQUEST } from './streamConsts';
 import { fetchStream, fetchMoreStream } from './streamApi';
 

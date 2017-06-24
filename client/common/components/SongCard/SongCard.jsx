@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BACKGROUND_COLOR, BOX_SHADOW_COLOR, THEME_COLOR } from 'client/app/css/colors';
+import { BACKGROUND_COLOR, BOX_SHADOW_COLOR, THEME_COLOR } from 'app/css/colors';
 
 import { connect } from 'react-redux';
-import { getTrackById } from 'client/features/entities/entitiesSelectors';
-import { isTrackActive } from 'client/features/player/playerSelectors';
+import { getTrackById } from 'features/entities/entitiesSelectors';
+import { isTrackActive } from 'features/player/playerSelectors';
 
 import SongCardDetails from './SongCardDetails';
 import SongCardControls from './SongCardControls';

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Avatar from 'client/common/components/Avatar';
+import Avatar from 'common/components/Avatar';
 import { Link } from 'react-router-dom';
 
 const AvatarWrapper = styled.div`

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FONT_COLOR_PRIMARY } from 'client/app/css/colors';
+import { FONT_COLOR_PRIMARY } from 'app/css/colors';
 
 const UserFollowersContainer = styled.div`
   margin: 10px 0;

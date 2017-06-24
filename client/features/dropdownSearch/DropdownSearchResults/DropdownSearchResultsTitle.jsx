@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
+import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 
 const StyledTitle = styled.div`
     text-align: center;

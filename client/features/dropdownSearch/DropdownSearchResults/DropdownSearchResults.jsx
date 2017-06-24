@@ -7,12 +7,12 @@ import {
   isDropdownSearchResultsHidden,
   getDropdownSearchUserIds,
   getDropdownSearchTrackIds,
-} from 'client/features/dropdownSearch/dropdownSearchSelectors';
+} from 'features/dropdownSearch/dropdownSearchSelectors';
 
-import { FONT_COLOR_SECONDARY, BACKGROUND_COLOR_SECONDARY } from 'client/app/css/colors';
+import { FONT_COLOR_SECONDARY, BACKGROUND_COLOR_SECONDARY } from 'app/css/colors';
 
 import styled from 'styled-components';
-import { media } from 'client/app/css/styleUtils';
+import { media } from 'app/css/styleUtils';
 
 import DropdownSearchResultsRowUser from './DropdownSearchResultsRowUser';
 import DropdownSearchResultsRowTrack from './DropdownSearchResultsRowTrack';
