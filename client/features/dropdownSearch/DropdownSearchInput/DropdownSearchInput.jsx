@@ -110,7 +110,6 @@ DropdownSearchInput.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   handleChange(keywords) {
-    console.log('onchange keywords');
     dispatch(startDropdownSearch(keywords));
   },
 

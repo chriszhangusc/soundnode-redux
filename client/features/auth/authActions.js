@@ -144,7 +144,7 @@ export function loadMe() {
         dispatch(notificationSuccess('Login Success'));
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         dispatch(loginFailed(err));
         dispatch(notificationWarning('Failed to login to SoundCloud'));
       });

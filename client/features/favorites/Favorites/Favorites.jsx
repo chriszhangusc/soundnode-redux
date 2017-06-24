@@ -29,7 +29,7 @@ class Favorites extends React.Component {
 
   componentWillUnmount() {
     const { actions } = this.props;
-    actions.clearFavoritesState();
+    actions.resetFavoritesState();
   }
 
   render() {

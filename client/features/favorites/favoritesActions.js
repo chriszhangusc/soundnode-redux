@@ -1,32 +1,34 @@
-import { updateVisiblePlaylistName, updateVisiblePlaylist, appendToVisiblePlaylist } from 'client/features/playlist/playlistActions';
+import {
+  updateVisiblePlaylistName,
+  updateVisiblePlaylist,
+  appendToVisiblePlaylist,
+} from 'client/features/playlist/playlistActions';
+
+import { mergeEntities } from 'client/features/entities/entitiesActions';
 import * as types from './favoritesConsts';
 import { fetchMyFavorites, fetchFavoritesByNextHref } from './favoritesApi';
 import { getFavoritesNextHref, isFavoritesFetching } from './favoritesSelectors';
 
-export function requestFavorites() {
+export function startFetchingFavorites() {
   return {
-    type: types.FAVORITES_REQUEST,
+    type: types.FAVORITES_FETCH_START,
   };
 }
 
-export function setFavorites({ result, entities, nextHref }) {
+export function updateFavorites(trackIds) {
   return {
-    type: types.FAVORITES_SET,
+    type: types.FAVORITES_UPDATE,
     payload: {
-      favoritesIds: result,
-      entities,
-      nextHref,
+      trackIds,
     },
   };
 }
 
-export function appendFavorites({ result, entities, nextHref }) {
+export function appendFavorites(trackIds) {
   return {
     type: types.FAVORITES_APPEND,
     payload: {
-      favoritesIds: result,
-      entities,
-      nextHref,
+      trackIds,
     },
   };
 }
@@ -37,37 +39,61 @@ export function stopFetchingFavorites() {
   };
 }
 
-export function clearFavoritesState() {
+export function updateFavoritesNextHref(nextHref) {
   return {
-    type: types.FAVORITES_STATE_CLEAR,
+    type: types.FAVORITES_NEXT_HREF_UPDATE,
+    payload: {
+      nextHref,
+    },
+  };
+}
+
+export function resetFavoritesState() {
+  return {
+    type: types.FAVORITES_STATE_RESET,
   };
 }
 
 export function loadFavorites() {
   return (dispatch) => {
-    dispatch(requestFavorites());
-    fetchMyFavorites().then((normalized) => {
-      dispatch(setFavorites(normalized));
-      dispatch(updateVisiblePlaylistName('favorites'));
-      dispatch(updateVisiblePlaylist(normalized.result));
-      dispatch(stopFetchingFavorites());
-    });
+    dispatch(startFetchingFavorites());
+    fetchMyFavorites()
+      .then((normalized) => {
+        const { entities, nextHref, result } = normalized;
+        dispatch(mergeEntities(entities));
+        // Remove it because it is now moved to playlsit state?
+        dispatch(updateFavorites(result));
+        dispatch(updateFavoritesNextHref(nextHref));
+        dispatch(updateVisiblePlaylistName('favorites'));
+        dispatch(updateVisiblePlaylist(result));
+        dispatch(stopFetchingFavorites());
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 }
 
 export function loadMoreFavorites() {
   return (dispatch, getState) => {
     const state = getState();
-    const nextHref = getFavoritesNextHref(state);
+    const curNextHref = getFavoritesNextHref(state);
     const fetching = isFavoritesFetching(state);
-    if (!fetching && nextHref) {
-      dispatch(requestFavorites());
-      fetchFavoritesByNextHref(nextHref).then((normalized) => {
-        dispatch(appendFavorites(normalized));
-        // Append new songs to the favorites/currently visible playlist
-        dispatch(appendToVisiblePlaylist(normalized.result));
-        dispatch(stopFetchingFavorites());
-      });
+    if (!fetching && curNextHref) {
+      dispatch(startFetchingFavorites());
+      fetchFavoritesByNextHref(curNextHref)
+        .then((normalized) => {
+          const { entities, nextHref, result } = normalized;
+          dispatch(mergeEntities(entities));
+          dispatch(appendFavorites(result));
+          dispatch(updateFavoritesNextHref(nextHref));
+          // Append new songs to the favorites/currently visible playlist
+          dispatch(appendToVisiblePlaylist(result));
+          dispatch(stopFetchingFavorites());
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   };
 }
