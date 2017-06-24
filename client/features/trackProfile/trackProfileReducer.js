@@ -8,55 +8,86 @@ const initialState = {
   commentsNextHref: null,
 };
 
-export function requestProfiledTrack(state) {
+export function startFetchingProfiledTrack(state) {
   return {
     ...state,
     trackFetching: true,
   };
 }
 
-export function updateProfiledTrack(state, { trackId }) {
+export function stopFetchingProfiledTrack(state) {
   return {
     ...state,
     trackFetching: false,
+  };
+}
+
+export function updateProfiledTrack(state, { trackId }) {
+  return {
+    ...state,
     trackId,
   };
 }
 
-export function requestProfiledTrackComments(state) {
+export function startFetchingComments(state) {
   return {
     ...state,
     commentsFetching: true,
   };
 }
 
-export function updateProfiledTrackComments(state, { commentIds, nextHref }) {
+export function stopFetchingComments(state) {
   return {
     ...state,
     commentsFetching: false,
+  };
+}
+
+export function appendComments(state, { commentIds }) {
+  return {
+    ...state,
     commentIds: [...state.commentIds, ...commentIds],
-    commentsNextHref: nextHref,
+  };
+}
+
+export function updateCommentsNextHref(state, { commentsNextHref }) {
+  return {
+    ...state,
+    commentsNextHref,
+  };
+}
+
+export function resetTrackProfileState() {
+  return {
+    ...initialState,
   };
 }
 
 export default function track(state = initialState, action) {
   switch (action.type) {
-    case types.TRACK_PROFILE_STATE_CLEAR:
-      return {
-        ...initialState,
-      };
+    case types.TRACK_PROFILE_TRACK_FETCH_START:
+      return startFetchingProfiledTrack(state);
 
-    case types.TRACK_PROFILE_TRACK_REQUEST:
-      return requestProfiledTrack(state);
+    case types.TRACK_PROFILE_TRACK_FETCH_STOP:
+      return stopFetchingProfiledTrack(state);
 
-    case types.TRACK_PROFILE_TRACK_RECEIVED:
+    case types.TRACK_PROFILE_TRACK_UPDATE:
       return updateProfiledTrack(state, action.payload);
 
-    case types.TRACK_PROFILE_COMMENTS_REQUEST:
-      return requestProfiledTrackComments(state);
+    case types.TRACK_PROFILE_COMMENTS_FETCH_START:
+      return startFetchingComments(state);
 
-    case types.TRACK_PROFILE_COMMENTS_RECEIVED:
-      return updateProfiledTrackComments(state, action.payload);
+    case types.TRACK_PROFILE_COMMENTS_FETCH_STOP:
+      return stopFetchingComments(state);
+
+    case types.TRACK_PROFILE_COMMENTS_APPEND:
+      return appendComments(state, action.payload);
+
+    case types.TRACK_PROFILE_COMMENTS_NEXT_HREF_UPDATE:
+      return updateCommentsNextHref(state, action.payload);
+
+    case types.TRACK_PROFILE_STATE_RESET:
+      return resetTrackProfileState();
 
     default:
       return state;

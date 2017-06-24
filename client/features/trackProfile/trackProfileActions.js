@@ -1,61 +1,82 @@
+import { mergeEntities } from 'client/features/entities/entitiesActions';
 import { fetchProfiledTrack, fetchTrackComments, fetchMoreComments } from './trackProfileApi';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import * as types from './trackProfileConsts';
 
 export const clearTrackState = () => ({
-  type: types.TRACK_PROFILE_STATE_CLEAR,
+  type: types.TRACK_PROFILE_STATE_RESET,
 });
 
-export function requestTrack() {
-  return { type: types.TRACK_PROFILE_TRACK_REQUEST };
+export function startFetchingProfiledTrack() {
+  return { type: types.TRACK_PROFILE_TRACK_FETCH_START };
 }
 
-export function receiveTrack(normalized) {
+export function stopFetchingProfiledTrack() {
+  return { type: types.TRACK_PROFILE_TRACK_FETCH_STOP };
+}
+
+export function updateProfiledTrack(trackId) {
   return {
-    type: types.TRACK_PROFILE_TRACK_RECEIVED,
+    type: types.TRACK_PROFILE_TRACK_UPDATE,
     payload: {
-      ...normalized,
-      trackId: normalized.result,
+      trackId,
     },
   };
 }
 
 export function failedToFetchTrack() {
   return {
-    type: types.TRACK_PROFILE_TRACK_FAILED,
+    type: types.TRACK_PROFILE_TRACK_FAIL,
   };
 }
 
-export function requestComments() {
-  return { type: types.TRACK_PROFILE_COMMENTS_REQUEST };
+export function startFetchingComments() {
+  return { type: types.TRACK_PROFILE_COMMENTS_FETCH_START };
 }
 
-export function receiveComments(normalized) {
+export function stopFetchingComments() {
+  return { type: types.TRACK_PROFILE_COMMENTS_FETCH_STOP };
+}
+
+export function appendComments(commentIds) {
   return {
-    type: types.TRACK_PROFILE_COMMENTS_RECEIVED,
+    type: types.TRACK_PROFILE_COMMENTS_APPEND,
     payload: {
-      ...normalized,
-      commentIds: normalized.result,
+      commentIds,
+    },
+  };
+}
+
+export function updateCommentsNextHref(commentsNextHref) {
+  return {
+    type: types.TRACK_PROFILE_COMMENTS_NEXT_HREF_UPDATE,
+    payload: {
+      commentsNextHref,
     },
   };
 }
 
 export function failedToFetchComments() {
   return {
-    type: types.TRACK_PROFILE_COMMENTS_FAILED,
+    type: types.TRACK_PROFILE_COMMENTS_FAIL,
   };
 }
 
 export function loadTrackProfilePage(trackId) {
   return (dispatch) => {
-    dispatch(requestTrack());
-    dispatch(requestComments());
+    dispatch(startFetchingProfiledTrack());
+    dispatch(startFetchingComments());
     Promise.all([fetchProfiledTrack(trackId), fetchTrackComments(trackId)])
       .then((res) => {
-        const track = res[0];
-        const comments = res[1];
-        dispatch(receiveTrack(track));
-        dispatch(receiveComments(comments));
+        const normalizedTrack = res[0];
+        const normalizedComments = res[1];
+        dispatch(mergeEntities(normalizedTrack.entities));
+        dispatch(mergeEntities(normalizedComments.entities));
+        dispatch(updateProfiledTrack(normalizedTrack.result));
+        dispatch(appendComments(normalizedComments.result));
+        dispatch(updateCommentsNextHref(normalizedComments.nextHref));
+        dispatch(stopFetchingProfiledTrack());
+        dispatch(stopFetchingComments());
       })
       .catch((err) => {
         dispatch(failedToFetchTrack());
@@ -71,10 +92,14 @@ export function loadMoreComments() {
     const commentsNextHref = getCommentsNextHref(state);
     const commentsFetching = isCommentsFetching(state);
     if (!commentsFetching && commentsNextHref) {
-      dispatch(requestComments());
+      dispatch(startFetchingComments());
       fetchMoreComments(commentsNextHref)
-        .then((normalizedComments) => {
-          dispatch(receiveComments(normalizedComments));
+        .then((normalized) => {
+          const { entities, result, nextHref } = normalized;
+          dispatch(mergeEntities(entities));
+          dispatch(appendComments(result));
+          dispatch(updateCommentsNextHref(nextHref));
+          dispatch(stopFetchingComments());
         })
         .catch((err) => {
           dispatch(failedToFetchComments());
