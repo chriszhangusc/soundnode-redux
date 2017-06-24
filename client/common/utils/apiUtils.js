@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { camelizeKeys } from 'humps';
-import { API_HOST, API_PROXY_ORIGIN } from 'common/constants/appConsts';
+import { API_PROXY_ORIGIN } from 'common/constants/appConsts';
 import { CLIENT_ID } from 'common/constants/authConsts';
 import { getOAuthToken } from 'features/auth/authUtils';
 import { setUrlParams } from './urlUtils';
@@ -8,6 +8,22 @@ import { setUrlParams } from './urlUtils';
 const SC_API_V2 = 'https://api-v2.soundcloud.com';
 
 const SC_API_V1 = 'https://api.soundcloud.com';
+
+function getSCV2ProxyOrigin() {
+  return `${API_PROXY_ORIGIN}/sc/v2`;
+}
+
+function getSCV1ProxyOrigin() {
+  return `${API_PROXY_ORIGIN}/sc/v1`;
+}
+
+function isSCV1Request(requestUrl) {
+  return requestUrl && requestUrl.startsWith(SC_API_V1);
+}
+
+function isSCV2Request(requestUrl) {
+  return requestUrl && requestUrl.startsWith(SC_API_V2);
+}
 
 export function getStreamUrl(track) {
   if (track && (track.streamUrl || track.uri)) {
@@ -17,9 +33,11 @@ export function getStreamUrl(track) {
   return null;
 }
 
-// Transform requests like https://api-v2.soundcloud.com to http://localhost:3001 (Our proxy server)
-export function transformSCV2Request(fetchUrl) {
-  return fetchUrl && fetchUrl.replace(`${SC_API_V2}`, `${API_HOST}`);
+export function getProxyRequest(requestUrl) {
+  if (!requestUrl) return requestUrl;
+  if (isSCV1Request(requestUrl)) return requestUrl.replace(`${SC_API_V1}`, getSCV1ProxyOrigin());
+  if (isSCV2Request(requestUrl)) return requestUrl.replace(`${SC_API_V2}`, getSCV2ProxyOrigin());
+  return requestUrl;
 }
 
 /**
@@ -41,11 +59,6 @@ export function parseJson(response) {
   return response.json().then(json => camelizeKeys(json));
 }
 
-// export function getSCV1Url(endpoint) {
-//   const v1Url = new URL(`${API_PROXY_ORIGIN}/sc/v1`, endpoint);
-//   return v1Url.toString();
-// }
-
 // If we have authed already, use oauth_token, otherwise use client_id
 export function appendTokenToUrl(fetchUrl) {
   const token = getOAuthToken();
@@ -54,32 +67,17 @@ export function appendTokenToUrl(fetchUrl) {
     : setUrlParams(fetchUrl, { client_id: CLIENT_ID });
 }
 
-export function makeRequest(fetchUrl, fetchOptions) {
-  const finalUrl = appendTokenToUrl(fetchUrl);
-  // console.log(finalUrl);
+// Check if the fetchUrl is v1 or v2 and convert them to point to our proxy server accordingly
+export function makeRequest(requestUrl, fetchOptions) {
+  const proxyRequest = getProxyRequest(requestUrl);
+  const finalUrl = appendTokenToUrl(proxyRequest);
   return (
     fetch(finalUrl, fetchOptions)
       .then(checkStatus)
-      // Should be removed!!
       .then(parseJson)
   );
 }
 
 export function getSCV1Url(endpoint) {
   return new URL(`/sc/v1${endpoint}`, `${API_PROXY_ORIGIN}`).toString();
-}
-
-export function getSCV2Url(endpoint) {
-  return new URL(`/sc/v2${endpoint}`, `${API_PROXY_ORIGIN}`).toString();
-}
-
-export function makeSCV1Request(endpoint, fetchOptions) {
-  const scV1Url = getSCV2Url(endpoint);
-  return makeRequest(scV1Url, fetchOptions);
-}
-
-export function makeSCV2Request(endpoint, fetchOptions) {
-  // const fetchUrl = `${SC_API_V2}${url}`;
-  const scV2Url = getSCV2Url(endpoint);
-  return makeRequest(scV2Url, fetchOptions);
 }

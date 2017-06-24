@@ -5,7 +5,6 @@ import {
 import { getVisiblePlaylist, getPlaylistByName } from 'features/playlist/playlistSelectors';
 import { notificationWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { transformSCV2Request } from 'common/utils/apiUtils';
 
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
 
@@ -66,7 +65,7 @@ export function loadChartsPage(genre) {
         const { entities, result, nextHref } = normalizedCharts;
         dispatch(mergeEntities(entities));
         dispatch(updateVisiblePlaylist(result));
-        dispatch(updateChartsNextHref(transformSCV2Request(nextHref)));
+        dispatch(updateChartsNextHref(nextHref));
         dispatch(stopFetchingCharts());
       } catch (err) {
         console.error(err);
@@ -90,7 +89,7 @@ export function loadMoreCharts() {
         const { entities, result, nextHref } = await fetchMoreCharts(curNextHref);
         dispatch(mergeEntities(entities));
         dispatch(appendToVisiblePlaylist(result));
-        dispatch(updateChartsNextHref(transformSCV2Request(nextHref)));
+        dispatch(updateChartsNextHref(nextHref));
         dispatch(stopFetchingCharts());
       } catch (err) {
         console.error(err);
