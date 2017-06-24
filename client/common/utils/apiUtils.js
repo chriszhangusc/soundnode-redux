@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { camelizeKeys } from 'humps';
-import { API_HOST } from 'common/constants/appConsts';
+import { API_HOST, API_PROXY_ORIGIN } from 'common/constants/appConsts';
 import { CLIENT_ID } from 'common/constants/authConsts';
 import { getOAuthToken } from 'features/auth/authUtils';
 import { setUrlParams } from './urlUtils';
@@ -41,8 +41,13 @@ export function parseJson(response) {
   return response.json().then(json => camelizeKeys(json));
 }
 
+// export function getSCV1Url(endpoint) {
+//   const v1Url = new URL(`${API_PROXY_ORIGIN}/sc/v1`, endpoint);
+//   return v1Url.toString();
+// }
+
 // If we have authed already, use oauth_token, otherwise use client_id
-export function getSCApiUrl(fetchUrl) {
+export function appendTokenToUrl(fetchUrl) {
   const token = getOAuthToken();
   return token
     ? setUrlParams(fetchUrl, { oauth_token: token })
@@ -50,8 +55,8 @@ export function getSCApiUrl(fetchUrl) {
 }
 
 export function makeRequest(fetchUrl, fetchOptions) {
-  const finalUrl = getSCApiUrl(fetchUrl);
-  console.log(finalUrl);
+  const finalUrl = appendTokenToUrl(fetchUrl);
+  // console.log(finalUrl);
   return (
     fetch(finalUrl, fetchOptions)
       .then(checkStatus)
@@ -60,13 +65,21 @@ export function makeRequest(fetchUrl, fetchOptions) {
   );
 }
 
-export function makeSCV1Request(url, fetchOptions) {
-  const fetchUrl = `${SC_API_V1}${url}`;
-  return makeRequest(fetchUrl, fetchOptions);
+export function getSCV1Url(endpoint) {
+  return new URL(`/sc/v1${endpoint}`, `${API_PROXY_ORIGIN}`).toString();
 }
 
-export function makeSCV2Request(url, fetchOptions) {
-  const fetchUrl = `${SC_API_V2}${url}`;
-  const finalFetchUrl = transformSCV2Request(fetchUrl);
-  return makeRequest(finalFetchUrl, fetchOptions);
+export function getSCV2Url(endpoint) {
+  return new URL(`/sc/v2${endpoint}`, `${API_PROXY_ORIGIN}`).toString();
+}
+
+export function makeSCV1Request(endpoint, fetchOptions) {
+  const scV1Url = getSCV2Url(endpoint);
+  return makeRequest(scV1Url, fetchOptions);
+}
+
+export function makeSCV2Request(endpoint, fetchOptions) {
+  // const fetchUrl = `${SC_API_V2}${url}`;
+  const scV2Url = getSCV2Url(endpoint);
+  return makeRequest(scV2Url, fetchOptions);
 }

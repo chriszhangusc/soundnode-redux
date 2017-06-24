@@ -4,11 +4,11 @@
   "description": "Music client based on SoundCloud API",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.prod.js",
+    "start": "NODE_ENV=production node server/server.prod.js",
     "proxy": "NODE_ENV=development nodemon server/proxy.js",
     "dev": "NODE_ENV=development webpack-dev-server --progress --colors --config webpack.dev.config.js",
-    "build": "rm -rf dist/ webpack -p --config webpack.prod.config.js",
-    "heroku-postbuild": "npm run build"
+    "build": "npm run clean && NODE_ENV=production webpack -p --config webpack.prod.config.js",
+    "clean": "rm -rf dist/"
   },
   "author": "MiniPekka",
   "license": "ISC",
@@ -39,6 +39,7 @@
     "webpack-dev-server": "^2.4.1"
   },
   "dependencies": {
+    "express": "^4.15.3",
     "humps": "^1.1.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.16.1",

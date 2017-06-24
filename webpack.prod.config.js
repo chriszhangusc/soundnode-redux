@@ -21,9 +21,8 @@ module.exports = {
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
   // In every other case use resolve.root.
   resolve: {
-    modules: ['node_modules'],
+    modules: [path.join(__dirname, 'client'), 'node_modules'],
     alias: {
-      client: path.join(__dirname, 'client'),
       assets: path.join(__dirname, 'public'),
     },
     extensions: ['*', '.js', '.jsx', 'stage-0'],
@@ -36,10 +35,10 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader', 'sass-loader'],
+          use: ['css-loader', 'postcss-loader'],
         }),
       },
 

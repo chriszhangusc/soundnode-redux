@@ -1,6 +1,5 @@
-import { API_HOST } from 'common/constants/appConsts';
 import { trackArraySchema } from 'app/schema';
-import { makeRequest } from 'common/utils/apiUtils';
+import { makeRequest, makeSCV2Request } from 'common/utils/apiUtils';
 import { normalizeResponse } from 'common/utils/normalizeUtils';
 
 // https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud%3Agenres%3Aall-music&linked_partitioning=1&limit=25&offset=0&client_id=f9e1e2232182a46705c880554a1011af
@@ -14,9 +13,10 @@ function transform(response) {
 
 export function fetchCharts(genre, limit = 20) {
   // const fetchUrl = constructFetchUrl(baseUrl, endpoint, queryParams);
-  const initialFetchUrl = `${API_HOST}/charts?kind=top&genre=soundcloud:genres:${genre}&linked_partitioning=1&limit=${limit}&offset=0`;
+  const endpoint = `/charts?kind=top&genre=soundcloud:genres:${genre}&linked_partitioning=1&limit=${limit}&offset=0`;
   return (
-    makeRequest(initialFetchUrl)
+    // makeRequest(initialFetchUrl)
+    makeSCV2Request(endpoint)
       // transform collection: [{score, track}] to collection: [track]
       // .then(response => transform(response))
       .then(transform)
