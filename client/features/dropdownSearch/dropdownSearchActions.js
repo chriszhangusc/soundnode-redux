@@ -3,9 +3,9 @@ import * as types from 'client/features/dropdownSearch/dropdownSearchConsts';
 export const DROPDOWN_SEARCH_LIMIT = 4;
 
 // Trigger saga
-export function requestDropdownSearch(keyword) {
+export function startDropdownSearch(keyword) {
   return {
-    type: types.DROPDOWN_SEARCH_REQUEST,
+    type: types.DROPDOWN_SEARCH_START,
     payload: {
       keyword,
       limit: DROPDOWN_SEARCH_LIMIT,
@@ -13,15 +13,15 @@ export function requestDropdownSearch(keyword) {
   };
 }
 
+export const stopDropdownSearch = () => ({
+  type: types.DROPDOWN_SEARCH_STOP,
+});
+
 export function failedToFetchSearchResults() {
   return {
-    type: types.DROPDOWN_SEARCH_REQUEST_FAILED,
+    type: types.DROPDOWN_SEARCH_REQUEST_FAIL,
   };
 }
-
-export const endDropdownSearch = () => ({
-  type: types.DROPDOWN_SEARCH_END,
-});
 
 export const hideDropdownSearchResults = () => ({
   type: types.DROPDOWN_SEARCH_RESULTS_HIDE,
@@ -35,19 +35,17 @@ export const clearDropdownSearchResults = () => ({
   type: types.DROPDOWN_SEARCH_RESULTS_CLEAR,
 });
 
-export const receiveDropdownSearchUsers = ({ result, entities }) => ({
-  type: types.DROPDOWN_SEARCH_USERS_RECEIVED,
+export const updateUserResults = userIds => ({
+  type: types.DROPDOWN_SEARCH_USER_RESULTS_UPDATE,
   payload: {
-    userIds: result,
-    entities,
+    userIds,
   },
 });
 
-export const receiveDropdownSearchTracks = ({ result, entities }) => ({
-  type: types.DROPDOWN_SEARCH_TRACKS_RECEIVED,
+export const updateTrackResults = trackIds => ({
+  type: types.DROPDOWN_SEARCH_TRACK_RESULTS_UPDATE,
   payload: {
-    trackIds: result,
-    entities,
+    trackIds,
   },
 });
 

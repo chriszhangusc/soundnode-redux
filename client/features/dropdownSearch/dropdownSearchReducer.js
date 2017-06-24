@@ -1,35 +1,35 @@
-import * as TYPES from 'client/features/dropdownSearch/dropdownSearchConsts';
+import * as types from 'client/features/dropdownSearch/dropdownSearchConsts';
 
 /* Reducers */
-const INITIAL_STATE = {
+const initialState = {
   hidden: true,
   fetching: false,
   userIds: [],
   trackIds: [],
 };
 
-export function requestDropdownSearch(state) {
+export function startDropdownSearch(state) {
   return {
     ...state,
     fetching: true,
   };
 }
 
-export function endDropdownSearch(state) {
+export function stopDropdownSearch(state) {
   return {
     ...state,
     fetching: false,
   };
 }
 
-export function receiveUsers(state, { userIds }) {
+export function updateUserResults(state, { userIds }) {
   return {
     ...state,
     userIds: [...userIds],
   };
 }
 
-export function receiveTracks(state, { trackIds }) {
+export function updateTrackResults(state, { trackIds }) {
   return {
     ...state,
     trackIds: [...trackIds],
@@ -58,30 +58,30 @@ export function clearDropdownSearchResults(state) {
   };
 }
 
-export default function dropdownSearchReducer(state = INITIAL_STATE, action) {
+export default function dropdownSearchReducer(state = initialState, action) {
   switch (action.type) {
-    case TYPES.DROPDOWN_SEARCH_REQUEST:
-      return requestDropdownSearch(state);
+    case types.DROPDOWN_SEARCH_START:
+      return startDropdownSearch(state);
 
-    case TYPES.DROPDOWN_SEARCH_END:
-      return endDropdownSearch(state);
+    case types.DROPDOWN_SEARCH_STOP:
+      return stopDropdownSearch(state);
 
-    case TYPES.DROPDOWN_SEARCH_FAILED:
-      return endDropdownSearch(state);
+    case types.DROPDOWN_SEARCH_FAIL:
+      return stopDropdownSearch(state);
 
-    case TYPES.DROPDOWN_SEARCH_USERS_RECEIVED:
-      return receiveUsers(state, action.payload);
+    case types.DROPDOWN_SEARCH_USER_RESULTS_UPDATE:
+      return updateUserResults(state, action.payload);
 
-    case TYPES.DROPDOWN_SEARCH_TRACKS_RECEIVED:
-      return receiveTracks(state, action.payload);
+    case types.DROPDOWN_SEARCH_TRACK_RESULTS_UPDATE:
+      return updateTrackResults(state, action.payload);
 
-    case TYPES.DROPDOWN_SEARCH_RESULTS_HIDE:
+    case types.DROPDOWN_SEARCH_RESULTS_HIDE:
       return hideDropdownSearchResults(state);
 
-    case TYPES.DROPDOWN_SEARCH_RESULTS_SHOW:
+    case types.DROPDOWN_SEARCH_RESULTS_SHOW:
       return showDropdownSearchResults(state);
 
-    case TYPES.DROPDOWN_SEARCH_RESULTS_CLEAR:
+    case types.DROPDOWN_SEARCH_RESULTS_CLEAR:
       return clearDropdownSearchResults(state);
 
     default:

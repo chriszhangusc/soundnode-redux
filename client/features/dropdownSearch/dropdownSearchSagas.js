@@ -2,15 +2,15 @@ import { put, call } from 'redux-saga/effects';
 import { takeLatest } from 'redux-saga';
 
 import {
-  receiveDropdownSearchTracks,
-  receiveDropdownSearchUsers,
+  updateTrackResults,
+  updateUserResults,
   showDropdownSearchResults,
   clearAndHideSearchResults,
-  endDropdownSearch,
+  stopDropdownSearch,
   failedToFetchSearchResults,
 } from 'client/features/dropdownSearch/dropdownSearchActions';
-
-import { DROPDOWN_SEARCH_REQUEST } from 'client/features/dropdownSearch/dropdownSearchConsts';
+import { mergeEntities } from 'client/features/entities/entitiesActions';
+import { DROPDOWN_SEARCH_START } from 'client/features/dropdownSearch/dropdownSearchConsts';
 
 import { fetchDropdownSearchTracks, fetchDropdownSearchUsers } from './dropdownSearchApi';
 /* *****************************************************************************/
@@ -22,7 +22,6 @@ import { fetchDropdownSearchTracks, fetchDropdownSearchUsers } from './dropdownS
 // Side effects in saga making actions cleaner. (Not mixing with thunks)
 export function* doDropdownSearch({ payload }) {
   const { keyword, limit } = payload;
-
   if (!keyword || keyword.trim() === '') {
     yield put(clearAndHideSearchResults());
     return;
@@ -34,13 +33,16 @@ export function* doDropdownSearch({ payload }) {
       call(fetchDropdownSearchTracks, finalKeyword),
       call(fetchDropdownSearchUsers, finalKeyword),
     ];
-    yield put(receiveDropdownSearchTracks(normalizedTracks));
-    yield put(receiveDropdownSearchUsers(normalizedUsers));
-    yield put(endDropdownSearch());
+    yield put(mergeEntities(normalizedTracks.entities));
+    yield put(mergeEntities(normalizedUsers.entities));
+    yield put(updateTrackResults(normalizedTracks.result));
+    yield put(updateUserResults(normalizedUsers.result));
     yield put(showDropdownSearchResults());
   } catch (err) {
+    console.error(err);
     yield put(failedToFetchSearchResults());
-    console.log(err);
+  } finally {
+    yield put(stopDropdownSearch());
   }
 }
 
@@ -49,5 +51,5 @@ export function* doDropdownSearch({ payload }) {
 /* *****************************************************************************/
 
 export function* watchDropdownSearch() {
-  yield takeLatest(DROPDOWN_SEARCH_REQUEST, doDropdownSearch);
+  yield takeLatest(DROPDOWN_SEARCH_START, doDropdownSearch);
 }

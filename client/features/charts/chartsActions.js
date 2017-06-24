@@ -1,4 +1,3 @@
-/* Action Creators */
 import {
   updateVisiblePlaylist,
   appendToVisiblePlaylist,

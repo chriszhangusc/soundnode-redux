@@ -5,7 +5,7 @@ import { media } from 'client/app/css/styleUtils';
 import { connect } from 'react-redux';
 import {
   clearAndHideSearchResults,
-  requestDropdownSearch,
+  startDropdownSearch,
 } from 'client/features/dropdownSearch/dropdownSearchActions';
 import { FONT_COLOR_SECONDARY } from 'client/app/css/colors';
 
@@ -49,7 +49,7 @@ const SearchIcon = styled.i`
 class DropdownSearchInput extends React.Component {
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -65,7 +65,7 @@ class DropdownSearchInput extends React.Component {
     this.searchInput.value = '';
   }
 
-  onChange(e) {
+  onInputChange(e) {
     e.preventDefault();
     e.stopPropagation();
     const { handleChange } = this.props;
@@ -91,7 +91,7 @@ class DropdownSearchInput extends React.Component {
             ref={(node) => {
               this.searchInput = node;
             }}
-            onChange={this.onChange}
+            onChange={this.onInputChange}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
           />
@@ -110,7 +110,8 @@ DropdownSearchInput.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   handleChange(keywords) {
-    dispatch(requestDropdownSearch(keywords));
+    console.log('onchange keywords');
+    dispatch(startDropdownSearch(keywords));
   },
 
   handleBlur() {
@@ -123,7 +124,7 @@ const mapDispatchToProps = dispatch => ({
 
   handleFocus(keywords) {
     if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
-    else dispatch(requestDropdownSearch(keywords));
+    else dispatch(startDropdownSearch(keywords));
   },
 
   handleShowAll(rawKeywords) {
