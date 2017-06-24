@@ -47,10 +47,7 @@ module.exports = {
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
   // In every other case use resolve.root.
   resolve: {
-    modules: [
-      path.join(__dirname, "client"),
-      'node_modules',
-    ],
+    modules: [path.join(__dirname, 'client'), 'node_modules'],
     alias: {
       // client: path.join(__dirname, 'client'),
       assets: path.join(__dirname, 'public'),
@@ -118,15 +115,12 @@ module.exports = {
 
     // DefinePlugin makes it possible for us to use env variables in src code
     new webpack.DefinePlugin({
-      PRODUCTION: false,
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
+
       PORT,
     }),
-    // Or do this.
-    // new webpack.DefinePlugin({
-    //   'process.env': {
-    //     NODE_ENV: JSON.stringify('production')
-    //   }
-    // }),
 
     // ProvidePlugin: automatically load modules.
     // new webpack.ProvidePlugin({
