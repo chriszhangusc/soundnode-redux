@@ -6,6 +6,7 @@ import configureStore from 'app/store/configureStore';
 import App from 'app/layout/App';
 import 'isomorphic-fetch';
 import 'normalize.css';
+import { BrowserRouter } from 'react-router-dom';
 
 const store = configureStore();
 
@@ -14,7 +15,9 @@ const store = configureStore();
 ReactDOM.render(
   <IntlProvider locale="en">
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </IntlProvider>,
   document.getElementById('app'),
