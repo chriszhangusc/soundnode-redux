@@ -11,7 +11,7 @@ function transform(response) {
   };
 }
 
-export function fetchCharts(genre, limit = 20) {
+export function fetchCharts(genre, limit = 25) {
   const requestUrl = `${SC_API_V2}/charts?kind=top&genre=soundcloud:genres:${genre}&linked_partitioning=1&limit=${limit}&offset=0`;
   return (
     makeRequest(requestUrl)

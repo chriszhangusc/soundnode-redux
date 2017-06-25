@@ -1,4 +1,5 @@
 import { CHARTS_CLEAR_STATE } from 'features/charts/chartsConsts';
+import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './playlistConsts';
 
 const initialState = {
@@ -72,13 +73,34 @@ export function appendToPlaylist(state, { playlistName, trackIds }) {
   };
 }
 
+export function mergePlaylist(state, { playlistName, trackIds }) {
+  const curPlaylist = state[playlistName] ? state[playlistName] : [];
+  return {
+    ...state,
+    // There is order in merged array!!
+    [playlistName]: mergeArrays(curPlaylist, trackIds),
+  };
+}
+
+export function removePlaylist(state, { playlistName }) {
+  const newState = { ...state };
+  delete newState[playlistName];
+  return newState;
+}
+
 export default function playlistReducer(state = initialState, action) {
   switch (action.type) {
-    case types.PLAYLIST_UPDATE:
-      return updatePlaylist(state, action.payload);
+    // case types.PLAYLIST_UPDATE:
+    //   return updatePlaylist(state, action.payload);
 
-    case types.PLAYLIST_APPEND:
-      return appendToPlaylist(state, action.payload);
+    // case types.PLAYLIST_APPEND:
+    //   return appendToPlaylist(state, action.payload);
+
+    case types.PLAYLIST_MERGE:
+      return mergePlaylist(state, action.payload);
+
+    case types.PLAYLIST_REMOVE:
+      return removePlaylist(state, action.payload);
 
     case types.PLAYLIST_SHUFFLE_PLAYLIST_UPDATE:
       return updateShuffledPlaylist(state, action.payload);
@@ -102,11 +124,6 @@ export default function playlistReducer(state = initialState, action) {
 
     case types.PLAYLIST_ACTIVE_PLAYLIST_NAME_CHANGE:
       return updateActivePlaylistName(state, action.payload);
-
-    case CHARTS_CLEAR_STATE:
-      return {
-        ...initialState,
-      };
 
     default:
       return state;

@@ -1,6 +1,5 @@
 import { getPlayerTrackId, isInShuffleMode } from 'features/player/playerSelectors';
 import shuffle from 'lodash/shuffle';
-import uniq from 'lodash/uniq';
 import { shiftToFront } from './PlaylistUtils';
 import * as types from './playlistConsts';
 
@@ -46,9 +45,29 @@ export const updateActivePlaylistName = activePlaylistName => ({
 
 export const togglePlaylist = () => ({ type: types.PLAYLIST_TOGGLE });
 
-export function updatePlaylist(playlistName, trackIds) {
+// export function updatePlaylist(playlistName, trackIds) {
+//   return {
+//     type: types.PLAYLIST_UPDATE,
+//     payload: {
+//       playlistName,
+//       trackIds,
+//     },
+//   };
+// }
+
+// export function appendToPlaylist(playlistName, trackIds) {
+//   return {
+//     type: types.PLAYLIST_APPEND,
+//     payload: {
+//       playlistName,
+//       trackIds,
+//     },
+//   };
+// }
+
+export function mergePlaylist(playlistName, trackIds) {
   return {
-    type: types.PLAYLIST_UPDATE,
+    type: types.PLAYLIST_MERGE,
     payload: {
       playlistName,
       trackIds,
@@ -56,12 +75,11 @@ export function updatePlaylist(playlistName, trackIds) {
   };
 }
 
-export function appendToPlaylist(playlistName, trackIds) {
+export function removePlaylist(playlistName) {
   return {
-    type: types.PLAYLIST_APPEND,
+    type: types.PLAYLIST_REMOVE,
     payload: {
       playlistName,
-      trackIds,
     },
   };
 }
@@ -93,25 +111,42 @@ export function updateShuffledPlaylistIfNeeded() {
   };
 }
 
-export function updateVisiblePlaylist(trackIds) {
+export function mergeVisiblePlaylist(trackIds) {
   return (dispatch, getState) => {
     const state = getState();
     const visiblePlaylistName = getVisiblePlaylistName(state);
-    // Keep the side effects in the thunks
-    dispatch(updatePlaylist(visiblePlaylistName, uniq(trackIds)));
+    dispatch(mergePlaylist(visiblePlaylistName, trackIds));
     dispatch(updateShuffledPlaylistIfNeeded());
   };
 }
 
-export function appendToVisiblePlaylist(trackIds) {
+export function removeVisiblePlaylist() {
   return (dispatch, getState) => {
     const state = getState();
     const visiblePlaylistName = getVisiblePlaylistName(state);
-    // Keep the side effects in the thunks
-    dispatch(appendToPlaylist(visiblePlaylistName, uniq(trackIds)));
-    dispatch(updateShuffledPlaylistIfNeeded());
+    dispatch(removePlaylist(visiblePlaylistName));
   };
 }
+
+// export function updateVisiblePlaylist(trackIds) {
+//   return (dispatch, getState) => {
+//     const state = getState();
+//     const visiblePlaylistName = getVisiblePlaylistName(state);
+//     // Keep the side effects in the thunks
+//     dispatch(updatePlaylist(visiblePlaylistName, uniq(trackIds)));
+//     dispatch(updateShuffledPlaylistIfNeeded());
+//   };
+// }
+
+// export function appendToVisiblePlaylist(trackIds) {
+//   return (dispatch, getState) => {
+//     const state = getState();
+//     const visiblePlaylistName = getVisiblePlaylistName(state);
+//     // Keep the side effects in the thunks
+//     dispatch(appendToPlaylist(visiblePlaylistName, uniq(trackIds)));
+//     dispatch(updateShuffledPlaylistIfNeeded());
+//   };
+// }
 
 // export function updatePlaylistIfNeeded(playlistName, playlistIds) {
 //   return (dispatch, getState) => {

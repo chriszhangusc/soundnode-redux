@@ -48,10 +48,9 @@ function Playlist(props) {
     <PlaylistWrapper {...props}>
       <PlaylistHeader {...props} />
       <ul className="playlist-list">
-        {playlistTrackIds &&
-          playlistTrackIds.map((trackId, idx) => (
-            <PlaylistRow trackId={trackId} index={idx + 1} key={trackId.toString()} />
-          ))}
+        {playlistTrackIds.map((trackId, idx) => (
+          trackId && <PlaylistRow trackId={trackId} index={idx + 1} key={trackId.toString()} />
+        ))}
       </ul>
     </PlaylistWrapper>
   );

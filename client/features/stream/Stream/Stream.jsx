@@ -15,7 +15,7 @@ const Title = styled.h1`
 class Stream extends React.Component {
   componentWillMount() {
     this.props.updateVisiblePlaylistName('stream');
-    this.props.loadStreamData();
+    this.props.loadStream();
   }
 
   componentWillUnmount() {
@@ -33,7 +33,7 @@ class Stream extends React.Component {
 }
 
 Stream.propTypes = {
-  loadStreamData: PropTypes.func.isRequired,
+  loadStream: PropTypes.func.isRequired,
   resetStreamState: PropTypes.func.isRequired,
   updateVisiblePlaylistName: PropTypes.func.isRequired,
 };

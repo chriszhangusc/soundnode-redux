@@ -1,4 +1,4 @@
-import uniq from 'lodash/uniq';
+import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './userProfileConsts';
 
 /* Reducer */
@@ -49,7 +49,7 @@ export function appendUserTracks(state, { trackIds }) {
   return {
     ...state,
     // There will be overlap in the data from SoundCloud
-    trackIds: uniq([...state.trackIds, ...trackIds]),
+    trackIds: mergeArrays(state.trackIds, trackIds),
   };
 }
 

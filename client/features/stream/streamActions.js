@@ -1,4 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
+import { mergeVisiblePlaylist } from 'features/playlist/playlistActions';
 import * as types from './streamConsts';
 import { fetchStream, fetchMoreStream } from './streamApi';
 import { isStreamFetching, getStreamNextHref } from './streamSelectors';
@@ -39,7 +40,7 @@ export function resetStreamState() {
   };
 }
 
-export function loadStreamData() {
+export function loadStream() {
   return (dispatch, getState) => {
     const state = getState();
     const streamFetching = isStreamFetching(state);
@@ -50,7 +51,8 @@ export function loadStreamData() {
         .then((normalized) => {
           const { entities, result, nextHref } = normalized;
           dispatch(mergeEntities(entities));
-          dispatch(mergeStream(result));
+          // dispatch(mergeStream(result));
+          dispatch(mergeVisiblePlaylist(result));
           dispatch(updateStreamNextHref(nextHref));
           dispatch(stopFetchingStream());
         })
@@ -61,7 +63,7 @@ export function loadStreamData() {
   };
 }
 
-export function loadMoreStreamData() {
+export function loadMoreStream() {
   return (dispatch, getState) => {
     const state = getState();
     const streamFetching = isStreamFetching(state);
@@ -72,7 +74,8 @@ export function loadMoreStreamData() {
         .then((normalized) => {
           const { entities, result, nextHref } = normalized;
           dispatch(mergeEntities(entities));
-          dispatch(mergeStream(result));
+          // dispatch(mergeStream(result));
+          dispatch(mergeVisiblePlaylist(result));
           dispatch(updateStreamNextHref(nextHref));
           dispatch(stopFetchingStream());
         })

@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
-import { isStreamFetching, getStreamIds } from 'features/stream/streamSelectors';
+import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
+import { isStreamFetching } from 'features/stream/streamSelectors';
 import { loadMoreStream } from 'features/stream/streamActions';
 
 // Container for SongCardList
 function mapStateToProps(state) {
   return {
     fetching: isStreamFetching(state),
-    trackIds: getStreamIds(state),
+    trackIds: getVisiblePlaylist(state),
     // playlistName: getChartsSelectedGenre(state),
   };
 }

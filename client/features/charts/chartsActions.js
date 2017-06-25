@@ -1,7 +1,4 @@
-import {
-  updateVisiblePlaylist,
-  appendToVisiblePlaylist,
-} from 'features/playlist/playlistActions';
+import { mergeVisiblePlaylist } from 'features/playlist/playlistActions';
 import { getVisiblePlaylist, getPlaylistByName } from 'features/playlist/playlistSelectors';
 import { notificationWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
@@ -64,7 +61,7 @@ export function loadChartsPage(genre) {
         const normalizedCharts = await fetchCharts(genre);
         const { entities, result, nextHref } = normalizedCharts;
         dispatch(mergeEntities(entities));
-        dispatch(updateVisiblePlaylist(result));
+        dispatch(mergeVisiblePlaylist(result));
         dispatch(updateChartsNextHref(nextHref));
         dispatch(stopFetchingCharts());
       } catch (err) {
@@ -88,7 +85,7 @@ export function loadMoreCharts() {
       try {
         const { entities, result, nextHref } = await fetchMoreCharts(curNextHref);
         dispatch(mergeEntities(entities));
-        dispatch(appendToVisiblePlaylist(result));
+        dispatch(mergeVisiblePlaylist(result));
         dispatch(updateChartsNextHref(nextHref));
         dispatch(stopFetchingCharts());
       } catch (err) {
