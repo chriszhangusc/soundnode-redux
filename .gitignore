@@ -2,6 +2,5 @@
 node_modules
 playground
 build
-dist
 *.log
 .vscode
