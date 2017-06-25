@@ -16,7 +16,7 @@ export default function Routing() {
     <Switch>
       <Route
         exact
-        path={`${routes.CHARTS_ROUTE}/:genre?`}
+        path={`${routes.CHARTS_ROUTE}/:genre`}
         render={(routeProps) => {
           // Validate route on route change
           const { match } = routeProps;
