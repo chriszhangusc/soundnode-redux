@@ -8,20 +8,14 @@ import { SC_API_V2 } from 'common/constants/apiConsts';
 function transform(response) {
   return {
     ...response,
-    collection: response.collection.map((item) => {
-      switch (item.type) {
-        case 'track-repost':
-          return item.track;
-        default:
-          return null;
-      }
-    }),
+    collection: response.collection.map(item => item.track),
   };
 }
 
 // https://api-v2.soundcloud.com/stream/users/250047142?client_id=2t9loNQH90kzJcsFCODdigxfp325aq4z&limit=10&offset=0&linked_partitioning=1&app_version=1497015478
-export function fetchStream(userId, limit = 20) {
-  const requestUrl = `${SC_API_V2}/stream/users/${userId}?limit=${limit}&offset=0&linked_partitioning=1`;
+// The results will contain all the track and playlist reposts of the currently logged in user.
+export function fetchStream(userId, limit = 30) {
+  const requestUrl = `${SC_API_V2}/stream?limit=${limit}&offset=0&linked_partitioning=1`;
   return makeRequest(requestUrl)
     .then(transform)
     .then(transformed => normalizeResponse(transformed, trackArraySchema));

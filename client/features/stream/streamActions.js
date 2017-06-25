@@ -1,28 +1,31 @@
-import { getMyId } from 'features/auth/authSelectors';
-import { STREAM_SET, STREAM_APPEND, STREAM_REQUEST } from './streamConsts';
+import { mergeEntities } from 'features/entities/entitiesActions';
+import * as types from './streamConsts';
 import { fetchStream, fetchMoreStream } from './streamApi';
+import { isStreamFetching, getStreamNextHref } from './streamSelectors';
 
-export function requestStream() {
+export function startFetchingStream() {
   return {
-    type: STREAM_REQUEST,
+    type: types.STREAM_FETCH_START,
   };
 }
 
-export function setStream({ result, nextHref }) {
+export function stopFetchingStream() {
   return {
-    type: STREAM_SET,
-    payload: {
-      streamIds: result,
-      nextHref,
-    },
+    type: types.STREAM_FETCH_STOP,
   };
 }
 
-export function appendStream({ result, nextHref }) {
+export function appendStream(result) {
   return {
-    type: STREAM_APPEND,
+    type: types.STREAM_APPEND,
+    payload: { streamIds: result },
+  };
+}
+
+export function updateStreamNextHref(nextHref) {
+  return {
+    type: types.STREAM_NEXT_HREF_UPDATE,
     payload: {
-      streamIds: result,
       nextHref,
     },
   };
@@ -31,13 +34,46 @@ export function appendStream({ result, nextHref }) {
 export function loadStreamData() {
   return (dispatch, getState) => {
     const state = getState();
-    const userId = getMyId(state);
-    if (userId) {
-      dispatch(requestStream());
-      fetchStream(userId).then((normalized) => {
-        // console.log(normalized);
-        dispatch(setStream(normalized));
-      });
+    const streamFetching = isStreamFetching(state);
+    if (!streamFetching) {
+      console.log('First Load');
+      dispatch(startFetchingStream());
+      fetchStream()
+        .then((normalized) => {
+          const { entities, result, nextHref } = normalized;
+          dispatch(mergeEntities(entities));
+          dispatch(appendStream(result));
+          dispatch(updateStreamNextHref(nextHref));
+          dispatch(stopFetchingStream());
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
+  };
+}
+
+export function loadMoreStreamData() {
+  return (dispatch, getState) => {
+    // const state = getState();
+    // const streamFetching = isStreamFetching(state);
+    // const curNextHref = getStreamNextHref(state);
+    // // const currentCharts = getVisiblePlaylist(state);
+
+    // if (!streamFetching && curNextHref) {
+    //   console.log('Load More');
+    //   dispatch(startFetchingStream());
+    //   fetchMoreStream(curNextHref)
+    //     .then((normalized) => {
+    //       const { entities, result, nextHref } = normalized;
+    //       dispatch(mergeEntities(entities));
+    //       dispatch(appendStream(result));
+    //       dispatch(updateStreamNextHref(nextHref));
+    //       dispatch(stopFetchingStream());
+    //     })
+    //     .catch((err) => {
+    //       console.error(err);
+    //     });
+    // }
   };
 }

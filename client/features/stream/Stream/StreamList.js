@@ -15,7 +15,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     scrollFunc() {
-      // dispatch(loadMoreFavorites());
+      console.log('Load more stream');
+      dispatch(loadMoreStream());
     },
   };
 }
