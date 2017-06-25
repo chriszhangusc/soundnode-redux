@@ -1,3 +1,4 @@
+import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './streamConsts';
 
 const initialState = {
@@ -20,10 +21,10 @@ export function stopFetchingStream(state) {
   };
 }
 
-export function appendStream(state, { streamIds }) {
+export function mergeStream(state, { streamIds }) {
   return {
     ...state,
-    streamIds: [...state.streamIds, ...streamIds],
+    streamIds: mergeArrays(streamIds, state.streamIds),
   };
 }
 
@@ -31,6 +32,12 @@ export function updateNextHref(state, { nextHref }) {
   return {
     ...state,
     nextHref,
+  };
+}
+
+export function resetStreamState(initial) {
+  return {
+    ...initial,
   };
 }
 
@@ -42,11 +49,14 @@ export default function streamReducer(state = initialState, action) {
     case types.STREAM_FETCH_STOP:
       return stopFetchingStream(state);
 
-    case types.STREAM_APPEND:
-      return appendStream(state, action.payload);
+    case types.STREAM_MERGE:
+      return mergeStream(state, action.payload);
 
     case types.STREAM_NEXT_HREF_UPDATE:
       return updateNextHref(state, action.payload);
+
+    case types.STREAM_STATE_RESET:
+      return resetStreamState(initialState);
 
     default:
       return state;

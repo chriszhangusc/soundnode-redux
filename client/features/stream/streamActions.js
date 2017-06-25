@@ -15,10 +15,12 @@ export function stopFetchingStream() {
   };
 }
 
-export function appendStream(result) {
+export function mergeStream(streamIds) {
   return {
-    type: types.STREAM_APPEND,
-    payload: { streamIds: result },
+    type: types.STREAM_MERGE,
+    payload: {
+      streamIds,
+    },
   };
 }
 
@@ -28,6 +30,12 @@ export function updateStreamNextHref(nextHref) {
     payload: {
       nextHref,
     },
+  };
+}
+
+export function resetStreamState() {
+  return {
+    type: types.STREAM_STATE_RESET,
   };
 }
 
@@ -42,7 +50,7 @@ export function loadStreamData() {
         .then((normalized) => {
           const { entities, result, nextHref } = normalized;
           dispatch(mergeEntities(entities));
-          dispatch(appendStream(result));
+          dispatch(mergeStream(result));
           dispatch(updateStreamNextHref(nextHref));
           dispatch(stopFetchingStream());
         })
@@ -55,25 +63,22 @@ export function loadStreamData() {
 
 export function loadMoreStreamData() {
   return (dispatch, getState) => {
-    // const state = getState();
-    // const streamFetching = isStreamFetching(state);
-    // const curNextHref = getStreamNextHref(state);
-    // // const currentCharts = getVisiblePlaylist(state);
-
-    // if (!streamFetching && curNextHref) {
-    //   console.log('Load More');
-    //   dispatch(startFetchingStream());
-    //   fetchMoreStream(curNextHref)
-    //     .then((normalized) => {
-    //       const { entities, result, nextHref } = normalized;
-    //       dispatch(mergeEntities(entities));
-    //       dispatch(appendStream(result));
-    //       dispatch(updateStreamNextHref(nextHref));
-    //       dispatch(stopFetchingStream());
-    //     })
-    //     .catch((err) => {
-    //       console.error(err);
-    //     });
-    // }
+    const state = getState();
+    const streamFetching = isStreamFetching(state);
+    const curNextHref = getStreamNextHref(state);
+    if (!streamFetching && curNextHref) {
+      dispatch(startFetchingStream());
+      fetchMoreStream(curNextHref)
+        .then((normalized) => {
+          const { entities, result, nextHref } = normalized;
+          dispatch(mergeEntities(entities));
+          dispatch(mergeStream(result));
+          dispatch(updateStreamNextHref(nextHref));
+          dispatch(stopFetchingStream());
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   };
 }

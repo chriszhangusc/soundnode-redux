@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
-import { loadStreamData } from '../streamActions';
+import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
+import * as streamActions from '../streamActions';
 import StreamList from './StreamList';
 
 const Title = styled.h1`
@@ -14,11 +14,13 @@ const Title = styled.h1`
 
 class Stream extends React.Component {
   componentWillMount() {
-    const { onPageLoad } = this.props;
-    onPageLoad();
+    this.props.updateVisiblePlaylistName('stream');
+    this.props.loadStreamData();
   }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    this.props.resetStreamState();
+  }
 
   render() {
     return (
@@ -31,13 +33,14 @@ class Stream extends React.Component {
 }
 
 Stream.propTypes = {
-  onPageLoad: PropTypes.func.isRequired,
+  loadStreamData: PropTypes.func.isRequired,
+  resetStreamState: PropTypes.func.isRequired,
+  updateVisiblePlaylistName: PropTypes.func.isRequired,
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onPageLoad: bindActionCreators(loadStreamData, dispatch),
-  };
-}
+const actions = {
+  ...streamActions,
+  updateVisiblePlaylistName,
+};
 
-export default connect(null, mapDispatchToProps)(Stream);
+export default connect(null, actions)(Stream);
