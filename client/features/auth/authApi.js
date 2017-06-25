@@ -1,24 +1,25 @@
-import { makeSCV1Request, checkStatus, getSCApiUrl } from 'common/utils/apiUtils';
+import { makeRequest, checkStatus, getSCApiUrl } from 'common/utils/apiUtils';
+import { SC_API_V1 } from 'common/constants/apiConsts';
 
 export function fetchMe() {
-  return makeSCV1Request('/me');
+  return makeRequest(`${SC_API_V1}/me`);
 }
 
 export function likeTrack(trackId) {
-  return makeSCV1Request(`/me/favorites/${trackId}`, { method: 'PUT' });
+  return makeRequest(`${SC_API_V1}/me/favorites/${trackId}`, { method: 'PUT' });
 }
 
 export function unlikeTrack(trackId) {
-  return makeSCV1Request(`/me/favorites/${trackId}`, { method: 'DELETE' });
+  return makeRequest(`${SC_API_V1}/me/favorites/${trackId}`, { method: 'DELETE' });
 }
 
 export function fetchMyFavoritesIds() {
-  return makeSCV1Request('/me/favorites/ids');
+  return makeRequest(`${SC_API_V1}/me/favorites/ids`);
 }
 
 // 'https://api.soundcloud.com/e1/me/track_reposts/ids?linked_partitioning=1&limit=200&oauth_token='
 export function fetchMyRepostIds() {
-  return makeSCV1Request('/e1/me/track_reposts/ids');
+  return makeRequest(`${SC_API_V1}/e1/me/track_reposts/ids`);
 }
 
 // #TODO: Modify make request method

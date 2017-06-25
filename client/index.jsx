@@ -1,10 +1,6 @@
-/* eslint-disable */
-import SC from 'soundcloud';
-/* eslint-enable */
 import React from 'react';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
-
 import ReactDOM from 'react-dom';
 import configureStore from 'app/store/configureStore';
 import App from 'app/layout/App';

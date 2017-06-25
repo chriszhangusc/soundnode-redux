@@ -1,5 +1,4 @@
-import { put, call } from 'redux-saga/effects';
-import { takeLatest } from 'redux-saga';
+import { put, call, takeLatest, all } from 'redux-saga/effects';
 
 import {
   updateTrackResults,
@@ -29,10 +28,10 @@ export function* doDropdownSearch({ payload }) {
   const finalKeyword = keyword.trim();
 
   try {
-    const [normalizedTracks, normalizedUsers] = yield [
+    const [normalizedTracks, normalizedUsers] = yield all([
       call(fetchDropdownSearchTracks, finalKeyword),
       call(fetchDropdownSearchUsers, finalKeyword),
-    ];
+    ]);
     yield put(mergeEntities(normalizedTracks.entities));
     yield put(mergeEntities(normalizedUsers.entities));
     yield put(updateTrackResults(normalizedTracks.result));

@@ -3,11 +3,10 @@ import { camelizeKeys } from 'humps';
 import { API_PROXY_ORIGIN } from 'common/constants/appConsts';
 import { CLIENT_ID } from 'common/constants/authConsts';
 import { getOAuthToken } from 'features/auth/authUtils';
+import { SC_API_V1, SC_API_V2 } from 'common/constants/apiConsts';
+
 import { setUrlParams } from './urlUtils';
 
-const SC_API_V2 = 'https://api-v2.soundcloud.com';
-
-const SC_API_V1 = 'https://api.soundcloud.com';
 
 function getSCV2ProxyOrigin() {
   return `${API_PROXY_ORIGIN}/sc/v2`;
@@ -78,6 +77,3 @@ export function makeRequest(requestUrl, fetchOptions) {
   );
 }
 
-export function getSCV1Url(endpoint) {
-  return new URL(`/sc/v1${endpoint}`, `${API_PROXY_ORIGIN}`).toString();
-}
