@@ -4,6 +4,7 @@ import { DEFAULT_GENRE } from 'features/charts/chartsConsts';
 import * as routes from 'common/constants/routeConsts';
 import Charts from 'features/charts/Charts';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import withAuthRequired from 'common/hocs/withAuthRequired';
 import UserProfile from 'features/userProfile/UserProfile';
 import TrackProfile from 'features/trackProfile/TrackProfile';
 import Favorites from 'features/favorites/Favorites';
@@ -27,8 +28,8 @@ export default function Routing() {
       />
       <Route exact path={`${routes.USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />
       <Route exact path={`${routes.TRACK_PROFILE_ROUTE}/:trackId`} component={TrackProfile} />
-      <Route exact path={`${routes.FAVORITES_ROUTE}`} component={Favorites} />
-      <Route exact path={`${routes.STREAM_ROUTE}`} component={Stream} />
+      <Route exact path={`${routes.FAVORITES_ROUTE}`} component={withAuthRequired(Favorites)} />
+      <Route exact path={`${routes.STREAM_ROUTE}`} component={withAuthRequired(Stream)} />
       {defaultRedirect}
     </Switch>
   );

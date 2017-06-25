@@ -12,25 +12,34 @@ const SongCardListWrapper = styled.div`
   margin-bottom: 30px;
 `;
 
-function SongCardList({ trackIds }) {
+const Title = styled.h1`
+  margin: 30px 20px;
+  font-weight: 400;
+  font-size: 2rem;
+`;
+
+function SongCardList({ title, trackIds }) {
   return (
-    <SongCardListWrapper>
-      {trackIds.map(
-        trackId =>
-          trackId &&
-          <SongCard trackId={trackId} key={trackId.toString()} />,
-      )}
-    </SongCardListWrapper>
+    <div>
+      {title && <Title>{title}</Title>}
+      <SongCardListWrapper>
+        {trackIds.map(
+          trackId => trackId && <SongCard trackId={trackId} key={trackId.toString()} />,
+        )}
+      </SongCardListWrapper>
+    </div>
   );
 }
 
 SongCardList.defaultProps = {
+  title: undefined,
   fetching: false,
   trackIds: [],
 };
 
 SongCardList.propTypes = {
   // fetching: PropTypes.bool,
+  title: PropTypes.string,
   trackIds: PropTypes.arrayOf(PropTypes.number),
 };
 

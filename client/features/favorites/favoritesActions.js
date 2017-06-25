@@ -1,9 +1,4 @@
-import {
-  updateVisiblePlaylistName,
-  updateVisiblePlaylist,
-  appendToVisiblePlaylist,
-} from 'features/playlist/playlistActions';
-
+import { updateVisiblePlaylistName, mergeVisiblePlaylist } from 'features/playlist/playlistActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import * as types from './favoritesConsts';
 import { fetchMyFavorites, fetchFavoritesByNextHref } from './favoritesApi';
@@ -46,7 +41,7 @@ export function loadFavorites() {
         const { entities, nextHref, result } = normalized;
         dispatch(mergeEntities(entities));
         dispatch(updateFavoritesNextHref(nextHref));
-        dispatch(updateVisiblePlaylist(result));
+        dispatch(mergeVisiblePlaylist(result));
         dispatch(stopFetchingFavorites());
       })
       .catch((err) => {
@@ -68,7 +63,7 @@ export function loadMoreFavorites() {
           dispatch(mergeEntities(entities));
           dispatch(updateFavoritesNextHref(nextHref));
           // Append new songs to the favorites/currently visible playlist
-          dispatch(appendToVisiblePlaylist(result));
+          dispatch(mergeVisiblePlaylist(result));
           dispatch(stopFetchingFavorites());
         })
         .catch((err) => {
