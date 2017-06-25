@@ -1,4 +1,3 @@
-// Webpack 2 dev config
 const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
