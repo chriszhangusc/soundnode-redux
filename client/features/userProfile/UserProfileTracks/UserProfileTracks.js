@@ -1,16 +1,14 @@
 import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
 import { loadMoreUserTracks } from 'features/userProfile/userProfileActions';
-import {
-  isUserTracksFetching,
-  getProfiledUserTrackIds,
-} from 'features/userProfile/userProfileSelectors';
+import { isUserTracksFetching } from 'features/userProfile/userProfileSelectors';
+import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
 
 // Container for SongCardList
 // Simply providing slices of state for the component to render.
 const mapStateToProps = state => ({
   fetching: isUserTracksFetching(state),
-  trackIds: getProfiledUserTrackIds(state),
+  trackIds: getVisiblePlaylist(state),
 });
 
 const mapDispatchToProps = dispatch => ({

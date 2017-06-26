@@ -4,12 +4,14 @@ import * as searchActions from 'features/search/searchActions';
 import PropTypes from 'prop-types';
 import SongCardList from 'common/components/SongCardList';
 import { isSearching, getTrackResults } from 'features/search/searchSelectors';
+import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 
 class Search extends React.Component {
   componentWillMount() {
     // Load query params from url
     const { loadSearchResults, match } = this.props;
     const { query } = match.params;
+    updateVisiblePlaylistName(`search-${query}`);
     loadSearchResults(query);
   }
 

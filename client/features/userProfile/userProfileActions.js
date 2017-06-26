@@ -1,4 +1,6 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
+import { mergeVisiblePlaylist } from 'features/playlist/playlistActions';
+
 import * as types from './userProfileConsts';
 
 import {
@@ -80,7 +82,7 @@ export function receiveUser(normalizedUser) {
 export function receiveTracks(normalizedTracks) {
   return (dispatch) => {
     dispatch(mergeEntities(normalizedTracks.entities));
-    dispatch(appendUserTracks(normalizedTracks.result));
+    dispatch(mergeVisiblePlaylist(normalizedTracks.result));
     dispatch(updateUserTracksNextHref(normalizedTracks.nextHref));
     dispatch(stopFetchingUserTracks());
   };

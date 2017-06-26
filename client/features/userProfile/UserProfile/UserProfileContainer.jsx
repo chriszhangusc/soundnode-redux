@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  loadUserProfilePage,
-  clearUserState,
-} from 'features/userProfile/userProfileActions';
-import {
-  getProfiledUserId,
-  getProfiledUser,
-  isUserFetching,
-} from 'features/userProfile/userProfileSelectors';
+import { loadUserProfilePage, clearUserState } from 'features/userProfile/userProfileActions';
+import { getProfiledUserId, isUserFetching } from 'features/userProfile/userProfileSelectors';
 import Spinner from 'common/components/Spinner';
+import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 
 import UserProfile from './UserProfile';
 
@@ -18,6 +12,7 @@ class UserProfileContainer extends Component {
   componentWillMount() {
     const { dispatch, match } = this.props;
     const userId = match.params.userId;
+    dispatch(updateVisiblePlaylistName(`user-${userId}`));
     dispatch(loadUserProfilePage(userId));
   }
 
@@ -33,6 +28,7 @@ class UserProfileContainer extends Component {
     if (curUserId !== newUserId && curUserId) {
       // Before jumping to new track profile page, clear old state.
       dispatch(clearUserState());
+      dispatch(updateVisiblePlaylistName(`user-${newUserId}`));
       dispatch(loadUserProfilePage(newUserId));
     }
   }
