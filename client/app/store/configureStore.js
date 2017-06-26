@@ -4,7 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from 'app/sagas/rootSaga';
 // import logger from 'redux-logger';
 import { persistStore, autoRehydrate } from 'redux-persist';
-import { rootReducer } from '../reducers/rootReducer';
+import rootReducer from '../reducers/rootReducer';
 
 const sagaMiddleware = createSagaMiddleware();
 

@@ -1,4 +1,3 @@
-// import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux';
 import chartsReducer from 'features/charts/chartsReducer';
 import entitiesReducer from 'features/entities/entitiesReducer';
@@ -11,12 +10,9 @@ import authReducer from 'features/auth/authReducer';
 import notificationReducer from 'features/notification/notificationReducer';
 import favoritesReducer from 'features/favorites/favoritesReducer';
 import streamReducer from 'features/stream/streamReducer';
+import searchReducer from 'features/search/searchReducer';
 
-// import { dropdownSearchEpic } from 'features/dropdownSearch/dropdownSearchActions';
-
-// export const rootEpic = combineEpics(dropdownSearchEpic);
-
-export const rootReducer = combineReducers({
+const rootReducer = combineReducers({
   entities: entitiesReducer,
   charts: chartsReducer,
   playlist: playlistReducer,
@@ -30,4 +26,7 @@ export const rootReducer = combineReducers({
   notification: notificationReducer,
   favorites: favoritesReducer,
   stream: streamReducer,
+  search: searchReducer,
 });
+
+export default rootReducer;

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { notificationWarning } from 'features/notification/notificationActions';
 import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 import SongCardList from 'common/components/SongCardList';
 import { isFavoritesFetching } from 'features/favorites/favoritesSelectors';

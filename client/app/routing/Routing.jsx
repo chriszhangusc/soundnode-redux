@@ -9,6 +9,7 @@ import UserProfile from 'features/userProfile/UserProfile';
 import TrackProfile from 'features/trackProfile/TrackProfile';
 import Favorites from 'features/favorites/Favorites';
 import Stream from 'features/stream/Stream';
+import Search from 'features/search/Search';
 
 const defaultRedirect = <Redirect to={`${routes.CHARTS_ROUTE}/${DEFAULT_GENRE}`} />;
 
@@ -30,6 +31,7 @@ export default function Routing() {
       <Route exact path={`${routes.TRACK_PROFILE_ROUTE}/:trackId`} component={TrackProfile} />
       <Route exact path={`${routes.FAVORITES_ROUTE}`} component={withAuthRequired(Favorites)} />
       <Route exact path={`${routes.STREAM_ROUTE}`} component={withAuthRequired(Stream)} />
+      <Route exact path={`${routes.SEARCH_ROUTE}/:query`} component={Search} />
       {defaultRedirect}
     </Switch>
   );
