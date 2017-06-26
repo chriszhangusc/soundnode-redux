@@ -31,6 +31,16 @@ export function resetFavoritesState() {
   };
 }
 
+export function receiveFavorites(normalized) {
+  return (dispatch) => {
+    const { entities, nextHref, result } = normalized;
+    dispatch(mergeEntities(entities));
+    dispatch(updateFavoritesNextHref(nextHref));
+    dispatch(mergeVisiblePlaylist(result));
+    dispatch(stopFetchingFavorites());
+  };
+}
+
 export function loadFavorites() {
   return (dispatch) => {
     dispatch(startFetchingFavorites());
@@ -38,11 +48,7 @@ export function loadFavorites() {
 
     fetchMyFavorites()
       .then((normalized) => {
-        const { entities, nextHref, result } = normalized;
-        dispatch(mergeEntities(entities));
-        dispatch(updateFavoritesNextHref(nextHref));
-        dispatch(mergeVisiblePlaylist(result));
-        dispatch(stopFetchingFavorites());
+        dispatch(receiveFavorites(normalized));
       })
       .catch((err) => {
         console.error(err);
@@ -59,12 +65,7 @@ export function loadMoreFavorites() {
       dispatch(startFetchingFavorites());
       fetchFavoritesByNextHref(curNextHref)
         .then((normalized) => {
-          const { entities, nextHref, result } = normalized;
-          dispatch(mergeEntities(entities));
-          dispatch(updateFavoritesNextHref(nextHref));
-          // Append new songs to the favorites/currently visible playlist
-          dispatch(mergeVisiblePlaylist(result));
-          dispatch(stopFetchingFavorites());
+          dispatch(receiveFavorites(normalized));
         })
         .catch((err) => {
           console.error(err);

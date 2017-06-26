@@ -62,6 +62,24 @@ export function failedToFetchComments() {
   };
 }
 
+export function receiveComments(normalized) {
+  return (dispatch) => {
+    const { entities, result, nextHref } = normalized;
+    dispatch(mergeEntities(entities));
+    dispatch(appendComments(result));
+    dispatch(updateCommentsNextHref(nextHref));
+    dispatch(stopFetchingComments());
+  };
+}
+
+export function receiveTracks(normalizedTrack) {
+  return (dispatch) => {
+    dispatch(mergeEntities(normalizedTrack.entities));
+    dispatch(updateProfiledTrack(normalizedTrack.result));
+    dispatch(stopFetchingProfiledTrack());
+  };
+}
+
 export function loadTrackProfilePage(trackId) {
   return (dispatch) => {
     dispatch(startFetchingProfiledTrack());
@@ -70,13 +88,8 @@ export function loadTrackProfilePage(trackId) {
       .then((res) => {
         const normalizedTrack = res[0];
         const normalizedComments = res[1];
-        dispatch(mergeEntities(normalizedTrack.entities));
-        dispatch(mergeEntities(normalizedComments.entities));
-        dispatch(updateProfiledTrack(normalizedTrack.result));
-        dispatch(appendComments(normalizedComments.result));
-        dispatch(updateCommentsNextHref(normalizedComments.nextHref));
-        dispatch(stopFetchingProfiledTrack());
-        dispatch(stopFetchingComments());
+        dispatch(receiveTracks(normalizedTrack));
+        dispatch(receiveComments(normalizedComments));
       })
       .catch((err) => {
         dispatch(failedToFetchTrack());
@@ -95,11 +108,7 @@ export function loadMoreComments() {
       dispatch(startFetchingComments());
       fetchMoreComments(commentsNextHref)
         .then((normalized) => {
-          const { entities, result, nextHref } = normalized;
-          dispatch(mergeEntities(entities));
-          dispatch(appendComments(result));
-          dispatch(updateCommentsNextHref(nextHref));
-          dispatch(stopFetchingComments());
+          dispatch(receiveComments(normalized));
         })
         .catch((err) => {
           dispatch(failedToFetchComments());

@@ -69,6 +69,23 @@ export function failedToFetchUserTracks() {
   };
 }
 
+export function receiveUser(normalizedUser) {
+  return (dispatch) => {
+    dispatch(mergeEntities(normalizedUser.entities));
+    dispatch(updateProfiledUser(normalizedUser.result));
+    dispatch(stopFetchingProfiledUser());
+  };
+}
+
+export function receiveTracks(normalizedTracks) {
+  return (dispatch) => {
+    dispatch(mergeEntities(normalizedTracks.entities));
+    dispatch(appendUserTracks(normalizedTracks.result));
+    dispatch(updateUserTracksNextHref(normalizedTracks.nextHref));
+    dispatch(stopFetchingUserTracks());
+  };
+}
+
 // Should load user first and then the tracks
 export function loadUserProfilePage(userId) {
   return async (dispatch) => {
@@ -81,21 +98,10 @@ export function loadUserProfilePage(userId) {
         fetchProfiledUserTracks(userId),
       ]);
 
-      dispatch(mergeEntities(normalizedUser.entities));
-      dispatch(mergeEntities(normalizedTracks.entities));
-
-      dispatch(updateProfiledUser(normalizedUser.result));
-
-      dispatch(appendUserTracks(normalizedTracks.result));
-      dispatch(updateUserTracksNextHref(normalizedTracks.nextHref));
-
-      dispatch(stopFetchingProfiledUser());
-      dispatch(stopFetchingUserTracks());
+      dispatch(receiveUser(normalizedUser));
+      dispatch(receiveTracks(normalizedTracks));
     } catch (err) {
-      // Do we need to stop spinner here ? dispatch(artistFailure(err.message));
       console.log(err);
-      // dispatch(failedToFetchUserTracks());
-      // dispatch(failedToFetchUser());
     }
   };
 }
@@ -111,11 +117,8 @@ export function loadMoreUserTracks() {
     if (!fetching && curNextHref) {
       try {
         dispatch(startFetchingUserTracks());
-        const { entities, result, nextHref } = await fetchMoreProfiledUserTracks(curNextHref);
-        dispatch(mergeEntities(entities));
-        dispatch(appendUserTracks(result));
-        dispatch(updateUserTracksNextHref(nextHref));
-        dispatch(stopFetchingUserTracks());
+        const normalizedTracks = await fetchMoreProfiledUserTracks(curNextHref);
+        dispatch(receiveTracks(normalizedTracks));
       } catch (err) {
         console.log(err);
         // dispatch(failedToFetchUserTracks());

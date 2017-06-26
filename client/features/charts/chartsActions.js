@@ -51,6 +51,16 @@ export function resetChartsState() {
   };
 }
 
+export function receiveCharts(normalizedCharts) {
+  return (dispatch) => {
+    const { entities, result, nextHref } = normalizedCharts;
+    dispatch(mergeEntities(entities));
+    dispatch(mergeVisiblePlaylist(result));
+    dispatch(updateChartsNextHref(nextHref));
+    dispatch(stopFetchingCharts());
+  };
+}
+
 /* Side Effects */
 export function loadChartsPage(genre) {
   return async (dispatch, getState) => {
@@ -59,11 +69,7 @@ export function loadChartsPage(genre) {
       dispatch(startFetchingCharts());
       try {
         const normalizedCharts = await fetchCharts(genre);
-        const { entities, result, nextHref } = normalizedCharts;
-        dispatch(mergeEntities(entities));
-        dispatch(mergeVisiblePlaylist(result));
-        dispatch(updateChartsNextHref(nextHref));
-        dispatch(stopFetchingCharts());
+        dispatch(receiveCharts(normalizedCharts));
       } catch (err) {
         console.error(err);
         dispatch(failedToFetchCharts());
@@ -83,11 +89,8 @@ export function loadMoreCharts() {
     if (!chartsFetching && currentCharts.length < 50 && curNextHref) {
       dispatch(startFetchingCharts());
       try {
-        const { entities, result, nextHref } = await fetchMoreCharts(curNextHref);
-        dispatch(mergeEntities(entities));
-        dispatch(mergeVisiblePlaylist(result));
-        dispatch(updateChartsNextHref(nextHref));
-        dispatch(stopFetchingCharts());
+        const normalizedCharts = await fetchMoreCharts(curNextHref);
+        dispatch(receiveCharts(normalizedCharts));
       } catch (err) {
         console.error(err);
         dispatch(failedToFetchCharts());

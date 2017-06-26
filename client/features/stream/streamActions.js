@@ -40,6 +40,16 @@ export function resetStreamState() {
   };
 }
 
+export function receiveStream(normalized) {
+  return (dispatch) => {
+    const { entities, result, nextHref } = normalized;
+    dispatch(mergeEntities(entities));
+    dispatch(mergeVisiblePlaylist(result));
+    dispatch(updateStreamNextHref(nextHref));
+    dispatch(stopFetchingStream());
+  };
+}
+
 export function loadStream() {
   return (dispatch, getState) => {
     const state = getState();
@@ -49,12 +59,7 @@ export function loadStream() {
       dispatch(startFetchingStream());
       fetchStream()
         .then((normalized) => {
-          const { entities, result, nextHref } = normalized;
-          dispatch(mergeEntities(entities));
-          // dispatch(mergeStream(result));
-          dispatch(mergeVisiblePlaylist(result));
-          dispatch(updateStreamNextHref(nextHref));
-          dispatch(stopFetchingStream());
+          dispatch(receiveStream(normalized));
         })
         .catch((err) => {
           console.error(err);
@@ -72,12 +77,7 @@ export function loadMoreStream() {
       dispatch(startFetchingStream());
       fetchMoreStream(curNextHref)
         .then((normalized) => {
-          const { entities, result, nextHref } = normalized;
-          dispatch(mergeEntities(entities));
-          // dispatch(mergeStream(result));
-          dispatch(mergeVisiblePlaylist(result));
-          dispatch(updateStreamNextHref(nextHref));
-          dispatch(stopFetchingStream());
+          dispatch(receiveStream(normalized));
         })
         .catch((err) => {
           console.error(err);
