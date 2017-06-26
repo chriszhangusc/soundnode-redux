@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { SEARCH_ROUTE } from 'common/constants/routeConsts';
 import {
   isDropdownSearchResultsHidden,
   getDropdownSearchUserIds,
   getDropdownSearchTrackIds,
+  getDropdownSearchQuery,
 } from 'features/dropdownSearch/dropdownSearchSelectors';
 
 import { FONT_COLOR_SECONDARY, BACKGROUND_COLOR_SECONDARY } from 'app/css/colors';
@@ -42,7 +43,7 @@ const ShowAllLink = styled(Link)`
 `;
 
 // Render the tracks results section.
-function TrackResults(trackIds) {
+function TrackResults(trackIds, query) {
   return (
     <ul>
       <DropdownSearchResultsTitle>TRACKS</DropdownSearchResultsTitle>
@@ -51,7 +52,7 @@ function TrackResults(trackIds) {
         .map(trackId => <DropdownSearchResultsRowTrack key={trackId} trackId={trackId} />)}
       {
         <li>
-          <ShowAllLink to="" onMouseDown={() => {}}>
+          <ShowAllLink to={`${SEARCH_ROUTE}/${query}`} onMouseDown={() => {}}>
             SHOW ALL TRACKS
           </ShowAllLink>
         </li>
@@ -81,11 +82,11 @@ const Wrapper = styled.div`
     max-height: ${props => !props.hidden && '600px'};
 `;
 
-function DropdownSearchResults({ userIds, trackIds, hidden }) {
+function DropdownSearchResults({ userIds, trackIds, hidden, query }) {
   return (
     <Wrapper hidden={hidden}>
       {userIds.length !== 0 && ArtistResults(userIds)}
-      {trackIds.length !== 0 && TrackResults(trackIds)}
+      {trackIds.length !== 0 && TrackResults(trackIds, query)}
     </Wrapper>
   );
 }
@@ -94,6 +95,7 @@ DropdownSearchResults.propTypes = {
   userIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   trackIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   hidden: PropTypes.bool.isRequired,
+  query: PropTypes.string,
 };
 
 function mapStateToProps(state) {
@@ -101,6 +103,7 @@ function mapStateToProps(state) {
     hidden: isDropdownSearchResultsHidden(state),
     userIds: getDropdownSearchUserIds(state),
     trackIds: getDropdownSearchTrackIds(state),
+    query: getDropdownSearchQuery(state),
   };
 }
 

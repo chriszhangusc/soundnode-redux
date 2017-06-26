@@ -2,10 +2,7 @@ import { createSelector } from 'reselect';
 
 export const getDropdownSearchState = state => state.dropdownSearch;
 
-export const isDropdownSearching = createSelector(
-  getDropdownSearchState,
-  state => state.fetching,
-);
+export const isDropdownSearching = createSelector(getDropdownSearchState, state => state.fetching);
 
 export const isDropdownSearchResultsHidden = createSelector(
   getDropdownSearchState,
@@ -21,3 +18,5 @@ export const getDropdownSearchTrackIds = createSelector(
   getDropdownSearchState,
   state => state.trackIds,
 );
+
+export const getDropdownSearchQuery = createSelector(getDropdownSearchState, state => state.query);

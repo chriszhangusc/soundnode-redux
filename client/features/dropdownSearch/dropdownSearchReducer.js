@@ -2,6 +2,7 @@ import * as types from 'features/dropdownSearch/dropdownSearchConsts';
 
 /* Reducers */
 const initialState = {
+  query: undefined,
   hidden: true,
   fetching: false,
   userIds: [],
@@ -58,6 +59,13 @@ export function clearDropdownSearchResults(state) {
   };
 }
 
+export function updateDropdownSearchQuery(state, { query }) {
+  return {
+    ...state,
+    query,
+  };
+}
+
 export default function dropdownSearchReducer(state = initialState, action) {
   switch (action.type) {
     case types.DROPDOWN_SEARCH_START:
@@ -83,6 +91,9 @@ export default function dropdownSearchReducer(state = initialState, action) {
 
     case types.DROPDOWN_SEARCH_RESULTS_CLEAR:
       return clearDropdownSearchResults(state);
+
+    case types.DROPDOWN_SEARCH_QUERY_UPDATE:
+      return updateDropdownSearchQuery(state, action.payload);
 
     default:
       return state;

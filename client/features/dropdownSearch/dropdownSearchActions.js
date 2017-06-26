@@ -13,9 +13,11 @@ export function startDropdownSearch(keyword) {
   };
 }
 
-export const stopDropdownSearch = () => ({
-  type: types.DROPDOWN_SEARCH_STOP,
-});
+export function stopDropdownSearch() {
+  return {
+    type: types.DROPDOWN_SEARCH_STOP,
+  };
+}
 
 export function failedToFetchSearchResults() {
   return {
@@ -23,31 +25,49 @@ export function failedToFetchSearchResults() {
   };
 }
 
-export const hideDropdownSearchResults = () => ({
-  type: types.DROPDOWN_SEARCH_RESULTS_HIDE,
-});
+export function hideDropdownSearchResults() {
+  return {
+    type: types.DROPDOWN_SEARCH_RESULTS_HIDE,
+  };
+}
 
-export const showDropdownSearchResults = () => ({
-  type: types.DROPDOWN_SEARCH_RESULTS_SHOW,
-});
+export function showDropdownSearchResults() {
+  return {
+    type: types.DROPDOWN_SEARCH_RESULTS_SHOW,
+  };
+}
+export function clearDropdownSearchResults() {
+  return {
+    type: types.DROPDOWN_SEARCH_RESULTS_CLEAR,
+  };
+}
 
-export const clearDropdownSearchResults = () => ({
-  type: types.DROPDOWN_SEARCH_RESULTS_CLEAR,
-});
+export function updateUserResults(userIds) {
+  return {
+    type: types.DROPDOWN_SEARCH_USER_RESULTS_UPDATE,
+    payload: {
+      userIds,
+    },
+  };
+}
 
-export const updateUserResults = userIds => ({
-  type: types.DROPDOWN_SEARCH_USER_RESULTS_UPDATE,
-  payload: {
-    userIds,
-  },
-});
+export function updateTrackResults(trackIds) {
+  return {
+    type: types.DROPDOWN_SEARCH_TRACK_RESULTS_UPDATE,
+    payload: {
+      trackIds,
+    },
+  };
+}
 
-export const updateTrackResults = trackIds => ({
-  type: types.DROPDOWN_SEARCH_TRACK_RESULTS_UPDATE,
-  payload: {
-    trackIds,
-  },
-});
+export function updateDropdownSearchQuery(query) {
+  return {
+    type: types.DROPDOWN_SEARCH_QUERY_UPDATE,
+    payload: {
+      query,
+    },
+  };
+}
 
 export function clearAndHideSearchResults() {
   return (dispatch) => {
