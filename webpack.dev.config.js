@@ -40,7 +40,7 @@ module.exports = {
     //     secure: false
     //   }
     // },
-    host: '127.0.0.1',
+    host: 'localhost',
     historyApiFallback: true,
   },
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
