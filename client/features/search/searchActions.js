@@ -1,7 +1,9 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
+import { mergeVisiblePlaylist } from 'features/playlist/playlistActions';
 import * as types from './searchConsts';
 import { fetchSearchResults, fetchByNextHref } from './searchApi';
 import { isSearching, getSearchNextHref } from './searchSelectors';
+
 
 export function startSearching() {
   return {
@@ -38,6 +40,7 @@ export function receiveSearchResults(normalizedResults) {
     const { entities, result, nextHref } = normalizedResults;
     dispatch(mergeEntities(entities));
     dispatch(mergeTrackResults(result));
+    dispatch(mergeVisiblePlaylist(result));
     dispatch(updateSearchNextHref(nextHref));
     dispatch(stopSearching());
   };

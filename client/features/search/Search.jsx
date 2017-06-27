@@ -9,15 +9,28 @@ import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 class Search extends React.Component {
   componentWillMount() {
     // Load query params from url
-    const { loadSearchResults, match } = this.props;
+    const { match } = this.props;
     const { query } = match.params;
-    updateVisiblePlaylistName(`search-${query}`);
-    loadSearchResults(query);
+    this.props.updateVisiblePlaylistName(`search-${query}`);
+    this.props.loadSearchResults(query);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const curQuery = this.props.match.params.query;
+    const newQuery = nextProps.match.params.query;
+    // If curQuery is undefined, it means this is the initial loading which is already
+    // handled by CWM,
+    // Check curQuery and newQuery to detect jumping from one track to another track.
+    if (curQuery !== newQuery && curQuery) {
+      // Before jumping to new track profile page, clear old state.
+      // this.props.clearSearchState();
+      this.props.updateVisiblePlaylistName(`search-${newQuery}`);
+      this.props.loadSearchResults(newQuery);
+    }
   }
 
   render() {
     const { query } = this.props.match.params;
-
     return (
       <SongCardList
         title={`Search results for ${query.toUpperCase()}`}
@@ -31,6 +44,7 @@ class Search extends React.Component {
 Search.propTypes = {
   loadSearchResults: PropTypes.func.isRequired,
   loadMoreSearchResults: PropTypes.func.isRequired,
+  updateVisiblePlaylistName: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.object,
   }).isRequired,
@@ -43,4 +57,9 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, searchActions)(Search);
+const actions = {
+  ...searchActions,
+  updateVisiblePlaylistName,
+};
+
+export default connect(mapStateToProps, actions)(Search);
