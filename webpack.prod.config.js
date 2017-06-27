@@ -16,7 +16,6 @@ module.exports = {
     filename: '[name].[chunkhash].min.js',
     publicPath: '/',
   },
-
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
   // In every other case use resolve.root.
   resolve: {

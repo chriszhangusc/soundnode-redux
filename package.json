@@ -64,6 +64,7 @@
     "proxy": "NODE_ENV=development nodemon server/proxy.js",
     "dev": "NODE_ENV=development webpack-dev-server --progress --colors --config webpack.dev.config.js",
     "build": "rm -rf ./dist/* && webpack -p --progress --config webpack.prod.config.js",
-    "heroku-postinstall": "npm run build"
+    "heroku-postinstall": "npm run build",
+    "heroku-postbuild": "npm run build"
   }
 }
