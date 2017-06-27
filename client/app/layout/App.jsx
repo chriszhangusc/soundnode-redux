@@ -7,7 +7,7 @@ import Sidebar from 'common/components/Sidebar';
 import Callback from 'common/components/Callback';
 import GlobalEvents from 'features/global/GlobalEvents';
 import Loadable from 'react-loading-overlay';
-import styled from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 import Player from 'features/player/Player';
 import {
   // NAV_BAR_HEIGHT,
@@ -20,10 +20,10 @@ import NotificationCenter from 'features/notification/NotificationCenter';
 import { isLoginInProgress } from 'features/auth/authSelectors';
 import { connect } from 'react-redux';
 import { CLIENT_ID, REDIRECT_URI } from 'common/constants/authConsts';
-import 'app/css/global';
 import Routing from 'app/routing/Routing';
 import { Route, Switch } from 'react-router-dom';
 import { AUTH_CALLBACK_ROUTE } from 'common/constants/routeConsts';
+import 'app/css/global';
 
 SC.initialize({
   client_id: CLIENT_ID,
@@ -48,22 +48,35 @@ const MainWrapper = styled.div`
   padding-top: 80px;
 `;
 
-function Main({ loginInProgress }) {
-  return (
-    <Loadable active={loginInProgress} spinner text="Authenticating..." animate zIndex={9999}>
-      <MainWrapper>
-        <Nav />
-        <Sidebar />
-        <PageContentWrapper>
-          <Routing />
-          <Player />
-          <Playlist />
-        </PageContentWrapper>
-        <GlobalEvents />
-        <NotificationCenter />
-      </MainWrapper>
-    </Loadable>
-  );
+class Main extends React.Component {
+  componentWillMount() {
+    // To stop scrolling while logging in.
+    const { loginInProgress } = this.props;
+    injectGlobal`
+      body {
+        overflow-y: ${loginInProgress ? 'hidden' : 'scroll'};
+      }
+    `;
+  }
+
+  render() {
+    const { loginInProgress } = this.props;
+    return (
+      <Loadable active={loginInProgress} spinner text="Authenticating..." animate zIndex={9999}>
+        <MainWrapper>
+          <Nav />
+          <Sidebar />
+          <PageContentWrapper>
+            <Routing />
+            <Player />
+            <Playlist />
+          </PageContentWrapper>
+          <GlobalEvents />
+          <NotificationCenter />
+        </MainWrapper>
+      </Loadable>
+    );
+  }
 }
 
 Main.propTypes = {
