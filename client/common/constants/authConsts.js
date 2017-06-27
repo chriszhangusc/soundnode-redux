@@ -3,7 +3,7 @@ import { HOST, isDev } from './appConsts';
 
 export const CLIENT_ID = isDev
   ? 'ZsXqrJ5fvCT0kw8AbbJARqxuRVYqAVEX'
-  : 'WHbr8ZvTg1c0Qjga7fdRjtfiFfvLPj1e';
+  : 'RgnaiRGxy8TgqHhWe1DLdTXxMRrA04Z9'; // This is for redux-music.heroku...
 
 console.log(CLIENT_ID);
 

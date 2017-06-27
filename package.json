@@ -64,7 +64,8 @@
     "start": "NODE_ENV=production node server/server.prod.js",
     "proxy": "NODE_ENV=development nodemon server/proxy.js",
     "dev": "NODE_ENV=development webpack-dev-server --progress --colors --config webpack.dev.config.js",
-    "build": "npm run clean && NODE_ENV=production webpack -p --progress --config webpack.prod.config.js",
+    "build": "NODE_ENV=production webpack -p --progress --config webpack.prod.config.js",
+    "deploy": "git subtree push --prefix dist heroku master",
     "clean": "rm -rf dist/"
   }
 }
