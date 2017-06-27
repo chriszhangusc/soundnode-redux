@@ -1,6 +1,6 @@
 import { clearShufflePlaylist, shufflePlaylist } from 'features/playlist/playlistActions';
 import { getPlaylistByMode } from 'features/playlist/playlistSelectors';
-import { getLastVolume, setLastVolume } from 'common/utils/LocalStorageUtils';
+import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
 import {
   isPlayerSeeking,
   getCurrentTime,
