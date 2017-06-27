@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  loadTrackProfilePage,
-  clearTrackState,
-} from 'features/trackProfile/trackProfileActions';
+import * as trackProfileActions from 'features/trackProfile/trackProfileActions';
 import { isTrackFetching } from 'features/trackProfile/trackProfileSelectors';
 import Spinner from 'common/components/Spinner';
 import TrackProfile from './TrackProfile';
@@ -12,14 +9,13 @@ import TrackProfile from './TrackProfile';
 class TrackProfileContainer extends Component {
   // Initial Loading
   componentWillMount() {
-    const { dispatch, match } = this.props;
+    const { match } = this.props;
     const trackId = match.params.trackId;
-    dispatch(loadTrackProfilePage(trackId));
+    this.props.loadTrackProfilePage(trackId);
   }
 
   // Change from different single track routes.
   componentWillReceiveProps(nextProps) {
-    const { dispatch } = this.props;
     const curTrackId = this.props.match.params.trackId;
     const newTrackId = nextProps.match.params.trackId;
 
@@ -28,14 +24,13 @@ class TrackProfileContainer extends Component {
     // Check curTrackId and newTrackId to detect jumping from one track to another track.
     if (curTrackId !== newTrackId && curTrackId) {
       // Before jumping to new track profile page, clear old state.
-      dispatch(clearTrackState());
-      dispatch(loadTrackProfilePage(newTrackId));
+      this.props.resetTrackProfileState();
+      this.props.loadTrackProfilePage(newTrackId);
     }
   }
 
   componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch(clearTrackState());
+    this.props.resetTrackProfileState();
   }
 
   render() {
@@ -55,9 +50,12 @@ function mapStateToProps(state) {
 }
 
 TrackProfileContainer.propTypes = {
-  match: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  resetTrackProfileState: PropTypes.func.isRequired,
+  loadTrackProfilePage: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.object,
+  }).isRequired,
   fetching: PropTypes.bool.isRequired,
 };
 
-export default connect(mapStateToProps)(TrackProfileContainer);
+export default connect(mapStateToProps, trackProfileActions)(TrackProfileContainer);

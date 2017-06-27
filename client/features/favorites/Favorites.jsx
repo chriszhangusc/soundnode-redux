@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 import SongCardList from 'common/components/SongCardList';
 import { isFavoritesFetching } from 'features/favorites/favoritesSelectors';
@@ -10,23 +9,26 @@ import * as favActions from 'features/favorites/favoritesActions';
 
 class Favorites extends React.Component {
   componentWillMount() {
-    const { actions } = this.props;
-    actions.updateVisiblePlaylistName('favorites');
-    actions.loadFavorites();
+    this.props.updateVisiblePlaylistName('favorites');
+    this.props.loadFavorites();
   }
 
   componentWillUnmount() {
-    const { actions } = this.props;
-    actions.resetFavoritesState();
+    this.props.resetFavoritesState();
   }
 
   render() {
-    return <SongCardList title="Favorites" {...this.props} />;
+    return (
+      <SongCardList title="Favorites" {...this.props} scrollFunc={this.props.loadMoreFavorites} />
+    );
   }
 }
 
 Favorites.propTypes = {
-  actions: PropTypes.objectOf(PropTypes.func).isRequired,
+  updateVisiblePlaylistName: PropTypes.func.isRequired,
+  loadFavorites: PropTypes.func.isRequired,
+  loadMoreFavorites: PropTypes.func.isRequired,
+  resetFavoritesState: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -36,20 +38,9 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(
-      {
-        ...favActions,
-        updateVisiblePlaylistName,
-      },
-      dispatch,
-    ),
+const actions = {
+  ...favActions,
+  updateVisiblePlaylistName,
+};
 
-    scrollFunc() {
-      dispatch(favActions.loadMoreFavorites());
-    },
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+export default connect(mapStateToProps, actions)(Favorites);

@@ -1,4 +1,3 @@
-import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './searchConsts';
 
 /* Reducers */
@@ -23,12 +22,11 @@ export function stopSearching(state) {
   };
 }
 
-// export function mergeTracks(state, { trackIds }) {
-//   return {
-//     ...state,
-//     trackIds: mergeArrays(state.trackIds, trackIds),
-//   };
-// }
+export function resetSearchState(initState) {
+  return {
+    ...initState,
+  };
+}
 
 export function updateNextHref(state, { nextHref }) {
   return {
@@ -45,11 +43,11 @@ export default function dropdownSearchReducer(state = initialState, action) {
     case types.SEARCH_STOP:
       return stopSearching(state);
 
-    // case types.SEARCH_TRACK_RESULTS_MERGE:
-    //   return mergeTracks(state, action.payload);
-
     case types.SEARCH_NEXT_HREF_UPDATE:
       return updateNextHref(state, action.payload);
+
+    case types.SEARCH_STATE_RESET:
+      return resetSearchState(initialState);
 
     default:
       return state;

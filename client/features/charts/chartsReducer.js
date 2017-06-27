@@ -3,9 +3,8 @@ import * as types from './chartsConsts';
 /* Reducer */
 const initialState = {
   selectedGenre: '',
-  // Visible tracks in current charts page.
   fetching: false,
-  nextHref: null,
+  nextHref: undefined,
 };
 
 export function changeGenre(state, { genre }) {
@@ -36,6 +35,12 @@ export function updateNextHref(state, { nextHref }) {
   };
 }
 
+export function resetChartsState(state) {
+  return {
+    ...state,
+  };
+}
+
 export default function chartsReducer(state = initialState, action) {
   switch (action.type) {
     case types.CHARTS_FETCH_START:
@@ -50,16 +55,8 @@ export default function chartsReducer(state = initialState, action) {
     case types.CHARTS_NEXT_HREF_UPDATE:
       return updateNextHref(state, action.payload);
 
-    case types.CHARTS_FETCH_FAIL:
-      return {
-        ...state,
-        fetching: false,
-      };
-
     case types.CHARTS_STATE_RESET:
-      return {
-        ...initialState,
-      };
+      return resetChartsState(initialState);
 
     default:
       return state;

@@ -53,7 +53,6 @@ class ChartsPage extends Component {
   }
 }
 
-// Container prop validation required here?
 ChartsPage.propTypes = {
   loadChartsPage: PropTypes.func.isRequired,
   changeGenre: PropTypes.func.isRequired,

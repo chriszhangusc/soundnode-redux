@@ -3,7 +3,7 @@ import { fetchProfiledTrack, fetchTrackComments, fetchMoreComments } from './tra
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import * as types from './trackProfileConsts';
 
-export const clearTrackState = () => ({
+export const resetTrackProfileState = () => ({
   type: types.TRACK_PROFILE_STATE_RESET,
 });
 

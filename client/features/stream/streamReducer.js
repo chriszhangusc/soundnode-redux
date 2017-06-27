@@ -35,9 +35,9 @@ export function updateNextHref(state, { nextHref }) {
   };
 }
 
-export function resetStreamState(initial) {
+export function resetStreamState(initState) {
   return {
-    ...initial,
+    ...initState,
   };
 }
 
@@ -48,9 +48,9 @@ export default function streamReducer(state = initialState, action) {
 
     case types.STREAM_FETCH_STOP:
       return stopFetchingStream(state);
-
     // case types.STREAM_MERGE:
     //   return mergeStream(state, action.payload);
+
 
     case types.STREAM_NEXT_HREF_UPDATE:
       return updateNextHref(state, action.payload);

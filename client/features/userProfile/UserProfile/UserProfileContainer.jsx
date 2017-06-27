@@ -26,14 +26,14 @@ class UserProfileContainer extends Component {
     // Check curTrackId and newTrackId to detect jumping from one track to another track.
     if (curUserId !== newUserId && curUserId) {
       // Before jumping to new track profile page, clear old state.
-      this.props.clearUserState();
+      this.props.resetUserProfileState();
       this.props.updateVisiblePlaylistName(`user-${newUserId}`);
       this.props.loadUserProfilePage(newUserId);
     }
   }
 
   componentWillUnmount() {
-    this.props.clearUserState();
+    this.props.resetUserProfileState();
   }
 
   render() {
@@ -59,7 +59,7 @@ UserProfileContainer.propTypes = {
     params: PropTypes.object,
   }).isRequired,
   updateVisiblePlaylistName: PropTypes.func.isRequired,
-  clearUserState: PropTypes.func.isRequired,
+  resetUserProfileState: PropTypes.func.isRequired,
   loadUserProfilePage: PropTypes.func.isRequired,
   userId: PropTypes.number,
   fetching: PropTypes.bool,

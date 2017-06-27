@@ -1,13 +1,12 @@
-import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './userProfileConsts';
 
 /* Reducer */
 const initialState = {
   userFetching: false,
   tracksFetching: false,
-  userId: null,
-  trackIds: [],
-  tracksNextHref: null,
+  userId: undefined,
+  // trackIds: [],
+  tracksNextHref: undefined,
 };
 
 export function startFetchingProfiledUser(state) {
@@ -45,14 +44,6 @@ export function stopFetchingUserTracks(state) {
   };
 }
 
-export function appendUserTracks(state, { trackIds }) {
-  return {
-    ...state,
-    // There will be overlap in the data from SoundCloud
-    trackIds: mergeArrays(state.trackIds, trackIds),
-  };
-}
-
 export function updateUserTracksNextHref(state, { nextHref }) {
   return {
     ...state,
@@ -60,16 +51,16 @@ export function updateUserTracksNextHref(state, { nextHref }) {
   };
 }
 
-export function resetProfiledUserState() {
+export function resetUserProfileState(initState) {
   return {
-    ...initialState,
+    ...initState,
   };
 }
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case types.USER_PROFILE_STATE_RESET:
-      return resetProfiledUserState();
+      return resetUserProfileState(initialState);
 
     case types.USER_PROFILE_USER_FETCH_START:
       return startFetchingProfiledUser(state);
@@ -79,9 +70,6 @@ export default function userReducer(state = initialState, action) {
 
     case types.USER_PROFILE_USER_UPDATE:
       return updateProfiledUser(state, action.payload);
-    // case types.USER_PROFILE_USER_FAIL:
-    //   return endProfiledUserRequest(state);
-
 
     case types.USER_PROFILE_TRACKS_FETCH_START:
       return startFetchingUserTracks(state);
@@ -89,14 +77,8 @@ export default function userReducer(state = initialState, action) {
     case types.USER_PROFILE_TRACKS_FETCH_STOP:
       return stopFetchingUserTracks(state);
 
-    case types.USER_PROFILE_TRACKS_APPEND:
-      return appendUserTracks(state, action.payload);
-
     case types.USER_PROFILE_TRACKS_NEXT_HREF_UPDATE:
       return updateUserTracksNextHref(state, action.payload);
-    // case types.USER_PROFILE_TRACKS_FAILED:
-    //   return endProfiledUserTracksRequest(state);
-
 
     default:
       return state;

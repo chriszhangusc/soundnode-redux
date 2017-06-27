@@ -2,7 +2,7 @@ import * as types from './favoritesConsts.js';
 
 const initialState = {
   fetching: false,
-  nextHref: null,
+  nextHref: undefined,
 };
 
 export function startFetchingFavorites(state) {
@@ -12,9 +12,9 @@ export function startFetchingFavorites(state) {
   };
 }
 
-export function resetFavoritesState() {
+export function resetFavoritesState(state) {
   return {
-    ...initialState,
+    ...state,
   };
 }
 
@@ -44,7 +44,7 @@ export default function favoritesReducer(state = initialState, action) {
       return stopFetchingFavorites(state);
 
     case types.FAVORITES_STATE_RESET:
-      return resetFavoritesState();
+      return resetFavoritesState(initialState);
 
     default:
       return state;

@@ -30,6 +30,10 @@ class Search extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.resetSearchState();
+  }
+
   render() {
     const { query } = this.props.match.params;
     return (
@@ -46,6 +50,7 @@ Search.propTypes = {
   loadSearchResults: PropTypes.func.isRequired,
   loadMoreSearchResults: PropTypes.func.isRequired,
   updateVisiblePlaylistName: PropTypes.func.isRequired,
+  resetSearchState: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.object,
   }).isRequired,

@@ -4,7 +4,6 @@ import * as types from './searchConsts';
 import { fetchSearchResults, fetchByNextHref } from './searchApi';
 import { isSearching, getSearchNextHref } from './searchSelectors';
 
-
 export function startSearching() {
   return {
     type: types.SEARCH_START,
@@ -32,6 +31,12 @@ export function updateSearchNextHref(nextHref) {
     payload: {
       nextHref,
     },
+  };
+}
+
+export function resetSearchState() {
+  return {
+    type: types.SEARCH_STATE_RESET,
   };
 }
 

@@ -57,9 +57,9 @@ export function updateCommentsNextHref(state, { commentsNextHref }) {
   };
 }
 
-export function resetTrackProfileState() {
+export function resetTrackProfileState(initState) {
   return {
-    ...initialState,
+    ...initState,
   };
 }
 
@@ -87,7 +87,7 @@ export default function track(state = initialState, action) {
       return updateCommentsNextHref(state, action.payload);
 
     case types.TRACK_PROFILE_STATE_RESET:
-      return resetTrackProfileState();
+      return resetTrackProfileState(initialState);
 
     default:
       return state;

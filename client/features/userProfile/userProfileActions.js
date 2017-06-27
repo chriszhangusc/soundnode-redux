@@ -12,7 +12,7 @@ import {
 import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelectors';
 
 /* Action Creators*/
-export function clearUserState() {
+export function resetUserProfileState() {
   return {
     type: types.USER_PROFILE_STATE_RESET,
   };
@@ -45,15 +45,6 @@ export function startFetchingUserTracks() {
 
 export function stopFetchingUserTracks() {
   return { type: types.USER_PROFILE_TRACKS_FETCH_STOP };
-}
-
-export function appendUserTracks(trackIds) {
-  return {
-    type: types.USER_PROFILE_TRACKS_APPEND,
-    payload: {
-      trackIds,
-    },
-  };
 }
 
 export function updateUserTracksNextHref(nextHref) {
