@@ -62,6 +62,7 @@ module.exports = {
     }),
 
     // DefinePlugin makes it possible for us to use env variables in src code
+    // Running webpack -p will include this plugin
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
