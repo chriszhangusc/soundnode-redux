@@ -21,7 +21,7 @@ function NavHeader() {
     <NavHeaderWrapper>
       <NavbarBrand href={HOST}>
         <Glyphicon glyph="headphones" />
-        <NavbarBrandName>Redux Music</NavbarBrandName>
+        <NavbarBrandName>Soundnode Redux</NavbarBrandName>
       </NavbarBrand>
     </NavHeaderWrapper>
   );
