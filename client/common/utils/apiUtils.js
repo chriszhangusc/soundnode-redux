@@ -1,17 +1,17 @@
 import fetch from 'isomorphic-fetch';
 import { camelizeKeys } from 'humps';
-import { API_PROXY_ORIGIN } from 'common/constants/appConsts';
+import { API_PROXY } from 'common/constants/appConsts';
 import { CLIENT_ID } from 'common/constants/authConsts';
 import { getOAuthToken } from 'features/auth/authUtils';
 import { SC_API_V1, SC_API_V2 } from 'common/constants/apiConsts';
 import { setUrlParams } from './urlUtils';
 
 export function getSCV2ProxyOrigin() {
-  return `${API_PROXY_ORIGIN}/sc/v2`;
+  return `${API_PROXY}/sc/v2`;
 }
 
 export function getSCV1ProxyOrigin() {
-  return `${API_PROXY_ORIGIN}/sc/v1`;
+  return `${API_PROXY}/sc/v1`;
 }
 
 export function isSCV1Request(requestUrl) {
