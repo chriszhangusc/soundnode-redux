@@ -3,13 +3,6 @@
   "version": "1.0.0",
   "description": "Music client based on SoundCloud API",
   "main": "index.js",
-  "scripts": {
-    "start": "NODE_ENV=production node server/server.prod.js",
-    "proxy": "NODE_ENV=development nodemon server/proxy.js",
-    "dev": "NODE_ENV=development webpack-dev-server --progress --colors --config webpack.dev.config.js",
-    "build": "npm run clean && NODE_ENV=production webpack -p --progress --config webpack.prod.config.js",
-    "clean": "rm -rf dist/"
-  },
   "author": "MiniPekka",
   "license": "ISC",
   "devDependencies": {
@@ -66,5 +59,12 @@
     "shortid": "^2.2.8",
     "soundcloud": "^3.1.2",
     "styled-components": "^2.0.0"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production node server/server.prod.js",
+    "proxy": "NODE_ENV=development nodemon server/proxy.js",
+    "dev": "NODE_ENV=development webpack-dev-server --progress --colors --config webpack.dev.config.js",
+    "build": "npm run clean && NODE_ENV=production webpack -p --progress --config webpack.prod.config.js",
+    "clean": "rm -rf dist/"
   }
 }
