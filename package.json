@@ -63,7 +63,6 @@
     "start": "NODE_ENV=production node server/server.prod.js",
     "proxy": "NODE_ENV=development nodemon server/proxy.js",
     "dev": "NODE_ENV=development webpack-dev-server --progress --colors --config webpack.dev.config.js",
-    "build": "webpack -p --progress --config webpack.prod.config.js",
-    "heroku-postinstall": "webpack -p --progress --config webpack.prod.config.js"
+    "build": "rm -rf ./dist/* webpack -p --progress --config webpack.prod.config.js"
   }
 }
