@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import * as searchActions from 'features/search/searchActions';
 import PropTypes from 'prop-types';
 import SongCardList from 'common/components/SongCardList';
-import { isSearching, getTrackResults } from 'features/search/searchSelectors';
+import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
+import { isSearching } from 'features/search/searchSelectors';
 import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 
 class Search extends React.Component {
@@ -53,7 +54,7 @@ Search.propTypes = {
 function mapStateToProps(state) {
   return {
     fetching: isSearching(state),
-    trackIds: getTrackResults(state),
+    trackIds: getVisiblePlaylist(state),
   };
 }
 

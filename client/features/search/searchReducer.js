@@ -6,7 +6,7 @@ const initialState = {
   searchType: undefined,
   nextHref: undefined,
   searching: false,
-  trackIds: [],
+  // trackIds: [],
 };
 
 export function startSearching(state) {
@@ -23,12 +23,12 @@ export function stopSearching(state) {
   };
 }
 
-export function mergeTracks(state, { trackIds }) {
-  return {
-    ...state,
-    trackIds: mergeArrays(state.trackIds, trackIds),
-  };
-}
+// export function mergeTracks(state, { trackIds }) {
+//   return {
+//     ...state,
+//     trackIds: mergeArrays(state.trackIds, trackIds),
+//   };
+// }
 
 export function updateNextHref(state, { nextHref }) {
   return {
@@ -45,8 +45,8 @@ export default function dropdownSearchReducer(state = initialState, action) {
     case types.SEARCH_STOP:
       return stopSearching(state);
 
-    case types.SEARCH_TRACK_RESULTS_MERGE:
-      return mergeTracks(state, action.payload);
+    // case types.SEARCH_TRACK_RESULTS_MERGE:
+    //   return mergeTracks(state, action.payload);
 
     case types.SEARCH_NEXT_HREF_UPDATE:
       return updateNextHref(state, action.payload);

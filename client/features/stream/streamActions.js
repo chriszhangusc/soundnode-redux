@@ -16,14 +16,14 @@ export function stopFetchingStream() {
   };
 }
 
-export function mergeStream(streamIds) {
-  return {
-    type: types.STREAM_MERGE,
-    payload: {
-      streamIds,
-    },
-  };
-}
+// export function mergeStream(streamIds) {
+//   return {
+//     type: types.STREAM_MERGE,
+//     payload: {
+//       streamIds,
+//     },
+//   };
+// }
 
 export function updateStreamNextHref(nextHref) {
   return {
@@ -55,7 +55,6 @@ export function loadStream() {
     const state = getState();
     const streamFetching = isStreamFetching(state);
     if (!streamFetching) {
-      console.log('First Load');
       dispatch(startFetchingStream());
       fetchStream()
         .then((normalized) => {

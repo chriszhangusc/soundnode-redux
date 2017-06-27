@@ -17,14 +17,14 @@ export function stopSearching() {
   };
 }
 
-export function mergeTrackResults(trackIds) {
-  return {
-    type: types.SEARCH_TRACK_RESULTS_MERGE,
-    payload: {
-      trackIds,
-    },
-  };
-}
+// export function mergeTrackResults(trackIds) {
+//   return {
+//     type: types.SEARCH_TRACK_RESULTS_MERGE,
+//     payload: {
+//       trackIds,
+//     },
+//   };
+// }
 
 export function updateSearchNextHref(nextHref) {
   return {
@@ -39,7 +39,7 @@ export function receiveSearchResults(normalizedResults) {
   return (dispatch) => {
     const { entities, result, nextHref } = normalizedResults;
     dispatch(mergeEntities(entities));
-    dispatch(mergeTrackResults(result));
+    // dispatch(mergeTrackResults(result));
     dispatch(mergeVisiblePlaylist(result));
     dispatch(updateSearchNextHref(nextHref));
     dispatch(stopSearching());
