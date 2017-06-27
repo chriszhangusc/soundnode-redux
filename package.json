@@ -1,6 +1,6 @@
 {
   "name": "soundnode-redux",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Music client based on SoundCloud API",
   "main": "index.js",
   "author": "MiniPekka",
