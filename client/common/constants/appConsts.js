@@ -1,7 +1,8 @@
 export const isDev = process.env.NODE_ENV === 'development';
 
 const HOST_DEV = 'http://localhost:3000';
-const HOST_PROD = 'https://soundnode-redux.herokuapp.com';
+const HOST_PROD = 'https://redux-music.herokuapp.com';
+
 
 const API_PROXY_DEV = 'http://localhost:3001';
 const API_PROXY_PROD = 'https://soundcloud-api-proxy.herokuapp.com';
