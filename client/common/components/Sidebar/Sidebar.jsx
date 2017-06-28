@@ -33,7 +33,7 @@ const SIDEBAR_ITEM_LIST = [
     title: 'Favorites',
   },
   {
-    to: '/playlists',
+    to: routes.PLAYLISTS_ROUTE,
     iconClassName: 'fa fa-list',
     title: 'Playlists',
   },
