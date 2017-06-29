@@ -5,8 +5,7 @@ import { LIGHT_BLACK } from 'app/css/colors';
 import Auth from 'features/auth/Auth';
 import NavHeader from './NavHeader';
 
-// Pure Navbar no bootstrap
-const Navbar = styled.nav`
+const StyledNavbar = styled.nav`
   position: fixed;
   width: 100%;
   top: 0;
@@ -27,17 +26,16 @@ const InnerWrapper = styled.div`
   padding: 0 15px;
 `;
 
-/* This is our main Nav layout */
-function Nav() {
+function Navbar() {
   return (
-    <Navbar>
+    <StyledNavbar>
       <NavHeader />
       <InnerWrapper>
         <DropdownSearch />
         <Auth />
       </InnerWrapper>
-    </Navbar>
+    </StyledNavbar>
   );
 }
 
-export default Nav;
+export default Navbar;

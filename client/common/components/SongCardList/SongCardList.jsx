@@ -33,15 +33,12 @@ function SongCardList({ title, trackIds }) {
 
 SongCardList.defaultProps = {
   title: undefined,
-  fetching: false,
   trackIds: [],
 };
 
 SongCardList.propTypes = {
-  // fetching: PropTypes.bool,
   title: PropTypes.string,
   trackIds: PropTypes.arrayOf(PropTypes.number),
 };
 
-// export default withLoadingSpinnerAfter(withFetchingOnScroll(SongCardList));
 export default compose(withLoadingSpinnerAfter, withFetchingOnScroll)(SongCardList);

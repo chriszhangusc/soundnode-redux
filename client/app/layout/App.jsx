@@ -14,6 +14,8 @@ import {
   SIDEBAR_WIDTH_4K,
 } from 'app/css/variables';
 import { media } from 'app/css/styleUtils';
+import Sidebar from 'common/components/Sidebar';
+import Navbar from 'common/components/Navbar';
 import NotificationCenter from 'features/notification/NotificationCenter';
 import { isLoginInProgress } from 'features/auth/authSelectors';
 import { connect } from 'react-redux';
@@ -22,8 +24,6 @@ import Routing from 'app/routing/Routing';
 import { Route, Switch } from 'react-router-dom';
 import { AUTH_CALLBACK_ROUTE } from 'common/constants/routeConsts';
 import 'app/css/global';
-import Sidebar from './Sidebar';
-import Nav from './Nav';
 
 SC.initialize({
   client_id: CLIENT_ID,
@@ -64,7 +64,7 @@ class Main extends React.Component {
     return (
       <Loadable active={loginInProgress} spinner text="Authenticating..." animate zIndex={9999}>
         <MainWrapper>
-          <Nav />
+          <Navbar />
           <Sidebar />
           <PageContentWrapper>
             <Routing />

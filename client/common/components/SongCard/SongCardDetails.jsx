@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import styled from 'styled-components';
 import Card from 'common/components/MaterialCard';
+import { connect } from 'react-redux';
+import { getUserByTrackId } from 'features/entities/entitiesSelectors';
 
 const AvatarWrapper = styled.div`
   height: 25px;
@@ -42,4 +44,15 @@ SongCardDetails.propTypes = {
   username: PropTypes.string.isRequired,
 };
 
-export default SongCardDetails;
+function mapStateToProps(state, { track }) {
+  const user = getUserByTrackId(state, track.id);
+  return {
+    trackId: track.id,
+    title: track.title,
+    userAvatar: user.avatarUrl,
+    username: user.username,
+    userId: user.id,
+  };
+}
+
+export default connect(mapStateToProps)(SongCardDetails);
