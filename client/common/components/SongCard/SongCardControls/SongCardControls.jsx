@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import SongCardButton from './SongCardButton';
-
-const Wrapper = styled.div`
-  margin-top: 10px;
-`;
+import Card from 'common/components/MaterialCard';
 
 function SongCardControls({
   liked,
@@ -15,8 +10,8 @@ function SongCardControls({
   handleCopyToClipboard,
 }) {
   return (
-    <Wrapper>
-      <SongCardButton
+    <Card.Row>
+      <Card.IconButton
         tooltipText={liked ? 'Unlike' : 'Like'}
         name="heart"
         active={liked}
@@ -25,8 +20,8 @@ function SongCardControls({
           handleToggleLike();
         }}
       />
-      <SongCardButton tooltipText="Add to playlist" name="bookmark" onClick={() => {}} />
-      <SongCardButton
+      <Card.IconButton tooltipText="Add to playlist" name="bookmark" onClick={() => {}} />
+      <Card.IconButton
         tooltipText="Repost"
         name="retweet"
         active={reposted}
@@ -35,12 +30,12 @@ function SongCardControls({
           handleRepost();
         }}
       />
-      <SongCardButton
+      <Card.IconButton
         tooltipText="Copy permalink"
         name="clipboard"
         onClick={handleCopyToClipboard}
       />
-    </Wrapper>
+    </Card.Row>
   );
 }
 
