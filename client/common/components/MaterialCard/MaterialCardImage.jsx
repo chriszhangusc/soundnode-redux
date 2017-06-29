@@ -37,19 +37,19 @@ const PlaybackButtonIcon = styled.i`
   color: ${THEME_COLOR}
 `;
 
-function MaterialCardImage({ active, playing, artworkUrl, handleImageClick }) {
+function MaterialCardImage({ active, playing, imageUrl, handleImageClick }) {
   return (
     <Wrapper>
       <PlaybackButtonWrapper active={active} onClick={handleImageClick}>
         <PlaybackButtonIcon className={`${playing ? 'ion-ios-pause' : 'ion-ios-play'}`} />
       </PlaybackButtonWrapper>
-      {artworkUrl && <EnhancedImage src={artworkUrl} />}
+      {imageUrl && <EnhancedImage src={imageUrl} />}
     </Wrapper>
   );
 }
 
 MaterialCardImage.defaultProps = {
-  artworkUrl: '',
+  imageUrl: '',
   active: false,
   playing: false,
   handleImageClick: () => {
@@ -60,7 +60,7 @@ MaterialCardImage.defaultProps = {
 MaterialCardImage.propTypes = {
   active: PropTypes.bool,
   playing: PropTypes.bool,
-  artworkUrl: PropTypes.string,
+  imageUrl: PropTypes.string,
   handleImageClick: PropTypes.func,
 };
 

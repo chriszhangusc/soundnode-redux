@@ -13,12 +13,11 @@ const OuterButton = styled.button`
   outline: none;
   background-color: transparent;
   cursor: pointer;
-  margin: 0 auto;
   text-align: center;
   margin-right: 20px;
 
   &:hover {
-    color: ${FONT_COLOR_PRIMARY}
+    color: ${FONT_COLOR_PRIMARY};
   }
 `;
 

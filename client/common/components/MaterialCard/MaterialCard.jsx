@@ -1,13 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BACKGROUND_COLOR, BOX_SHADOW_COLOR, THEME_COLOR } from 'app/css/colors';
-import { getLargeVersion } from 'common/utils/imageUtils';
-import MaterialCardDetails from './MaterialCardDetails';
-import MaterialCardControls from './MaterialCardControls';
-import MaterialCardImage from './MaterialCardImage';
+import {
+  BACKGROUND_COLOR,
+  BOX_SHADOW_COLOR,
+  THEME_COLOR,
+  FONT_COLOR_SECONDARY,
+} from 'app/css/colors';
+import { Link } from 'react-router-dom';
+import MaterialCardButton from './MaterialCardButton';
 
-const MaterialCardWrapper = styled.div`
+const MaterialCard = styled.div`
   background-color: ${BACKGROUND_COLOR};
   box-shadow: 0 0 12px 8px ${BOX_SHADOW_COLOR};
   padding: 11px;
@@ -19,48 +20,48 @@ const MaterialCardWrapper = styled.div`
   border: 1px solid ${props => (props.active ? THEME_COLOR : 'transparent')};
 `;
 
-function getPlaylistCoverImage(playlist) {
-  return getLargeVersion(playlist.tracks[0].artwork_url);
-}
+MaterialCard.IconButton = MaterialCardButton;
 
-function getPlaylistTitle(playlist) {
-  return playlist.title;
-}
+MaterialCard.Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-function getPlaylistUserAvatar(playlist) {
-  return playlist.user.avatar_url;
-}
+MaterialCard.Row = styled.div`
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
 
-function getPlaylistUsername(playlist) {
-  return playlist.user.username;
-}
+MaterialCard.Title = styled(Link)`
+    display: -webkit-box;
+    font-size: 1.05rem;
+    font-weight: bold;
+    overflow: hidden;
+    /* -webkit-line-clamp: 2; */
+    -webkit-box-orient: vertical;
+    /* height: 40px; */
+`;
 
-function MaterialCard({ playlist, active }) {
-  return (
-    <MaterialCardWrapper active={active}>
-      <MaterialCardImage
-        active={active}
-        playing={false}
-        artworkUrl={getPlaylistCoverImage(playlist)}
-      />
-      <MaterialCardDetails
-        title={getPlaylistTitle(playlist)}
-        userAvatar={getPlaylistUserAvatar(playlist)}
-        username={getPlaylistUsername(playlist)}
-      />
-      <MaterialCardControls />
-    </MaterialCardWrapper>
-  );
-}
+MaterialCard.Subtitle = styled.span`
+  font-size: 0.95rem;
+  color: ${FONT_COLOR_SECONDARY};
+`;
 
-MaterialCard.defaultProps = {
-  playlist: null,
-  active: false,
-};
+MaterialCard.SubLink = styled(Link)`
+    display: inline-block;
+    margin-left: 10px;
+    color: ${FONT_COLOR_SECONDARY};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px; /* Vertical align!! It should be equal to the height of avatar */
+    max-width: 160px;
+    font-size: 0.9rem;
+`;
 
-MaterialCard.propTypes = {
-  playlist: PropTypes.object,
-  active: PropTypes.bool.isRequired,
-};
+MaterialCard.InnerSpan = styled.span`
+  margin-right: 5px;
+`;
 
 export default MaterialCard;

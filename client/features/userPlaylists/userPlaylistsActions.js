@@ -36,6 +36,7 @@ export function loadPlaylists() {
   return (dispatch) => {
     dispatch(startFetchingPlaylists());
     fetchMyPlaylists().then((normalized) => {
+      console.log(normalized);
       dispatch(receivePlaylists(normalized));
     });
   };

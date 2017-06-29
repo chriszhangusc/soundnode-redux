@@ -1,13 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import MaterialCardButton from './MaterialCardButton';
+import Card from 'common/components/MaterialCard';
 
-const Wrapper = styled.div`
-  margin-top: 10px;
-`;
-
-function MaterialCardControls({
+function PlaylistCardControls({
   liked,
   reposted,
   handleToggleLike,
@@ -15,8 +10,8 @@ function MaterialCardControls({
   handleCopyToClipboard,
 }) {
   return (
-    <Wrapper>
-      <MaterialCardButton
+    <Card.Row>
+      <Card.IconButton
         tooltipText={liked ? 'Unlike' : 'Like'}
         name="heart"
         active={liked}
@@ -25,8 +20,8 @@ function MaterialCardControls({
           handleToggleLike();
         }}
       />
-      <MaterialCardButton tooltipText="Add to playlist" name="bookmark" onClick={() => {}} />
-      <MaterialCardButton
+      <Card.IconButton tooltipText="Add to playlist" name="bookmark" onClick={() => {}} />
+      <Card.IconButton
         tooltipText="Repost"
         name="retweet"
         active={reposted}
@@ -35,16 +30,16 @@ function MaterialCardControls({
           handleRepost();
         }}
       />
-      <MaterialCardButton
+      <Card.IconButton
         tooltipText="Copy permalink"
         name="clipboard"
         onClick={handleCopyToClipboard}
       />
-    </Wrapper>
+    </Card.Row>
   );
 }
 
-MaterialCardControls.propTypes = {
+PlaylistCardControls.propTypes = {
   liked: PropTypes.bool,
   reposted: PropTypes.bool,
   handleToggleLike: PropTypes.func,
@@ -52,4 +47,4 @@ MaterialCardControls.propTypes = {
   handleCopyToClipboard: PropTypes.func,
 };
 
-export default MaterialCardControls;
+export default PlaylistCardControls;

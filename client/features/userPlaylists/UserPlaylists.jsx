@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PlaylistCard from './PlaylistCard';
 import * as userPlaylistsActions from './userPlaylistsActions';
-import { getUserPlaylistIds } from './userPlaylistsSelectors.js';
+import { getUserPlaylistIds } from './userPlaylistsSelectors';
 
 const MaterialCardList = styled.div`
   display: flex;
@@ -19,7 +19,6 @@ class UserPlaylists extends React.Component {
 
   componentWillMount() {
     this.props.loadPlaylists();
-    console.log('Will mount');
   }
 
   render() {
@@ -41,7 +40,7 @@ UserPlaylists.defaultProps = {
 };
 
 UserPlaylists.propTypes = {
-  playlistIds: PropTypes.func,
+  playlistIds: PropTypes.arrayOf(PropTypes.number),
   loadPlaylists: PropTypes.func.isRequired,
 };
 
