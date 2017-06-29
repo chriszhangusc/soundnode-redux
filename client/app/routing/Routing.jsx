@@ -10,7 +10,7 @@ import TrackProfile from 'features/trackProfile/TrackProfile';
 import Favorites from 'features/favorites/Favorites';
 import Stream from 'features/stream/Stream';
 import Search from 'features/search/Search';
-import Playlists from 'features/playlists/Playlists';
+import Playlists from 'features/userPlaylists/UserPlaylists';
 
 const defaultRedirect = <Redirect to={`${routes.CHARTS_ROUTE}/${DEFAULT_GENRE}`} />;
 

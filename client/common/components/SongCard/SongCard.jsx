@@ -11,11 +11,6 @@ import SongCardDetails from './SongCardDetails';
 import SongCardControls from './SongCardControls';
 import SongCardImage from './SongCardImage';
 
-const mapStateToProps = (state, { trackId }) => ({
-  track: getTrackById(state, trackId),
-  active: isTrackActive(state, trackId),
-});
-
 const SongCardWrapper = styled.div`
   background-color: ${BACKGROUND_COLOR};
   box-shadow: 0 0 12px 8px ${BOX_SHADOW_COLOR};
@@ -50,7 +45,13 @@ SongCard.defaultProps = {
 SongCard.propTypes = {
   track: PropTypes.object,
   active: PropTypes.bool.isRequired,
-  // playlistName: PropTypes.string,
 };
+
+function mapStateToProps(state, { trackId }) {
+  return {
+    track: getTrackById(state, trackId),
+    active: isTrackActive(state, trackId),
+  };
+}
 
 export default connect(mapStateToProps)(SongCard);

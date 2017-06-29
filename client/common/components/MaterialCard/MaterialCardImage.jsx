@@ -37,7 +37,7 @@ const PlaybackButtonIcon = styled.i`
   color: ${THEME_COLOR}
 `;
 
-function SongCardImage({ active, playing, artworkUrl, handleImageClick }) {
+function MaterialCardImage({ active, playing, artworkUrl, handleImageClick }) {
   return (
     <Wrapper>
       <PlaybackButtonWrapper active={active} onClick={handleImageClick}>
@@ -48,16 +48,20 @@ function SongCardImage({ active, playing, artworkUrl, handleImageClick }) {
   );
 }
 
-SongCardImage.defaultProps = {
+MaterialCardImage.defaultProps = {
   artworkUrl: '',
-  artworkUrlSmall: '',
+  active: false,
+  playing: false,
+  handleImageClick: () => {
+    console.log('Image click not implemented!');
+  },
 };
 
-SongCardImage.propTypes = {
-  active: PropTypes.bool.isRequired,
-  playing: PropTypes.bool.isRequired,
+MaterialCardImage.propTypes = {
+  active: PropTypes.bool,
+  playing: PropTypes.bool,
   artworkUrl: PropTypes.string,
-  handleImageClick: PropTypes.func.isRequired,
+  handleImageClick: PropTypes.func,
 };
 
-export default SongCardImage;
+export default MaterialCardImage;

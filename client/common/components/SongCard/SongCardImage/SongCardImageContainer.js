@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
 import { changeSongAndPlay, playSong, pauseSong } from 'features/player/playerActions';
 import { switchActivePlaylistIfNeeded } from 'features/playlist/playlistActions';
-import { getMiniVersion, getLargeVersion } from 'common/utils/imageUtils';
+import { getLargeVersion } from 'common/utils/imageUtils';
 import { getUserById } from 'features/entities/entitiesSelectors';
 import SongCardImage from './SongCardImage';
 
@@ -10,7 +10,6 @@ function mapStateToProps(state, { track }) {
   const user = getUserById(state, track.userId);
   return {
     artworkUrl: getLargeVersion(track.artworkUrl || user.avatarUrl),
-    artworkUrlBlur: getMiniVersion(track.artworkUrl),
     active: isTrackActive(state, track.id),
     playing: isTrackPlaying(state, track.id),
   };
