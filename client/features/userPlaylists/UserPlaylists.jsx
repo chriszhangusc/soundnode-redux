@@ -1,8 +1,10 @@
 import React from 'react';
-import SC from 'soundcloud';
-import MaterialCard from 'common/components/MaterialCard';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import playlists from './data';
+import { connect } from 'react-redux';
+import PlaylistCard from './PlaylistCard';
+import * as userPlaylistsActions from './userPlaylistsActions';
+import { getUserPlaylistIds } from './userPlaylistsSelectors.js';
 
 const MaterialCardList = styled.div`
   display: flex;
@@ -11,35 +13,42 @@ const MaterialCardList = styled.div`
 `;
 
 class UserPlaylists extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      playlists: [],
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentWillMount() {
-    // SC.get('/me/playlists', { limit: 10 }).then((playlists) => {
-    //   this.setState({
-    //     playlists,
-    //   });
-    // });
-    this.setState({
-      playlists,
-    });
+    this.props.loadPlaylists();
     console.log('Will mount');
   }
 
   render() {
-    console.log(this.state.playlists);
+    const { playlistIds } = this.props;
+
     return (
       <MaterialCardList>
-        {this.state.playlists.map(playlist => (
-          <MaterialCard playlist={playlist} key={playlist.id} />
-        ))}
+        {playlistIds.map(
+          playlistId =>
+            playlistId && <PlaylistCard playlistId={playlistId} key={playlistId.toString()} />,
+        )}
       </MaterialCardList>
     );
   }
 }
 
-export default UserPlaylists;
+UserPlaylists.defaultProps = {
+  playlistIds: [],
+};
+
+UserPlaylists.propTypes = {
+  playlistIds: PropTypes.func,
+  loadPlaylists: PropTypes.func.isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    playlistIds: getUserPlaylistIds(state),
+  };
+}
+
+export default connect(mapStateToProps, userPlaylistsActions)(UserPlaylists);

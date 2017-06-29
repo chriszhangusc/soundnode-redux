@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   tracks: {},
   users: {},
   comments: {},
+  playlists: {},
 };
 
 export function mergeEntities(state, { entities }) {

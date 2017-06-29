@@ -7,15 +7,9 @@ import { createSelector } from 'reselect';
  */
 export const getEntities = state => state.entities;
 
-export const getUsers = createSelector(
-  getEntities,
-  entities => entities.users,
-);
+export const getUsers = createSelector(getEntities, entities => entities.users);
 
-export const getTracks = createSelector(
-  getEntities,
-  entities => entities.tracks,
-);
+export const getTracks = createSelector(getEntities, entities => entities.tracks);
 
 /**
  * Returns user object by userId
@@ -23,8 +17,7 @@ export const getTracks = createSelector(
  * @param {number} userId UserId field of an user object
  * @returns {object} Artist object whose id equals to userId
  */
-export const getUserById = (state, userId) =>
-  userId && getEntities(state).users[String(userId)];
+export const getUserById = (state, userId) => userId && getEntities(state).users[String(userId)];
 
 /**
  * Returns track object by trackId
@@ -66,4 +59,8 @@ export function getUserByCommentId(state, commentId) {
   const comment = getCommentById(state, commentId);
   const userId = comment && comment.userId;
   return getUserById(state, userId);
+}
+
+export function getPlaylistById(state, playlistId) {
+  return playlistId && getEntities(state).playlists[String(playlistId)];
 }

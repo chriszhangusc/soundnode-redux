@@ -13,5 +13,5 @@ import { playlistArraySchema } from 'app/schema';
 // https://api.soundcloud.com/me/playlists?limit=10&format=json&oauth_token=1-283018-250047142-67772dd734f9f
 export function fetchMyPlaylists() {
   const requestUrl = `${SC_API_V1}/me/playlists?format=json`;
-  makeRequest(requestUrl).then(response => normalizeResponse(response, playlistArraySchema));
+  return makeRequest(requestUrl).then(response => normalizeResponse(response, playlistArraySchema));
 }
