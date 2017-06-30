@@ -39,9 +39,9 @@ MaterialCard.Title = styled(Link)`
     font-size: 1.05rem;
     font-weight: bold;
     overflow: hidden;
-    /* -webkit-line-clamp: 2; */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    /* height: 40px; */
+    height: 40px;
 `;
 
 MaterialCard.Subtitle = styled.span`
@@ -56,6 +56,7 @@ MaterialCard.SubLink = styled(Link)`
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 25px; /* Vertical align!! It should be equal to the height of avatar */
+    max-height: 25px;
     max-width: 160px;
     font-size: 0.9rem;
 `;

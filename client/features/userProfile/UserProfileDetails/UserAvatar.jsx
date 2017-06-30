@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EnhancedImage from 'common/components/images/EnhancedImage';
+import Avatar from 'common/components/images/Avatar';
 import styled from 'styled-components';
 
-const Avatar = styled.div`
-  height: 350px;
-  width: 350px;
+const Wrapper = styled.div`
   margin-right: 50px;
 `;
 
-function UserAvatar(props) {
+function UserAvatar() {
   return (
-    <Avatar>
-      <EnhancedImage circle {...props} />
-    </Avatar>
+    <Wrapper>
+      <Avatar />
+    </Wrapper>
   );
 }
 

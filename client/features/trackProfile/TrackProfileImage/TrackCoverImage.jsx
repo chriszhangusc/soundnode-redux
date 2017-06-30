@@ -7,7 +7,7 @@ import { getLargeVersion } from 'common/utils/imageUtils';
 import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
 import { FormattedNumber } from 'react-intl';
 import { changeSongAndPlay, playSong, pauseSong } from 'features/player/playerActions';
-import EnhancedImage from 'common/components/images/EnhancedImage';
+import Image from 'common/components/images/Image';
 
 const Wrapper = styled.div`
   width: 350px;
@@ -76,7 +76,7 @@ function TrackCoverImage({
       <PlaybackButton active={active} onClick={handleImageClick}>
         <i className={`fa ${playing ? 'fa-pause' : 'fa-play'}`} />
       </PlaybackButton>
-      <EnhancedImage src={src} onClick={handleImageClick} />
+      <Image src={src} onClick={handleImageClick} />
       <CoverImageDetailsWrapper onClick={handleImageClick}>
         <span>
           <i className="fa fa-play" /> <FormattedNumber value={playbackCount || 0} />

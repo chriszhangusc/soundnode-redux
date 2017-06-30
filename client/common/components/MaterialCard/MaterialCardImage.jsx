@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { THEME_COLOR } from 'app/css/colors';
-import EnhancedImage from 'common/components/images/EnhancedImage';
+import Image from 'common/components/images/Image';
 import ShadowOverlay from 'common/components/ShadowOverlay';
 
 const Wrapper = styled.div`
@@ -11,7 +11,6 @@ const Wrapper = styled.div`
   position: relative;
   margin-bottom: 10px;
 `;
-
 
 const PlaybackButtonIcon = styled.i`
   display: inline-block;
@@ -25,7 +24,7 @@ function MaterialCardImage({ active, playing, imageUrl, handleImageClick }) {
       <ShadowOverlay active={active} onClick={handleImageClick}>
         <PlaybackButtonIcon className={`${playing ? 'ion-ios-pause' : 'ion-ios-play'}`} />
       </ShadowOverlay>
-      {imageUrl && <EnhancedImage src={imageUrl} />}
+      {imageUrl && <Image src={imageUrl} />}
     </Wrapper>
   );
 }
