@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Avatar from 'common/components/Avatar';
+import Avatar from 'common/components/images/Avatar';
 import styled from 'styled-components';
 import { media } from 'app/css/styleUtils';
 import { SEPARATOR_COLOR_DARK } from 'app/css/colors';

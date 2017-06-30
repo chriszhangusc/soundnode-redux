@@ -1,16 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from 'common/components/Avatar';
+import Avatar from 'common/components/images/Avatar';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
-import styled from 'styled-components';
 import Card from 'common/components/MaterialCard';
 import { connect } from 'react-redux';
 import { getUserByTrackId } from 'features/entities/entitiesSelectors';
-
-const AvatarWrapper = styled.div`
-  height: 25px;
-  width: 25px;
-`;
 
 function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
   const trackUrl = `${TRACK_PROFILE_ROUTE}/${trackId}`;
@@ -24,7 +18,7 @@ function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
         </Card.Title>
       </Card.Row>
       <Card.Row>
-        <AvatarWrapper><Avatar linkTo={userUrl} title={username} src={userAvatar} /></AvatarWrapper>
+        <Avatar linkTo={userUrl} src={userAvatar} />
         <Card.SubLink to={userUrl} title={username}>
           {username}
         </Card.SubLink>
