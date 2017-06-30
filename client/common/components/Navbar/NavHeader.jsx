@@ -1,5 +1,4 @@
 import React from 'react';
-import { HOST } from 'common/constants/appConsts';
 import styled from 'styled-components';
 import { Glyphicon } from 'react-bootstrap';
 
@@ -19,7 +18,7 @@ const NavHeaderWrapper = styled.div`
 function NavHeader() {
   return (
     <NavHeaderWrapper>
-      <NavbarBrand href={HOST}>
+      <NavbarBrand href="/">
         <Glyphicon glyph="headphones" />
         <NavbarBrandName>SoundNode Redux</NavbarBrandName>
       </NavbarBrand>

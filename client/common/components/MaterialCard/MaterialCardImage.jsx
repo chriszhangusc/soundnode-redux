@@ -34,9 +34,7 @@ MaterialCardImage.defaultProps = {
   imageUrl: '',
   active: false,
   playing: false,
-  handleImageClick: () => {
-    console.log('Image click not implemented!');
-  },
+  handleImageClick: undefined,
 };
 
 MaterialCardImage.propTypes = {

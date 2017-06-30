@@ -32,8 +32,8 @@ SC.initialize({
 });
 
 const PageContentWrapper = styled.div`
-  margin-left: $sidebar-width;
   padding: 20px 20px 20px 50px;
+  /* Make space for sidebar */
   ${media.desktop`margin-left: ${SIDEBAR_WIDTH_DESKTOP}`}
   ${media.desktopLG`margin-left: ${SIDEBAR_WIDTH_DESKTOP_LG}`}
   ${media.desktop4K`margin-left: ${SIDEBAR_WIDTH_4K}`}

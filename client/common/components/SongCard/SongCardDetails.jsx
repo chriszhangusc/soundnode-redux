@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'common/components/Avatar';
-import { Link } from 'react-router-dom';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import styled from 'styled-components';
 import Card from 'common/components/MaterialCard';
@@ -25,9 +24,7 @@ function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
         </Card.Title>
       </Card.Row>
       <Card.Row>
-        <Link to={userUrl} title={username}>
-          <AvatarWrapper><Avatar src={userAvatar} /></AvatarWrapper>
-        </Link>
+        <AvatarWrapper><Avatar linkTo={userUrl} title={username} src={userAvatar} /></AvatarWrapper>
         <Card.SubLink to={userUrl} title={username}>
           {username}
         </Card.SubLink>

@@ -25,6 +25,7 @@ function MaterialCardButton({ title, name, active, onClick, tooltipText }) {
   const tooltip = <Tooltip id={`tooltip-${shortid.generate()}`}>{tooltipText}</Tooltip>;
   return (
     <OverlayTrigger delayShow={1000} delayHide={200} placement="bottom" overlay={tooltip}>
+      {/* Extrack button */}
       <OuterButton active={active} title={title} onClick={onClick}>
         <FontAwesome name={name} />
       </OuterButton>
