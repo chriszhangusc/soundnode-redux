@@ -21,7 +21,7 @@ const SidebarWrapper = styled.div`
   ${media.desktop4K`width: ${SIDEBAR_WIDTH_4K}`}
 `;
 
-const SIDEBAR_ITEM_LIST = [
+const sidebarItemList = [
   {
     to: routes.CHARTS_ROUTE,
     iconClassName: 'fa fa-trophy',
@@ -50,7 +50,7 @@ function Sidebar() {
   return (
     <SidebarWrapper>
       <ul>
-        {SIDEBAR_ITEM_LIST.map(d => <SidebarItem {...d} key={d.title} />)}
+        {sidebarItemList.map(d => <SidebarItem {...d} key={d.title} />)}
       </ul>
     </SidebarWrapper>
   );

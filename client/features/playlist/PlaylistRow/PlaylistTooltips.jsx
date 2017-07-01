@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { SEPARATOR_COLOR_CLEAN, SEPARATOR_COLOR_DARK } from 'app/css/colors';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 import { TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import { media } from 'app/css/styleUtils';
 
@@ -85,14 +85,14 @@ function PlaylistTooltips({ index, trackId }) {
           <OptionsListItem>Repost</OptionsListItem>
           <OptionsListItem>Add to playlist</OptionsListItem>
           <OptionsListItem>
-            <Link
+            <RouterLink
               to={`${TRACK_PROFILE_ROUTE}/${trackId}`}
               onClick={(e) => {
                 e.stopPropagation();
               }}
             >
               Go to track
-            </Link>
+            </RouterLink>
           </OptionsListItem>
         </OptionsList>
       </OptionsListWrapper>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Avatar from 'common/components/images/Avatar';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 
 const AvatarWrapper = styled.div`
   margin-right: 10px;
@@ -11,9 +11,9 @@ const AvatarWrapper = styled.div`
 export default function CommentUserAvatar({ linkTo, userAvatarUrl }) {
   return (
     <AvatarWrapper>
-      <Link to={linkTo}>
+      <RouterLink to={linkTo}>
         <Avatar src={userAvatarUrl} />
-      </Link>
+      </RouterLink>
     </AvatarWrapper>
   );
 }

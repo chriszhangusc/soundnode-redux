@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Avatar from 'common/components/images/Avatar';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
@@ -30,7 +30,6 @@ const AvatarWrapper = styled.div`
 class Auth extends React.Component {
   componentWillMount() {
     const { syncLoginIfNeeded } = this.props;
-    // console.log('componentWillMount');
     syncLoginIfNeeded();
   }
 
@@ -40,9 +39,9 @@ class Auth extends React.Component {
     const loggedIn = () => (
       <AuthWrapper>
         <AvatarWrapper>
-          <Link to={`${USER_PROFILE_ROUTE}/${me.id}`}>
+          <RouterLink to={`${USER_PROFILE_ROUTE}/${me.id}`}>
             <Avatar src={me.avatarUrl} />
-          </Link>
+          </RouterLink>
         </AvatarWrapper>
         <Username>{me.username}</Username>
         <LogoutButton />
@@ -51,7 +50,7 @@ class Auth extends React.Component {
 
     const loggedOut = () => (
       <AuthWrapper>
-        <a onClick={onLogin}>Login</a>
+        <RouterLink to="/" onClick={onLogin}>Login</RouterLink>
       </AuthWrapper>
     );
 

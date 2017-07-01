@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 
 const StyledUsername = styled.span`
   margin: 10px 0;
@@ -9,7 +9,7 @@ const StyledUsername = styled.span`
 `;
 
 function TrackUsername({ children, to }) {
-  return <StyledUsername><Link to={to}>{children}</Link></StyledUsername>;
+  return <StyledUsername><RouterLink to={to}>{children}</RouterLink></StyledUsername>;
 }
 
 TrackUsername.defaultProps = {

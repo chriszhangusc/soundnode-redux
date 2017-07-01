@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 import TrackAvatar from 'common/components/images/TrackAvatar';
 import styled from 'styled-components';
 import { media } from 'app/css/styleUtils';
@@ -42,12 +42,12 @@ const DropdownItemTitle = styled.span`
 // So we have to put the routing logic to onMouseDown which trigger before onblur.
 function DropdownSearchResultsItemTrack({ imageUrl, itemLinkUrl, itemTitle }) {
   return (
-    <Link to={itemLinkUrl}>
+    <RouterLink to={itemLinkUrl}>
       <StyledListItem>
         <TrackAvatar src={imageUrl} size="small" />
         <DropdownItemTitle>{itemTitle}</DropdownItemTitle>
       </StyledListItem>
-    </Link>
+    </RouterLink>
   );
 }
 

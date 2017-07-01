@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ExternalLink from 'common/components/links/ExternalLink';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 import { compose } from 'recompose';
 
 import withImageFadeInOnLoad from 'common/hocs/withImageFadeInOnLoad';
@@ -17,22 +17,19 @@ const StyledImage = styled.img`
   transition: opacity 0.5s linear;
 `;
 
-const DivWrapper = styled.div`
-`;
-
 function Image(props) {
   const { linkTo, external } = props;
+  const WrapperLink = external ? ExternalLink : RouterLink;
 
-  const LinkedWrapper = external
-    ? DivWrapper.withComponent(ExternalLink)
-    : DivWrapper.withComponent(Link);
-
-  const Wrapper = linkTo ? LinkedWrapper : DivWrapper;
-  return (
-    <Wrapper to={linkTo}>
-      <StyledImage {...props} />
-    </Wrapper>
-  );
+  if (linkTo) {
+    // Wrap within a link
+    return (
+      <WrapperLink to={linkTo}>
+        <StyledImage {...props} />
+      </WrapperLink>
+    );
+  }
+  return <StyledImage {...props} />;
 }
 
 Image.defaultProps = {
@@ -41,6 +38,7 @@ Image.defaultProps = {
   loaded: false,
   fadeIn: true,
   linkTo: undefined,
+  external: false,
 };
 
 Image.propTypes = {
@@ -49,7 +47,7 @@ Image.propTypes = {
   loaded: PropTypes.bool,
   fadeIn: PropTypes.bool,
   linkTo: PropTypes.string,
-  external: PropTypes.string,
+  external: PropTypes.bool,
 };
 
 // export default withImageFallbackOnError(withImageFadeInOnLoad(Image));

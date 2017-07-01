@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 
 const StyledUsername = styled.span`
@@ -12,9 +12,9 @@ const StyledUsername = styled.span`
 
 export default function CommentUsername({ linkTo, children }) {
   return (
-    <Link to={linkTo}>
+    <RouterLink to={linkTo}>
       <StyledUsername>{children}</StyledUsername>
-    </Link>
+    </RouterLink>
   );
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 import styled from 'styled-components';
 import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 import { media } from 'app/css/styleUtils';
@@ -18,7 +18,7 @@ const TrackImage = styled.img`
   margin-right: 10px;
 `;
 
-const TrackTitle = styled(Link)`
+const TrackTitle = styled(RouterLink)`
   display: -webkit-box;
   overflow: hidden;
   -webkit-line-clamp: 2;
@@ -29,7 +29,7 @@ const TrackTitle = styled(Link)`
   ${media.desktopLG`font-size: 0.8rem;`}
 `;
 
-const ArtistName = styled(Link)`
+const ArtistName = styled(RouterLink)`
   display: inline-block;
   color: ${FONT_COLOR_SECONDARY};
   ${media.desktop4K`font-size: 0.8rem;`}
@@ -44,9 +44,9 @@ const DetailsWrapper = styled.div`
 function PlayerTrackInfo({ artworkUrl, trackTitle, artistName, trackUrl, artistUrl }) {
   return (
     <PlayerTrackInfoWrapper>
-      <Link to={trackUrl}>
+      <RouterLink to={trackUrl}>
         <TrackImage alt="Not Found" src={artworkUrl || defaultArtworkImage} />
-      </Link>
+      </RouterLink>
       <DetailsWrapper>
         <TrackTitle to={trackUrl} title={trackUrl}>
           {trackTitle}

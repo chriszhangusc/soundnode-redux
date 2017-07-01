@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'common/components/images/Avatar';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import styled from 'styled-components';
 import { FONT_COLOR_SECONDARY } from 'app/css/colors';
@@ -32,9 +32,9 @@ function PlaylistCardDetails({ trackCount, duration, title, userAvatar, username
         </Card.Subtitle>
       </Card.Row>
       <Card.Row>
-        <Link to="#" title={username}>
+        <RouterLink to="#" title={username}>
           <AvatarWrapper><Avatar src={userAvatar} /></AvatarWrapper>
-        </Link>
+        </RouterLink>
         <Card.SubLink to="#" title={username}>
           {username}
         </Card.SubLink>

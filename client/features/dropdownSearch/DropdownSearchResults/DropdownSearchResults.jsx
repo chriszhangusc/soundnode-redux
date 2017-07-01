@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 import { connect } from 'react-redux';
 import { SEARCH_ROUTE } from 'common/constants/routeConsts';
 import {
@@ -33,7 +33,7 @@ function renderArtistResults(userIds) {
   );
 }
 
-const ShowAllLink = styled(Link)`
+const ShowAllLink = styled(RouterLink)`
   display: block;
   line-height: 35px;
   text-align: center;

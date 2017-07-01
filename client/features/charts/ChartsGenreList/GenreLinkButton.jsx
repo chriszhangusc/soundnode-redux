@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 import styled from 'styled-components';
 import { GRAY } from 'app/css/colors';
 
 // className="button inline link-button"
-const StyledLinkButton = styled(Link)`
+const StyledLinkButton = styled(RouterLink)`
   display: inline-block;
   width: 19%;
   color: #ededed;

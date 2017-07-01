@@ -20,18 +20,6 @@ injectGlobal`
     background-color: ${BACKGROUND_COLOR};
   }
 
-  a {
-    color: ${LIGHTER_GRAY};
-    text-decoration: none;
-    &:hover,
-    &:focus,
-    &:active {
-      color: ${LIGHTER_GRAY};
-      cursor: pointer;
-      text-decoration: none;
-    }
-  }
-
   .container {
     padding: 0;
   }

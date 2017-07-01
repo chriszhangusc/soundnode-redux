@@ -5,7 +5,7 @@ import {
   THEME_COLOR,
   FONT_COLOR_SECONDARY,
 } from 'app/css/colors';
-import { Link } from 'react-router-dom';
+import RouterLink from 'common/components/links/RouterLink';
 import MaterialCardButton from './MaterialCardButton';
 
 const MaterialCard = styled.div`
@@ -34,7 +34,7 @@ MaterialCard.Row = styled.div`
   align-items: center;
 `;
 
-MaterialCard.Title = styled(Link)`
+MaterialCard.Title = styled(RouterLink)`
     display: -webkit-box;
     font-size: 1.05rem;
     font-weight: bold;
@@ -49,7 +49,7 @@ MaterialCard.Subtitle = styled.span`
   color: ${FONT_COLOR_SECONDARY};
 `;
 
-MaterialCard.SubLink = styled(Link)`
+MaterialCard.SubLink = styled(RouterLink)`
     display: inline-block;
     margin-left: 10px;
     color: ${FONT_COLOR_SECONDARY};
