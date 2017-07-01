@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Avatar from 'common/components/images/Avatar';
+import TrackAvatar from 'common/components/images/TrackAvatar';
 import styled from 'styled-components';
 import { media } from 'app/css/styleUtils';
 import { SEPARATOR_COLOR_DARK } from 'app/css/colors';
+import { connect } from 'react-redux';
+import { getTrackById } from 'features/entities/entitiesSelectors';
+import { TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 
 const StyledListItem = styled.li`
   padding: 8px 10px;
@@ -37,25 +40,34 @@ const DropdownItemTitle = styled.span`
 // Clicking the link will also trigger onBlur of the search input which will cause the result to
 // disappear before handling onClick event of the link,
 // So we have to put the routing logic to onMouseDown which trigger before onblur.
-function DropdownSearchResultsRow({ imageUrl, itemLinkUrl, itemTitle }) {
+function DropdownSearchResultsItemTrack({ imageUrl, itemLinkUrl, itemTitle }) {
   return (
     <Link to={itemLinkUrl}>
       <StyledListItem>
-        <Avatar src={imageUrl} />
+        <TrackAvatar src={imageUrl} size="small" />
         <DropdownItemTitle>{itemTitle}</DropdownItemTitle>
       </StyledListItem>
     </Link>
   );
 }
 
-DropdownSearchResultsRow.defaultProps = {
+DropdownSearchResultsItemTrack.defaultProps = {
   imageUrl: undefined,
 };
 
-DropdownSearchResultsRow.propTypes = {
+DropdownSearchResultsItemTrack.propTypes = {
   imageUrl: PropTypes.string,
   itemLinkUrl: PropTypes.string.isRequired,
   itemTitle: PropTypes.string.isRequired,
 };
 
-export default DropdownSearchResultsRow;
+function mapStateToProps(state, { trackId }) {
+  const track = getTrackById(state, trackId);
+  return {
+    imageUrl: track.artworkUrl,
+    itemLinkUrl: `${TRACK_PROFILE_ROUTE}/${trackId}`,
+    itemTitle: track.title,
+  };
+}
+
+export default connect(mapStateToProps)(DropdownSearchResultsItemTrack);

@@ -29,7 +29,7 @@ export default function withImageFadeInOnLoad(ImageComponent) {
     }
   }
 
-  FadeInImage.displayName = `WithImgFadeInOnLoad(${getDisplayName(ImageComponent)})`;
+  FadeInImage.displayName = `WithImageFadeInOnLoad(${getDisplayName(ImageComponent)})`;
 
   return FadeInImage;
 }

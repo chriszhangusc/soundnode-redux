@@ -10,7 +10,13 @@ const Wrapper = styled.div`
 function UserAvatar() {
   return (
     <Wrapper>
-      <Avatar />
+      <Avatar
+        src={avatarUrl}
+        size="large"
+        linkTo={permalinkUrl}
+        target="_blank"
+        title="Go to SoundCloud"
+      />
     </Wrapper>
   );
 }
@@ -22,3 +28,13 @@ UserAvatar.propTypes = {
 };
 
 export default UserAvatar;
+
+{
+  /* <Avatar
+        src={avatarUrl}
+        size="large"
+        linkTo={permalinkUrl}
+        external
+        title="Go to SoundCloud"
+      />*/
+}

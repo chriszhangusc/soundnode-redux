@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getDisplayName } from 'common/utils/hocUtils';
-import trackFallbackSrc from 'assets/images/default-track.png';
+import defaultTrackFallbackImage from 'assets/images/default-track.png';
 
 export default function withImageFallbackOnError(ImageComponent) {
   class FallbackImage extends React.Component {
@@ -37,16 +37,16 @@ export default function withImageFallbackOnError(ImageComponent) {
   }
 
   FallbackImage.defaultProps = {
-    fallbackSrc: trackFallbackSrc,
+    fallbackSrc: defaultTrackFallbackImage,
   };
 
   FallbackImage.propTypes = {
-    src: PropTypes.string.isRequired,
+    src: PropTypes.string,
     fallbackSrc: PropTypes.string,
     onError: PropTypes.func,
   };
 
-  FallbackImage.displayName = `WithImgFadeInOnLoad(${getDisplayName(ImageComponent)})`;
+  FallbackImage.displayName = `WithImageFallbackOnError(${getDisplayName(ImageComponent)})`;
 
   return FallbackImage;
 }

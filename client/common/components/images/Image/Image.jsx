@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ExternalLink from 'common/components/links/ExternalLink';
 import { Link } from 'react-router-dom';
 import { compose } from 'recompose';
 
@@ -19,10 +20,13 @@ const StyledImage = styled.img`
 const DivWrapper = styled.div`
 `;
 
-const LinkedWrapper = DivWrapper.withComponent(Link);
-
 function Image(props) {
-  const { linkTo } = props;
+  const { linkTo, external } = props;
+
+  const LinkedWrapper = external
+    ? DivWrapper.withComponent(ExternalLink)
+    : DivWrapper.withComponent(Link);
+
   const Wrapper = linkTo ? LinkedWrapper : DivWrapper;
   return (
     <Wrapper to={linkTo}>
@@ -45,6 +49,7 @@ Image.propTypes = {
   loaded: PropTypes.bool,
   fadeIn: PropTypes.bool,
   linkTo: PropTypes.string,
+  external: PropTypes.string,
 };
 
 // export default withImageFallbackOnError(withImageFadeInOnLoad(Image));

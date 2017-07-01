@@ -28,15 +28,12 @@ const UserAvatarWrapper = styled.div`
 
 const UserProfileDetails = ({ avatarUrl, username, followerCount, description, permalinkUrl }) => (
   <UserDetailsRowWrapper>
-    {/* <a href={permalinkUrl} target="_black" title="Go to SoundCloud">
-      <UserAvatar src={avatarUrl} />
-    </a>*/}
     <UserAvatarWrapper>
       <Avatar
         src={avatarUrl}
         size="large"
         linkTo={permalinkUrl}
-        target="_blank"
+        external
         title="Go to SoundCloud"
       />
     </UserAvatarWrapper>

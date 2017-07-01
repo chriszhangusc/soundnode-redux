@@ -16,13 +16,13 @@ import styled from 'styled-components';
 import { media } from 'app/css/styleUtils';
 
 import DropdownSearchResultsRowUser from './DropdownSearchResultsRowUser';
-import DropdownSearchResultsRowTrack from './DropdownSearchResultsRowTrack';
+import DropdownSearchResultsItemTrack from './DropdownSearchResultsItemTrack';
 import DropdownSearchResultsTitle from './DropdownSearchResultsTitle';
 
 const dropdownSearchShowCount = 3;
 
 // Render the artists/users results section.
-function ArtistResults(userIds) {
+function renderArtistResults(userIds) {
   return (
     <ul>
       <DropdownSearchResultsTitle>ARTISTS</DropdownSearchResultsTitle>
@@ -43,13 +43,15 @@ const ShowAllLink = styled(Link)`
 `;
 
 // Render the tracks results section.
-function TrackResults(trackIds, query) {
+function renderTrackResults(trackIds, query) {
   return (
     <ul>
       <DropdownSearchResultsTitle>TRACKS</DropdownSearchResultsTitle>
       {trackIds
         .slice(0, dropdownSearchShowCount)
-        .map(trackId => <DropdownSearchResultsRowTrack key={trackId} trackId={trackId} />)}
+        .map(trackId => (
+          <DropdownSearchResultsItemTrack key={trackId.toString()} trackId={trackId} />
+        ))}
       {
         <li>
           <ShowAllLink to={`${SEARCH_ROUTE}/${query}`} onMouseDown={() => {}}>
@@ -85,8 +87,8 @@ const Wrapper = styled.div`
 function DropdownSearchResults({ userIds, trackIds, hidden, query }) {
   return (
     <Wrapper hidden={hidden}>
-      {userIds.length !== 0 && ArtistResults(userIds)}
-      {trackIds.length !== 0 && TrackResults(trackIds, query)}
+      {userIds.length !== 0 && renderArtistResults(userIds)}
+      {trackIds.length !== 0 && renderTrackResults(trackIds, query)}
     </Wrapper>
   );
 }
