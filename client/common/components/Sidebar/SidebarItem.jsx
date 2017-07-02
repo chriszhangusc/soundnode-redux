@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { SIDEBAR_ITEM_HEIGHT } from 'app/css/variables';
 import SidebarNavLink from './SidebarNavLink';
 
 const ListItem = styled.li`
-  line-height: ${SIDEBAR_ITEM_HEIGHT};
+  line-height: 80px;
 `;
 
 const Icon = styled.i`
