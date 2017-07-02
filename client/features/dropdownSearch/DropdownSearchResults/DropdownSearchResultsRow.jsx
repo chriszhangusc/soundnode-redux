@@ -49,6 +49,7 @@ DropdownSearchResultsRow.propTypes = {
   imageUrl: PropTypes.string,
   itemLinkUrl: PropTypes.string.isRequired,
   itemTitle: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['user', 'track']).isRequired,
 };
 
 export default DropdownSearchResultsRow;

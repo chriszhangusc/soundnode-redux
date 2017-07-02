@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 import { connect } from 'react-redux';
 import { getPlaylistById, getUserByPlaylistId } from 'features/entities/entitiesSelectors';
-import Card from 'common/components/MaterialCard';
+import Card from 'common/components/Card';
 
 const AvatarWrapper = styled.div`
   height: 25px;

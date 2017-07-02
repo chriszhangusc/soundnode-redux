@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTrackById } from 'features/entities/entitiesSelectors';
 import { isTrackActive } from 'features/player/playerSelectors';
-import MaterialCard from 'common/components/MaterialCard';
+import Card from 'common/components/Card';
 import SongCardDetails from './SongCardDetails';
 import SongCardControls from './SongCardControls';
 import SongCardImage from './SongCardImage';
@@ -12,18 +12,18 @@ import SongCardImage from './SongCardImage';
 function SongCard({ track, active }) {
   if (track && track.streamable) {
     return (
-      <MaterialCard active={active}>
+      <Card active={active}>
         <SongCardImage track={track} />
         <SongCardDetails track={track} />
         <SongCardControls track={track} />
-      </MaterialCard>
+      </Card>
     );
   }
   return null;
 }
 
 SongCard.defaultProps = {
-  track: null,
+  track: undefined,
   active: false,
 };
 

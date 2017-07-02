@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  loadChartsPage,
-  changeGenre,
-  resetChartsState,
-} from 'features/charts/chartsActions';
+import { loadChartsPage, changeGenre, resetChartsState } from 'features/charts/chartsActions';
 import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 import { Grid } from 'react-bootstrap';
+import Title from 'common/components/Title';
+import { getCurrentGenreTitle } from 'features/charts/chartsSelectors';
+
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';
-import ChartsTitle from '../ChartsTitle';
 
-class ChartsPage extends Component {
+class ChartsView extends Component {
   constructor(props) {
     super(props);
     this.onPageMountOrChange = this.onPageMountOrChange.bind(this);
@@ -43,9 +41,10 @@ class ChartsPage extends Component {
   }
 
   render() {
+    const { genreTitle } = this.props;
     return (
       <Grid fluid>
-        <ChartsTitle />
+        <Title>Top Charts - {genreTitle}</Title>
         <ChartsGenreList />
         <ChartsTracks />
       </Grid>
@@ -53,7 +52,12 @@ class ChartsPage extends Component {
   }
 }
 
-ChartsPage.propTypes = {
+ChartsView.defaultProps = {
+  genreTitle: '',
+};
+
+ChartsView.propTypes = {
+  genreTitle: PropTypes.string,
   loadChartsPage: PropTypes.func.isRequired,
   changeGenre: PropTypes.func.isRequired,
   resetChartsState: PropTypes.func.isRequired,
@@ -63,6 +67,12 @@ ChartsPage.propTypes = {
   }).isRequired,
 };
 
+function mapStateToProps(state) {
+  return {
+    genreTitle: getCurrentGenreTitle(state),
+  };
+}
+
 const actions = {
   loadChartsPage,
   changeGenre,
@@ -70,4 +80,4 @@ const actions = {
   updateVisiblePlaylistName,
 };
 
-export default connect(null, actions)(ChartsPage);
+export default connect(mapStateToProps, actions)(ChartsView);

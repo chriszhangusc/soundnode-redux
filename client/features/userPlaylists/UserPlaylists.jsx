@@ -6,16 +6,14 @@ import PlaylistCard from './PlaylistCard';
 import * as userPlaylistsActions from './userPlaylistsActions';
 import { getUserPlaylistIds } from './userPlaylistsSelectors';
 
-const MaterialCardList = styled.div`
+const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 30px;
 `;
 
 class UserPlaylists extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+
 
   componentWillMount() {
     this.props.loadPlaylists();
@@ -25,12 +23,12 @@ class UserPlaylists extends React.Component {
     const { playlistIds } = this.props;
 
     return (
-      <MaterialCardList>
+      <CardList>
         {playlistIds.map(
           playlistId =>
             playlistId && <PlaylistCard playlistId={playlistId} key={playlistId.toString()} />,
         )}
-      </MaterialCardList>
+      </CardList>
     );
   }
 }

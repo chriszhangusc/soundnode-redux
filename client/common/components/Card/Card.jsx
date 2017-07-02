@@ -6,9 +6,9 @@ import {
   FONT_COLOR_SECONDARY,
 } from 'app/css/colors';
 import RouterLink from 'common/components/links/RouterLink';
-import MaterialCardButton from './MaterialCardButton';
+import CardButton from './CardButton';
 
-const MaterialCard = styled.div`
+const Card = styled.div`
   background-color: ${BACKGROUND_COLOR};
   box-shadow: 0 0 12px 8px ${BOX_SHADOW_COLOR};
   padding: 11px;
@@ -20,21 +20,21 @@ const MaterialCard = styled.div`
   border: 1px solid ${props => (props.active ? THEME_COLOR : 'transparent')};
 `;
 
-MaterialCard.IconButton = MaterialCardButton;
+Card.IconButton = CardButton;
 
-MaterialCard.Column = styled.div`
+Card.Column = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-MaterialCard.Row = styled.div`
+Card.Row = styled.div`
   margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
 `;
 
-MaterialCard.Title = styled(RouterLink)`
+Card.Title = styled(RouterLink)`
     display: -webkit-box;
     font-size: 1.05rem;
     font-weight: bold;
@@ -44,12 +44,12 @@ MaterialCard.Title = styled(RouterLink)`
     height: 40px;
 `;
 
-MaterialCard.Subtitle = styled.span`
+Card.Subtitle = styled.span`
   font-size: 0.95rem;
   color: ${FONT_COLOR_SECONDARY};
 `;
 
-MaterialCard.SubLink = styled(RouterLink)`
+Card.SubLink = styled(RouterLink)`
     display: inline-block;
     margin-left: 10px;
     color: ${FONT_COLOR_SECONDARY};
@@ -61,8 +61,8 @@ MaterialCard.SubLink = styled(RouterLink)`
     font-size: 0.9rem;
 `;
 
-MaterialCard.InnerSpan = styled.span`
+Card.InnerSpan = styled.span`
   margin-right: 5px;
 `;
 
-export default MaterialCard;
+export default Card;

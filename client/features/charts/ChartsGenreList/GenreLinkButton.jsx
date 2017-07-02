@@ -1,11 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import RouterLink from 'common/components/links/RouterLink';
-import styled from 'styled-components';
 import { GRAY } from 'app/css/colors';
 
-// className="button inline link-button"
-const StyledLinkButton = styled(RouterLink)`
+const StyledLinkButton = RouterLink.extend`
   display: inline-block;
   width: 19%;
   color: #ededed;
@@ -20,24 +16,7 @@ const StyledLinkButton = styled(RouterLink)`
   transition: color 200ms ease-in;
   &:hover {
     color: ${GRAY};
-    cursor: pointer;
   }
 `;
 
-function GenreLinkButton({ to, children, onClick }) {
-  return <StyledLinkButton to={to} onClick={onClick}>{children}</StyledLinkButton>;
-}
-
-GenreLinkButton.defaultProps = {
-  children: '',
-  onClick: () => {},
-  to: '',
-};
-
-GenreLinkButton.propTypes = {
-  to: PropTypes.string,
-  onClick: PropTypes.func,
-  children: PropTypes.node,
-};
-
-export default GenreLinkButton;
+export default StyledLinkButton;

@@ -5,17 +5,12 @@ import withLoadingSpinnerAfter from 'common/hocs/withLoadingSpinnerAfter';
 import withFetchingOnScroll from 'common/hocs/withFetchingOnScroll';
 import { compose } from 'recompose';
 import styled from 'styled-components';
+import Title from 'common/components/Title';
 
 const SongCardListWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 30px;
-`;
-
-const Title = styled.h1`
-  margin: 30px 20px;
-  font-weight: 400;
-  font-size: 2rem;
 `;
 
 function SongCardList({ title, trackIds }) {

@@ -21,11 +21,10 @@ const OuterButton = styled.button`
   }
 `;
 
-function MaterialCardButton({ title, name, active, onClick, tooltipText }) {
+function CardButton({ title, name, active, onClick, tooltipText }) {
   const tooltip = <Tooltip id={`tooltip-${shortid.generate()}`}>{tooltipText}</Tooltip>;
   return (
     <OverlayTrigger delayShow={1000} delayHide={200} placement="bottom" overlay={tooltip}>
-      {/* Extrack button */}
       <OuterButton active={active} title={title} onClick={onClick}>
         <FontAwesome name={name} />
       </OuterButton>
@@ -33,13 +32,13 @@ function MaterialCardButton({ title, name, active, onClick, tooltipText }) {
   );
 }
 
-MaterialCardButton.defaultProps = {
+CardButton.defaultProps = {
   active: false,
   tooltipText: '',
   title: '',
 };
 
-MaterialCardButton.propTypes = {
+CardButton.propTypes = {
   active: PropTypes.bool,
   title: PropTypes.string,
   tooltipText: PropTypes.string,
@@ -47,4 +46,4 @@ MaterialCardButton.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-export default MaterialCardButton;
+export default CardButton;

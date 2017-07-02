@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getTracksByPlaylistId } from 'features/entities/entitiesSelectors';
-import MaterialCardImage from 'common/components/MaterialCard/MaterialCardImage';
+import CardImage from 'common/components/Card/CardImage';
 import { getLargeVersion } from 'common/utils/imageUtils';
 
 // { active, playing, imageUrl, handleImageClick }
@@ -11,4 +11,4 @@ function mapStateToProps(state, { playlistId }) {
   };
 }
 
-export default connect(mapStateToProps)(MaterialCardImage);
+export default connect(mapStateToProps)(CardImage);

@@ -1,36 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { THEME_COLOR } from 'app/css/colors';
 import Image from 'common/components/images/Image';
-import ShadowOverlay from 'common/components/ShadowOverlay';
+import PlaybackOverlay from 'common/components/PlaybackOverlay';
 import { connect } from 'react-redux';
 import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
 import { changeSongAndPlay, playSong, pauseSong } from 'features/player/playerActions';
 import { switchActivePlaylistIfNeeded } from 'features/playlist/playlistActions';
 import { getLargeVersion } from 'common/utils/imageUtils';
 import { getUserById } from 'features/entities/entitiesSelectors';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 206px;
   height: 206px;
-  position: relative;
-  margin-bottom: 10px;
-`;
-
-const PlaybackButtonIcon = styled.i`
-  display: inline-block;
-  font-size: 2rem;
-  color: ${THEME_COLOR}
 `;
 
 function SongCardImage({ active, playing, artworkUrl, handleImageClick }) {
   return (
     <Wrapper>
-      <ShadowOverlay active={active} onClick={handleImageClick}>
-        <PlaybackButtonIcon className={`${playing ? 'ion-ios-pause' : 'ion-ios-play'}`} />
-      </ShadowOverlay>
-      {artworkUrl && <Image src={artworkUrl} width="206" height="206" />}
+      <PlaybackOverlay active={active} onClick={handleImageClick} playing={playing} >
+        <Image src={artworkUrl} />
+      </PlaybackOverlay>
     </Wrapper>
   );
 }

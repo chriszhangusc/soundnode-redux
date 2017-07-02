@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'common/components/images/Avatar';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
-import Card from 'common/components/MaterialCard';
+import Card from 'common/components/Card';
 import { connect } from 'react-redux';
 import { getUserByTrackId } from 'features/entities/entitiesSelectors';
 

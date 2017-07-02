@@ -19,13 +19,12 @@ const AuthWrapper = styled.div`
 `;
 
 const Username = styled.span`
-  margin: 0 10px;
+  margin-right: 10px;
 `;
 
 const AvatarWrapper = styled.div`
   display: inline-block;
-  width: 25px;
-  height: 25px;
+  margin-right: 10px;
 `;
 
 class Auth extends React.Component {
@@ -37,25 +36,23 @@ class Auth extends React.Component {
   render() {
     const { me, onLogin } = this.props;
 
-    const loggedIn = () => (
+    const renderLoggedIn = () => (
       <AuthWrapper>
         <AvatarWrapper>
-          <RouterLink to={`${USER_PROFILE_ROUTE}/${me.id}`}>
-            <Avatar src={me.avatarUrl} />
-          </RouterLink>
+          <Avatar src={me.avatarUrl} linkTo={`${USER_PROFILE_ROUTE}/${me.id}`} />
         </AvatarWrapper>
         <Username>{me.username}</Username>
         <LogoutButton />
       </AuthWrapper>
     );
 
-    const loggedOut = () => (
+    const renderLoggedOut = () => (
       <AuthWrapper>
         <RouterLink to="/" onClick={onLogin}>Login</RouterLink>
       </AuthWrapper>
     );
 
-    return me ? loggedIn() : loggedOut();
+    return me ? renderLoggedIn() : renderLoggedOut();
   }
 }
 

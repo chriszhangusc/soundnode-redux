@@ -1,1 +1,1 @@
-export { default } from './ChartsPage';
+export { default } from './ChartsView';

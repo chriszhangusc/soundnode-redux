@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from 'common/components/MaterialCard';
+import Card from 'common/components/Card';
 import { connect } from 'react-redux';
 import { getFavoriteTrackIds, getReposts } from 'features/auth/authSelectors';
 import { doLikeTrack, doUnlikeTrack, createRepost, removeRepost } from 'features/auth/authActions';

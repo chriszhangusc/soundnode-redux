@@ -7,26 +7,11 @@ import {
   startDropdownSearch,
 } from 'features/dropdownSearch/dropdownSearchActions';
 import { FONT_COLOR_SECONDARY } from 'app/css/colors';
+import DropdownSearchInput from './DropdownSearchInput';
 
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-`;
-
-const StyledSearchInput = styled.input`
-    display: inline-block;
-    border: none;
-    text-align: left;
-    font-family: 'Open Sans';
-    font-size: 0.9rem;
-    outline: 0;
-    border-radius: 5px;
-    padding: 6px 10px 6px 30px;
-    font-weight: 300;
-    transition: all 0.2s ease-in-out;
-    background-color: #333333;
-    height: 30px;
-    width: 100%;
 `;
 
 const SearchIcon = styled.i`
@@ -75,7 +60,7 @@ class DropdownSearchBox extends React.Component {
       <Wrapper>
         <form onSubmit={this.onSubmit}>
           <SearchIcon className="icon ion-search" />
-          <StyledSearchInput
+          <DropdownSearchInput
             type="search"
             placeholder="Search SoundCloud"
             ref={(node) => {
@@ -98,30 +83,32 @@ DropdownSearchBox.propTypes = {
   handleShowAll: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = dispatch => ({
-  handleChange(keywords) {
-    dispatch(startDropdownSearch(keywords));
-  },
+function mapDispatchToProps(dispatch) {
+  return {
+    handleChange(keywords) {
+      dispatch(startDropdownSearch(keywords));
+    },
 
-  handleBlur() {
-    // Delay onblur to make sure when user click on the search result it will redirect first
-    // and then do onblur
-    setTimeout(() => {
-      // dispatch(clearAndHideSearchResults());
-    }, 250);
-  },
+    handleBlur() {
+      // Delay onblur to make sure when user click on the search result it will redirect first
+      // and then do onblur
+      setTimeout(() => {
+        dispatch(clearAndHideSearchResults());
+      }, 250);
+    },
 
-  handleFocus(keywords) {
-    if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
-    else dispatch(startDropdownSearch(keywords));
-  },
+    handleFocus(keywords) {
+      if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
+      else dispatch(startDropdownSearch(keywords));
+    },
 
-  handleShowAll(rawKeywords) {
-    const keywords = rawKeywords.toLowerCase().trim();
-    if (keywords !== '') {
-      dispatch(clearAndHideSearchResults());
-    }
-  },
-});
+    handleShowAll(rawKeywords) {
+      const keywords = rawKeywords.toLowerCase().trim();
+      if (keywords !== '') {
+        dispatch(clearAndHideSearchResults());
+      }
+    },
+  };
+}
 
 export default connect(null, mapDispatchToProps)(DropdownSearchBox);
