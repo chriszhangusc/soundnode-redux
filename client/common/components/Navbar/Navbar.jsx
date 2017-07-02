@@ -14,26 +14,37 @@ const StyledNavbar = styled.nav`
   height: 80px;
   max-height: 80px;
   z-index: 1000;
-
   padding: 0 100px;
   display: flex;
   justify-content: space-between;
 `;
 
-const InnerWrapper = styled.div`
-  display: inline-flex;
+const NavbarSectionLeft = styled.div`
+  display: flex;
   align-items: center;
-  padding: 0 15px;
+  flex: 1;
+`;
+
+const NavbarSectionRight = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
 `;
 
 function Navbar() {
   return (
     <StyledNavbar>
-      <NavHeader />
-      <InnerWrapper>
+
+      <NavbarSectionLeft>
+        <NavHeader />
+      </NavbarSectionLeft>
+
+      <NavbarSectionRight>
         <DropdownSearch />
         <Auth />
-      </InnerWrapper>
+      </NavbarSectionRight>
+
     </StyledNavbar>
   );
 }

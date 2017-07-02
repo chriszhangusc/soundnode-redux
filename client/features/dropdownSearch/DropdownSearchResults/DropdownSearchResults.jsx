@@ -13,7 +13,6 @@ import {
 import { FONT_COLOR_SECONDARY, BACKGROUND_COLOR_SECONDARY } from 'app/css/colors';
 
 import styled from 'styled-components';
-import { media } from 'app/css/styleUtils';
 
 import DropdownSearchResultsRowUser from './DropdownSearchResultsRowUser';
 import DropdownSearchResultsItemTrack from './DropdownSearchResultsItemTrack';
@@ -54,7 +53,7 @@ function renderTrackResults(trackIds, query) {
         ))}
       {
         <li>
-          <ShowAllLink to={`${SEARCH_ROUTE}/${query}`} onMouseDown={() => {}}>
+          <ShowAllLink to={`${SEARCH_ROUTE}/${query}`}>
             SHOW ALL TRACKS
           </ShowAllLink>
         </li>
@@ -63,17 +62,10 @@ function renderTrackResults(trackIds, query) {
   );
 }
 
-const DROPDOWN_SEARCH_INPUT_WIDTH = '320px';
-const DROPDOWN_SEARCH_INPUT_WIDTH_MD = '400px';
-const DROPDOWN_SEARCH_INPUT_WIDTH_LG = '470px';
-const DROPDOWN_SEARCH_INPUT_WIDTH_4K = '550px';
-
 const Wrapper = styled.div`
-    width: ${DROPDOWN_SEARCH_INPUT_WIDTH};
-    ${media.desktop`width: ${DROPDOWN_SEARCH_INPUT_WIDTH_MD}`}
-    ${media.desktopLG`width: ${DROPDOWN_SEARCH_INPUT_WIDTH_LG}`}
-    ${media.desktop4K`width: ${DROPDOWN_SEARCH_INPUT_WIDTH_4K}`}
+    width: 100%;
     position: absolute;
+    top: 50px;
     background-color: ${BACKGROUND_COLOR_SECONDARY};
     z-index: 1002;
     display: block;

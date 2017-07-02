@@ -11,10 +11,11 @@ import { getMe } from '../authSelectors';
 import LogoutButton from './LogoutButton';
 
 const AuthWrapper = styled.div`
-  display: inline-flex;
+  display: flex;
   align-items: center;
   padding: 23px 0;
   margin-left: 20px;
+  min-width: 135px;
 `;
 
 const Username = styled.span`

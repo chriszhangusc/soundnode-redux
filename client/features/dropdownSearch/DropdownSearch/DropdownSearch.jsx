@@ -1,18 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import DropdownSearchInput from '../DropdownSearchInput';
+import DropdownSearchBox from '../DropdownSearchBox';
 import DropdownSearchResults from '../DropdownSearchResults';
 
 const DropdownSearchWrapper = styled.div`
+    display: flex;
     padding: 20px 0;
-    display: inline-block;
     border-radius: 3px;
+    flex: 1;
+    position: relative;
+    max-width: 580px;
 `;
+
 
 function DropdownSearch() {
   return (
     <DropdownSearchWrapper>
-      <DropdownSearchInput />
+      <DropdownSearchBox />
       <DropdownSearchResults />
     </DropdownSearchWrapper>
   );

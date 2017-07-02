@@ -11,19 +11,12 @@ const NavbarBrand = RouterLink.extend`
   font-size: 1.3rem;
 `;
 
-const NavHeaderWrapper = styled.div`
-  display: inline-flex;
-  align-items: center;
-`;
-
 function NavHeader() {
   return (
-    <NavHeaderWrapper>
-      <NavbarBrand to="/">
-        <Glyphicon glyph="headphones" />
-        <NavbarBrandName>SoundNode Redux</NavbarBrandName>
-      </NavbarBrand>
-    </NavHeaderWrapper>
+    <NavbarBrand to="/">
+      <Glyphicon glyph="headphones" />
+      <NavbarBrandName>SoundNode Redux</NavbarBrandName>
+    </NavbarBrand>
   );
 }
 

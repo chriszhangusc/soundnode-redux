@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { media } from 'app/css/styleUtils';
 import { connect } from 'react-redux';
 import {
   clearAndHideSearchResults,
@@ -9,10 +8,11 @@ import {
 } from 'features/dropdownSearch/dropdownSearchActions';
 import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 
-const DROPDOWN_SEARCH_INPUT_WIDTH = '320px';
-const DROPDOWN_SEARCH_INPUT_WIDTH_MD = '400px';
-const DROPDOWN_SEARCH_INPUT_WIDTH_LG = '470px';
-const DROPDOWN_SEARCH_INPUT_WIDTH_4K = '550px';
+const Wrapper = styled.div`
+  position: relative;
+  margin-bottom: 0;
+  width: 100%;
+`;
 
 const StyledSearchInput = styled.input`
     display: inline-block;
@@ -27,15 +27,7 @@ const StyledSearchInput = styled.input`
     transition: all 0.2s ease-in-out;
     background-color: #333333;
     height: 30px;
-    width: ${DROPDOWN_SEARCH_INPUT_WIDTH};
-    ${media.desktop`width: ${DROPDOWN_SEARCH_INPUT_WIDTH_MD}`}
-    ${media.desktopLG`width: ${DROPDOWN_SEARCH_INPUT_WIDTH_LG}`}
-    ${media.desktop4K`width: ${DROPDOWN_SEARCH_INPUT_WIDTH_4K}`}
-`;
-
-const InputContentWrapper = styled.div`
-  position: relative;
-  margin-bottom: 0;
+    width: 100%;
 `;
 
 const SearchIcon = styled.i`
@@ -46,14 +38,13 @@ const SearchIcon = styled.i`
     pointer-events: none;
 `;
 
-class DropdownSearchInput extends React.Component {
+class DropdownSearchBox extends React.Component {
   constructor(props) {
     super(props);
     this.onInputChange = this.onInputChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    // this.onShowAllClick = this.onShowAllClick.bind(this);
   }
 
   // When user press enter, show all results.
@@ -82,8 +73,8 @@ class DropdownSearchInput extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <InputContentWrapper>
+      <Wrapper>
+        <form onSubmit={this.onSubmit}>
           <SearchIcon className="icon ion-search" />
           <StyledSearchInput
             type="search"
@@ -95,13 +86,13 @@ class DropdownSearchInput extends React.Component {
             onFocus={this.onFocus}
             onBlur={this.onBlur}
           />
-        </InputContentWrapper>
-      </form>
+        </form>
+      </Wrapper>
     );
   }
 }
 
-DropdownSearchInput.propTypes = {
+DropdownSearchBox.propTypes = {
   handleBlur: PropTypes.func.isRequired,
   handleFocus: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
@@ -134,4 +125,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(DropdownSearchInput);
+export default connect(null, mapDispatchToProps)(DropdownSearchBox);
