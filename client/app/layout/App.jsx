@@ -7,13 +7,6 @@ import GlobalEvents from 'features/global/GlobalEvents';
 import Loadable from 'react-loading-overlay';
 import styled, { injectGlobal } from 'styled-components';
 import Player from 'features/player/Player';
-import {
-  // NAV_BAR_HEIGHT,
-  SIDEBAR_WIDTH_DESKTOP,
-  SIDEBAR_WIDTH_DESKTOP_LG,
-  SIDEBAR_WIDTH_4K,
-} from 'app/css/variables';
-import { media } from 'app/css/styleUtils';
 import Sidebar from 'common/components/Sidebar';
 import Navbar from 'common/components/Navbar';
 import NotificationCenter from 'features/notification/NotificationCenter';
@@ -33,19 +26,19 @@ SC.initialize({
 
 const PageContentWrapper = styled.div`
   padding: 20px 20px 20px 50px;
-  /* Make space for sidebar */
-  ${media.desktop`margin-left: ${SIDEBAR_WIDTH_DESKTOP}`}
-  ${media.desktopLG`margin-left: ${SIDEBAR_WIDTH_DESKTOP_LG}`}
-  ${media.desktop4K`margin-left: ${SIDEBAR_WIDTH_4K}`}
   overflow-y: scroll;
   overflow-x: hidden;
-  /* Making space for music player */
+  flex: 6;
   padding-bottom: 70px;
   min-height: 100vh;
 `;
 
 const MainWrapper = styled.div`
   padding-top: 80px;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
 `;
 
 class Main extends React.Component {
@@ -65,12 +58,14 @@ class Main extends React.Component {
       <Loadable active={loginInProgress} spinner text="Authenticating..." animate zIndex={9999}>
         <MainWrapper>
           <Navbar />
-          <Sidebar />
-          <PageContentWrapper>
-            <Routing />
-            <Player />
-            <Playlist />
-          </PageContentWrapper>
+          <FlexWrapper>
+            <Sidebar />
+            <PageContentWrapper>
+              <Routing />
+              <Player />
+              <Playlist />
+            </PageContentWrapper>
+          </FlexWrapper>
           <GlobalEvents />
           <NotificationCenter />
         </MainWrapper>

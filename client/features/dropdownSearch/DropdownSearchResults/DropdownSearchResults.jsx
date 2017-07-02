@@ -27,7 +27,7 @@ function renderArtistResults(userIds) {
       <DropdownSearchResultsTitle>ARTISTS</DropdownSearchResultsTitle>
       {userIds
         .slice(0, dropdownSearchShowCount)
-        .map(userId => <DropdownSearchResultsRowUser key={userId} userId={userId} />)}
+        .map(userId => <DropdownSearchResultsRowUser key={userId.toString()} userId={userId} />)}
     </ul>
   );
 }
@@ -46,11 +46,13 @@ function renderTrackResults(trackIds, query) {
   return (
     <ul>
       <DropdownSearchResultsTitle>TRACKS</DropdownSearchResultsTitle>
-      {trackIds
+      {
+        trackIds
         .slice(0, dropdownSearchShowCount)
         .map(trackId => (
           <DropdownSearchResultsItemTrack key={trackId.toString()} trackId={trackId} />
-        ))}
+        ))
+      }
       {
         <li>
           <ShowAllLink to={`${SEARCH_ROUTE}/${query}`}>

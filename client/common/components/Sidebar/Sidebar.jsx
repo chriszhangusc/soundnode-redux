@@ -1,24 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import {
-  SIDEBAR_WIDTH_DESKTOP,
-  SIDEBAR_WIDTH_DESKTOP_LG,
-  SIDEBAR_WIDTH_4K,
-} from 'app/css/variables';
 import * as routes from 'common/constants/routeConsts';
-import { media } from 'app/css/styleUtils';
 import { LIGHT_BLACK } from 'app/css/colors';
 
 import SidebarItem from './SidebarItem';
 
-const SidebarWrapper = styled.div`
-  position: fixed;
+const SidebarWrapper = styled.nav`
   height: 100%;
+  flex: 1;
   background-color: ${LIGHT_BLACK};
-  ${media.desktop`width: ${SIDEBAR_WIDTH_DESKTOP}`}
-  ${media.desktopLG`width: ${SIDEBAR_WIDTH_DESKTOP_LG}`}
-  ${media.desktop4K`width: ${SIDEBAR_WIDTH_4K}`}
+  /* Full height */
+  min-height: 100vh;
 `;
 
 const sidebarItemList = [
