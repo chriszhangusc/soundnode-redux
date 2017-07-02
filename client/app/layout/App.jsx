@@ -25,20 +25,15 @@ SC.initialize({
 });
 
 const PageContentWrapper = styled.div`
-  padding: 20px 20px 20px 50px;
   overflow-y: scroll;
   overflow-x: hidden;
   flex: 6;
-  padding-bottom: 70px;
+  padding: 20px 20px 70px 350px;
   min-height: 100vh;
 `;
 
 const MainWrapper = styled.div`
   padding-top: 80px;
-`;
-
-const FlexWrapper = styled.div`
-  display: flex;
 `;
 
 class Main extends React.Component {
@@ -58,14 +53,12 @@ class Main extends React.Component {
       <Loadable active={loginInProgress} spinner text="Authenticating..." animate zIndex={9999}>
         <MainWrapper>
           <Navbar />
-          <FlexWrapper>
-            <Sidebar />
-            <PageContentWrapper>
-              <Routing />
-              <Player />
-              <Playlist />
-            </PageContentWrapper>
-          </FlexWrapper>
+          <Sidebar />
+          <PageContentWrapper>
+            <Routing />
+            <Player />
+            <Playlist />
+          </PageContentWrapper>
           <GlobalEvents />
           <NotificationCenter />
         </MainWrapper>

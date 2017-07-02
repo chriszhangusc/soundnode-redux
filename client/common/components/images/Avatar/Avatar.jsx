@@ -7,7 +7,7 @@ import Image from 'common/components/images/Image';
 function getWidthAndHeight(size) {
   switch (size) {
     case 'small':
-      return 25;
+      return 32;
     case 'medium':
       return 150;
     case 'large':

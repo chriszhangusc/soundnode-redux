@@ -6,6 +6,7 @@ import DropdownSearchResultsRow from './DropdownSearchResultsRow';
 const mapStateToProps = (state, { trackId }) => {
   const track = getTrackById(state, trackId);
   return {
+    type: 'track',
     imageUrl: track.artworkUrl,
     itemLinkUrl: `${TRACK_PROFILE_ROUTE}/${trackId}`,
     itemTitle: track.title,

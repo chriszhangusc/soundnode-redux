@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RouterLink from 'common/components/links/RouterLink';
 import { connect } from 'react-redux';
 import { SEARCH_ROUTE } from 'common/constants/routeConsts';
 import {
@@ -10,13 +9,14 @@ import {
   getDropdownSearchQuery,
 } from 'features/dropdownSearch/dropdownSearchSelectors';
 
-import { FONT_COLOR_SECONDARY, BACKGROUND_COLOR_SECONDARY } from 'app/css/colors';
+import { BACKGROUND_COLOR_SECONDARY } from 'app/css/colors';
 
 import styled from 'styled-components';
 
 import DropdownSearchResultsRowUser from './DropdownSearchResultsRowUser';
-import DropdownSearchResultsItemTrack from './DropdownSearchResultsItemTrack';
-import DropdownSearchResultsTitle from './DropdownSearchResultsTitle';
+import DropdownSearchResultsRowTrack from './DropdownSearchResultsRowTrack';
+import DropdownSearchResultsRowTitle from './DropdownSearchResultsRowTitle';
+import DropdownSearchResultsRowLink from './DropdownSearchResultsRowLink';
 
 const dropdownSearchShowCount = 3;
 
@@ -24,7 +24,7 @@ const dropdownSearchShowCount = 3;
 function renderArtistResults(userIds) {
   return (
     <ul>
-      <DropdownSearchResultsTitle>ARTISTS</DropdownSearchResultsTitle>
+      <DropdownSearchResultsRowTitle>ARTISTS</DropdownSearchResultsRowTitle>
       {userIds
         .slice(0, dropdownSearchShowCount)
         .map(userId => <DropdownSearchResultsRowUser key={userId.toString()} userId={userId} />)}
@@ -32,32 +32,19 @@ function renderArtistResults(userIds) {
   );
 }
 
-const ShowAllLink = styled(RouterLink)`
-  display: block;
-  line-height: 35px;
-  text-align: center;
-  color: ${FONT_COLOR_SECONDARY};
-  font-size: 0.9rem;
-  padding: 10px 10px 0 10px;
-`;
-
 // Render the tracks results section.
 function renderTrackResults(trackIds, query) {
   return (
     <ul>
-      <DropdownSearchResultsTitle>TRACKS</DropdownSearchResultsTitle>
-      {
-        trackIds
+      <DropdownSearchResultsRowTitle>TRACKS</DropdownSearchResultsRowTitle>
+      {trackIds
         .slice(0, dropdownSearchShowCount)
         .map(trackId => (
-          <DropdownSearchResultsItemTrack key={trackId.toString()} trackId={trackId} />
-        ))
-      }
+          <DropdownSearchResultsRowTrack key={trackId.toString()} trackId={trackId} />
+        ))}
       {
         <li>
-          <ShowAllLink to={`${SEARCH_ROUTE}/${query}`}>
-            SHOW ALL TRACKS
-          </ShowAllLink>
+          <DropdownSearchResultsRowLink to={`${SEARCH_ROUTE}/${query}`}>SHOW ALL TRACKS</DropdownSearchResultsRowLink>
         </li>
       }
     </ul>

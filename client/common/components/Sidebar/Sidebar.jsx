@@ -6,11 +6,11 @@ import { LIGHT_BLACK } from 'app/css/colors';
 import SidebarItem from './SidebarItem';
 
 const SidebarWrapper = styled.nav`
+  position: fixed;
+  width: 300px;
   height: 100%;
-  flex: 1;
   background-color: ${LIGHT_BLACK};
-  /* Full height */
-  min-height: 100vh;
+  z-index: 1000;
 `;
 
 const sidebarItemList = [

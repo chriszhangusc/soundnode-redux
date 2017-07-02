@@ -10,7 +10,6 @@ import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 
 const Wrapper = styled.div`
   position: relative;
-  margin-bottom: 0;
   width: 100%;
 `;
 

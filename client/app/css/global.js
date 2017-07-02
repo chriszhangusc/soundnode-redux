@@ -30,6 +30,7 @@ injectGlobal`
 
   ul {
     list-style-type: none;
+    margin: 0;
   }
 
   .pad-bottom {
