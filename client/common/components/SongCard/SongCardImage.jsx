@@ -8,20 +8,15 @@ import { changeSongAndPlay, playSong, pauseSong } from 'features/player/playerAc
 import { switchActivePlaylistIfNeeded } from 'features/playlist/playlistActions';
 import { getLargeVersion } from 'common/utils/imageUtils';
 import { getUserById } from 'features/entities/entitiesSelectors';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  width: 206px;
-  height: 206px;
-`;
+import Card from 'common/components/Card';
 
 function SongCardImage({ active, playing, artworkUrl, handleImageClick }) {
   return (
-    <Wrapper>
-      <PlaybackOverlay active={active} onClick={handleImageClick} playing={playing} >
+    <Card.ImageWrapper>
+      <PlaybackOverlay active={active} onClick={handleImageClick} playing={playing}>
         <Image src={artworkUrl} />
       </PlaybackOverlay>
-    </Wrapper>
+    </Card.ImageWrapper>
   );
 }
 

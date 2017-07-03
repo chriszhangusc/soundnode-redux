@@ -1,21 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  notificationSuccess,
-  notificationWarning,
-} from 'features/notification/notificationActions';
+import * as notificationActions from 'features/notification/notificationActions';
 
 class GlobalEvents extends React.Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-
     window.addEventListener('offline', () => {
-      dispatch(notificationWarning('Looks like your internet connection is down!'));
+      this.props.notificationWarning('Looks like your internet connection is down!');
     });
 
     window.addEventListener('online', () => {
-      dispatch(notificationSuccess('Great, you are back online!'));
+      this.props.notificationSuccess('Great, you are back online!');
     });
   }
 
@@ -31,7 +26,8 @@ class GlobalEvents extends React.Component {
 }
 
 GlobalEvents.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  notificationWarning: PropTypes.func.isRequired,
+  notificationSuccess: PropTypes.func.isRequired,
 };
 
-export default connect()(GlobalEvents);
+export default connect(null, notificationActions)(GlobalEvents);

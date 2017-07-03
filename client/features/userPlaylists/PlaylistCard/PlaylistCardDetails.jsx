@@ -2,17 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'common/components/images/Avatar';
 import RouterLink from 'common/components/links/RouterLink';
-import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
-import styled from 'styled-components';
-import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 import { connect } from 'react-redux';
 import { getPlaylistById, getUserByPlaylistId } from 'features/entities/entitiesSelectors';
 import Card from 'common/components/Card';
-
-const AvatarWrapper = styled.div`
-  height: 25px;
-  width: 25px;
-`;
 
 function PlaylistCardDetails({ trackCount, duration, title, userAvatar, username }) {
   // const trackUrl = `${TRACK_PROFILE_ROUTE}/${trackId}`;
@@ -27,13 +19,12 @@ function PlaylistCardDetails({ trackCount, duration, title, userAvatar, username
       <Card.Row>
         <Card.Subtitle>
           <Card.InnerSpan>{trackCount} songs</Card.InnerSpan>
-          <Card.InnerSpan>•</Card.InnerSpan>
           <Card.InnerSpan>{duration}</Card.InnerSpan>
         </Card.Subtitle>
       </Card.Row>
       <Card.Row>
         <RouterLink to="#" title={username}>
-          <AvatarWrapper><Avatar src={userAvatar} /></AvatarWrapper>
+          <Avatar src={userAvatar} />
         </RouterLink>
         <Card.SubLink to="#" title={username}>
           {username}

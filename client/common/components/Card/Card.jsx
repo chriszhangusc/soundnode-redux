@@ -55,14 +55,19 @@ Card.SubLink = styled(RouterLink)`
     color: ${FONT_COLOR_SECONDARY};
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 25px; /* Vertical align!! It should be equal to the height of avatar */
-    max-height: 25px;
+    line-height: 32px; /* Vertical align!! It should be equal to the height of avatar */
+    max-height: 32px;
     max-width: 160px;
     font-size: 0.9rem;
 `;
 
 Card.InnerSpan = styled.span`
   margin-right: 5px;
+`;
+
+Card.ImageWrapper = styled.div`
+  width: 206px;
+  height: 206px;
 `;
 
 export default Card;

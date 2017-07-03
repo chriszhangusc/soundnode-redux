@@ -33,7 +33,7 @@ function PlaylistCardControls({
       <Card.IconButton
         tooltipText="Copy permalink"
         name="clipboard"
-        onClick={handleCopyToClipboard}
+        onClick={() => {}}
       />
     </Card.Row>
   );
