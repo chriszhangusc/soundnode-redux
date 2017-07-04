@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { REPEAT, SHUFFLE } from 'features/player/playerConsts';
 import styled from 'styled-components';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import PlayerButton from '../PlayerButton';
 
 const PlayerModeControlsWrapper = styled.div`
@@ -25,7 +24,7 @@ class PlayerModeControls extends Component {
       <PlayerButton
         tooltipText="Repeat"
         active={mode === REPEAT}
-        iconClassName="ion-loop"
+        name="repeat"
         onClick={onRepeatClick}
       />
     );
@@ -37,7 +36,7 @@ class PlayerModeControls extends Component {
       <PlayerButton
         tooltipText="Toggle playlist"
         active={!playlistHidden}
-        iconClassName="ion-ios-list"
+        name="list-ul"
         onClick={onTogglePlaylistClick}
       />
     );
@@ -49,7 +48,7 @@ class PlayerModeControls extends Component {
       <PlayerButton
         tooltipText="Shuffle"
         active={mode === SHUFFLE}
-        iconClassName="ion-shuffle"
+        name="random"
         onClick={onShuffleClick}
       />
     );

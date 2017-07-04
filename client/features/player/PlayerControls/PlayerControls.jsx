@@ -21,8 +21,7 @@ class PlayerControls extends Component {
     return (
       <PlayerButton
         tooltipText={playing ? 'Pause' : 'Play'}
-        title={playing ? 'Play' : 'Pause'}
-        iconClassName={playing ? 'ion-ios-pause' : 'ion-ios-play'}
+        name={playing ? 'pause' : 'play'}
         onClick={playing ? onPauseClick : onPlayClick}
       />
     );
@@ -30,26 +29,12 @@ class PlayerControls extends Component {
 
   renderForwardButton() {
     const { onNextClick } = this.props;
-    return (
-      <PlayerButton
-        tooltipText="Next"
-        title="Next"
-        iconClassName="ion-ios-fastforward"
-        onClick={onNextClick}
-      />
-    );
+    return <PlayerButton tooltipText="Next" name="step-forward" onClick={onNextClick} />;
   }
 
   renderBackwardButton() {
     const { onPrevClick } = this.props;
-    return (
-      <PlayerButton
-        tooltipText="Previous"
-        title="Previous"
-        iconClassName="ion-ios-rewind"
-        onClick={onPrevClick}
-      />
-    );
+    return <PlayerButton tooltipText="Previous" name="step-backward" onClick={onPrevClick} />;
   }
 
   render() {

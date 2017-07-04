@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import { WHITE, THEME_COLOR } from 'app/css/colors';
 import { computeNewVolumeOnSeek } from 'features/player/playerUtils';
 
 import {
@@ -51,6 +51,38 @@ const PlayerVolumeWrapper = styled.div`
   width: 100px;
 `;
 
+const PlayerSeekbar = styled.div`
+    position: relative;
+    height: 2px;
+    background-color: #ddd;
+`;
+
+const PlayerSeekbarWrapper = styled.div`
+  padding: 6px 0;
+  flex: 1;
+  cursor: pointer;
+`;
+
+const PlayerSeekDurationBar = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: ${props => props.width || '100%'};
+  height: 100%;
+  background-color: ${THEME_COLOR};
+`;
+
+const PlayerSeekHandle = styled.div`
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    width: 12px;
+    height: 12px;
+    background-color: ${WHITE};
+    border-radius: 50%;
+    border: 1px solid ${WHITE};
+`;
+
 class PlayerVolumeSeekBar extends React.Component {
   constructor(props) {
     super(props);
@@ -85,22 +117,20 @@ class PlayerVolumeSeekBar extends React.Component {
 
     return (
       <PlayerVolumeWrapper>
-        <div
-          className="player-seek-bar-wrap"
+        <PlayerSeekbarWrapper
           onMouseDown={onVolumeBarMouseDown}
           onMouseUp={this.handleVolumeMouseUp}
         >
-          <div
-            className="player-seek-bar"
-            ref={(ref) => {
+          <PlayerSeekbar
+            innerRef={(ref) => {
               this.volumeBar = ref;
             }}
           >
-            <div className="player-seek-duration-bar" style={{ width: `${volume * 100}%` }}>
-              <div className="player-seek-handle" onMouseDown={onVolumeHandleMouseDown} />
-            </div>
-          </div>
-        </div>
+            <PlayerSeekDurationBar width={`${volume * 100}%`}>
+              <PlayerSeekHandle onMouseDown={onVolumeHandleMouseDown} />
+            </PlayerSeekDurationBar>
+          </PlayerSeekbar>
+        </PlayerSeekbarWrapper>
       </PlayerVolumeWrapper>
     );
   }

@@ -1,34 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesome from 'react-fontawesome';
+import Icon from 'common/components/icons/Icon';
 import styled from 'styled-components';
 import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY, THEME_COLOR } from 'app/css/colors';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import shortid from 'shortid';
 
-const OuterButton = styled.button`
-  color: ${props => (props.active ? THEME_COLOR : FONT_COLOR_SECONDARY)};
+const Wrapper = styled.span`
   padding: 4px;
-  border: none;
-  outline: none;
-  background-color: transparent;
   cursor: pointer;
   text-align: center;
   margin-right: 20px;
-
-  &:hover {
-    color: ${FONT_COLOR_PRIMARY};
-  }
 `;
 
 function CardButton({ title, name, active, onClick, tooltipText }) {
-  const tooltip = <Tooltip id={`tooltip-${shortid.generate()}`}>{tooltipText}</Tooltip>;
   return (
-    <OverlayTrigger delayShow={1000} delayHide={200} placement="bottom" overlay={tooltip}>
-      <OuterButton active={active} title={title} onClick={onClick}>
-        <FontAwesome name={name} />
-      </OuterButton>
-    </OverlayTrigger>
+    <Wrapper>
+      <Icon
+        name={name}
+        active={active}
+        title={title}
+        color={FONT_COLOR_SECONDARY}
+        hoverColor={FONT_COLOR_PRIMARY}
+        activeColor={THEME_COLOR}
+        onClick={onClick}
+        tooltipText={tooltipText}
+        tooltipPlacement="bottom"
+      />
+    </Wrapper>
   );
 }
 
