@@ -17,22 +17,24 @@ const StyledImage = styled.img`
   transition: opacity 0.5s linear;
 `;
 
+// const cdnPrefix = 'http://res.cloudinary.com/drijsmsvv/image/fetch/w_400/';
+
 function Image(props) {
-  const { linkTo, external } = props;
+  const { linkTo, external, src, ...rest } = props;
   const WrapperLink = external ? ExternalLink : RouterLink;
+  // Reduce the image size by using cdn to resize.
+  // const img = <StyledImage src={`${cdnPrefix}${props.src}`} {...rest} />;
+  const img = <StyledImage src={src} {...rest} />;
 
   if (linkTo) {
     // Wrap within a link
-    return (
-      <WrapperLink to={linkTo}>
-        <StyledImage {...props} />
-      </WrapperLink>
-    );
+    return <WrapperLink to={linkTo}>{img}</WrapperLink>;
   }
-  return <StyledImage {...props} />;
+  return img;
 }
 
 Image.defaultProps = {
+  src: undefined,
   width: '100%',
   height: '100%',
   loaded: false,
@@ -42,6 +44,7 @@ Image.defaultProps = {
 };
 
 Image.propTypes = {
+  src: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   loaded: PropTypes.bool,
