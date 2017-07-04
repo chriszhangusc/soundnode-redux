@@ -7,7 +7,6 @@ import {
   startDropdownSearch,
 } from 'features/dropdownSearch/dropdownSearchActions';
 import { FONT_COLOR_SECONDARY } from 'app/css/colors';
-import DropdownSearchInput from './DropdownSearchInput';
 
 const Wrapper = styled.div`
   position: relative;
@@ -20,6 +19,22 @@ const SearchIcon = styled.i`
     left: 10px;
     color: ${FONT_COLOR_SECONDARY};
     pointer-events: none;
+`;
+
+const DropdownSearchInput = styled.input`
+    display: inline-block;
+    border: none;
+    text-align: left;
+    font-family: 'Open Sans';
+    font-size: 0.9rem;
+    outline: 0;
+    border-radius: 5px;
+    padding: 6px 10px 6px 30px;
+    font-weight: 300;
+    transition: all 0.2s ease-in-out;
+    background-color: #333333;
+    height: 30px;
+    width: 100%;
 `;
 
 class DropdownSearchBox extends React.Component {

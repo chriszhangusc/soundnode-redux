@@ -64,6 +64,7 @@ export function receiveCharts(normalizedCharts) {
 /* Side Effects */
 export function loadChartsPage(genre) {
   return async (dispatch, getState) => {
+    // Using getState in conditional dispatch
     const state = getState();
     if (!getPlaylistByName(state, genre)) {
       dispatch(startFetchingCharts());

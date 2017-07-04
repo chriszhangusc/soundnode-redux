@@ -1,17 +1,18 @@
 import { connect } from 'react-redux';
-import { getTrackById } from 'features/entities/entitiesSelectors';
+import { getTrackById, getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import DropdownSearchResultsRow from './DropdownSearchResultsRow';
 
-const mapStateToProps = (state, { trackId }) => {
+function mapStateToProps(state, { trackId }) {
   const track = getTrackById(state, trackId);
+  const user = getUserByTrackId(state, trackId);
   return {
     type: 'track',
-    imageUrl: track.artworkUrl,
-    itemLinkUrl: `${TRACK_PROFILE_ROUTE}/${trackId}`,
-    itemTitle: track.title,
+    avatarUrl: track && track.artworkUrl,
+    linkUrl: `${TRACK_PROFILE_ROUTE}/${trackId}`,
+    title: track && track.title,
+    subtitle: `Track by ${user && user.username}`,
   };
-};
+}
 
 export default connect(mapStateToProps)(DropdownSearchResultsRow);
-

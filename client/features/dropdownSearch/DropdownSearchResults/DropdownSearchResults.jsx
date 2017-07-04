@@ -8,48 +8,22 @@ import {
   getDropdownSearchTrackIds,
   getDropdownSearchQuery,
 } from 'features/dropdownSearch/dropdownSearchSelectors';
-
-import { BACKGROUND_COLOR_SECONDARY } from 'app/css/colors';
-
+import { FONT_COLOR_SECONDARY, BACKGROUND_COLOR_SECONDARY } from 'app/css/colors';
 import styled from 'styled-components';
-
+import RouterLink from 'common/components/links/RouterLink';
 import DropdownSearchResultsRowUser from './DropdownSearchResultsRowUser';
 import DropdownSearchResultsRowTrack from './DropdownSearchResultsRowTrack';
-import DropdownSearchResultsRowTitle from './DropdownSearchResultsRowTitle';
-import DropdownSearchResultsRowLink from './DropdownSearchResultsRowLink';
 
-const dropdownSearchShowCount = 3;
+const dropdownSearchShowCount = 5;
 
-// Render the artists/users results section.
-function renderArtistResults(userIds) {
-  return (
-    <ul>
-      <DropdownSearchResultsRowTitle>ARTISTS</DropdownSearchResultsRowTitle>
-      {userIds
-        .slice(0, dropdownSearchShowCount)
-        .map(userId => <DropdownSearchResultsRowUser key={userId.toString()} userId={userId} />)}
-    </ul>
-  );
-}
-
-// Render the tracks results section.
-function renderTrackResults(trackIds, query) {
-  return (
-    <ul>
-      <DropdownSearchResultsRowTitle>TRACKS</DropdownSearchResultsRowTitle>
-      {trackIds
-        .slice(0, dropdownSearchShowCount)
-        .map(trackId => (
-          <DropdownSearchResultsRowTrack key={trackId.toString()} trackId={trackId} />
-        ))}
-      {
-        <li>
-          <DropdownSearchResultsRowLink to={`${SEARCH_ROUTE}/${query}`}>SHOW ALL TRACKS</DropdownSearchResultsRowLink>
-        </li>
-      }
-    </ul>
-  );
-}
+const ShowAllLink = RouterLink.extend`
+  display: block;
+  line-height: 35px;
+  text-align: center;
+  color: ${FONT_COLOR_SECONDARY};
+  font-size: 0.9rem;
+  padding: 5px;
+`;
 
 const Wrapper = styled.div`
     width: 100%;
@@ -65,14 +39,33 @@ const Wrapper = styled.div`
     max-height: ${props => !props.hidden && '600px'};
 `;
 
+// Render the artists/users results section.
+function renderArtistResults(userIds) {
+  return userIds
+    .slice(0, dropdownSearchShowCount)
+    .map(userId => <DropdownSearchResultsRowUser key={userId.toString()} userId={userId} />);
+}
+
+// Render the tracks results section.
+function renderTrackResults(trackIds) {
+  return trackIds
+    .slice(0, dropdownSearchShowCount)
+    .map(trackId => <DropdownSearchResultsRowTrack key={trackId.toString()} trackId={trackId} />);
+}
+
 function DropdownSearchResults({ userIds, trackIds, hidden, query }) {
   return (
     <Wrapper hidden={hidden}>
-      {userIds.length !== 0 && renderArtistResults(userIds)}
-      {trackIds.length !== 0 && renderTrackResults(trackIds, query)}
+      {renderArtistResults(userIds)}
+      {renderTrackResults(trackIds)}
+      <ShowAllLink to={`${SEARCH_ROUTE}/${query}`}>SHOW ALL TRACKS</ShowAllLink>
     </Wrapper>
   );
 }
+
+DropdownSearchResults.defaultProps = {
+  query: '',
+};
 
 DropdownSearchResults.propTypes = {
   userIds: PropTypes.arrayOf(PropTypes.number).isRequired,

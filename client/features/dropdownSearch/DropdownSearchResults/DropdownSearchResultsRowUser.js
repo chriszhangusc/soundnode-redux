@@ -4,12 +4,13 @@ import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import DropdownSearchResultsRow from './DropdownSearchResultsRow';
 
 const mapStateToProps = (state, { userId }) => {
-  const artist = getUserById(state, userId);
+  const user = getUserById(state, userId);
   return {
     type: 'user',
-    imageUrl: artist.avatarUrl,
-    itemLinkUrl: `${USER_PROFILE_ROUTE}/${userId}`,
-    itemTitle: artist.username,
+    avatarUrl: user && user.avatarUrl,
+    linkUrl: `${USER_PROFILE_ROUTE}/${userId}`,
+    title: user && user.username,
+    subtitle: 'Artist',
   };
 };
 
