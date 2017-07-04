@@ -18,7 +18,7 @@ const TrackImage = styled.img`
   margin-right: 10px;
 `;
 
-const TrackTitle = styled(RouterLink)`
+const TrackTitle = RouterLink.extend`
   display: -webkit-box;
   overflow: hidden;
   -webkit-line-clamp: 2;
@@ -29,7 +29,7 @@ const TrackTitle = styled(RouterLink)`
   ${media.desktopLG`font-size: 0.8rem;`}
 `;
 
-const ArtistName = styled(RouterLink)`
+const ArtistName = RouterLink.extend`
   display: inline-block;
   color: ${FONT_COLOR_SECONDARY};
   ${media.desktop4K`font-size: 0.8rem;`}
@@ -45,7 +45,7 @@ function PlayerTrackInfo({ artworkUrl, trackTitle, artistName, trackUrl, artistU
   return (
     <PlayerTrackInfoWrapper>
       <RouterLink to={trackUrl}>
-        <TrackImage alt="Not Found" src={artworkUrl || defaultArtworkImage} />
+        <TrackImage alt="Not Found" src={artworkUrl} />
       </RouterLink>
       <DetailsWrapper>
         <TrackTitle to={trackUrl} title={trackUrl}>

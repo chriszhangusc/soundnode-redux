@@ -34,7 +34,7 @@ Card.Row = styled.div`
   align-items: center;
 `;
 
-Card.Title = styled(RouterLink)`
+Card.Title = RouterLink.extend`
     display: -webkit-box;
     font-size: 1.05rem;
     font-weight: bold;
@@ -49,7 +49,7 @@ Card.Subtitle = styled.span`
   color: ${FONT_COLOR_SECONDARY};
 `;
 
-Card.SubLink = styled(RouterLink)`
+Card.SubLink = RouterLink.extend`
     display: inline-block;
     margin-left: 10px;
     color: ${FONT_COLOR_SECONDARY};
