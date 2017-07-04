@@ -13,8 +13,8 @@ const StyledIcon = styled(({ color, hoverColor, active, activeColor, iconSize, .
 )).attrs({
   color: props => props.color || FONT_COLOR_PRIMARY,
   activeColor: props => props.activeColor || FONT_COLOR_PRIMARY,
-  hoverColor: props => props.hoverColor || FONT_COLOR_PRIMARY,
-  iconSize: '1rem',
+  hoverColor: props => props.hoverColor || props.color,
+  iconSize: props => props.iconSize || '1rem',
 })`
   color: ${props => (props.active ? props.activeColor : props.color)};
   font-size: ${props => props.iconSize || '1rem'};

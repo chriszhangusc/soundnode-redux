@@ -6,19 +6,11 @@ import {
   clearAndHideSearchResults,
   startDropdownSearch,
 } from 'features/dropdownSearch/dropdownSearchActions';
-import { FONT_COLOR_SECONDARY } from 'app/css/colors';
+import SearchIcon from './SearchIcon';
 
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-`;
-
-const SearchIcon = styled.i`
-    position: absolute;
-    top: 5px;
-    left: 10px;
-    color: ${FONT_COLOR_SECONDARY};
-    pointer-events: none;
 `;
 
 const DropdownSearchInput = styled.input`
@@ -74,7 +66,7 @@ class DropdownSearchBox extends React.Component {
     return (
       <Wrapper>
         <form onSubmit={this.onSubmit}>
-          <SearchIcon className="icon ion-search" />
+          <SearchIcon />
           <DropdownSearchInput
             type="search"
             placeholder="Search SoundCloud"

@@ -1,11 +1,28 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { THEME_COLOR } from 'app/css/colors';
+import Icon from 'common/components/icons/Icon';
 
-
-const PlaybackButtonIcon = styled.i`
+const Wrapper = styled.i`
   display: inline-block;
-  font-size: 2rem;
-  color: ${THEME_COLOR}
+  color: ${THEME_COLOR};
 `;
 
-export default PlaybackButtonIcon;
+function PlaybackOverlayIcon({ playing }) {
+  return (
+    <Wrapper>
+      <Icon name={playing ? 'pause' : 'play'} color={THEME_COLOR} iconSize="1.5rem" />
+    </Wrapper>
+  );
+}
+
+PlaybackOverlayIcon.defaultProps = {
+  playing: false,
+};
+
+PlaybackOverlayIcon.propTypes = {
+  playing: PropTypes.bool,
+};
+
+export default PlaybackOverlayIcon;

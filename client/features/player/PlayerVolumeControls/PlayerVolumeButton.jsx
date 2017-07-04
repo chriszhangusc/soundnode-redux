@@ -20,14 +20,11 @@ function PlayerVolumeButton({ volume, handleOnClick }) {
     case volume <= 0:
       type = 'mute';
       break;
-    case volume > 0 && volume < 0.3:
-      type = 'low';
+    case volume >= 0 && volume < 0.5:
+      type = 'volume-down';
       break;
-    case volume >= 0.3 && volume < 0.7:
-      type = 'medium';
-      break;
-    case volume >= 0.7 && volume <= 1:
-      type = 'high';
+    case volume >= 0.5 && volume <= 1:
+      type = 'volume-up';
       break;
     default:
       throw new Error('volume can not be greater than 1.0');

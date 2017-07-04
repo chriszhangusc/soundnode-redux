@@ -15,7 +15,7 @@ function PlaybackOverlay({ playing, active, children, onClick }) {
   return (
     <Wrapper>
       <ShadowOverlay active={active} onClick={onClick}>
-        <PlaybackOverlayIcon className={`${playing ? 'ion-ios-pause' : 'ion-ios-play'}`} />
+        <PlaybackOverlayIcon playing={playing} />
       </ShadowOverlay>
       {children}
     </Wrapper>
