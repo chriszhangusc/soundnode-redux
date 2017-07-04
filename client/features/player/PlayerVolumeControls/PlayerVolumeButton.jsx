@@ -2,42 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { THEME_COLOR, WHITE } from 'app/css/colors';
-import IconButton from 'common/components/buttons/IconButton';
+// import Icon from 'common/components/icons/Icon';
+import PlayerButton from 'features/player/PlayerButton';
+import { getIconNameByVolume } from 'features/player/playerUtils';
 import { getCurrentVolume } from '../playerSelectors';
 import { toggleMute } from '../playerActions';
 
 const Wrapper = styled.div`
   padding: 4px;
-  font-size: 1.5rem;
-  width: 30px;
-  margin-left: 20px;
+  cursor: pointer;
 `;
 
 function PlayerVolumeButton({ volume, handleOnClick }) {
-  let type = null;
-  switch (true) {
-    case volume <= 0:
-      type = 'mute';
-      break;
-    case volume >= 0 && volume < 0.5:
-      type = 'volume-down';
-      break;
-    case volume >= 0.5 && volume <= 1:
-      type = 'volume-up';
-      break;
-    default:
-      throw new Error('volume can not be greater than 1.0');
-  }
+  const iconName = getIconNameByVolume(volume);
   return (
     <Wrapper>
-      <IconButton
-        tooltipText="Adjust volume"
-        iconClassName={`${`ion-volume-${type}`}`}
-        onClick={handleOnClick}
-        color={WHITE}
-        hoverColor={THEME_COLOR}
-      />
+      <PlayerButton tooltipText="Adjust volume" name={iconName} onClick={handleOnClick} />
     </Wrapper>
   );
 }
