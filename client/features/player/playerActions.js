@@ -60,7 +60,8 @@ export const changePlayMode = mode => ({
 export function updateTimeIfNeeded(rawTime) {
   return (dispatch, getState) => {
     const state = getState();
-    const newTime = Math.floor(rawTime);
+    // const newTime = Math.floor(rawTime);
+    const newTime = rawTime;
     const currentTime = getCurrentTime(state);
     if (newTime !== currentTime) {
       dispatch(updateTime(newTime));

@@ -1,1 +1,1 @@
-export { default } from './PlayerTrackInfoContainer';
+export { default } from './PlayerTrackInfo';

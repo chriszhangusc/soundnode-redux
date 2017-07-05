@@ -5,36 +5,37 @@ import { getCurrentPlayerTrack } from 'features/player/playerSelectors';
 import styled from 'styled-components';
 import { BLACK, LIGHT_BLACK } from 'app/css/colors';
 import { Z_MAX } from 'app/css/variables';
-import { media } from 'app/css/styleUtils';
-
+import PlayerTimeSection from '../PlayerTimeSection';
 import PlayerAudio from '../PlayerAudio';
 import PlayerControls from '../PlayerControls';
-import PlayerDurationBar from '../PlayerDurationBar';
+import PlayerProgressBar from '../PlayerProgressBar';
 import PlayerTrackInfo from '../PlayerTrackInfo';
 import PlayerModeControls from '../PlayerModeControls';
 import PlayerVolumeControls from '../PlayerVolumeControls';
-
-const mapStateToProps = state => ({
-  playerTrack: getCurrentPlayerTrack(state),
-});
 
 const PlayerWrapper = styled.div`
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 70px;
+  height: 90px;
   background-color: ${LIGHT_BLACK};
   border-top: 1px solid ${BLACK};
   z-index: ${Z_MAX};
 `;
 
 const PlayerLayout = styled.div`
-  ${media.desktop4K`width: 60%;`}
-  ${media.desktopLG`width: 70%;`}
   margin: 0 auto;
   display: flex;
-  padding: 8px;
+  position: relative;
+`;
+
+const RightWrapper = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
 `;
 
 function Player({ playerTrack }) {
@@ -46,12 +47,15 @@ function Player({ playerTrack }) {
   return (
     <PlayerWrapper>
       <PlayerLayout>
+        <PlayerProgressBar playerTrack={playerTrack} />
         <PlayerAudio playerTrack={playerTrack} />
         <PlayerTrackInfo playerTrack={playerTrack} />
         <PlayerControls />
-        <PlayerDurationBar playerTrack={playerTrack} />
-        <PlayerModeControls />
-        <PlayerVolumeControls />
+        <RightWrapper>
+          <PlayerTimeSection playerTrack={playerTrack} />
+          <PlayerVolumeControls />
+          <PlayerModeControls />
+        </RightWrapper>
       </PlayerLayout>
     </PlayerWrapper>
   );
@@ -64,5 +68,11 @@ Player.defaultProps = {
 Player.propTypes = {
   playerTrack: PropTypes.object,
 };
+
+function mapStateToProps(state) {
+  return {
+    playerTrack: getCurrentPlayerTrack(state),
+  };
+}
 
 export default connect(mapStateToProps)(Player);

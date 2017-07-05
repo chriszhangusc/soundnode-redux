@@ -10,9 +10,9 @@ function getWidthAndHeight(size) {
     case 'small':
       return 32;
     case 'medium':
-      return 150;
+      return 70;
     case 'large':
-      return 350;
+      return 206;
     default:
       return 32;
   }

@@ -1,1 +1,1 @@
-export { default } from './PlayerAudioContainer';
+export { default } from './PlayerAudio';

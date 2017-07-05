@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import { THEME_COLOR, WHITE } from 'app/css/colors';
 
 const Wrapper = styled.div`
-  font-size: 1.3rem;
-  margin-left: 20px;
   cursor: pointer;
 `;
 
@@ -14,6 +12,7 @@ function PlayerButton({ active, ...rest }) {
   return (
     <Wrapper>
       <Icon
+        iconSize="1.5rem"
         hoverColor={THEME_COLOR}
         color={WHITE}
         activeColor={active ? THEME_COLOR : ''}

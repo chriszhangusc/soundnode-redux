@@ -6,6 +6,7 @@ import PlayerVolumeSeekBar from './PlayerVolumeSeekBar';
 const PlayerVolumeControlsWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 40px;
 `;
 
 function PlayerVolumeControls() {

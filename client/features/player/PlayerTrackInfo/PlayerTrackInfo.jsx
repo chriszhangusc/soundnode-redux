@@ -1,68 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RouterLink from 'common/components/links/RouterLink';
 import styled from 'styled-components';
-import { FONT_COLOR_SECONDARY } from 'app/css/colors';
-import { media } from 'app/css/styleUtils';
+import { getLargeVersion } from 'common/utils/imageUtils';
+import { connect } from 'react-redux';
+import { getUserByTrackId } from 'features/entities/entitiesSelectors';
+import { formatTitle } from 'common/utils/formatUtils';
+import PlayerTrackImage from './PlayerTrackImage';
+import TrackDetails from './PlayerTrackDetails';
 
 const PlayerTrackInfoWrapper = styled.div`
-  width: 200px;
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: right;
-`;
-
-const TrackImage = styled.img`
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-`;
-
-const TrackTitle = RouterLink.extend`
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  max-height: 32px;
-  max-width: 200px;
-  ${media.desktop4K`font-size: 0.9rem;`}
-  ${media.desktopLG`font-size: 0.8rem;`}
-`;
-
-const ArtistName = RouterLink.extend`
-  display: inline-block;
-  color: ${FONT_COLOR_SECONDARY};
-  ${media.desktop4K`font-size: 0.8rem;`}
-  ${media.desktopLG`font-size: 0.75rem;`}
-`;
-
-const DetailsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 function PlayerTrackInfo({ artworkUrl, trackTitle, artistName, trackUrl, artistUrl }) {
   return (
     <PlayerTrackInfoWrapper>
-      <RouterLink to={trackUrl}>
-        <TrackImage alt="Not Found" src={artworkUrl} />
-      </RouterLink>
-      <DetailsWrapper>
-        <TrackTitle to={trackUrl} title={trackUrl}>
-          {trackTitle}
-        </TrackTitle>
-        <ArtistName to={artistUrl} title={artistUrl}>
-          {artistName}
-        </ArtistName>
-      </DetailsWrapper>
+      <PlayerTrackImage src={artworkUrl} linkTo={trackUrl} />
+      <TrackDetails
+        title={trackTitle}
+        subtitle={artistName}
+        trackUrl={trackUrl}
+        artistUrl={artistUrl}
+      />
     </PlayerTrackInfoWrapper>
   );
 }
 
 PlayerTrackInfo.defaultProps = {
-  artworkUrl: '',
-  trackUrl: '',
-  artistUrl: '',
+  artworkUrl: undefined,
+  trackUrl: undefined,
+  artistUrl: undefined,
   artistName: '',
   trackTitle: '',
 };
@@ -75,4 +45,17 @@ PlayerTrackInfo.propTypes = {
   trackTitle: PropTypes.string,
 };
 
-export default PlayerTrackInfo;
+function mapStateToProps(state, { playerTrack }) {
+  const trackId = playerTrack.id;
+  const artist = getUserByTrackId(state, trackId);
+  const userId = artist.id;
+  return {
+    artworkUrl: getLargeVersion(playerTrack.artworkUrl),
+    trackTitle: playerTrack.title,
+    artistName: formatTitle(artist.username),
+    trackUrl: `/track/${trackId}`,
+    artistUrl: `/artist/${userId}`,
+  };
+}
+
+export default connect(mapStateToProps)(PlayerTrackInfo);

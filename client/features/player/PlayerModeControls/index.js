@@ -1,1 +1,1 @@
-export { default } from './PlayerModeControlsContainer';
+export { default } from './PlayerModeControls';

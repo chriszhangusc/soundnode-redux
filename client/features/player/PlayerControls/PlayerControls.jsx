@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { isPlayerPlaying } from 'features/player/playerSelectors';
+import * as playerActions from 'features/player/playerActions';
 import PlayerButton from '../PlayerButton';
 
 const PlayerControlsWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin: 4px 48px 0 48px;
+`;
+
+const ButtonWrapper = styled.div`
+  margin: 0 40px;
 `;
 
 class PlayerControls extends Component {
@@ -17,24 +25,36 @@ class PlayerControls extends Component {
   }
 
   renderPlayPauseButton() {
-    const { playing, onPauseClick, onPlayClick } = this.props;
+    const { playing, pauseSong, playSong } = this.props;
     return (
-      <PlayerButton
-        tooltipText={playing ? 'Pause' : 'Play'}
-        name={playing ? 'pause' : 'play'}
-        onClick={playing ? onPauseClick : onPlayClick}
-      />
+      <ButtonWrapper>
+        <PlayerButton
+          iconSize="2rem"
+          tooltipText={playing ? 'Pause' : 'Play'}
+          name={playing ? 'pause' : 'play'}
+          onClick={playing ? pauseSong : playSong}
+        />
+      </ButtonWrapper>
     );
   }
 
   renderForwardButton() {
-    const { onNextClick } = this.props;
-    return <PlayerButton tooltipText="Next" name="step-forward" onClick={onNextClick} />;
+    const { playNextSong } = this.props;
+    return (
+      <PlayerButton iconSize="2rem" tooltipText="Next" name="step-forward" onClick={playNextSong} />
+    );
   }
 
   renderBackwardButton() {
-    const { onPrevClick } = this.props;
-    return <PlayerButton tooltipText="Previous" name="step-backward" onClick={onPrevClick} />;
+    const { playPrevSong } = this.props;
+    return (
+      <PlayerButton
+        iconSize="2rem"
+        tooltipText="Previous"
+        name="step-backward"
+        onClick={playPrevSong}
+      />
+    );
   }
 
   render() {
@@ -50,10 +70,16 @@ class PlayerControls extends Component {
 
 PlayerControls.propTypes = {
   playing: PropTypes.bool.isRequired,
-  onNextClick: PropTypes.func.isRequired,
-  onPrevClick: PropTypes.func.isRequired,
-  onPlayClick: PropTypes.func.isRequired,
-  onPauseClick: PropTypes.func.isRequired,
+  playNextSong: PropTypes.func.isRequired,
+  playPrevSong: PropTypes.func.isRequired,
+  playSong: PropTypes.func.isRequired,
+  pauseSong: PropTypes.func.isRequired,
 };
 
-export default PlayerControls;
+function mapStateToProps(state) {
+  return {
+    playing: isPlayerPlaying(state),
+  };
+}
+
+export default connect(mapStateToProps, playerActions)(PlayerControls);

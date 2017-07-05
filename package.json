@@ -29,6 +29,7 @@
     "humps": "^1.1.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.16.1",
+    "moment": "^2.18.1",
     "normalize.css": "^6.0.0",
     "normalizr": "^2.2.1",
     "postcss-loader": "^1.3.3",

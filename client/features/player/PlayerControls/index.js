@@ -1,1 +1,1 @@
-export { default } from './PlayerControlsContainer';
+export { default } from './PlayerControls';

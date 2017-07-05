@@ -1,4 +1,4 @@
-export function computeSeekPercent(clientX, offsetLeft, offsetWidth) {
+export function computeSeekPercentage(clientX, offsetLeft, offsetWidth) {
   let offset = clientX - offsetLeft;
   offset = offset < 0 ? 0 : offset;
   offset = offset > offsetWidth ? offsetWidth : offset;
@@ -6,22 +6,14 @@ export function computeSeekPercent(clientX, offsetLeft, offsetWidth) {
 }
 
 // This should be moved to util functions
-export function computeNewTimeOnSeek(seekBar, duration, mouseEvent) {
-  const percent = computeSeekPercent(mouseEvent.clientX, seekBar.offsetLeft, seekBar.offsetWidth);
-  return percent * duration;
+export function computeOffset(component, maxValue, mouseEvent) {
+  const rect = component.getBoundingClientRect();
+  const percent = computeSeekPercentage(mouseEvent.clientX, rect.left, component.offsetWidth);
+  return percent * maxValue;
 }
 
-export function computeNewVolumeOnSeek(volumeBar, mouseEvent) {
-  const percent = computeSeekPercent(
-    mouseEvent.clientX,
-    volumeBar.offsetLeft,
-    volumeBar.offsetWidth,
-  );
-  return percent * 1.0;
-}
-
-export function computeSeekBarPercent(currentTime, duration) {
-  let percent = currentTime * 100 / duration;
+export function computePercentage(min, max, cur) {
+  let percent = cur * 100 / (max - min);
   percent = percent > 100 ? 100 : percent;
   percent = percent < 0 ? 0 : percent;
   return percent;
