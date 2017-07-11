@@ -38,7 +38,7 @@ const MainWrapper = styled.div`
 `;
 
 class Main extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     // To stop scrolling while logging in.
     const { loginInProgress } = this.props;
     injectGlobal`

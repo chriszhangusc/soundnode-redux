@@ -8,7 +8,7 @@ import { getDisplayName } from 'common/utils/hocUtils';
 
 export default function withAuthReqired(WrappedComponent) {
   class EnhancedComponent extends Component {
-    componentWillMount() {
+    componentDidMount() {
       if (!isAuthenticated()) {
         this.props.notificationWarning('Please signin with SoundCloud first');
       }

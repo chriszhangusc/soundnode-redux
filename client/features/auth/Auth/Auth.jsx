@@ -28,7 +28,7 @@ const AvatarWrapper = styled.div`
 `;
 
 class Auth extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { syncLoginIfNeeded } = this.props;
     syncLoginIfNeeded();
   }

@@ -15,7 +15,7 @@ const CardList = styled.div`
 class UserPlaylists extends React.Component {
 
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadPlaylists();
   }
 

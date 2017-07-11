@@ -8,7 +8,7 @@ import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
 import * as favActions from 'features/favorites/favoritesActions';
 
 class Favorites extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.updateVisiblePlaylistName('favorites');
     this.props.loadFavorites();
   }

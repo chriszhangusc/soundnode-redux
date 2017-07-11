@@ -8,7 +8,7 @@ import TrackProfile from './TrackProfile';
 
 class TrackProfileContainer extends Component {
   // Initial Loading
-  componentWillMount() {
+  componentDidMount() {
     const { match } = this.props;
     const trackId = match.params.trackId;
     this.props.loadTrackProfilePage(trackId);

@@ -9,7 +9,7 @@ import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 import UserProfile from './UserProfile';
 
 class UserProfileContainer extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { match } = this.props;
     const userId = match.params.userId;
     this.props.updateVisiblePlaylistName(`user-${userId}`);

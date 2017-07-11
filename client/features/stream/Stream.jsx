@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import * as streamActions from 'features/stream/streamActions';
 
 class Stream extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.updateVisiblePlaylistName('stream');
     this.props.loadStream();
   }

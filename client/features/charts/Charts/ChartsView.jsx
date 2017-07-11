@@ -16,7 +16,7 @@ class ChartsView extends Component {
     this.onPageMountOrChange = this.onPageMountOrChange.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.onPageMountOrChange(this.props);
   }
 

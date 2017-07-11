@@ -8,7 +8,7 @@ import { isSearching } from 'features/search/searchSelectors';
 import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 
 class Search extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     // Load query params from url
     const { match } = this.props;
     const { query } = match.params;
