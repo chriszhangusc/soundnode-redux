@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getCurrentPlayerTrack } from 'features/player/playerSelectors';
 import styled from 'styled-components';
 import { BLACK, LIGHT_BLACK } from 'app/css/colors';
+import { zIndexPlayer } from 'app/css/zIndex';
 import PlayerTimeSection from '../PlayerTimeSection';
 import PlayerAudio from '../PlayerAudio';
 import PlayerControls from '../PlayerControls';
@@ -20,7 +21,7 @@ const PlayerWrapper = styled.div`
   height: 90px;
   background-color: ${LIGHT_BLACK};
   border-top: 1px solid ${BLACK};
-  z-index: 2;
+  z-index: ${zIndexPlayer};
 `;
 
 const PlayerLayout = styled.div`

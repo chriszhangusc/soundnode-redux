@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { CSSTransitionGroup } from 'react-transition-group'; // ES6
+import { zIndexNotification } from 'app/css/zIndex';
 import { getNotifications } from '../notificationSelectors';
 import Notification from '../Notification';
 import './NotificationCenter.css';
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 100px;
   right: 0;
-  z-index: 3;
+  z-index: ${zIndexNotification};
 `;
 
 function NotificationCenter({ notifications }) {

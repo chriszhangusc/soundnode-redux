@@ -17,6 +17,7 @@ import Routing from 'app/routing/Routing';
 import { Route, Switch } from 'react-router-dom';
 import { AUTH_CALLBACK_ROUTE } from 'common/constants/routeConsts';
 import 'app/css/global';
+import { zIndexModal } from 'app/css/zIndex';
 
 SC.initialize({
   client_id: CLIENT_ID,
@@ -50,7 +51,7 @@ class Main extends React.Component {
   render() {
     const { loginInProgress } = this.props;
     return (
-      <Loadable active={loginInProgress} spinner text="Authenticating..." animate zIndex={9999}>
+      <Loadable active={loginInProgress} spinner text="Authenticating..." animate zIndex={zIndexModal}>
         <MainWrapper>
           <Navbar />
           <Sidebar />

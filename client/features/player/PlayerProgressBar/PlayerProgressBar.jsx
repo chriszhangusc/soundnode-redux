@@ -13,8 +13,6 @@ const PlayerProgressBarWrapper = styled.div`
   width: 100%;
   top: -14px;
   left: 90px;
-  /* 10 is the top */
-  z-index: 10;
 `;
 
 class PlayerProgressBar extends React.Component {

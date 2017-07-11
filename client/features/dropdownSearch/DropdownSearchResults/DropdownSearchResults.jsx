@@ -9,6 +9,7 @@ import {
   getDropdownSearchQuery,
 } from 'features/dropdownSearch/dropdownSearchSelectors';
 import { FONT_COLOR_SECONDARY, BACKGROUND_COLOR_SECONDARY } from 'app/css/colors';
+import { zIndexDropdownSearch } from 'app/css/zIndex';
 import styled from 'styled-components';
 import RouterLink from 'common/components/links/RouterLink';
 import DropdownSearchResultsRowUser from './DropdownSearchResultsRowUser';
@@ -30,7 +31,7 @@ const Wrapper = styled.div`
     position: absolute;
     top: 50px;
     background-color: ${BACKGROUND_COLOR_SECONDARY};
-    z-index: 3;
+    z-index: ${zIndexDropdownSearch};
     display: block;
     transition: .4s ease-in-out;
     box-shadow: ${props => !props.hidden && '0 0 10px 8px rgba(0, 0, 0, 0.2)'};

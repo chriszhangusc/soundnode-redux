@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import IconButton from 'common/components/buttons/IconButton';
 import styled from 'styled-components';
 import { BACKGROUND_COLOR_SECONDARY } from 'app/css/colors';
-
+import { zIndexPlayQueue } from 'app/css/zIndex';
 import { media } from 'app/css/styleUtils';
 import PlaylistRow from '../PlaylistRow';
 import PlaylistHeader from '../PlaylistHeader';
@@ -31,7 +30,7 @@ const PlaylistWrapper = styled.div`
     top: 70px;
     right: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: ${zIndexPlayQueue};
     display: block;
     padding: 20px 0 0 0;
     overflow-x: hidden;
