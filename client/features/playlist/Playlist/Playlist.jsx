@@ -31,7 +31,7 @@ const PlaylistWrapper = styled.div`
     top: 70px;
     right: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: 1;
     display: block;
     padding: 20px 0 0 0;
     overflow-x: hidden;

@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 100px;
   right: 0;
-  z-index: 9999;
+  z-index: 3;
 `;
 
 function NotificationCenter({ notifications }) {

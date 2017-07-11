@@ -10,7 +10,7 @@ const SidebarWrapper = styled.nav`
   width: 300px;
   height: 100%;
   background-color: ${LIGHT_BLACK};
-  z-index: 1000;
+  z-index: 1;
 `;
 
 const sidebarItemList = [

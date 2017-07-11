@@ -21,7 +21,7 @@ const PlayerWrapper = styled.div`
   height: 90px;
   background-color: ${LIGHT_BLACK};
   border-top: 1px solid ${BLACK};
-  z-index: ${Z_MAX};
+  z-index: 2;
 `;
 
 const PlayerLayout = styled.div`

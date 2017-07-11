@@ -13,7 +13,7 @@ const StyledNavbar = styled.nav`
   background-color: ${LIGHT_BLACK};
   height: 80px;
   max-height: 80px;
-  z-index: 1000;
+  z-index: 2;
   padding: 0 100px;
   display: flex;
   justify-content: space-between;

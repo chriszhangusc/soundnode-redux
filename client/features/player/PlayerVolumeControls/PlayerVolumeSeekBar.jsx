@@ -4,12 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FONT_COLOR_PRIMARY } from 'app/css/colors';
 import { computeOffset } from 'features/player/playerUtils';
-// import {
-//   beginVolumeSeek,
-//   changeVolume,
-//   toggleMute,
-//   updateVolumeAndEndSeek,
-// } from 'features/player/playerActions';
 import * as playerActions from 'features/player/playerActions';
 import { getCurrentVolume, isVolumeSeeking } from 'features/player/playerSelectors';
 import PlayerSlider from 'features/player/PlayerSlider';
