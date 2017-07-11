@@ -7,7 +7,6 @@ import { getDisplayName } from 'common/utils/hocUtils';
 
 const Wrapper = styled.div`
   min-height: 100vh;
-  padding-bottom: 80px;
 `;
 
 export default function withFullHeightWrapper(WrappedComponent) {

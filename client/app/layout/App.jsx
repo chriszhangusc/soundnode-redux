@@ -28,7 +28,7 @@ const PageContentWrapper = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   flex: 6;
-  padding: 50px 20px 70px 350px;
+  padding: 50px 20px 100px 350px;
   min-height: 100vh;
 `;
 

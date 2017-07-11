@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { getCurrentPlayerTrack } from 'features/player/playerSelectors';
 import styled from 'styled-components';
 import { BLACK, LIGHT_BLACK } from 'app/css/colors';
-import { Z_MAX } from 'app/css/variables';
 import PlayerTimeSection from '../PlayerTimeSection';
 import PlayerAudio from '../PlayerAudio';
 import PlayerControls from '../PlayerControls';
