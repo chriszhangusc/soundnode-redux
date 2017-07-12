@@ -1,9 +1,11 @@
 [ignore]
-.*/node_modules/react-loading-overlay/.*
+
 .*/node_modules/styled-components/.*
+
 [include]
 
 [libs]
+flow-typed
 
 [options]
 module.system.node.resolve_dirname=node_modules
