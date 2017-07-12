@@ -1,4 +1,3 @@
-import { PLAYLIST_CLEAR_QUEUE } from 'features/playlist/playlistActions';
 import {
   PLAYER_SONG_PLAY,
   PLAYER_SONG_PAUSE,
