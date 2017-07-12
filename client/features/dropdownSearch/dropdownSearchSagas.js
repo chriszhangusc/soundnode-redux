@@ -1,7 +1,7 @@
 import { put, call, takeLatest, all } from 'redux-saga/effects';
 import * as actions from 'features/dropdownSearch/dropdownSearchActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { DROPDOWN_SEARCH_START } from 'features/dropdownSearch/dropdownSearchConsts';
+import { DROPDOWN_SEARCH_START } from 'features/dropdownSearch/dropdownSearchActionTypes';
 import { fetchDropdownSearchTracks, fetchDropdownSearchUsers } from './dropdownSearchApi';
 
 /* *****************************************************************************/

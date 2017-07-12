@@ -1,4 +1,4 @@
-import * as types from './chartsConsts';
+import * as actionTypes from './chartsActionTypes';
 
 /* Reducer */
 const initialState = {
@@ -43,19 +43,19 @@ export function resetChartsState(state) {
 
 export default function chartsReducer(state = initialState, action) {
   switch (action.type) {
-    case types.CHARTS_FETCH_START:
+    case actionTypes.CHARTS_FETCH_START:
       return startFetchingCharts(state);
 
-    case types.CHARTS_FETCH_STOP:
+    case actionTypes.CHARTS_FETCH_STOP:
       return stopFetchingCharts(state);
 
-    case types.CHARTS_GENRE_CHANGE:
+    case actionTypes.CHARTS_GENRE_CHANGE:
       return changeGenre(state, action.payload);
 
-    case types.CHARTS_NEXT_HREF_UPDATE:
+    case actionTypes.CHARTS_NEXT_HREF_UPDATE:
       return updateNextHref(state, action.payload);
 
-    case types.CHARTS_STATE_RESET:
+    case actionTypes.CHARTS_STATE_RESET:
       return resetChartsState(initialState);
 
     default:

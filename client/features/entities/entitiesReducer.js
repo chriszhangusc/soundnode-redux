@@ -1,5 +1,5 @@
 import merge from 'lodash/merge';
-import { ENTITIES_MERGE } from './entitiesConsts';
+import { ENTITIES_MERGE } from './entitiesActionTypes';
 
 const INITIAL_STATE = {
   tracks: {},

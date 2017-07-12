@@ -1,11 +1,3 @@
-/* Action types for charts */
-export const CHARTS_FETCH_START = 'CHARTS_FETCH_START';
-export const CHARTS_FETCH_STOP = 'CHARTS_FETCH_STOP';
-export const CHARTS_NEXT_HREF_UPDATE = 'CHARTS_NEXT_HREF_UPDATE';
-export const CHARTS_GENRE_CHANGE = 'CHARTS_GENRE_CHANGE';
-export const CHARTS_FETCH_FAIL = 'CHARTS_FETCH_FAIL';
-export const CHARTS_STATE_RESET = 'CHARTS_STATE_RESET';
-
 export const TOP_COUNT = 50;
 // Number of items to fetch each time.
 export const DEFAULT_GENRE = 'all-music';

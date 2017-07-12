@@ -1,4 +1,4 @@
-import * as types from './favoritesConsts.js';
+import * as types from './favoritesActionTypes.js';
 
 const initialState = {
   fetching: false,

@@ -19,4 +19,3 @@ export const getChartsNextHref = createSelector(
   getChartsState,
   chartsState => chartsState.nextHref,
 );
-

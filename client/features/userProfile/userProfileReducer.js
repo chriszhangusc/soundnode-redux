@@ -1,4 +1,4 @@
-import * as types from './userProfileConsts';
+import * as types from './userProfileActionTypes';
 
 /* Reducer */
 const initialState = {

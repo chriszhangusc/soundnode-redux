@@ -1,5 +1,5 @@
 import shortid from 'shortid';
-import * as types from './notificationConsts';
+import * as types from './notificationActionTypes';
 
 export function notificationSuccessFactory(message) {
   return {

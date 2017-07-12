@@ -1,5 +1,5 @@
 import { mergeArrays } from 'common/utils/generalUtils';
-import * as types from './streamConsts';
+import * as types from './streamActionTypes';
 
 const initialState = {
   fetching: false,

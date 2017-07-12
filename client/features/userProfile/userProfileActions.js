@@ -1,7 +1,7 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { mergeVisiblePlaylist } from 'features/playlist/playlistActions';
 
-import * as types from './userProfileConsts';
+import * as types from './userProfileActionTypes';
 
 import {
   fetchProfiledUser,

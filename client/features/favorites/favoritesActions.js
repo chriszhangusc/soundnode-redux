@@ -1,6 +1,6 @@
 import { updateVisiblePlaylistName, mergeVisiblePlaylist } from 'features/playlist/playlistActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
-import * as types from './favoritesConsts';
+import * as types from './favoritesActionTypes';
 import { fetchMyFavorites, fetchFavoritesByNextHref } from './favoritesApi';
 import { getFavoritesNextHref, isFavoritesFetching } from './favoritesSelectors';
 

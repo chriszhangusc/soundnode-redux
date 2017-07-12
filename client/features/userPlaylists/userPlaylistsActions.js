@@ -1,5 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
-import * as types from './userPlaylistsConsts';
+import * as types from './userPlaylistsActionTypes';
 import { fetchMyPlaylists } from './userPlaylistsApi';
 
 export function startFetchingPlaylists() {

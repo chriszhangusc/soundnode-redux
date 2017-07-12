@@ -1,7 +1,7 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { fetchProfiledTrack, fetchTrackComments, fetchMoreComments } from './trackProfileApi';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
-import * as types from './trackProfileConsts';
+import * as types from './trackProfileActionTypes';
 
 export const resetTrackProfileState = () => ({
   type: types.TRACK_PROFILE_STATE_RESET,

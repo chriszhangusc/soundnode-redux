@@ -1,4 +1,4 @@
-import * as types from './trackProfileConsts';
+import * as types from './trackProfileActionTypes';
 
 const initialState = {
   trackFetching: false,

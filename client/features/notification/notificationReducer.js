@@ -1,4 +1,4 @@
-import * as TYPES from './notificationConsts';
+import * as TYPES from './notificationActionTypes';
 
 /* Reducer */
 const initialState = {

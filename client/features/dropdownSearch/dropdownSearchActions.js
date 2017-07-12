@@ -1,4 +1,4 @@
-import * as types from 'features/dropdownSearch/dropdownSearchConsts';
+import * as types from 'features/dropdownSearch/dropdownSearchActionTypes';
 
 export const DROPDOWN_SEARCH_LIMIT = 4;
 

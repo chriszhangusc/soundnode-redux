@@ -2,16 +2,13 @@ import { mergeVisiblePlaylist } from 'features/playlist/playlistActions';
 import { getVisiblePlaylist, getPlaylistByName } from 'features/playlist/playlistSelectors';
 import { notificationWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
-
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
-
 import { isChartsFetching, getChartsNextHref } from './chartsSelectors';
-
-import * as types from './chartsConsts';
+import * as actionTypes from './chartsActionTypes';
 
 export function changeGenre(genre) {
   return {
-    type: types.CHARTS_GENRE_CHANGE,
+    type: actionTypes.CHARTS_GENRE_CHANGE,
     payload: {
       genre,
     },
@@ -20,19 +17,19 @@ export function changeGenre(genre) {
 
 export function startFetchingCharts() {
   return {
-    type: types.CHARTS_FETCH_START,
+    type: actionTypes.CHARTS_FETCH_START,
   };
 }
 
 export function stopFetchingCharts() {
   return {
-    type: types.CHARTS_FETCH_STOP,
+    type: actionTypes.CHARTS_FETCH_STOP,
   };
 }
 
 export function updateChartsNextHref(nextHref) {
   return {
-    type: types.CHARTS_NEXT_HREF_UPDATE,
+    type: actionTypes.CHARTS_NEXT_HREF_UPDATE,
     payload: {
       nextHref,
     },
@@ -41,13 +38,13 @@ export function updateChartsNextHref(nextHref) {
 
 export function failedToFetchCharts() {
   return {
-    type: types.CHARTS_FETCH_FAIL,
+    type: actionTypes.CHARTS_FETCH_FAIL,
   };
 }
 
 export function resetChartsState() {
   return {
-    type: types.CHARTS_STATE_RESET,
+    type: actionTypes.CHARTS_STATE_RESET,
   };
 }
 

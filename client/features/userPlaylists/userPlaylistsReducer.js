@@ -1,4 +1,4 @@
-import * as types from './userPlaylistsConsts';
+import * as types from './userPlaylistsActionTypes';
 
 const initialState = {
   fetching: false,

@@ -1,6 +1,6 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { mergeVisiblePlaylist } from 'features/playlist/playlistActions';
-import * as types from './searchConsts';
+import * as types from './searchActionTypes';
 import { fetchSearchResults, fetchByNextHref } from './searchApi';
 import { isSearching, getSearchNextHref } from './searchSelectors';
 
@@ -15,15 +15,6 @@ export function stopSearching() {
     type: types.SEARCH_STOP,
   };
 }
-
-// export function mergeTrackResults(trackIds) {
-//   return {
-//     type: types.SEARCH_TRACK_RESULTS_MERGE,
-//     payload: {
-//       trackIds,
-//     },
-//   };
-// }
 
 export function updateSearchNextHref(nextHref) {
   return {

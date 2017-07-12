@@ -1,4 +1,4 @@
-import * as types from './searchConsts';
+import * as types from './searchActionTypes';
 
 /* Reducers */
 const initialState = {

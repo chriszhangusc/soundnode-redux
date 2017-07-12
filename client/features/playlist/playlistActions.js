@@ -1,7 +1,7 @@
 import { getActiveTrackId, isInShuffleMode } from 'features/player/playerSelectors';
 import shuffle from 'lodash/shuffle';
 import { shiftToFront } from './playlistUtils';
-import * as types from './playlistConsts';
+import * as types from './playlistActionTypes';
 
 import {
   getActivePlaylist,

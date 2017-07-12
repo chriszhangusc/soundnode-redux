@@ -1,6 +1,6 @@
 import { CHARTS_CLEAR_STATE } from 'features/charts/chartsConsts';
 import { mergeArrays } from 'common/utils/generalUtils';
-import * as types from './playlistConsts';
+import * as types from './playlistActionTypes';
 
 const initialState = {
   activePlaylistName: undefined,
