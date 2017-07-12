@@ -1,3 +1,6 @@
+// @flow
+import type { Action } from 'common/flowTypes';
+
 import {
   PLAYER_SONG_PLAY,
   PLAYER_SONG_PAUSE,
@@ -15,6 +18,17 @@ import {
   INITIAL_VOLUME,
 } from './playerConsts';
 
+type PlayerState = {
+  duration: number,
+  currentTime: number,
+  volume: number,
+  playing: boolean,
+  seeking: false,
+  volumeSeeking: false,
+  mode: string,
+  trackId: ?number,
+};
+
 /* Player Reducer */
 const initialState = {
   currentTime: 0,
@@ -27,91 +41,91 @@ const initialState = {
   trackId: null,
 };
 
-export function changeSong(state, { trackId }) {
+export function changeSong(state: PlayerState, { trackId }: { trackId: ?number }) {
   return {
     ...state,
     trackId,
   };
 }
 
-export function playSong(state) {
+export function playSong(state: PlayerState) {
   return {
     ...state,
     playing: true,
   };
 }
 
-export function pauseSong(state) {
+export function pauseSong(state: PlayerState) {
   return {
     ...state,
     playing: false,
   };
 }
 
-export function updateCurrentTime(state, { currentTime }) {
+export function updateCurrentTime(state: PlayerState, { currentTime }: { currentTime: number }) {
   return {
     ...state,
     currentTime,
   };
 }
 
-export function startSeek(state) {
+export function startSeek(state: PlayerState) {
   return {
     ...state,
     seeking: true,
   };
 }
 
-export function endSeek(state) {
+export function endSeek(state: PlayerState) {
   return {
     ...state,
     seeking: false,
   };
 }
 
-export function updateVolume(state, { volume }) {
+export function updateVolume(state: PlayerState, { volume }: { volume: number }) {
   return {
     ...state,
     volume,
   };
 }
 
-export function startVolumeSeek(state) {
+export function startVolumeSeek(state: PlayerState) {
   return {
     ...state,
     volumeSeeking: true,
   };
 }
 
-export function endVolumeSeek(state) {
+export function endVolumeSeek(state: PlayerState) {
   return {
     ...state,
     volumeSeeking: false,
   };
 }
 
-export function updatePlayMode(state, { mode }) {
+export function updatePlayMode(state: PlayerState, { mode }: { mode: string }) {
   return {
     ...state,
     mode,
   };
 }
 
-export function mute(state) {
+export function mute(state: PlayerState) {
   return {
     ...state,
     volume: 0,
   };
 }
 
-export function clearTime(state) {
+export function clearTime(state: PlayerState) {
   return {
     ...state,
     currentTime: 0,
   };
 }
 
-export default function playerReducer(state = initialState, action) {
+export default function playerReducer(state: PlayerState = initialState, action: Action) {
   switch (action.type) {
     case PLAYER_SONG_CHANGE:
       return changeSong(state, action.payload);
