@@ -1,6 +1,7 @@
 import { clearShufflePlaylist, shufflePlaylist } from 'features/playlist/playlistActions';
 import { getPlaylistByMode } from 'features/playlist/playlistSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
+import * as types from './playerActionTypes';
 import {
   isPlayerSeeking,
   getCurrentTime,
@@ -9,7 +10,6 @@ import {
   getActiveTrackId,
   getPlayerMode,
 } from './playerSelectors';
-import * as types from './playerActionTypes';
 
 /* Action Creators */
 export function beginSeek() {
