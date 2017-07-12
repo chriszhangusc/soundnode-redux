@@ -6,7 +6,7 @@ import { getProfiledTrack } from 'features/trackProfile/trackProfileSelectors';
 import { getLargeVersion } from 'common/utils/imageUtils';
 import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
 import { FormattedNumber } from 'react-intl';
-import { changeSongAndPlay, playSong, pauseSong } from 'features/player/playerActions';
+import { updateActiveTrackIdAndPlay, playSong, pauseSong } from 'features/player/playerActions';
 import Image from 'common/components/images/Image';
 
 const Wrapper = styled.div`
@@ -131,7 +131,7 @@ function mergeProps(stateProps, { dispatch }) {
     handleImageClick() {
       if (!trackId) return;
       if (!active) {
-        dispatch(changeSongAndPlay(trackId));
+        dispatch(updateActiveTrackIdAndPlay(trackId));
       } else {
         dispatch(playing ? pauseSong() : playSong());
       }

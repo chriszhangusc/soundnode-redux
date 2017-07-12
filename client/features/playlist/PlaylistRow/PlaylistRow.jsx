@@ -62,7 +62,7 @@ function PlaylistRow({
   active,
   index,
   trackId,
-  handleChangeSong,
+  handleupdateActiveTrackId,
   handleLikeSong,
   handleUnlikeSong,
 }) {
@@ -72,7 +72,7 @@ function PlaylistRow({
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (!active) handleChangeSong();
+        if (!active) handleupdateActiveTrackId();
       }}
     >
       <PlaylistItemTitle title={title}>{`${index}. ${title}`}</PlaylistItemTitle>
@@ -83,7 +83,7 @@ function PlaylistRow({
 }
 
 PlaylistRow.propTypes = {
-  handleChangeSong: PropTypes.func.isRequired,
+  handleupdateActiveTrackId: PropTypes.func.isRequired,
   handleLikeSong: PropTypes.func.isRequired,
   handleUnlikeSong: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,

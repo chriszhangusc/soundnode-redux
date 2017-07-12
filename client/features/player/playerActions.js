@@ -6,61 +6,84 @@ import {
   getCurrentTime,
   getCurrentVolume,
   getCurrentPlayerTrack,
-  getPlayerTrackId,
+  getActiveTrackId,
   getPlayerMode,
 } from './playerSelectors';
-import * as types from './playerConsts';
+import * as types from './playerActionTypes';
 
 /* Action Creators */
-export const beginSeek = () => ({ type: types.PLAYER_SEEK_BEGIN });
+export function beginSeek() {
+  return { type: types.PLAYER_SEEK_BEGIN };
+}
 
-export const endSeek = () => ({ type: types.PLAYER_SEEK_END });
+export function endSeek() {
+  return { type: types.PLAYER_SEEK_END };
+}
 
-export const playSong = () => ({ type: types.PLAYER_SONG_PLAY });
+export function playSong() {
+  return { type: types.PLAYER_SONG_PLAY };
+}
 
-export const pauseSong = () => ({ type: types.PLAYER_SONG_PAUSE });
+export function pauseSong() {
+  return { type: types.PLAYER_SONG_PAUSE };
+}
 
-export const beginVolumeSeek = () => ({ type: types.PLAYER_VOLUME_SEEK_BEGIN });
+export function beginVolumeSeek() {
+  return { type: types.PLAYER_VOLUME_SEEK_BEGIN };
+}
 
-export const endVolumeSeek = () => ({ type: types.PLAYER_VOLUME_SEEK_END });
+export function endVolumeSeek() {
+  return { type: types.PLAYER_VOLUME_SEEK_END };
+}
 
-export const mute = () => ({ type: types.PLAYER_MUTE });
+export function mute() {
+  return { type: types.PLAYER_MUTE };
+}
 
-export const clearTime = () => ({ type: types.PLAYER_TIME_CLEAR });
+export function resetTime() {
+  return { type: types.PLAYER_TIME_RESET };
+}
 
-export const changeSong = trackId => ({
-  type: types.PLAYER_SONG_CHANGE,
-  payload: {
-    trackId,
-  },
-});
+export function updateActiveTrackId(trackId) {
+  return {
+    type: types.PLAYER_ACTIVE_TRACK_ID_UPDATE,
+    payload: {
+      activeTrackId: trackId,
+    },
+  };
+}
 
-export const updateTime = currentTime => ({
-  type: types.PLAYER_TIME_UPDATE,
-  payload: {
-    currentTime,
-  },
-});
+export function updateTime(currentTime) {
+  return {
+    type: types.PLAYER_TIME_UPDATE,
+    payload: {
+      currentTime,
+    },
+  };
+}
 
-export const changeVolume = volume => ({
-  type: types.PLAYER_VOLUME_CHANGE,
-  payload: {
-    volume,
-  },
-});
+export function updateVolume(volume) {
+  return {
+    type: types.PLAYER_VOLUME_UPDATE,
+    payload: {
+      volume,
+    },
+  };
+}
 
-export const changePlayMode = mode => ({
-  type: types.PLAYER_PLAY_MODE_CHANGE,
-  payload: {
-    mode,
-  },
-});
+export function changePlayMode(mode) {
+  return {
+    type: types.PLAYER_PLAY_MODE_CHANGE,
+    payload: {
+      mode,
+    },
+  };
+}
 
 /* Redux Thunks Domain Logic */
 export function updateTimeIfNeeded(rawTime) {
   return (dispatch, getState) => {
     const state = getState();
-    // const newTime = Math.floor(rawTime);
     const newTime = rawTime;
     const currentTime = getCurrentTime(state);
     if (newTime !== currentTime) {
@@ -94,7 +117,7 @@ export function updateTimeAndEndSeek(time) {
 
 export function updateVolumeAndEndSeek(volume) {
   return (dispatch) => {
-    dispatch(changeVolume(volume));
+    dispatch(updateVolume(volume));
     dispatch(endVolumeSeek());
   };
 }
@@ -105,7 +128,7 @@ export function toggleMute() {
     const currVolume = getCurrentVolume(state);
     if (currVolume === 0) {
       const lastVolume = getLastVolume();
-      dispatch(changeVolume(lastVolume));
+      dispatch(updateVolume(lastVolume));
     } else {
       setLastVolume(currVolume);
       dispatch(mute());
@@ -114,14 +137,14 @@ export function toggleMute() {
 }
 
 // Change to new song or just play paused current song.
-export function changeSongAndPlay(newTrackId) {
+export function updateActiveTrackIdAndPlay(newTrackId) {
   return (dispatch, getState) => {
     const state = getState();
     const curTrackId = getCurrentPlayerTrack(state);
     dispatch(pauseSong());
-    dispatch(clearTime());
+    dispatch(resetTime());
     if (curTrackId !== newTrackId) {
-      dispatch(changeSong(newTrackId));
+      dispatch(updateActiveTrackId(newTrackId));
     }
     dispatch(playSong());
   };
@@ -133,7 +156,7 @@ export function playSongByAction(actionType) {
     const state = getState();
     const mode = getPlayerMode(state);
     let nextTrackId = null;
-    const curTrackId = getPlayerTrackId(state);
+    const curTrackId = getActiveTrackId(state);
     const activePlaylist = getPlaylistByMode(state);
     if (mode === types.REPEAT) {
       nextTrackId = curTrackId;
@@ -145,7 +168,7 @@ export function playSongByAction(actionType) {
       nextTrackId = activePlaylist[nextIdx];
     }
 
-    dispatch(changeSongAndPlay(nextTrackId));
+    dispatch(updateActiveTrackIdAndPlay(nextTrackId));
   };
 }
 

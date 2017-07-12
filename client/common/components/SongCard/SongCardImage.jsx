@@ -4,7 +4,7 @@ import Image from 'common/components/images/Image';
 import PlaybackOverlay from 'common/components/PlaybackOverlay';
 import { connect } from 'react-redux';
 import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
-import { changeSongAndPlay, playSong, pauseSong } from 'features/player/playerActions';
+import { updateActiveTrackIdAndPlay, playSong, pauseSong } from 'features/player/playerActions';
 import { switchActivePlaylistIfNeeded } from 'features/playlist/playlistActions';
 import { getLargeVersion } from 'common/utils/imageUtils';
 import { getUserById } from 'features/entities/entitiesSelectors';
@@ -49,7 +49,7 @@ function mergeProps(stateProps, { dispatch }, { track }) {
     handleImageClick() {
       if (!stateProps.active) {
         // Change song first and then switch active playlist
-        dispatch(changeSongAndPlay(track.id));
+        dispatch(updateActiveTrackIdAndPlay(track.id));
         dispatch(switchActivePlaylistIfNeeded());
       } else {
         dispatch(stateProps.playing ? pauseSong() : playSong());

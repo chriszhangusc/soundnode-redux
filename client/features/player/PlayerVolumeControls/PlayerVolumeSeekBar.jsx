@@ -41,7 +41,7 @@ class PlayerVolumeSeekBar extends React.Component {
 
   handleVolumeMouseMove(e) {
     const newVolume = computeOffset(this.volumeBar, 1.0, e);
-    this.props.changeVolume(newVolume);
+    this.props.updateVolume(newVolume);
   }
 
   handleVolumeMouseUp(e) {
@@ -78,7 +78,7 @@ PlayerVolumeSeekBar.propTypes = {
   volume: PropTypes.number.isRequired,
   volumeSeeking: PropTypes.bool.isRequired,
   beginVolumeSeek: PropTypes.func.isRequired,
-  changeVolume: PropTypes.func.isRequired,
+  updateVolume: PropTypes.func.isRequired,
   updateVolumeAndEndSeek: PropTypes.func.isRequired,
 };
 

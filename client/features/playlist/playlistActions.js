@@ -1,4 +1,4 @@
-import { getPlayerTrackId, isInShuffleMode } from 'features/player/playerSelectors';
+import { getActiveTrackId, isInShuffleMode } from 'features/player/playerSelectors';
 import shuffle from 'lodash/shuffle';
 import { shiftToFront } from './playlistUtils';
 import * as types from './playlistConsts';
@@ -91,7 +91,7 @@ export function shufflePlaylist() {
   return (dispatch, getState) => {
     const state = getState();
     const activePlaylist = getActivePlaylist(state);
-    const playerTrackId = getPlayerTrackId(state);
+    const playerTrackId = getActiveTrackId(state);
     // Every time we reshuffle the playlist, we need to move the current playing track to the
     // first position.
     const shuffled = shiftToFront(shuffle(activePlaylist), playerTrackId);

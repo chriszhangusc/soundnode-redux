@@ -1,5 +1,4 @@
 // @flow
-
 export function computeSeekPercentage(
   clientX: number,
   offsetLeft: number,
@@ -12,7 +11,7 @@ export function computeSeekPercentage(
 }
 
 // This should be moved to util functions
-export function computeOffset(component: Object, maxValue: number, mouseEvent: Object): number {
+export function computeOffset(component: Object, maxValue: number, mouseEvent: MouseEvent): number {
   const rect = component.getBoundingClientRect();
   const percent = computeSeekPercentage(mouseEvent.clientX, rect.left, component.offsetWidth);
   return percent * maxValue;

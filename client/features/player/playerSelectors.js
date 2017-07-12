@@ -5,7 +5,7 @@ import { SHUFFLE } from './playerConsts';
 /* Basic Selectors */
 export const getPlayerState = state => state.player;
 
-export const getPlayerTrackId = createSelector(getPlayerState, state => state.trackId);
+export const getActiveTrackId = createSelector(getPlayerState, state => state.activeTrackId);
 
 export const isPlayerPlaying = createSelector(getPlayerState, state => state.playing);
 
@@ -22,7 +22,7 @@ export const getCurrentVolume = createSelector(getPlayerState, state => state.vo
 export const isInShuffleMode = createSelector(getPlayerMode, mode => mode === SHUFFLE);
 
 export const getCurrentPlayerTrack = createSelector(
-  getPlayerTrackId,
+  getActiveTrackId,
   getTracks,
   (trackId, tracks) => trackId && tracks[String(trackId)],
 );
@@ -30,7 +30,7 @@ export const getCurrentPlayerTrack = createSelector(
 /* Memoized Selectors by Reselect*/
 /* Return if the current track(byId) is loaded in player. (Paused or Playing) */
 export function isTrackActive(state, trackId) {
-  const playerTrackId = getPlayerTrackId(state);
+  const playerTrackId = getActiveTrackId(state);
   return playerTrackId === trackId;
 }
 

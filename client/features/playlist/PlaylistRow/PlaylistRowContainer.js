@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getTrackById, getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { isTrackActive } from 'features/player/playerSelectors';
-import { changeSongAndPlay } from 'features/player/playerActions';
+import { updateActiveTrackIdAndPlay } from 'features/player/playerActions';
 import PlaylistRow from './PlaylistRow';
 
 const mapStateToProps = (state, { trackId, index }) => {
@@ -18,8 +18,8 @@ const mapStateToProps = (state, { trackId, index }) => {
   };
 };
 const mapDispatchToProps = (dispatch, { trackId }) => ({
-  handleChangeSong() {
-    dispatch(changeSongAndPlay(trackId));
+  handleupdateActiveTrackId() {
+    dispatch(updateActiveTrackIdAndPlay(trackId));
   },
   handleLikeSong() {
     // dispatch(startLikeSong(trackId));
