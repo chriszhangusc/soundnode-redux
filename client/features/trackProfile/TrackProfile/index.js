@@ -1,2 +1,1 @@
-export { default } from './TrackProfileContainer';
-
+export { default } from './TrackProfile';

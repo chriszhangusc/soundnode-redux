@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY } from 'app/css/colors';
 import { connect } from 'react-redux';
 import { copyToClipboard } from 'features/copy';
-import { getProfiledTrack } from '../trackProfileSelectors';
+import { getProfiledTrack } from 'features/trackProfile/trackProfileSelectors';
 
 const Wrapper = styled.div`
   display: flex;

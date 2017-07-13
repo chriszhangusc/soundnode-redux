@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
-import { getProfiledTrack } from '../trackProfileSelectors';
+import { getProfiledTrack } from 'features/trackProfile/trackProfileSelectors';
 import TrackTitle from './TrackTitle';
 import TrackUsername from './TrackUsername';
 import TrackDescription from './TrackDescription';

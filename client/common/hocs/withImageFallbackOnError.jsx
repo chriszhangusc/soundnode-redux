@@ -47,6 +47,7 @@ export default function withImageFallbackOnError(ImageComponent) {
   FallbackImage.defaultProps = {
     fallbackSrc: defaultTrackSrc,
     onError: null,
+    src: null,
   };
 
   FallbackImage.propTypes = {

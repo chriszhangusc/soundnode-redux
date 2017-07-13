@@ -62,7 +62,7 @@ const CoverImageDetailsWrapper = styled.div`
 `;
 
 // Extract TrackButton
-function TrackCoverImage({
+function TrackProfileImage({
   src,
   playing,
   active,
@@ -91,7 +91,7 @@ function TrackCoverImage({
   );
 }
 
-TrackCoverImage.defaultProps = {
+TrackProfileImage.defaultProps = {
   src: null,
   playing: false,
   active: false,
@@ -100,7 +100,7 @@ TrackCoverImage.defaultProps = {
   likesCount: 0,
 };
 
-TrackCoverImage.propTypes = {
+TrackProfileImage.propTypes = {
   src: PropTypes.string,
   playing: PropTypes.bool,
   active: PropTypes.bool,
@@ -141,4 +141,4 @@ function mergeProps(stateProps, { dispatch }) {
   };
 }
 
-export default connect(mapStateToProps, null, mergeProps)(TrackCoverImage);
+export default connect(mapStateToProps, null, mergeProps)(TrackProfileImage);
