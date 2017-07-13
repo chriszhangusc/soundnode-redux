@@ -1,15 +1,12 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeVisiblePlaylist } from 'features/playlist/playlistActions';
-
+import { mergeVisiblePlaylist, updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 import * as types from './userProfileActionTypes';
-
+import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelectors';
 import {
   fetchProfiledUser,
   fetchProfiledUserTracks,
   fetchMoreProfiledUserTracks,
 } from './userProfileApi';
-
-import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelectors';
 
 /* Action Creators*/
 export function resetUserProfileState() {
@@ -80,8 +77,10 @@ export function receiveTracks(normalizedTracks) {
 }
 
 // Should load user first and then the tracks
-export function loadUserProfilePage(userId) {
+export function loadUserProfileData(userId) {
   return async (dispatch) => {
+    dispatch(updateProfiledUser(userId));
+    dispatch(updateVisiblePlaylistName(`user-${userId}`));
     try {
       dispatch(startFetchingProfiledUser());
       dispatch(startFetchingUserTracks());

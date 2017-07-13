@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from 'common/components/images/Avatar';
+import UserImage from 'common/components/images/UserImage';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import Card from 'common/components/Card';
 import { connect } from 'react-redux';
@@ -18,7 +18,7 @@ function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
         </Card.Title>
       </Card.Row>
       <Card.Row>
-        <Avatar linkTo={userUrl} src={userAvatar} />
+        <UserImage linkTo={userUrl} src={userAvatar} size="small" />
         <Card.SubLink to={userUrl} title={username}>
           {username}
         </Card.SubLink>

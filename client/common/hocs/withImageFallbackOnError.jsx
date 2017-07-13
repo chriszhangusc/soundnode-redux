@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getDisplayName } from 'common/utils/hocUtils';
-import defaultTrackFallbackImage from 'assets/images/default-track.png';
+import defaultTrackSrc from 'assets/images/default-track.png';
 
 export default function withImageFallbackOnError(ImageComponent) {
   class FallbackImage extends React.Component {
@@ -13,6 +13,12 @@ export default function withImageFallbackOnError(ImageComponent) {
       };
       this.handleError = this.handleError.bind(this);
     }
+    // This is for flow
+    // props: {
+    //   src: ?string,
+    //   fallbackSrc?: string,
+    //   onError?: Function,
+    // };
 
     handleError() {
       const { onError } = this.props;
@@ -25,19 +31,22 @@ export default function withImageFallbackOnError(ImageComponent) {
       }
     }
 
+    // If src is null/undefined
     render() {
+      const { src = null } = this.props;
       return (
         <ImageComponent
-          onError={this.handleError}
           {...this.props}
-          src={this.state.fallback ? this.props.fallbackSrc : this.props.src}
+          onError={this.handleError}
+          src={!src || this.state.fallback ? this.props.fallbackSrc : this.props.src}
         />
       );
     }
   }
 
   FallbackImage.defaultProps = {
-    fallbackSrc: defaultTrackFallbackImage,
+    fallbackSrc: defaultTrackSrc,
+    onError: null,
   };
 
   FallbackImage.propTypes = {

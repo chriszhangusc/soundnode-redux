@@ -1,5 +1,8 @@
 // @flow
-export type Action = {
-  type: string,
-  payload: Object,
-};
+export type Track = {};
+
+export type User = {};
+
+export type Comment = {};
+
+export type StringOrNumber = string | number;

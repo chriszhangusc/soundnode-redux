@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Image from 'common/components/images/Image';
+import TrackImage from 'common/components/images/TrackImage';
 import PlaybackOverlay from 'common/components/PlaybackOverlay';
 import { connect } from 'react-redux';
 import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
@@ -14,7 +14,7 @@ function SongCardImage({ active, playing, artworkUrl, handleImageClick }) {
   return (
     <Card.ImageWrapper>
       <PlaybackOverlay active={active} onClick={handleImageClick} playing={playing}>
-        <Image src={artworkUrl} />
+        <TrackImage src={artworkUrl} size="medium" />
       </PlaybackOverlay>
     </Card.ImageWrapper>
   );

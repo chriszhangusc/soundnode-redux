@@ -1,14 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from 'common/components/images/Avatar';
+import UserImage from 'common/components/images/UserImage';
 import RouterLink from 'common/components/links/RouterLink';
 import { connect } from 'react-redux';
 import { getPlaylistById, getUserByPlaylistId } from 'features/entities/entitiesSelectors';
 import Card from 'common/components/Card';
 
 function PlaylistCardDetails({ trackCount, duration, title, userAvatar, username }) {
-  // const trackUrl = `${TRACK_PROFILE_ROUTE}/${trackId}`;
-  // const userUrl = `${USER_PROFILE_ROUTE}/${userId}`;
   return (
     <Card.Column>
       <Card.Row>
@@ -18,13 +16,17 @@ function PlaylistCardDetails({ trackCount, duration, title, userAvatar, username
       </Card.Row>
       <Card.Row>
         <Card.Subtitle>
-          <Card.InnerSpan>{trackCount} songs</Card.InnerSpan>
-          <Card.InnerSpan>{duration}</Card.InnerSpan>
+          <Card.InnerSpan>
+            {trackCount} songs
+          </Card.InnerSpan>
+          <Card.InnerSpan>
+            {duration}
+          </Card.InnerSpan>
         </Card.Subtitle>
       </Card.Row>
       <Card.Row>
         <RouterLink to="#" title={username}>
-          <Avatar src={userAvatar} />
+          <UserImage src={userAvatar} size="small" />
         </RouterLink>
         <Card.SubLink to="#" title={username}>
           {username}

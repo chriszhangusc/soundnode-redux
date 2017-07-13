@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Avatar from 'common/components/images/Avatar';
+import UserImage from 'common/components/images/UserImage';
 import RouterLink from 'common/components/links/RouterLink';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -18,9 +18,7 @@ const AuthWrapper = styled.div`
   min-width: 135px;
 `;
 
-const Username = styled.span`
-  margin-right: 10px;
-`;
+const Username = styled.span`margin-right: 10px;`;
 
 const AvatarWrapper = styled.div`
   display: inline-block;
@@ -36,21 +34,23 @@ class Auth extends React.Component {
   render() {
     const { me, onLogin } = this.props;
 
-    const renderLoggedIn = () => (
+    const renderLoggedIn = () =>
       <AuthWrapper>
         <AvatarWrapper>
-          <Avatar src={me.avatarUrl} linkTo={`${USER_PROFILE_ROUTE}/${me.id}`} />
+          <UserImage src={me.avatarUrl} linkTo={`${USER_PROFILE_ROUTE}/${me.id}`} size="small" />
         </AvatarWrapper>
-        <Username>{me.username}</Username>
+        <Username>
+          {me.username}
+        </Username>
         <LogoutButton />
-      </AuthWrapper>
-    );
+      </AuthWrapper>;
 
-    const renderLoggedOut = () => (
+    const renderLoggedOut = () =>
       <AuthWrapper>
-        <RouterLink to="/" onClick={onLogin}>Login</RouterLink>
-      </AuthWrapper>
-    );
+        <RouterLink to="/" onClick={onLogin}>
+          Login
+        </RouterLink>
+      </AuthWrapper>;
 
     return me ? renderLoggedIn() : renderLoggedOut();
   }

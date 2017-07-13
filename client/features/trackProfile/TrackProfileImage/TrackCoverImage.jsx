@@ -7,7 +7,7 @@ import { getLargeVersion } from 'common/utils/imageUtils';
 import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
 import { FormattedNumber } from 'react-intl';
 import { updateActiveTrackIdAndPlay, playSong, pauseSong } from 'features/player/playerActions';
-import Image from 'common/components/images/Image';
+import TrackImage from 'common/components/images/TrackImage';
 
 const Wrapper = styled.div`
   width: 350px;
@@ -73,10 +73,12 @@ function TrackCoverImage({
 }) {
   return (
     <Wrapper>
+      {/* Track Image */}
+      <TrackImage src={src} onClick={handleImageClick} />
+      {/* Track Image Overlay */}
       <PlaybackButton active={active} onClick={handleImageClick}>
         <i className={`fa ${playing ? 'fa-pause' : 'fa-play'}`} />
       </PlaybackButton>
-      <Image src={src} onClick={handleImageClick} />
       <CoverImageDetailsWrapper onClick={handleImageClick}>
         <span>
           <i className="fa fa-play" /> <FormattedNumber value={playbackCount || 0} />
@@ -90,7 +92,7 @@ function TrackCoverImage({
 }
 
 TrackCoverImage.defaultProps = {
-  src: '',
+  src: null,
   playing: false,
   active: false,
   liked: false,

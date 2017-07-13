@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RouterLink from 'common/components/links/RouterLink';
-import Avatar from 'common/components/images/Avatar';
+import UserImage from 'common/components/images/UserImage';
+import TrackImage from 'common/components/images/TrackImage';
 import styled from 'styled-components';
 import { SEPARATOR_COLOR_DARK, FONT_COLOR_SECONDARY } from 'app/css/colors';
 
@@ -36,6 +37,12 @@ const TitleWrapper = styled.div`
   flex: 1;
 `;
 
+function renderAvatarByType(type, avatarUrl) {
+  return type === 'user'
+    ? <UserImage src={avatarUrl} size="small" />
+    : <TrackImage src={avatarUrl} size="small" />;
+}
+
 // Clicking the link will also trigger onBlur of the search input which will cause the result to
 // disappear before handling onClick event of the link,
 // So we have to put the routing logic to onMouseDown which trigger before onblur.
@@ -44,10 +51,14 @@ function DropdownSearchResultsRow({ type, avatarUrl, linkUrl, title, subtitle })
     <div>
       <RouterLink to={linkUrl}>
         <ContentWrapper>
-          <Avatar src={avatarUrl} size="small" type={type} />
+          {renderAvatarByType(type, avatarUrl)}
           <TitleWrapper>
-            <Title>{title}</Title>
-            <Subtitle>{subtitle}</Subtitle>
+            <Title>
+              {title}
+            </Title>
+            <Subtitle>
+              {subtitle}
+            </Subtitle>
           </TitleWrapper>
         </ContentWrapper>
       </RouterLink>

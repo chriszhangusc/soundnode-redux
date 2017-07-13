@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getUserById } from 'features/entities/entitiesSelectors';
 import { getLargeVersion } from 'common/utils/imageUtils';
 import styled from 'styled-components';
-import Avatar from 'common/components/images/Avatar';
+import { getProfiledUser } from 'features/userProfile/userProfileSelectors';
+import UserAvatar from './UserAvatar';
 import UserName from './UserName';
 import UserFollowers from './UserFollowers';
 import UserDescription from './UserDescription';
@@ -22,28 +22,15 @@ const UserDetailsColumnWrapper = styled.div`
   margin-left: 20px;
 `;
 
-const UserAvatarWrapper = styled.div`
-  margin-right: 50px;
-`;
-
-const UserProfileDetails = ({ avatarUrl, username, followerCount, description, permalinkUrl }) => (
+const UserProfileDetails = ({ avatarUrl, username, followerCount, description, permalinkUrl }) =>
   <UserDetailsRowWrapper>
-    <UserAvatarWrapper>
-      <Avatar
-        src={avatarUrl}
-        size="large"
-        linkTo={permalinkUrl}
-        external
-        title="Go to SoundCloud"
-      />
-    </UserAvatarWrapper>
+    <UserAvatar avatarUrl={avatarUrl} permalinkUrl={permalinkUrl} />
     <UserDetailsColumnWrapper>
       <UserName username={username} />
       <UserFollowers followerCount={followerCount} />
       <UserDescription text={description} />
     </UserDetailsColumnWrapper>
-  </UserDetailsRowWrapper>
-);
+  </UserDetailsRowWrapper>;
 
 UserProfileDetails.defaultProps = {
   avatarUrlBlurry: '',
@@ -62,13 +49,12 @@ UserProfileDetails.propTypes = {
   permalinkUrl: PropTypes.string,
 };
 
-export const mapStateToProps = (state, { userId }) => {
-  const user = getUserById(state, userId);
-  const avatarUrl = user.avatarUrl;
+export const mapStateToProps = (state) => {
+  const user = getProfiledUser(state);
 
   return {
     permalinkUrl: user.permalinkUrl,
-    avatarUrl: getLargeVersion(avatarUrl),
+    avatarUrl: getLargeVersion(user.avatarUrl),
     username: user.username,
     followerCount: user.followersCount.toLocaleString(),
     description: user.description,

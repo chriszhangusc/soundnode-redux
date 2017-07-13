@@ -1,4 +1,5 @@
 // @flow
+
 export function computeSeekPercentage(
   clientX: number,
   offsetLeft: number,

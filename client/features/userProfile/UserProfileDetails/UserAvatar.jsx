@@ -1,22 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from 'common/components/images/Avatar';
+import UserImage from 'common/components/images/UserImage';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  margin-right: 50px;
-`;
+const Wrapper = styled.div`margin-right: 50px;`;
 
-function UserAvatar() {
+function UserAvatar({ avatarUrl, permalinkUrl }) {
   return (
     <Wrapper>
-      <Avatar
-        src={avatarUrl}
-        size="large"
-        linkTo={permalinkUrl}
-        target="_blank"
-        title="Go to SoundCloud"
-      />
+      <UserImage src={avatarUrl} linkTo={permalinkUrl} title="Go to SoundCloud" size="large" />
     </Wrapper>
   );
 }
@@ -24,17 +16,8 @@ function UserAvatar() {
 UserAvatar.defaultProps = {};
 
 UserAvatar.propTypes = {
-  src: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.string,
+  permalinkUrl: PropTypes.string,
 };
 
 export default UserAvatar;
-
-{
-  /* <Avatar
-        src={avatarUrl}
-        size="large"
-        linkTo={permalinkUrl}
-        external
-        title="Go to SoundCloud"
-      />*/
-}

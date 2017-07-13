@@ -4,9 +4,9 @@ import * as types from './userProfileActionTypes';
 const initialState = {
   userFetching: false,
   tracksFetching: false,
-  userId: undefined,
-  // trackIds: [],
-  tracksNextHref: undefined,
+  userId: null,
+  trackIds: [],
+  tracksNextHref: null,
 };
 
 export function startFetchingProfiledUser(state) {
