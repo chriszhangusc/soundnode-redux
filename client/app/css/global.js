@@ -2,8 +2,7 @@ import { injectGlobal } from 'styled-components';
 import { FONT_COLOR_PRIMARY, BACKGROUND_COLOR } from 'app/css/colors';
 
 // Global CSS
-injectGlobal`
-
+injectGlobal([`
   * {
     padding: 0;
     margin: 0;
@@ -36,4 +35,4 @@ injectGlobal`
   .container-fluid {
     padding: 0;
   }
-`;
+`]);
