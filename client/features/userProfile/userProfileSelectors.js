@@ -25,7 +25,7 @@ export const isUserTracksFetching = createSelector(getState, state => state.trac
 export const isPageLoading = createSelector(
   isUserFetching,
   isUserTracksFetching,
-  (userFetching, tracksFetching) => userFetching || tracksFetching,
+  (userFetching, tracksFetching) => userFetching && tracksFetching,
 );
 
 export const getUserTracksNextHref = createSelector(getState, state => state.tracksNextHref);

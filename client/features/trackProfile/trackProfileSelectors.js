@@ -20,5 +20,5 @@ export const isCommentsFetching = createSelector(getState, state => state.commen
 export const isPageLoading = createSelector(
   isTrackFetching,
   isCommentsFetching,
-  (trackFetching, commentsFetching) => trackFetching || commentsFetching,
+  (trackFetching, commentsFetching) => trackFetching && commentsFetching,
 );
