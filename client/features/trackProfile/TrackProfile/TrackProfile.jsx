@@ -2,24 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as trackProfileActions from 'features/trackProfile/trackProfileActions';
-import { isTrackFetching } from 'features/trackProfile/trackProfileSelectors';
+import { isPageLoading } from 'features/trackProfile/trackProfileSelectors';
 import Spinner from 'common/components/Spinner';
 import { Grid } from 'react-bootstrap';
 
 import TrackProfileComments from '../TrackProfileComments';
 import TrackProfileHeader from '../TrackProfileHeader';
 
-class TrackProfileContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.renderTrackProfile = this.renderTrackProfile.bind(this);
-  }
-
+class TrackProfile extends Component {
   // Initial Loading
   componentDidMount() {
     const { match } = this.props;
     const trackId = match.params.trackId;
-    this.props.loadTrackProfilePage(trackId);
+    this.props.loadTrackProfileData(trackId);
   }
 
   // Change from different single track routes.
@@ -33,7 +28,7 @@ class TrackProfileContainer extends Component {
     if (curTrackId !== newTrackId && curTrackId) {
       // Before jumping to new track profile page, clear old state.
       this.props.resetTrackProfileState();
-      this.props.loadTrackProfilePage(newTrackId);
+      this.props.loadTrackProfileData(newTrackId);
     }
   }
 
@@ -41,12 +36,10 @@ class TrackProfileContainer extends Component {
     this.props.resetTrackProfileState();
   }
 
-  // Render main part of track profile page
-  renderTrackProfile() {}
-
   render() {
     const { fetching } = this.props;
     if (fetching) {
+      // If comments or profiled track is fetching, show spinner
       return <Spinner />;
     }
     return (
@@ -60,17 +53,17 @@ class TrackProfileContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    fetching: isTrackFetching(state),
+    fetching: isPageLoading(state),
   };
 }
 
-TrackProfileContainer.propTypes = {
+TrackProfile.propTypes = {
   resetTrackProfileState: PropTypes.func.isRequired,
-  loadTrackProfilePage: PropTypes.func.isRequired,
+  loadTrackProfileData: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.object,
   }).isRequired,
   fetching: PropTypes.bool.isRequired,
 };
 
-export default connect(mapStateToProps, trackProfileActions)(TrackProfileContainer);
+export default connect(mapStateToProps, trackProfileActions)(TrackProfile);

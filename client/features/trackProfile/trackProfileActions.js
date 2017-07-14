@@ -80,7 +80,7 @@ export function receiveTracks(normalizedTrack) {
   };
 }
 
-export function loadTrackProfilePage(trackId) {
+export function loadTrackProfileData(trackId) {
   return (dispatch) => {
     dispatch(startFetchingProfiledTrack());
     dispatch(startFetchingComments());

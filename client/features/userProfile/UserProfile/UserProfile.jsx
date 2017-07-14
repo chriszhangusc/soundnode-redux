@@ -44,7 +44,6 @@ class UserProfile extends Component {
     return (
       <Grid fluid>
         <UserProfileHeader />
-        <h3>Tracks:</h3>
         <UserProfileTracks />
       </Grid>
     );

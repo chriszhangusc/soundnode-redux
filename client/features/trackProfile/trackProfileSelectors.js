@@ -16,3 +16,9 @@ export const isTrackFetching = createSelector(getState, state => state.trackFetc
 export const getCommentIds = createSelector(getState, state => state.commentIds);
 export const getCommentsNextHref = createSelector(getState, state => state.commentsNextHref);
 export const isCommentsFetching = createSelector(getState, state => state.commentsFetching);
+
+export const isPageLoading = createSelector(
+  isTrackFetching,
+  isCommentsFetching,
+  (trackFetching, commentsFetching) => trackFetching || commentsFetching,
+);

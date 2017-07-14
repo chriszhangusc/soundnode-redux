@@ -5,7 +5,7 @@ import Image from 'common/components/images/Image';
 
 function TrackImage(props) {
   const { size, ...rest } = props;
-  return <Image fallbackSrc={defaultTrackSrc} rounded={false} {...rest} />;
+  return <Image fallbackSrc={defaultTrackSrc} size={size} rounded={false} {...rest} />;
 }
 
 TrackImage.defaultProps = {

@@ -6,17 +6,21 @@ import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
 
 // Container for SongCardList
 // Simply providing slices of state for the component to render.
-const mapStateToProps = state => ({
-  fetching: isUserTracksFetching(state),
-  trackIds: getVisiblePlaylist(state),
-});
+function mapStateToProps(state) {
+  return {
+    fetching: isUserTracksFetching(state),
+    trackIds: getVisiblePlaylist(state),
+    title: 'Tracks',
+  };
+}
 
-const mapDispatchToProps = dispatch => ({
-  // Load more tracks
-  scrollFunc() {
-    console.log('Fetch more user tracks');
-    dispatch(loadMoreUserTracks());
-  },
-});
+function mapDispatchToProps(dispatch) {
+  return {
+    scrollFunc() {
+      console.log('Fetch more user tracks');
+      dispatch(loadMoreUserTracks());
+    },
+  };
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongCardList);
