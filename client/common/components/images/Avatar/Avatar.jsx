@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import defaultAvatar from 'assets/images/default-avatar.png';
+import defaultAvatar from 'assets/images/default-artist.png';
 import defaultTrackAvatar from 'assets/images/default-track.png';
 import Image from 'common/components/images/Image';
 

@@ -10,7 +10,6 @@ import TrackProfileComments from '../TrackProfileComments';
 import TrackProfileHeader from '../TrackProfileHeader';
 
 class TrackProfile extends Component {
-  // Initial Loading
   componentDidMount() {
     const { match } = this.props;
     const trackId = match.params.trackId;

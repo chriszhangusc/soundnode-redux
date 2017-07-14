@@ -1,7 +1,3 @@
-// export const defaultArtistImageUrl = '/images/default-artist.png';
-export const DEFAULT_USER_AVATAR = 'https://i1.sndcdn.com/avatars-000249624208-d5jr2v-t500x500.jpg';
-export const defaultTrackPlaceholder = '/images/song-placeholder.png';
-
 export const t500x500 = 't500x500';
 export const crop = 'crop';
 export const t300x300 = 't300×300';

@@ -10,8 +10,6 @@ import { updateActiveTrackIdAndPlay, playSong, pauseSong } from 'features/player
 import TrackImage from 'common/components/images/TrackImage';
 
 const Wrapper = styled.div`
-  width: 350px;
-  height: 350px;
   position: relative;
   display: flex;
 `;
@@ -74,7 +72,7 @@ function TrackProfileImage({
   return (
     <Wrapper>
       {/* Track Image */}
-      <TrackImage src={src} onClick={handleImageClick} />
+      <TrackImage src={src} size="large" onClick={handleImageClick} />
       {/* Track Image Overlay */}
       <PlaybackButton active={active} onClick={handleImageClick}>
         <i className={`fa ${playing ? 'fa-pause' : 'fa-play'}`} />

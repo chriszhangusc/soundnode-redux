@@ -23,7 +23,7 @@ export function stopFetchingProfiledUser() {
   return { type: types.USER_PROFILE_USER_FETCH_STOP };
 }
 
-export function updateProfiledUser(userId) {
+export function updateProfiledUserId(userId) {
   return {
     type: types.USER_PROFILE_USER_UPDATE,
     payload: {
@@ -59,10 +59,17 @@ export function failedToFetchUserTracks() {
   };
 }
 
+// export function startPageLoading() {
+//   return (dispatch) => {
+//     dispatch(startFetchingProfiledUser());
+//     dispatch(startFetchingUserTracks());
+//   };
+// }
+
 export function receiveUser(normalizedUser) {
   return (dispatch) => {
     dispatch(mergeEntities(normalizedUser.entities));
-    dispatch(updateProfiledUser(normalizedUser.result));
+    dispatch(updateProfiledUserId(normalizedUser.result));
     dispatch(stopFetchingProfiledUser());
   };
 }
@@ -79,19 +86,15 @@ export function receiveTracks(normalizedTracks) {
 // Should load user first and then the tracks
 export function loadUserProfileData(userId) {
   return async (dispatch) => {
-    dispatch(updateProfiledUser(userId));
+    dispatch(updateProfiledUserId(userId));
     dispatch(updateVisiblePlaylistName(`user-${userId}`));
     try {
       dispatch(startFetchingProfiledUser());
       dispatch(startFetchingUserTracks());
-      // No need to group them together
-      const [normalizedUser, normalizedTracks] = await Promise.all([
-        fetchProfiledUser(userId),
-        fetchProfiledUserTracks(userId),
-      ]);
-
-      dispatch(receiveUser(normalizedUser));
-      dispatch(receiveTracks(normalizedTracks));
+      fetchProfiledUser(userId).then(normalizedUser => dispatch(receiveUser(normalizedUser)));
+      fetchProfiledUserTracks(userId).then(normalizedTracks =>
+        dispatch(receiveTracks(normalizedTracks)),
+      );
     } catch (err) {
       console.log(err);
     }

@@ -13,11 +13,11 @@ const UserDetailsColumnWrapper = styled.div`
   margin-left: 20px;
 `;
 
-function UserProfileDetails({ username, followerCount, description }) {
+function UserProfileDetails({ username, followersCount, description }) {
   return (
     <UserDetailsColumnWrapper>
       <UserName username={username} />
-      <UserFollowers followerCount={followerCount} />
+      <UserFollowers followersCount={followersCount} />
       <UserDescription text={description} />
     </UserDetailsColumnWrapper>
   );
@@ -25,13 +25,13 @@ function UserProfileDetails({ username, followerCount, description }) {
 
 UserProfileDetails.defaultProps = {
   username: '',
-  followerCount: 0, // Formatted number
+  followersCount: '',
   description: '',
 };
 
 UserProfileDetails.propTypes = {
   username: PropTypes.string,
-  followerCount: PropTypes.string, // Formatted number
+  followersCount: PropTypes.string, // Formatted number
   description: PropTypes.string,
 };
 

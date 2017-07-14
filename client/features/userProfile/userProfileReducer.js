@@ -4,6 +4,7 @@ import * as types from './userProfileActionTypes';
 const initialState = {
   userFetching: false,
   tracksFetching: false,
+  // pageFetching: false,
   userId: null,
   trackIds: [],
   tracksNextHref: null,
@@ -23,7 +24,7 @@ export function stopFetchingProfiledUser(state) {
   };
 }
 
-export function updateProfiledUser(state, { userId }) {
+export function updateProfiledUserId(state, { userId }) {
   return {
     ...state,
     userId,
@@ -69,7 +70,7 @@ export default function userReducer(state = initialState, action) {
       return stopFetchingProfiledUser(state);
 
     case types.USER_PROFILE_USER_UPDATE:
-      return updateProfiledUser(state, action.payload);
+      return updateProfiledUserId(state, action.payload);
 
     case types.USER_PROFILE_TRACKS_FETCH_START:
       return startFetchingUserTracks(state);

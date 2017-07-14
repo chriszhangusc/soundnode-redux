@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import defaultUserSrc from 'assets/images/default-avatar.png';
+import defaultUserSrc from 'assets/images/default-artist.png';
 import Image from 'common/components/images/Image';
 
 function UserImage(props) {

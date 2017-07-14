@@ -8,12 +8,20 @@ const UserFollowersContainer = styled.div`
   color: ${FONT_COLOR_PRIMARY};
 `;
 
-function UserFollowers({ followerCount }) {
-  return <UserFollowersContainer>Followers: {followerCount}</UserFollowersContainer>;
+function UserFollowers({ followersCount }) {
+  return (
+    <UserFollowersContainer>
+      Followers: {followersCount}
+    </UserFollowersContainer>
+  );
 }
 
+UserFollowers.defaultProps = {
+  followersCount: '',
+};
+
 UserFollowers.propTypes = {
-  followerCount: PropTypes.string.isRequired,
+  followersCount: PropTypes.string,
 };
 
 export default UserFollowers;

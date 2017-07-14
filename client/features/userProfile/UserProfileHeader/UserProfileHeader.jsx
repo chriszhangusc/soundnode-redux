@@ -6,12 +6,12 @@ import SplitPane from 'common/components/SplitPane';
 import UserProfileDetails from './UserProfileDetails';
 import UserProfileImage from './UserProfileImage';
 
-function UserProfileHeader({ avatarUrl, permalinkUrl, username, followerCount, description }) {
+function UserProfileHeader({ avatarUrl, permalinkUrl, username, followersCount, description }) {
   const userProfileImage = <UserProfileImage avatarUrl={avatarUrl} permalinkUrl={permalinkUrl} />;
   const userProfileDetails = (
     <UserProfileDetails
       username={username}
-      followerCount={followerCount}
+      followersCount={followersCount}
       description={description}
     />
   );
@@ -24,7 +24,7 @@ function mapStateToProps(state) {
     permalinkUrl: user && user.permalinkUrl,
     avatarUrl: user && getLargeVersion(user.avatarUrl),
     username: user && user.username,
-    followerCount: user && user.followersCount.toLocaleString(),
+    followersCount: user && user.followersCount.toLocaleString(),
     description: user && user.description,
   };
 }
