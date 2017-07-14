@@ -6,7 +6,6 @@ import { isPageLoading } from 'features/userProfile/userProfileSelectors';
 import UserProfileTracks from 'features/userProfile/UserProfileTracks';
 import UserProfileHeader from 'features/userProfile/UserProfileHeader';
 import Spinner from 'common/components/Spinner';
-
 import { Grid } from 'react-bootstrap';
 
 class UserProfile extends Component {

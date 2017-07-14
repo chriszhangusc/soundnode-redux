@@ -20,13 +20,13 @@ const StyledNavbar = styled.nav`
   justify-content: space-between;
 `;
 
-const NavbarSectionLeft = styled.div`
+const NavbarSectionLeft = styled.section`
   display: flex;
   align-items: center;
   flex: 1;
 `;
 
-const NavbarSectionRight = styled.div`
+const NavbarSectionRight = styled.section`
   display: flex;
   align-items: center;
   justify-content: flex-end;

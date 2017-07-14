@@ -1,5 +1,4 @@
 import NavLink from 'common/components/links/NavLink';
-import { fontColor, gray } from 'app/css/colors';
 
 const SidebarNavLink = NavLink.extend.attrs({
   // Passing activeClassName as default
@@ -8,11 +7,11 @@ const SidebarNavLink = NavLink.extend.attrs({
   font-size: 1.1rem;
   display: block;
   text-align: center;
-  color: ${fontColor};
+  color: ${props => props.theme.fontColor};
   transition: color 0.25s ease-out;
 
   &:hover, &:active {
-    color: ${gray};
+    color: ${props => props.theme.fontColorSub};
   }
 
   &.${props => props.activeClassName} {
