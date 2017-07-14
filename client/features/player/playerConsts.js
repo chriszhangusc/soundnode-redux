@@ -2,6 +2,6 @@ export const LOOP = 'LOOP'; // Loop through the playlist, when it hits the end, 
 export const REPEAT = 'REPEAT'; // Repeat current song.
 export const SHUFFLE = 'SHUFFLE'; // Shuffle playing, will not play songs that are played already.
 export const DEFAULT_MODE = LOOP;
-export const INITIAL_VOLUME = 0.5;
+// export const INITIAL_VOLUME = 1.0;
 export const NEXT = 'NEXT';
 export const PREV = 'PREV';

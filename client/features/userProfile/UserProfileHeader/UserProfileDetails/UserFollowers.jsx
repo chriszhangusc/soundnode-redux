@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FONT_COLOR_PRIMARY } from 'app/css/colors';
 
 const UserFollowersContainer = styled.div`
   margin-top: 10px;
-  color: ${FONT_COLOR_PRIMARY};
+  color: ${props => props.theme.fontColorSub};
 `;
 
 function UserFollowers({ followersCount }) {

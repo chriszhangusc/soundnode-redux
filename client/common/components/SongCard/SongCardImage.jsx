@@ -7,7 +7,6 @@ import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
 import { updateActiveTrackIdAndPlay, playSong, pauseSong } from 'features/player/playerActions';
 import { switchActivePlaylistIfNeeded } from 'features/playlist/playlistActions';
 import { getLargeVersion } from 'common/utils/imageUtils';
-import { getUserById } from 'features/entities/entitiesSelectors';
 import Card from 'common/components/Card';
 
 function SongCardImage({ active, playing, artworkUrl, handleImageClick }) {
@@ -32,9 +31,9 @@ SongCardImage.propTypes = {
 };
 
 function mapStateToProps(state, { track }) {
-  const user = getUserById(state, track.userId);
+  // const user = getUserById(state, track.userId);
   return {
-    artworkUrl: getLargeVersion(track.artworkUrl || user.avatarUrl),
+    artworkUrl: getLargeVersion(track.artworkUrl),
     active: isTrackActive(state, track.id),
     playing: isTrackPlaying(state, track.id),
   };

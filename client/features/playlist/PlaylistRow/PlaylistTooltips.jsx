@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { SEPARATOR_COLOR_CLEAN, SEPARATOR_COLOR_DARK } from 'app/css/colors';
 import { connect } from 'react-redux';
 import RouterLink from 'common/components/links/RouterLink';
 import { TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
@@ -14,7 +13,7 @@ const Wrapper = styled.span`
   &:hover {
     /* Better ideas? */
     & > div {
-      transform: scale(1,1);
+      transform: scale(1, 1);
     }
   }
 `;
@@ -30,40 +29,35 @@ const TooltipsArrowLeft = styled.div`
   display: block;
   position: absolute;
   top: -38px;
-  ${media.desktopLG`right: 10px;`}
-
-  width: 0;
+  ${media.desktopLG`right: 10px;`} width: 0;
   height: 0;
   border-top: 12px solid transparent;
   border-bottom: 10px solid transparent;
-  border-left: 12px solid ${SEPARATOR_COLOR_CLEAN};
+  border-left: 12px solid ${props => props.theme.separatorColorClean};
 `;
 
 const OptionsList = styled.ul`
-    position: absolute;
+  position: absolute;
 
-    ${media.desktopLG`right: 22px;`}
-    ${media.desktop4K`right: 45px;`}
+  ${media.desktopLG`right: 22px;`} ${media.desktop4K`right: 45px;`} top: -128px;
+  display: block;
+  background: ${props => props.theme.separatorColorClean};
+  border-radius: 2px;
 
-    top: -128px;
-    display: block;
-    background: ${SEPARATOR_COLOR_CLEAN};
-    border-radius: 2px;
-
-    & li:last-child {
-      border-bottom: none;
-    }
+  & li:last-child {
+    border-bottom: none;
+  }
 `;
 
 const OptionsListItem = styled.li`
-    line-height: 20px;
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid ${SEPARATOR_COLOR_DARK};
-    &:hover {
-      cursor: pointer;
-      background: ${SEPARATOR_COLOR_DARK};
-    }
+  line-height: 20px;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid ${props => props.theme.separatorColorDark};
+  &:hover {
+    cursor: pointer;
+    background: ${props => props.theme.separatorColorDark};
+  }
 `;
 
 function PlaylistTooltips({ index, trackId }) {

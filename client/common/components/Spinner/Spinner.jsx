@@ -1,5 +1,4 @@
 import React from 'react';
-import { THEME_COLOR } from 'app/css/colors';
 import styled, { keyframes } from 'styled-components';
 
 const strechDelay = keyframes`
@@ -13,12 +12,6 @@ const strechDelay = keyframes`
   }
 `;
 
-// const MainWrapper = styled.div`
-//   padding: 20px 0;
-//   margin: 0px auto;
-//   width: 100%;
-// `;
-
 const SpinnerWrapper = styled.div`
   height: 30px;
   text-align: center;
@@ -26,7 +19,7 @@ const SpinnerWrapper = styled.div`
 `;
 
 const Rect = styled.div`
-  background-color: ${props => props.color || THEME_COLOR};
+  background-color: ${props => props.color || props.theme.themeColor};
   height: 100%;
   width: 7px;
   margin: 0 3px 0 0;

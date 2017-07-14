@@ -1,5 +1,5 @@
 import React from 'react';
-import { FONT_COLOR_SECONDARY } from 'app/css/colors';
+import { fontColorSub } from 'app/css/colors';
 import styled from 'styled-components';
 import Icon from 'common/components/icons/Icon';
 
@@ -12,7 +12,7 @@ const SearchIconWrapper = styled.span`
 function SearchIcon() {
   return (
     <SearchIconWrapper>
-      <Icon name="search" color={FONT_COLOR_SECONDARY} />
+      <Icon name="search" color={fontColorSub} />
     </SearchIconWrapper>
   );
 }

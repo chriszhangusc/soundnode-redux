@@ -20,7 +20,7 @@ export const isVolumeSeeking = createSelector(getPlayerState, state => state.vol
 export const getCurrentVolume = createSelector(getPlayerState, state => state.volume);
 
 export const isInShuffleMode = createSelector(getPlayerMode, mode => mode === SHUFFLE);
-
+// Change to getActiveTrack
 export const getCurrentPlayerTrack = createSelector(
   getActiveTrackId,
   getTracks,

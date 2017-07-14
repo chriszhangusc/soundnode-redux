@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'common/components/icons/Icon';
 import styled from 'styled-components';
-import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY, THEME_COLOR } from 'app/css/colors';
+import { fontColor, fontColorSub, themeColor } from 'app/css/colors';
 
 const Wrapper = styled.span`
   padding: 4px;
@@ -18,9 +18,9 @@ function CardButton({ title, name, active, onClick, tooltipText }) {
         name={name}
         active={active}
         title={title}
-        color={FONT_COLOR_SECONDARY}
-        hoverColor={FONT_COLOR_PRIMARY}
-        activeColor={THEME_COLOR}
+        color={fontColorSub}
+        hoverColor={fontColor}
+        activeColor={themeColor}
         onClick={onClick}
         tooltipText={tooltipText}
         tooltipPlacement="bottom"

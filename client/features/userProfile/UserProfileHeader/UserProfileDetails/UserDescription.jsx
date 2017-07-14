@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 
 const UserDescriptionWithStyle = styled.div`
   margin: 10px 0;
@@ -9,12 +8,16 @@ const UserDescriptionWithStyle = styled.div`
   overflow: scroll;
   height: 240px;
   width: 500px;
-  color: ${FONT_COLOR_SECONDARY};
+  color: ${props => props.theme.fontColorSub};
   white-space: pre-wrap;
 `;
 
 function UserDescription({ text }) {
-  return <UserDescriptionWithStyle>{text}</UserDescriptionWithStyle>;
+  return (
+    <UserDescriptionWithStyle>
+      {text}
+    </UserDescriptionWithStyle>
+  );
 }
 
 UserDescription.defaultProps = {

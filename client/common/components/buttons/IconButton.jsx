@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY } from 'app/css/colors';
 import shortid from 'shortid';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 const WrapperButton = styled.button`
-  color: ${props => props.activeColor || props.color || FONT_COLOR_PRIMARY};
+  color: ${props => props.activeColor || props.color || props.theme.fontColor};
   padding: 4px;
   border: none;
   outline: none;
@@ -15,7 +14,7 @@ const WrapperButton = styled.button`
   margin: 0 auto;
   text-align: center;
   &:hover {
-    color: ${props => props.hoverColor || FONT_COLOR_SECONDARY};
+    color: ${props => props.hoverColor || props.theme.fontColorSub};
   }
 `;
 
@@ -27,7 +26,11 @@ function IconButton({
   iconClassName,
   ...rest
 }) {
-  const tooltip = <Tooltip id={`tooltip-${shortid.generate()}`}>{tooltipText}</Tooltip>;
+  const tooltip = (
+    <Tooltip id={`tooltip-${shortid.generate()}`}>
+      {tooltipText}
+    </Tooltip>
+  );
   return (
     <OverlayTrigger
       placement={tooltipPlacement}

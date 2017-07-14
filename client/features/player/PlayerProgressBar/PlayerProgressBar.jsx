@@ -10,8 +10,8 @@ import PlayerSlider from 'features/player/PlayerSlider';
 const PlayerProgressBarWrapper = styled.div`
   display: block;
   position: absolute;
-  width: 100%;
-  top: -14px;
+  width: calc(100% - 90px);
+  top: -15px;
   left: 90px;
 `;
 

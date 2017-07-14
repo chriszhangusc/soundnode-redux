@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FONT_COLOR_PRIMARY, FONT_COLOR_SECONDARY } from 'app/css/colors';
 import { connect } from 'react-redux';
 import { copyToClipboard } from 'features/copy';
 import { getProfiledTrack } from 'features/trackProfile/trackProfileSelectors';
@@ -18,7 +17,7 @@ const LinkButtonWithIcon = styled.a`
   border: 1px solid;
   border-radius: .25em;
   padding: 3px 6px;
-  color: ${FONT_COLOR_SECONDARY};
+  color: ${props => props.theme.fontColorSub};
   font-size: 0.75rem;
   margin-right: 10px;
   transition: all 200ms ease-in-out;
@@ -28,7 +27,7 @@ const LinkButtonWithIcon = styled.a`
 
   &:hover {
     cursor: pointer;
-    color: ${FONT_COLOR_PRIMARY};
+    color: ${props => props.theme.fontColor};
   }
 `;
 
@@ -52,7 +51,7 @@ function TrackButtonGroup({ permalink, downloadable, downloadUrl, handleCopyPerm
         <i className="fa fa-external-link" />PERMALINK
       </LinkButtonWithIcon>
 
-      <LinkButtonWithIcon onClick={() => handleCopyPermalink(permalink)} title="Copy Permalink" >
+      <LinkButtonWithIcon onClick={() => handleCopyPermalink(permalink)} title="Copy Permalink">
         <i className="fa fa-clipboard" />COPY TRACK LINK
       </LinkButtonWithIcon>
     </Wrapper>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FONT_COLOR_SECONDARY } from 'app/css/colors';
+import { fontColorSub } from 'app/css/colors';
 import { getCurrentTime } from 'features/player/playerSelectors';
 import { formatDuration } from 'common/utils/formatUtils';
 import { connect } from 'react-redux';
@@ -21,19 +21,21 @@ const Wrapper = styled.div`
 
 const Span = styled.span`
   font-size: 0.9rem;
-  color: ${FONT_COLOR_SECONDARY};
+  color: ${fontColorSub};
 `;
 
-const SeparatorSpan = Span.extend`
-  margin: 0 5px;
-`;
+const SeparatorSpan = Span.extend`margin: 0 5px;`;
 
 function PlayerTimeSection({ currentTime, totalTime }) {
   return (
     <Wrapper>
-      <Span>{currentTime}</Span>
+      <Span>
+        {currentTime}
+      </Span>
       <SeparatorSpan>/</SeparatorSpan>
-      <Span>{totalTime}</Span>
+      <Span>
+        {totalTime}
+      </Span>
     </Wrapper>
   );
 }

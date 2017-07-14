@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { THEME_COLOR } from 'app/css/colors';
 import { computePercentage } from 'features/player/playerUtils';
 
 const SliderWrapper = styled.div`
@@ -16,19 +15,18 @@ const SeekBar = styled.div`
   height: ${props => props.height || '3px'};
   ${props => props.backgroundColor && `background-color: ${props.backgroundColor}`};
   cursor: pointer;
-  
 `;
 
 const SeekKnob = styled.div`
   position: absolute;
   top: -16px;
-  right: -21px;
+  right: -16px;
   margin: 10px;
   width: 14px;
   height: 14px;
-  background-color: ${THEME_COLOR};
+  background-color: ${props => props.theme.themeColor};
   border-radius: 50%;
-  border: 2px solid ${THEME_COLOR};
+  border: 2px solid ${props => props.theme.themeColor};
   cursor: pointer;
 `;
 
@@ -37,7 +35,7 @@ const ProgressBar = styled.div`
   top: 0;
   left: 0;
   height: 100%;
-  background-color: ${THEME_COLOR};
+  background-color: ${props => props.theme.themeColor};
   cursor: pointer;
 `;
 

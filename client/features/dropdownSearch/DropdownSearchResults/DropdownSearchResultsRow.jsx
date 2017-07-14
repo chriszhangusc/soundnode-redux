@@ -4,16 +4,16 @@ import RouterLink from 'common/components/links/RouterLink';
 import UserImage from 'common/components/images/UserImage';
 import TrackImage from 'common/components/images/TrackImage';
 import styled from 'styled-components';
-import { SEPARATOR_COLOR_DARK, FONT_COLOR_SECONDARY } from 'app/css/colors';
+import { saparatorColorDark, fontColorSub } from 'app/css/colors';
 
 const ContentWrapper = styled.div`
   padding: 8px 10px;
   cursor: pointer;
   display: flex;
   align-items: middle;
-  border-bottom: 1px solid ${SEPARATOR_COLOR_DARK};
+  border-bottom: 1px solid ${saparatorColorDark};
   &:hover {
-    background: ${SEPARATOR_COLOR_DARK};
+    background: ${saparatorColorDark};
   }
 `;
 
@@ -25,7 +25,7 @@ const Title = styled.div`
 `;
 
 const Subtitle = styled.div`
-  color: ${FONT_COLOR_SECONDARY};
+  color: ${fontColorSub};
   font-size: 0.9rem;
 `;
 

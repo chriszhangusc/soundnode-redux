@@ -2,20 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'common/components/icons/Icon';
 import styled from 'styled-components';
-import { THEME_COLOR, WHITE } from 'app/css/colors';
+import { themeColor, white } from 'app/css/colors';
 
-const Wrapper = styled.div`
-  cursor: pointer;
-`;
+const Wrapper = styled.div`cursor: pointer;`;
 
 function PlayerButton({ active, ...rest }) {
   return (
     <Wrapper>
       <Icon
         iconSize="1.5rem"
-        hoverColor={THEME_COLOR}
-        color={WHITE}
-        activeColor={active ? THEME_COLOR : ''}
+        hoverColor={themeColor}
+        color={white}
+        activeColor={active ? themeColor : ''}
         {...rest}
       />
     </Wrapper>

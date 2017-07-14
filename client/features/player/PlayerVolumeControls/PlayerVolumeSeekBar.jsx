@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FONT_COLOR_PRIMARY } from 'app/css/colors';
+import { lighterGray } from 'app/css/colors';
+
 import { computeOffset } from 'features/player/playerUtils';
 import * as playerActions from 'features/player/playerActions';
 import { getCurrentVolume, isVolumeSeeking } from 'features/player/playerSelectors';
@@ -63,7 +64,7 @@ class PlayerVolumeSeekBar extends React.Component {
           maxValue={1.0}
           currentValue={volume}
           seekBarHeight="2px"
-          seekBarColor={FONT_COLOR_PRIMARY}
+          seekBarColor={lighterGray}
           onProgressBarMouseUp={this.handleVolumeMouseUp}
           onProgressBarMouseDown={this.handleVolumeMouseDown}
           onSeekKnobMouseDown={this.handleVolumeMouseDown}

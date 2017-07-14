@@ -5,9 +5,6 @@ import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import { connect } from 'react-redux';
 import { getCommentById, getUserByCommentId } from 'features/entities/entitiesSelectors';
 import { getSmallVersion } from 'common/utils/imageUtils';
-
-import { FONT_COLOR_SECONDARY } from 'app/css/colors';
-
 import CommentUserAvatar from './CommentUserAvatar';
 import CommentUsername from './CommentUsername';
 
@@ -36,7 +33,7 @@ const CommentHeader = styled.div`
 `;
 
 const CommentTimestamp = styled.span`
-  color: ${FONT_COLOR_SECONDARY};
+  color: ${props => props.theme.fontColorSub};
   font-size: 0.8rem;
 `;
 
@@ -48,10 +45,16 @@ function TrackProfileComment({ commentBody, userId, username, commentTimestamp, 
       <CommentUserAvatar linkTo={userLink} userAvatarUrl={userAvatarUrl} />
       <CommentWrapper>
         <CommentHeader>
-          <CommentUsername linkTo={userLink}>{username}</CommentUsername>
-          <CommentTimestamp>{commentTimestamp}</CommentTimestamp>
+          <CommentUsername linkTo={userLink}>
+            {username}
+          </CommentUsername>
+          <CommentTimestamp>
+            {commentTimestamp}
+          </CommentTimestamp>
         </CommentHeader>
-        <CommentBody>{commentBody}</CommentBody>
+        <CommentBody>
+          {commentBody}
+        </CommentBody>
       </CommentWrapper>
     </Wrapper>
   );

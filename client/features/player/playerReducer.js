@@ -1,10 +1,10 @@
 import * as actionTypes from './playerActionTypes';
-import { DEFAULT_MODE, INITIAL_VOLUME } from './playerConsts';
+import { DEFAULT_MODE } from './playerConsts';
 
 /* Player Reducer */
 const initialState = {
   currentTime: 0,
-  volume: INITIAL_VOLUME,
+  volume: 1.0,
   playing: false,
   seeking: false,
   volumeSeeking: false,
@@ -100,7 +100,7 @@ export function resetTime(state) {
 export default function playerReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.PLAYER_ACTIVE_TRACK_ID_UPDATE:
-      return updateActiveTrackId(state, action);
+      return updateActiveTrackId(state, action.payload);
 
     case actionTypes.PLAYER_SONG_PLAY:
       return playSong(state);

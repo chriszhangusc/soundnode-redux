@@ -7,18 +7,22 @@ import App from 'app/layout/App';
 import 'isomorphic-fetch';
 import 'normalize.css';
 import { BrowserRouter } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import theme from 'app/css/theme';
 
 const store = configureStore();
 
 // Use provider to provide our store down to the dom tree
 // so that it can be shared among all components.
 ReactDOM.render(
-  <IntlProvider locale="en">
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </IntlProvider>,
+  <ThemeProvider theme={theme}>
+    <IntlProvider locale="en">
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </IntlProvider>
+  </ThemeProvider>,
   document.getElementById('app'),
 );

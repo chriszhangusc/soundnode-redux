@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import IconButton from 'common/components/buttons/IconButton';
-import { FONT_COLOR_SECONDARY } from 'app/css/colors';
 import styled from 'styled-components';
 
 const PlaylistHeaderWrapper = styled.div`
   margin-bottom: 10px;
   text-align: center;
-  color: ${FONT_COLOR_SECONDARY};
+  color: ${props => props.theme.fontColorSub};
   font-size: 1.1rem;
 `;
 

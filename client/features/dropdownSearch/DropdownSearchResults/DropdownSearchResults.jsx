@@ -8,7 +8,7 @@ import {
   getDropdownSearchTrackIds,
   getDropdownSearchQuery,
 } from 'features/dropdownSearch/dropdownSearchSelectors';
-import { FONT_COLOR_SECONDARY, BACKGROUND_COLOR_SECONDARY } from 'app/css/colors';
+import { fontColorSub, bgColorSub } from 'app/css/colors';
 import { zIndexDropdownSearch } from 'app/css/zIndex';
 import styled from 'styled-components';
 import RouterLink from 'common/components/links/RouterLink';
@@ -21,23 +21,23 @@ const ShowAllLink = RouterLink.extend`
   display: block;
   line-height: 35px;
   text-align: center;
-  color: ${FONT_COLOR_SECONDARY};
+  color: ${fontColorSub};
   font-size: 0.9rem;
   padding: 5px;
 `;
 
 const Wrapper = styled.div`
-    width: 100%;
-    position: absolute;
-    top: 50px;
-    background-color: ${BACKGROUND_COLOR_SECONDARY};
-    z-index: ${zIndexDropdownSearch};
-    display: block;
-    transition: .4s ease-in-out;
-    box-shadow: ${props => !props.hidden && '0 0 10px 8px rgba(0, 0, 0, 0.2)'};
-    padding: ${props => !props.hidden && '10px 10px 5px 10px'};
-    transform: ${props => !props.hidden && 'translateY(0)'};
-    max-height: ${props => !props.hidden && '600px'};
+  width: 100%;
+  position: absolute;
+  top: 50px;
+  background-color: ${bgColorSub};
+  z-index: ${zIndexDropdownSearch};
+  display: block;
+  transition: .4s ease-in-out;
+  box-shadow: ${props => !props.hidden && '0 0 10px 8px rgba(0, 0, 0, 0.2)'};
+  padding: ${props => !props.hidden && '10px 10px 5px 10px'};
+  transform: ${props => !props.hidden && 'translateY(0)'};
+  max-height: ${props => !props.hidden && '600px'};
 `;
 
 // Render the artists/users results section.
