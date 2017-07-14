@@ -13,8 +13,9 @@ import TrackButtonGroup from './TrackButtonGroup';
 const ColumnWrapper = styled.div`
   position: relative;
   width: 800px;
+  height: 100%;
   margin-left: 20px;
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: left; /* This is important or the children of this container would strech to have the full width of their parent */
   justify-content: flex-start;
@@ -23,9 +24,15 @@ const ColumnWrapper = styled.div`
 function TrackProfileDetails({ title, userId, username, description }) {
   return (
     <ColumnWrapper>
-      <TrackTitle>{title}</TrackTitle>
-      <TrackUsername to={`${USER_PROFILE_ROUTE}/${userId}`}>{username}</TrackUsername>
-      <TrackDescription>{description}</TrackDescription>
+      <TrackTitle>
+        {title}
+      </TrackTitle>
+      <TrackUsername to={`${USER_PROFILE_ROUTE}/${userId}`}>
+        {username}
+      </TrackUsername>
+      <TrackDescription>
+        {description}
+      </TrackDescription>
       <TrackButtonGroup />
     </ColumnWrapper>
   );
