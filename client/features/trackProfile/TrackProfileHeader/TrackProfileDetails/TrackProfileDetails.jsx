@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import { getProfiledTrack } from 'features/trackProfile/trackProfileSelectors';
-import TrackTitle from './TrackTitle';
+import Title from 'common/components/Title';
 import TrackUsername from './TrackUsername';
 import TrackDescription from './TrackDescription';
 import TrackButtonGroup from './TrackButtonGroup';
@@ -24,9 +24,9 @@ const ColumnWrapper = styled.div`
 function TrackProfileDetails({ title, userId, username, description }) {
   return (
     <ColumnWrapper>
-      <TrackTitle>
+      <Title>
         {title}
-      </TrackTitle>
+      </Title>
       <TrackUsername to={`${USER_PROFILE_ROUTE}/${userId}`}>
         {username}
       </TrackUsername>

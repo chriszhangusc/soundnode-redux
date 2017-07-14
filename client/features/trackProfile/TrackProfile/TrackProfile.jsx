@@ -5,7 +5,6 @@ import * as trackProfileActions from 'features/trackProfile/trackProfileActions'
 import { isPageLoading } from 'features/trackProfile/trackProfileSelectors';
 import Spinner from 'common/components/Spinner';
 import { Grid } from 'react-bootstrap';
-
 import TrackProfileComments from '../TrackProfileComments';
 import TrackProfileHeader from '../TrackProfileHeader';
 

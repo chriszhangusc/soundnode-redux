@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getProfiledTrack } from 'features/trackProfile/trackProfileSelectors';
+import Title from 'common/components/Title';
 import TrackProfileCommentList from './TrackProfileCommentList';
-
-const Title = styled.h3`
-  margin: 25px 0;
-`;
 
 function TrackProfileComments({ commentCount }) {
   return (

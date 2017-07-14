@@ -1,17 +1,13 @@
-// The most common technique is to wrap the display name of the wrapped component.
-// So if your higher-order component is named withSubscription,
-// and the wrapped component's display name is CommentList,
-// use the display name WithSubscription(CommentList):
+import { branch, renderComponent } from 'recompose';
+import Spinner from 'common/components/Spinner';
 
-// function withSubscription(WrappedComponent) {
-//   class WithSubscription extends React.Component {/* ... */}
-//   WithSubscription.displayName = `WithSubscription(${getDisplayName(WrappedComponent)})`;
-//   return WithSubscription;
-// }
+export function renderSpinnerUntil(isLoading) {
+  return branch(
+    isLoading,
+    renderComponent(Spinner), // `Spinner` is a React component
+  );
+}
 
-// function getDisplayName(WrappedComponent) {
-//   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
-// }
 export function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }

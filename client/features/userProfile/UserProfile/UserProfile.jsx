@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as userProfileActions from 'features/userProfile/userProfileActions';
-import {
-  isPageLoading,
-  getProfiledUserTrackIds,
-  getProfiledUser,
-} from 'features/userProfile/userProfileSelectors';
+import { isPageLoading } from 'features/userProfile/userProfileSelectors';
 import UserProfileTracks from 'features/userProfile/UserProfileTracks';
 import UserProfileHeader from 'features/userProfile/UserProfileHeader';
 import Spinner from 'common/components/Spinner';
@@ -57,8 +53,6 @@ class UserProfile extends Component {
 function mapStateToProps(state) {
   return {
     pageLoading: isPageLoading(state),
-    trackIds: getProfiledUserTrackIds(state),
-    user: getProfiledUser(state),
   };
 }
 

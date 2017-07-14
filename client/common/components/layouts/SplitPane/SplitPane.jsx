@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  margin-bottom: 30px;
 `;
 const LeftWrapper = styled.div`margin-right: 30px;`;
 const RightWrapper = styled.div``;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import UserName from './UserName';
+import Title from 'common/components/Title';
 import UserFollowers from './UserFollowers';
 import UserDescription from './UserDescription';
 
@@ -16,7 +16,9 @@ const UserDetailsColumnWrapper = styled.div`
 function UserProfileDetails({ username, followersCount, description }) {
   return (
     <UserDetailsColumnWrapper>
-      <UserName username={username} />
+      <Title>
+        {username}
+      </Title>
       <UserFollowers followersCount={followersCount} />
       <UserDescription text={description} />
     </UserDetailsColumnWrapper>

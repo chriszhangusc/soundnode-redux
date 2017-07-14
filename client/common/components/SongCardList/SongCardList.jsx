@@ -16,7 +16,9 @@ const SongCardListWrapper = styled.div`
 function SongCardList({ title, trackIds }) {
   return (
     <div>
-      {title && <Title>{title}</Title>}
+      <Title>
+        {title}
+      </Title>
       <SongCardListWrapper>
         {trackIds.map(
           trackId => trackId && <SongCard trackId={trackId} key={trackId.toString()} />,
@@ -27,7 +29,7 @@ function SongCardList({ title, trackIds }) {
 }
 
 SongCardList.defaultProps = {
-  title: undefined,
+  title: '',
   trackIds: [],
 };
 

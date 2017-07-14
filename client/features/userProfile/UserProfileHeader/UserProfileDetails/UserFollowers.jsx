@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FONT_COLOR_PRIMARY } from 'app/css/colors';
 
 const UserFollowersContainer = styled.div`
-  margin: 10px 0;
+  margin-top: 10px;
   color: ${FONT_COLOR_PRIMARY};
 `;
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getProfiledUser } from 'features/userProfile/userProfileSelectors';
 import { getLargeVersion } from 'common/utils/imageUtils';
 import SplitPane from 'common/components/layouts/SplitPane';
+// import { renderSpinnerUntil } from 'common/utils/hocUtils';
 import UserProfileDetails from './UserProfileDetails';
 import UserProfileImage from './UserProfileImage';
 
