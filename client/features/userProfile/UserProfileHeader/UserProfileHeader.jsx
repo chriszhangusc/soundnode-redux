@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getProfiledUser } from 'features/userProfile/userProfileSelectors';
 import { getLargeVersion } from 'common/utils/imageUtils';
-import SplitPane from 'common/components/SplitPane';
+import SplitPane from 'common/components/layouts/SplitPane';
 import UserProfileDetails from './UserProfileDetails';
 import UserProfileImage from './UserProfileImage';
 

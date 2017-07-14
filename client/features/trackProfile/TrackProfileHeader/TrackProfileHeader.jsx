@@ -1,5 +1,5 @@
 import React from 'react';
-import SplitPane from 'common/components/SplitPane';
+import SplitPane from 'common/components/layouts/SplitPane';
 import TrackProfileDetails from './TrackProfileDetails';
 import TrackProfileImage from './TrackProfileImage';
 
