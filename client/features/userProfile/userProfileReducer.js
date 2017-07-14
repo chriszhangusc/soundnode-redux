@@ -10,14 +10,14 @@ const initialState = {
   tracksNextHref: null,
 };
 
-export function startFetchingProfiledUser(state) {
+export function startFetchingUser(state) {
   return {
     ...state,
     userFetching: true,
   };
 }
 
-export function stopFetchingProfiledUser(state) {
+export function stopFetchingUser(state) {
   return {
     ...state,
     userFetching: false,
@@ -31,21 +31,21 @@ export function updateProfiledUserId(state, { userId }) {
   };
 }
 
-export function startFetchingUserTracks(state) {
+export function startFetchingTracks(state) {
   return {
     ...state,
     tracksFetching: true,
   };
 }
 
-export function stopFetchingUserTracks(state) {
+export function stopFetchingTracks(state) {
   return {
     ...state,
     tracksFetching: false,
   };
 }
 
-export function updateUserTracksNextHref(state, { nextHref }) {
+export function updateTracksNextHref(state, { nextHref }) {
   return {
     ...state,
     tracksNextHref: nextHref,
@@ -64,22 +64,22 @@ export default function userReducer(state = initialState, action) {
       return resetUserProfileState(initialState);
 
     case types.USER_PROFILE_USER_FETCH_START:
-      return startFetchingProfiledUser(state);
+      return startFetchingUser(state);
 
     case types.USER_PROFILE_USER_FETCH_STOP:
-      return stopFetchingProfiledUser(state);
+      return stopFetchingUser(state);
 
     case types.USER_PROFILE_USER_UPDATE:
       return updateProfiledUserId(state, action.payload);
 
     case types.USER_PROFILE_TRACKS_FETCH_START:
-      return startFetchingUserTracks(state);
+      return startFetchingTracks(state);
 
     case types.USER_PROFILE_TRACKS_FETCH_STOP:
-      return stopFetchingUserTracks(state);
+      return stopFetchingTracks(state);
 
     case types.USER_PROFILE_TRACKS_NEXT_HREF_UPDATE:
-      return updateUserTracksNextHref(state, action.payload);
+      return updateTracksNextHref(state, action.payload);
 
     default:
       return state;

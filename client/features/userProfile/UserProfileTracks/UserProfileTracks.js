@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
-import { loadMoreUserTracks } from 'features/userProfile/userProfileActions';
+import { loadMoreTracks } from 'features/userProfile/userProfileActions';
 import { isUserTracksFetching } from 'features/userProfile/userProfileSelectors';
 import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
 
@@ -18,7 +18,7 @@ function mapDispatchToProps(dispatch) {
   return {
     scrollFunc() {
       console.log('Fetch more user tracks');
-      dispatch(loadMoreUserTracks());
+      dispatch(loadMoreTracks());
     },
   };
 }

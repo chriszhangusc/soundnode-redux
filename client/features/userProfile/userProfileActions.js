@@ -15,11 +15,11 @@ export function resetUserProfileState() {
   };
 }
 
-export function startFetchingProfiledUser() {
+export function startFetchingUser() {
   return { type: types.USER_PROFILE_USER_FETCH_START };
 }
 
-export function stopFetchingProfiledUser() {
+export function stopFetchingUser() {
   return { type: types.USER_PROFILE_USER_FETCH_STOP };
 }
 
@@ -36,15 +36,15 @@ export function failedToFetchUser() {
   return { type: types.USER_PROFILE_USER_FAIL };
 }
 
-export function startFetchingUserTracks() {
+export function startFetchingTracks() {
   return { type: types.USER_PROFILE_TRACKS_FETCH_START };
 }
 
-export function stopFetchingUserTracks() {
+export function stopFetchingTracks() {
   return { type: types.USER_PROFILE_TRACKS_FETCH_STOP };
 }
 
-export function updateUserTracksNextHref(nextHref) {
+export function updateTracksNextHref(nextHref) {
   return {
     type: types.USER_PROFILE_TRACKS_NEXT_HREF_UPDATE,
     payload: {
@@ -59,18 +59,11 @@ export function failedToFetchUserTracks() {
   };
 }
 
-// export function startPageLoading() {
-//   return (dispatch) => {
-//     dispatch(startFetchingProfiledUser());
-//     dispatch(startFetchingUserTracks());
-//   };
-// }
-
 export function receiveUser(normalizedUser) {
   return (dispatch) => {
     dispatch(mergeEntities(normalizedUser.entities));
     dispatch(updateProfiledUserId(normalizedUser.result));
-    dispatch(stopFetchingProfiledUser());
+    dispatch(stopFetchingUser());
   };
 }
 
@@ -78,8 +71,8 @@ export function receiveTracks(normalizedTracks) {
   return (dispatch) => {
     dispatch(mergeEntities(normalizedTracks.entities));
     dispatch(mergeVisiblePlaylist(normalizedTracks.result));
-    dispatch(updateUserTracksNextHref(normalizedTracks.nextHref));
-    dispatch(stopFetchingUserTracks());
+    dispatch(updateTracksNextHref(normalizedTracks.nextHref));
+    dispatch(stopFetchingTracks());
   };
 }
 
@@ -89,8 +82,8 @@ export function loadUserProfileData(userId) {
     dispatch(updateProfiledUserId(userId));
     dispatch(updateVisiblePlaylistName(`user-${userId}`));
     try {
-      dispatch(startFetchingProfiledUser());
-      dispatch(startFetchingUserTracks());
+      dispatch(startFetchingUser());
+      dispatch(startFetchingTracks());
       fetchProfiledUser(userId).then(normalizedUser => dispatch(receiveUser(normalizedUser)));
       fetchProfiledUserTracks(userId).then(normalizedTracks =>
         dispatch(receiveTracks(normalizedTracks)),
@@ -101,17 +94,16 @@ export function loadUserProfileData(userId) {
   };
 }
 
-export function loadMoreUserTracks() {
+export function loadMoreTracks() {
   return async (dispatch, getState) => {
     const state = getState();
     const fetching = isUserTracksFetching(state);
 
     // nextHref will be undefined if there is no more data to fetch
     const curNextHref = getUserTracksNextHref(state);
-    // console.log('NextHref:', nextHref);
     if (!fetching && curNextHref) {
       try {
-        dispatch(startFetchingUserTracks());
+        dispatch(startFetchingTracks());
         const normalizedTracks = await fetchMoreProfiledUserTracks(curNextHref);
         dispatch(receiveTracks(normalizedTracks));
       } catch (err) {
