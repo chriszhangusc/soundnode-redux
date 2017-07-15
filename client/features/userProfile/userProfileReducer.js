@@ -4,11 +4,25 @@ import * as types from './userProfileActionTypes';
 const initialState = {
   userFetching: false,
   tracksFetching: false,
-  // pageFetching: false,
+  pageLoading: false,
   userId: null,
   trackIds: [],
   tracksNextHref: null,
 };
+
+export function startLoadingPage(state) {
+  return {
+    ...state,
+    pageLoading: true,
+  };
+}
+
+export function stopLoadingPage(state) {
+  return {
+    ...state,
+    pageLoading: false,
+  };
+}
 
 export function startFetchingUser(state) {
   return {
@@ -60,6 +74,12 @@ export function resetUserProfileState(initState) {
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
+    case types.USER_PROFILE_PAGE_LOADING_START:
+      return startLoadingPage(state);
+
+    case types.USER_PROFILE_PAGE_LOADING_STOP:
+      return stopLoadingPage(state);
+
     case types.USER_PROFILE_STATE_RESET:
       return resetUserProfileState(initialState);
 

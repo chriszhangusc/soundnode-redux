@@ -15,7 +15,7 @@ class UserProfile extends Component {
     this.props.loadUserProfileData(userId);
   }
 
-  // Change from different single track routes.
+  // Handle route changes
   componentWillReceiveProps(nextProps) {
     const curUserId = this.props.match.params.userId;
     const newUserId = nextProps.match.params.userId;
@@ -36,7 +36,6 @@ class UserProfile extends Component {
 
   render() {
     const { pageLoading } = this.props;
-
     if (!pageLoading) {
       return (
         <Grid fluid>
@@ -62,10 +61,6 @@ UserProfile.propTypes = {
   resetUserProfileState: PropTypes.func.isRequired,
   loadUserProfileData: PropTypes.func.isRequired,
   pageLoading: PropTypes.bool.isRequired,
-};
-
-UserProfile.defaultProps = {
-  fetching: false,
 };
 
 export default connect(mapStateToProps, userProfileActions)(UserProfile);

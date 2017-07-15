@@ -9,6 +9,18 @@ import {
 } from './userProfileApi';
 
 /* Action Creators*/
+export function startLoadingPage() {
+  return {
+    type: types.USER_PROFILE_PAGE_LOADING_START,
+  };
+}
+
+export function stopLoadingPage() {
+  return {
+    type: types.USER_PROFILE_PAGE_LOADING_STOP,
+  };
+}
+
 export function resetUserProfileState() {
   return {
     type: types.USER_PROFILE_STATE_RESET,
@@ -76,21 +88,23 @@ export function receiveTracks(normalizedTracks) {
   };
 }
 
-// Should load user first and then the tracks
+// Initial loading
 export function loadUserProfileData(userId) {
-  return async (dispatch) => {
+  return (dispatch) => {
     dispatch(updateProfiledUserId(userId));
     dispatch(updateVisiblePlaylistName(`user-${userId}`));
-    try {
-      dispatch(startFetchingUser());
-      dispatch(startFetchingTracks());
-      fetchProfiledUser(userId).then(normalizedUser => dispatch(receiveUser(normalizedUser)));
-      fetchProfiledUserTracks(userId).then(normalizedTracks =>
-        dispatch(receiveTracks(normalizedTracks)),
-      );
-    } catch (err) {
-      console.log(err);
-    }
+    // Right now the user fetching state does nothing... Consider removing it in the future
+    dispatch(startLoadingPage());
+    dispatch(startFetchingUser());
+    dispatch(startFetchingTracks());
+    Promise.all([fetchProfiledUser(userId), fetchProfiledUserTracks(userId)]).then((res) => {
+      const normalizedUser = res[0];
+      const normalizedTracks = res[1];
+      dispatch(receiveUser(normalizedUser));
+      dispatch(receiveTracks(normalizedTracks));
+      // Stop page loading here
+      dispatch(stopLoadingPage());
+    });
   };
 }
 

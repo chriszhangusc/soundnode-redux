@@ -11,10 +11,10 @@ export const getProfiledUser = createSelector(
   (users, userId) => userId && users[String(userId)],
 );
 
-export const getFollowersCount = createSelector(
-  getProfiledUser,
-  user => user && user.followersCount.toLocaleString(),
-);
+// export const getFollowersCount = createSelector(
+//   getProfiledUser,
+//   user => user && user.followersCount.toLocaleString(),
+// );
 
 export const getProfiledUserTrackIds = createSelector(getState, state => state.trackIds);
 
@@ -22,10 +22,12 @@ export const isUserFetching = createSelector(getState, state => state.userFetchi
 
 export const isUserTracksFetching = createSelector(getState, state => state.tracksFetching);
 
-export const isPageLoading = createSelector(
-  isUserFetching,
-  isUserTracksFetching,
-  (userFetching, tracksFetching) => userFetching && tracksFetching,
-);
+// export const isPageLoading = createSelector(
+//   isUserFetching,
+//   isUserTracksFetching,
+//   (userFetching, tracksFetching) => userFetching && tracksFetching,
+// );
+
+export const isPageLoading = createSelector(getState, state => state.pageLoading);
 
 export const getUserTracksNextHref = createSelector(getState, state => state.tracksNextHref);
