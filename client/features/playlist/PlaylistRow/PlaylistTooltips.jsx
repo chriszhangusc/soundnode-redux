@@ -19,8 +19,6 @@ const Wrapper = styled.span`
 `;
 
 const OptionsListWrapper = styled.div`
-  /* This is for testing */
-  /* transform: ${props => (props.index === 1 ? 'scale(1, 1)' : 'scale(0, 0)')}; */
   transform: scale(0, 0);
   transition: all .3s;
 `;

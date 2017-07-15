@@ -1,39 +1,61 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Title from 'common/components/Title';
-import { compose, mapProps } from 'recompose';
-import UserFollowers from './UserFollowers';
-import UserDescription from './UserDescription';
+
+// Putting these small components in one file or separate?
 
 const UserDetailsColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: left;
-  margin-left: 20px;
+`;
+
+// Maybe tweak the style in the future
+const Username = Title.extend`margin-bottom: 10px;`;
+
+const UserFollowers = styled.div`
+  color: ${props => props.theme.fontColorSub};
+  margin-bottom: 10px;
+`;
+
+const UserDescription = styled.p`
+  font-size: 1rem;
+  margin-bottom: 10px;
+  overflow: scroll;
+  height: 240px;
+  width: 500px;
+  color: ${props => props.theme.fontColorSub};
+  white-space: pre-wrap;
 `;
 
 function UserProfileDetails({ username, followersCount, description }) {
   return (
     <UserDetailsColumnWrapper>
-      <Title>
+      <Username>
         {username}
-      </Title>
-      <UserFollowers followersCount={followersCount} />
-      <UserDescription text={description} />
+      </Username>
+      <UserFollowers>
+        Followers: {followersCount}
+      </UserFollowers>
+      <UserDescription>
+        {description}
+      </UserDescription>
     </UserDetailsColumnWrapper>
   );
 }
 
-function userPropsMapper({ user }) {
-  if (!user) return {};
-  const { username = '', followersCount = '0', description = '' } = user;
-  return {
-    username,
-    followersCount: followersCount.toLocaleString(),
-    description,
-  };
-}
+UserProfileDetails.propTypes = {
+  username: PropTypes.string,
+  followersCount: PropTypes.string,
+  description: PropTypes.string,
+};
 
-export default compose(mapProps(userPropsMapper))(UserProfileDetails);
+UserProfileDetails.defaultProps = {
+  username: '',
+  followersCount: '',
+  description: '',
+};
+
+export default UserProfileDetails;
