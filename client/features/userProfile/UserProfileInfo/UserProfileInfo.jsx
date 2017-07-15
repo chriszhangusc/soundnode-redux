@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getProfiledUser } from 'features/userProfile/userProfileSelectors';
+import * as selectors from 'features/userProfile/userProfileSelectors';
 import styled from 'styled-components';
-import { getLargeVersion } from 'common/utils/imageUtils';
 import UserProfileAvatar from './UserProfileAvatar';
 import UserProfileDetails from './UserProfileDetails';
 
@@ -32,24 +31,12 @@ function UserProfileInfo({ avatarUrl, permalinkUrl, username, followersCount, de
 }
 
 function mapStateToProps(state) {
-  const user = getProfiledUser(state);
-
-  if (!user) return {};
-
-  const {
-    avatarUrl = '',
-    permalinkUrl = '',
-    username = '',
-    followersCount = '0',
-    description = '',
-  } = user;
-
   return {
-    avatarUrl: getLargeVersion(avatarUrl),
-    permalinkUrl,
-    username,
-    followersCount: followersCount.toLocaleString(),
-    description,
+    avatarUrl: selectors.getUserAvatarUrl(state),
+    permalinkUrl: selectors.getUserPermalinkUrl(state),
+    username: selectors.getUsername(state),
+    followersCount: selectors.getUserFollowersCount(state),
+    description: selectors.getUserDescription(state),
   };
 }
 
