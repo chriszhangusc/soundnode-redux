@@ -9,6 +9,15 @@ import Spinner from 'common/components/Spinner';
 import { Grid } from 'react-bootstrap';
 
 class UserProfile extends Component {
+  static propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.object,
+    }).isRequired,
+    resetUserProfileState: PropTypes.func.isRequired,
+    loadUserProfileData: PropTypes.func.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+  };
+
   componentDidMount() {
     const { match } = this.props;
     const userId = match.params.userId;
@@ -37,14 +46,14 @@ class UserProfile extends Component {
   render() {
     const { pageLoading } = this.props;
     if (!pageLoading) {
-      return (
-        <Grid fluid>
-          <UserProfileInfo />
-          <UserProfileTracks />
-        </Grid>
-      );
+      return <Spinner />;
     }
-    return <Spinner />;
+    return (
+      <Grid fluid>
+        <UserProfileInfo />
+        <UserProfileTracks />
+      </Grid>
+    );
   }
 }
 
@@ -54,13 +63,13 @@ function mapStateToProps(state) {
   };
 }
 
-UserProfile.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.object,
-  }).isRequired,
-  resetUserProfileState: PropTypes.func.isRequired,
-  loadUserProfileData: PropTypes.func.isRequired,
-  pageLoading: PropTypes.bool.isRequired,
-};
+// UserProfile.propTypes = {
+//   match: PropTypes.shape({
+//     params: PropTypes.object,
+//   }).isRequired,
+//   resetUserProfileState: PropTypes.func.isRequired,
+//   loadUserProfileData: PropTypes.func.isRequired,
+//   pageLoading: PropTypes.bool.isRequired,
+// };
 
 export default connect(mapStateToProps, userProfileActions)(UserProfile);
