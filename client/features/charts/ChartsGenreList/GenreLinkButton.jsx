@@ -1,10 +1,8 @@
 import RouterLink from 'common/components/links/RouterLink';
-import { GRAY } from 'app/css/colors';
 
 const StyledLinkButton = RouterLink.extend`
   display: inline-block;
   width: 19%;
-  color: #ededed;
   letter-spacing: 1px;
   border: 1px solid;
   border-radius: 3px;
@@ -15,7 +13,7 @@ const StyledLinkButton = RouterLink.extend`
   font-size: 0.75rem;
   transition: color 200ms ease-in;
   &:hover {
-    color: ${GRAY};
+    color: ${props => props.theme.fontColorSub};
   }
 `;
 

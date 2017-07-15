@@ -10,7 +10,22 @@ import { getCurrentGenreTitle } from 'features/charts/chartsSelectors';
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';
 
-class ChartsView extends Component {
+class Charts extends Component {
+  static propTypes = {
+    genreTitle: PropTypes.string,
+    loadChartsPage: PropTypes.func.isRequired,
+    changeGenre: PropTypes.func.isRequired,
+    resetChartsState: PropTypes.func.isRequired,
+    updateVisiblePlaylistName: PropTypes.func.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.object,
+    }).isRequired,
+  };
+
+  static defaultProps = {
+    genreTitle: '',
+  };
+
   constructor(props) {
     super(props);
     this.onPageMountOrChange = this.onPageMountOrChange.bind(this);
@@ -44,7 +59,9 @@ class ChartsView extends Component {
     const { genreTitle } = this.props;
     return (
       <Grid fluid>
-        <Title>Top Charts - {genreTitle}</Title>
+        <Title>
+          Top Charts - {genreTitle}
+        </Title>
         <ChartsGenreList />
         <ChartsTracks />
       </Grid>
@@ -52,20 +69,20 @@ class ChartsView extends Component {
   }
 }
 
-ChartsView.defaultProps = {
-  genreTitle: '',
-};
+// Charts.defaultProps = {
+//   genreTitle: '',
+// };
 
-ChartsView.propTypes = {
-  genreTitle: PropTypes.string,
-  loadChartsPage: PropTypes.func.isRequired,
-  changeGenre: PropTypes.func.isRequired,
-  resetChartsState: PropTypes.func.isRequired,
-  updateVisiblePlaylistName: PropTypes.func.isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.object,
-  }).isRequired,
-};
+// Charts.propTypes = {
+//   genreTitle: PropTypes.string,
+//   loadChartsPage: PropTypes.func.isRequired,
+//   changeGenre: PropTypes.func.isRequired,
+//   resetChartsState: PropTypes.func.isRequired,
+//   updateVisiblePlaylistName: PropTypes.func.isRequired,
+//   match: PropTypes.shape({
+//     params: PropTypes.object,
+//   }).isRequired,
+// };
 
 function mapStateToProps(state) {
   return {
@@ -80,4 +97,4 @@ const actions = {
   updateVisiblePlaylistName,
 };
 
-export default connect(mapStateToProps, actions)(ChartsView);
+export default connect(mapStateToProps, actions)(Charts);
