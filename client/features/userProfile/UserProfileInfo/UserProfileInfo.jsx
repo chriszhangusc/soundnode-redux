@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as selectors from 'features/userProfile/userProfileSelectors';
 import styled from 'styled-components';
@@ -29,6 +30,19 @@ function UserProfileInfo({ avatarUrl, permalinkUrl, username, followersCount, de
     </Wrapper>
   );
 }
+
+UserProfileInfo.defaultProps = {
+  ...UserProfileAvatar.defaultProps,
+  ...UserProfileDetails.defaultProps,
+};
+
+UserProfileInfo.propTypes = {
+  avatarUrl: PropTypes.string,
+  permalinkUrl: PropTypes.string,
+  username: PropTypes.string,
+  followersCount: PropTypes.string,
+  description: PropTypes.string,
+};
 
 function mapStateToProps(state) {
   return {
