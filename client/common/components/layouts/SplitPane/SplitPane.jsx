@@ -23,9 +23,14 @@ function SplitPane({ left, right }) {
   );
 }
 
+SplitPane.defaultProps = {
+  left: null,
+  right: null,
+};
+
 SplitPane.propTypes = {
-  left: PropTypes.node.isRequired,
-  right: PropTypes.node.isRequired,
+  left: PropTypes.node,
+  right: PropTypes.node,
 };
 
 export default SplitPane;

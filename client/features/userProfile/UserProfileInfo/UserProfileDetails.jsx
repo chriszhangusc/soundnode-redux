@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Title from 'common/components/Title';
+import { compose, mapProps } from 'recompose';
 import UserFollowers from './UserFollowers';
 import UserDescription from './UserDescription';
 
@@ -25,16 +26,14 @@ function UserProfileDetails({ username, followersCount, description }) {
   );
 }
 
-UserProfileDetails.defaultProps = {
-  username: '',
-  followersCount: '',
-  description: '',
-};
+function userPropsMapper({ user }) {
+  if (!user) return {};
+  const { username = '', followersCount = '0', description = '' } = user;
+  return {
+    username,
+    followersCount: followersCount.toLocaleString(),
+    description,
+  };
+}
 
-UserProfileDetails.propTypes = {
-  username: PropTypes.string,
-  followersCount: PropTypes.string, // Formatted number
-  description: PropTypes.string,
-};
-
-export default UserProfileDetails;
+export default compose(mapProps(userPropsMapper))(UserProfileDetails);

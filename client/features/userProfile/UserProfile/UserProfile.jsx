@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as userProfileActions from 'features/userProfile/userProfileActions';
 import { isPageLoading } from 'features/userProfile/userProfileSelectors';
 import UserProfileTracks from 'features/userProfile/UserProfileTracks';
-import UserProfileHeader from 'features/userProfile/UserProfileHeader';
+import UserProfileInfo from 'features/userProfile/UserProfileInfo';
 import Spinner from 'common/components/Spinner';
 import { Grid } from 'react-bootstrap';
 
@@ -40,7 +40,7 @@ class UserProfile extends Component {
     if (!pageLoading) {
       return (
         <Grid fluid>
-          <UserProfileHeader />
+          <UserProfileInfo />
           <UserProfileTracks />
         </Grid>
       );

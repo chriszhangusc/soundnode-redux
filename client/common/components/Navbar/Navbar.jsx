@@ -35,7 +35,6 @@ const NavbarSectionRight = styled.section`
 function Navbar() {
   return (
     <StyledNavbar>
-
       <NavbarSectionLeft>
         <NavHeader />
       </NavbarSectionLeft>
@@ -44,7 +43,6 @@ function Navbar() {
         <DropdownSearch />
         <Auth />
       </NavbarSectionRight>
-
     </StyledNavbar>
   );
 }
