@@ -3,6 +3,7 @@ import { getPlaylistByMode } from 'features/playlist/playlistSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
 import * as types from './playerActionTypes';
 import {
+  isPlayerPlaying,
   isPlayerSeeking,
   getCurrentTime,
   getCurrentVolume,
@@ -181,6 +182,18 @@ export function playNextSong() {
 export function playPrevSong() {
   return (dispatch) => {
     dispatch(playSongByAction(types.PREV));
+  };
+}
+
+export function togglePlay() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const playing = isPlayerPlaying(state);
+    if (playing) {
+      dispatch(pauseSong());
+    } else {
+      dispatch(playSong());
+    }
   };
 }
 

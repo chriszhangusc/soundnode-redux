@@ -28,7 +28,7 @@ export const getUserDescription = createSelector(getProfiledUser, user => user &
 
 export const getUserFollowersCount = createSelector(
   getProfiledUser,
-  user => user && user.followersCount.toLocaleString(),
+  user => user && user.followersCount && user.followersCount.toLocaleString(),
 );
 
 export const getProfiledUserTrackIds = createSelector(getState, state => state.trackIds);

@@ -1,8 +1,9 @@
 import { createSelector } from 'reselect';
-import { getTracks } from 'features/entities/entitiesSelectors';
+import { getTracks, getUsers } from 'features/entities/entitiesSelectors';
 import { getLargeVersion } from 'common/utils/imageUtils';
 import { getActiveTrackId, isPlayerPlaying } from 'features/player/playerSelectors';
 import { getFavoriteTrackIds } from 'features/auth/authSelectors';
+import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
 
 const getState = state => state.trackProfile;
 
@@ -11,7 +12,7 @@ export const getProfiledTrackId = createSelector(getState, state => state.trackI
 export const getProfiledTrack = createSelector(
   getTracks,
   getProfiledTrackId,
-  (users, userId) => userId && users[userId.toString()],
+  (tracks, trackId) => trackId && tracks[trackId.toString()],
 );
 
 export const isTrackFetching = createSelector(getState, state => state.trackFetching);
@@ -59,3 +60,45 @@ export const getProfiledTrackPlaybackCount = createSelector(
   getProfiledTrack,
   track => track && track.playbackCount.toLocaleString(),
 );
+
+export const getProfiledTrackTitle = createSelector(
+  getProfiledTrack,
+  track => track && track.title,
+);
+
+export const getProfiledTrackDescription = createSelector(
+  getProfiledTrack,
+  track => track && track.description,
+);
+
+export const getProfiledTrackUserId = createSelector(
+  getProfiledTrack,
+  track => track && track.userId,
+);
+
+export const getProfiledTrackUserRoute = createSelector(
+  getProfiledTrackUserId,
+  userId => `${USER_PROFILE_ROUTE}/${userId}`,
+);
+
+export const getProfiledTrackUser = createSelector(
+  getProfiledTrackUserId,
+  getUsers,
+  (userId, users) => userId && users[userId.toString()],
+);
+
+export const getProfiledTrackUsername = createSelector(
+  getProfiledTrackUser,
+  user => user && user.username,
+);
+
+// const track = getProfiledTrack(state);
+//   // console.log(track);
+//   const user = track && getUserByTrackId(state, track.id);
+//   // console.log(user);
+//   return {
+//     userId: user && user.id,
+//     title: track && track.title,
+//     username: user && user.username,
+//     description: track && track.description,
+//   };
