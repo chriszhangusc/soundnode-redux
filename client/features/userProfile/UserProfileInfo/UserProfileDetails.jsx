@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Title from 'common/components/Title';
 
-// Putting these small components in one file or separate?
+// Putting these small components in one file or separate files?
 
 const UserDetailsColumnWrapper = styled.div`
   display: flex;

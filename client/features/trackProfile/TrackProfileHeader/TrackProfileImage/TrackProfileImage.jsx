@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { getProfiledTrack } from 'features/trackProfile/trackProfileSelectors';
-import { getLargeVersion } from 'common/utils/imageUtils';
-import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
-import { FormattedNumber } from 'react-intl';
+import * as selectors from 'features/trackProfile/trackProfileSelectors';
 import { updateActiveTrackIdAndPlay, playSong, pauseSong } from 'features/player/playerActions';
 import TrackImage from 'common/components/images/TrackImage';
 
@@ -79,10 +76,12 @@ function TrackProfileImage({
       </PlaybackButton>
       <CoverImageDetailsWrapper onClick={handleImageClick}>
         <span>
-          <i className="fa fa-play" /> <FormattedNumber value={playbackCount || 0} />
+          <i className="fa fa-play" />
+          {playbackCount}
         </span>
         <span>
-          <i className="fa fa-heart" /> <FormattedNumber value={likesCount || 0} />
+          <i className="fa fa-heart" />
+          {likesCount}
         </span>
       </CoverImageDetailsWrapper>
     </Wrapper>
@@ -90,12 +89,12 @@ function TrackProfileImage({
 }
 
 TrackProfileImage.defaultProps = {
-  src: null,
+  src: '',
   playing: false,
   active: false,
   liked: false,
-  playbackCount: 0,
-  likesCount: 0,
+  playbackCount: '',
+  likesCount: '',
 };
 
 TrackProfileImage.propTypes = {
@@ -104,20 +103,19 @@ TrackProfileImage.propTypes = {
   active: PropTypes.bool,
   liked: PropTypes.bool,
   handleImageClick: PropTypes.func.isRequired,
-  playbackCount: PropTypes.number,
-  likesCount: PropTypes.number,
+  playbackCount: PropTypes.string,
+  likesCount: PropTypes.string,
 };
 
 function mapStateToProps(state) {
-  const track = getProfiledTrack(state);
   return {
-    trackId: track && track.id,
-    src: track && getLargeVersion(track.artworkUrl),
-    playing: track && isTrackPlaying(state, track.id),
-    active: track && isTrackActive(state, track.id),
-    liked: false,
-    likesCount: track && (track.favoritingsCount || track.likesCount),
-    playbackCount: track && track.playbackCount,
+    trackId: selectors.getProfiledTrackId(state),
+    src: selectors.getProfiledTrackArtworkUrl(state),
+    playing: selectors.isProfiledTrackPlaying(state),
+    active: selectors.isProfiledTrackActive(state),
+    liked: selectors.isProfiledTrackLiked(state),
+    likesCount: selectors.getProfiledTrackLikesCount(state),
+    playbackCount: selectors.getProfiledTrackPlaybackCount(state),
   };
 }
 

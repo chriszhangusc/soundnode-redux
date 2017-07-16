@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import UserProfileAvatar from './UserProfileAvatar';
 import UserProfileDetails from './UserProfileDetails';
 
+// Container components should not have styles, try to extract reusable Wrapper components
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;

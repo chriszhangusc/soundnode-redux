@@ -47,7 +47,6 @@
     "react-fontawesome": "^1.5.0",
     "react-hot-loader": "^1.3.1",
     "react-icons": "^2.2.5",
-    "react-intl": "^2.3.0",
     "react-loading-overlay": "^0.2.5",
     "react-redux": "^4.4.5",
     "react-router": "^4.1.1",
@@ -72,7 +71,7 @@
     "start": "NODE_ENV=production node server/server.prod.js",
     "build": "rm -rf ./dist/* && NODE_ENV=production webpack -p --progress --config webpack.prod.config.js",
     "proxy": "NODE_ENV=development nodemon server/proxy.js",
-    "dev": "NODE_ENV=development webpack-dev-server --progress --colors --config webpack.dev.config.js",
+    "dev": "NODE_ENV=development webpack-dev-server --hot --progress --colors --config webpack.dev.config.js",
     "heroku-postbuild": "npm run build"
   }
 }

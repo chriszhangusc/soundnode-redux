@@ -1,6 +1,5 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { IntlProvider } from 'react-intl';
 import ReactDOM from 'react-dom';
 import configureStore from 'app/store/configureStore';
 import App from 'app/layout/App';
@@ -16,13 +15,11 @@ const store = configureStore();
 // so that it can be shared among all components.
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <IntlProvider locale="en">
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </IntlProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </ThemeProvider>,
   document.getElementById('app'),
 );
