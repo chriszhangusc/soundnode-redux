@@ -14,19 +14,19 @@ const Wrapper = styled.div`
 `;
 
 const DropdownSearchInput = styled.input`
-    display: inline-block;
-    border: none;
-    text-align: left;
-    font-family: 'Open Sans';
-    font-size: 0.9rem;
-    outline: 0;
-    border-radius: 5px;
-    padding: 6px 10px 6px 30px;
-    font-weight: 300;
-    transition: all 0.2s ease-in-out;
-    background-color: #333333;
-    height: 30px;
-    width: 100%;
+  display: inline-block;
+  border: none;
+  text-align: left;
+  font-family: 'Open Sans';
+  font-size: 0.9rem;
+  outline: 0;
+  border-radius: 5px;
+  padding: 6px 10px 6px 30px;
+  font-weight: 300;
+  transition: all 0.2s ease-in-out;
+  background-color: #333333;
+  height: 30px;
+  width: 100%;
 `;
 
 class DropdownSearchBox extends React.Component {
@@ -100,7 +100,7 @@ function mapDispatchToProps(dispatch) {
       // Delay onblur to make sure when user click on the search result it will redirect first
       // and then do onblur
       setTimeout(() => {
-        // dispatch(clearAndHideSearchResults());
+        dispatch(clearAndHideSearchResults());
       }, 250);
     },
 
