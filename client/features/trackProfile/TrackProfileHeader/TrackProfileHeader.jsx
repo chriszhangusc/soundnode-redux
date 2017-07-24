@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import * as selectors from 'features/trackProfile/trackProfileSelectors';
 import * as playerActions from 'features/player/playerActions';
-// import SplitPane from 'common/components/layouts/SplitPane';
 import TrackProfileDetails from './TrackProfileDetails';
 import TrackProfileImage from './TrackProfileImage';
 

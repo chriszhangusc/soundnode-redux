@@ -100,7 +100,7 @@ function mapDispatchToProps(dispatch) {
       // Delay onblur to make sure when user click on the search result it will redirect first
       // and then do onblur
       setTimeout(() => {
-        dispatch(clearAndHideSearchResults());
+        // dispatch(clearAndHideSearchResults());
       }, 250);
     },
 

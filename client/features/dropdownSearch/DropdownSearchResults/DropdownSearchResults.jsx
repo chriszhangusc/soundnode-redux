@@ -8,7 +8,6 @@ import {
   getDropdownSearchTrackIds,
   getDropdownSearchQuery,
 } from 'features/dropdownSearch/dropdownSearchSelectors';
-import { fontColorSub, bgColorSub } from 'app/css/colors';
 import { zIndexDropdownSearch } from 'app/css/zIndex';
 import styled from 'styled-components';
 import RouterLink from 'common/components/links/RouterLink';
@@ -21,7 +20,7 @@ const ShowAllLink = RouterLink.extend`
   display: block;
   line-height: 35px;
   text-align: center;
-  color: ${fontColorSub};
+  color: ${props => props.theme.fontColorSub};
   font-size: 0.9rem;
   padding: 5px;
 `;
@@ -30,7 +29,7 @@ const Wrapper = styled.div`
   width: 100%;
   position: absolute;
   top: 50px;
-  background-color: ${bgColorSub};
+  background-color: ${props => props.theme.bgColorSub};
   z-index: ${zIndexDropdownSearch};
   display: block;
   transition: .4s ease-in-out;

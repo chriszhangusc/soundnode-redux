@@ -9,11 +9,17 @@ const StyledUsername = styled.span`
 `;
 
 function TrackUsername({ children, to }) {
-  return <StyledUsername><RouterLink to={to}>{children}</RouterLink></StyledUsername>;
+  return (
+    <StyledUsername>
+      <RouterLink to={to}>
+        {children}
+      </RouterLink>
+    </StyledUsername>
+  );
 }
 
 TrackUsername.defaultProps = {
-  children: '',
+  children: null,
   to: '',
 };
 

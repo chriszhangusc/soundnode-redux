@@ -4,28 +4,29 @@ import RouterLink from 'common/components/links/RouterLink';
 import UserImage from 'common/components/images/UserImage';
 import TrackImage from 'common/components/images/TrackImage';
 import styled from 'styled-components';
-import { saparatorColorDark, fontColorSub } from 'app/css/colors';
 
 const ContentWrapper = styled.div`
   padding: 8px 10px;
   cursor: pointer;
   display: flex;
   align-items: middle;
-  border-bottom: 1px solid ${saparatorColorDark};
+  border-bottom: 1px solid ${props => props.theme.separatorColorDark};
   &:hover {
-    background: ${saparatorColorDark};
+    background: ${props => props.theme.separatorColorDark};
   }
 `;
 
 const Title = styled.div`
   font-size: 0.95rem;
+  flex: 1;
+  max-width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 `;
 
-const Subtitle = styled.div`
-  color: ${fontColorSub};
+const Subtitle = Title.extend`
+  color: ${props => props.theme.fontColorSub};
   font-size: 0.9rem;
 `;
 
@@ -35,6 +36,7 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   flex: 1;
+  width: calc(100% - 32px);
 `;
 
 function renderAvatarByType(type, avatarUrl) {
