@@ -11,13 +11,15 @@ export const getUsers = createSelector(getEntities, entities => entities.users);
 
 export const getTracks = createSelector(getEntities, entities => entities.tracks);
 
+export const getComments = createSelector(getEntities, entities => entities.comments);
+
 /**
  * Returns user object by userId
  * @param {object} state Global state object
  * @param {number} userId UserId field of an user object
  * @returns {object} Artist object whose id equals to userId
  */
-export const getUserById = (state, userId) => userId && getEntities(state).users[String(userId)];
+export const getUserById = (state, userId) => userId && getUsers(state)[String(userId)];
 
 /**
  * Returns track object by trackId
@@ -25,8 +27,7 @@ export const getUserById = (state, userId) => userId && getEntities(state).users
  * @param {number} trackId trackId field of a sound track object
  * @returns {object} Track object whose id is trackId or undefined if the trackId is not valid.
  */
-export const getTrackById = (state, trackId) =>
-  trackId && getEntities(state).tracks[String(trackId)];
+export const getTrackById = (state, trackId) => trackId && getTracks(state)[String(trackId)];
 
 /**
  * Returns comment object by commentId
@@ -35,8 +36,7 @@ export const getTrackById = (state, trackId) =>
  * @returns {object} Comment object whose id equals commentId
  */
 export const getCommentById = (state, commentId) =>
-  commentId && getEntities(state).comments[String(commentId)];
-
+  commentId && getComments(state)[String(commentId)];
 /**
  * Returns the Artist object of a track specified by trackId
  * @param {Object} state Global state object

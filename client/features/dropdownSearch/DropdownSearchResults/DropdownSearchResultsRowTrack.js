@@ -4,14 +4,14 @@ import { TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import DropdownSearchResultsRow from './DropdownSearchResultsRow';
 
 function mapStateToProps(state, { trackId }) {
-  const track = getTrackById(state, trackId);
-  const user = getUserByTrackId(state, trackId);
+  const { artworkUrl, title } = getTrackById(state, trackId);
+  const { username } = getUserByTrackId(state, trackId);
   return {
     type: 'track',
-    avatarUrl: track && track.artworkUrl,
+    avatarUrl: artworkUrl,
     linkUrl: `${TRACK_PROFILE_ROUTE}/${trackId}`,
-    title: track && track.title,
-    subtitle: `Track by ${user && user.username}`,
+    title,
+    subtitle: `Track by ${username}`,
   };
 }
 

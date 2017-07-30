@@ -17,7 +17,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     scrollFunc() {
-      console.log('Fetch more user tracks');
       dispatch(loadMoreTracks());
     },
   };

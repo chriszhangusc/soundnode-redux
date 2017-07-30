@@ -3,13 +3,14 @@ import { getUserById } from 'features/entities/entitiesSelectors';
 import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import DropdownSearchResultsRow from './DropdownSearchResultsRow';
 
-const mapStateToProps = (state, { userId }) => {
-  const user = getUserById(state, userId);
+const mapStateToProps = (state, props) => {
+  const { userId } = props;
+  const { avatarUrl, username } = getUserById(state, userId);
   return {
     type: 'user',
-    avatarUrl: user && user.avatarUrl,
+    avatarUrl,
     linkUrl: `${USER_PROFILE_ROUTE}/${userId}`,
-    title: user && user.username,
+    title: username,
     subtitle: 'Artist',
   };
 };

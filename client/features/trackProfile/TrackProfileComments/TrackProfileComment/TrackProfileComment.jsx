@@ -61,14 +61,14 @@ function TrackProfileComment({ commentBody, userId, username, commentTimestamp, 
 }
 
 function mapStateToProps(state, { commentId }) {
-  const comment = getCommentById(state, commentId);
-  const user = getUserByCommentId(state, commentId);
+  const { body, createdAt } = getCommentById(state, commentId);
+  const { username, id, avatarUrl } = getUserByCommentId(state, commentId);
   return {
-    userAvatarUrl: getSmallVersion(user.avatarUrl),
-    username: user.username,
-    commentBody: comment.body,
-    commentTimestamp: comment.createdAt.replace('+0000', ''),
-    userId: user.id,
+    userAvatarUrl: getSmallVersion(avatarUrl),
+    username,
+    commentBody: body,
+    commentTimestamp: createdAt.replace('+0000', ''),
+    userId: id,
   };
 }
 

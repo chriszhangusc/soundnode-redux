@@ -1,20 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { SEARCH_ROUTE } from 'common/constants/routeConsts';
-import {
-  isDropdownSearchResultsHidden,
-  getDropdownSearchUserIds,
-  getDropdownSearchTrackIds,
-  getDropdownSearchQuery,
-} from 'features/dropdownSearch/dropdownSearchSelectors';
+import * as selectors from 'features/dropdownSearch/dropdownSearchSelectors';
 import { zIndexDropdownSearch } from 'app/css/zIndex';
 import styled from 'styled-components';
 import RouterLink from 'common/components/links/RouterLink';
 import DropdownSearchResultsRowUser from './DropdownSearchResultsRowUser';
 import DropdownSearchResultsRowTrack from './DropdownSearchResultsRowTrack';
-
-const dropdownSearchShowCount = 5;
 
 const ShowAllLink = RouterLink.extend`
   display: block;
@@ -41,45 +33,45 @@ const Wrapper = styled.div`
 
 // Render the artists/users results section.
 function renderArtistResults(userIds) {
-  return userIds
-    .slice(0, dropdownSearchShowCount)
-    .map(userId => <DropdownSearchResultsRowUser key={userId.toString()} userId={userId} />);
+  return userIds.map(userId => (
+    <DropdownSearchResultsRowUser key={userId.toString()} userId={userId} />
+  ));
 }
 
 // Render the tracks results section.
 function renderTrackResults(trackIds) {
-  return trackIds
-    .slice(0, dropdownSearchShowCount)
-    .map(trackId => <DropdownSearchResultsRowTrack key={trackId.toString()} trackId={trackId} />);
+  return trackIds.map(trackId => (
+    <DropdownSearchResultsRowTrack key={trackId.toString()} trackId={trackId} />
+  ));
 }
 
-function DropdownSearchResults({ userIds, trackIds, hidden, query }) {
+function DropdownSearchResults({ userIds, trackIds, hidden, queryLink }) {
   return (
     <Wrapper hidden={hidden}>
       {renderArtistResults(userIds)}
       {renderTrackResults(trackIds)}
-      <ShowAllLink to={`${SEARCH_ROUTE}/${query}`}>SHOW ALL TRACKS</ShowAllLink>
+      <ShowAllLink to={queryLink}>SHOW ALL TRACKS</ShowAllLink>
     </Wrapper>
   );
 }
 
 DropdownSearchResults.defaultProps = {
-  query: '',
+  queryLink: '',
 };
 
 DropdownSearchResults.propTypes = {
   userIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   trackIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   hidden: PropTypes.bool.isRequired,
-  query: PropTypes.string,
+  queryLink: PropTypes.string,
 };
 
 function mapStateToProps(state) {
   return {
-    hidden: isDropdownSearchResultsHidden(state),
-    userIds: getDropdownSearchUserIds(state),
-    trackIds: getDropdownSearchTrackIds(state),
-    query: getDropdownSearchQuery(state),
+    hidden: selectors.isDropdownSearchResultsHidden(state),
+    userIds: selectors.getDropdownSearchUserIds(state),
+    trackIds: selectors.getDropdownSearchTrackIds(state),
+    queryLink: selectors.getDropdownSearchQueryLink(state),
   };
 }
 

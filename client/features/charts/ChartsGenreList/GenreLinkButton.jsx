@@ -1,6 +1,6 @@
 import RouterLink from 'common/components/links/RouterLink';
 
-const StyledLinkButton = RouterLink.extend`
+const GenreLinkButton = RouterLink.extend`
   display: inline-block;
   width: 19%;
   letter-spacing: 1px;
@@ -17,4 +17,4 @@ const StyledLinkButton = RouterLink.extend`
   }
 `;
 
-export default StyledLinkButton;
+export default GenreLinkButton;
