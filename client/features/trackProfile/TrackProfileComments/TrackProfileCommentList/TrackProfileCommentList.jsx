@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import {
-  getCommentIds,
-  isCommentsFetching,
-} from 'features/trackProfile/trackProfileSelectors';
+import { getCommentIds, isCommentsFetching } from 'features/trackProfile/trackProfileSelectors';
 import withFetchingOnScroll from 'common/hocs/withFetchingOnScroll';
 import withLoadingSpinnerAfter from 'common/hocs/withLoadingSpinnerAfter';
 import { loadMoreComments } from 'features/trackProfile/trackProfileActions';
@@ -30,6 +27,10 @@ function TrackProfileCommentList({ commentIds }) {
 
 TrackProfileCommentList.propTypes = {
   commentIds: PropTypes.arrayOf(PropTypes.number),
+};
+
+TrackProfileCommentList.defaultProps = {
+  commentIds: [],
 };
 
 function mapStateToProps(state) {

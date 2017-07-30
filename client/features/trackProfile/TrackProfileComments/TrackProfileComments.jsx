@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getProfiledTrack } from 'features/trackProfile/trackProfileSelectors';
+import { getProfiledTrackCommentCount } from 'features/trackProfile/trackProfileSelectors';
 import Title from 'common/components/Title';
 import TrackProfileCommentList from './TrackProfileCommentList';
 
@@ -23,9 +23,8 @@ TrackProfileComments.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const track = getProfiledTrack(state);
   return {
-    commentCount: track && track.commentCount,
+    commentCount: getProfiledTrackCommentCount(state),
   };
 }
 

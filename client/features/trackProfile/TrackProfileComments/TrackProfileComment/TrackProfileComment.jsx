@@ -45,7 +45,7 @@ function TrackProfileComment({ commentBody, userId, username, commentTimestamp, 
       <CommentUserAvatar linkTo={userLink} userAvatarUrl={userAvatarUrl} />
       <CommentWrapper>
         <CommentHeader>
-          <CommentUsername linkTo={userLink}>
+          <CommentUsername to={userLink}>
             {username}
           </CommentUsername>
           <CommentTimestamp>
@@ -77,7 +77,7 @@ TrackProfileComment.defaultProps = {
   username: '',
   commentBody: '',
   commentTimestamp: '',
-  userId: 0,
+  userId: null,
 };
 
 TrackProfileComment.propTypes = {

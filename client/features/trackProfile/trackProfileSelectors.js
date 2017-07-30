@@ -107,6 +107,11 @@ export const getProfiledTrackUsername = createSelector(
   user => user && user.username,
 );
 
+export const getProfiledTrackCommentCount = createSelector(
+  getProfiledTrack,
+  track => track && track.commentCount,
+);
+
 // const track = getProfiledTrack(state);
 //   // console.log(track);
 //   const user = track && getUserByTrackId(state, track.id);
