@@ -22,7 +22,6 @@ class UserProfile extends Component {
     const { match } = this.props;
     const userId = match.params.userId;
     this.props.loadUserProfileData(userId);
-    console.log('did mount');
   }
 
   // Handle route changes

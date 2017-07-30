@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { copyToClipboard } from 'features/copy';
-import { getProfiledTrack } from 'features/trackProfile/trackProfileSelectors';
+import * as selectors from 'features/trackProfile/trackProfileSelectors';
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   bottom: 0;
 `;
 
-const LinkButtonWithIcon = styled.a`
+const LinkButton = styled.a`
   display: inline-block;
   border: 1px solid;
   border-radius: .25em;
@@ -31,54 +31,48 @@ const LinkButtonWithIcon = styled.a`
   }
 `;
 
-function TrackButtonGroup({ permalink, downloadable, downloadUrl, handleCopyPermalink }) {
+function TrackActions({ permalink, downloadable, downloadUrl, handleCopyPermalink }) {
   return (
     <Wrapper>
       {downloadable &&
-        <LinkButtonWithIcon
-          href={downloadUrl}
-          target="_blank"
-          title="Download on SoundCloud Website"
-        >
+        <LinkButton href={downloadUrl} target="_blank" title="Download on SoundCloud Website">
           <i className="fa fa-download" />DOWNLOAD
-        </LinkButtonWithIcon>}
+        </LinkButton>}
 
-      <LinkButtonWithIcon>
+      <LinkButton to="/">
         <i className="fa fa-bookmark" title="Add to Playlist" />ADD TO PLAYLIST
-      </LinkButtonWithIcon>
+      </LinkButton>
 
-      <LinkButtonWithIcon href={permalink} target="_blank" title="Visit Track on SoundCloud">
+      <LinkButton href={permalink} target="_blank" title="Visit Track on SoundCloud">
         <i className="fa fa-external-link" />PERMALINK
-      </LinkButtonWithIcon>
+      </LinkButton>
 
-      <LinkButtonWithIcon onClick={() => handleCopyPermalink(permalink)} title="Copy Permalink">
+      <LinkButton onClick={() => handleCopyPermalink(permalink)} title="Copy Permalink">
         <i className="fa fa-clipboard" />COPY TRACK LINK
-      </LinkButtonWithIcon>
+      </LinkButton>
     </Wrapper>
   );
 }
 
-TrackButtonGroup.propTypes = {
+TrackActions.propTypes = {
   downloadable: PropTypes.bool,
   permalink: PropTypes.string,
   downloadUrl: PropTypes.string,
   handleCopyPermalink: PropTypes.func,
 };
 
-TrackButtonGroup.defaultProps = {
+TrackActions.defaultProps = {
   downloadable: false,
   permalink: '',
   downloadUrl: '',
-  handleCopyPermalink: () => {},
+  handleCopyPermalink: null,
 };
 
 function mapStateToProps(state) {
-  const track = getProfiledTrack(state);
-  // console.log(track);
   return {
-    downloadable: track && track.downloadable,
-    downloadUrl: track && track.downloadUrl,
-    permalink: track && track.permalinkUrl,
+    downloadable: selectors.isProfiledTrackDownloadable(state),
+    downloadUrl: selectors.getProfiledTrackDownloadUrl(state),
+    permalink: selectors.getProfiledTrackPermalink(state),
   };
 }
 
@@ -90,4 +84,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrackButtonGroup);
+export default connect(mapStateToProps, mapDispatchToProps)(TrackActions);

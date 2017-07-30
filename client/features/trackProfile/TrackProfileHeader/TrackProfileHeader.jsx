@@ -16,6 +16,11 @@ const Wrapper = styled.div`
 const Section = styled.section`margin-right: 30px;`;
 
 class TrackProfileHeader extends React.Component {
+  static propTypes = {
+    ...TrackProfileImage.propTypes,
+    ...TrackProfileDetails.propTypes,
+  };
+
   constructor(props) {
     super(props);
     this.handleImageClick = this.handleImageClick.bind(this);
@@ -60,10 +65,10 @@ class TrackProfileHeader extends React.Component {
   }
 }
 
-TrackProfileHeader.propTypes = {
-  ...TrackProfileImage.propTypes,
-  ...TrackProfileDetails.propTypes,
-};
+// TrackProfileHeader.propTypes = {
+//   ...TrackProfileImage.propTypes,
+//   ...TrackProfileDetails.propTypes,
+// };
 
 function mapStateToProps(state) {
   return {

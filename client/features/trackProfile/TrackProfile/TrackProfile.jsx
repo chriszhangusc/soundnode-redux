@@ -9,6 +9,15 @@ import TrackProfileComments from '../TrackProfileComments';
 import TrackProfileHeader from '../TrackProfileHeader';
 
 class TrackProfile extends Component {
+  static propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.object,
+    }).isRequired,
+    resetTrackProfileState: PropTypes.func.isRequired,
+    loadTrackProfileData: PropTypes.func.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+  };
+
   componentDidMount() {
     const { match } = this.props;
     const trackId = match.params.trackId;
@@ -35,8 +44,8 @@ class TrackProfile extends Component {
   }
 
   render() {
-    const { fetching } = this.props;
-    if (fetching) {
+    const { pageLoading } = this.props;
+    if (pageLoading) {
       // If comments or profiled track is fetching, show spinner
       return <Spinner />;
     }
@@ -51,17 +60,17 @@ class TrackProfile extends Component {
 
 function mapStateToProps(state) {
   return {
-    fetching: isPageLoading(state),
+    pageLoading: isPageLoading(state),
   };
 }
 
-TrackProfile.propTypes = {
-  resetTrackProfileState: PropTypes.func.isRequired,
-  loadTrackProfileData: PropTypes.func.isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.object,
-  }).isRequired,
-  fetching: PropTypes.bool.isRequired,
-};
+// TrackProfile.propTypes = {
+//   resetTrackProfileState: PropTypes.func.isRequired,
+//   loadTrackProfileData: PropTypes.func.isRequired,
+//   match: PropTypes.shape({
+//     params: PropTypes.object,
+//   }).isRequired,
+//   pageLoading: PropTypes.bool.isRequired,
+// };
 
 export default connect(mapStateToProps, trackProfileActions)(TrackProfile);

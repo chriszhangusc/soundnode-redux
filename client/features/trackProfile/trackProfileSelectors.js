@@ -27,6 +27,21 @@ export const isPageLoading = createSelector(
   (trackFetching, commentsFetching) => trackFetching && commentsFetching,
 );
 
+export const isProfiledTrackDownloadable = createSelector(
+  getProfiledTrack,
+  track => track && track.downloadable,
+);
+
+export const getProfiledTrackDownloadUrl = createSelector(
+  getProfiledTrack,
+  track => track && track.downloadUrl,
+);
+
+export const getProfiledTrackPermalink = createSelector(
+  getProfiledTrack,
+  track => track && track.permalinkUrl,
+);
+
 export const getProfiledTrackArtworkUrl = createSelector(
   getProfiledTrack,
   track => track && getLargeVersion(track.artworkUrl),

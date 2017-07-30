@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Title from 'common/components/Title';
 import TrackUsername from './TrackUsername';
 import TrackDescription from './TrackDescription';
-import TrackButtonGroup from './TrackButtonGroup';
+import TrackActions from './TrackActions';
 
 const ColumnWrapper = styled.div`
   position: relative;
@@ -29,7 +29,7 @@ function TrackProfileDetails({ title, username, description, userRoute }) {
       <TrackDescription>
         {description}
       </TrackDescription>
-      <TrackButtonGroup />
+      <TrackActions />
     </ColumnWrapper>
   );
 }
