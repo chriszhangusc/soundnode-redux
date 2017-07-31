@@ -7,9 +7,15 @@ import { compose } from 'recompose';
 import withImageFadeInOnLoad from 'common/hocs/withImageFadeInOnLoad';
 import withImageFallbackOnError from 'common/hocs/withImageFallbackOnError';
 
-const StyledImage = styled.img`
+const Wrapper = styled.div`
+  position: relative;
   width: ${props => props.width || '100%'};
   height: ${props => props.height || '100%'};
+`;
+
+const StyledImage = styled.img`
+  width: 100%;
+  height: 100%;
   border-radius: ${props => props.rounded && '50%'};
   display: inline-block;
   opacity: ${props => (props.loaded ? 1 : 0)};
@@ -20,11 +26,11 @@ const StyledImage = styled.img`
 function getWidthAndHeight(size) {
   switch (size) {
     case 'small':
-      return 32;
+      return '32px';
     case 'medium':
-      return 206;
+      return '206px';
     case 'large':
-      return 350;
+      return '350px';
     case 'fluid':
       return '100%';
     default:
@@ -34,13 +40,18 @@ function getWidthAndHeight(size) {
 
 // const cdnPrefix = 'http://res.cloudinary.com/drijsmsvv/image/fetch/w_400/';
 function Image(props) {
-  const { linkTo, externalLink, src, size, ...rest } = props;
+  const { linkTo, externalLink, src, size, children, ...rest } = props;
   const WrapperLink = externalLink ? ExternalLink : RouterLink;
-  const widthAndHeight = getWidthAndHeight(size);
+  const wh = getWidthAndHeight(size);
 
   // Reduce the image size by using cdn to resize.
   // const img = <StyledImage src={`${cdnPrefix}${props.src}`} {...rest} />;
-  const img = <StyledImage src={src} width={widthAndHeight} height={widthAndHeight} {...rest} />;
+  const img = (
+    <Wrapper width={wh} height={wh}>
+      <StyledImage src={src} {...rest} />
+      {children}
+    </Wrapper>
+  );
 
   if (linkTo) {
     // Wrap within a link
@@ -59,6 +70,7 @@ Image.defaultProps = {
   linkTo: null,
   loaded: false,
   size: 'fluid',
+  children: null,
   // Not used yet
   fadeIn: true,
   externalLink: false,
@@ -74,6 +86,7 @@ Image.propTypes = {
   fadeIn: PropTypes.bool,
   linkTo: PropTypes.string,
   externalLink: PropTypes.bool,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 export default compose(withImageFallbackOnError, withImageFadeInOnLoad)(Image);

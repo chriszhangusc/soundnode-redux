@@ -15,6 +15,7 @@ const StyledIcon = styled(({ color, hoverColor, active, activeColor, iconSize, .
   hoverColor: props => props.hoverColor || props.color,
   iconSize: props => props.iconSize || '1rem',
 })`
+  margin-right: 5px;
   color: ${props => (props.active ? props.activeColor : props.color)};
   font-size: ${props => props.iconSize || '1rem'};
   &:hover {

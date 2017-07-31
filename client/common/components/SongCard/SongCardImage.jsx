@@ -7,27 +7,27 @@ import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
 import { updateActiveTrackIdAndPlay, playSong, pauseSong } from 'features/player/playerActions';
 import { switchActivePlaylistIfNeeded } from 'features/playlist/playlistActions';
 import { getLargeVersion } from 'common/utils/imageUtils';
-import Card from 'common/components/Card';
 
 function SongCardImage({ active, playing, artworkUrl, handleImageClick }) {
   return (
-    <Card.ImageWrapper>
-      <PlaybackOverlay active={active} onClick={handleImageClick} playing={playing}>
-        <TrackImage src={artworkUrl} size="medium" />
-      </PlaybackOverlay>
-    </Card.ImageWrapper>
+    <TrackImage src={artworkUrl} size="medium">
+      <PlaybackOverlay active={active} onClick={handleImageClick} playing={playing} />
+    </TrackImage>
   );
 }
 
 SongCardImage.defaultProps = {
   artworkUrl: '',
+  active: false,
+  playing: false,
+  handleImageClick: null,
 };
 
 SongCardImage.propTypes = {
-  active: PropTypes.bool.isRequired,
-  playing: PropTypes.bool.isRequired,
+  active: PropTypes.bool,
+  playing: PropTypes.bool,
   artworkUrl: PropTypes.string,
-  handleImageClick: PropTypes.func.isRequired,
+  handleImageClick: PropTypes.func,
 };
 
 function mapStateToProps(state, { track }) {

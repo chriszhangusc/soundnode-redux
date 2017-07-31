@@ -1,4 +1,3 @@
-// import React from 'react';
 import styled from 'styled-components';
 
 const ShadowOverlay = styled.span`
@@ -7,10 +6,10 @@ const ShadowOverlay = styled.span`
   align-items: center;
   justify-content: center;
   font-size: 1rem;
+  height: 100%;
   width: 100%;
   position: absolute;
   top: 0;
-  height: 100%;
   opacity: ${props => (props.active ? 1 : 0)};
   background: rgba(0, 0, 0, 0.8);
   text-align: center;

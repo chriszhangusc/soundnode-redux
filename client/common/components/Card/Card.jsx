@@ -57,9 +57,9 @@ Card.SubLink = RouterLink.extend`
 
 Card.InnerSpan = styled.span`margin-right: 5px;`;
 
-Card.ImageWrapper = styled.div`
-  width: 206px;
-  height: 206px;
-`;
+// Card.ImageWrapper = styled.div`
+//   width: 206px;
+//   height: 206px;
+// `;
 
 export default Card;

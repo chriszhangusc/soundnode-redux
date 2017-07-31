@@ -1,24 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import ShadowOverlay from './ShadowOverlay';
 import PlaybackOverlayIcon from './PlaybackOverlayIcon';
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-`;
-
-function PlaybackOverlay({ playing, active, children, onClick }) {
+function PlaybackOverlay({ playing, active, onClick }) {
   return (
-    <Wrapper>
-      <ShadowOverlay active={active} onClick={onClick}>
-        <PlaybackOverlayIcon playing={playing} />
-      </ShadowOverlay>
-      {children}
-    </Wrapper>
+    <ShadowOverlay active={active} onClick={onClick}>
+      <PlaybackOverlayIcon playing={playing} />
+    </ShadowOverlay>
   );
 }
+
+PlaybackOverlay.propTypes = {
+  playing: PropTypes.bool,
+  active: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+
+PlaybackOverlay.defaultProps = {
+  playing: false,
+  active: false,
+  onClick: null,
+};
 
 export default PlaybackOverlay;
