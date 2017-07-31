@@ -11,7 +11,7 @@ const StyledIcon = styled(({ color, hoverColor, active, activeColor, iconSize, .
   <FontAwesome {...rest} />,
 ).attrs({
   color: props => props.color || props.theme.fontColor,
-  activeColor: props => props.activeColor || props.theme.fontColor,
+  activeColor: props => props.activeColor || props.theme.themeColor,
   hoverColor: props => props.hoverColor || props.color,
   iconSize: props => props.iconSize || '1rem',
 })`

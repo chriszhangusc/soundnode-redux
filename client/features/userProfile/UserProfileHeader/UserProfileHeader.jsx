@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 
 const Section = styled.section`margin-right: 30px;`;
 
-function UserProfileInfo({ avatarUrl, permalinkUrl, username, followersCount, description }) {
+function UserProfileHeader({ avatarUrl, permalinkUrl, username, followersCount, description }) {
   return (
     <Wrapper>
       <Section>
@@ -32,12 +32,12 @@ function UserProfileInfo({ avatarUrl, permalinkUrl, username, followersCount, de
   );
 }
 
-UserProfileInfo.defaultProps = {
+UserProfileHeader.defaultProps = {
   ...UserProfileAvatar.defaultProps,
   ...UserProfileDetails.defaultProps,
 };
 
-UserProfileInfo.propTypes = {
+UserProfileHeader.propTypes = {
   avatarUrl: PropTypes.string,
   permalinkUrl: PropTypes.string,
   username: PropTypes.string,
@@ -55,4 +55,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(UserProfileInfo);
+export default connect(mapStateToProps)(UserProfileHeader);

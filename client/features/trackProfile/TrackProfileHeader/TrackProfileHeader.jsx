@@ -72,7 +72,7 @@ class TrackProfileHeader extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    // TrackProfileImage
+    // props for TrackProfileImage
     trackId: selectors.getProfiledTrackId(state),
     artworkUrl: selectors.getProfiledTrackArtworkUrl(state),
     playing: selectors.isProfiledTrackPlaying(state),
@@ -80,7 +80,7 @@ function mapStateToProps(state) {
     liked: selectors.isProfiledTrackLiked(state),
     likesCount: selectors.getProfiledTrackLikesCount(state),
     playbackCount: selectors.getProfiledTrackPlaybackCount(state),
-    // TrackProfileInfo
+    // props for TrackProfileInfo
     title: selectors.getProfiledTrackTitle(state),
     username: selectors.getProfiledTrackUsername(state),
     description: selectors.getProfiledTrackDescription(state),

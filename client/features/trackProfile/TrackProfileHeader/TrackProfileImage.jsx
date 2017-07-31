@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TrackImage from 'common/components/images/TrackImage';
 import PlaybackOverlay from 'common/components/PlaybackOverlay';
 import styled from 'styled-components';
+import Icon from 'common/components/icons/Icon';
 
 const Wrapper = styled.div`
   position: relative;
@@ -21,14 +22,15 @@ const CoverImageDetailsWrapper = styled.div`
   }
   align-items: center;
   justify-content: center;
-
-  & span {
-    font-size: 1rem;
-    flex-grow: 1;
-    text-align: center;
-    margin-right: 5px;
-  }
 `;
+
+const Column = styled.span`
+  flex-grow: 1;
+  text-align: center;
+`;
+
+const Spacer = styled.span`margin-left: 5px;`;
+
 function TrackProfileImage({ src, playing, active, liked, playbackCount, likesCount, onClick }) {
   return (
     <Wrapper>
@@ -36,14 +38,18 @@ function TrackProfileImage({ src, playing, active, liked, playbackCount, likesCo
         <TrackImage src={src} size="large" />
       </PlaybackOverlay>
       <CoverImageDetailsWrapper>
-        <span>
-          <i className="fa fa-play" />
-          {playbackCount}
-        </span>
-        <span>
-          <i className="fa fa-heart" />
-          {likesCount}
-        </span>
+        <Column>
+          <Icon name="play" />
+          <Spacer>
+            {playbackCount}
+          </Spacer>
+        </Column>
+        <Column>
+          <Icon name="heart" active={liked} />
+          <Spacer>
+            {likesCount}
+          </Spacer>
+        </Column>
       </CoverImageDetailsWrapper>
     </Wrapper>
   );
