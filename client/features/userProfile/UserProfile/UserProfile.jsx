@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as userProfileActions from 'features/userProfile/userProfileActions';
@@ -8,7 +8,7 @@ import UserProfileHeader from 'features/userProfile/UserProfileHeader';
 import Spinner from 'common/components/Spinner';
 import { Grid } from 'react-bootstrap';
 
-class UserProfile extends Component {
+class UserProfile extends React.Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.object,

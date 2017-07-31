@@ -1,19 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import * as selectors from 'features/trackProfile/trackProfileSelectors';
 import * as playerActions from 'features/player/playerActions';
+import PageHeaderInfoLayout from 'common/components/layouts/PageHeaderInfoLayout';
 import TrackProfileDetails from './TrackProfileDetails';
 import TrackProfileImage from './TrackProfileImage';
-
-// Container components should not have styles, try to extract reusable Wrapper components
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 30px;
-`;
-
-const Section = styled.section`margin-right: 30px;`;
 
 class TrackProfileHeader extends React.Component {
   static propTypes = {
@@ -26,6 +17,7 @@ class TrackProfileHeader extends React.Component {
     this.handleImageClick = this.handleImageClick.bind(this);
   }
 
+  // Refactor?
   handleImageClick() {
     const { updateActiveTrackIdAndPlay, togglePlay, trackId, active } = this.props;
     if (!trackId) return;
@@ -40,27 +32,23 @@ class TrackProfileHeader extends React.Component {
     const { artworkUrl, playing, active, liked, playbackCount, likesCount } = this.props;
     const { title, username, description, userRoute } = this.props;
     return (
-      <Wrapper>
-        <Section>
-          <TrackProfileImage
-            src={artworkUrl}
-            playing={playing}
-            active={active}
-            playbackCount={playbackCount}
-            likesCount={likesCount}
-            liked={liked}
-            onClick={this.handleImageClick}
-          />
-        </Section>
-        <Section>
-          <TrackProfileDetails
-            title={title}
-            username={username}
-            description={description}
-            userRoute={userRoute}
-          />
-        </Section>
-      </Wrapper>
+      <PageHeaderInfoLayout>
+        <TrackProfileImage
+          src={artworkUrl}
+          playing={playing}
+          active={active}
+          playbackCount={playbackCount}
+          likesCount={likesCount}
+          liked={liked}
+          onClick={this.handleImageClick}
+        />
+        <TrackProfileDetails
+          title={title}
+          username={username}
+          description={description}
+          userRoute={userRoute}
+        />
+      </PageHeaderInfoLayout>
     );
   }
 }

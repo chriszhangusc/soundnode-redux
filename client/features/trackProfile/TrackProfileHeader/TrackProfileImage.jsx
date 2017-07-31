@@ -17,9 +17,6 @@ const CoverImageDetailsWrapper = styled.div`
   height: 40px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  & i {
-    display: inline-block;
-  }
   align-items: center;
   justify-content: center;
 `;

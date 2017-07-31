@@ -1,25 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Title from 'common/components/Title';
+import ColumnLayout from 'common/components/layouts/ColumnLayout';
 import TrackUsername from './TrackUsername';
 import TrackDescription from './TrackDescription';
 import TrackActions from './TrackActions';
 
-const ColumnWrapper = styled.div`
-  position: relative;
-  width: 800px;
-  height: 100%;
-  margin-left: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: left; /* This is important or the children of this container would strech to have the full width of their parent */
-  justify-content: flex-start;
-`;
-
 function TrackProfileDetails({ title, username, description, userRoute }) {
   return (
-    <ColumnWrapper>
+    <ColumnLayout width={800}>
       <Title>
         {title}
       </Title>
@@ -30,7 +19,7 @@ function TrackProfileDetails({ title, username, description, userRoute }) {
         {description}
       </TrackDescription>
       <TrackActions />
-    </ColumnWrapper>
+    </ColumnLayout>
   );
 }
 

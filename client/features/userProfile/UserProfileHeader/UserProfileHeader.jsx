@@ -2,33 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as selectors from 'features/userProfile/userProfileSelectors';
-import styled from 'styled-components';
+import PageHeaderInfoLayout from 'common/components/layouts/PageHeaderInfoLayout';
 import UserProfileAvatar from './UserProfileAvatar';
 import UserProfileDetails from './UserProfileDetails';
 
-// Container components should not have styles, try to extract reusable Wrapper components
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 30px;
-`;
-
-const Section = styled.section`margin-right: 30px;`;
-
 function UserProfileHeader({ avatarUrl, permalinkUrl, username, followersCount, description }) {
   return (
-    <Wrapper>
-      <Section>
-        <UserProfileAvatar avatarUrl={avatarUrl} permalinkUrl={permalinkUrl} />
-      </Section>
-      <Section>
-        <UserProfileDetails
-          username={username}
-          followersCount={followersCount}
-          description={description}
-        />
-      </Section>
-    </Wrapper>
+    <PageHeaderInfoLayout>
+      <UserProfileAvatar avatarUrl={avatarUrl} permalinkUrl={permalinkUrl} />
+      <UserProfileDetails
+        username={username}
+        followersCount={followersCount}
+        description={description}
+      />
+    </PageHeaderInfoLayout>
   );
 }
 

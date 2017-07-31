@@ -1,16 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import ColumnLayout from 'common/components/layouts/ColumnLayout';
 import Title from 'common/components/Title';
 
 // Putting these small components in one file or separate files?
-
-const UserDetailsColumnWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: left;
-`;
 
 // Maybe tweak the style in the future
 const Username = Title.extend`margin-bottom: 10px;`;
@@ -32,7 +26,7 @@ const UserDescription = styled.p`
 
 function UserProfileDetails({ username, followersCount, description }) {
   return (
-    <UserDetailsColumnWrapper>
+    <ColumnLayout width={800}>
       <Username>
         {username}
       </Username>
@@ -42,7 +36,7 @@ function UserProfileDetails({ username, followersCount, description }) {
       <UserDescription>
         {description}
       </UserDescription>
-    </UserDetailsColumnWrapper>
+    </ColumnLayout>
   );
 }
 
