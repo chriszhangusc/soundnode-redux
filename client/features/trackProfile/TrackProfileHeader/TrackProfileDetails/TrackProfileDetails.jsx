@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Title from 'common/components/Title';
 import ColumnLayout from 'common/components/layouts/ColumnLayout';
-import TrackUsername from './TrackUsername';
+import RouterLink from 'common/components/links/RouterLink';
 import TrackDescription from './TrackDescription';
 import TrackActions from './TrackActions';
 
+const TrackUsername = RouterLink.extend`font-size: 1.5rem;`;
+
 function TrackProfileDetails({ title, username, description, userRoute }) {
   return (
-    <ColumnLayout width={800}>
+    <ColumnLayout width="800px">
       <Title>
         {title}
       </Title>

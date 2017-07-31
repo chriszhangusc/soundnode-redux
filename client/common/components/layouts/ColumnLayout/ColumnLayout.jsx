@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Section from 'common/components/layouts/Section';
 import styled from 'styled-components';
+
+const Section = styled.section`margin-bottom: 10px;`;
 
 const Wrapper = styled.div`
   position: relative;
@@ -25,8 +26,15 @@ function ColumnLayout({ children, width, height }) {
   );
 }
 
+ColumnLayout.defaultProps = {
+  width: '100%',
+  height: '100%',
+};
+
 ColumnLayout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  width: PropTypes.PropTypes.string,
+  height: PropTypes.PropTypes.string,
 };
 
 export default ColumnLayout;

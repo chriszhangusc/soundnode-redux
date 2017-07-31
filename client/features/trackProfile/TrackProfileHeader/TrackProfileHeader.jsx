@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as selectors from 'features/trackProfile/trackProfileSelectors';
 import * as playerActions from 'features/player/playerActions';
-import PageHeaderInfoLayout from 'common/components/layouts/PageHeaderInfoLayout';
+import RowLayout from 'common/components/layouts/RowLayout';
 import TrackProfileDetails from './TrackProfileDetails';
 import TrackProfileImage from './TrackProfileImage';
 
@@ -32,7 +32,7 @@ class TrackProfileHeader extends React.Component {
     const { artworkUrl, playing, active, liked, playbackCount, likesCount } = this.props;
     const { title, username, description, userRoute } = this.props;
     return (
-      <PageHeaderInfoLayout>
+      <RowLayout>
         <TrackProfileImage
           src={artworkUrl}
           playing={playing}
@@ -48,7 +48,7 @@ class TrackProfileHeader extends React.Component {
           description={description}
           userRoute={userRoute}
         />
-      </PageHeaderInfoLayout>
+      </RowLayout>
     );
   }
 }

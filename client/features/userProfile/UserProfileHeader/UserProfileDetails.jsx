@@ -7,16 +7,12 @@ import Title from 'common/components/Title';
 // Putting these small components in one file or separate files?
 
 // Maybe tweak the style in the future
-const Username = Title.extend`margin-bottom: 10px;`;
+const Username = Title.extend`margin: 0;`;
 
-const UserFollowers = styled.div`
-  color: ${props => props.theme.fontColorSub};
-  margin-bottom: 10px;
-`;
+const UserFollowers = styled.div`color: ${props => props.theme.fontColorSub};`;
 
 const UserDescription = styled.p`
   font-size: 1rem;
-  margin-bottom: 10px;
   overflow: scroll;
   height: 240px;
   width: 500px;
@@ -26,7 +22,7 @@ const UserDescription = styled.p`
 
 function UserProfileDetails({ username, followersCount, description }) {
   return (
-    <ColumnLayout width={800}>
+    <ColumnLayout width="800px">
       <Username>
         {username}
       </Username>

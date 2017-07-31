@@ -2,20 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as selectors from 'features/userProfile/userProfileSelectors';
-import PageHeaderInfoLayout from 'common/components/layouts/PageHeaderInfoLayout';
+import RowLayout from 'common/components/layouts/RowLayout';
 import UserProfileAvatar from './UserProfileAvatar';
 import UserProfileDetails from './UserProfileDetails';
 
 function UserProfileHeader({ avatarUrl, permalinkUrl, username, followersCount, description }) {
   return (
-    <PageHeaderInfoLayout>
+    <RowLayout>
       <UserProfileAvatar avatarUrl={avatarUrl} permalinkUrl={permalinkUrl} />
       <UserProfileDetails
         username={username}
         followersCount={followersCount}
         description={description}
       />
-    </PageHeaderInfoLayout>
+    </RowLayout>
   );
 }
 
