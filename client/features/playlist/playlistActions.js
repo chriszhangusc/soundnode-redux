@@ -111,8 +111,10 @@ export function updateShuffledPlaylistIfNeeded() {
   };
 }
 
-export function mergeVisiblePlaylist(trackIds) {
+export function mergeVisiblePlaylist(playlist) {
   return (dispatch, getState) => {
+    // playlist could be a single trackId or an array of trackIds
+    const trackIds = [...playlist];
     const state = getState();
     const visiblePlaylistName = getVisiblePlaylistName(state);
     dispatch(mergePlaylist(visiblePlaylistName, trackIds));

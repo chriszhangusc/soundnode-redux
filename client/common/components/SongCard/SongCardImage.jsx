@@ -4,14 +4,32 @@ import TrackImage from 'common/components/images/TrackImage';
 import PlaybackOverlay from 'common/components/PlaybackOverlay';
 import { connect } from 'react-redux';
 import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
-import { updateActiveTrackIdAndPlay, playSong, pauseSong } from 'features/player/playerActions';
+import * as playerActions from 'features/player/playerActions';
 import { switchActivePlaylistIfNeeded } from 'features/playlist/playlistActions';
 import { getLargeVersion } from 'common/utils/imageUtils';
 
-function SongCardImage({ active, playing, artworkUrl, handleImageClick }) {
+const handleImageClick = (togglePlaybackState, switchActivePlaylistIfNeeded, trackId, e) => {
+  e.preventDefault();
+  switchActivePlaylistIfNeeded();
+  togglePlaybackState(trackId);
+};
+
+function SongCardImage({
+  trackId,
+  active,
+  playing,
+  artworkUrl,
+  togglePlaybackState,
+  switchActivePlaylistIfNeeded,
+}) {
   return (
     <TrackImage src={artworkUrl} size="medium">
-      <PlaybackOverlay active={active} onClick={handleImageClick} playing={playing} />
+      <PlaybackOverlay
+        active={active}
+        onClick={event =>
+          handleImageClick(togglePlaybackState, switchActivePlaylistIfNeeded, trackId, event)}
+        playing={playing}
+      />
     </TrackImage>
   );
 }
@@ -27,34 +45,21 @@ SongCardImage.propTypes = {
   active: PropTypes.bool,
   playing: PropTypes.bool,
   artworkUrl: PropTypes.string,
-  handleImageClick: PropTypes.func,
 };
 
 function mapStateToProps(state, { track }) {
   // const user = getUserById(state, track.userId);
   return {
+    trackId: track.id,
     artworkUrl: getLargeVersion(track.artworkUrl),
     active: isTrackActive(state, track.id),
     playing: isTrackPlaying(state, track.id),
   };
 }
 
-// This is useful when you need to compute some action using stateProps
-function mergeProps(stateProps, { dispatch }, { track }) {
-  return {
-    ...stateProps,
-    // Besides doing it this way, we could also do it in a thunk function
-    // or pass all args into components and assemble there
-    handleImageClick() {
-      if (!stateProps.active) {
-        // Change song first and then switch active playlist
-        dispatch(updateActiveTrackIdAndPlay(track.id));
-        dispatch(switchActivePlaylistIfNeeded());
-      } else {
-        dispatch(stateProps.playing ? pauseSong() : playSong());
-      }
-    },
-  };
-}
+const actions = {
+  ...playerActions,
+  switchActivePlaylistIfNeeded,
+};
 
-export default connect(mapStateToProps, null, mergeProps)(SongCardImage);
+export default connect(mapStateToProps, actions)(SongCardImage);

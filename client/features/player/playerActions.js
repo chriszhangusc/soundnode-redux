@@ -1,4 +1,8 @@
-import { clearShufflePlaylist, shufflePlaylist } from 'features/playlist/playlistActions';
+import {
+  clearShufflePlaylist,
+  shufflePlaylist,
+  switchActivePlaylistIfNeeded,
+} from 'features/playlist/playlistActions';
 import { getPlaylistByMode } from 'features/playlist/playlistSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
 import * as types from './playerActionTypes';
@@ -215,3 +219,23 @@ export function togglePlayMode(newMode) {
     }
   };
 }
+
+export function togglePlaybackState(trackId) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const activeTrackId = getActiveTrackId(state);
+    if (trackId === activeTrackId) {
+      dispatch(togglePlay());
+    } else {
+      dispatch(switchActivePlaylistIfNeeded());
+      dispatch(updateActiveTrackIdAndPlay(trackId));
+    }
+  };
+}
+
+// export function togglePlaybackStateAndSwitchPlaylist() {
+//   return (dispatch) => {
+//     dispatch(togglePlaybackState());
+//     dispatch(switchPlaylistIfNeeded());
+//   };
+// }

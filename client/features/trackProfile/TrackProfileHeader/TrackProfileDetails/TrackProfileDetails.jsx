@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import * as selectors from 'features/trackProfile/trackProfileSelectors';
 import Title from 'common/components/Title';
 import ColumnLayout from 'common/components/layouts/ColumnLayout';
-import RouterLink from 'common/components/links/RouterLink';
+import TrackUsername from './TrackUsername';
 import TrackDescription from './TrackDescription';
 import TrackActions from './TrackActions';
-
-const TrackUsername = RouterLink.extend`font-size: 1.5rem;`;
 
 function TrackProfileDetails({ title, username, description, userRoute }) {
   return (
@@ -39,4 +39,13 @@ TrackProfileDetails.defaultProps = {
   description: '',
 };
 
-export default TrackProfileDetails;
+function mapStateToProps(state) {
+  return {
+    title: selectors.getProfiledTrackTitle(state),
+    username: selectors.getProfiledTrackUsername(state),
+    description: selectors.getProfiledTrackDescription(state),
+    userRoute: selectors.getProfiledTrackUserRoute(state),
+  };
+}
+
+export default connect(mapStateToProps)(TrackProfileDetails);

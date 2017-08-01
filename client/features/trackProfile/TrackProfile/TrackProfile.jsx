@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as trackProfileActions from 'features/trackProfile/trackProfileActions';
@@ -8,7 +8,7 @@ import { Grid } from 'react-bootstrap';
 import TrackProfileComments from '../TrackProfileComments';
 import TrackProfileHeader from '../TrackProfileHeader';
 
-class TrackProfile extends Component {
+class TrackProfile extends React.Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.object,
@@ -21,6 +21,7 @@ class TrackProfile extends Component {
   componentDidMount() {
     const { match } = this.props;
     const trackId = match.params.trackId;
+    // Switch to track playlist
     this.props.loadTrackProfileData(trackId);
   }
 

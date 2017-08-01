@@ -1,4 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
+import { mergeVisiblePlaylist, updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 import { fetchProfiledTrack, fetchTrackComments, fetchMoreComments } from './trackProfileApi';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import * as types from './trackProfileActionTypes';
@@ -72,23 +73,26 @@ export function receiveComments(normalized) {
   };
 }
 
-export function receiveTracks(normalizedTrack) {
+export function receiveTrack(normalizedTrack) {
   return (dispatch) => {
     dispatch(mergeEntities(normalizedTrack.entities));
     dispatch(updateProfiledTrack(normalizedTrack.result));
+    // Update playlist
+    dispatch(mergeVisiblePlaylist([normalizedTrack.result]));
     dispatch(stopFetchingProfiledTrack());
   };
 }
 
 export function loadTrackProfileData(trackId) {
   return (dispatch) => {
+    dispatch(updateVisiblePlaylistName(`track-${trackId}`));
     dispatch(startFetchingProfiledTrack());
     dispatch(startFetchingComments());
     Promise.all([fetchProfiledTrack(trackId), fetchTrackComments(trackId)])
       .then((res) => {
         const normalizedTrack = res[0];
         const normalizedComments = res[1];
-        dispatch(receiveTracks(normalizedTrack));
+        dispatch(receiveTrack(normalizedTrack));
         dispatch(receiveComments(normalizedComments));
       })
       .catch((err) => {
