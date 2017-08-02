@@ -2,14 +2,20 @@
 import styled from 'styled-components';
 
 const Link = styled.a`
-  color: ${props => props.theme.fontColor};
+  color: ${props => (props.inverted ? props.theme.fontColorSub : props.theme.fontColor)};
   text-decoration: none;
-  &:hover,
+  transition: color 0.25s ease-out;
+  &:hover {
+    text-decoration: none;
+    color: ${props =>
+      props.hoverColor || (props.inverted ? props.theme.fontColorSub : props.theme.fontColor)};
+  }
+
+  &:visited,
   &:focus,
   &:active {
-    color: ${props => props.theme.fontColor};
-    cursor: pointer;
     text-decoration: none;
+    color: ${props => (props.inverted ? props.theme.fontColorSub : props.theme.fontColor)};
   }
 `;
 

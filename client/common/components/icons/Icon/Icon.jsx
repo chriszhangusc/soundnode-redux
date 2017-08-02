@@ -7,13 +7,15 @@ import shortid from 'shortid';
 
 // Filter props to get rid of unknown props warning:
 // https://github.com/styled-components/styled-components/issues/305
-const StyledIcon = styled(({ color, hoverColor, active, activeColor, iconSize, ...rest }) =>
-  <FontAwesome {...rest} />,
+const StyledIcon = styled(
+  ({ color, hoverColor, active, inverted, activeColor, iconSize, small, ...rest }) =>
+    <FontAwesome {...rest} />,
 ).attrs({
   color: props => props.color || props.theme.fontColor,
   activeColor: props => props.activeColor || props.theme.themeColor,
   hoverColor: props => props.hoverColor || props.color,
-  iconSize: props => props.iconSize || '1rem',
+  // iconSize: props => props.iconSize || '1rem',
+  iconSize: props => (props.small ? '0.75rem' : '1rem'),
 })`
   margin-right: 5px;
   color: ${props => (props.active ? props.activeColor : props.color)};

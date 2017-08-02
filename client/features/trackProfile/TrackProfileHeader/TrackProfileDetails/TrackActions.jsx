@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import LinkButton from 'common/components/links/LinkButton';
 import { copyToClipboard } from 'features/copy';
 import * as selectors from 'features/trackProfile/trackProfileSelectors';
 
@@ -10,25 +11,6 @@ const Wrapper = styled.div`
   position: absolute;
   left: 0;
   bottom: 0;
-`;
-
-const LinkButton = styled.a`
-  display: inline-block;
-  border: 1px solid;
-  border-radius: .25em;
-  padding: 3px 6px;
-  color: ${props => props.theme.fontColorSub};
-  font-size: 0.75rem;
-  margin-right: 10px;
-  transition: all 200ms ease-in-out;
-  & i {
-    margin-right: 5px;
-  }
-
-  &:hover {
-    cursor: pointer;
-    color: ${props => props.theme.fontColor};
-  }
 `;
 
 function TrackActions({ permalink, downloadable, downloadUrl, handleCopyPermalink }) {

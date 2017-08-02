@@ -44,7 +44,6 @@ Card.Subtitle = styled.span`
 `;
 
 Card.SubLink = RouterLink.extend`
-  display: inline-block;
   margin-left: 10px;
   color: ${props => props.theme.fontColorSub};
   overflow: hidden;
@@ -56,10 +55,5 @@ Card.SubLink = RouterLink.extend`
 `;
 
 Card.InnerSpan = styled.span`margin-right: 5px;`;
-
-// Card.ImageWrapper = styled.div`
-//   width: 206px;
-//   height: 206px;
-// `;
 
 export default Card;
