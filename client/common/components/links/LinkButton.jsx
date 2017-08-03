@@ -13,15 +13,8 @@ const LinkButton = Link.extend`
     margin-right: 5px;
   }
 
-
   &:hover {
-    cursor: pointer;
     color: ${props => props.theme.fontColor};
-  }
-
-  &:focus,
-  &:active {
-    color: ${props => props.theme.fontColorSub};
   }
 `;
 

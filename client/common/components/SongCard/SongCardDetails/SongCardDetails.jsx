@@ -5,6 +5,8 @@ import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeC
 import Card from 'common/components/Card';
 import { connect } from 'react-redux';
 import { getUserByTrackId } from 'features/entities/entitiesSelectors';
+import SongCardTitle from './SongCardTitle';
+import SongCardSubTitle from './SongCardSubTitle';
 
 function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
   const trackUrl = `${TRACK_PROFILE_ROUTE}/${trackId}`;
@@ -13,15 +15,15 @@ function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
   return (
     <Card.Column>
       <Card.Row>
-        <Card.Title to={trackUrl} title={title}>
+        <SongCardTitle to={trackUrl} title={title}>
           {title}
-        </Card.Title>
+        </SongCardTitle>
       </Card.Row>
       <Card.Row>
         <UserImage linkTo={userUrl} src={userAvatar} size="small" />
-        <Card.SubLink to={userUrl} title={username}>
+        <SongCardSubTitle to={userUrl} title={username}>
           {username}
-        </Card.SubLink>
+        </SongCardSubTitle>
       </Card.Row>
     </Card.Column>
   );
