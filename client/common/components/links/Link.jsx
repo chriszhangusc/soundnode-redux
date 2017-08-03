@@ -7,12 +7,16 @@ import styled from 'styled-components';
 // a:hover {color:#FF00FF;}  /* mouse over link */
 // a:active {color:#0000FF;}  /* selected link */
 
+// https://medium.com/styled-components/announcing-v2-f01ef3766ac2
+// The .extend and .withComponent helpers
+// Sometimes, a single styled-component with lots of props isn’t the best way to do things
+// it can be better to build up a family of related components.
+
 const Link = styled.a`
   cursor: pointer;
-  color: ${props => (props.inverted ? props.theme.fontColorSub : props.theme.fontColor)};
+  color: ${props => props.theme.fontColor};
   text-decoration: none;
   transition: color 200ms ease-out;
-
   /*
   &:visited {
     color: ${props => (props.inverted ? props.theme.fontColorSub : props.theme.fontColor)};
@@ -21,7 +25,7 @@ const Link = styled.a`
   &:focus,
   &:active {
     text-decoration: none;
-    color: ${props => (props.inverted ? props.theme.fontColor : props.theme.fontColorSub)};
+    color: ${props => props.theme.fontColor};
   }
 `;
 

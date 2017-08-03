@@ -4,6 +4,9 @@ const CommentUsername = RouterLink.extend`
   color: ${props => props.theme.fontColorSub};
   font-size: 0.85rem;
   font-weight: 700;
+  &:hover {
+    color: ${props => props.theme.fontColor};
+  }
 `;
 
 export default CommentUsername;
