@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   background-color: ${props => props.theme.bgColorSub};
   z-index: ${zIndexDropdownSearch};
   display: block;
-  transition: .4s ease-in-out;
+  transition: all 0.4s ease-in-out;
   box-shadow: ${props => !props.hidden && '0 0 10px 8px rgba(0, 0, 0, 0.2)'};
   padding: ${props => !props.hidden && '10px 10px 5px 10px'};
   transform: ${props => !props.hidden && 'translateY(0)'};
@@ -33,16 +33,16 @@ const Wrapper = styled.div`
 
 // Render the artists/users results section.
 function renderArtistResults(userIds) {
-  return userIds.map(userId => (
-    <DropdownSearchResultsRowUser key={userId.toString()} userId={userId} />
-  ));
+  return userIds.map(userId =>
+    <DropdownSearchResultsRowUser key={userId.toString()} userId={userId} />,
+  );
 }
 
 // Render the tracks results section.
 function renderTrackResults(trackIds) {
-  return trackIds.map(trackId => (
-    <DropdownSearchResultsRowTrack key={trackId.toString()} trackId={trackId} />
-  ));
+  return trackIds.map(trackId =>
+    <DropdownSearchResultsRowTrack key={trackId.toString()} trackId={trackId} />,
+  );
 }
 
 function DropdownSearchResults({ userIds, trackIds, hidden, queryLink }) {

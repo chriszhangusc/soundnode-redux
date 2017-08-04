@@ -4,6 +4,7 @@ import RouterLink from 'common/components/links/RouterLink';
 import UserImage from 'common/components/images/UserImage';
 import TrackImage from 'common/components/images/TrackImage';
 import styled from 'styled-components';
+import { truncateWidth } from 'app/css/styleUtils';
 
 const ContentWrapper = styled.div`
   padding: 8px 10px;
@@ -16,16 +17,13 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Title = styled.div`
+const SuggestionTitle = styled.div`
   font-size: 0.95rem;
-  flex: 1;
   max-width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  ${truncateWidth('100%')};
 `;
 
-const Subtitle = Title.extend`
+const SuggestionSubtitle = SuggestionTitle.extend`
   color: ${props => props.theme.fontColorSub};
   font-size: 0.9rem;
 `;
@@ -36,7 +34,7 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   flex: 1;
-  width: calc(100% - 32px);
+  width: calc(100% - 32px - 10px);
 `;
 
 function renderAvatarByType(type, avatarUrl) {
@@ -55,12 +53,12 @@ function DropdownSearchResultsRow({ type, avatarUrl, linkUrl, title, subtitle })
         <ContentWrapper>
           {renderAvatarByType(type, avatarUrl)}
           <TitleWrapper>
-            <Title>
+            <SuggestionTitle>
               {title}
-            </Title>
-            <Subtitle>
+            </SuggestionTitle>
+            <SuggestionSubtitle>
               {subtitle}
-            </Subtitle>
+            </SuggestionSubtitle>
           </TitleWrapper>
         </ContentWrapper>
       </RouterLink>

@@ -1,18 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import RouterLink from 'common/components/links/RouterLink';
+import { truncateMaxWidth } from 'app/css/styleUtils';
 
 const TrackTitle = RouterLink.extend`
-  overflow: hidden;
-  text-overflow: ellipsis;
   display: inline-block;
   font-size: 1.05rem;
+  ${truncateMaxWidth('100%')};
 `;
 
-const TrackSubtitle = RouterLink.extend`
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
+const TrackSubtitle = TrackTitle.extend`
   color: ${props => props.theme.fontColorSub};
   font-size: 0.95rem;
 `;
@@ -32,12 +30,26 @@ function PlayerTrackDetails({ title, subtitle, trackUrl, artistUrl }) {
         </TrackTitle>
       </div>
       <div>
-        <TrackSubtitle to={artistUrl || '/'}>
+        <TrackSubtitle to={artistUrl}>
           {subtitle}
         </TrackSubtitle>
       </div>
     </DetailsWrapper>
   );
 }
+
+PlayerTrackDetails.defaultProps = {
+  title: '',
+  subtitle: '',
+  trackUrl: '',
+  artistUrl: '',
+};
+
+PlayerTrackDetails.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  trackUrl: PropTypes.string,
+  artistUrl: PropTypes.string,
+};
 
 export default PlayerTrackDetails;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { truncateWidth } from 'app/css/styleUtils';
 import PlaylistTooltips from './PlaylistTooltips';
 
 const PlaylistItem = styled.li`
@@ -24,10 +25,8 @@ const PlaylistItem = styled.li`
 
 const PlaylistItemTitle = styled.span`
   flex-grow: 1;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  width: 180px;
+  width: 200px;
+  ${truncateWidth('200px')};
   text-align: left;
   margin-right: 10px;
   color: ${props => props.theme.fontColor};
@@ -37,14 +36,10 @@ const PlaylistItemTitle = styled.span`
   }
 `;
 
-const PlaylistItemArtistName = styled.span`
-  flex-grow: 1;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  text-align: left;
+const PlaylistItemArtistName = PlaylistItemTitle.extend`
   color: ${props => props.theme.fontColorSub};
   width: 140px;
+  ${truncateWidth('140px')};
 `;
 
 function PlaylistRow({

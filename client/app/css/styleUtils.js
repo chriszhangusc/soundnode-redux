@@ -26,19 +26,21 @@ export const media = {
   `,
 };
 
-export function truncate(width) {
+const truncate = `
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;`;
+
+export function truncateWidth(width) {
   return `
-    width: ${width};
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: ${width || '100%'};
+    ${truncate};
   `;
 }
 
-// Then you can use it like this:
-// import { truncate } from '../style-utils';
-// // Make this div truncate the text with an ellipsis
-// const Box = styled.div`
-//   ${ truncate('250px') }
-//   background: papayawhip;
-// `;
+export function truncateMaxWidth(maxWidth) {
+  return `
+    maxWidth: ${maxWidth || '100%'};
+    ${truncate};
+  `;
+}
