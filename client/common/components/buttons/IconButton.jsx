@@ -5,7 +5,7 @@ import shortid from 'shortid';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 const WrapperButton = styled.button`
-  color: ${props => props.activeColor || props.color || props.theme.fontColor};
+  color: ${props => props.activeColor || props.color || props.theme.colors.fontColor};
   padding: 4px;
   border: none;
   outline: none;
@@ -14,7 +14,7 @@ const WrapperButton = styled.button`
   margin: 0 auto;
   text-align: center;
   &:hover {
-    color: ${props => props.hoverColor || props.theme.fontColorSub};
+    color: ${props => props.hoverColor || props.theme.colors.fontColorSub};
   }
 `;
 

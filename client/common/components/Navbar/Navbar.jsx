@@ -10,7 +10,7 @@ const StyledNavbar = styled.nav`
   width: 100%;
   top: 0;
   left: 0;
-  background-color: ${props => props.theme.bgColorSub};
+  background-color: ${props => props.theme.colors.bgColorSub};
   height: 80px;
   max-height: 80px;
   z-index: ${zIndexNav};

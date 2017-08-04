@@ -33,7 +33,7 @@ const CommentHeader = styled.div`
 `;
 
 const CommentTimestamp = styled.span`
-  color: ${props => props.theme.fontColorSub};
+  color: ${props => props.theme.colors.fontColorSub};
   font-size: 0.8rem;
 `;
 

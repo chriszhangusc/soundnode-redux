@@ -12,14 +12,14 @@ const PlaylistItem = styled.li`
   line-height: 50px;
   max-height: 50px;
   min-height: 50px;
-  color: ${props => props.theme.fontColor};
-  border-bottom: 1px solid ${props => props.theme.separatorColorDark};
+  color: ${props => props.theme.colors.fontColor};
+  border-bottom: 1px solid ${props => props.theme.colors.separatorColorDark};
   padding: 12px 20px;
   white-space: nowrap;
   cursor: pointer;
-  background-color: ${props => props.active && props.theme.separatorColorDark};
+  background-color: ${props => props.active && props.theme.colors.separatorColorDark};
   &:hover {
-    background-color: ${props => props.theme.separatorColorDark};
+    background-color: ${props => props.theme.colors.separatorColorDark};
   }
 `;
 
@@ -29,7 +29,7 @@ const PlaylistItemTitle = styled.span`
   ${truncateWidth('200px')};
   text-align: left;
   margin-right: 10px;
-  color: ${props => props.theme.fontColor};
+  color: ${props => props.theme.colors.fontColor};
   font-size: 1rem;
   & span {
     margin: 10px;
@@ -37,7 +37,7 @@ const PlaylistItemTitle = styled.span`
 `;
 
 const PlaylistItemArtistName = PlaylistItemTitle.extend`
-  color: ${props => props.theme.fontColorSub};
+  color: ${props => props.theme.colors.fontColorSub};
   width: 140px;
   ${truncateWidth('140px')};
 `;

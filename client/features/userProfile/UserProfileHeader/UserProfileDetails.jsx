@@ -9,14 +9,14 @@ import Title from 'common/components/Title';
 // Maybe tweak the style in the future
 const Username = Title.extend`margin: 0;`;
 
-const UserFollowers = styled.div`color: ${props => props.theme.fontColorSub};`;
+const UserFollowers = styled.div`color: ${props => props.theme.colors.fontColorSub};`;
 
 const UserDescription = styled.p`
   font-size: 1rem;
   overflow: scroll;
   height: 240px;
   width: 500px;
-  color: ${props => props.theme.fontColorSub};
+  color: ${props => props.theme.colors.fontColorSub};
   white-space: pre-wrap;
 `;
 

@@ -19,7 +19,7 @@ const SpinnerWrapper = styled.div`
 `;
 
 const Rect = styled.div`
-  background-color: ${props => props.color || props.theme.themeColor};
+  background-color: ${props => props.color || props.theme.colors.themeColor};
   height: 100%;
   width: 7px;
   margin: 0 3px 0 0;

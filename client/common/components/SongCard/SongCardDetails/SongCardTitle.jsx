@@ -9,7 +9,7 @@ const SongCardTitle = RouterLink.extend`
   -webkit-box-orient: vertical;
   height: 40px;
   &:hover {
-    color: ${props => props.theme.fontColor};
+    color: ${props => props.theme.colors.fontColor};
   }
 `;
 

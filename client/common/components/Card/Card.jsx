@@ -3,15 +3,15 @@ import RouterLink from 'common/components/links/RouterLink';
 import CardButton from './CardButton';
 
 const Card = styled.div`
-  background-color: ${props => props.theme.bgColor};
-  box-shadow: 0 0 12px 8px ${props => props.theme.boxShadowColor};
+  background-color: ${props => props.theme.colors.bgColor};
+  box-shadow: 0 0 12px 8px ${props => props.theme.colors.boxShadowColor};
   padding: 11px;
   width: 230px;
   margin: 10px 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid ${props => (props.active ? props.theme.themeColor : 'transparent')};
+  border: 1px solid ${props => (props.active ? props.theme.colors.themeColor : 'transparent')};
 `;
 
 Card.IconButton = CardButton;
@@ -40,12 +40,12 @@ Card.Row = styled.div`
 
 Card.Subtitle = styled.span`
   font-size: 0.95rem;
-  color: ${props => props.theme.fontColorSub};
+  color: ${props => props.theme.colors.fontColorSub};
 `;
 
 // Card.SubLink = RouterLink.extend`
 //   margin-left: 10px;
-//   color: ${props => props.theme.fontColorSub};
+//   color: ${props => props.theme.colors.fontColorSub};
 //   overflow: hidden;
 //   text-overflow: ellipsis;
 //   line-height: 32px; /* Vertical align!! It should be equal to the height of avatar */

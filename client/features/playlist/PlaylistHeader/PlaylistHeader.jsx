@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const PlaylistHeaderWrapper = styled.div`
   margin-bottom: 10px;
   text-align: center;
-  color: ${props => props.theme.fontColorSub};
+  color: ${props => props.theme.colors.fontColorSub};
   font-size: 1.1rem;
 `;
 

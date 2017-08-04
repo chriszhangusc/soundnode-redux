@@ -5,7 +5,7 @@ const LinkButton = Link.extend`
   border: 1px solid;
   border-radius: .25em;
   padding: 3px 6px;
-  color: ${props => props.theme.fontColorSub};
+  color: ${props => props.theme.colors.fontColorSub};
   font-size: 0.75rem;
   margin-right: 10px;
 
@@ -14,7 +14,7 @@ const LinkButton = Link.extend`
   }
 
   &:hover {
-    color: ${props => props.theme.fontColor};
+    color: ${props => props.theme.colors.fontColor};
   }
 `;
 

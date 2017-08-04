@@ -5,7 +5,7 @@ const TrackDescription = styled.p`
   overflow: scroll;
   white-space: pre-wrap;
   font-size: 0.9rem;
-  color: ${props => props.theme.fontColorSub};
+  color: ${props => props.theme.colors.fontColorSub};
 `;
 
 export default TrackDescription;

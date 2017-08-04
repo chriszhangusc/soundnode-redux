@@ -14,18 +14,18 @@ import styled from 'styled-components';
 
 const Link = styled.a`
   cursor: pointer;
-  color: ${props => props.theme.fontColor};
+  color: ${props => props.theme.colors.fontColor};
   text-decoration: none;
   transition: color 200ms ease-out;
   /*
   &:visited {
-    color: ${props => (props.inverted ? props.theme.fontColorSub : props.theme.fontColor)};
+    color: ${props => (props.inverted ? props.theme.colors.fontColorSub : props.theme.colors.fontColor)};
   }*/
   &:hover,
   &:focus,
   &:active {
     text-decoration: none;
-    color: ${props => props.theme.fontColor};
+    color: ${props => props.theme.colors.fontColor};
   }
 `;
 

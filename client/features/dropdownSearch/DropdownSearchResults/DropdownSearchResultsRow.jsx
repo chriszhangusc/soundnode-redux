@@ -11,9 +11,9 @@ const ContentWrapper = styled.div`
   cursor: pointer;
   display: flex;
   align-items: middle;
-  border-bottom: 1px solid ${props => props.theme.separatorColorDark};
+  border-bottom: 1px solid ${props => props.theme.colors.separatorColorDark};
   &:hover {
-    background: ${props => props.theme.separatorColorDark};
+    background: ${props => props.theme.colors.separatorColorDark};
   }
 `;
 
@@ -24,7 +24,7 @@ const SuggestionTitle = styled.div`
 `;
 
 const SuggestionSubtitle = SuggestionTitle.extend`
-  color: ${props => props.theme.fontColorSub};
+  color: ${props => props.theme.colors.fontColorSub};
   font-size: 0.9rem;
 `;
 

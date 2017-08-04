@@ -12,7 +12,7 @@ const ShowAllLink = RouterLink.extend`
   display: block;
   line-height: 35px;
   text-align: center;
-  color: ${props => props.theme.fontColorSub};
+  color: ${props => props.theme.colors.fontColorSub};
   font-size: 0.9rem;
   padding: 5px;
 `;
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   width: 100%;
   position: absolute;
   top: 50px;
-  background-color: ${props => props.theme.bgColorSub};
+  background-color: ${props => props.theme.colors.bgColorSub};
   z-index: ${zIndexDropdownSearch};
   display: block;
   transition: all 0.4s ease-in-out;

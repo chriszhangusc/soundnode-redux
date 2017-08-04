@@ -13,7 +13,7 @@ const GenreLinkButton = RouterLink.extend`
   font-size: 0.75rem;
   transition: color 200ms ease-in;
   &:hover {
-    color: ${props => props.theme.fontColorSub};
+    color: ${props => props.theme.colors.fontColorSub};
   }
 `;
 

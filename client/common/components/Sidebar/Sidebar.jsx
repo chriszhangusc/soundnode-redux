@@ -9,7 +9,7 @@ const SidebarWrapper = styled.nav`
   position: fixed;
   width: 300px;
   height: 100%;
-  background-color: ${props => props.theme.bgColorSub};
+  background-color: ${props => props.theme.colors.bgColorSub};
   z-index: ${zIndexSidebar};
 `;
 

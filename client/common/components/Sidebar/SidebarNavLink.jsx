@@ -7,10 +7,10 @@ const SidebarNavLink = NavLink.extend.attrs({
   font-size: 1.1rem;
   display: block;
   text-align: center;
-  color: ${props => props.theme.fontColor};
+  color: ${props => props.theme.colors.fontColor};
   
   &:hover {
-    color: ${props => props.theme.fontColorSub};
+    color: ${props => props.theme.colors.fontColorSub};
   }
 
   &.${props => props.activeClassName} {

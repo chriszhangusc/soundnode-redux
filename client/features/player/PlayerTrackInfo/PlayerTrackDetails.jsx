@@ -11,7 +11,7 @@ const TrackTitle = RouterLink.extend`
 `;
 
 const TrackSubtitle = TrackTitle.extend`
-  color: ${props => props.theme.fontColorSub};
+  color: ${props => props.theme.colors.fontColorSub};
   font-size: 0.95rem;
 `;
 

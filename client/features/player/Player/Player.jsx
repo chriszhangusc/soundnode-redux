@@ -20,8 +20,8 @@ const PlayerWrapper = styled.div`
   bottom: 0;
   width: 100%;
   height: 90px;
-  background-color: ${props => props.theme.bgColorSub};
-  border-top: 1px solid ${props => props.theme.separatorColorDark};
+  background-color: ${props => props.theme.colors.bgColorSub};
+  border-top: 1px solid ${props => props.theme.colors.separatorColorDark};
   z-index: ${zIndexPlayer};
 `;
 
