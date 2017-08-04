@@ -7,11 +7,11 @@ const PlaylistHeaderWrapper = styled.div`
   margin-bottom: 10px;
   text-align: center;
   color: ${props => props.theme.colors.fontColorSub};
-  font-size: 1.1rem;
 `;
 
 const TitleColumn = styled.div`
   display: inline-block;
+  font-size: 1.05rem;
   margin: 10px;
 `;
 

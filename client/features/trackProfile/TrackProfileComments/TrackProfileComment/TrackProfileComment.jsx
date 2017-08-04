@@ -13,7 +13,6 @@ const Wrapper = styled.div`
   display: flex;
   align-items: flex-start;
   margin: 20px 0;
-  max-height: 60px;
 `;
 
 const CommentWrapper = styled.div`
@@ -23,7 +22,7 @@ const CommentWrapper = styled.div`
 `;
 
 const CommentBody = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   margin: 5px 0 0 0;
 `;
 
@@ -34,7 +33,7 @@ const CommentHeader = styled.div`
 
 const CommentTimestamp = styled.span`
   color: ${props => props.theme.colors.fontColorSub};
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 `;
 
 function TrackProfileComment({ commentBody, userId, username, commentTimestamp, userAvatarUrl }) {

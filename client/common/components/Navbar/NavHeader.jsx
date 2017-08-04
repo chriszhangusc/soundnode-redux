@@ -3,13 +3,9 @@ import styled from 'styled-components';
 import { Glyphicon } from 'react-bootstrap';
 import RouterLink from 'common/components/links/RouterLink';
 
-const NavbarBrandName = styled.span`
-  margin-left: 15px;
-`;
+const NavbarBrandName = styled.span`margin-left: 15px;`;
 
-const NavbarBrand = RouterLink.extend`
-  font-size: 1.3rem;
-`;
+const NavbarBrand = RouterLink.extend`font-size: 1.25rem;`;
 
 function NavHeader() {
   return (

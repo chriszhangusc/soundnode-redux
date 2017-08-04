@@ -40,7 +40,7 @@ export function truncateWidth(width) {
 
 export function truncateMaxWidth(maxWidth) {
   return `
-    maxWidth: ${maxWidth || '100%'};
+    max-width: ${maxWidth || '100%'};
     ${truncate};
   `;
 }

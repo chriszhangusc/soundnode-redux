@@ -7,7 +7,6 @@ import PlaylistTooltips from './PlaylistTooltips';
 const PlaylistItem = styled.li`
   display: flex;
   align-items: center;
-  font-size: 13px;
   height: 50px;
   line-height: 50px;
   max-height: 50px;
