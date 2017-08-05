@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import DropdownSearch from 'features/dropdownSearch/DropdownSearch';
 import Auth from 'features/auth/Auth';
+import { Flex } from 'grid-styled';
 import NavHeader from './NavHeader';
 
 const StyledNavbar = styled.nav`
   position: fixed;
+  display: flex;
   width: 100%;
   top: 0;
   left: 0;
@@ -14,34 +16,20 @@ const StyledNavbar = styled.nav`
   max-height: 80px;
   z-index: ${props => props.theme.zIndexes[2]};
   padding: 0 100px;
-  display: flex;
   justify-content: space-between;
-`;
-
-const NavbarSectionLeft = styled.section`
-  display: flex;
-  align-items: center;
-  flex: 1;
-`;
-
-const NavbarSectionRight = styled.section`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex: 1;
 `;
 
 function Navbar() {
   return (
     <StyledNavbar>
-      <NavbarSectionLeft>
+      <Flex align="center" justify="flex-start" flex="1">
         <NavHeader />
-      </NavbarSectionLeft>
+      </Flex>
 
-      <NavbarSectionRight>
+      <Flex align="center" justify="flex-end" flex="1">
         <DropdownSearch />
         <Auth />
-      </NavbarSectionRight>
+      </Flex>
     </StyledNavbar>
   );
 }

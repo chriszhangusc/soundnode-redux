@@ -2648,6 +2648,15 @@ graceful-fs@~3.0.2:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
+grid-styled@^2.0.0-10:
+  version "2.0.0-10"
+  resolved "https://registry.yarnpkg.com/grid-styled/-/grid-styled-2.0.0-10.tgz#d6e8254680027f3cf04a21d2d29e1f89dc24a622"
+  dependencies:
+    prop-types "^15.5.10"
+    styled-components "^2.0.1"
+    styled-system "^1.0.0-9"
+    tag-hoc "^1.0.0-0"
+
 handle-thing@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
@@ -5270,7 +5279,7 @@ styled-components@^1.0.8:
     prop-types "^15.5.4"
     supports-color "^3.1.2"
 
-styled-components@^2.1.1:
+styled-components@^2.0.1, styled-components@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-2.1.1.tgz#7e9b5bc319ee3963b47aebb74f4658119ea9d484"
   dependencies:
@@ -5283,6 +5292,10 @@ styled-components@^2.1.1:
     prop-types "^15.5.4"
     stylis "^3.2.1"
     supports-color "^3.2.3"
+
+styled-system@^1.0.0-9:
+  version "1.0.0-12"
+  resolved "https://registry.yarnpkg.com/styled-system/-/styled-system-1.0.0-12.tgz#e2f72a2ef25fa3fc91612433595a23cd6a11f59b"
 
 stylis@^3.2.1:
   version "3.2.3"
@@ -5330,6 +5343,10 @@ table@^3.7.8:
     lodash "^4.0.0"
     slice-ansi "0.0.4"
     string-width "^2.0.0"
+
+tag-hoc@^1.0.0-0:
+  version "1.0.0-0"
+  resolved "https://registry.yarnpkg.com/tag-hoc/-/tag-hoc-1.0.0-0.tgz#bc25d20f99e11431f6876c8013219fbaf85049e4"
 
 tapable@^0.2.5, tapable@~0.2.5:
   version "0.2.6"
