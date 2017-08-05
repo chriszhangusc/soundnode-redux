@@ -16,7 +16,7 @@ import { CLIENT_ID, REDIRECT_URI } from 'common/constants/authConsts';
 import Routing from 'app/routing/Routing';
 import { Route, Switch } from 'react-router-dom';
 import { AUTH_CALLBACK_ROUTE } from 'common/constants/routeConsts';
-import { zIndexModal } from 'app/css/zIndex';
+import { zIndexes } from 'app/css/theme';
 import 'app/css/global';
 
 SC.initialize({
@@ -33,9 +33,7 @@ const PageContentWrapper = styled.div`
   min-height: 100vh;
 `;
 
-const MainWrapper = styled.div`
-  padding-top: 80px;
-`;
+const MainWrapper = styled.div`padding-top: 80px;`;
 
 class Main extends React.Component {
   componentDidMount() {
@@ -56,7 +54,7 @@ class Main extends React.Component {
         spinner
         text="Authenticating..."
         animate
-        zIndex={zIndexModal}
+        zIndex={zIndexes[5]}
       >
         <MainWrapper>
           <Navbar />

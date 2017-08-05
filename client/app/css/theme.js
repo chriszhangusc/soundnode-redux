@@ -1,17 +1,15 @@
 import * as colors from './colors';
 
-const fontSize = {
-  default: '1rem',
-  xsm: '0.8rem',
-  sm: '0.95rem',
-  md: '1rem',
-  lg: '1.25rem',
-  xlg: '1.5rem',
-};
+// Too implicit
+export const fontSizes = ['0.8rem', '0.9rem', '0.95rem', '1rem', '1.25rem', '1.5rem', '2rem'];
+
+// 0 is default
+export const zIndexes = [0, 1, 2, 3, 4, 5];
 
 const theme = {
   colors,
-  fontSize,
+  fontSizes,
+  zIndexes,
 };
 
 export default theme;

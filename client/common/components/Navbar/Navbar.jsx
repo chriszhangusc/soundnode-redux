@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import DropdownSearch from 'features/dropdownSearch/DropdownSearch';
 import Auth from 'features/auth/Auth';
-import { zIndexNav } from 'app/css/zIndex';
 import NavHeader from './NavHeader';
 
 const StyledNavbar = styled.nav`
@@ -13,7 +12,7 @@ const StyledNavbar = styled.nav`
   background-color: ${props => props.theme.colors.bgColorSub};
   height: 80px;
   max-height: 80px;
-  z-index: ${zIndexNav};
+  z-index: ${props => props.theme.zIndexes[2]};
   padding: 0 100px;
   display: flex;
   justify-content: space-between;

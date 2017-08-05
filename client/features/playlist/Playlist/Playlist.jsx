@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { zIndexPlayQueue } from 'app/css/zIndex';
 import { media } from 'app/css/styleUtils';
 import PlaylistRow from '../PlaylistRow';
 import PlaylistHeader from '../PlaylistHeader';
@@ -24,7 +23,7 @@ const PlaylistWrapper = styled.div`
   top: 70px;
   right: 0;
   bottom: 0;
-  z-index: ${zIndexPlayQueue};
+  z-index: ${props => props.theme.zIndexes[1]};
   display: block;
   padding: 20px 0 0 0;
   overflow-x: hidden;

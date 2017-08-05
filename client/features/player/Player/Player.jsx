@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentPlayerTrack } from 'features/player/playerSelectors';
 import styled from 'styled-components';
-import { zIndexPlayer } from 'app/css/zIndex';
 import PlayerTimeSection from '../PlayerTimeSection';
 import PlayerAudio from '../PlayerAudio';
 import PlayerControls from '../PlayerControls';
@@ -22,7 +21,7 @@ const PlayerWrapper = styled.div`
   height: 90px;
   background-color: ${props => props.theme.colors.bgColorSub};
   border-top: 1px solid ${props => props.theme.colors.separatorColorDark};
-  z-index: ${zIndexPlayer};
+  z-index: ${props => props.theme.zIndexes[2]};
 `;
 
 const PlayerLayout = styled.div`

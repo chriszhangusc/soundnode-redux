@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import * as routes from 'common/constants/routeConsts';
-import { zIndexSidebar } from 'app/css/zIndex';
 
 import SidebarItem from './SidebarItem';
 
@@ -10,7 +9,7 @@ const SidebarWrapper = styled.nav`
   width: 300px;
   height: 100%;
   background-color: ${props => props.theme.colors.bgColorSub};
-  z-index: ${zIndexSidebar};
+  z-index: ${props => props.theme.zIndexes[1]};
 `;
 
 const sidebarItemList = [

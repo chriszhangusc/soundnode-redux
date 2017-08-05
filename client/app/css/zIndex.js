@@ -1,3 +1,4 @@
+// Remove in the future, moved to theme
 export const zIndexModal = 5;
 export const zIndexNav = 2;
 export const zIndexNotification = 4;

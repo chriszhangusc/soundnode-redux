@@ -4,7 +4,7 @@ const SidebarNavLink = NavLink.extend.attrs({
   // Passing activeClassName as default
   activeClassName: 'sidebarLinkActive',
 })`
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   display: block;
   text-align: center;
   color: ${props => props.theme.colors.fontColor};
