@@ -53,6 +53,7 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-transition-group": "^1.2.0",
+    "rebass": "^1.0.3",
     "recompose": "^0.23.5",
     "redux": "^3.5.2",
     "redux-logger": "^3.0.6",

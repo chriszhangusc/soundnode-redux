@@ -4,14 +4,8 @@ import SongCard from 'common/components/SongCard';
 import withLoadingSpinnerAfter from 'common/hocs/withLoadingSpinnerAfter';
 import withFetchingOnScroll from 'common/hocs/withFetchingOnScroll';
 import { compose } from 'recompose';
-import styled from 'styled-components';
 import Title from 'common/components/Title';
-
-const SongCardListWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
-`;
+import { Flex } from 'grid-styled';
 
 function SongCardList({ title, trackIds }) {
   return (
@@ -19,11 +13,11 @@ function SongCardList({ title, trackIds }) {
       <Title>
         {title}
       </Title>
-      <SongCardListWrapper>
+      <Flex wrap mb="30px">
         {trackIds.map(
           trackId => trackId && <SongCard trackId={trackId} key={trackId.toString()} />,
         )}
-      </SongCardListWrapper>
+      </Flex>
     </div>
   );
 }

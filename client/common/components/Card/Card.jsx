@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import RouterLink from 'common/components/links/RouterLink';
 import CardButton from './CardButton';
 
 const Card = styled.div`

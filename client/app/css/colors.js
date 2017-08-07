@@ -15,5 +15,9 @@ export const fontColor = lighterGray;
 export const fontColorSub = gray;
 export const themeColor = orange;
 export const boxShadowColor = transparentLight;
+
+export const borderDark = black;
+export const borderBright = darkGray;
+
 export const separatorColorDark = black;
 export const separatorColorClean = darkGray;
