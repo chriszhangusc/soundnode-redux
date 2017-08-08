@@ -47,7 +47,7 @@ function Player({ playerTrack }) {
   // just pass track down and let the children's  do their job
   return (
     <Fixed bg={theme.colors.bgColorSub} bottom left z={theme.zIndexes[2]} width="100%">
-      <BoxShadow>
+      <BoxShadow blur={10} spread={4} shade={5}>
         <PlayerWrapper>
           <PlayerProgressBar playerTrack={playerTrack} />
           <PlayerAudio playerTrack={playerTrack} />
