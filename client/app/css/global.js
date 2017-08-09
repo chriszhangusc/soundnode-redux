@@ -1,5 +1,5 @@
 import { injectGlobal } from 'styled-components';
-import { fontColor, bgColor } from 'app/css/colors';
+import { fontColor, bg } from 'app/css/colors';
 
 // Global CSS
 injectGlobal([
@@ -17,7 +17,7 @@ injectGlobal([
 
   body {
     color: ${fontColor};
-    background-color: ${bgColor};
+    background-color: ${bg};
   }
 
   .container {

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentPlayerTrack } from 'features/player/playerSelectors';
 import styled from 'styled-components';
-import { Fixed } from 'rebass';
 // import Border from 'common/components/Border';
 import theme from 'app/css/theme';
+import Fixed from 'common/components/Fixed';
 import BoxShadow from 'common/components/BoxShadow';
 import PlayerTimeSection from '../PlayerTimeSection';
 import PlayerAudio from '../PlayerAudio';
@@ -15,15 +15,20 @@ import PlayerTrackInfo from '../PlayerTrackInfo';
 import PlayerModeControls from '../PlayerModeControls';
 import PlayerVolumeControls from '../PlayerVolumeControls';
 
-// const PlayerWrapper = styled.div`
+// const Wrapper = styled.div`
 //   position: fixed;
 //   left: 0;
 //   bottom: 0;
 //   width: 100%;
-//   background-color: ${props => props.theme.colors.bgColorSub};
-//   border-top: 1px solid ${props => props.theme.colors.separatorColorDark};
+//   background-color: ${props => props.theme.colors.bgSub};
 //   z-index: ${props => props.theme.zIndexes[2]};
 // `;
+
+const FixedBottom = Fixed.extend`
+  bottom: 0;
+  left: 0;
+  z-index: ${props => props.theme.zIndexes[2]};
+`;
 
 const PlayerWrapper = styled.div`
   margin: 0 auto;
@@ -46,7 +51,7 @@ function Player({ playerTrack }) {
   // Do not pass down specific data required by its children,
   // just pass track down and let the children's  do their job
   return (
-    <Fixed bg={theme.colors.bgColorSub} bottom left z={theme.zIndexes[2]} width="100%">
+    <FixedBottom bg={theme.colors.bgSub}>
       <BoxShadow blur={10} spread={4} shade={5}>
         <PlayerWrapper>
           <PlayerProgressBar playerTrack={playerTrack} />
@@ -60,7 +65,7 @@ function Player({ playerTrack }) {
           </RightWrapper>
         </PlayerWrapper>
       </BoxShadow>
-    </Fixed>
+    </FixedBottom>
   );
 }
 

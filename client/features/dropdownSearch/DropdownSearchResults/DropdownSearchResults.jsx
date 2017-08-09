@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   width: 100%;
   position: absolute;
   top: 50px;
-  background-color: ${props => props.theme.colors.bgColorSub};
+  background-color: ${props => props.theme.colors.bgSub};
   z-index: ${props => props.theme.zIndexes[3]};
   display: block;
   transition: all 0.4s ease-in-out;

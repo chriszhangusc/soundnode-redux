@@ -9,8 +9,8 @@ export const lighterGray = '#ededed';
 export const transparentLight = 'rgba(0, 0, 0, 0.22)';
 export const transparentDark = 'rgba(0, 0, 0, 0.7)';
 
-export const bgColor = lighterBlack;
-export const bgColorSub = lightBlack;
+export const bg = lighterBlack;
+export const bgSub = lightBlack;
 export const fontColor = lighterGray;
 export const fontColorSub = gray;
 export const themeColor = orange;

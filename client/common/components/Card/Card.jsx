@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import CardButton from './CardButton';
 
 const Card = styled.div`
-  background-color: ${props => props.theme.colors.bgColor};
+  background-color: ${props => props.theme.colors.bg};
   box-shadow: 0 0 12px 8px ${props => props.theme.colors.boxShadowColor};
   padding: 11px;
   width: 230px;
