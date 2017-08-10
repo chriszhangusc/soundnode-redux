@@ -5,13 +5,13 @@ import withLoadingSpinnerAfter from 'common/hocs/withLoadingSpinnerAfter';
 import withFetchingOnScroll from 'common/hocs/withFetchingOnScroll';
 import { compose } from 'recompose';
 import Title from 'common/components/Title';
-import { Flex } from 'grid-styled';
+import { Flex, Box } from 'grid-styled';
 
 const Heading = Title.extend`padding: 15px;`;
 
 function SongCardList({ title, trackIds }) {
   return (
-    <div>
+    <Box>
       <Heading>
         {title}
       </Heading>
@@ -20,7 +20,7 @@ function SongCardList({ title, trackIds }) {
           trackId => trackId && <SongCard trackId={trackId} key={trackId.toString()} />,
         )}
       </Flex>
-    </div>
+    </Box>
   );
 }
 
