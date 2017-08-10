@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import * as routes from 'common/constants/routeConsts';
-
 import SidebarItem from './SidebarItem';
 
-const SidebarWrapper = styled.nav`
+const SidebarWrapper = styled.div`
   position: fixed;
   width: 300px;
   height: 100%;
@@ -41,7 +40,7 @@ function Sidebar() {
   return (
     <SidebarWrapper>
       <ul>
-        {sidebarItemList.map(d => <SidebarItem {...d} key={d.title} />)}
+        {sidebarItemList.map(item => <SidebarItem {...item} key={item.title} />)}
       </ul>
     </SidebarWrapper>
   );

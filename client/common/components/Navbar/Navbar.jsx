@@ -1,5 +1,4 @@
 import React from 'react';
-// import styled from 'styled-components';
 import DropdownSearch from 'features/dropdownSearch/DropdownSearch';
 import Auth from 'features/auth/Auth';
 import { Flex } from 'grid-styled';
@@ -9,6 +8,7 @@ import NavHeader from './NavHeader';
 const Nav = Fixed.extend`
   top: 0;
   left: 0;
+  width: 100%;
   z-index: ${props => props.theme.zIndexes[2]};
   background-color: ${props => props.theme.colors.bgSub};
 `;

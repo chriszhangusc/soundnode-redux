@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import Fixed from 'common/components/Fixed';
 import { connect } from 'react-redux';
 import { CSSTransitionGroup } from 'react-transition-group'; // ES6
 import { getNotifications } from '../notificationSelectors';
 import Notification from '../Notification';
 import './NotificationCenter.css';
 
-const Wrapper = styled.div`
-  position: fixed;
+const Wrapper = Fixed.extend`
   top: 100px;
   right: 0;
   z-index: ${props => props.theme.zIndexes[4]};
@@ -24,9 +23,9 @@ function NotificationCenter({ notifications }) {
         transitionEnterTimeout={300}
         transitionLeaveTimeout={300}
       >
-        {notifications.map(({ id, type, title, message }, idx) => (
-          <Notification id={id} type={type} key={idx} title={title} message={message} />
-        ))}
+        {notifications.map(({ id, type, title, message }, idx) =>
+          <Notification id={id} type={type} key={idx} title={title} message={message} />,
+        )}
       </CSSTransitionGroup>
     </Wrapper>
   );
