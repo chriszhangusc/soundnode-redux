@@ -7,12 +7,14 @@ import { compose } from 'recompose';
 import Title from 'common/components/Title';
 import { Flex } from 'grid-styled';
 
+const Heading = Title.extend`padding: 15px;`;
+
 function SongCardList({ title, trackIds }) {
   return (
     <div>
-      <Title>
+      <Heading>
         {title}
-      </Title>
+      </Heading>
       <Flex wrap mb="30px">
         {trackIds.map(
           trackId => trackId && <SongCard trackId={trackId} key={trackId.toString()} />,

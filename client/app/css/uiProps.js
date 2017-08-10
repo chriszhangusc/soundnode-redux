@@ -1,6 +1,8 @@
 import { css } from 'styled-components';
 
 // Prop passing Shorthands for Styled-components
+
+// For future reference
 export const borderProps = props => css`
   ${props.borderBottom && `border-bottom: ${props.borderWidth || '1px'} solid ${color.border}`};
   ${props.borderTop && `border-top: ${props.borderWidth || '1px'} solid ${color.border}`};

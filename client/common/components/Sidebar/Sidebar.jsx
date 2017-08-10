@@ -1,10 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import * as routes from 'common/constants/routeConsts';
+import Fixed from 'common/components/Fixed';
 import SidebarItem from './SidebarItem';
 
-const SidebarWrapper = styled.div`
-  position: fixed;
+const SidebarWrapper = Fixed.extend`
   width: 300px;
   height: 100%;
   background-color: ${props => props.theme.colors.bgSub};
