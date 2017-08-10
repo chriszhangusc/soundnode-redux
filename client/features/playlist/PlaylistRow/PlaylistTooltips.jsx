@@ -31,7 +31,7 @@ const TooltipsArrowLeft = styled.div`
   height: 0;
   border-top: 12px solid transparent;
   border-bottom: 10px solid transparent;
-  border-left: 12px solid ${props => props.theme.colors.separatorColorClean};
+  border-left: 12px solid ${props => props.theme.colors.separatorClean};
 `;
 
 const OptionsList = styled.ul`
@@ -39,7 +39,7 @@ const OptionsList = styled.ul`
 
   ${media.desktopLG`right: 22px;`} ${media.desktop4K`right: 45px;`} top: -128px;
   display: block;
-  background: ${props => props.theme.colors.separatorColorClean};
+  background: ${props => props.theme.colors.separatorClean};
   border-radius: 2px;
 
   & li:last-child {
@@ -51,10 +51,10 @@ const OptionsListItem = styled.li`
   line-height: 20px;
   padding: 10px;
   text-align: center;
-  border-bottom: 1px solid ${props => props.theme.colors.separatorColorDark};
+  border-bottom: 1px solid ${props => props.theme.colors.separatorDark};
   &:hover {
     cursor: pointer;
-    background: ${props => props.theme.colors.separatorColorDark};
+    background: ${props => props.theme.colors.separatorDark};
   }
 `;
 

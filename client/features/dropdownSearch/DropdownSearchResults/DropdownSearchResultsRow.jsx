@@ -4,20 +4,21 @@ import RouterLink from 'common/components/links/RouterLink';
 import UserImage from 'common/components/images/UserImage';
 import TrackImage from 'common/components/images/TrackImage';
 import styled from 'styled-components';
+// import { Flex } from 'grid-styled';
+// import FlexColumn from 'common/components/layouts/FlexColumn';
 import { truncateWidth } from 'app/css/styleUtils';
 
-const ContentWrapper = styled.div`
+const Wrapper = styled.div`
   padding: 8px 10px;
-  cursor: pointer;
   display: flex;
   align-items: middle;
-  border-bottom: 1px solid ${props => props.theme.colors.separatorColorDark};
+  border-bottom: 1px solid ${props => props.theme.colors.separatorDark};
   &:hover {
-    background: ${props => props.theme.colors.separatorColorDark};
+    background: ${props => props.theme.colors.separatorDark};
   }
 `;
 
-const SuggestionTitle = styled.div`
+const SuggestionTitle = styled.span`
   font-size: 0.95rem;
   max-width: 100%;
   ${truncateWidth('100%')};
@@ -29,12 +30,13 @@ const SuggestionSubtitle = SuggestionTitle.extend`
 `;
 
 const TitleWrapper = styled.div`
-  display: flex;
   margin-left: 10px;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   flex: 1;
-  width: calc(100% - 32px - 10px);
+  /* Prevent text-overflow, https://css-tricks.com/flexbox-truncated-text/ */
+  min-width: 0;
 `;
 
 function renderAvatarByType(type, avatarUrl) {
@@ -48,21 +50,19 @@ function renderAvatarByType(type, avatarUrl) {
 // So we have to put the routing logic to onMouseDown which trigger before onblur.
 function DropdownSearchResultsRow({ type, avatarUrl, linkUrl, title, subtitle }) {
   return (
-    <div>
-      <RouterLink to={linkUrl}>
-        <ContentWrapper>
-          {renderAvatarByType(type, avatarUrl)}
-          <TitleWrapper>
-            <SuggestionTitle>
-              {title}
-            </SuggestionTitle>
-            <SuggestionSubtitle>
-              {subtitle}
-            </SuggestionSubtitle>
-          </TitleWrapper>
-        </ContentWrapper>
-      </RouterLink>
-    </div>
+    <RouterLink to={linkUrl}>
+      <Wrapper>
+        {renderAvatarByType(type, avatarUrl)}
+        <TitleWrapper>
+          <SuggestionTitle>
+            {title}
+          </SuggestionTitle>
+          <SuggestionSubtitle>
+            {subtitle}
+          </SuggestionSubtitle>
+        </TitleWrapper>
+      </Wrapper>
+    </RouterLink>
   );
 }
 

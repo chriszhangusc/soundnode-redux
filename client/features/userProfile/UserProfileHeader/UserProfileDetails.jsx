@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ColumnLayout from 'common/components/layouts/ColumnLayout';
-import Title from 'common/components/Title';
+import Heading from 'common/components/Heading';
 
 // Putting these small components in one file or separate files?
 
 // Maybe tweak the style in the future
-const Username = Title.extend`margin: 0;`;
+const Username = Heading.extend`margin: 0;`;
 
 const UserFollowers = styled.div`color: ${props => props.theme.colors.fontColorSub};`;
 

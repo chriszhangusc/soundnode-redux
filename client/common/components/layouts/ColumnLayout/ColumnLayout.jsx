@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import FlexColumn from 'common/components/layouts/FlexColumn';
 
 const Section = styled.section`margin-bottom: 10px;`;
 
-const Wrapper = styled.div`
+const Wrapper = FlexColumn.extend`
   position: relative;
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   align-items: left;
   width: ${props => props.width || '100%'};

@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfiledTrackCommentCount } from 'features/trackProfile/trackProfileSelectors';
-import Title from 'common/components/Title';
+import Heading from 'common/components/Heading';
 import TrackProfileCommentList from './TrackProfileCommentList';
 
 function TrackProfileComments({ commentCount }) {
   return (
     <div>
-      <Title>{`Comments: (${commentCount})`}</Title>
+      <Heading>{`Comments: (${commentCount})`}</Heading>
       <TrackProfileCommentList />
     </div>
   );

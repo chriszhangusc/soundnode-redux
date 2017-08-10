@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 import SongCardList from 'common/components/SongCardList';
+import PageTitle from 'common/components/PageTitle';
 import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
 import { isStreamFetching } from 'features/stream/streamSelectors';
 import { bindActionCreators } from 'redux';
 import * as streamActions from 'features/stream/streamActions';
+import { Box } from 'grid-styled';
 
 class Stream extends React.Component {
   componentDidMount() {
@@ -19,7 +21,12 @@ class Stream extends React.Component {
   }
 
   render() {
-    return <SongCardList title="Stream" {...this.props} />;
+    return (
+      <Box>
+        <PageTitle>Stream</PageTitle>
+        <SongCardList {...this.props} />
+      </Box>
+    );
   }
 }
 

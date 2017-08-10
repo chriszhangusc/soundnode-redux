@@ -17,7 +17,7 @@ export const themeColor = orange;
 export const boxShadowColor = transparentLight;
 
 export const borderDark = black;
-export const borderBright = darkGray;
+export const borderClean = darkGray;
 
-export const separatorColorDark = black;
-export const separatorColorClean = darkGray;
+export const separatorDark = black;
+export const separatorClean = darkGray;

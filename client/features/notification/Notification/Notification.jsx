@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import FlexColumn from 'common/components/layouts/FlexColumn';
 import { connect } from 'react-redux';
 import { removeNotification } from '../notificationActions';
 
@@ -48,11 +49,6 @@ const Icon = styled.i`
   font-size: 2rem;
 `;
 
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 const Header = styled.h1`
   margin: 0;
   font-size: 1.05rem;
@@ -93,10 +89,14 @@ class Notification extends React.Component {
         <IconWrapper>
           <Icon className={this.getIconByType(type)} />
         </IconWrapper>
-        <ContentWrapper>
-          <Header>{title}</Header>
-          <Message>{message}</Message>
-        </ContentWrapper>
+        <FlexColumn>
+          <Header>
+            {title}
+          </Header>
+          <Message>
+            {message}
+          </Message>
+        </FlexColumn>
       </Wrapper>
     );
   }

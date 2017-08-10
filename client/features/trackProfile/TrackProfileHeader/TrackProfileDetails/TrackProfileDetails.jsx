@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as selectors from 'features/trackProfile/trackProfileSelectors';
-import Title from 'common/components/Title';
+import Heading from 'common/components/Heading';
 import ColumnLayout from 'common/components/layouts/ColumnLayout';
 import TrackUsername from './TrackUsername';
 import TrackDescription from './TrackDescription';
@@ -11,9 +11,9 @@ import TrackActions from './TrackActions';
 function TrackProfileDetails({ title, username, description, userRoute }) {
   return (
     <ColumnLayout width="800px">
-      <Title>
+      <Heading>
         {title}
-      </Title>
+      </Heading>
       <TrackUsername to={userRoute}>
         {username}
       </TrackUsername>

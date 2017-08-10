@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadChartsPage, changeGenre, resetChartsState } from 'features/charts/chartsActions';
 import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
-import { Grid } from 'react-bootstrap';
-import Title from 'common/components/Title';
+import PageTitle from 'common/components/PageTitle';
 import { getCurrentGenreTitle } from 'features/charts/chartsSelectors';
 
 import ChartsTracks from '../ChartsTracks';
@@ -58,13 +57,13 @@ class Charts extends Component {
   render() {
     const { genreTitle } = this.props;
     return (
-      <Grid fluid>
-        <Title>
+      <div>
+        <PageTitle>
           Top Charts - {genreTitle}
-        </Title>
+        </PageTitle>
         <ChartsGenreList />
         <ChartsTracks />
-      </Grid>
+      </div>
     );
   }
 }

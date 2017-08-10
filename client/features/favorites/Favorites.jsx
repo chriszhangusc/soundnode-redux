@@ -5,6 +5,8 @@ import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
 import SongCardList from 'common/components/SongCardList';
 import { isFavoritesFetching } from 'features/favorites/favoritesSelectors';
 import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
+import { Box } from 'grid-styled';
+import PageTitle from 'common/components/PageTitle';
 import * as favActions from 'features/favorites/favoritesActions';
 
 class Favorites extends React.Component {
@@ -19,7 +21,10 @@ class Favorites extends React.Component {
 
   render() {
     return (
-      <SongCardList title="Favorites" {...this.props} scrollFunc={this.props.loadMoreFavorites} />
+      <Box>
+        <PageTitle>Favorites</PageTitle>
+        <SongCardList title="Favorites" {...this.props} scrollFunc={this.props.loadMoreFavorites} />
+      </Box>
     );
   }
 }
