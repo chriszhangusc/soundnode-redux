@@ -5,7 +5,6 @@ import GenreListTitle from './GenreListTitle';
 import GenreLinkButton from './GenreLinkButton';
 
 const Wrapper = styled.div`
-  width: 100%;
   overflow: hidden;
   height: 105px;
   transition: height 0.4s;

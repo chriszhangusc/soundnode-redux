@@ -52,7 +52,6 @@ function mapDispatchToProps(dispatch) {
   return {
     ...bindActionCreators(actions, dispatch),
     scrollFunc() {
-      console.log('Load more stream');
       dispatch(streamActions.loadMoreStream());
     },
   };
