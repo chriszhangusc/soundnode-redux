@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { lighterGray } from 'app/css/colors';
@@ -8,11 +7,7 @@ import { computeOffset } from 'features/player/playerUtils';
 import * as playerActions from 'features/player/playerActions';
 import { getCurrentVolume, isVolumeSeeking } from 'features/player/playerSelectors';
 import PlayerSlider from 'features/player/PlayerSlider';
-
-const PlayerVolumeWrapper = styled.div`
-  margin-left: 7px;
-  width: 100px;
-`;
+import Wrapper from './Wrapper';
 
 class PlayerVolumeSeekBar extends React.Component {
   constructor(props) {
@@ -54,7 +49,7 @@ class PlayerVolumeSeekBar extends React.Component {
     const { volume } = this.props;
 
     return (
-      <PlayerVolumeWrapper
+      <Wrapper
         innerRef={(volumeBar) => {
           this.volumeBar = volumeBar;
         }}
@@ -70,7 +65,7 @@ class PlayerVolumeSeekBar extends React.Component {
           onSeekKnobMouseDown={this.handleVolumeMouseDown}
           onSeekKnobMouseUp={this.handleVolumeMouseUp}
         />
-      </PlayerVolumeWrapper>
+      </Wrapper>
     );
   }
 }

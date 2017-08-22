@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 // import Icon from 'common/components/icons/Icon';
 import PlayerButton from 'features/player/PlayerButton';
 import { getIconNameByVolume } from 'features/player/playerUtils';
-import { getCurrentVolume } from '../playerSelectors';
-import { toggleMute } from '../playerActions';
-
-const Wrapper = styled.div`
-  padding: 4px;
-  cursor: pointer;
-`;
+import { getCurrentVolume } from 'features/player/playerSelectors';
+import { toggleMute } from 'features/player/playerActions';
+import Wrapper from './Wrapper';
 
 function PlayerVolumeButton({ volume, handleOnClick }) {
   const iconName = getIconNameByVolume(volume);
