@@ -1,19 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { computeOffset } from 'features/player/playerUtils';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import * as playerActions from 'features/player/playerActions';
 import { getCurrentTime, isPlayerSeeking } from 'features/player/playerSelectors';
 import PlayerSlider from 'features/player/PlayerSlider';
-
-const PlayerProgressBarWrapper = styled.div`
-  display: block;
-  position: absolute;
-  width: calc(100% - 90px);
-  top: -15px;
-  left: 90px;
-`;
+import Wrapper from './Wrapper';
 
 class PlayerProgressBar extends React.Component {
   constructor(props) {
@@ -70,7 +62,7 @@ class PlayerProgressBar extends React.Component {
   render() {
     const { duration, currentTime } = this.props;
     return (
-      <PlayerProgressBarWrapper
+      <Wrapper
         innerRef={(sb) => {
           this.seekBar = sb;
         }}
@@ -84,7 +76,7 @@ class PlayerProgressBar extends React.Component {
           onSeekKnobMouseDown={this.handleSeekKnobMouseDown}
           onSeekKnobMouseUp={this.handleSeekKnobMouseUp}
         />
-      </PlayerProgressBarWrapper>
+      </Wrapper>
     );
   }
 }

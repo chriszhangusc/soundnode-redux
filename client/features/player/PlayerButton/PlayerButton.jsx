@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'common/components/icons/Icon';
-import styled from 'styled-components';
 import { themeColor, white } from 'app/css/colors';
-
-const Wrapper = styled.div`cursor: pointer;`;
+import Wrapper from './Wrapper';
 
 function PlayerButton({ active, ...rest }) {
   return (

@@ -1,41 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { fontColorSub } from 'app/css/colors';
 import { getCurrentTime } from 'features/player/playerSelectors';
 import { formatDuration } from 'common/utils/formatUtils';
 import { connect } from 'react-redux';
-
-const Wrapper = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  max-width: 100%;
-  overflow: hidden;
-  height: 32px;
-  display: flex;
-  margin-right: 40px;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const Span = styled.span`
-  font-size: 0.9rem;
-  color: ${fontColorSub};
-`;
-
-const SeparatorSpan = Span.extend`margin: 0 5px;`;
+import Wrapper from './Wrapper';
+import Time from './Time';
+import Separator from './Separator';
 
 function PlayerTimeSection({ currentTime, totalTime }) {
   return (
     <Wrapper>
-      <Span>
+      <Time>
         {currentTime}
-      </Span>
-      <SeparatorSpan>/</SeparatorSpan>
-      <Span>
+      </Time>
+      <Separator>/</Separator>
+      <Time>
         {totalTime}
-      </Span>
+      </Time>
     </Wrapper>
   );
 }

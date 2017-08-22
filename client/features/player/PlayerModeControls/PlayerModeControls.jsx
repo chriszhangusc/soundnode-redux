@@ -3,23 +3,15 @@ import PropTypes from 'prop-types';
 import { REPEAT, SHUFFLE } from 'features/player/playerConsts';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-// import { getPlayerMode, isPlaylistHidden } from 'features/reducers';
 import { getPlayerMode } from 'features/player/playerSelectors';
 import { togglePlayMode } from 'features/player/playerActions';
 
 import { isPlaylistHidden } from 'features/playlist/playlistSelectors';
 import { togglePlaylist } from 'features/playlist/playlistActions';
-
+import Wrapper from './Wrapper';
 import PlayerButton from '../PlayerButton';
 
-const PlayerModeControlsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const PlayerButtonWrapper = styled.div`
-  margin-right: 40px;
-`;
+const PlayerButtonWrapper = styled.div`margin-right: 40px;`;
 
 class PlayerModeControls extends Component {
   constructor(props) {
@@ -73,11 +65,11 @@ class PlayerModeControls extends Component {
 
   render() {
     return (
-      <PlayerModeControlsWrapper>
+      <Wrapper>
         {this.renderRepeat()}
         {this.renderShuffle()}
         {this.renderTogglePlaylist()}
-      </PlayerModeControlsWrapper>
+      </Wrapper>
     );
   }
 }

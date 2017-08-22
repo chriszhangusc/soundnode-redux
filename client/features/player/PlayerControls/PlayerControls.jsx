@@ -1,20 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { isPlayerPlaying } from 'features/player/playerSelectors';
 import * as playerActions from 'features/player/playerActions';
 import PlayerButton from '../PlayerButton';
-
-const PlayerControlsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 4px 48px 0 48px;
-`;
-
-const ButtonWrapper = styled.div`
-  margin: 0 40px;
-`;
+import ButtonWrapper from './ButtonWrapper';
+import Wrapper from './Wrapper';
 
 class PlayerControls extends Component {
   constructor(props) {
@@ -41,29 +32,38 @@ class PlayerControls extends Component {
   renderForwardButton() {
     const { playNextSong } = this.props;
     return (
-      <PlayerButton iconSize="2rem" tooltipText="Next" name="step-forward" onClick={playNextSong} />
+      <ButtonWrapper>
+        <PlayerButton
+          iconSize="2rem"
+          tooltipText="Next"
+          name="step-forward"
+          onClick={playNextSong}
+        />
+      </ButtonWrapper>
     );
   }
 
   renderBackwardButton() {
     const { playPrevSong } = this.props;
     return (
-      <PlayerButton
-        iconSize="2rem"
-        tooltipText="Previous"
-        name="step-backward"
-        onClick={playPrevSong}
-      />
+      <ButtonWrapper>
+        <PlayerButton
+          iconSize="2rem"
+          tooltipText="Previous"
+          name="step-backward"
+          onClick={playPrevSong}
+        />
+      </ButtonWrapper>
     );
   }
 
   render() {
     return (
-      <PlayerControlsWrapper>
+      <Wrapper>
         {this.renderBackwardButton()}
         {this.renderPlayPauseButton()}
         {this.renderForwardButton()}
-      </PlayerControlsWrapper>
+      </Wrapper>
     );
   }
 }

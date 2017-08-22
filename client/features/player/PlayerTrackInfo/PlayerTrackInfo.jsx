@@ -1,23 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { getLargeVersion } from 'common/utils/imageUtils';
 import { connect } from 'react-redux';
 import { getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { formatTitle } from 'common/utils/formatUtils';
 import PlayerTrackImage from './PlayerTrackImage';
 import TrackDetails from './PlayerTrackDetails';
-
-const PlayerTrackInfoWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: right;
-`;
+import Wrapper from './Wrapper';
 
 function PlayerTrackInfo({ artworkUrl, trackTitle, artistName, trackUrl, artistUrl }) {
   return (
-    <PlayerTrackInfoWrapper>
+    <Wrapper>
       <PlayerTrackImage src={artworkUrl} linkTo={trackUrl} />
       <TrackDetails
         title={trackTitle}
@@ -25,7 +18,7 @@ function PlayerTrackInfo({ artworkUrl, trackTitle, artistName, trackUrl, artistU
         trackUrl={trackUrl}
         artistUrl={artistUrl}
       />
-    </PlayerTrackInfoWrapper>
+    </Wrapper>
   );
 }
 
