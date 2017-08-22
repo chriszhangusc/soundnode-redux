@@ -10,6 +10,8 @@ const ListItem = styled.li`
 const Icon = styled.i`
   font-size: 1rem;
   margin-right: 10px;
+  width: 40%;
+  text-align: right;
 `;
 
 const Title = styled.span``;

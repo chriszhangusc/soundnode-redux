@@ -1,7 +1,7 @@
 import React from 'react';
 import * as routes from 'common/constants/routeConsts';
-import Fixed from 'common/components/Fixed';
 import SidebarItem from './SidebarItem';
+import Wrapper from './Wrapper';
 
 const sidebarItemList = [
   {
@@ -25,13 +25,6 @@ const sidebarItemList = [
     title: 'Stream',
   },
 ];
-
-const Wrapper = Fixed.extend`
-  width: 300px;
-  height: 100%;
-  background-color: ${props => props.theme.colors.bgSub};
-  z-index: ${props => props.theme.zIndexes[1]};
-`;
 
 // Should be refactored to take sidebar items as props
 function Sidebar() {
