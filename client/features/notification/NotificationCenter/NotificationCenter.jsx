@@ -1,17 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Fixed from 'common/components/Fixed';
 import { connect } from 'react-redux';
 import { CSSTransitionGroup } from 'react-transition-group'; // ES6
 import { getNotifications } from '../notificationSelectors';
 import Notification from '../Notification';
 import './NotificationCenter.css';
-
-const Wrapper = Fixed.extend`
-  top: 100px;
-  right: 0;
-  z-index: ${props => props.theme.zIndexes[4]};
-`;
+import Wrapper from './Wrapper';
 
 function NotificationCenter({ notifications }) {
   return (

@@ -1,65 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import FlexColumn from 'common/components/layouts/FlexColumn';
 import { connect } from 'react-redux';
 import { removeNotification } from '../notificationActions';
-
-const colorSuccess = '#51A351';
-const colorWarning = '#f89406';
-const colorInfo = '#58abc3';
-const colorDanger = '#bd362f';
-
-const Wrapper = styled.div`
-  display: flex;
-  background-color: ${(props) => {
-    switch (props.type) {
-      case 'success':
-        return colorSuccess;
-      case 'warning':
-        return colorWarning;
-      case 'info':
-        return colorInfo;
-      case 'danger':
-        return colorDanger;
-      default:
-        return 'transparent';
-    }
-  }};
-  box-sizing: border-box;
-  padding: 20px;
-  border-radius: 2px;
-  cursor: pointer;
-  font-size: 1em;
-  line-height: 1.2em;
-  margin-bottom: 15px;
-  width: 300px;
-  transition: all .5s ease-in-out;
-`;
-
-const IconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
-`;
-
-const Icon = styled.i`
-  display: inline-block;
-  font-size: 2rem;
-`;
-
-const Header = styled.h1`
-  margin: 0;
-  font-size: 1.05rem;
-  font-weight: bold;
-  margin: 0 0 5px 0;
-`;
-
-const Message = styled.p`
-  margin: 0;
-  font-size: 1rem;
-`;
+import Wrapper from './Wrapper';
+import NotificationIcon from './NotificationIcon';
+import Header from './Header';
+import Message from './Message';
 
 class Notification extends React.Component {
   getIconByType(type) {
@@ -86,9 +33,7 @@ class Notification extends React.Component {
           handleOnClick();
         }}
       >
-        <IconWrapper>
-          <Icon className={this.getIconByType(type)} />
-        </IconWrapper>
+        <NotificationIcon className={this.getIconByType(type)} />
         <FlexColumn>
           <Header>
             {title}
