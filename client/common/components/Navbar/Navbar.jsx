@@ -5,7 +5,6 @@ import { Flex } from 'grid-styled';
 import Fixed from 'common/components/Fixed';
 import BoxShadow from 'common/components/BoxShadow';
 import NavHeader from './NavHeader';
-import SidebarToggleButton from './SidebarToggleButton';
 
 const Nav = Fixed.extend`
   top: 0;
@@ -17,11 +16,10 @@ const Nav = Fixed.extend`
 
 function Navbar() {
   return (
-    <Nav>
-      <BoxShadow blur={10} spread={4} shade={3}>
+    <BoxShadow blur={10} spread={4} shade={3}>
+      <Nav>
         <Flex justify="space-between" px={100} py={0}>
           <Flex align="center" justify="flex-start" flex="1">
-            <SidebarToggleButton />
             <NavHeader />
           </Flex>
 
@@ -30,8 +28,8 @@ function Navbar() {
             <Auth />
           </Flex>
         </Flex>
-      </BoxShadow>
-    </Nav>
+      </Nav>
+    </BoxShadow>
   );
 }
 
