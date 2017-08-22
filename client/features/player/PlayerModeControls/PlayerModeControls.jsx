@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { REPEAT, SHUFFLE } from 'features/player/playerConsts';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { getPlayerMode } from 'features/player/playerSelectors';
 import { togglePlayMode } from 'features/player/playerActions';
-
 import { isPlaylistHidden } from 'features/playlist/playlistSelectors';
 import { togglePlaylist } from 'features/playlist/playlistActions';
 import Wrapper from './Wrapper';
+import ButtonWrapper from './ButtonWrapper';
 import PlayerButton from '../PlayerButton';
-
-const PlayerButtonWrapper = styled.div`margin-right: 40px;`;
 
 class PlayerModeControls extends Component {
   constructor(props) {
@@ -24,42 +21,42 @@ class PlayerModeControls extends Component {
   renderRepeat() {
     const { onRepeatClick, mode } = this.props;
     return (
-      <PlayerButtonWrapper>
+      <ButtonWrapper>
         <PlayerButton
           tooltipText="Repeat"
           active={mode === REPEAT}
           name="repeat"
           onClick={onRepeatClick}
         />
-      </PlayerButtonWrapper>
-    );
-  }
-
-  renderTogglePlaylist() {
-    const { onTogglePlaylistClick, playlistHidden } = this.props;
-    return (
-      <PlayerButtonWrapper>
-        <PlayerButton
-          tooltipText="Toggle playlist"
-          active={!playlistHidden}
-          name="list-ul"
-          onClick={onTogglePlaylistClick}
-        />
-      </PlayerButtonWrapper>
+      </ButtonWrapper>
     );
   }
 
   renderShuffle() {
     const { onShuffleClick, mode } = this.props;
     return (
-      <PlayerButtonWrapper>
+      <ButtonWrapper>
         <PlayerButton
           tooltipText="Shuffle"
           active={mode === SHUFFLE}
           name="random"
           onClick={onShuffleClick}
         />
-      </PlayerButtonWrapper>
+      </ButtonWrapper>
+    );
+  }
+
+  renderTogglePlaylist() {
+    const { onTogglePlaylistClick, playlistHidden } = this.props;
+    return (
+      <ButtonWrapper>
+        <PlayerButton
+          tooltipText="Toggle playlist"
+          active={!playlistHidden}
+          name="list-ul"
+          onClick={onTogglePlaylistClick}
+        />
+      </ButtonWrapper>
     );
   }
 

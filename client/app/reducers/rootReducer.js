@@ -12,6 +12,7 @@ import favoritesReducer from 'features/favorites/favoritesReducer';
 import streamReducer from 'features/stream/streamReducer';
 import searchReducer from 'features/search/searchReducer';
 import userPlaylistsReducer from 'features/userPlaylists/userPlaylistsReducer';
+import sidebarReducer from 'common/components/Sidebar/sidebarReducer';
 
 const rootReducer = combineReducers({
   entities: entitiesReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   stream: streamReducer,
   search: searchReducer,
   userPlaylists: userPlaylistsReducer,
+  sidebar: sidebarReducer,
 });
 
 export default rootReducer;

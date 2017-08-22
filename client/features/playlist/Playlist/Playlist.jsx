@@ -9,6 +9,7 @@ const PLAYLIST_WIDTH_DESKTOP = '300px';
 const PLAYLIST_WIDTH_DESKTOP_LG = '400px';
 const PLAYLIST_WIDTH_DESKTOP_4K = '500px';
 
+// #Fix: Media queries are wrong!!
 const PlaylistWrapper = Fixed.extend`
   ${media.desktop`
     width: ${PLAYLIST_WIDTH_DESKTOP};
@@ -38,10 +39,10 @@ const PlaylistWrapper = Fixed.extend`
 `;
 
 function Playlist(props) {
-  const { playlistTrackIds } = props;
+  const { playlistTrackIds, playlistHidden } = props;
   // Do not forget to pass down props to styled components if necessary.
   return (
-    <PlaylistWrapper {...props}>
+    <PlaylistWrapper playlistHidden={playlistHidden}>
       <PlaylistHeader {...props} />
       <ul className="playlist-list">
         {playlistTrackIds.map(

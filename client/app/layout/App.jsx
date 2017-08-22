@@ -29,11 +29,12 @@ const PageContentWrapper = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   flex: 6;
-  padding: 50px 20px 100px 350px;
+  padding: 50px 20px 100px 100px;
+  margin: 0 auto;
   min-height: 100vh;
 `;
 
-const MainWrapper = styled.div`padding-top: 80px;`;
+const MainWrapper = styled.div`padding-top: 78px;`;
 
 class Main extends React.Component {
   componentDidMount() {

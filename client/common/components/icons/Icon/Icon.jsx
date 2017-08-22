@@ -5,17 +5,25 @@ import FontAwesome from 'react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import shortid from 'shortid';
 
+// Figure out a way to specify iconSize!!
+
 // Filter props to get rid of unknown props warning:
 // https://github.com/styled-components/styled-components/issues/305
-const StyledIcon = styled(
-  ({ color, hoverColor, active, inverted, activeColor, iconSize, small, ...rest }) =>
-    <FontAwesome {...rest} />,
-).attrs({
+const StyledIcon = styled(({
+  color,
+  hoverColor,
+  active,
+  inverted,
+  activeColor,
+  iconSize,
+  small,
+  ...rest
+}) => <FontAwesome {...rest} />).attrs({
   color: props => props.color || props.theme.colors.fontColor,
   activeColor: props => props.activeColor || props.theme.colors.themeColor,
   hoverColor: props => props.hoverColor || props.color,
   // iconSize: props => props.iconSize || '1rem',
-  iconSize: props => (props.small ? '0.75rem' : '1rem'),
+  iconSize: props => (props.small ? '0.75rem' : props.iconSize),
 })`
   margin-right: 5px;
   color: ${props => (props.active ? props.activeColor : props.color)};
