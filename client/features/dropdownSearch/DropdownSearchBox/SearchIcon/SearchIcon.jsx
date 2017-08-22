@@ -1,19 +1,13 @@
 import React from 'react';
 import { fontColorSub } from 'app/css/colors';
-import styled from 'styled-components';
 import Icon from 'common/components/icons/Icon';
-
-const SearchIconWrapper = styled.span`
-    position: absolute;
-    top: 5px;
-    left: 10px;
-`;
+import Wrapper from './Wrapper';
 
 function SearchIcon() {
   return (
-    <SearchIconWrapper>
+    <Wrapper>
       <Icon name="search" color={fontColorSub} />
-    </SearchIconWrapper>
+    </Wrapper>
   );
 }
 

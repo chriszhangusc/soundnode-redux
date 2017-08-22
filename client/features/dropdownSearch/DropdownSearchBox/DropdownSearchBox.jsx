@@ -1,33 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
   clearAndHideSearchResults,
   startDropdownSearch,
 } from 'features/dropdownSearch/dropdownSearchActions';
 import SearchIcon from './SearchIcon';
-
-const Wrapper = styled.div`
-  position: relative;
-  width: 100%;
-`;
-
-const DropdownSearchInput = styled.input`
-  display: inline-block;
-  border: none;
-  text-align: left;
-  font-family: 'Open Sans';
-  font-size: 0.9rem;
-  outline: 0;
-  border-radius: 5px;
-  padding: 6px 10px 6px 30px;
-  font-weight: 300;
-  transition: all 0.2s ease-in-out;
-  background-color: #333333;
-  height: 30px;
-  width: 100%;
-`;
+import Wrapper from './Wrapper';
+import DropdownSearchInput from './DropdownSearchInput';
 
 class DropdownSearchBox extends React.Component {
   constructor(props) {
@@ -100,7 +80,7 @@ function mapDispatchToProps(dispatch) {
       // Delay onblur to make sure when user click on the search result it will redirect first
       // and then do onblur
       setTimeout(() => {
-        // dispatch(clearAndHideSearchResults());
+        dispatch(clearAndHideSearchResults());
       }, 250);
     },
 
