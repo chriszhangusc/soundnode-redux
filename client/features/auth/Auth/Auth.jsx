@@ -3,27 +3,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import UserImage from 'common/components/images/UserImage';
 import RouterLink from 'common/components/links/RouterLink';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import { doLogin, loginIfNeeded } from '../authActions';
 import { getMe } from '../authSelectors';
 import LogoutButton from './LogoutButton';
-
-const AuthWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 23px 0;
-  margin-left: 20px;
-  min-width: 135px;
-`;
-
-const Username = styled.span`margin-right: 10px;`;
-
-const AvatarWrapper = styled.div`
-  display: inline-block;
-  margin-right: 10px;
-`;
+import Wrapper from './Wrapper';
+import AvatarWrapper from './AvatarWrapper';
+import Username from './Username';
 
 class Auth extends React.Component {
   componentDidMount() {
@@ -35,7 +22,7 @@ class Auth extends React.Component {
     const { me, onLogin } = this.props;
 
     const renderLoggedIn = () =>
-      <AuthWrapper>
+      <Wrapper>
         <AvatarWrapper>
           <UserImage src={me.avatarUrl} linkTo={`${USER_PROFILE_ROUTE}/${me.id}`} size="small" />
         </AvatarWrapper>
@@ -43,14 +30,14 @@ class Auth extends React.Component {
           {me.username}
         </Username>
         <LogoutButton />
-      </AuthWrapper>;
+      </Wrapper>;
 
     const renderLoggedOut = () =>
-      <AuthWrapper>
+      <Wrapper>
         <RouterLink to="/" onClick={onLogin}>
           Login
         </RouterLink>
-      </AuthWrapper>;
+      </Wrapper>;
 
     return me ? renderLoggedIn() : renderLoggedOut();
   }
