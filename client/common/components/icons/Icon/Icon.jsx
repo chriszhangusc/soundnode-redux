@@ -9,16 +9,10 @@ import shortid from 'shortid';
 
 // Filter props to get rid of unknown props warning:
 // https://github.com/styled-components/styled-components/issues/305
-const StyledIcon = styled(({
-  color,
-  hoverColor,
-  active,
-  inverted,
-  activeColor,
-  iconSize,
-  small,
-  ...rest
-}) => <FontAwesome {...rest} />).attrs({
+const StyledIcon = styled(
+  ({ color, hoverColor, active, inverted, activeColor, iconSize, small, ...rest }) =>
+    <FontAwesome {...rest} />,
+).attrs({
   color: props => props.color || props.theme.colors.fontColor,
   activeColor: props => props.activeColor || props.theme.colors.themeColor,
   hoverColor: props => props.hoverColor || props.color,
@@ -35,14 +29,15 @@ const StyledIcon = styled(({
 
 function Icon(props) {
   const { tooltipDelayShow, tooltipDelayHide, tooltipPlacement, tooltipText, ...rest } = props;
+
   const tooltip = (
     <Tooltip id={`tooltip-${shortid.generate()}`}>
       {tooltipText}
     </Tooltip>
   );
 
-  return (
-    <OverlayTrigger
+  return tooltipText
+    ? <OverlayTrigger
       delayShow={tooltipDelayShow}
       delayHide={tooltipDelayHide}
       placement={tooltipPlacement}
@@ -50,7 +45,7 @@ function Icon(props) {
     >
       <StyledIcon {...rest} />
     </OverlayTrigger>
-  );
+    : <StyledIcon {...rest} />;
 }
 
 Icon.defaultProps = {
