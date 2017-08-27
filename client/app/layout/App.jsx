@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Playlist from 'features/playlist/Playlist';
 import Callback from 'common/components/Callback';
 import GlobalEvents from 'features/global/GlobalEvents';
-import Loadable from 'react-loading-overlay';
+import OverlayLoader from 'features/overlayLoader/OverlayLoader';
 import styled, { injectGlobal } from 'styled-components';
 import Player from 'features/player/Player';
 import Sidebar from 'features/sidebar/Sidebar';
@@ -16,7 +16,6 @@ import { CLIENT_ID, REDIRECT_URI } from 'common/constants/authConsts';
 import Routing from 'app/routing/Routing';
 import { Route, Switch } from 'react-router-dom';
 import { AUTH_CALLBACK_ROUTE } from 'common/constants/routeConsts';
-import { zIndexes } from 'app/css/theme';
 import 'app/css/global';
 
 SC.initialize({
@@ -50,13 +49,7 @@ class Main extends React.Component {
   render() {
     const { loginInProgress } = this.props;
     return (
-      <Loadable
-        active={loginInProgress}
-        spinner
-        text="Authenticating..."
-        animate
-        zIndex={zIndexes[5]}
-      >
+      <OverlayLoader>
         <MainWrapper>
           <Navbar />
           <Sidebar />
@@ -68,7 +61,7 @@ class Main extends React.Component {
           <GlobalEvents />
           <NotificationCenter />
         </MainWrapper>
-      </Loadable>
+      </OverlayLoader>
     );
   }
 }

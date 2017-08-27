@@ -3,6 +3,10 @@ import {
   notificationSuccess,
   notificationWarning,
 } from 'features/notification/notificationActions';
+import {
+  activateOverlayLoader,
+  deactivateOverlayLoader,
+} from 'features/overlayLoader/overlayLoaderActions';
 
 import { getOAuthToken, setOAuthToken, removeOAuthToken, isUnauthError } from './authUtils';
 
@@ -141,6 +145,7 @@ export function loadMe() {
       })
       .then(() => {
         dispatch(loginSucceed());
+        dispatch(deactivateOverlayLoader());
         dispatch(notificationSuccess('Login Success'));
       })
       .catch((err) => {
@@ -153,6 +158,7 @@ export function loadMe() {
 export function doLogin() {
   return (dispatch) => {
     dispatch(startLogin());
+    dispatch(activateOverlayLoader('Authenticating...'));
     dispatch(doAuth()).then(() => dispatch(loadMe()));
   };
 }
@@ -165,6 +171,8 @@ export function loginIfNeeded() {
     // Check if we need to log the user in.
     if (token && !me) {
       dispatch(startLogin());
+      dispatch(activateOverlayLoader('Authenticating...'));
+
       dispatch(loadMe());
     }
   };

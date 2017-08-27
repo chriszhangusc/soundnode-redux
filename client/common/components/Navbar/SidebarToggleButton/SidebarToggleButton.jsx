@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from 'common/components/icons/Icon';
 import { white } from 'app/css/colors';
 import { connect } from 'react-redux';
-import * as sidebarActions from 'common/components/Sidebar/sidebarActions';
+import * as sidebarActions from 'features/sidebar/sidebarActions';
 import Wrapper from './Wrapper';
 
 function SidebarToggleButton({ toggleSidebar }) {

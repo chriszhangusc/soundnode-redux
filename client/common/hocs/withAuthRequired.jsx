@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { isAuthenticated } from 'features/auth/authUtils';
 import { notificationWarning } from 'features/notification/notificationActions';
-import { resetSidebarTab } from 'common/components/Sidebar/sidebarActions';
+import { resetSidebarTab } from 'features/sidebar/sidebarActions';
 import { getDisplayName } from 'common/utils/hocUtils';
 
 export default function withAuthRequired(WrappedComponent) {
