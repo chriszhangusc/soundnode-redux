@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import * as actions from './sidebarActions';
+import * as actions from '../sidebarActions';
 import SidebarNavLink from './SidebarNavLink';
 
 const ListItem = styled.li`line-height: 80px;`;
@@ -16,12 +16,12 @@ const Icon = styled.i`
 
 const Title = styled.span``;
 
-function SidebarItem({ selectedTab, toggleSidebar, selectTab, to, iconClassName, title }) {
+function SidebarTab({ selectedTab, toggleSidebar, selectTab, to, iconClassName, title }) {
   return (
     <ListItem>
       <SidebarNavLink
         to={to}
-        active={selectedTab === title}
+        selected={selectedTab === title}
         onClick={() => {
           selectTab(title);
           toggleSidebar();
@@ -36,8 +36,8 @@ function SidebarItem({ selectedTab, toggleSidebar, selectTab, to, iconClassName,
   );
 }
 
-SidebarItem.propTypes = {
-  selectedTab: PropTypes.func.isRequired,
+SidebarTab.propTypes = {
+  selectedTab: PropTypes.string.isRequired,
   toggleSidebar: PropTypes.func.isRequired,
   selectTab: PropTypes.func.isRequired,
   to: PropTypes.string.isRequired,
@@ -51,4 +51,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, actions)(SidebarItem);
+export default connect(mapStateToProps, actions)(SidebarTab);

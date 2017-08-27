@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as routes from 'common/constants/routeConsts';
 import BoxShadow from 'common/components/BoxShadow';
 import PropTypes from 'prop-types';
-import SidebarItem from './SidebarItem';
+import SidebarTab from './SidebarTab';
 import Wrapper from './Wrapper';
 
 const sidebarItemList = [
@@ -36,7 +36,7 @@ function Sidebar({ hidden }) {
     <BoxShadow blur={10} spread={4} shade={3}>
       <Wrapper sidebarHidden={hidden}>
         <ul>
-          {sidebarItemList.map(item => <SidebarItem {...item} key={item.title} />)}
+          {sidebarItemList.map(item => <SidebarTab {...item} key={item.title} />)}
         </ul>
       </Wrapper>
     </BoxShadow>

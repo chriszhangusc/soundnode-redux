@@ -1,4 +1,4 @@
-import { SIDEBAR_TOGGLE, SIDEBAR_TAB_SELECT } from './sidebarActionTypes';
+import { SIDEBAR_TOGGLE, SIDEBAR_TAB_SELECT, SIDEBAR_TAB_RESET } from './sidebarActionTypes';
 
 export function toggleSidebar() {
   return {
@@ -12,5 +12,11 @@ export function selectTab(tabName) {
     payload: {
       tabName,
     },
+  };
+}
+
+export function resetSidebarTab() {
+  return {
+    type: SIDEBAR_TAB_RESET,
   };
 }

@@ -4,15 +4,18 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { isAuthenticated } from 'features/auth/authUtils';
 import { notificationWarning } from 'features/notification/notificationActions';
+import { resetSidebarTab } from 'common/components/Sidebar/sidebarActions';
 import { getDisplayName } from 'common/utils/hocUtils';
 
-export default function withAuthReqired(WrappedComponent) {
+export default function withAuthRequired(WrappedComponent) {
   class EnhancedComponent extends Component {
     componentDidMount() {
       if (!isAuthenticated()) {
-        this.props.notificationWarning('Please signin with SoundCloud first');
+        this.props.resetSidebarTab();
+        this.props.notificationWarning('Please Signin with SoundCloud First');
       }
     }
+
     render() {
       const authed = isAuthenticated();
       return authed ? <WrappedComponent {...this.props} /> : <Redirect to="/" />;
@@ -21,9 +24,15 @@ export default function withAuthReqired(WrappedComponent) {
 
   EnhancedComponent.propTypes = {
     notificationWarning: PropTypes.func.isRequired,
+    resetSidebarTab: PropTypes.func.isRequired,
   };
 
   EnhancedComponent.displayName = `withAuthReqired(${getDisplayName(WrappedComponent)})`;
 
-  return connect(null, { notificationWarning })(EnhancedComponent);
+  const actions = {
+    notificationWarning,
+    resetSidebarTab,
+  };
+
+  return connect(null, actions)(EnhancedComponent);
 }

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as sidebarActions from 'common/components/Sidebar/sidebarActions';
 import Wrapper from './Wrapper';
 
-function SidebarToggleButton({ toggleSidebar, ...rest }) {
+function SidebarToggleButton({ toggleSidebar }) {
   return (
     <Wrapper>
       <Icon
@@ -16,7 +16,6 @@ function SidebarToggleButton({ toggleSidebar, ...rest }) {
         onClick={() => {
           toggleSidebar();
         }}
-        {...rest}
       />
     </Wrapper>
   );

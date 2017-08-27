@@ -1,4 +1,4 @@
-import { SIDEBAR_TOGGLE, SIDEBAR_TAB_SELECT } from './sidebarActionTypes';
+import { SIDEBAR_TOGGLE, SIDEBAR_TAB_SELECT, SIDEBAR_TAB_RESET } from './sidebarActionTypes';
 
 /* Reducer */
 const initialState = {
@@ -20,12 +20,20 @@ function selectTab(state, { tabName }) {
   };
 }
 
+function resetTab() {
+  return {
+    ...initialState,
+  };
+}
+
 export default function sidebarReducer(state = initialState, action) {
   switch (action.type) {
     case SIDEBAR_TOGGLE:
       return toggleSidebar(state);
     case SIDEBAR_TAB_SELECT:
       return selectTab(state, action.payload);
+    case SIDEBAR_TAB_RESET:
+      return resetTab();
     default:
       return state;
   }
