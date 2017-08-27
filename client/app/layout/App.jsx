@@ -7,7 +7,7 @@ import GlobalEvents from 'features/global/GlobalEvents';
 import Loadable from 'react-loading-overlay';
 import styled, { injectGlobal } from 'styled-components';
 import Player from 'features/player/Player';
-import Sidebar from 'common/components/Sidebar';
+import Sidebar from 'features/sidebar/Sidebar';
 import Navbar from 'common/components/Navbar';
 import NotificationCenter from 'features/notification/NotificationCenter';
 import { isLoginInProgress } from 'features/auth/authSelectors';

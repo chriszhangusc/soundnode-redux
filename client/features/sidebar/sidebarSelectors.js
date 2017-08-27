@@ -7,3 +7,4 @@ export const getSelectedTab = createSelector(
   sidebarState => sidebarState.selectedTab,
 );
 
+export const isSidebarHidden = createSelector(getSidebarState, sidebarState => sidebarState.hidden);

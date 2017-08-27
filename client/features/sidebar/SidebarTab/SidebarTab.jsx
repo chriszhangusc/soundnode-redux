@@ -3,16 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import * as actions from '../sidebarActions';
+import { getSelectedTab } from '../sidebarSelectors';
 import SidebarNavLink from './SidebarNavLink';
+import SidebarTabIcon from './SidebarTabIcon';
 
 const ListItem = styled.li`line-height: 80px;`;
-
-const Icon = styled.i`
-  font-size: 1rem;
-  margin-right: 10px;
-  width: 40%;
-  text-align: right;
-`;
 
 const Title = styled.span``;
 
@@ -27,7 +22,7 @@ function SidebarTab({ selectedTab, toggleSidebar, selectTab, to, iconClassName, 
           toggleSidebar();
         }}
       >
-        <Icon className={iconClassName} />
+        <SidebarTabIcon className={iconClassName} />
         <Title>
           {title}
         </Title>
@@ -47,7 +42,7 @@ SidebarTab.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    selectedTab: state.sidebar.selectedTab,
+    selectedTab: getSelectedTab(state),
   };
 }
 
