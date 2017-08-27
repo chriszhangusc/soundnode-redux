@@ -5,7 +5,7 @@ import FontAwesome from 'react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import shortid from 'shortid';
 
-// Figure out a way to specify iconSize!!
+// #TODO: Figure out a way to specify iconSize!!
 
 // Filter props to get rid of unknown props warning:
 // https://github.com/styled-components/styled-components/issues/305

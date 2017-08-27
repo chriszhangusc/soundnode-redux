@@ -20,7 +20,6 @@ class PlayerControls extends Component {
     return (
       <ButtonWrapper>
         <PlayerButton
-          iconSize="2rem"
           tooltipText={playing ? 'Pause' : 'Play'}
           name={playing ? 'pause' : 'play'}
           onClick={playing ? pauseSong : playSong}
@@ -33,12 +32,7 @@ class PlayerControls extends Component {
     const { playNextSong } = this.props;
     return (
       <ButtonWrapper>
-        <PlayerButton
-          iconSize="2rem"
-          tooltipText="Next"
-          name="step-forward"
-          onClick={playNextSong}
-        />
+        <PlayerButton tooltipText="Next" name="step-forward" onClick={playNextSong} />
       </ButtonWrapper>
     );
   }
@@ -47,12 +41,7 @@ class PlayerControls extends Component {
     const { playPrevSong } = this.props;
     return (
       <ButtonWrapper>
-        <PlayerButton
-          iconSize="2rem"
-          tooltipText="Previous"
-          name="step-backward"
-          onClick={playPrevSong}
-        />
+        <PlayerButton tooltipText="Previous" name="step-backward" onClick={playPrevSong} />
       </ButtonWrapper>
     );
   }

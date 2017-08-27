@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as routes from 'common/constants/routeConsts';
 import BoxShadow from 'common/components/BoxShadow';
+import PropTypes from 'prop-types';
 import SidebarItem from './SidebarItem';
 import Wrapper from './Wrapper';
 
@@ -41,6 +42,10 @@ function Sidebar({ hidden }) {
     </BoxShadow>
   );
 }
+
+Sidebar.propTypes = {
+  hidden: PropTypes.bool.isRequired,
+};
 
 function mapStateToProps(state) {
   return {
