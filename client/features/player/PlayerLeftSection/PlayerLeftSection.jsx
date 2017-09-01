@@ -8,7 +8,7 @@ import PlayerTrackImage from './PlayerTrackImage';
 import TrackDetails from './PlayerTrackDetails';
 import Wrapper from './Wrapper';
 
-function PlayerTrackInfo({ artworkUrl, trackTitle, artistName, trackUrl, artistUrl }) {
+function PlayerLeftSection({ artworkUrl, trackTitle, artistName, trackUrl, artistUrl }) {
   return (
     <Wrapper>
       <PlayerTrackImage src={artworkUrl} linkTo={trackUrl} />
@@ -22,7 +22,7 @@ function PlayerTrackInfo({ artworkUrl, trackTitle, artistName, trackUrl, artistU
   );
 }
 
-PlayerTrackInfo.defaultProps = {
+PlayerLeftSection.defaultProps = {
   artworkUrl: undefined,
   trackUrl: undefined,
   artistUrl: undefined,
@@ -30,7 +30,7 @@ PlayerTrackInfo.defaultProps = {
   trackTitle: '',
 };
 
-PlayerTrackInfo.propTypes = {
+PlayerLeftSection.propTypes = {
   artworkUrl: PropTypes.string,
   trackUrl: PropTypes.string,
   artistUrl: PropTypes.string,
@@ -51,4 +51,4 @@ function mapStateToProps(state, { playerTrack }) {
   };
 }
 
-export default connect(mapStateToProps)(PlayerTrackInfo);
+export default connect(mapStateToProps)(PlayerLeftSection);

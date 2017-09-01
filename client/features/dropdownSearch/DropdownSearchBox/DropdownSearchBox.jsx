@@ -72,8 +72,8 @@ DropdownSearchBox.propTypes = {
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleChange(keywords) {
-      dispatch(startDropdownSearch(keywords));
+    handleChange(searchKeyword) {
+      dispatch(startDropdownSearch(searchKeyword));
     },
 
     handleBlur() {
@@ -84,14 +84,13 @@ function mapDispatchToProps(dispatch) {
       }, 250);
     },
 
-    handleFocus(keywords) {
-      if (keywords.trim() === '') dispatch(clearAndHideSearchResults());
-      else dispatch(startDropdownSearch(keywords));
+    handleFocus(searchKeyword) {
+      if (searchKeyword.trim() === '') dispatch(clearAndHideSearchResults());
+      else dispatch(startDropdownSearch(searchKeyword));
     },
 
-    handleShowAll(rawKeywords) {
-      const keywords = rawKeywords.toLowerCase().trim();
-      if (keywords !== '') {
+    handleShowAll(rawsearchKeyword) {
+      if (rawsearchKeyword.trim() !== '') {
         dispatch(clearAndHideSearchResults());
       }
     },

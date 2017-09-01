@@ -3,7 +3,7 @@ import SC from 'soundcloud';
 import PropTypes from 'prop-types';
 import Playlist from 'features/playlist/Playlist';
 import Callback from 'common/components/Callback';
-import GlobalEvents from 'features/global/GlobalEvents';
+import NetworkDetector from 'features/network/NetworkDetector';
 import OverlayLoader from 'features/overlayLoader/OverlayLoader';
 import styled, { injectGlobal } from 'styled-components';
 import Player from 'features/player/Player';
@@ -58,7 +58,7 @@ class Main extends React.Component {
             <Player />
             <Playlist />
           </PageContentWrapper>
-          <GlobalEvents />
+          <NetworkDetector />
           <NotificationCenter />
         </MainWrapper>
       </OverlayLoader>

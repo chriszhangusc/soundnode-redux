@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as notificationActions from 'features/notification/notificationActions';
 
-class GlobalEvents extends React.Component {
+class NetworkDetector extends React.Component {
   componentDidMount() {
     window.addEventListener('offline', () => {
       this.props.notificationWarning('Looks like your internet connection is down!');
@@ -25,9 +25,9 @@ class GlobalEvents extends React.Component {
   }
 }
 
-GlobalEvents.propTypes = {
+NetworkDetector.propTypes = {
   notificationWarning: PropTypes.func.isRequired,
   notificationSuccess: PropTypes.func.isRequired,
 };
 
-export default connect(null, notificationActions)(GlobalEvents);
+export default connect(null, notificationActions)(NetworkDetector);

@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentPlayerTrack } from 'features/player/playerSelectors';
 import BoxShadow from 'common/components/BoxShadow';
-import PlayerTimeSection from '../PlayerTimeSection';
-import PlayerAudio from '../PlayerAudio';
-import PlayerControls from '../PlayerControls';
-import PlayerProgressBar from '../PlayerProgressBar';
-import PlayerTrackInfo from '../PlayerTrackInfo';
-import PlayerModeControls from '../PlayerModeControls';
-import PlayerVolumeControls from '../PlayerVolumeControls';
+import PlayerLeftSection from 'features/player/PlayerLeftSection';
+import PlayerMiddleSection from 'features/player/PlayerMiddleSection';
+import PlayerRightSection from 'features/player/PlayerRightSection';
+import PlayerAudio from 'features/player/PlayerAudio';
+import PlayerProgressBar from 'features/player/PlayerProgressBar';
 import OuterWrapper from './OuterWrapper';
 import ContentWrapper from './ContentWrapper';
-import RightSectionWrapper from './RightSectionWrapper';
 
 function Player({ playerTrack }) {
   if (!playerTrack || !playerTrack.id) {
@@ -26,13 +23,9 @@ function Player({ playerTrack }) {
         <ContentWrapper>
           <PlayerProgressBar playerTrack={playerTrack} />
           <PlayerAudio playerTrack={playerTrack} />
-          <PlayerTrackInfo playerTrack={playerTrack} />
-          <PlayerControls />
-          <RightSectionWrapper>
-            <PlayerTimeSection playerTrack={playerTrack} />
-            <PlayerVolumeControls />
-            <PlayerModeControls />
-          </RightSectionWrapper>
+          <PlayerLeftSection playerTrack={playerTrack} />
+          <PlayerMiddleSection />
+          <PlayerRightSection playerTrack={playerTrack} />
         </ContentWrapper>
       </BoxShadow>
     </OuterWrapper>

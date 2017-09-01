@@ -7,7 +7,7 @@ import PlayerButton from '../PlayerButton';
 import ButtonWrapper from './ButtonWrapper';
 import Wrapper from './Wrapper';
 
-class PlayerControls extends Component {
+class PlayerMiddleSection extends Component {
   constructor(props) {
     super(props);
     this.renderPlayPauseButton = this.renderPlayPauseButton.bind(this);
@@ -57,7 +57,7 @@ class PlayerControls extends Component {
   }
 }
 
-PlayerControls.propTypes = {
+PlayerMiddleSection.propTypes = {
   playing: PropTypes.bool.isRequired,
   playNextSong: PropTypes.func.isRequired,
   playPrevSong: PropTypes.func.isRequired,
@@ -71,4 +71,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, playerActions)(PlayerControls);
+export default connect(mapStateToProps, playerActions)(PlayerMiddleSection);

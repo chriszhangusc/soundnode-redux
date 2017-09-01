@@ -6,9 +6,9 @@ import { getPlayerMode } from 'features/player/playerSelectors';
 import { togglePlayMode } from 'features/player/playerActions';
 import { isPlaylistHidden } from 'features/playlist/playlistSelectors';
 import { togglePlaylist } from 'features/playlist/playlistActions';
+import PlayerButton from 'features/player/PlayerButton';
 import Wrapper from './Wrapper';
 import ButtonWrapper from './ButtonWrapper';
-import PlayerButton from '../PlayerButton';
 
 class PlayerModeControls extends Component {
   constructor(props) {
