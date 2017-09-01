@@ -11,15 +11,10 @@ import OverlayInfoBar from './OverlayInfoBar';
 import OverlayIconInfo from './OverlayIconInfo';
 
 class TrackProfileImage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleImageClick = this.handleImageClick.bind(this);
-  }
-
-  handleImageClick() {
+  handleImageClick = () => {
     const { trackId, togglePlaybackState } = this.props;
     togglePlaybackState(trackId);
-  }
+  };
 
   render() {
     const { artworkUrl, playing, active, liked, playbackCount, likesCount } = this.props;

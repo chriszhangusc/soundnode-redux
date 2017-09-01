@@ -8,15 +8,6 @@ import PlayerSlider from 'features/player/shared/PlayerSlider';
 import Wrapper from './Wrapper';
 
 class PlayerProgressBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleSeekKnobMouseDown = this.handleSeekKnobMouseDown.bind(this);
-    this.handleSeekKnobMouseMove = this.handleSeekKnobMouseMove.bind(this);
-    this.handleSeekKnobMouseUp = this.handleSeekKnobMouseUp.bind(this);
-    this.handleProgressBarMouseDown = this.handleProgressBarMouseDown.bind(this);
-    this.handleProgressBarMouseUp = this.handleProgressBarMouseUp.bind(this);
-  }
-
   componentDidUpdate(prevProps) {
     const { seeking } = this.props;
     const prevSeeking = prevProps.seeking;
@@ -32,32 +23,32 @@ class PlayerProgressBar extends React.Component {
     }
   }
 
-  handleSeekKnobMouseDown() {
+  handleSeekKnobMouseDown = () => {
     this.props.beginSeek();
-  }
+  };
 
   // Can not use bind because it will fail when removing listener.
-  handleSeekKnobMouseMove(e) {
+  handleSeekKnobMouseMove = (e) => {
     const { duration, updateTimeOnSeek } = this.props;
     const newTime = computeOffset(this.seekBar, duration, e);
     updateTimeOnSeek(newTime);
-  }
+  };
 
-  handleSeekKnobMouseUp(e) {
+  handleSeekKnobMouseUp = (e) => {
     const { duration, updateTimeAndEndSeek } = this.props;
     const newTime = computeOffset(this.seekBar, duration, e);
     updateTimeAndEndSeek(newTime);
-  }
+  };
 
-  handleProgressBarMouseDown() {
+  handleProgressBarMouseDown = () => {
     this.props.beginSeek();
-  }
+  };
 
-  handleProgressBarMouseUp(e) {
+  handleProgressBarMouseUp = (e) => {
     const { duration, updateTimeAndEndSeek } = this.props;
     const newTime = computeOffset(this.seekBar, duration, e);
     updateTimeAndEndSeek(newTime);
-  }
+  };
 
   render() {
     const { duration, currentTime } = this.props;

@@ -9,10 +9,9 @@ export default function withImageFadeInOnLoad(ImageComponent) {
       this.state = {
         imageLoaded: false,
       };
-      this.handleImageLoaded = this.handleImageLoaded.bind(this);
     }
 
-    handleImageLoaded() {
+    handleImageLoaded = () => {
       this.setState({
         imageLoaded: true,
       });

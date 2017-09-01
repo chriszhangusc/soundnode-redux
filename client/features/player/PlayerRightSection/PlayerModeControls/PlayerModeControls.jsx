@@ -11,14 +11,7 @@ import Wrapper from './Wrapper';
 import ButtonWrapper from './ButtonWrapper';
 
 class PlayerModeControls extends Component {
-  constructor(props) {
-    super(props);
-    this.renderRepeat = this.renderRepeat.bind(this);
-    this.renderShuffle = this.renderShuffle.bind(this);
-    this.renderTogglePlaylist = this.renderTogglePlaylist.bind(this);
-  }
-
-  renderRepeat() {
+  renderRepeat = () => {
     const { onRepeatClick, mode } = this.props;
     return (
       <ButtonWrapper>
@@ -30,9 +23,9 @@ class PlayerModeControls extends Component {
         />
       </ButtonWrapper>
     );
-  }
+  };
 
-  renderShuffle() {
+  renderShuffle = () => {
     const { onShuffleClick, mode } = this.props;
     return (
       <ButtonWrapper>
@@ -44,9 +37,9 @@ class PlayerModeControls extends Component {
         />
       </ButtonWrapper>
     );
-  }
+  };
 
-  renderTogglePlaylist() {
+  renderTogglePlaylist = () => {
     const { onTogglePlaylistClick, playlistHidden } = this.props;
     return (
       <ButtonWrapper>
@@ -58,7 +51,7 @@ class PlayerModeControls extends Component {
         />
       </ButtonWrapper>
     );
-  }
+  };
 
   render() {
     return (

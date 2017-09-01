@@ -11,7 +11,6 @@ export default function withImageFallbackOnError(ImageComponent) {
       this.state = {
         fallback: false,
       };
-      this.handleError = this.handleError.bind(this);
     }
     // This is for flow
     // props: {
@@ -20,7 +19,7 @@ export default function withImageFallbackOnError(ImageComponent) {
     //   onError?: Function,
     // };
 
-    handleError() {
+    handleError = () => {
       const { onError } = this.props;
 
       this.setState({ fallback: true });

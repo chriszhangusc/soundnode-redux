@@ -10,37 +10,29 @@ import Wrapper from './Wrapper';
 import DropdownSearchInput from './DropdownSearchInput';
 
 class DropdownSearchBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onFocus = this.onFocus.bind(this);
-    this.onBlur = this.onBlur.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
   // When user press enter, show all results.
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
     const { handleShowAll } = this.props;
     const searchKeyword = this.searchInput.value;
     handleShowAll(searchKeyword);
     this.searchInput.value = '';
-  }
+  };
 
-  onInputChange(e) {
+  onInputChange = (e) => {
     e.preventDefault();
     e.stopPropagation();
     const { handleChange } = this.props;
     handleChange(e.target.value.trim());
-  }
+  };
 
-  onFocus(e) {
+  onFocus = (e) => {
     this.props.handleFocus(e.target.value.trim());
-  }
+  };
 
-  onBlur() {
+  onBlur = () => {
     this.props.handleBlur();
-  }
+  };
 
   render() {
     return (

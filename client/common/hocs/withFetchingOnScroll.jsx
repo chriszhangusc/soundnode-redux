@@ -7,7 +7,6 @@ export default function withFetchingOnScroll(WrappedComponent) {
   class EnhancedComponent extends Component {
     constructor(props) {
       super(props);
-      this.onScroll = this.onScroll.bind(this);
       this.onScroll = debounce(this.onScroll, 300);
     }
 
@@ -19,12 +18,13 @@ export default function withFetchingOnScroll(WrappedComponent) {
       window.removeEventListener('scroll', this.onScroll, false);
     }
 
-    onScroll() {
+    onScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
         const { scrollFunc } = this.props;
         scrollFunc();
       }
-    }
+    };
+
     render() {
       return <WrappedComponent {...this.props} />;
     }

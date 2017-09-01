@@ -26,11 +26,6 @@ class Charts extends Component {
     genreTitle: '',
   };
 
-  constructor(props) {
-    super(props);
-    this.onPageMountOrChange = this.onPageMountOrChange.bind(this);
-  }
-
   componentDidMount() {
     this.onPageMountOrChange(this.props);
   }
@@ -48,12 +43,12 @@ class Charts extends Component {
     this.props.resetChartsState();
   }
 
-  onPageMountOrChange({ match }) {
+  onPageMountOrChange = ({ match }) => {
     const genre = match.params.genre;
     this.props.updateVisiblePlaylistName(genre);
     this.props.changeGenre(genre);
     this.props.loadChartsPage(genre);
-  }
+  };
 
   render() {
     const { genreTitle } = this.props;

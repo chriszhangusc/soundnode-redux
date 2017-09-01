@@ -10,13 +10,6 @@ import PlayerSlider from 'features/player/shared/PlayerSlider';
 import Wrapper from './Wrapper';
 
 class PlayerVolumeSeekBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleVolumeMouseMove = this.handleVolumeMouseMove.bind(this);
-    this.handleVolumeMouseDown = this.handleVolumeMouseDown.bind(this);
-    this.handleVolumeMouseUp = this.handleVolumeMouseUp.bind(this);
-  }
-
   componentDidUpdate(prevProps) {
     const prevSeeking = prevProps.volumeSeeking;
     const currSeeking = this.props.volumeSeeking;
@@ -31,19 +24,19 @@ class PlayerVolumeSeekBar extends React.Component {
     }
   }
 
-  handleVolumeMouseDown() {
+  handleVolumeMouseDown = () => {
     this.props.beginVolumeSeek();
-  }
+  };
 
-  handleVolumeMouseMove(e) {
+  handleVolumeMouseMove = (e) => {
     const newVolume = computeOffset(this.volumeBar, 1.0, e);
     this.props.updateVolume(newVolume);
-  }
+  };
 
-  handleVolumeMouseUp(e) {
+  handleVolumeMouseUp = (e) => {
     const newVolume = computeOffset(this.volumeBar, 1.0, e);
     this.props.updateVolumeAndEndSeek(newVolume);
-  }
+  };
 
   render() {
     const { volume } = this.props;
