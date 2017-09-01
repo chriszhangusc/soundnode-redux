@@ -33,7 +33,7 @@ const PageContentWrapper = styled.div`
   min-height: 100vh;
 `;
 
-const MainWrapper = styled.div`padding-top: 78px;`;
+const MainWrapper = styled.div`padding-top: 70px;`;
 
 class Main extends React.Component {
   componentDidMount() {
@@ -41,13 +41,13 @@ class Main extends React.Component {
     const { loginInProgress } = this.props;
     injectGlobal`
       body {
+        /* disable scroll when the global overlay loader is active */
         overflow-y: ${loginInProgress ? 'hidden' : 'scroll'};
       }
     `;
   }
 
   render() {
-    const { loginInProgress } = this.props;
     return (
       <OverlayLoader>
         <MainWrapper>

@@ -9,8 +9,8 @@ import NavWrapper from './NavWrapper';
 
 function Navbar() {
   return (
-    <BoxShadow blur={10} spread={4} shade={3}>
-      <NavWrapper>
+    <NavWrapper>
+      <BoxShadow blur={10} spread={8} shade={3}>
         <Flex justify="space-between" px={100} py={0}>
           <Flex align="center" justify="flex-start" flex="1">
             <SidebarToggleButton />
@@ -22,8 +22,8 @@ function Navbar() {
             <Auth />
           </Flex>
         </Flex>
-      </NavWrapper>
-    </BoxShadow>
+      </BoxShadow>
+    </NavWrapper>
   );
 }
 

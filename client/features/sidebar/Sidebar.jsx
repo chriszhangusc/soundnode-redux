@@ -33,6 +33,7 @@ const sidebarItemList = [
 // Should be refactored to take sidebar items as props
 function Sidebar({ hidden }) {
   // The activeClassName thing would need work-around to work with styled-component: https://github.com/styled-components/styled-components/issues/184
+  // #TODO: Fix shadow not working issue.
   return (
     <BoxShadow blur={10} spread={4} shade={3}>
       <Wrapper sidebarHidden={hidden}>

@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import RouterLink from 'common/components/links/RouterLink';
-import { doLogout } from '../authActions';
+import { doLogout } from 'features/auth/authActions';
 
 function LogoutButton({ onLogout }) {
-  return <RouterLink to="/" onClick={onLogout}>Logout</RouterLink>;
+  return (
+    <RouterLink to="/" onClick={onLogout}>
+      Logout
+    </RouterLink>
+  );
 }
 
 LogoutButton.propTypes = {
