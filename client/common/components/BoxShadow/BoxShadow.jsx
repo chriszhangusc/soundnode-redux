@@ -23,6 +23,10 @@ const shade = (props) => {
 };
 // shade between 0 and props.theme.shades.length
 
-const BoxShadow = styled.div`box-shadow: ${offsetX} ${offsetY} ${blur} ${spread} ${shade};`;
+const BoxShadow = styled.div`
+  height: 100%;
+  width: 100%;
+  box-shadow: ${offsetX} ${offsetY} ${blur} ${spread} ${shade};
+`;
 
 export default BoxShadow;
