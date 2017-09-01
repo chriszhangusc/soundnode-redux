@@ -1,13 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { themeColor } from 'app/css/colors';
 import Icon from 'common/components/icons/Icon';
+import { themeColor } from 'app/css/colors';
 
-const Wrapper = styled.i`
-  display: inline-block;
-  color: ${themeColor};
-`;
+import Wrapper from './Wrapper';
 
 function PlaybackOverlayIcon({ playing }) {
   return (

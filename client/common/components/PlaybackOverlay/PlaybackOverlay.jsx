@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ShadowOverlay from './ShadowOverlay';
+import Overlay from './Overlay';
 import PlaybackOverlayIcon from './PlaybackOverlayIcon';
 
 function PlaybackOverlay({ playing, active, onClick }) {
   return (
-    <ShadowOverlay active={active} onClick={onClick}>
+    <Overlay active={active} onClick={onClick}>
       <PlaybackOverlayIcon playing={playing} />
-    </ShadowOverlay>
+    </Overlay>
   );
 }
 

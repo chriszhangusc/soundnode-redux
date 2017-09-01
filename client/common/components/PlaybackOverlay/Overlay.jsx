@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ShadowOverlay = styled.span`
+export default styled.span`
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -19,5 +19,3 @@ const ShadowOverlay = styled.span`
     opacity: 1;
   }
 `;
-
-export default ShadowOverlay;
