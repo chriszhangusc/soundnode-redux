@@ -6,7 +6,7 @@ import { getPlayerMode } from 'features/player/playerSelectors';
 import { togglePlayMode } from 'features/player/playerActions';
 import { isPlaylistHidden } from 'features/playlist/playlistSelectors';
 import { togglePlaylist } from 'features/playlist/playlistActions';
-import PlayerButton from 'features/player/PlayerButton';
+import PlayerButton from 'features/player/shared/PlayerButton';
 import Wrapper from './Wrapper';
 import ButtonWrapper from './ButtonWrapper';
 

@@ -6,7 +6,7 @@ import { lighterGray } from 'app/css/colors';
 import { computeOffset } from 'features/player/playerUtils';
 import * as playerActions from 'features/player/playerActions';
 import { getCurrentVolume, isVolumeSeeking } from 'features/player/playerSelectors';
-import PlayerSlider from 'features/player/PlayerSlider';
+import PlayerSlider from 'features/player/shared/PlayerSlider';
 import Wrapper from './Wrapper';
 
 class PlayerVolumeSeekBar extends React.Component {

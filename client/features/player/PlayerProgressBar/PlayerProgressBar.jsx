@@ -4,7 +4,7 @@ import { computeOffset } from 'features/player/playerUtils';
 import { connect } from 'react-redux';
 import * as playerActions from 'features/player/playerActions';
 import { getCurrentTime, isPlayerSeeking } from 'features/player/playerSelectors';
-import PlayerSlider from 'features/player/PlayerSlider';
+import PlayerSlider from 'features/player/shared/PlayerSlider';
 import Wrapper from './Wrapper';
 
 class PlayerProgressBar extends React.Component {

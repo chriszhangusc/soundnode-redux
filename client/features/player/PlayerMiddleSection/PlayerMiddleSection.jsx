@@ -3,19 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isPlayerPlaying } from 'features/player/playerSelectors';
 import * as playerActions from 'features/player/playerActions';
-import PlayerButton from '../PlayerButton';
+import PlayerButton from 'features/player/shared/PlayerButton';
 import ButtonWrapper from './ButtonWrapper';
 import Wrapper from './Wrapper';
 
 class PlayerMiddleSection extends Component {
-  constructor(props) {
-    super(props);
-    this.renderPlayPauseButton = this.renderPlayPauseButton.bind(this);
-    this.renderForwardButton = this.renderForwardButton.bind(this);
-    this.renderBackwardButton = this.renderBackwardButton.bind(this);
-  }
 
-  renderPlayPauseButton() {
+  renderPlayPauseButton = () => {
     const { playing, pauseSong, playSong } = this.props;
     return (
       <ButtonWrapper>
@@ -28,7 +22,7 @@ class PlayerMiddleSection extends Component {
     );
   }
 
-  renderForwardButton() {
+  renderForwardButton = () => {
     const { playNextSong } = this.props;
     return (
       <ButtonWrapper>
@@ -37,7 +31,7 @@ class PlayerMiddleSection extends Component {
     );
   }
 
-  renderBackwardButton() {
+  renderBackwardButton = () => {
     const { playPrevSong } = this.props;
     return (
       <ButtonWrapper>

@@ -14,19 +14,7 @@ import {
 } from 'features/player/playerSelectors';
 
 class PlayerAudio extends Component {
-  constructor(props) {
-    super(props);
-    this.bindEventListeners = this.bindEventListeners.bind(this);
-    this.removeEventListeners = this.removeEventListeners.bind(this);
-    this.updateTimeIfNeeded = this.updateTimeIfNeeded.bind(this);
-    this.togglePlayIfNeeded = this.togglePlayIfNeeded.bind(this);
-    this.updateVolumeIfNeeded = this.updateVolumeIfNeeded.bind(this);
-    this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
-    this.handleEnd = this.handleEnd.bind(this);
-  }
-
   componentDidMount() {
-    this.bindEventListeners();
     this.togglePlayIfNeeded(this.audio, this.props);
   }
 
@@ -36,12 +24,8 @@ class PlayerAudio extends Component {
     this.togglePlayIfNeeded(this.audio);
   }
 
-  componentWillUnmount() {
-    this.removeEventListeners();
-  }
-
   // If seeking status changed from true to false, then we should update time in our audio
-  updateTimeIfNeeded(prevProps) {
+  updateTimeIfNeeded = (prevProps) => {
     if (prevProps.seeking && !this.props.seeking) {
       this.audio.currentTime = this.props.currentTime;
     }
@@ -51,15 +35,15 @@ class PlayerAudio extends Component {
     if (prevProps.currentTime !== 0 && this.props.currentTime === 0) {
       this.audio.currentTime = this.props.currentTime;
     }
-  }
+  };
 
-  updateVolumeIfNeeded(prevProps) {
+  updateVolumeIfNeeded = (prevProps) => {
     if (prevProps.volume !== this.props.volume) {
       this.audio.volume = this.props.volume;
     }
-  }
+  };
 
-  togglePlayIfNeeded(audio) {
+  togglePlayIfNeeded = (audio) => {
     // This also covers change song and play logic
     if (audio.paused === this.props.playing) {
       if (audio.paused) {
@@ -70,27 +54,15 @@ class PlayerAudio extends Component {
         audio.pause();
       }
     }
-  }
+  };
 
-  handleTimeUpdate(e) {
+  handleTimeUpdate = (e) => {
     this.props.updateTimeOnPlay(e.target.currentTime);
-  }
+  };
 
-  handleEnd() {
+  handleEnded = () => {
     this.props.playNextSong();
-  }
-
-  bindEventListeners() {
-    const audio = this.audio;
-    audio.addEventListener('timeupdate', this.handleTimeUpdate);
-    audio.addEventListener('ended', this.handleEnd);
-  }
-
-  removeEventListeners() {
-    const audio = this.audio;
-    audio.removeEventListener('timeupdate', this.handleTimeUpdate);
-    audio.removeEventListener('ended', this.handleEnd);
-  }
+  };
 
   render() {
     const { streamUrl, mode } = this.props;
@@ -102,6 +74,8 @@ class PlayerAudio extends Component {
           this.audio = ref;
         }}
         src={streamUrl}
+        onEnded={this.handleEnded}
+        onTimeUpdate={this.handleTimeUpdate}
       />
     );
   }

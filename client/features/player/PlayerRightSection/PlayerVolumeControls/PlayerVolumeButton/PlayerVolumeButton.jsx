@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import Icon from 'common/components/icons/Icon';
-import PlayerButton from 'features/player/PlayerButton';
+import PlayerButton from 'features/player/shared/PlayerButton';
 import { getIconNameByVolume } from 'features/player/playerUtils';
 import { getCurrentVolume } from 'features/player/playerSelectors';
 import { toggleMute } from 'features/player/playerActions';
