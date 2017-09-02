@@ -10,7 +10,6 @@ function mapStateToProps(state) {
   return {
     fetching: isUserTracksFetching(state),
     trackIds: getVisiblePlayQueue(state),
-    title: 'Tracks',
   };
 }
 

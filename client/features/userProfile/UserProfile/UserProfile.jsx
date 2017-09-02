@@ -5,6 +5,7 @@ import * as userProfileActions from 'features/userProfile/userProfileActions';
 import { isPageLoading } from 'features/userProfile/userProfileSelectors';
 import UserProfileTracks from 'features/userProfile/UserProfileTracks';
 import UserProfileHeader from 'features/userProfile/UserProfileHeader';
+import PageTitle from 'common/components/PageTitle';
 import Spinner from 'common/components/Spinner';
 import { Grid } from 'react-bootstrap';
 
@@ -51,6 +52,7 @@ class UserProfile extends React.Component {
     return (
       <Grid fluid>
         <UserProfileHeader />
+        <PageTitle>Tracks</PageTitle>
         <UserProfileTracks />
       </Grid>
     );
