@@ -1,19 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import LinkButton from 'common/components/links/LinkButton';
-import { copyToClipboard } from 'features/copy';
+import { copyToClipboard } from 'features/copy/copyActions';
 import * as selectors from 'features/trackProfile/trackProfileSelectors';
+import Wrapper from './Wrapper';
 
-const Wrapper = styled.div`
-  display: flex;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-`;
-
-function TrackActions({ permalink, downloadable, downloadUrl, handleCopyPermalink }) {
+function TrackActions({ permalink, downloadable, downloadUrl, handleCopyClick }) {
   return (
     <Wrapper>
       {downloadable &&
@@ -29,7 +22,7 @@ function TrackActions({ permalink, downloadable, downloadUrl, handleCopyPermalin
         <i className="fa fa-external-link" />PERMALINK
       </LinkButton>
 
-      <LinkButton onClick={() => handleCopyPermalink(permalink)} title="Copy Permalink">
+      <LinkButton onClick={() => handleCopyClick(permalink)} title="Copy Permalink">
         <i className="fa fa-clipboard" />COPY TRACK LINK
       </LinkButton>
     </Wrapper>
@@ -40,14 +33,13 @@ TrackActions.propTypes = {
   downloadable: PropTypes.bool,
   permalink: PropTypes.string,
   downloadUrl: PropTypes.string,
-  handleCopyPermalink: PropTypes.func,
+  handleCopyClick: PropTypes.func.isRequired,
 };
 
 TrackActions.defaultProps = {
   downloadable: false,
   permalink: '',
   downloadUrl: '',
-  handleCopyPermalink: null,
 };
 
 function mapStateToProps(state) {
@@ -58,12 +50,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    handleCopyPermalink(permalink) {
-      dispatch(copyToClipboard(permalink));
-    },
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TrackActions);
+export default connect(mapStateToProps, { handleCopyClick: copyToClipboard })(TrackActions);

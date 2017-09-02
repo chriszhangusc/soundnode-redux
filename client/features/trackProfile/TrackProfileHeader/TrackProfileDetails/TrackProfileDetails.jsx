@@ -25,6 +25,13 @@ function TrackProfileDetails({ title, username, description, userRoute }) {
   );
 }
 
+TrackProfileDetails.defaultProps = {
+  userRoute: '',
+  title: '',
+  username: '',
+  description: '',
+};
+
 TrackProfileDetails.propTypes = {
   userRoute: PropTypes.string,
   title: PropTypes.string,
@@ -32,12 +39,6 @@ TrackProfileDetails.propTypes = {
   description: PropTypes.string,
 };
 
-TrackProfileDetails.defaultProps = {
-  userRoute: '',
-  title: '',
-  username: '',
-  description: '',
-};
 
 function mapStateToProps(state) {
   return {

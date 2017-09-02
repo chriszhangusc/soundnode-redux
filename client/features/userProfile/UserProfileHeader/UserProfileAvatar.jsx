@@ -7,8 +7,8 @@ function UserProfileAvatar({ avatarUrl, permalinkUrl }) {
 }
 
 UserProfileAvatar.defaultProps = {
-  avatarUrl: null,
-  permalinkUrl: null,
+  avatarUrl: '',
+  permalinkUrl: '',
 };
 
 UserProfileAvatar.propTypes = {

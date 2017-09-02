@@ -4,7 +4,7 @@ import Card from 'common/components/Card';
 import { connect } from 'react-redux';
 import { getFavoriteTrackIds, getReposts } from 'features/auth/authSelectors';
 import { doLikeTrack, doUnlikeTrack, createRepost, removeRepost } from 'features/auth/authActions';
-import { copyToClipboard } from 'features/copy';
+import { copyToClipboard } from 'features/copy/copyActions';
 
 function SongCardControls({
   liked,

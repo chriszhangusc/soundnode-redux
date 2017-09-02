@@ -12,11 +12,10 @@ import OuterWrapper from './OuterWrapper';
 import ContentWrapper from './ContentWrapper';
 
 function Player({ playerTrack }) {
-  if (!playerTrack || !playerTrack.id) {
+  if (!playerTrack) {
     return null;
   }
-  // Do not pass down specific data required by its children,
-  // just pass track down and let the children's  do their job
+
   return (
     <OuterWrapper>
       <BoxShadow blur={10} spread={4} shade={5}>
@@ -37,7 +36,9 @@ Player.defaultProps = {
 };
 
 Player.propTypes = {
-  playerTrack: PropTypes.object,
+  playerTrack: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }),
 };
 
 function mapStateToProps(state) {

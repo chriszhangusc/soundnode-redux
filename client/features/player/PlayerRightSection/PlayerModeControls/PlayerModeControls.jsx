@@ -12,42 +12,42 @@ import ButtonWrapper from './ButtonWrapper';
 
 class PlayerModeControls extends Component {
   renderRepeat = () => {
-    const { onRepeatClick, mode } = this.props;
+    const { handleRepeatClick, mode } = this.props;
     return (
       <ButtonWrapper>
         <PlayerButton
           tooltipText="Repeat"
           active={mode === REPEAT}
           name="repeat"
-          onClick={onRepeatClick}
+          onClick={handleRepeatClick}
         />
       </ButtonWrapper>
     );
   };
 
   renderShuffle = () => {
-    const { onShuffleClick, mode } = this.props;
+    const { handleShuffleClick, mode } = this.props;
     return (
       <ButtonWrapper>
         <PlayerButton
           tooltipText="Shuffle"
           active={mode === SHUFFLE}
           name="random"
-          onClick={onShuffleClick}
+          onClick={handleShuffleClick}
         />
       </ButtonWrapper>
     );
   };
 
   renderTogglePlaylist = () => {
-    const { onTogglePlayQueueClick, playQueueHidden } = this.props;
+    const { handlePlayQueueToggle, playQueueHidden } = this.props;
     return (
       <ButtonWrapper>
         <PlayerButton
           tooltipText="Toggle Play Queue"
           active={!playQueueHidden}
           name="list-ul"
-          onClick={onTogglePlayQueueClick}
+          onClick={handlePlayQueueToggle}
         />
       </ButtonWrapper>
     );
@@ -67,9 +67,9 @@ class PlayerModeControls extends Component {
 PlayerModeControls.propTypes = {
   mode: PropTypes.string.isRequired,
   playQueueHidden: PropTypes.bool.isRequired,
-  onRepeatClick: PropTypes.func.isRequired,
-  onShuffleClick: PropTypes.func.isRequired,
-  onTogglePlayQueueClick: PropTypes.func.isRequired,
+  handleRepeatClick: PropTypes.func.isRequired,
+  handleShuffleClick: PropTypes.func.isRequired,
+  handlePlayQueueToggle: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -81,13 +81,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onRepeatClick() {
+    handleRepeatClick() {
       dispatch(togglePlayMode(REPEAT));
     },
-    onShuffleClick() {
+    handleShuffleClick() {
       dispatch(togglePlayMode(SHUFFLE));
     },
-    onTogglePlaylistClick() {
+    handlePlayQueueToggle() {
       dispatch(togglePlayQueue());
     },
   };

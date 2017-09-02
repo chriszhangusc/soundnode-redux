@@ -27,7 +27,7 @@ export const getCurrentPlayerTrack = createSelector(
   (trackId, tracks) => trackId && tracks[String(trackId)],
 );
 
-/* Memoized Selectors by Reselect*/
+/* Memoized Selectors by Reselect */
 /* Return if the current track(byId) is loaded in player. (Paused or Playing) */
 export function isTrackActive(state, trackId) {
   const playerTrackId = getActiveTrackId(state);

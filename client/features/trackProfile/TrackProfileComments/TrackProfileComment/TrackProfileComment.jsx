@@ -1,40 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import { connect } from 'react-redux';
 import { getCommentById, getUserByCommentId } from 'features/entities/entitiesSelectors';
 import { getSmallVersion } from 'common/utils/imageUtils';
 import CommentUserAvatar from './CommentUserAvatar';
 import CommentUsername from './CommentUsername';
-
-const Wrapper = styled.div`
-  width: 90%;
-  display: flex;
-  align-items: flex-start;
-  margin: 20px 0;
-`;
-
-const CommentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const CommentBody = styled.p`
-  font-size: 0.9rem;
-  margin: 5px 0 0 0;
-`;
-
-const CommentHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const CommentTimestamp = styled.span`
-  color: ${props => props.theme.colors.fontColorSub};
-  font-size: 0.9rem;
-`;
+import Wrapper from './Wrapper';
+import CommentDetailWrapper from './CommentDetailWrapper';
+import CommentHeaderWrapper from './CommentHeaderWrapper';
+import CommentTimestamp from './CommentTimestamp';
+import CommentBody from './CommentBody';
 
 function TrackProfileComment({ commentBody, userId, username, commentTimestamp, userAvatarUrl }) {
   const userLink = `${USER_PROFILE_ROUTE}/${userId}`;
@@ -42,27 +18,30 @@ function TrackProfileComment({ commentBody, userId, username, commentTimestamp, 
   return (
     <Wrapper>
       <CommentUserAvatar linkTo={userLink} userAvatarUrl={userAvatarUrl} />
-      <CommentWrapper>
-        <CommentHeader>
+      <CommentDetailWrapper>
+        <CommentHeaderWrapper>
           <CommentUsername to={userLink}>
             {username}
           </CommentUsername>
           <CommentTimestamp>
             {commentTimestamp}
           </CommentTimestamp>
-        </CommentHeader>
+        </CommentHeaderWrapper>
         <CommentBody>
           {commentBody}
         </CommentBody>
-      </CommentWrapper>
+      </CommentDetailWrapper>
     </Wrapper>
   );
 }
 
 function mapStateToProps(state, { commentId }) {
-  const { body, createdAt } = getCommentById(state, commentId);
-  const { username, id, avatarUrl } = getUserByCommentId(state, commentId);
+  const comment = getCommentById(state, commentId);
+  const { body, createdAt } = comment;
+  const commentUser = getUserByCommentId(state, commentId);
+  const { username, id, avatarUrl } = commentUser;
   return {
+    comment,
     userAvatarUrl: getSmallVersion(avatarUrl),
     username,
     commentBody: body,

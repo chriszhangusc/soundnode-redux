@@ -23,9 +23,9 @@ function PlayerLeftSection({ artworkUrl, trackTitle, artistName, trackUrl, artis
 }
 
 PlayerLeftSection.defaultProps = {
-  artworkUrl: undefined,
-  trackUrl: undefined,
-  artistUrl: undefined,
+  artworkUrl: '',
+  trackUrl: '',
+  artistUrl: '',
   artistName: '',
   trackTitle: '',
 };

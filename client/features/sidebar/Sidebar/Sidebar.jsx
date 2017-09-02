@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import * as routes from 'common/constants/routeConsts';
 import BoxShadow from 'common/components/BoxShadow';
 import PropTypes from 'prop-types';
-import { isSidebarHidden } from './sidebarSelectors';
-import SidebarTab from './SidebarTab';
+import { isSidebarHidden } from '../sidebarSelectors';
+import SidebarTab from '../SidebarTab';
 import Wrapper from './Wrapper';
 
 const sidebarItemList = [
