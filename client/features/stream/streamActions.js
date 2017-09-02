@@ -1,5 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeVisiblePlaylist } from 'features/playQueue/playlistActions';
+import { mergeVisiblePlayQueue } from 'features/playQueue/playQueueActions';
 import * as types from './streamActionTypes';
 import { fetchStream, fetchMoreStream } from './streamApi';
 import { isStreamFetching, getStreamNextHref } from './streamSelectors';
@@ -44,7 +44,7 @@ export function receiveStream(normalized) {
   return (dispatch) => {
     const { entities, result, nextHref } = normalized;
     dispatch(mergeEntities(entities));
-    dispatch(mergeVisiblePlaylist(result));
+    dispatch(mergeVisiblePlayQueue(result));
     dispatch(updateStreamNextHref(nextHref));
     dispatch(stopFetchingStream());
   };

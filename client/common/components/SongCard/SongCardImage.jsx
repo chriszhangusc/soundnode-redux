@@ -5,12 +5,12 @@ import PlaybackOverlay from 'common/components/PlaybackOverlay';
 import { connect } from 'react-redux';
 import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
 import * as playerActions from 'features/player/playerActions';
-import { switchActivePlaylistIfNeeded } from 'features/playQueue/playlistActions';
+import { switchActivePlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
 import { getLargeVersion } from 'common/utils/imageUtils';
 
-const handleImageClick = (togglePlaybackState, switchActivePlaylistIfNeeded, trackId, e) => {
+const handleImageClick = (togglePlaybackState, switchActivePlayQueueIfNeeded, trackId, e) => {
   e.preventDefault();
-  switchActivePlaylistIfNeeded();
+  switchActivePlayQueueIfNeeded();
   togglePlaybackState(trackId);
 };
 
@@ -20,14 +20,14 @@ function SongCardImage({
   playing,
   artworkUrl,
   togglePlaybackState,
-  switchActivePlaylistIfNeeded,
+  switchActivePlayQueueIfNeeded,
 }) {
   return (
     <TrackImage src={artworkUrl} size="medium">
       <PlaybackOverlay
         active={active}
         onClick={event =>
-          handleImageClick(togglePlaybackState, switchActivePlaylistIfNeeded, trackId, event)}
+          handleImageClick(togglePlaybackState, switchActivePlayQueueIfNeeded, trackId, event)}
         playing={playing}
       />
     </TrackImage>
@@ -59,7 +59,7 @@ function mapStateToProps(state, { track }) {
 
 const actions = {
   ...playerActions,
-  switchActivePlaylistIfNeeded,
+  switchActivePlayQueueIfNeeded,
 };
 
 export default connect(mapStateToProps, actions)(SongCardImage);

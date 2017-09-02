@@ -1,4 +1,4 @@
-import { updateVisiblePlaylistName, mergeVisiblePlaylist } from 'features/playQueue/playlistActions';
+import { updateVisiblePlayQueueName, mergeVisiblePlayQueue } from 'features/playQueue/playQueueActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import * as types from './favoritesActionTypes';
 import { fetchMyFavorites, fetchFavoritesByNextHref } from './favoritesApi';
@@ -36,7 +36,7 @@ export function receiveFavorites(normalized) {
     const { entities, nextHref, result } = normalized;
     dispatch(mergeEntities(entities));
     dispatch(updateFavoritesNextHref(nextHref));
-    dispatch(mergeVisiblePlaylist(result));
+    dispatch(mergeVisiblePlayQueue(result));
     dispatch(stopFetchingFavorites());
   };
 }
@@ -44,7 +44,7 @@ export function receiveFavorites(normalized) {
 export function loadFavorites() {
   return (dispatch) => {
     dispatch(startFetchingFavorites());
-    dispatch(updateVisiblePlaylistName('favorites'));
+    dispatch(updateVisiblePlayQueueName('favorites'));
 
     fetchMyFavorites()
       .then((normalized) => {

@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import * as searchActions from 'features/search/searchActions';
 import PropTypes from 'prop-types';
 import SongCardList from 'common/components/SongCardList';
-import { getVisiblePlaylist } from 'features/playQueue/playlistSelectors';
+import { getVisiblePlayQueue } from 'features/playQueue/playQueueSelectors';
 import { isSearching } from 'features/search/searchSelectors';
-import { updateVisiblePlaylistName } from 'features/playQueue/playlistActions';
+import { updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
 
 class Search extends React.Component {
   componentDidMount() {
     // Load query params from url
     const { match } = this.props;
     const { query } = match.params;
-    this.props.updateVisiblePlaylistName(`search-${query}`);
+    this.props.updateVisiblePlayQueueName(`search-${query}`);
     this.props.loadSearchResults(query);
   }
 
@@ -25,7 +25,7 @@ class Search extends React.Component {
     if (curQuery !== newQuery && curQuery) {
       // Before jumping to new track profile page, clear old state.
       // this.props.clearSearchState();
-      this.props.updateVisiblePlaylistName(`search-${newQuery}`);
+      this.props.updateVisiblePlayQueueName(`search-${newQuery}`);
       this.props.loadSearchResults(newQuery);
     }
   }
@@ -49,7 +49,7 @@ class Search extends React.Component {
 Search.propTypes = {
   loadSearchResults: PropTypes.func.isRequired,
   loadMoreSearchResults: PropTypes.func.isRequired,
-  updateVisiblePlaylistName: PropTypes.func.isRequired,
+  updateVisiblePlayQueueName: PropTypes.func.isRequired,
   resetSearchState: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.object,
@@ -59,13 +59,13 @@ Search.propTypes = {
 function mapStateToProps(state) {
   return {
     fetching: isSearching(state),
-    trackIds: getVisiblePlaylist(state),
+    trackIds: getVisiblePlayQueue(state),
   };
 }
 
 const actions = {
   ...searchActions,
-  updateVisiblePlaylistName,
+  updateVisiblePlayQueueName,
 };
 
 export default connect(mapStateToProps, actions)(Search);

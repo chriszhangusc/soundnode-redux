@@ -853,7 +853,7 @@ export default [
     created_at: '2016/09/29 19:26:28 +0000',
     release: null,
     kind: 'playlist',
-    title: 'First Playlist',
+    title: 'First PlayQueue',
     type: null,
     purchase_title: null,
     artwork_url: null,

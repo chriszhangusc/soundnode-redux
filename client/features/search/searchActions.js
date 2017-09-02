@@ -1,5 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeVisiblePlaylist } from 'features/playQueue/playlistActions';
+import { mergeVisiblePlayQueue } from 'features/playQueue/playQueueActions';
 import * as types from './searchActionTypes';
 import { fetchSearchResults, fetchByNextHref } from './searchApi';
 import { isSearching, getSearchNextHref } from './searchSelectors';
@@ -36,7 +36,7 @@ export function receiveSearchResults(normalizedResults) {
     const { entities, result, nextHref } = normalizedResults;
     dispatch(mergeEntities(entities));
     // dispatch(mergeTrackResults(result));
-    dispatch(mergeVisiblePlaylist(result));
+    dispatch(mergeVisiblePlayQueue(result));
     dispatch(updateSearchNextHref(nextHref));
     dispatch(stopSearching());
   };

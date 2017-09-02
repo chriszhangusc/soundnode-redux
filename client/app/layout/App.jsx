@@ -1,7 +1,7 @@
 import React from 'react';
 import SC from 'soundcloud';
 import PropTypes from 'prop-types';
-import Playlist from 'features/playQueue/Playlist';
+import PlayQueue from 'features/playQueue/PlayQueue';
 import Callback from 'common/components/Callback';
 import NetworkDetector from 'features/network/NetworkDetector';
 import GlobalOverlayLoader from 'features/globalOverlayLoader/GlobalOverlayLoader';
@@ -56,7 +56,7 @@ class Main extends React.Component {
           <PageContentWrapper>
             <Routing />
             <Player />
-            <Playlist />
+            <PlayQueue />
           </PageContentWrapper>
           <NetworkDetector />
           <NotificationCenter />

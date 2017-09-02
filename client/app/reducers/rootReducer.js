@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import chartsReducer from 'features/charts/chartsReducer';
 import entitiesReducer from 'features/entities/entitiesReducer';
 import playerReducer from 'features/player/playerReducer';
-import playlistReducer from 'features/playQueue/playlistReducer';
+import playQueueReducer from 'features/playQueue/playQueueReducer';
 import userProfileReducer from 'features/userProfile/userProfileReducer';
 import trackProfileReducer from 'features/trackProfile/trackProfileReducer';
 import dropdownSearchReducer from 'features/dropdownSearch/dropdownSearchReducer';
@@ -18,7 +18,7 @@ import globalOverlayLoaderReducer from 'features/globalOverlayLoader/globalOverl
 const rootReducer = combineReducers({
   entities: entitiesReducer,
   charts: chartsReducer,
-  playlist: playlistReducer,
+  playQueue: playQueueReducer,
   player: playerReducer,
   // Single user profile page
   userProfile: userProfileReducer,

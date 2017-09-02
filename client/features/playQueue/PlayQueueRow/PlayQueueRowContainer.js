@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { getTrackById, getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { isTrackActive } from 'features/player/playerSelectors';
 import { updateActiveTrackIdAndPlay } from 'features/player/playerActions';
-import PlaylistRow from './PlaylistRow';
+import PlayQueueRow from './PlayQueueRow';
 
 const mapStateToProps = (state, { trackId, index }) => {
   // console.log(typeof trackId);
@@ -29,4 +29,4 @@ const mapDispatchToProps = (dispatch, { trackId }) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaylistRow);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayQueueRow);

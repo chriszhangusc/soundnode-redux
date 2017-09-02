@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import UserImage from 'common/components/images/UserImage';
 import RouterLink from 'common/components/links/RouterLink';
 import { connect } from 'react-redux';
-import { getPlaylistById, getUserByPlaylistId } from 'features/entities/entitiesSelectors';
+import { getPlayQueueById, getUserByPlaylistId } from 'features/entities/entitiesSelectors';
 import Card from 'common/components/Card';
 
 function PlaylistCardDetails({ trackCount, duration, title, userAvatar, username }) {
@@ -45,7 +45,7 @@ PlaylistCardDetails.propTypes = {
 };
 
 function mapStateToProps(state, { playlistId }) {
-  const playlist = getPlaylistById(state, playlistId);
+  const playlist = getPlayQueueById(state, playlistId);
   const user = getUserByPlaylistId(state, playlistId);
   return {
     trackCount: playlist && playlist.trackCount,

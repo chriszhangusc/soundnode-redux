@@ -22,7 +22,7 @@ function TrackActions({ permalink, downloadable, downloadUrl, handleCopyPermalin
         </LinkButton>}
 
       <LinkButton to="/">
-        <i className="fa fa-bookmark" title="Add to Playlist" />ADD TO PLAYLIST
+        <i className="fa fa-bookmark" title="Add to PlayQueue" />ADD TO PLAY_QUEUE
       </LinkButton>
 
       <LinkButton href={permalink} target="_blank" title="Visit Track on SoundCloud">

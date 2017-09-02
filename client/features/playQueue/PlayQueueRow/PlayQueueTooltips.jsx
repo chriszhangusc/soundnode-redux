@@ -58,7 +58,7 @@ const OptionsListItem = styled.li`
   }
 `;
 
-function PlaylistTooltips({ index, trackId }) {
+function PlayQueueTooltips({ index, trackId }) {
   return (
     <Wrapper>
       <i className="fa fa-ellipsis-v" />
@@ -100,9 +100,9 @@ function mapDispatchToProps(dispatch) {
   return {};
 }
 
-PlaylistTooltips.propTypes = {
+PlayQueueTooltips.propTypes = {
   index: PropTypes.number.isRequired,
   trackId: PropTypes.number.isRequired,
 };
 
-export default connect()(PlaylistTooltips);
+export default connect()(PlayQueueTooltips);

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateVisiblePlaylistName } from 'features/playQueue/playlistActions';
+import { updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
 import SongCardList from 'common/components/SongCardList';
 import PageTitle from 'common/components/PageTitle';
-import { getVisiblePlaylist } from 'features/playQueue/playlistSelectors';
+import { getVisiblePlayQueue } from 'features/playQueue/playQueueSelectors';
 import { isStreamFetching } from 'features/stream/streamSelectors';
 import { bindActionCreators } from 'redux';
 import * as streamActions from 'features/stream/streamActions';
@@ -12,7 +12,7 @@ import { Box } from 'grid-styled';
 
 class Stream extends React.Component {
   componentDidMount() {
-    this.props.updateVisiblePlaylistName('stream');
+    this.props.updateVisiblePlayQueueName('stream');
     this.props.loadStream();
   }
 
@@ -33,19 +33,19 @@ class Stream extends React.Component {
 Stream.propTypes = {
   loadStream: PropTypes.func.isRequired,
   resetStreamState: PropTypes.func.isRequired,
-  updateVisiblePlaylistName: PropTypes.func.isRequired,
+  updateVisiblePlayQueueName: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     fetching: isStreamFetching(state),
-    trackIds: getVisiblePlaylist(state),
+    trackIds: getVisiblePlayQueue(state),
   };
 }
 
 const actions = {
   ...streamActions,
-  updateVisiblePlaylistName,
+  updateVisiblePlayQueueName,
 };
 
 function mapDispatchToProps(dispatch) {

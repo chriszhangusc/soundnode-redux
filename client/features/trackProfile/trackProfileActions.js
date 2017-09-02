@@ -1,5 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeVisiblePlaylist, updateVisiblePlaylistName } from 'features/playQueue/playlistActions';
+import { mergeVisiblePlayQueue, updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
 import { fetchProfiledTrack, fetchTrackComments, fetchMoreComments } from './trackProfileApi';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import * as types from './trackProfileActionTypes';
@@ -78,14 +78,14 @@ export function receiveTrack(normalizedTrack) {
     dispatch(mergeEntities(normalizedTrack.entities));
     dispatch(updateProfiledTrack(normalizedTrack.result));
     // Update playlist
-    dispatch(mergeVisiblePlaylist([normalizedTrack.result]));
+    dispatch(mergeVisiblePlayQueue([normalizedTrack.result]));
     dispatch(stopFetchingProfiledTrack());
   };
 }
 
 export function loadTrackProfileData(trackId) {
   return (dispatch) => {
-    dispatch(updateVisiblePlaylistName(`track-${trackId}`));
+    dispatch(updateVisiblePlayQueueName(`track-${trackId}`));
     dispatch(startFetchingProfiledTrack());
     dispatch(startFetchingComments());
     Promise.all([fetchProfiledTrack(trackId), fetchTrackComments(trackId)])

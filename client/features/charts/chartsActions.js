@@ -1,5 +1,5 @@
-import { mergeVisiblePlaylist } from 'features/playQueue/playlistActions';
-import { getVisiblePlaylist, getPlaylistByName } from 'features/playQueue/playlistSelectors';
+import { mergeVisiblePlayQueue } from 'features/playQueue/playQueueActions';
+import { getVisiblePlayQueue, getPlayQueueByName } from 'features/playQueue/playQueueSelectors';
 import { notificationWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
@@ -52,7 +52,7 @@ export function receiveCharts(normalizedCharts) {
   return (dispatch) => {
     const { entities, result, nextHref } = normalizedCharts;
     dispatch(mergeEntities(entities));
-    dispatch(mergeVisiblePlaylist(result));
+    dispatch(mergeVisiblePlayQueue(result));
     dispatch(updateChartsNextHref(nextHref));
     dispatch(stopFetchingCharts());
   };
@@ -63,7 +63,7 @@ export function loadChartsPage(genre) {
   return async (dispatch, getState) => {
     // Using getState in conditional dispatch
     const state = getState();
-    if (!getPlaylistByName(state, genre)) {
+    if (!getPlayQueueByName(state, genre)) {
       dispatch(startFetchingCharts());
       try {
         const normalizedCharts = await fetchCharts(genre);
@@ -82,7 +82,7 @@ export function loadMoreCharts() {
     const state = getState();
     const chartsFetching = isChartsFetching(state);
     const curNextHref = getChartsNextHref(state);
-    const currentCharts = getVisiblePlaylist(state);
+    const currentCharts = getVisiblePlayQueue(state);
 
     if (!chartsFetching && currentCharts.length < 50 && curNextHref) {
       dispatch(startFetchingCharts());

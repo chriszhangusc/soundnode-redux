@@ -19,7 +19,7 @@ const sidebarItemList = [
     title: 'Favorites',
   },
   {
-    to: routes.PLAYLISTS_ROUTE,
+    to: routes.PLAY_QUEUES_ROUTE,
     iconClassName: 'fa fa-list',
     title: 'Playlists',
   },

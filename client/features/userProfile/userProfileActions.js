@@ -1,5 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeVisiblePlaylist, updateVisiblePlaylistName } from 'features/playQueue/playlistActions';
+import { mergeVisiblePlayQueue, updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
 import * as types from './userProfileActionTypes';
 import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelectors';
 import {
@@ -82,7 +82,7 @@ export function receiveUser(normalizedUser) {
 export function receiveTracks(normalizedTracks) {
   return (dispatch) => {
     dispatch(mergeEntities(normalizedTracks.entities));
-    dispatch(mergeVisiblePlaylist(normalizedTracks.result));
+    dispatch(mergeVisiblePlayQueue(normalizedTracks.result));
     dispatch(updateTracksNextHref(normalizedTracks.nextHref));
     dispatch(stopFetchingTracks());
   };
@@ -92,7 +92,7 @@ export function receiveTracks(normalizedTracks) {
 export function loadUserProfileData(userId) {
   return (dispatch) => {
     dispatch(updateProfiledUserId(userId));
-    dispatch(updateVisiblePlaylistName(`user-${userId}`));
+    dispatch(updateVisiblePlayQueueName(`user-${userId}`));
     // Right now the user fetching state does nothing... Consider removing it in the future
     dispatch(startLoadingPage());
     dispatch(startFetchingUser());

@@ -62,18 +62,18 @@ export function getUserByCommentId(state, commentId) {
 }
 
 /* For playlists */
-export function getPlaylistById(state, playlistId) {
+export function getPlayQueueById(state, playlistId) {
   return playlistId && getEntities(state).playlists[String(playlistId)];
 }
 
 export function getUserByPlaylistId(state, playlistId) {
-  const playlist = getPlaylistById(state, playlistId);
+  const playlist = getPlayQueueById(state, playlistId);
   const userId = playlist && playlist.userId;
   return getUserById(state, userId);
 }
 
 export function getTracksByPlaylistId(state, playlistId) {
-  const playlist = getPlaylistById(state, playlistId);
+  const playlist = getPlayQueueById(state, playlistId);
   const trackIds = playlist && playlist.tracks;
   return trackIds.map(trackId => getTrackById(state, trackId));
 }

@@ -33,7 +33,7 @@ export default function Routing() {
       <Route exact path={`${routes.FAVORITES_ROUTE}`} component={withAuthRequired(Favorites)} />
       <Route exact path={`${routes.STREAM_ROUTE}`} component={withAuthRequired(Stream)} />
       <Route exact path={`${routes.SEARCH_ROUTE}/:query`} component={Search} />
-      <Route exact path={`${routes.PLAYLISTS_ROUTE}`} component={withAuthRequired(Playlists)} />
+      <Route exact path={`${routes.PLAY_QUEUES_ROUTE}`} component={withAuthRequired(Playlists)} />
       {defaultRedirect}
     </Switch>
   );

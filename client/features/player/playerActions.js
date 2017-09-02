@@ -1,9 +1,9 @@
 import {
   clearShufflePlaylist,
-  shufflePlaylist,
-  switchActivePlaylistIfNeeded,
-} from 'features/playQueue/playlistActions';
-import { getPlaylistByMode } from 'features/playQueue/playlistSelectors';
+  shufflePlayQueue,
+  switchActivePlayQueueIfNeeded,
+} from 'features/playQueue/playQueueActions';
+import { getPlayQueueByMode } from 'features/playQueue/playQueueSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
 import * as types from './playerActionTypes';
 import {
@@ -162,7 +162,7 @@ export function playSongByAction(actionType) {
     const mode = getPlayerMode(state);
     let nextTrackId = null;
     const curTrackId = getActiveTrackId(state);
-    const activePlaylist = getPlaylistByMode(state);
+    const activePlaylist = getPlayQueueByMode(state);
     if (mode === types.REPEAT) {
       nextTrackId = curTrackId;
     } else {
@@ -214,7 +214,7 @@ export function togglePlayMode(newMode) {
       /* Toggle on new mode */
       dispatch(changePlayMode(newMode));
       if (newMode === types.SHUFFLE) {
-        dispatch(shufflePlaylist());
+        dispatch(shufflePlayQueue());
       }
     }
   };
@@ -227,7 +227,7 @@ export function togglePlaybackState(trackId) {
     if (trackId === activeTrackId) {
       dispatch(togglePlay());
     } else {
-      dispatch(switchActivePlaylistIfNeeded());
+      dispatch(switchActivePlayQueueIfNeeded());
       dispatch(updateActiveTrackIdAndPlay(trackId));
     }
   };

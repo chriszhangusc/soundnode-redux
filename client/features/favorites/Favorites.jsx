@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateVisiblePlaylistName } from 'features/playQueue/playlistActions';
+import { updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
 import SongCardList from 'common/components/SongCardList';
 import { isFavoritesFetching } from 'features/favorites/favoritesSelectors';
-import { getVisiblePlaylist } from 'features/playQueue/playlistSelectors';
+import { getVisiblePlayQueue } from 'features/playQueue/playQueueSelectors';
 import { Box } from 'grid-styled';
 import PageTitle from 'common/components/PageTitle';
 import * as favActions from 'features/favorites/favoritesActions';
 
 class Favorites extends React.Component {
   componentDidMount() {
-    this.props.updateVisiblePlaylistName('favorites');
+    this.props.updateVisiblePlayQueueName('favorites');
     this.props.loadFavorites();
   }
 
@@ -30,7 +30,7 @@ class Favorites extends React.Component {
 }
 
 Favorites.propTypes = {
-  updateVisiblePlaylistName: PropTypes.func.isRequired,
+  updateVisiblePlayQueueName: PropTypes.func.isRequired,
   loadFavorites: PropTypes.func.isRequired,
   loadMoreFavorites: PropTypes.func.isRequired,
   resetFavoritesState: PropTypes.func.isRequired,
@@ -39,13 +39,13 @@ Favorites.propTypes = {
 function mapStateToProps(state) {
   return {
     fetching: isFavoritesFetching(state),
-    trackIds: getVisiblePlaylist(state),
+    trackIds: getVisiblePlayQueue(state),
   };
 }
 
 const actions = {
   ...favActions,
-  updateVisiblePlaylistName,
+  updateVisiblePlayQueueName,
 };
 
 export default connect(mapStateToProps, actions)(Favorites);

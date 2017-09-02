@@ -4,8 +4,8 @@ import { REPEAT, SHUFFLE } from 'features/player/playerConsts';
 import { connect } from 'react-redux';
 import { getPlayerMode } from 'features/player/playerSelectors';
 import { togglePlayMode } from 'features/player/playerActions';
-import { isPlaylistHidden } from 'features/playQueue/playlistSelectors';
-import { togglePlaylist } from 'features/playQueue/playlistActions';
+import { isPlayQueueHidden } from 'features/playQueue/playQueueSelectors';
+import { togglePlayQueue } from 'features/playQueue/playQueueActions';
 import PlayerButton from 'features/player/shared/PlayerButton';
 import Wrapper from './Wrapper';
 import ButtonWrapper from './ButtonWrapper';
@@ -40,14 +40,14 @@ class PlayerModeControls extends Component {
   };
 
   renderTogglePlaylist = () => {
-    const { onTogglePlaylistClick, playlistHidden } = this.props;
+    const { onTogglePlayQueueClick, playQueueHidden } = this.props;
     return (
       <ButtonWrapper>
         <PlayerButton
-          tooltipText="Toggle playlist"
-          active={!playlistHidden}
+          tooltipText="Toggle Play Queue"
+          active={!playQueueHidden}
           name="list-ul"
-          onClick={onTogglePlaylistClick}
+          onClick={onTogglePlayQueueClick}
         />
       </ButtonWrapper>
     );
@@ -66,16 +66,16 @@ class PlayerModeControls extends Component {
 
 PlayerModeControls.propTypes = {
   mode: PropTypes.string.isRequired,
-  playlistHidden: PropTypes.bool.isRequired,
+  playQueueHidden: PropTypes.bool.isRequired,
   onRepeatClick: PropTypes.func.isRequired,
   onShuffleClick: PropTypes.func.isRequired,
-  onTogglePlaylistClick: PropTypes.func.isRequired,
+  onTogglePlayQueueClick: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     mode: getPlayerMode(state),
-    playlistHidden: isPlaylistHidden(state),
+    playQueueHidden: isPlayQueueHidden(state),
   };
 }
 
@@ -88,7 +88,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(togglePlayMode(SHUFFLE));
     },
     onTogglePlaylistClick() {
-      dispatch(togglePlaylist());
+      dispatch(togglePlayQueue());
     },
   };
 }

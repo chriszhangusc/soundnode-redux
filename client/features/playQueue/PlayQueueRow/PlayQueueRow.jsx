@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { truncateWidth } from 'app/css/styleUtils';
-import PlaylistTooltips from './PlaylistTooltips';
+import PlayQueueTooltips from './PlayQueueTooltips';
 
-const PlaylistItem = styled.li`
+const PlayQueueItem = styled.li`
   display: flex;
   align-items: center;
   height: 50px;
@@ -22,7 +22,7 @@ const PlaylistItem = styled.li`
   }
 `;
 
-const PlaylistItemTitle = styled.span`
+const PlayQueueItemTitle = styled.span`
   flex-grow: 1;
   width: 200px;
   ${truncateWidth('200px')};
@@ -35,13 +35,13 @@ const PlaylistItemTitle = styled.span`
   }
 `;
 
-const PlaylistItemArtistName = PlaylistItemTitle.extend`
+const PlayQueueItemArtistName = PlayQueueItemTitle.extend`
   color: ${props => props.theme.colors.fontColorSub};
   width: 140px;
   ${truncateWidth('140px')};
 `;
 
-function PlaylistRow({
+function PlayQueueRow({
   title,
   artistName,
   liked,
@@ -53,7 +53,7 @@ function PlaylistRow({
   handleUnlikeSong,
 }) {
   return (
-    <PlaylistItem
+    <PlayQueueItem
       active={active}
       onClick={(e) => {
         e.preventDefault();
@@ -61,16 +61,16 @@ function PlaylistRow({
         if (!active) handleupdateActiveTrackId();
       }}
     >
-      <PlaylistItemTitle title={title}>{`${index}. ${title}`}</PlaylistItemTitle>
-      <PlaylistItemArtistName title={artistName}>
+      <PlayQueueItemTitle title={title}>{`${index}. ${title}`}</PlayQueueItemTitle>
+      <PlayQueueItemArtistName title={artistName}>
         by: {artistName}
-      </PlaylistItemArtistName>
-      <PlaylistTooltips index={index} trackId={trackId} />
-    </PlaylistItem>
+      </PlayQueueItemArtistName>
+      <PlayQueueTooltips index={index} trackId={trackId} />
+    </PlayQueueItem>
   );
 }
 
-PlaylistRow.propTypes = {
+PlayQueueRow.propTypes = {
   handleupdateActiveTrackId: PropTypes.func.isRequired,
   handleLikeSong: PropTypes.func.isRequired,
   handleUnlikeSong: PropTypes.func.isRequired,
@@ -81,4 +81,4 @@ PlaylistRow.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
-export default PlaylistRow;
+export default PlayQueueRow;

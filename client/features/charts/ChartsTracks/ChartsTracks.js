@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
 import { isChartsFetching } from 'features/charts/chartsSelectors';
 
-import { getVisiblePlaylist } from 'features/playQueue/playlistSelectors';
+import { getVisiblePlayQueue } from 'features/playQueue/playQueueSelectors';
 
 import { loadMoreCharts } from 'features/charts/chartsActions';
 
@@ -10,7 +10,7 @@ import { loadMoreCharts } from 'features/charts/chartsActions';
 function mapStateToProps(state) {
   return {
     fetching: isChartsFetching(state),
-    trackIds: getVisiblePlaylist(state),
+    trackIds: getVisiblePlayQueue(state),
   };
 }
 

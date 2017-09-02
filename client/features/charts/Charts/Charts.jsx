@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadChartsPage, changeGenre, resetChartsState } from 'features/charts/chartsActions';
-import { updateVisiblePlaylistName } from 'features/playQueue/playlistActions';
+import { updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
 import PageTitle from 'common/components/PageTitle';
 import { getCurrentGenreTitle } from 'features/charts/chartsSelectors';
 import { Grid } from 'react-bootstrap';
@@ -16,7 +16,7 @@ class Charts extends Component {
     loadChartsPage: PropTypes.func.isRequired,
     changeGenre: PropTypes.func.isRequired,
     resetChartsState: PropTypes.func.isRequired,
-    updateVisiblePlaylistName: PropTypes.func.isRequired,
+    updateVisiblePlayQueueName: PropTypes.func.isRequired,
     match: PropTypes.shape({
       params: PropTypes.object,
     }).isRequired,
@@ -45,7 +45,7 @@ class Charts extends Component {
 
   onPageMountOrChange = ({ match }) => {
     const genre = match.params.genre;
-    this.props.updateVisiblePlaylistName(genre);
+    this.props.updateVisiblePlayQueueName(genre);
     this.props.changeGenre(genre);
     this.props.loadChartsPage(genre);
   };
@@ -73,7 +73,7 @@ class Charts extends Component {
 //   loadChartsPage: PropTypes.func.isRequired,
 //   changeGenre: PropTypes.func.isRequired,
 //   resetChartsState: PropTypes.func.isRequired,
-//   updateVisiblePlaylistName: PropTypes.func.isRequired,
+//   updateVisiblePlayQueueName: PropTypes.func.isRequired,
 //   match: PropTypes.shape({
 //     params: PropTypes.object,
 //   }).isRequired,
@@ -89,7 +89,7 @@ const actions = {
   loadChartsPage,
   changeGenre,
   resetChartsState,
-  updateVisiblePlaylistName,
+  updateVisiblePlayQueueName,
 };
 
 export default connect(mapStateToProps, actions)(Charts);

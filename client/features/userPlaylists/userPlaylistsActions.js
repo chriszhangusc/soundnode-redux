@@ -4,19 +4,19 @@ import { fetchMyPlaylists } from './userPlaylistsApi';
 
 export function startFetchingPlaylists() {
   return {
-    type: types.USER_PLAYLISTS_FETCH_START,
+    type: types.USER_PLAY_QUEUES_FETCH_START,
   };
 }
 
 export function stopFetchingPlaylists() {
   return {
-    type: types.USER_PLAYLISTS_FETCH_STOP,
+    type: types.USER_PLAY_QUEUES_FETCH_STOP,
   };
 }
 
-export function mergePlaylists(playlistIds) {
+export function mergePlayQueues(playlistIds) {
   return {
-    type: types.USER_PLAYLISTS_MERGE,
+    type: types.USER_PLAY_QUEUES_MERGE,
     payload: {
       playlistIds,
     },
@@ -27,7 +27,7 @@ export function receivePlaylists(normalized) {
   return (dispatch) => {
     const { entities, result } = normalized;
     dispatch(mergeEntities(entities));
-    dispatch(mergePlaylists(result));
+    dispatch(mergePlayQueues(result));
     dispatch(stopFetchingPlaylists());
   };
 }
