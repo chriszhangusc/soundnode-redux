@@ -9,21 +9,21 @@ import Wrapper from './Wrapper';
 
 // Render the artists/users results section.
 function renderArtistResults(userIds) {
-  return userIds.map(userId =>
-    <SearchSuggestionResultsRowUser key={userId.toString()} userId={userId} />,
-  );
+  return userIds.map(userId => (
+    <SearchSuggestionResultsRowUser key={userId.toString()} userId={userId} />
+  ));
 }
 
 // Render the tracks results section.
 function renderTrackResults(trackIds) {
-  return trackIds.map(trackId =>
-    <SearchSuggestionResultsRowTrack key={trackId.toString()} trackId={trackId} />,
-  );
+  return trackIds.map(trackId => (
+    <SearchSuggestionResultsRowTrack key={trackId.toString()} trackId={trackId} />
+  ));
 }
 
 function SearchSuggestionResults({ userIds, trackIds, hidden, queryLink }) {
   return (
-    <Wrapper hidden={hidden}>
+    <Wrapper searchResultsHidden={hidden}>
       {renderArtistResults(userIds)}
       {renderTrackResults(trackIds)}
       <ShowAllLink to={queryLink}>SHOW ALL TRACKS</ShowAllLink>
