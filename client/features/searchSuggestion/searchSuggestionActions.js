@@ -1,50 +1,50 @@
-import * as types from 'features/dropdownSearch/dropdownSearchActionTypes';
+import * as types from 'features/searchSuggestion/searchSuggestionActionTypes';
 
-export const DROPDOWN_SEARCH_LIMIT = 4;
+export const SEARCH_SUGGESTION_LIMIT = 4;
 
 // Trigger saga
-export function startDropdownSearch(keyword) {
+export function startSearchSuggestion(keyword) {
   return {
-    type: types.DROPDOWN_SEARCH_START,
+    type: types.SEARCH_SUGGESTION_START,
     payload: {
       keyword,
-      limit: DROPDOWN_SEARCH_LIMIT,
+      limit: SEARCH_SUGGESTION_LIMIT,
     },
   };
 }
 
-export function stopDropdownSearch() {
+export function stopSearchSuggestion() {
   return {
-    type: types.DROPDOWN_SEARCH_STOP,
+    type: types.SEARCH_SUGGESTION_STOP,
   };
 }
 
 export function failedToFetchSearchResults() {
   return {
-    type: types.DROPDOWN_SEARCH_REQUEST_FAIL,
+    type: types.SEARCH_SUGGESTION_REQUEST_FAIL,
   };
 }
 
-export function hideDropdownSearchResults() {
+export function hideSearchSuggestionResults() {
   return {
-    type: types.DROPDOWN_SEARCH_RESULTS_HIDE,
+    type: types.SEARCH_SUGGESTION_RESULTS_HIDE,
   };
 }
 
-export function showDropdownSearchResults() {
+export function showSearchSuggestionResults() {
   return {
-    type: types.DROPDOWN_SEARCH_RESULTS_SHOW,
+    type: types.SEARCH_SUGGESTION_RESULTS_SHOW,
   };
 }
-export function clearDropdownSearchResults() {
+export function clearSearchSuggestionResults() {
   return {
-    type: types.DROPDOWN_SEARCH_RESULTS_CLEAR,
+    type: types.SEARCH_SUGGESTION_RESULTS_CLEAR,
   };
 }
 
 export function updateUserResults(userIds) {
   return {
-    type: types.DROPDOWN_SEARCH_USER_RESULTS_UPDATE,
+    type: types.SEARCH_SUGGESTION_USER_RESULTS_UPDATE,
     payload: {
       userIds,
     },
@@ -53,16 +53,16 @@ export function updateUserResults(userIds) {
 
 export function updateTrackResults(trackIds) {
   return {
-    type: types.DROPDOWN_SEARCH_TRACK_RESULTS_UPDATE,
+    type: types.SEARCH_SUGGESTION_TRACK_RESULTS_UPDATE,
     payload: {
       trackIds,
     },
   };
 }
 
-export function updateDropdownSearchQuery(query) {
+export function updateSearchSuggestionQuery(query) {
   return {
-    type: types.DROPDOWN_SEARCH_QUERY_UPDATE,
+    type: types.SEARCH_SUGGESTION_QUERY_UPDATE,
     payload: {
       query,
     },
@@ -71,15 +71,15 @@ export function updateDropdownSearchQuery(query) {
 
 export function clearAndHideSearchResults() {
   return (dispatch) => {
-    dispatch(hideDropdownSearchResults());
-    dispatch(clearDropdownSearchResults());
+    dispatch(hideSearchSuggestionResults());
+    dispatch(clearSearchSuggestionResults());
   };
 }
 
-/* Search Epic (Not currently active)*/
-// export const dropdownSearchEpic = action$ =>
+/* Search Epic (Not currently active) */
+// export const searchSuggestionEpic = action$ =>
 //   action$
-//     .ofType(types.DROPDOWN_SEARCH_REQUEST)
+//     .ofType(types.SEARCH_SUGGESTION_REQUEST)
 //     // This will cause initial fetch delay!
 //     .debounceTime(250)
 //     .switchMap((action) => {
@@ -95,7 +95,7 @@ export function clearAndHideSearchResults() {
 //       return Observable.concat(
 //         Observable.of(dropdownArtistsReceived(res[1])),
 //         Observable.of(dropdownTracksReceived(res[0])),
-//         Observable.of(endDropdownSearch()),
-//         Observable.of(showDropdownSearchResults()),
+//         Observable.of(endSearchSuggestion()),
+//         Observable.of(showSearchSuggestionResults()),
 //       );
 //     });

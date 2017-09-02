@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   clearAndHideSearchResults,
-  startDropdownSearch,
-} from 'features/dropdownSearch/dropdownSearchActions';
+  startSearchSuggestion,
+} from 'features/searchSuggestion/searchSuggestionActions';
 import SearchIcon from './SearchIcon';
 import Wrapper from './Wrapper';
 import DropdownSearchInput from './DropdownSearchInput';
@@ -65,7 +65,7 @@ DropdownSearchBox.propTypes = {
 function mapDispatchToProps(dispatch) {
   return {
     handleChange(searchKeyword) {
-      dispatch(startDropdownSearch(searchKeyword));
+      dispatch(startSearchSuggestion(searchKeyword));
     },
 
     handleBlur() {
@@ -78,7 +78,7 @@ function mapDispatchToProps(dispatch) {
 
     handleFocus(searchKeyword) {
       if (searchKeyword.trim() === '') dispatch(clearAndHideSearchResults());
-      else dispatch(startDropdownSearch(searchKeyword));
+      else dispatch(startSearchSuggestion(searchKeyword));
     },
 
     handleShowAll(rawsearchKeyword) {

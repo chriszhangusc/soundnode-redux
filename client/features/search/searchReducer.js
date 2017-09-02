@@ -35,7 +35,7 @@ export function updateNextHref(state, { nextHref }) {
   };
 }
 
-export default function dropdownSearchReducer(state = initialState, action) {
+export default function searchSuggestionReducer(state = initialState, action) {
   switch (action.type) {
     case types.SEARCH_START:
       return startSearching(state);

@@ -4,7 +4,7 @@ import SC from 'soundcloud';
 import { normalize } from 'normalizr';
 import { trackArraySchema, userArraySchema } from 'app/schema';
 
-export function fetchDropdownSearchTracks(keyword, limit = 5) {
+export function fetchSearchSuggestionTracks(keyword, limit = 5) {
   return (
     SC.get('/tracks', {
       q: keyword,
@@ -16,7 +16,7 @@ export function fetchDropdownSearchTracks(keyword, limit = 5) {
   );
 }
 
-export function fetchDropdownSearchUsers(keyword, limit = 5) {
+export function fetchSearchSuggestionUsers(keyword, limit = 5) {
   return SC.get('/users', {
     q: keyword,
     limit,

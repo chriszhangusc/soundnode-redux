@@ -1,5 +1,5 @@
 import React from 'react';
-import DropdownSearch from 'features/dropdownSearch/DropdownSearch';
+import DropdownSearch from 'features/searchSuggestion/DropdownSearch';
 import Auth from 'features/auth/Auth';
 import { Flex } from 'grid-styled';
 import BoxShadow from 'common/components/BoxShadow';

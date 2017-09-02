@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as selectors from 'features/dropdownSearch/dropdownSearchSelectors';
+import * as selectors from 'features/searchSuggestion/searchSuggestionSelectors';
 import DropdownSearchResultsRowUser from './DropdownSearchResultsRowUser';
 import DropdownSearchResultsRowTrack from './DropdownSearchResultsRowTrack';
 import ShowAllLink from './ShowAllLink';
@@ -44,10 +44,10 @@ DropdownSearchResults.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    hidden: selectors.isDropdownSearchResultsHidden(state),
-    userIds: selectors.getDropdownSearchUserIds(state),
-    trackIds: selectors.getDropdownSearchTrackIds(state),
-    queryLink: selectors.getDropdownSearchQueryLink(state),
+    hidden: selectors.isSearchSuggestionResultsHidden(state),
+    userIds: selectors.getSearchSuggestionUserIds(state),
+    trackIds: selectors.getSearchSuggestionTrackIds(state),
+    queryLink: selectors.getSearchSuggestionQueryLink(state),
   };
 }
 

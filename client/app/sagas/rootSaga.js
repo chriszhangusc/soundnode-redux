@@ -1,10 +1,8 @@
 import { fork, all } from 'redux-saga/effects';
-import * as fromDropdownSearch from 'features/dropdownSearch/dropdownSearchSagas';
+import * as fromSearchSuggestion from 'features/searchSuggestion/searchSuggestionSagas';
 
 function* rootSaga() {
-  yield all([
-    fork(fromDropdownSearch.watchDropdownSearch),
-  ]);
+  yield all([fork(fromSearchSuggestion.watchSearchSuggestion)]);
 }
 
 export default rootSaga;

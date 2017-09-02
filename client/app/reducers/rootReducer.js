@@ -5,7 +5,7 @@ import playerReducer from 'features/player/playerReducer';
 import playQueueReducer from 'features/playQueue/playQueueReducer';
 import userProfileReducer from 'features/userProfile/userProfileReducer';
 import trackProfileReducer from 'features/trackProfile/trackProfileReducer';
-import dropdownSearchReducer from 'features/dropdownSearch/dropdownSearchReducer';
+import searchSuggestionReducer from 'features/searchSuggestion/searchSuggestionReducer';
 import authReducer from 'features/auth/authReducer';
 import notificationReducer from 'features/notification/notificationReducer';
 import favoritesReducer from 'features/favorites/favoritesReducer';
@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   userProfile: userProfileReducer,
   trackProfile: trackProfileReducer,
   // Single track profile page
-  dropdownSearch: dropdownSearchReducer,
+  searchSuggestion: searchSuggestionReducer,
   auth: authReducer,
   notification: notificationReducer,
   favorites: favoritesReducer,
