@@ -1,7 +1,7 @@
 const express = require('express');
 const proxy = require('http-proxy-middleware');
 
-var app = express();
+const app = express();
 
 const port = process.env.PORT || 3001;
 
