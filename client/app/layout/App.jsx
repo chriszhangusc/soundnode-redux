@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Playlist from 'features/playlist/Playlist';
 import Callback from 'common/components/Callback';
 import NetworkDetector from 'features/network/NetworkDetector';
-import OverlayLoader from 'features/overlayLoader/OverlayLoader';
+import GlobalOverlayLoader from 'features/globalOverlayLoader/GlobalOverlayLoader';
 import styled, { injectGlobal } from 'styled-components';
 import Player from 'features/player/Player';
 import Sidebar from 'features/sidebar/Sidebar';
@@ -49,7 +49,7 @@ class Main extends React.Component {
 
   render() {
     return (
-      <OverlayLoader>
+      <GlobalOverlayLoader>
         <MainWrapper>
           <Navbar />
           <Sidebar />
@@ -61,7 +61,7 @@ class Main extends React.Component {
           <NetworkDetector />
           <NotificationCenter />
         </MainWrapper>
-      </OverlayLoader>
+      </GlobalOverlayLoader>
     );
   }
 }

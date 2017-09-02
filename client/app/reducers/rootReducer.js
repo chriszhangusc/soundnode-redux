@@ -13,7 +13,7 @@ import streamReducer from 'features/stream/streamReducer';
 import searchReducer from 'features/search/searchReducer';
 import userPlaylistsReducer from 'features/userPlaylists/userPlaylistsReducer';
 import sidebarReducer from 'features/sidebar/sidebarReducer';
-import overlayLoaderReducer from 'features/overlayLoader/overlayLoaderReducer';
+import globalOverlayLoaderReducer from 'features/globalOverlayLoader/globalOverlayLoaderReducer';
 
 const rootReducer = combineReducers({
   entities: entitiesReducer,
@@ -32,7 +32,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   userPlaylists: userPlaylistsReducer,
   sidebar: sidebarReducer,
-  overlayLoader: overlayLoaderReducer,
+  globalOverlayLoader: globalOverlayLoaderReducer,
 });
 
 export default rootReducer;

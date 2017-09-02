@@ -1,4 +1,4 @@
-import { OVERLAY_LOADER_DEACTIVATE, OVERLAY_LOADER_ACTIVATE } from './overlayLoaderActionTypes';
+import { OVERLAY_LOADER_DEACTIVATE, OVERLAY_LOADER_ACTIVATE } from './globalOverlayLoaderActionTypes';
 
 export function activateOverlayLoader(text) {
   return {

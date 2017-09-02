@@ -1,10 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Loadable from 'react-loading-overlay';
 import { zIndexes } from 'app/css/theme';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import {
+  isLoaderActive,
+  getLoaderText,
+} from 'features/globalOverlayLoader/globalOverlayLoaderSelectors';
 
-function OverlayLoader({ active, text, children }) {
+function GlobalOverlayLoader({ active, text, children }) {
   return (
     <Loadable active={active} spinner text={text} animate zIndex={zIndexes[5]}>
       {children}
@@ -12,11 +16,11 @@ function OverlayLoader({ active, text, children }) {
   );
 }
 
-OverlayLoader.defaultProps = {
+GlobalOverlayLoader.defaultProps = {
   text: '',
 };
 
-OverlayLoader.propTypes = {
+GlobalOverlayLoader.propTypes = {
   active: PropTypes.bool.isRequired,
   text: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
@@ -24,9 +28,9 @@ OverlayLoader.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    active: state.overlayLoader.active,
-    text: state.overlayLoader.text,
+    active: isLoaderActive(state),
+    text: getLoaderText(state),
   };
 }
 
-export default connect(mapStateToProps)(OverlayLoader);
+export default connect(mapStateToProps)(GlobalOverlayLoader);

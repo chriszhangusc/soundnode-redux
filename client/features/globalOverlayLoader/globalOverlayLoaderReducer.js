@@ -1,4 +1,4 @@
-import { OVERLAY_LOADER_ACTIVATE, OVERLAY_LOADER_DEACTIVATE } from './overlayLoaderActionTypes';
+import { OVERLAY_LOADER_ACTIVATE, OVERLAY_LOADER_DEACTIVATE } from './globalOverlayLoaderActionTypes';
 
 const initialState = {
   active: false,
@@ -21,7 +21,7 @@ function deactivateOverlayLoader(state) {
   };
 }
 
-export default function overlayLoaderReducer(state = initialState, action) {
+export default function globalOverlayLoaderReducer(state = initialState, action) {
   switch (action.type) {
     case OVERLAY_LOADER_ACTIVATE:
       return activateOverlayLoader(state, action.payload);
