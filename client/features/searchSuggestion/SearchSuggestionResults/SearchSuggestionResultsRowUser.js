@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getUserById } from 'features/entities/entitiesSelectors';
 import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
-import DropdownSearchResultsRow from './DropdownSearchResultsRow';
+import SearchSuggestionResultsRow from './SearchSuggestionResultsRow';
 
 const mapStateToProps = (state, props) => {
   const { userId } = props;
@@ -15,4 +15,4 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps)(DropdownSearchResultsRow);
+export default connect(mapStateToProps)(SearchSuggestionResultsRow);

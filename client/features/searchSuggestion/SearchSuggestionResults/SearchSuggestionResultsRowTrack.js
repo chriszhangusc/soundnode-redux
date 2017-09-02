@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getTrackById, getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
-import DropdownSearchResultsRow from './DropdownSearchResultsRow';
+import SearchSuggestionResultsRow from './SearchSuggestionResultsRow';
 
 function mapStateToProps(state, { trackId }) {
   const { artworkUrl, title } = getTrackById(state, trackId);
@@ -15,4 +15,4 @@ function mapStateToProps(state, { trackId }) {
   };
 }
 
-export default connect(mapStateToProps)(DropdownSearchResultsRow);
+export default connect(mapStateToProps)(SearchSuggestionResultsRow);

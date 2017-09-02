@@ -2,26 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as selectors from 'features/searchSuggestion/searchSuggestionSelectors';
-import DropdownSearchResultsRowUser from './DropdownSearchResultsRowUser';
-import DropdownSearchResultsRowTrack from './DropdownSearchResultsRowTrack';
+import SearchSuggestionResultsRowUser from './SearchSuggestionResultsRowUser';
+import SearchSuggestionResultsRowTrack from './SearchSuggestionResultsRowTrack';
 import ShowAllLink from './ShowAllLink';
 import Wrapper from './Wrapper';
 
 // Render the artists/users results section.
 function renderArtistResults(userIds) {
   return userIds.map(userId =>
-    <DropdownSearchResultsRowUser key={userId.toString()} userId={userId} />,
+    <SearchSuggestionResultsRowUser key={userId.toString()} userId={userId} />,
   );
 }
 
 // Render the tracks results section.
 function renderTrackResults(trackIds) {
   return trackIds.map(trackId =>
-    <DropdownSearchResultsRowTrack key={trackId.toString()} trackId={trackId} />,
+    <SearchSuggestionResultsRowTrack key={trackId.toString()} trackId={trackId} />,
   );
 }
 
-function DropdownSearchResults({ userIds, trackIds, hidden, queryLink }) {
+function SearchSuggestionResults({ userIds, trackIds, hidden, queryLink }) {
   return (
     <Wrapper hidden={hidden}>
       {renderArtistResults(userIds)}
@@ -31,11 +31,11 @@ function DropdownSearchResults({ userIds, trackIds, hidden, queryLink }) {
   );
 }
 
-DropdownSearchResults.defaultProps = {
+SearchSuggestionResults.defaultProps = {
   queryLink: '',
 };
 
-DropdownSearchResults.propTypes = {
+SearchSuggestionResults.propTypes = {
   userIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   trackIds: PropTypes.arrayOf(PropTypes.number).isRequired,
   hidden: PropTypes.bool.isRequired,
@@ -51,4 +51,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(DropdownSearchResults);
+export default connect(mapStateToProps)(SearchSuggestionResults);

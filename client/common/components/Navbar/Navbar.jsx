@@ -1,5 +1,5 @@
 import React from 'react';
-import DropdownSearch from 'features/searchSuggestion/DropdownSearch';
+import SearchSuggestion from 'features/searchSuggestion/SearchSuggestion';
 import Auth from 'features/auth/Auth';
 import { Flex } from 'grid-styled';
 import BoxShadow from 'common/components/BoxShadow';
@@ -18,7 +18,7 @@ function Navbar() {
           </Flex>
 
           <Flex align="center" justify="flex-end" flex="1">
-            <DropdownSearch />
+            <SearchSuggestion />
             <Auth />
           </Flex>
         </Flex>

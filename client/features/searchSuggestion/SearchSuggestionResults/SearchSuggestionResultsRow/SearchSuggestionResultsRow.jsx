@@ -17,7 +17,7 @@ function renderAvatarByType(type, avatarUrl) {
 // Clicking the link will also trigger onBlur of the search input which will cause the result to
 // disappear before handling onClick event of the link,
 // So we have to put the routing logic to onMouseDown which trigger before onblur.
-function DropdownSearchResultsRow({ type, avatarUrl, linkUrl, title, subtitle }) {
+function SearchSuggestionResultsRow({ type, avatarUrl, linkUrl, title, subtitle }) {
   return (
     <RouterLink to={linkUrl}>
       <Wrapper>
@@ -35,11 +35,11 @@ function DropdownSearchResultsRow({ type, avatarUrl, linkUrl, title, subtitle })
   );
 }
 
-DropdownSearchResultsRow.defaultProps = {
+SearchSuggestionResultsRow.defaultProps = {
   avatarUrl: undefined,
 };
 
-DropdownSearchResultsRow.propTypes = {
+SearchSuggestionResultsRow.propTypes = {
   avatarUrl: PropTypes.string,
   linkUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -47,4 +47,4 @@ DropdownSearchResultsRow.propTypes = {
   type: PropTypes.oneOf(['user', 'track', 'playlist']).isRequired,
 };
 
-export default DropdownSearchResultsRow;
+export default SearchSuggestionResultsRow;
