@@ -7,15 +7,11 @@
   "license": "ISC",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-preset-flow": "^6.23.0",
     "eslint": "3.x",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
-    "flow-bin": "^0.49.1",
-    "flow-typed": "^2.1.2"
+    "eslint-plugin-react": "^6.10.3"
   },
   "dependencies": {
     "autoprefixer": "^6.7.7",
