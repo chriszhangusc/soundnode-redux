@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadChartsPage, changeGenre, resetChartsState } from 'features/charts/chartsActions';
-import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
+import { updateVisiblePlaylistName } from 'features/playQueue/playlistActions';
 import PageTitle from 'common/components/PageTitle';
 import { getCurrentGenreTitle } from 'features/charts/chartsSelectors';
 import { Grid } from 'react-bootstrap';

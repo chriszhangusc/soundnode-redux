@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
 import { isChartsFetching } from 'features/charts/chartsSelectors';
 
-import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
+import { getVisiblePlaylist } from 'features/playQueue/playlistSelectors';
 
 import { loadMoreCharts } from 'features/charts/chartsActions';
 

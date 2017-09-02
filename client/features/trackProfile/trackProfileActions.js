@@ -1,5 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeVisiblePlaylist, updateVisiblePlaylistName } from 'features/playlist/playlistActions';
+import { mergeVisiblePlaylist, updateVisiblePlaylistName } from 'features/playQueue/playlistActions';
 import { fetchProfiledTrack, fetchTrackComments, fetchMoreComments } from './trackProfileApi';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import * as types from './trackProfileActionTypes';

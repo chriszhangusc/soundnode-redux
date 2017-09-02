@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
 import { loadMoreTracks } from 'features/userProfile/userProfileActions';
 import { isUserTracksFetching } from 'features/userProfile/userProfileSelectors';
-import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
+import { getVisiblePlaylist } from 'features/playQueue/playlistSelectors';
 
 // Container for SongCardList
 // Simply providing slices of state for the component to render.

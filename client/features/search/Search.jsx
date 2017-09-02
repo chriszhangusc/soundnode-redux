@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import * as searchActions from 'features/search/searchActions';
 import PropTypes from 'prop-types';
 import SongCardList from 'common/components/SongCardList';
-import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
+import { getVisiblePlaylist } from 'features/playQueue/playlistSelectors';
 import { isSearching } from 'features/search/searchSelectors';
-import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
+import { updateVisiblePlaylistName } from 'features/playQueue/playlistActions';
 
 class Search extends React.Component {
   componentDidMount() {

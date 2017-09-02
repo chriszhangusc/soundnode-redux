@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import chartsReducer from 'features/charts/chartsReducer';
 import entitiesReducer from 'features/entities/entitiesReducer';
 import playerReducer from 'features/player/playerReducer';
-import playlistReducer from 'features/playlist/playlistReducer';
+import playlistReducer from 'features/playQueue/playlistReducer';
 import userProfileReducer from 'features/userProfile/userProfileReducer';
 import trackProfileReducer from 'features/trackProfile/trackProfileReducer';
 import dropdownSearchReducer from 'features/dropdownSearch/dropdownSearchReducer';

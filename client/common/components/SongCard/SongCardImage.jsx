@@ -5,7 +5,7 @@ import PlaybackOverlay from 'common/components/PlaybackOverlay';
 import { connect } from 'react-redux';
 import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
 import * as playerActions from 'features/player/playerActions';
-import { switchActivePlaylistIfNeeded } from 'features/playlist/playlistActions';
+import { switchActivePlaylistIfNeeded } from 'features/playQueue/playlistActions';
 import { getLargeVersion } from 'common/utils/imageUtils';
 
 const handleImageClick = (togglePlaybackState, switchActivePlaylistIfNeeded, trackId, e) => {

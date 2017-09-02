@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateVisiblePlaylistName } from 'features/playlist/playlistActions';
+import { updateVisiblePlaylistName } from 'features/playQueue/playlistActions';
 import SongCardList from 'common/components/SongCardList';
 import { isFavoritesFetching } from 'features/favorites/favoritesSelectors';
-import { getVisiblePlaylist } from 'features/playlist/playlistSelectors';
+import { getVisiblePlaylist } from 'features/playQueue/playlistSelectors';
 import { Box } from 'grid-styled';
 import PageTitle from 'common/components/PageTitle';
 import * as favActions from 'features/favorites/favoritesActions';

@@ -1,5 +1,5 @@
-import { mergeVisiblePlaylist } from 'features/playlist/playlistActions';
-import { getVisiblePlaylist, getPlaylistByName } from 'features/playlist/playlistSelectors';
+import { mergeVisiblePlaylist } from 'features/playQueue/playlistActions';
+import { getVisiblePlaylist, getPlaylistByName } from 'features/playQueue/playlistSelectors';
 import { notificationWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { fetchCharts, fetchMoreCharts } from './chartsApi';

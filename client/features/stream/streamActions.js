@@ -1,5 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeVisiblePlaylist } from 'features/playlist/playlistActions';
+import { mergeVisiblePlaylist } from 'features/playQueue/playlistActions';
 import * as types from './streamActionTypes';
 import { fetchStream, fetchMoreStream } from './streamApi';
 import { isStreamFetching, getStreamNextHref } from './streamSelectors';

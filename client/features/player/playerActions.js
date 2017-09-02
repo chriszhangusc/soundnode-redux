@@ -2,8 +2,8 @@ import {
   clearShufflePlaylist,
   shufflePlaylist,
   switchActivePlaylistIfNeeded,
-} from 'features/playlist/playlistActions';
-import { getPlaylistByMode } from 'features/playlist/playlistSelectors';
+} from 'features/playQueue/playlistActions';
+import { getPlaylistByMode } from 'features/playQueue/playlistSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
 import * as types from './playerActionTypes';
 import {

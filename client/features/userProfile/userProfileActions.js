@@ -1,5 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeVisiblePlaylist, updateVisiblePlaylistName } from 'features/playlist/playlistActions';
+import { mergeVisiblePlaylist, updateVisiblePlaylistName } from 'features/playQueue/playlistActions';
 import * as types from './userProfileActionTypes';
 import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelectors';
 import {
