@@ -1,8 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Wrapper from './Wrapper';
-import PlayerTimeSection from '../PlayerTimeSection';
-import PlayerVolumeControls from '../PlayerVolumeControls';
-import PlayerModeControls from '../PlayerModeControls';
+import PlayerTimeSection from './PlayerTimeSection';
+import PlayerVolumeControls from './PlayerVolumeControls';
+import PlayerModeControls from './PlayerModeControls';
 
 function PlayerRightSection({ playerTrack }) {
   return (
@@ -13,5 +15,9 @@ function PlayerRightSection({ playerTrack }) {
     </Wrapper>
   );
 }
+
+PlayerRightSection.propTypes = {
+  playerTrack: PropTypes.object.isRequired,
+};
 
 export default PlayerRightSection;

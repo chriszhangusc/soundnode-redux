@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { REPEAT, SHUFFLE } from 'features/player/playerConsts';
 import { connect } from 'react-redux';
+
+import { REPEAT, SHUFFLE } from 'features/player/playerConsts';
 import { getPlayerMode } from 'features/player/playerSelectors';
 import { togglePlayMode } from 'features/player/playerActions';
 import { isPlayQueueHidden } from 'features/playQueue/playQueueSelectors';
 import { togglePlayQueue } from 'features/playQueue/playQueueActions';
+
 import PlayerButton from 'features/player/shared/PlayerButton';
 import Wrapper from './Wrapper';
 import ButtonWrapper from './ButtonWrapper';

@@ -8,7 +8,6 @@ import ButtonWrapper from './ButtonWrapper';
 import Wrapper from './Wrapper';
 
 class PlayerMiddleSection extends Component {
-
   renderPlayPauseButton = () => {
     const { playing, pauseSong, playSong } = this.props;
     return (
@@ -20,7 +19,7 @@ class PlayerMiddleSection extends Component {
         />
       </ButtonWrapper>
     );
-  }
+  };
 
   renderForwardButton = () => {
     const { playNextSong } = this.props;
@@ -29,7 +28,7 @@ class PlayerMiddleSection extends Component {
         <PlayerButton tooltipText="Next" name="step-forward" onClick={playNextSong} />
       </ButtonWrapper>
     );
-  }
+  };
 
   renderBackwardButton = () => {
     const { playPrevSong } = this.props;
@@ -38,7 +37,7 @@ class PlayerMiddleSection extends Component {
         <PlayerButton tooltipText="Previous" name="step-backward" onClick={playPrevSong} />
       </ButtonWrapper>
     );
-  }
+  };
 
   render() {
     return (
