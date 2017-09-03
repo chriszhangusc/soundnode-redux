@@ -1,65 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import TrackImage from 'common/components/images/TrackImage';
 import PlaybackOverlay from 'common/components/PlaybackOverlay';
-import { connect } from 'react-redux';
-import { isTrackActive, isTrackPlaying } from 'features/player/playerSelectors';
-import * as playerActions from 'features/player/playerActions';
-import { switchActivePlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
+import { isTrackPlaying } from 'features/player/playerSelectors';
+import { togglePlaybackState } from 'features/player/playerActions';
 import { getLargeVersion } from 'common/utils/imageUtils';
 
-const handleImageClick = (togglePlaybackState, switchActivePlayQueueIfNeeded, trackId, e) => {
-  e.preventDefault();
-  switchActivePlayQueueIfNeeded();
-  togglePlaybackState(trackId);
-};
-
-function SongCardImage({
-  trackId,
-  active,
-  playing,
-  artworkUrl,
-  togglePlaybackState,
-  switchActivePlayQueueIfNeeded,
-}) {
+function SongCardImage({ trackId, active, playing, artworkUrl, handleImageClick }) {
   return (
     <TrackImage src={artworkUrl} size="medium">
       <PlaybackOverlay
         active={active}
-        onClick={event =>
-          handleImageClick(togglePlaybackState, switchActivePlayQueueIfNeeded, trackId, event)}
+        onClick={() => {
+          handleImageClick(trackId);
+        }}
         playing={playing}
       />
     </TrackImage>
   );
 }
 
-SongCardImage.defaultProps = {
-  artworkUrl: '',
-  active: false,
-  playing: false,
-  handleImageClick: null,
-};
-
-SongCardImage.propTypes = {
-  active: PropTypes.bool,
-  playing: PropTypes.bool,
-  artworkUrl: PropTypes.string,
-};
-
-function mapStateToProps(state, { track }) {
-  // const user = getUserById(state, track.userId);
+function mapStateToProps(state, { track, active }) {
+  const { id, artworkUrl } = track;
   return {
-    trackId: track.id,
-    artworkUrl: getLargeVersion(track.artworkUrl),
-    active: isTrackActive(state, track.id),
-    playing: isTrackPlaying(state, track.id),
+    active,
+    trackId: id,
+    artworkUrl: getLargeVersion(artworkUrl),
+    playing: isTrackPlaying(state, id),
   };
 }
 
-const actions = {
-  ...playerActions,
-  switchActivePlayQueueIfNeeded,
+function mapDispatchToProps(dispatch) {
+  return {
+    handleImageClick: bindActionCreators(togglePlaybackState, dispatch),
+  };
+}
+
+const Connected = connect(mapStateToProps, mapDispatchToProps)(SongCardImage);
+
+/* Prop type validation */
+
+const propTypes = {
+  track: PropTypes.object.isRequired,
+  active: PropTypes.bool.isRequired,
 };
 
-export default connect(mapStateToProps, actions)(SongCardImage);
+const injectedProps = {
+  trackId: PropTypes.number.isRequired,
+  active: PropTypes.bool.isRequired,
+  playing: PropTypes.bool.isRequired,
+  artworkUrl: PropTypes.string.isRequired,
+  handleImageClick: PropTypes.func.isRequired,
+};
+
+SongCardImage.propTypes = injectedProps;
+
+Connected.propTypes = propTypes;
+
+export default Connected;

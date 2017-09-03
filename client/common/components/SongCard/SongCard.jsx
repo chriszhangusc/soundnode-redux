@@ -5,7 +5,7 @@ import { getTrackById } from 'features/entities/entitiesSelectors';
 import { isTrackActive } from 'features/player/playerSelectors';
 import Card from 'common/components/Card';
 import SongCardDetails from './SongCardDetails';
-import SongCardControls from './SongCardControls';
+import SongCardActions from './SongCardActions';
 import SongCardImage from './SongCardImage';
 
 // playlistName: The name of playlist this track belongs
@@ -13,24 +13,14 @@ function SongCard({ track, active }) {
   if (track && track.streamable) {
     return (
       <Card active={active}>
-        <SongCardImage track={track} />
+        <SongCardImage track={track} active={active} />
         <SongCardDetails track={track} />
-        <SongCardControls track={track} />
+        <SongCardActions track={track} />
       </Card>
     );
   }
   return null;
 }
-
-SongCard.defaultProps = {
-  track: undefined,
-  active: false,
-};
-
-SongCard.propTypes = {
-  track: PropTypes.object,
-  active: PropTypes.bool.isRequired,
-};
 
 function mapStateToProps(state, { trackId }) {
   return {
@@ -39,4 +29,19 @@ function mapStateToProps(state, { trackId }) {
   };
 }
 
-export default connect(mapStateToProps)(SongCard);
+const ConnectedSongCard = connect(mapStateToProps)(SongCard);
+
+const propTypes = {
+  trackId: PropTypes.number.isRequired,
+};
+
+const injectedProps = {
+  track: PropTypes.object.isRequired,
+  active: PropTypes.bool.isRequired,
+};
+
+SongCard.propTypes = injectedProps;
+
+ConnectedSongCard.propTypes = propTypes;
+
+export default ConnectedSongCard;
