@@ -15,12 +15,11 @@ function SongCardList({ trackIds }) {
 }
 
 SongCardList.defaultProps = {
-  title: '',
   trackIds: [],
 };
 
 SongCardList.propTypes = {
-  trackIds: PropTypes.arrayOf(PropTypes.number),
+  trackIds: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default compose(withLoadingSpinnerAfter, withFetchingOnScroll)(SongCardList);

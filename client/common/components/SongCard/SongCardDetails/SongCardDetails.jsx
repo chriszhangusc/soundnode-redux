@@ -29,14 +29,6 @@ function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
   );
 }
 
-SongCardDetails.propTypes = {
-  trackId: PropTypes.number.isRequired,
-  userId: PropTypes.number.isRequired,
-  userAvatar: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
-};
-
 function mapStateToProps(state, { track }) {
   const user = getUserByTrackId(state, track.id);
   return {
@@ -48,4 +40,22 @@ function mapStateToProps(state, { track }) {
   };
 }
 
-export default connect(mapStateToProps)(SongCardDetails);
+const Connected = connect(mapStateToProps)(SongCardDetails);
+
+const propTypes = {
+  track: PropTypes.object.isRequired,
+};
+
+const injectedPropsTypes = {
+  trackId: PropTypes.number.isRequired,
+  userAvatar: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
+};
+
+SongCardDetails.propTypes = injectedPropsTypes;
+
+Connected.propTypes = propTypes;
+
+export default Connected;

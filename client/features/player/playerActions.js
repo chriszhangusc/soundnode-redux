@@ -233,6 +233,7 @@ export function togglePlaybackState(trackId) {
   };
 }
 
+
 // export function togglePlaybackStateAndSwitchPlaylist() {
 //   return (dispatch) => {
 //     dispatch(togglePlaybackState());

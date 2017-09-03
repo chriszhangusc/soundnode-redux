@@ -1,4 +1,4 @@
-import { makeRequest, checkStatus, getSCApiUrl } from 'common/utils/apiUtils';
+import { makeRequest, checkStatus, appendTokenToUrl } from 'common/utils/apiUtils';
 import { SC_API_V1 } from 'common/constants/apiConsts';
 
 export function fetchMe() {
@@ -26,11 +26,11 @@ export function fetchMyRepostIds() {
 export function repost(trackId) {
   // Repost will get empty string as response, which will lead to json format error
   // when calling response.json()
-  const fetchUrl = getSCApiUrl(`https://api.soundcloud.com/e1/me/track_reposts/${trackId}`);
+  const fetchUrl = appendTokenToUrl(`https://api.soundcloud.com/e1/me/track_reposts/${trackId}`);
   return fetch(fetchUrl, { method: 'PUT' }).then(checkStatus);
 }
 
 export function deleteRepost(trackId) {
-  const fetchUrl = getSCApiUrl(`https://api.soundcloud.com/e1/me/track_reposts/${trackId}`);
+  const fetchUrl = appendTokenToUrl(`https://api.soundcloud.com/e1/me/track_reposts/${trackId}`);
   return fetch(fetchUrl, { method: 'DELETE' }).then(checkStatus);
 }
