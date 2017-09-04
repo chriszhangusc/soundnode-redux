@@ -1,11 +1,11 @@
 import React from 'react';
+import Icon from 'common/components/icons/Icon';
 import Wrapper from './Wrapper';
-import Icon from './Icon';
 
-function NotificationIcon({ className }) {
+function NotificationIcon(iconProps) {
   return (
     <Wrapper>
-      <Icon className={className} />
+      <Icon {...iconProps} />
     </Wrapper>
   );
 }

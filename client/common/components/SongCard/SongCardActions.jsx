@@ -51,7 +51,11 @@ function SongCardActions({ trackId, liked, reposted, permalinkUrl, actions }) {
         active={reposted}
         onClick={handleRepostClick}
       />
-      <Card.IconButton tooltipText="Copy permalink" iconName="clipboard" onClick={handleCopyClick} />
+      <Card.IconButton
+        tooltipText="Copy permalink"
+        iconName="clipboard"
+        onClick={handleCopyClick}
+      />
     </Card.Row>
   );
 }

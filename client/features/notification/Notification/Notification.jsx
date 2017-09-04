@@ -3,24 +3,24 @@ import PropTypes from 'prop-types';
 import FlexColumn from 'common/components/layouts/FlexColumn';
 import { connect } from 'react-redux';
 import { removeNotification } from '../notificationActions';
-import Wrapper from './Wrapper';
 import NotificationIcon from './NotificationIcon';
+import Wrapper from './Wrapper';
 import Header from './Header';
 import Message from './Message';
 
 class Notification extends React.Component {
-  getIconByType(type) {
+  getIconNameByType(type) {
     switch (type) {
       case 'success':
-        return 'fa fa-check-circle';
+        return 'check-circle';
       case 'warning':
-        return 'fa fa-exclamation-triangle';
+        return 'exclamation-triangle';
       case 'info':
-        return 'fa fa-info-circle';
+        return 'info-circle';
       case 'danger':
-        return 'fa fa-times';
+        return 'times';
       default:
-        return 'fa fa-question-circle';
+        return 'question-circle';
     }
   }
 
@@ -33,7 +33,7 @@ class Notification extends React.Component {
           handleOnClick();
         }}
       >
-        <NotificationIcon className={this.getIconByType(type)} />
+        <NotificationIcon iconName={this.getIconNameByType(type)} iconSize="2x" />
         <FlexColumn>
           <Header>
             {title}
