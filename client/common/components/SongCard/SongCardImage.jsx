@@ -51,8 +51,12 @@ const injectedProps = {
   trackId: PropTypes.number.isRequired,
   active: PropTypes.bool.isRequired,
   playing: PropTypes.bool.isRequired,
-  artworkUrl: PropTypes.string.isRequired,
+  artworkUrl: PropTypes.string,
   handleImageClick: PropTypes.func.isRequired,
+};
+
+SongCardImage.defaultProps = {
+  artworkUrl: '',
 };
 
 SongCardImage.propTypes = injectedProps;

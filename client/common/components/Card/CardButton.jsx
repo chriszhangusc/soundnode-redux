@@ -1,21 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'common/components/icons/Icon';
+import IconButton from 'common/components/buttons/IconButton';
 import styled from 'styled-components';
 import { fontColor, fontColorSub, themeColor } from 'app/css/colors';
 
 const Wrapper = styled.span`
-  padding: 4px;
-  cursor: pointer;
   text-align: center;
   margin-right: 20px;
 `;
 
-function CardButton({ title, name, active, onClick, tooltipText }) {
+function CardButton({ title, iconName, active, onClick, tooltipText }) {
   return (
     <Wrapper>
-      <Icon
-        name={name}
+      <IconButton
+        iconName={iconName}
         active={active}
         title={title}
         color={fontColorSub}
@@ -40,7 +38,7 @@ CardButton.propTypes = {
   title: PropTypes.string,
   tooltipText: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
+  iconName: PropTypes.string.isRequired,
 };
 
 export default CardButton;

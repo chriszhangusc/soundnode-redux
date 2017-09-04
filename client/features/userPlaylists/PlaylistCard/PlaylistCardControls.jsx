@@ -13,28 +13,24 @@ function PlaylistCardControls({
     <Card.Row>
       <Card.IconButton
         tooltipText={liked ? 'Unlike' : 'Like'}
-        name="heart"
+        iconName="heart"
         active={liked}
         onClick={(e) => {
           e.stopPropagation();
           handleToggleLike();
         }}
       />
-      <Card.IconButton tooltipText="Add to playlist" name="bookmark" onClick={() => {}} />
+      <Card.IconButton tooltipText="Add to playlist" iconName="bookmark" onClick={() => {}} />
       <Card.IconButton
         tooltipText="Repost"
-        name="retweet"
+        iconName="retweet"
         active={reposted}
         onClick={(e) => {
           e.stopPropagation();
           handleRepost();
         }}
       />
-      <Card.IconButton
-        tooltipText="Copy permalink"
-        name="clipboard"
-        onClick={() => {}}
-      />
+      <Card.IconButton tooltipText="Copy permalink" iconName="clipboard" onClick={() => {}} />
     </Card.Row>
   );
 }

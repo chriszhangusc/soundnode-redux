@@ -8,7 +8,7 @@ import Wrapper from './Wrapper';
 function PlaybackOverlayIcon({ playing }) {
   return (
     <Wrapper>
-      <Icon name={playing ? 'pause' : 'play'} color={themeColor} iconSize="1.5rem" />
+      <Icon iconName={playing ? 'pause' : 'play'} color={themeColor} iconSize="1.5rem" />
     </Wrapper>
   );
 }

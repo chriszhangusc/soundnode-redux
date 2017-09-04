@@ -1,20 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'common/components/icons/Icon';
-import { themeColor, white } from 'app/css/colors';
-import Wrapper from './Wrapper';
+import IconButton from 'common/components/buttons/IconButton';
+import { themeColor, fontColor } from 'app/css/colors';
 
 function PlayerButton({ active, ...rest }) {
   return (
-    <Wrapper>
-      <Icon
-        iconSize="1.5rem"
-        hoverColor={themeColor}
-        color={white}
-        activeColor={active ? themeColor : ''}
-        {...rest}
-      />
-    </Wrapper>
+    <IconButton
+      iconSize="1.5rem"
+      hoverColor={themeColor}
+      color={fontColor}
+      active={active}
+      activeColor={themeColor}
+      {...rest}
+    />
   );
 }
 

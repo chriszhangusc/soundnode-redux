@@ -14,7 +14,7 @@ class PlayerMiddleSection extends Component {
       <ButtonWrapper>
         <PlayerButton
           tooltipText={playing ? 'Pause' : 'Play'}
-          name={playing ? 'pause' : 'play'}
+          iconName={playing ? 'pause' : 'play'}
           onClick={playing ? pauseSong : playSong}
         />
       </ButtonWrapper>
@@ -25,7 +25,7 @@ class PlayerMiddleSection extends Component {
     const { playNextSong } = this.props;
     return (
       <ButtonWrapper>
-        <PlayerButton tooltipText="Next" name="step-forward" onClick={playNextSong} />
+        <PlayerButton tooltipText="Next" iconName="step-forward" onClick={playNextSong} />
       </ButtonWrapper>
     );
   };
@@ -34,7 +34,7 @@ class PlayerMiddleSection extends Component {
     const { playPrevSong } = this.props;
     return (
       <ButtonWrapper>
-        <PlayerButton tooltipText="Previous" name="step-backward" onClick={playPrevSong} />
+        <PlayerButton tooltipText="Previous" iconName="step-backward" onClick={playPrevSong} />
       </ButtonWrapper>
     );
   };

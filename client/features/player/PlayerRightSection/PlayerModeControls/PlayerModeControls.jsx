@@ -20,7 +20,7 @@ class PlayerModeControls extends Component {
         <PlayerButton
           tooltipText="Repeat"
           active={mode === REPEAT}
-          name="repeat"
+          iconName="repeat"
           onClick={handleRepeatClick}
         />
       </ButtonWrapper>
@@ -34,7 +34,7 @@ class PlayerModeControls extends Component {
         <PlayerButton
           tooltipText="Shuffle"
           active={mode === SHUFFLE}
-          name="random"
+          iconName="random"
           onClick={handleShuffleClick}
         />
       </ButtonWrapper>
@@ -48,7 +48,7 @@ class PlayerModeControls extends Component {
         <PlayerButton
           tooltipText="Toggle Play Queue"
           active={!playQueueHidden}
-          name="list-ul"
+          iconName="list-ul"
           onClick={handlePlayQueueToggle}
         />
       </ButtonWrapper>

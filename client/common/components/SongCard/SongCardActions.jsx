@@ -36,22 +36,22 @@ function SongCardActions({ trackId, liked, reposted, permalinkUrl, actions }) {
     <Card.Row>
       <Card.IconButton
         tooltipText={liked ? 'Unlike' : 'Like'}
-        name="heart"
+        iconName="heart"
         active={liked}
         onClick={handleLikeClick}
       />
       <Card.IconButton
         tooltipText="Add to playlist"
-        name="bookmark"
+        iconName="bookmark"
         onClick={handlePlaylistClick}
       />
       <Card.IconButton
         tooltipText="Repost"
-        name="retweet"
+        iconName="retweet"
         active={reposted}
         onClick={handleRepostClick}
       />
-      <Card.IconButton tooltipText="Copy permalink" name="clipboard" onClick={handleCopyClick} />
+      <Card.IconButton tooltipText="Copy permalink" iconName="clipboard" onClick={handleCopyClick} />
     </Card.Row>
   );
 }

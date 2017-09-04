@@ -12,7 +12,7 @@ function PlayerVolumeButton({ volume, handleOnClick }) {
   const iconName = getIconNameByVolume(volume);
   return (
     <Wrapper>
-      <PlayerButton tooltipText="Adjust volume" name={iconName} onClick={handleOnClick} />
+      <PlayerButton tooltipText="Adjust volume" iconName={iconName} onClick={handleOnClick} />
     </Wrapper>
   );
 }

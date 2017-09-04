@@ -12,8 +12,7 @@ function PlayQueueHeader({ handleClearPlayQueue }) {
       <IconWrapper>
         <IconButton
           title="Clear play queue"
-          btnClassName=""
-          iconClassName="fa fa-trash"
+          iconName="trash"
           onClick={handleClearPlayQueue}
         />
       </IconWrapper>

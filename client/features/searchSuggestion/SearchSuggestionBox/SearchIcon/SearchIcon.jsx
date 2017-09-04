@@ -6,7 +6,7 @@ import Wrapper from './Wrapper';
 function SearchIcon() {
   return (
     <Wrapper>
-      <Icon name="search" color={fontColorSub} />
+      <Icon iconName="search" color={fontColorSub} />
     </Wrapper>
   );
 }
