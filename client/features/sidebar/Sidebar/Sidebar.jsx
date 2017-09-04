@@ -10,22 +10,22 @@ import Wrapper from './Wrapper';
 const sidebarItemList = [
   {
     to: routes.CHARTS_ROUTE,
-    iconClassName: 'fa fa-trophy',
+    iconName: 'trophy',
     title: 'Top 50',
   },
   {
     to: routes.FAVORITES_ROUTE,
-    iconClassName: 'fa fa-heart',
+    iconName: 'heart',
     title: 'Favorites',
   },
   {
     to: routes.PLAY_QUEUES_ROUTE,
-    iconClassName: 'fa fa-list',
+    iconName: 'list',
     title: 'Playlists',
   },
   {
     to: routes.STREAM_ROUTE,
-    iconClassName: 'fa fa-music',
+    iconName: 'music',
     title: 'Stream',
   },
 ];

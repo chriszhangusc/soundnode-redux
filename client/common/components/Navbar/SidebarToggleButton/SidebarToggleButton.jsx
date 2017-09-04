@@ -13,7 +13,7 @@ function SidebarToggleButton({ toggleSidebar }) {
 
   return (
     <Wrapper>
-      <IconButton iconSize="1.5rem" color={white} iconName="bars" onClick={handleToggleSidebar} />
+      <IconButton iconSize="lg" color={white} iconName="bars" onClick={handleToggleSidebar} />
     </Wrapper>
   );
 }

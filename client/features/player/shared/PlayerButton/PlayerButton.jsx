@@ -6,7 +6,7 @@ import { themeColor, fontColor } from 'app/css/colors';
 function PlayerButton({ active, ...rest }) {
   return (
     <IconButton
-      iconSize="1.5rem"
+      iconSize="lg"
       hoverColor={themeColor}
       color={fontColor}
       active={active}

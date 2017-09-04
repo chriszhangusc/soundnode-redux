@@ -1,33 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import FontAwesome from 'react-fontawesome';
-import { fontColor, themeColor } from 'app/css/colors';
+import { margin } from 'app/css/mixin';
 
-function FontAwesomeIcon({ iconName, color, hoverColor, active, activeColor, iconSize, ...rest }) {
-  return <FontAwesome name={iconName} {...rest} />;
-}
+const color = props =>
+  (props.active ? props.activeColor : props.color || props.theme.colors.fontColor);
 
-FontAwesomeIcon.defaultProps = {
-  color: fontColor,
-  activeColor: themeColor,
-  hoverColor: fontColor,
-  active: false,
-  iconSize: '1rem',
-};
-
-FontAwesomeIcon.propTypes = {
-  iconName: PropTypes.string.isRequired,
-  color: PropTypes.string,
-  hoverColor: PropTypes.string,
-  activeColor: PropTypes.string,
-  active: PropTypes.bool,
-  iconSize: PropTypes.string,
-};
-
-export default styled(FontAwesomeIcon)`
-  color: ${props => (props.active ? props.activeColor : props.color)};
-  font-size: ${props => props.iconSize};
+// iconSize: lg(33% increase) 2x 3x 4x 5x
+export default styled.i.attrs({
+  className: props => `fa fa-${props.iconName} fa-${props.iconSize}`,
+})`
+  ${margin};
+  color: ${color};
   &:hover {
     color: ${props => props.hoverColor};
   }
