@@ -33,7 +33,7 @@ const PageContentWrapper = styled.div`
   min-height: 100vh;
 `;
 
-const MainWrapper = styled.div`padding-top: 70px;`;
+const MainWrapper = styled.div`padding-top: 78px;`;
 
 class Main extends React.Component {
   componentDidMount() {

@@ -6,7 +6,7 @@ const color = props =>
 
 // iconSize: lg(33% increase) 2x 3x 4x 5x
 export default styled.i.attrs({
-  className: props => `fa fa-${props.iconName} fa-${props.iconSize}`,
+  className: props => `fa fa-fw fa-${props.iconName} fa-${props.iconSize}`,
 })`
   ${margins};
   ${paddings};

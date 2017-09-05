@@ -38,10 +38,6 @@ function IconButton({
 }
 
 IconButton.defaultProps = {
-  title: '',
-  color: '',
-  hoverColor: '',
-  activeColor: '',
   tooltipText: '',
   tooltipPlacement: 'top',
   tooltipDelayHide: 200,
@@ -54,9 +50,6 @@ IconButton.propTypes = {
   tooltipText: PropTypes.string,
   tooltipPlacement: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  color: PropTypes.string,
-  hoverColor: PropTypes.string,
-  activeColor: PropTypes.string,
 };
 
 export default IconButton;

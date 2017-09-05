@@ -4,7 +4,6 @@ import IconButton from 'common/components/buttons/IconButton';
 import { white } from 'app/css/colors';
 import { connect } from 'react-redux';
 import * as sidebarActions from 'features/sidebar/sidebarActions';
-import Wrapper from './Wrapper';
 
 function SidebarToggleButton({ toggleSidebar }) {
   const handleToggleSidebar = () => {
@@ -12,9 +11,13 @@ function SidebarToggleButton({ toggleSidebar }) {
   };
 
   return (
-    <Wrapper>
-      <IconButton iconSize="lg" color={white} iconName="bars" onClick={handleToggleSidebar} />
-    </Wrapper>
+    <IconButton
+      iconSize="lg"
+      color={white}
+      iconName="bars"
+      mr="10px"
+      onClick={handleToggleSidebar}
+    />
   );
 }
 

@@ -6,6 +6,5 @@ export default styled.button`
   outline: none;
   background-color: transparent;
   cursor: pointer;
-  margin: 0 auto;
   text-align: center;
 `;
