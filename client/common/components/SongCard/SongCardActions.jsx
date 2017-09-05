@@ -99,7 +99,10 @@ const injectedProps = {
   actions: PropTypes.object.isRequired,
 };
 
-SongCardActions.propTypes = injectedProps;
+SongCardActions.propTypes = {
+  ...injectedProps,
+  ...propTypes,
+};
 
 Connected.propTypes = propTypes;
 

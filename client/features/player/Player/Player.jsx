@@ -8,7 +8,7 @@ import PlayerMiddleSection from 'features/player/PlayerMiddleSection';
 import PlayerRightSection from 'features/player/PlayerRightSection';
 import PlayerAudio from 'features/player/PlayerAudio';
 import PlayerProgressBar from 'features/player/PlayerProgressBar';
-import OuterWrapper from './OuterWrapper';
+import Wrapper from './Wrapper';
 import ContentWrapper from './ContentWrapper';
 
 function Player({ playerTrack }) {
@@ -17,7 +17,7 @@ function Player({ playerTrack }) {
   }
 
   return (
-    <OuterWrapper>
+    <Wrapper>
       <BoxShadow blur={10} spread={4} shade={5}>
         <ContentWrapper>
           <PlayerProgressBar playerTrack={playerTrack} />
@@ -27,7 +27,7 @@ function Player({ playerTrack }) {
           <PlayerRightSection playerTrack={playerTrack} />
         </ContentWrapper>
       </BoxShadow>
-    </OuterWrapper>
+    </Wrapper>
   );
 }
 

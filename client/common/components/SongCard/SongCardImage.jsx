@@ -59,7 +59,10 @@ SongCardImage.defaultProps = {
   artworkUrl: '',
 };
 
-SongCardImage.propTypes = injectedProps;
+SongCardImage.propTypes = {
+  ...propTypes,
+  ...injectedProps,
+};
 
 Connected.propTypes = propTypes;
 

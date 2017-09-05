@@ -9,14 +9,14 @@ export const textStyles = css`
   line-height: ${props => props.theme.lineHeight};
 `;
 
-export const margin = css`
+export const margins = css`
   margin-right: ${props => props.mr};
   margin-left: ${props => props.ml};
   margin-top: ${props => props.mt};
   margin-bottom: ${props => props.mb};
 `;
 
-export const padding = css`
+export const paddings = css`
   padding-top: ${props => props.pt};
   padding-right: ${props => props.pr};
   padding-bottom: ${props => props.pb};

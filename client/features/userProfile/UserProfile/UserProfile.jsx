@@ -7,7 +7,7 @@ import UserProfileTracks from 'features/userProfile/UserProfileTracks';
 import UserProfileHeader from 'features/userProfile/UserProfileHeader';
 import PageTitle from 'common/components/PageTitle';
 import Spinner from 'common/components/Spinner';
-import { Grid } from 'react-bootstrap';
+import { Box } from 'grid-styled';
 
 class UserProfile extends React.Component {
   static propTypes = {
@@ -50,11 +50,11 @@ class UserProfile extends React.Component {
       return <Spinner />;
     }
     return (
-      <Grid fluid>
+      <Box>
         <UserProfileHeader />
         <PageTitle>Tracks</PageTitle>
         <UserProfileTracks />
-      </Grid>
+      </Box>
     );
   }
 }

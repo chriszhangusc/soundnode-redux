@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { margin } from 'app/css/mixin';
+import { margins, paddings } from 'app/css/mixin';
 
 const color = props =>
   (props.active ? props.activeColor : props.color || props.theme.colors.fontColor);
@@ -8,7 +8,8 @@ const color = props =>
 export default styled.i.attrs({
   className: props => `fa fa-${props.iconName} fa-${props.iconSize}`,
 })`
-  ${margin};
+  ${margins};
+  ${paddings};
   color: ${color};
   &:hover {
     color: ${props => props.hoverColor};

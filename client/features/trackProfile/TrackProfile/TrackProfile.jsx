@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as trackProfileActions from 'features/trackProfile/trackProfileActions';
 import { isPageLoading } from 'features/trackProfile/trackProfileSelectors';
 import Spinner from 'common/components/Spinner';
-import { Grid } from 'react-bootstrap';
+import { Box } from 'grid-styled';
 import TrackProfileComments from '../TrackProfileComments';
 import TrackProfileHeader from '../TrackProfileHeader';
 
@@ -51,10 +51,10 @@ class TrackProfile extends React.Component {
       return <Spinner />;
     }
     return (
-      <Grid fluid>
+      <Box>
         <TrackProfileHeader />
         <TrackProfileComments />
-      </Grid>
+      </Box>
     );
   }
 }

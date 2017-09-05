@@ -54,7 +54,10 @@ const injectedPropsTypes = {
   userId: PropTypes.number.isRequired,
 };
 
-SongCardDetails.propTypes = injectedPropsTypes;
+SongCardDetails.propTypes = {
+  ...injectedPropsTypes,
+  ...propTypes,
+};
 
 Connected.propTypes = propTypes;
 

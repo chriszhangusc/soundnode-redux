@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Icon from 'common/components/icons/Icon';
+import { themeColor } from 'app/css/colors';
 import Overlay from './Overlay';
-import PlaybackOverlayIcon from './PlaybackOverlayIcon';
 
 function PlaybackOverlay({ playing, active, onClick }) {
   return (
     <Overlay active={active} onClick={onClick}>
-      <PlaybackOverlayIcon playing={playing} />
+      <Icon iconName={playing ? 'pause' : 'play'} color={themeColor} iconSize="lg" />
     </Overlay>
   );
 }

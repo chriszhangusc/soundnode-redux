@@ -5,7 +5,7 @@ import { loadChartsPage, changeGenre, resetChartsState } from 'features/charts/c
 import { updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
 import PageTitle from 'common/components/PageTitle';
 import { getCurrentGenreTitle } from 'features/charts/chartsSelectors';
-import { Grid } from 'react-bootstrap';
+import { Box } from 'grid-styled';
 
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';
@@ -53,13 +53,13 @@ class Charts extends Component {
   render() {
     const { genreTitle } = this.props;
     return (
-      <Grid fluid>
+      <Box>
         <PageTitle>
           Top Charts - {genreTitle}
         </PageTitle>
         <ChartsGenreList />
         <ChartsTracks />
-      </Grid>
+      </Box>
     );
   }
 }

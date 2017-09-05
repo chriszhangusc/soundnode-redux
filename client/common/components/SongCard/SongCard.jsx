@@ -40,7 +40,10 @@ const injectedProps = {
   active: PropTypes.bool.isRequired,
 };
 
-SongCard.propTypes = injectedProps;
+SongCard.propTypes = {
+  ...injectedProps,
+  ...propTypes,
+};
 
 ConnectedSongCard.propTypes = propTypes;
 
