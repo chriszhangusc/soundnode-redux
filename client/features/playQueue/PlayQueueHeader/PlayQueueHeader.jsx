@@ -10,7 +10,7 @@ function PlayQueueHeader() {
       <TitleColumn>TRACKS</TitleColumn>
       <TitleColumn>|</TitleColumn>
       <TitleColumn>ARTIST</TitleColumn>
-      {/* <ClearIcon /> */}
+      <ClearIcon />
     </Wrapper>
   );
 }
