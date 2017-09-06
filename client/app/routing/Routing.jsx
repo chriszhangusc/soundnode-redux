@@ -14,7 +14,7 @@ import Playlists from 'features/userPlaylists/UserPlaylists';
 
 const defaultRedirect = <Redirect to={`${routes.CHARTS_ROUTE}/${DEFAULT_GENRE}`} />;
 
-export default function Routing() {
+function Routing() {
   return (
     <Switch>
       <Route
@@ -38,3 +38,5 @@ export default function Routing() {
     </Switch>
   );
 }
+
+export default Routing;

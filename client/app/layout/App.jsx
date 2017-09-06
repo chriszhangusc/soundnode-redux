@@ -17,6 +17,7 @@ import Routing from 'app/routing/Routing';
 import { Route, Switch } from 'react-router-dom';
 import { AUTH_CALLBACK_ROUTE } from 'common/constants/routeConsts';
 import 'app/css/global';
+import { hideSidebar } from 'features/sidebar/sidebarActions';
 
 SC.initialize({
   client_id: CLIENT_ID,
@@ -33,7 +34,7 @@ const PageContentWrapper = styled.div`
   min-height: 100vh;
 `;
 
-const MainWrapper = styled.div`padding-top: 78px;`;
+const MainWrapper = styled.div`padding-top: 70px;`;
 
 class Main extends React.Component {
   componentDidMount() {
