@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as searchActions from 'features/search/searchActions';
 import PropTypes from 'prop-types';
-import SongCardList from 'common/components/SongCardList';
-import { getVisiblePlayQueue } from 'features/playQueue/playQueueSelectors';
-import { isSearching } from 'features/search/searchSelectors';
+import PageTitle from 'common/components/PageTitle';
+import SearchResults from 'features/search/SearchResults';
+
+import { Box } from 'grid-styled';
 import { updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
 
 class Search extends React.Component {
@@ -36,19 +37,21 @@ class Search extends React.Component {
 
   render() {
     const { query } = this.props.match.params;
+    // title={`Search results for ${query.toUpperCase()}`}
+
     return (
-      <SongCardList
-        title={`Search results for ${query.toUpperCase()}`}
-        scrollFunc={this.props.loadMoreSearchResults}
-        {...this.props}
-      />
+      <Box>
+        <PageTitle>
+          Search results for: {query.toUpperCase()}
+        </PageTitle>
+        <SearchResults />
+      </Box>
     );
   }
 }
 
 Search.propTypes = {
   loadSearchResults: PropTypes.func.isRequired,
-  loadMoreSearchResults: PropTypes.func.isRequired,
   updateVisiblePlayQueueName: PropTypes.func.isRequired,
   resetSearchState: PropTypes.func.isRequired,
   match: PropTypes.shape({
@@ -56,16 +59,9 @@ Search.propTypes = {
   }).isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-    fetching: isSearching(state),
-    trackIds: getVisiblePlayQueue(state),
-  };
-}
-
 const actions = {
   ...searchActions,
   updateVisiblePlayQueueName,
 };
 
-export default connect(mapStateToProps, actions)(Search);
+export default connect(null, actions)(Search);
