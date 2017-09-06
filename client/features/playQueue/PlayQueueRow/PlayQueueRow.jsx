@@ -1,111 +1,50 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTrackById, getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { isTrackActive } from 'features/player/playerSelectors';
-import { updateActiveTrackIdAndPlay } from 'features/player/playerActions';
-import { truncateWidth } from 'app/css/styleUtils';
+import { updateActiveTrackIdAndPlay, togglePlaybackState } from 'features/player/playerActions';
+import Wrapper from './Wrapper';
 import PlayQueueTooltips from './PlayQueueTooltips';
+import PlayQueueItemTitle from './PlayQueueItemTitle';
+import PlayQueueItemArtistName from './PlayQueueItemArtistName';
 
-const PlayQueueItem = styled.li`
-  display: flex;
-  align-items: center;
-  height: 50px;
-  line-height: 50px;
-  max-height: 50px;
-  min-height: 50px;
-  color: ${props => props.theme.colors.fontColor};
-  border-bottom: 1px solid ${props => props.theme.colors.separatorDark};
-  padding: 12px 20px;
-  white-space: nowrap;
-  cursor: pointer;
-  background-color: ${props => props.active && props.theme.colors.separatorDark};
-  &:hover {
-    background-color: ${props => props.theme.colors.separatorDark};
-  }
-`;
-
-const PlayQueueItemTitle = styled.span`
-  flex-grow: 1;
-  width: 200px;
-  ${truncateWidth('200px')};
-  text-align: left;
-  margin-right: 10px;
-  color: ${props => props.theme.colors.fontColor};
-  font-size: 1rem;
-  & span {
-    margin: 10px;
-  }
-`;
-
-const PlayQueueItemArtistName = PlayQueueItemTitle.extend`
-  color: ${props => props.theme.colors.fontColorSub};
-  width: 140px;
-  ${truncateWidth('140px')};
-`;
-
-function PlayQueueRow({
-  title,
-  artistName,
-  liked,
-  active,
-  index,
-  trackId,
-  handleupdateActiveTrackId,
-  handleLikeSong,
-  handleUnlikeSong,
-}) {
+function PlayQueueRow({ title, artistName, trackId, active, index, handleItemClick }) {
   return (
-    <PlayQueueItem
+    <Wrapper
       active={active}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (!active) handleupdateActiveTrackId();
+        if (!active) handleItemClick(trackId);
       }}
     >
       <PlayQueueItemTitle title={title}>{`${index}. ${title}`}</PlayQueueItemTitle>
       <PlayQueueItemArtistName title={artistName}>by: {artistName}</PlayQueueItemArtistName>
       <PlayQueueTooltips index={index} trackId={trackId} />
-    </PlayQueueItem>
+    </Wrapper>
   );
 }
 
 PlayQueueRow.propTypes = {
-  handleupdateActiveTrackId: PropTypes.func.isRequired,
-  handleLikeSong: PropTypes.func.isRequired,
-  handleUnlikeSong: PropTypes.func.isRequired,
+  trackId: PropTypes.number.isRequired,
+  handleItemClick: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   artistName: PropTypes.string.isRequired,
-  liked: PropTypes.bool.isRequired,
   active: PropTypes.bool.isRequired,
   index: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state, { trackId, index }) => {
-  // console.log(typeof trackId);
+function mapStateToProps(state, { trackId, index }) {
   const track = getTrackById(state, trackId);
   const artist = getUserByTrackId(state, trackId);
   return {
     index,
     trackId,
     active: isTrackActive(state, trackId),
-    liked: false,
     title: track.title,
     artistName: artist.username,
   };
-};
-const mapDispatchToProps = (dispatch, { trackId }) => ({
-  handleupdateActiveTrackId() {
-    dispatch(updateActiveTrackIdAndPlay(trackId));
-  },
-  handleLikeSong() {
-    // dispatch(startLikeSong(trackId));
-  },
-  handleUnlikeSong() {
-    // dispatch(startUnlikeSong(trackId));
-  },
-});
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayQueueRow);
+export default connect(mapStateToProps, { handleItemClick: togglePlaybackState })(PlayQueueRow);

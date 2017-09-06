@@ -9,7 +9,6 @@ function ClearIcon({ handleClearPlayQueue }) {
   return (
     <Wrapper>
       <IconButton
-        title="Clear play queue"
         iconName="trash"
         iconSize="lg"
         tooltipText="Clear Play Queue"
