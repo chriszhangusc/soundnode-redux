@@ -30,16 +30,3 @@ export default styled(NavLink).attrs({
   }
 
 `;
-/* background: ${props => props.selected && 'rgba(255, 255, 255, 0.3)'}; */
-
-// export default RouterLink.extend`
-//   font-size: 1.05rem;
-//   line-height: 80px;
-//   display: block;
-//   text-align: left;
-//   color: ${props => props.theme.colors.fontColor};
-//   background: ${props => props.selected && 'rgba(255, 255, 255, 0.3)'};
-//   &:hover {
-//     background: rgba(255, 255, 255, 0.2);
-//   }
-// `;

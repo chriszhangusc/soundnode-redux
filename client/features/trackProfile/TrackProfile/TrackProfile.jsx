@@ -65,13 +65,4 @@ function mapStateToProps(state) {
   };
 }
 
-// TrackProfile.propTypes = {
-//   resetTrackProfileState: PropTypes.func.isRequired,
-//   loadTrackProfileData: PropTypes.func.isRequired,
-//   match: PropTypes.shape({
-//     params: PropTypes.object,
-//   }).isRequired,
-//   pageLoading: PropTypes.bool.isRequired,
-// };
-
 export default connect(mapStateToProps, trackProfileActions)(TrackProfile);

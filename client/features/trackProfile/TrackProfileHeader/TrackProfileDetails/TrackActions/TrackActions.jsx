@@ -4,26 +4,28 @@ import { connect } from 'react-redux';
 import LinkButton from 'common/components/links/LinkButton';
 import { copyToClipboard } from 'features/copy/copyActions';
 import * as selectors from 'features/trackProfile/trackProfileSelectors';
+import Icon from 'common/components/icons/Icon';
 import Wrapper from './Wrapper';
 
 function TrackActions({ permalink, downloadable, downloadUrl, handleCopyClick }) {
   return (
     <Wrapper>
-      {downloadable &&
+      {downloadable && (
         <LinkButton href={downloadUrl} target="_blank" title="Download on SoundCloud Website">
-          <i className="fa fa-download" />DOWNLOAD
-        </LinkButton>}
+          <Icon iconName="download" title="Download" />DOWNLOAD
+        </LinkButton>
+      )}
 
       <LinkButton to="/">
-        <i className="fa fa-bookmark" title="Add to PlayQueue" />ADD TO PLAY_QUEUE
+        <Icon iconName="bookmark" title="Add to Playlist" />ADD TO PLAYLIST
       </LinkButton>
 
       <LinkButton href={permalink} target="_blank" title="Visit Track on SoundCloud">
-        <i className="fa fa-external-link" />PERMALINK
+        <Icon iconName="external-link" />PERMALINK
       </LinkButton>
 
       <LinkButton onClick={() => handleCopyClick(permalink)} title="Copy Permalink">
-        <i className="fa fa-clipboard" />COPY TRACK LINK
+        <Icon iconName="clipboard" title="Copy track link to clipboard" />COPY TRACK LINK
       </LinkButton>
     </Wrapper>
   );
