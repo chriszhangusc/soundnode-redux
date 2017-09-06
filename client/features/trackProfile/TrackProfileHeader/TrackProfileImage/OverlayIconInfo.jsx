@@ -5,7 +5,7 @@ import Icon from 'common/components/icons/Icon';
 function OverlayIconInfo({ iconName, iconActive, info }) {
   return (
     <span>
-      <Icon name={iconName} active={iconActive} />
+      <Icon iconName={iconName} active={iconActive} />
       {info}
     </span>
   );
