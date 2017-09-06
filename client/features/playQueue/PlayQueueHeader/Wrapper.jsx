@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export default styled.div`
-margin-bottom: 10px;
-text-align: center;
-color: ${props => props.theme.colors.fontColorSub};
+  display: flex;
+  padding: 12px 20px;
+  justify-content: center;
+  color: ${props => props.theme.colors.fontColorSub};
 `;

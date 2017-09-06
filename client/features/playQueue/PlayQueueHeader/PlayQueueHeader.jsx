@@ -1,27 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import IconButton from 'common/components/buttons/IconButton';
+
 import Wrapper from './Wrapper';
 import TitleColumn from './TitleColumn';
-import IconWrapper from './IconWrapper';
+import ClearIcon from './ClearIcon';
 
-function PlayQueueHeader({ handleClearPlayQueue }) {
+function PlayQueueHeader() {
   return (
     <Wrapper>
-      <TitleColumn>TRACKS</TitleColumn> | <TitleColumn>ARTIST</TitleColumn>
-      <IconWrapper>
-        <IconButton
-          title="Clear play queue"
-          iconName="trash"
-          onClick={handleClearPlayQueue}
-        />
-      </IconWrapper>
+      <TitleColumn>TRACKS</TitleColumn>
+      <TitleColumn>|</TitleColumn>
+      <TitleColumn>ARTIST</TitleColumn>
+      {/* <ClearIcon /> */}
     </Wrapper>
   );
 }
-
-PlayQueueHeader.propTypes = {
-  handleClearPlayQueue: PropTypes.func.isRequired,
-};
 
 export default PlayQueueHeader;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.div`
-display: inline-block;
-margin-right: 12px;
-float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

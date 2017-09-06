@@ -1,1 +1,1 @@
-export { default } from './PlayQueueContainer';
+export { default } from './PlayQueue';

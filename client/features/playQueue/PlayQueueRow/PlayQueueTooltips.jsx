@@ -6,7 +6,7 @@ import RouterLink from 'common/components/links/RouterLink';
 import { TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import { media } from 'app/css/styleUtils';
 
-// Tooltips styling is not working!!
+// #TODO: Consider removing tooltips
 const Wrapper = styled.span`
   flex-grow: 1;
   text-align: center;
@@ -20,7 +20,7 @@ const Wrapper = styled.span`
 
 const OptionsListWrapper = styled.div`
   transform: scale(0, 0);
-  transition: all .3s;
+  transition: all 0.3s;
 `;
 
 const TooltipsArrowLeft = styled.div`

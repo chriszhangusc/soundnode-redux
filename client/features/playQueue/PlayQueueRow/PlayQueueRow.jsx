@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getTrackById, getUserByTrackId } from 'features/entities/entitiesSelectors';
+import { isTrackActive } from 'features/player/playerSelectors';
+import { updateActiveTrackIdAndPlay } from 'features/player/playerActions';
 import { truncateWidth } from 'app/css/styleUtils';
 import PlayQueueTooltips from './PlayQueueTooltips';
 
@@ -62,9 +66,7 @@ function PlayQueueRow({
       }}
     >
       <PlayQueueItemTitle title={title}>{`${index}. ${title}`}</PlayQueueItemTitle>
-      <PlayQueueItemArtistName title={artistName}>
-        by: {artistName}
-      </PlayQueueItemArtistName>
+      <PlayQueueItemArtistName title={artistName}>by: {artistName}</PlayQueueItemArtistName>
       <PlayQueueTooltips index={index} trackId={trackId} />
     </PlayQueueItem>
   );
@@ -81,4 +83,29 @@ PlayQueueRow.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
-export default PlayQueueRow;
+const mapStateToProps = (state, { trackId, index }) => {
+  // console.log(typeof trackId);
+  const track = getTrackById(state, trackId);
+  const artist = getUserByTrackId(state, trackId);
+  return {
+    index,
+    trackId,
+    active: isTrackActive(state, trackId),
+    liked: false,
+    title: track.title,
+    artistName: artist.username,
+  };
+};
+const mapDispatchToProps = (dispatch, { trackId }) => ({
+  handleupdateActiveTrackId() {
+    dispatch(updateActiveTrackIdAndPlay(trackId));
+  },
+  handleLikeSong() {
+    // dispatch(startLikeSong(trackId));
+  },
+  handleUnlikeSong() {
+    // dispatch(startUnlikeSong(trackId));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayQueueRow);

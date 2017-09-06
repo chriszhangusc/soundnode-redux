@@ -65,7 +65,9 @@ export function updatePlayQueue(state, { playQueueName, trackIds }) {
 }
 
 export function appendToPlayQueue(state, { playQueueName, trackIds }) {
-  const newPlayQueue = state[playQueueName] ? [...state[playQueueName], ...trackIds] : [...trackIds];
+  const newPlayQueue = state[playQueueName]
+    ? [...state[playQueueName], ...trackIds]
+    : [...trackIds];
   return {
     ...state,
     [playQueueName]: newPlayQueue,
