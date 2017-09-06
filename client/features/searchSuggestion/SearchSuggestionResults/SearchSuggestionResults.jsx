@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as selectors from 'features/searchSuggestion/searchSuggestionSelectors';
 import SearchSuggestionResultsRowUser from './SearchSuggestionResultsRowUser';
 import SearchSuggestionResultsRowTrack from './SearchSuggestionResultsRowTrack';
-import ShowAllLink from './ShowAllLink';
+import ShowAll from './ShowAllLink';
 import Wrapper from './Wrapper';
 
 // Render the artists/users results section.
@@ -21,12 +21,16 @@ function renderTrackResults(trackIds) {
   ));
 }
 
+function renderShowAll(trackIds, queryLink) {
+  return trackIds.length > 0 && <ShowAll to={queryLink}>SHOW ALL TRACKS</ShowAll>;
+}
+
 function SearchSuggestionResults({ userIds, trackIds, hidden, queryLink }) {
   return (
     <Wrapper searchResultsHidden={hidden}>
       {renderArtistResults(userIds)}
       {renderTrackResults(trackIds)}
-      <ShowAllLink to={queryLink}>SHOW ALL TRACKS</ShowAllLink>
+      {renderShowAll(trackIds, queryLink)}
     </Wrapper>
   );
 }

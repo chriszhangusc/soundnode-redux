@@ -36,7 +36,7 @@ function SearchSuggestionResultsRow({ type, avatarUrl, linkUrl, title, subtitle 
 }
 
 SearchSuggestionResultsRow.defaultProps = {
-  avatarUrl: undefined,
+  avatarUrl: '',
 };
 
 SearchSuggestionResultsRow.propTypes = {

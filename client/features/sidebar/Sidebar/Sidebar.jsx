@@ -36,6 +36,7 @@ class Sidebar extends React.Component {
   componentDidMount() {
     const { history, hideSidebarAction } = this.props;
     history.listen(() => {
+      // Hide sidebar on route change to make space for the actual page.
       hideSidebarAction();
     });
   }
