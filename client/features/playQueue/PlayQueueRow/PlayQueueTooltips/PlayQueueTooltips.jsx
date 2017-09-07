@@ -7,7 +7,7 @@ import { TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import { media } from 'app/css/styleUtils';
 
 // #TODO: Consider removing tooltips
-const Wrapper = styled.span`
+const Wrapper = styled.div`
   flex-grow: 1;
   text-align: center;
   &:hover {
@@ -36,8 +36,9 @@ const TooltipsArrowLeft = styled.div`
 
 const OptionsList = styled.ul`
   position: absolute;
-
-  ${media.desktopLG`right: 22px;`} ${media.desktop4K`right: 45px;`} top: -128px;
+  ${media.desktopLG`right: 22px;`};
+  ${media.desktop4K`right: 35px;`};
+  top: -128px;
   display: block;
   background: ${props => props.theme.colors.separatorClean};
   border-radius: 2px;

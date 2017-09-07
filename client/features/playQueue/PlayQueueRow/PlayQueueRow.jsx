@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTrackById, getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { isTrackActive } from 'features/player/playerSelectors';
-import { updateActiveTrackIdAndPlay, togglePlaybackState } from 'features/player/playerActions';
+import { togglePlaybackState } from 'features/player/playerActions';
 import Wrapper from './Wrapper';
 import PlayQueueTooltips from './PlayQueueTooltips';
 import PlayQueueItemTitle from './PlayQueueItemTitle';
@@ -13,9 +13,7 @@ function PlayQueueRow({ title, artistName, trackId, active, index, handleItemCli
   return (
     <Wrapper
       active={active}
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
+      onClick={() => {
         if (!active) handleItemClick(trackId);
       }}
     >
