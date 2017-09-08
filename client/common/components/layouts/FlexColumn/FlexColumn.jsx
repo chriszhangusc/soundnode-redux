@@ -1,5 +1,9 @@
-import { Flex } from 'grid-styled';
+import styled from 'styled-components';
 
-const FlexColumn = Flex.extend`flex-direction: column;`;
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: ${props => props.grow && 1};
+`;
 
 export default FlexColumn;

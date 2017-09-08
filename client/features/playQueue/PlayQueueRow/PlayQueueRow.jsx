@@ -4,45 +4,76 @@ import { connect } from 'react-redux';
 import { getTrackById, getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { isTrackActive } from 'features/player/playerSelectors';
 import { togglePlaybackState } from 'features/player/playerActions';
+import TrackImage from 'common/components/images/TrackImage';
+import ColumnTitleWrapper from 'common/components/layouts/ColumnTitleWrapper';
 import Wrapper from './Wrapper';
 import PlayQueueTooltips from './PlayQueueTooltips';
 import PlayQueueItemTitle from './PlayQueueItemTitle';
-import PlayQueueItemArtistName from './PlayQueueItemArtistName';
+import PlayQueueItemArtist from './PlayQueueItemArtist';
 
-function PlayQueueRow({ title, artistName, trackId, active, index, handleItemClick }) {
+function PlayQueueRow({
+  title,
+  artworkUrl,
+  artistName,
+  trackId,
+  active,
+  index,
+  handleTogglePlayback,
+}) {
+  const handlePlayQueueClick = () => {
+    if (!active) handleTogglePlayback(trackId);
+  };
+
   return (
-    <Wrapper
-      active={active}
-      onClick={() => {
-        if (!active) handleItemClick(trackId);
-      }}
-    >
-      <PlayQueueItemTitle title={title}>{`${index}. ${title}`}</PlayQueueItemTitle>
-      <PlayQueueItemArtistName title={artistName}>by: {artistName}</PlayQueueItemArtistName>
+    <Wrapper active={active} onClick={handlePlayQueueClick}>
+      <TrackImage src={artworkUrl} size="small" />
+      <ColumnTitleWrapper>
+        <PlayQueueItemTitle>
+          {title}
+        </PlayQueueItemTitle>
+        <PlayQueueItemArtist>
+          By: {artistName}
+        </PlayQueueItemArtist>
+      </ColumnTitleWrapper>
       <PlayQueueTooltips index={index} trackId={trackId} />
     </Wrapper>
   );
 }
 
-PlayQueueRow.propTypes = {
-  trackId: PropTypes.number.isRequired,
-  handleItemClick: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  artistName: PropTypes.string.isRequired,
-  active: PropTypes.bool.isRequired,
-  index: PropTypes.number.isRequired,
-};
-
-function mapStateToProps(state, { trackId, index }) {
-  const track = getTrackById(state, trackId);
-  const artist = getUserByTrackId(state, trackId);
+function mapStateToProps(state, { trackId }) {
+  const { title, artworkUrl } = getTrackById(state, trackId);
+  const { username } = getUserByTrackId(state, trackId);
   return {
-    index,
-    trackId,
+    artworkUrl,
     active: isTrackActive(state, trackId),
-    title: track.title,
-    artistName: artist.username,
+    title,
+    artistName: username,
   };
 }
 
-export default connect(mapStateToProps, { handleItemClick: togglePlaybackState })(PlayQueueRow);
+const mapDispatchToProps = {
+  handleTogglePlayback: togglePlaybackState,
+};
+
+const Connected = connect(mapStateToProps, mapDispatchToProps)(PlayQueueRow);
+
+const injectedProps = {
+  handleTogglePlayback: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  artistName: PropTypes.string.isRequired,
+  active: PropTypes.bool.isRequired,
+};
+
+const passedInProps = {
+  index: PropTypes.number.isRequired,
+  trackId: PropTypes.number.isRequired,
+};
+
+PlayQueueRow.propTypes = {
+  ...passedInProps,
+  ...injectedProps,
+};
+
+Connected.propTypes = passedInProps;
+
+export default Connected;

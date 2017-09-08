@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import RouterLink from 'common/components/links/RouterLink';
 import UserImage from 'common/components/images/UserImage';
 import TrackImage from 'common/components/images/TrackImage';
+import ColumnTitleWrapper from 'common/components/layouts/ColumnTitleWrapper';
+
 import Wrapper from './Wrapper';
-import TitleWrapper from './TitleWrapper';
 import SuggestionTitle from './SuggestionTitle';
 import SuggestionSubtitle from './SuggestionSubtitle';
 
@@ -22,14 +23,14 @@ function SearchSuggestionResultsRow({ type, avatarUrl, linkUrl, title, subtitle 
     <RouterLink to={linkUrl}>
       <Wrapper>
         {renderAvatarByType(type, avatarUrl)}
-        <TitleWrapper>
+        <ColumnTitleWrapper>
           <SuggestionTitle>
             {title}
           </SuggestionTitle>
           <SuggestionSubtitle>
             {subtitle}
           </SuggestionSubtitle>
-        </TitleWrapper>
+        </ColumnTitleWrapper>
       </Wrapper>
     </RouterLink>
   );

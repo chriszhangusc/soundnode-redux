@@ -6,9 +6,12 @@ import RouterLink from 'common/components/links/RouterLink';
 import { compose } from 'recompose';
 import withImageFadeInOnLoad from 'common/hocs/withImageFadeInOnLoad';
 import withImageFallbackOnError from 'common/hocs/withImageFallbackOnError';
+import { margins, paddings } from 'app/css/mixin';
 
 const Wrapper = styled.div`
   position: relative;
+  ${margins};
+  ${paddings};
   width: ${props => props.width || '100%'};
   height: ${props => props.height || '100%'};
 `;
