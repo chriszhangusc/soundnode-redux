@@ -3,9 +3,14 @@ import { media } from 'app/css/styleUtils';
 
 export default styled.ul`
   position: absolute;
-  ${media.desktopLG`right: 22px;`};
-  ${media.desktop4K`right: 35px;`};
-  top: -128px;
+  ${media.desktopLG`
+      right: 22px;
+      top: -110px;
+    `};
+  ${media.desktop4K`
+      right: 35px;
+      top: -128px;
+    `};
   display: block;
   background: ${props => props.theme.colors.separatorClean};
   border-radius: 10px;
