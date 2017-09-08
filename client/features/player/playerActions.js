@@ -58,7 +58,7 @@ export function updateActiveTrackId(trackId) {
   };
 }
 
-export function removeActiveTrackFromPlayer() {
+export function removePlayerActiveTrack() {
   return {
     type: types.PLAYER_ACTIVE_TRACK_REMOVE,
   };

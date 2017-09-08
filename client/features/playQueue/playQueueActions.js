@@ -1,6 +1,7 @@
 import { getActiveTrackId, isInShuffleMode } from 'features/player/playerSelectors';
 import shuffle from 'lodash/shuffle';
-import { removeActiveTrackFromPlayer } from 'features/player/playerActions';
+import { removePlayerActiveTrack } from 'features/player/playerActions';
+import { notificationSuccess } from 'features/notification/notificationActions';
 import { shiftToFront } from './playQueueUtils';
 import * as types from './playQueueActionTypes';
 
@@ -10,12 +11,15 @@ import {
   getActivePlayQueueName,
 } from './playQueueSelectors';
 
-export function clearPlayQueue() {
+export function hidePlayQueue() {
   return {
-    type: types.PLAY_QUEUE_CLEAR_QUEUE,
-    payload: {
-      notificationSuccess: 'Play Queue Cleared!',
-    },
+    type: types.PLAY_QUEUE_HIDE,
+  };
+}
+
+export function showPlayQueue() {
+  return {
+    type: types.PLAY_QUEUE_SHOW,
   };
 }
 
@@ -100,7 +104,7 @@ export function removeTrackFromPlayQueueAndPlayer(trackId) {
     dispatch(removeTrackFromPlayQueue(trackId));
     const activeTrackId = getActiveTrackId(state);
     if (activeTrackId === trackId) {
-      dispatch(removeActiveTrackFromPlayer(trackId));
+      dispatch(removePlayerActiveTrack(trackId));
     }
   };
 }
@@ -151,44 +155,6 @@ export function removeVisiblePlayQueue() {
   };
 }
 
-// export function updateVisiblePlayQueue(trackIds) {
-//   return (dispatch, getState) => {
-//     const state = getState();
-//     const visiblePlayQueueName = getVisiblePlayQueueName(state);
-//     // Keep the side effects in the thunks
-//     dispatch(updatePlayQueue(visiblePlayQueueName, uniq(trackIds)));
-//     dispatch(updateShuffledPlayQueueIfNeeded());
-//   };
-// }
-
-// export function appendToVisiblePlayQueue(trackIds) {
-//   return (dispatch, getState) => {
-//     const state = getState();
-//     const visiblePlayQueueName = getVisiblePlayQueueName(state);
-//     // Keep the side effects in the thunks
-//     dispatch(appendToPlayQueue(visiblePlayQueueName, uniq(trackIds)));
-//     dispatch(updateShuffledPlayQueueIfNeeded());
-//   };
-// }
-
-// export function updatePlayQueueIfNeeded(playQueueName, playQueueIds) {
-//   return (dispatch, getState) => {
-//     const state = getState();
-//     const inShuffleMode = isInShuffleMode(state);
-//     const visiblePlayQueueName = getVisiblePlayQueueName(state);
-//     const activePlayQueueName = getActivePlayQueueName(state);
-//     if (visiblePlayQueueName !== activePlayQueueName) return;
-//     if (inShuffleMode) {
-//       console.log('Update shuffle playQueue');
-//       // Fix later
-//       // dispatch(shufflePlayQueue());
-//     } else {
-//       // Normal playQueue update
-//       dispatch(updatePlayQueue(playQueueName, playQueueIds));
-//     }
-//   };
-// }
-
 // Called when playing song through song cards list
 export function switchActivePlayQueueIfNeeded() {
   return (dispatch, getState) => {
@@ -201,5 +167,15 @@ export function switchActivePlayQueueIfNeeded() {
       // Update shuffled playQueue
       // Reshuffle the new active playQueue if in shuffle mode
     }
+  };
+}
+
+export function clearPlayQueue() {
+  return (dispatch) => {
+    // Remove player track
+    dispatch(removePlayerActiveTrack());
+    dispatch({ type: types.PLAY_QUEUE_CLEAR });
+    dispatch(hidePlayQueue());
+    dispatch(notificationSuccess('Play Queue Cleared'));
   };
 }

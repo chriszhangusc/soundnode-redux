@@ -19,6 +19,14 @@ export function appendVisiblePlayQueue(state, { newPlayQueue }) {
   };
 }
 
+// #TODO: also need to handle play queue shuffle
+export function clearPlayQueue(state) {
+  return {
+    ...state,
+    activePlayQueue: [],
+  };
+}
+
 export function updateVisiblePlayQueue(state, { visiblePlayQueue }) {
   return {
     ...state,
@@ -104,8 +112,28 @@ export function removeTrackFromPlayQueue(state, { trackId }) {
   };
 }
 
+export function showPlayQueue(state) {
+  return {
+    ...state,
+    hidden: false,
+  };
+}
+
+export function hidePlayQueue(state) {
+  return {
+    ...state,
+    hidden: true,
+  };
+}
+
 export default function playQueueReducer(state = initialState, action) {
   switch (action.type) {
+    case types.PLAY_QUEUE_SHOW:
+      return showPlayQueue(state);
+
+    case types.PLAY_QUEUE_HIDE:
+      return hidePlayQueue(state);
+
     case types.PLAY_QUEUE_MERGE:
       return mergePlayQueue(state, action.payload);
 
@@ -127,10 +155,8 @@ export default function playQueueReducer(state = initialState, action) {
     case types.APPEND_TRACK_TO_PLAY_QUEUE:
       return appendToPlayQueue(state, action.payload);
 
-    case types.PLAY_QUEUE_CLEAR_QUEUE:
-      return {
-        ...initialState,
-      };
+    case types.PLAY_QUEUE_CLEAR:
+      return clearPlayQueue(state, action.payload);
 
     case types.PLAY_QUEUE_VISIBLE_PLAY_QUEUE_NAME_CHANGE:
       return updateVisiblePlayQueueName(state, action.payload);
