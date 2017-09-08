@@ -5,13 +5,6 @@ const initialState = {
   hidden: true,
 };
 
-function toggleSidebar(state) {
-  return {
-    ...state,
-    hidden: !state.hidden,
-  };
-}
-
 function showSidebar(state) {
   return {
     ...state,
@@ -28,8 +21,6 @@ function hideSidebar(state) {
 
 export default function sidebarReducer(state = initialState, action) {
   switch (action.type) {
-    case types.SIDEBAR_TOGGLE:
-      return toggleSidebar(state);
 
     case types.SIDEBAR_SHOW:
       return showSidebar(state);

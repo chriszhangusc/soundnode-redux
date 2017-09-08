@@ -17,7 +17,6 @@ import Routing from 'app/routing/Routing';
 import { Route, Switch } from 'react-router-dom';
 import { AUTH_CALLBACK_ROUTE } from 'common/constants/routeConsts';
 import 'app/css/global';
-import { hideSidebar } from 'features/sidebar/sidebarActions';
 
 SC.initialize({
   client_id: CLIENT_ID,

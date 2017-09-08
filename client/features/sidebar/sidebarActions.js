@@ -1,10 +1,5 @@
-import { SIDEBAR_TOGGLE, SIDEBAR_SHOW, SIDEBAR_HIDE } from './sidebarActionTypes';
-
-export function toggleSidebar() {
-  return {
-    type: SIDEBAR_TOGGLE,
-  };
-}
+import { SIDEBAR_SHOW, SIDEBAR_HIDE } from './sidebarActionTypes';
+import { isSidebarHidden } from './sidebarSelectors';
 
 export function showSidebar() {
   return {
@@ -15,5 +10,17 @@ export function showSidebar() {
 export function hideSidebar() {
   return {
     type: SIDEBAR_HIDE,
+  };
+}
+
+export function toggleSidebar() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const sidebarHidden = isSidebarHidden(state);
+    if (sidebarHidden) {
+      dispatch(showSidebar());
+    } else {
+      dispatch(hideSidebar());
+    }
   };
 }
