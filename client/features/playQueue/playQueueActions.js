@@ -1,5 +1,6 @@
 import { getActiveTrackId, isInShuffleMode } from 'features/player/playerSelectors';
 import shuffle from 'lodash/shuffle';
+import { removeActiveTrackFromPlayer } from 'features/player/playerActions';
 import { shiftToFront } from './playQueueUtils';
 import * as types from './playQueueActionTypes';
 
@@ -81,6 +82,26 @@ export function removePlayQueue(playQueueName) {
     payload: {
       playQueueName,
     },
+  };
+}
+
+export function removeTrackFromPlayQueue(trackId) {
+  return {
+    type: types.PLAY_QUEUE_TRACK_REMOVE,
+    payload: {
+      trackId,
+    },
+  };
+}
+
+export function removeTrackFromPlayQueueAndPlayer(trackId) {
+  return (dispatch, getState) => {
+    const state = getState();
+    dispatch(removeTrackFromPlayQueue(trackId));
+    const activeTrackId = getActiveTrackId(state);
+    if (activeTrackId === trackId) {
+      dispatch(removeActiveTrackFromPlayer(trackId));
+    }
   };
 }
 

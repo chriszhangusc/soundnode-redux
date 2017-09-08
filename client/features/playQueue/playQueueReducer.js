@@ -1,13 +1,17 @@
 import { mergeArrays } from 'common/utils/generalUtils';
+import remove from 'lodash/remove';
 import * as types from './playQueueActionTypes';
 
 const initialState = {
   activePlayQueueName: undefined,
   visiblePlayQueueName: undefined,
+  visiblePlayQueue: [],
+  activePlayQueue: [],
   hidden: true,
   shuffledPlayQueue: [],
 };
 
+// not used??
 export function appendVisiblePlayQueue(state, { newPlayQueue }) {
   return {
     ...state,
@@ -19,6 +23,7 @@ export function updateVisiblePlayQueue(state, { visiblePlayQueue }) {
   return {
     ...state,
     [state.visiblePlayQueueName]: [...visiblePlayQueue],
+    visiblePlayQueue: [...visiblePlayQueue],
   };
 }
 
@@ -51,9 +56,11 @@ export function updateVisiblePlayQueueName(state, { visiblePlayQueueName }) {
 }
 
 export function updateActivePlayQueueName(state, { activePlayQueueName }) {
+  const newPlayQueue = state[activePlayQueueName];
   return {
     ...state,
     activePlayQueueName,
+    activePlayQueue: [...newPlayQueue],
   };
 }
 
@@ -89,19 +96,24 @@ export function removePlayQueue(state, { playQueueName }) {
   return newState;
 }
 
+export function removeTrackFromPlayQueue(state, { trackId }) {
+  const newActivePlayQueue = remove(state.activePlayQueue, item => item !== trackId);
+  return {
+    ...state,
+    activePlayQueue: [...newActivePlayQueue],
+  };
+}
+
 export default function playQueueReducer(state = initialState, action) {
   switch (action.type) {
-    // case types.PLAY_QUEUE_UPDATE:
-    //   return updatePlayQueue(state, action.payload);
-
-    // case types.PLAY_QUEUE_APPEND:
-    //   return appendToPlayQueue(state, action.payload);
-
     case types.PLAY_QUEUE_MERGE:
       return mergePlayQueue(state, action.payload);
 
     case types.PLAY_QUEUE_REMOVE:
       return removePlayQueue(state, action.payload);
+
+    case types.PLAY_QUEUE_TRACK_REMOVE:
+      return removeTrackFromPlayQueue(state, action.payload);
 
     case types.PLAY_QUEUE_SHUFFLE_PLAY_QUEUE_UPDATE:
       return updateShuffledPlayQueue(state, action.payload);

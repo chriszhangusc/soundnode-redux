@@ -97,8 +97,19 @@ export function resetTime(state) {
   };
 }
 
+export function removeActiveTrack(state) {
+  return {
+    ...state,
+    playing: false,
+    activeTrackId: null,
+  };
+}
+
 export default function playerReducer(state = initialState, action) {
   switch (action.type) {
+    case actionTypes.PLAYER_ACTIVE_TRACK_REMOVE:
+      return removeActiveTrack(state);
+
     case actionTypes.PLAYER_ACTIVE_TRACK_ID_UPDATE:
       return updateActiveTrackId(state, action.payload);
 

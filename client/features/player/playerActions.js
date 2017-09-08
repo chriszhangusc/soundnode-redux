@@ -58,6 +58,12 @@ export function updateActiveTrackId(trackId) {
   };
 }
 
+export function removeActiveTrackFromPlayer() {
+  return {
+    type: types.PLAYER_ACTIVE_TRACK_REMOVE,
+  };
+}
+
 export function updateTime(currentTime) {
   return {
     type: types.PLAYER_TIME_UPDATE,
@@ -232,7 +238,6 @@ export function togglePlaybackState(trackId) {
     }
   };
 }
-
 
 // export function togglePlaybackStateAndSwitchPlaylist() {
 //   return (dispatch) => {
