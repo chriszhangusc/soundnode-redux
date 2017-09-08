@@ -9,6 +9,7 @@ import {
   getActivePlayQueue,
   getVisiblePlayQueueName,
   getActivePlayQueueName,
+  isPlayQueueHidden,
 } from './playQueueSelectors';
 
 export function hidePlayQueue() {
@@ -48,27 +49,17 @@ export const updateActivePlayQueueName = activePlayQueueName => ({
   },
 });
 
-export const togglePlayQueue = () => ({ type: types.PLAY_QUEUE_TOGGLE });
-
-// export function updatePlayQueue(playQueueName, trackIds) {
-//   return {
-//     type: types.PLAY_QUEUE_UPDATE,
-//     payload: {
-//       playQueueName,
-//       trackIds,
-//     },
-//   };
-// }
-
-// export function appendToPlayQueue(playQueueName, trackIds) {
-//   return {
-//     type: types.PLAY_QUEUE_APPEND,
-//     payload: {
-//       playQueueName,
-//       trackIds,
-//     },
-//   };
-// }
+export function togglePlayQueue() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const hidden = isPlayQueueHidden(state);
+    if (hidden) {
+      dispatch(showPlayQueue());
+    } else {
+      dispatch(hidePlayQueue());
+    }
+  };
+}
 
 export function mergePlayQueue(playQueueName, trackIds) {
   return {
@@ -76,15 +67,6 @@ export function mergePlayQueue(playQueueName, trackIds) {
     payload: {
       playQueueName,
       trackIds,
-    },
-  };
-}
-
-export function removePlayQueue(playQueueName) {
-  return {
-    type: types.PLAY_QUEUE_REMOVE,
-    payload: {
-      playQueueName,
     },
   };
 }
@@ -144,14 +126,6 @@ export function mergeVisiblePlayQueue(playQueue) {
     const visiblePlayQueueName = getVisiblePlayQueueName(state);
     dispatch(mergePlayQueue(visiblePlayQueueName, trackIds));
     dispatch(updateShuffledPlayQueueIfNeeded());
-  };
-}
-
-export function removeVisiblePlayQueue() {
-  return (dispatch, getState) => {
-    const state = getState();
-    const visiblePlayQueueName = getVisiblePlayQueueName(state);
-    dispatch(removePlayQueue(visiblePlayQueueName));
   };
 }
 

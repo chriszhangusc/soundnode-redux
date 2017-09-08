@@ -49,13 +49,6 @@ export function clearShufflePlayQueue(state) {
   };
 }
 
-export function togglePlayQueue(state) {
-  return {
-    ...state,
-    hidden: !state.hidden,
-  };
-}
-
 export function updateVisiblePlayQueueName(state, { visiblePlayQueueName }) {
   return {
     ...state,
@@ -149,8 +142,6 @@ export default function playQueueReducer(state = initialState, action) {
     case types.PLAY_QUEUE_SHUFFLE_PLAY_QUEUE_CLEAR:
       return clearShufflePlayQueue(state);
 
-    case types.PLAY_QUEUE_TOGGLE:
-      return togglePlayQueue(state);
     // Need to handle shuffle mode!!
     case types.APPEND_TRACK_TO_PLAY_QUEUE:
       return appendToPlayQueue(state, action.payload);

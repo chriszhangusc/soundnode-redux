@@ -7,6 +7,8 @@ export const getPlayerState = state => state.player;
 
 export const getActiveTrackId = createSelector(getPlayerState, state => state.activeTrackId);
 
+export const isPlayQueueHidden = createSelector(getPlayerState, state => state.hidden);
+
 export const isPlayerPlaying = createSelector(getPlayerState, state => state.playing);
 
 export const isPlayerSeeking = createSelector(getPlayerState, state => state.seeking);

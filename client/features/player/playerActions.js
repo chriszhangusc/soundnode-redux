@@ -6,15 +6,7 @@ import {
 import { getPlayQueueByMode } from 'features/playQueue/playQueueSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
 import * as types from './playerActionTypes';
-import {
-  isPlayerPlaying,
-  isPlayerSeeking,
-  getCurrentTime,
-  getCurrentVolume,
-  getCurrentPlayerTrack,
-  getActiveTrackId,
-  getPlayerMode,
-} from './playerSelectors';
+import * as selectors from './playerSelectors';
 
 /* Action Creators */
 export function beginSeek() {
@@ -96,7 +88,7 @@ export function updateTimeIfNeeded(rawTime) {
   return (dispatch, getState) => {
     const state = getState();
     const newTime = rawTime;
-    const currentTime = getCurrentTime(state);
+    const currentTime = selectors.getCurrentTime(state);
     if (newTime !== currentTime) {
       dispatch(updateTime(newTime));
     }
@@ -106,7 +98,7 @@ export function updateTimeIfNeeded(rawTime) {
 export function updateTimeOnPlay(time) {
   return (dispatch, getState) => {
     const state = getState();
-    const seeking = isPlayerSeeking(state);
+    const seeking = selectors.isPlayerSeeking(state);
     if (!seeking) {
       dispatch(updateTimeIfNeeded(time));
     }
@@ -136,7 +128,7 @@ export function updateVolumeAndEndSeek(volume) {
 export function toggleMute() {
   return (dispatch, getState) => {
     const state = getState();
-    const currVolume = getCurrentVolume(state);
+    const currVolume = selectors.getCurrentVolume(state);
     if (currVolume === 0) {
       const lastVolume = getLastVolume();
       dispatch(updateVolume(lastVolume));
@@ -151,7 +143,7 @@ export function toggleMute() {
 export function updateActiveTrackIdAndPlay(newTrackId) {
   return (dispatch, getState) => {
     const state = getState();
-    const curTrackId = getCurrentPlayerTrack(state);
+    const curTrackId = selectors.getCurrentPlayerTrack(state);
     dispatch(pauseSong());
     dispatch(resetTime());
     if (curTrackId !== newTrackId) {
@@ -165,9 +157,9 @@ export function updateActiveTrackIdAndPlay(newTrackId) {
 export function playSongByAction(actionType) {
   return (dispatch, getState) => {
     const state = getState();
-    const mode = getPlayerMode(state);
+    const mode = selectors.getPlayerMode(state);
     let nextTrackId = null;
-    const curTrackId = getActiveTrackId(state);
+    const curTrackId = selectors.getActiveTrackId(state);
     const activePlaylist = getPlayQueueByMode(state);
     if (mode === types.REPEAT) {
       nextTrackId = curTrackId;
@@ -198,7 +190,7 @@ export function playPrevSong() {
 export function togglePlay() {
   return (dispatch, getState) => {
     const state = getState();
-    const playing = isPlayerPlaying(state);
+    const playing = selectors.isPlayerPlaying(state);
     if (playing) {
       dispatch(pauseSong());
     } else {
@@ -211,7 +203,7 @@ export function togglePlay() {
 export function togglePlayMode(newMode) {
   return (dispatch, getState) => {
     const state = getState();
-    const currMode = getPlayerMode(state);
+    const currMode = selectors.getPlayerMode(state);
     if (currMode === newMode) {
       /* Toggle off current mode, set to default mode */
       dispatch(changePlayMode(types.DEFAULT_MODE));
@@ -229,7 +221,7 @@ export function togglePlayMode(newMode) {
 export function togglePlaybackState(trackId) {
   return (dispatch, getState) => {
     const state = getState();
-    const activeTrackId = getActiveTrackId(state);
+    const activeTrackId = selectors.getActiveTrackId(state);
     if (trackId === activeTrackId) {
       dispatch(togglePlay());
     } else {
