@@ -8,7 +8,6 @@ export default styled.ul`
   top: -128px;
   display: block;
   background: ${props => props.theme.colors.separatorClean};
-  border-radius: 10px;
 
   & li:last-child {
     border-bottom: none;

@@ -47,13 +47,13 @@ function ActionList({ trackId, liked, reposted, actions }) {
   return (
     <Wrapper>
       <ActionListWrapper>
-        <ActionListItem onClick={handleRemoveFromPlayQueue}>Remove</ActionListItem>
+        <ActionListItem onClick={handleRemoveFromPlayQueue} first>Remove</ActionListItem>
         <ActionListItem onClick={handleLike}>{liked ? 'Unlike' : 'Like'}</ActionListItem>
         <ActionListItem onClick={handleRepost}>
           {reposted ? 'Remove Repost' : 'Repost'}
         </ActionListItem>
         <ActionListItem onClick={handleAddToPlaylist}>Add to playlist</ActionListItem>
-        <ActionListItem>
+        <ActionListItem last>
           <RouterLink to={`${TRACK_PROFILE_ROUTE}/${trackId}`} onClick={handleGoToTrack}>
             Go to track
           </RouterLink>
