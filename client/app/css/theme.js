@@ -18,6 +18,7 @@ const shades = [
   darken(3 / 4),
   darken(7 / 8),
   darken(1),
+  darken(2),
 ];
 
 const theme = {

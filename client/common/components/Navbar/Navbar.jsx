@@ -11,7 +11,7 @@ function Navbar() {
   return (
     <NavWrapper>
       <BoxShadow blur={10} spread={8} shade={3}>
-        <Flex justify="space-between" px={100} py={0}>
+        <Flex justify="space-between" px={87} py={0}>
           <Flex align="center" justify="flex-start" flex="1">
             <SidebarToggleButton />
             <NavBrand to="/">SoundNode Redux</NavBrand>

@@ -9,11 +9,12 @@ function formatPixel(numberOrString) {
   return includes(numberOrString, 'px') ? numberOrString : `${numberOrString}px`;
 }
 
-const offsetX = props => formatPixel(props.offsetX || 0);
-const offsetY = props => formatPixel(props.offsetY || 0);
-const spread = props => formatPixel(props.spread || 0);
-const blur = props => formatPixel(props.blur || 0);
-const shade = (props) => {
+const offsetXMixin = props => formatPixel(props.offsetX || 0);
+const offsetYMixin = props => formatPixel(props.offsetY || 0);
+const spreadMixin = props => formatPixel(props.spread || 0);
+const blurMixin = props => formatPixel(props.blur || 0);
+const shadeMixin = (props) => {
+  const { shade } = props;
   const { shades } = props.theme;
   const defaultShadeLevel = 4;
   if (isNumber(shade) && shade >= 0 && shade < shades.length) {
@@ -26,7 +27,7 @@ const shade = (props) => {
 const BoxShadow = styled.div`
   height: 100%;
   width: 100%;
-  box-shadow: ${offsetX} ${offsetY} ${blur} ${spread} ${shade};
+  box-shadow: ${offsetXMixin} ${offsetYMixin} ${blurMixin} ${spreadMixin} ${shadeMixin};
 `;
 
 export default BoxShadow;

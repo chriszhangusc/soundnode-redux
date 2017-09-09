@@ -1,10 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import * as routes from 'common/constants/routeConsts';
 import BoxShadow from 'common/components/BoxShadow';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
 import { hideSidebar } from 'features/sidebar/sidebarActions';
+import SidebarHeader from 'features/sidebar/SidebarHeader';
 import { isSidebarHidden } from '../sidebarSelectors';
 import SidebarTab from '../SidebarTab';
 import Wrapper from './Wrapper';
@@ -32,32 +33,34 @@ const sidebarItemList = [
   },
 ];
 
-class Sidebar extends React.Component {
-  componentDidMount() {
-    const { history, hideSidebarAction } = this.props;
-    history.listen(() => {
-      // Hide sidebar on route change to make space for the actual page.
-      hideSidebarAction();
-    });
-  }
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition-property: opacity;
+  z-index: ${props => (props.sidebarHidden ? props.theme.zIndexes[0] : props.theme.zIndexes[4])};
+  opacity: ${props => (props.sidebarHidden ? 0 : 1)};
+  background: rgba(0, 0, 0, 0.5);
+`;
 
-  render() {
-    const { hidden } = this.props;
-    return (
+function Sidebar({ hidden, hideSidebarAction }) {
+  return (
+    <div>
+      <Overlay sidebarHidden={hidden} onClick={hideSidebarAction} />
       <Wrapper sidebarHidden={hidden}>
-        <BoxShadow blur={10} spread={4} shade={3}>
+        <BoxShadow blur={10} spread={4} shade={9}>
+          <SidebarHeader />
           <ul>{sidebarItemList.map(item => <SidebarTab {...item} key={item.title} />)}</ul>
         </BoxShadow>
       </Wrapper>
-    );
-  }
+    </div>
+  );
 }
 
 Sidebar.propTypes = {
   hidden: PropTypes.bool.isRequired,
-  history: PropTypes.shape({
-    listen: PropTypes.func.isRequired,
-  }).isRequired,
   hideSidebarAction: PropTypes.func.isRequired,
 };
 
@@ -67,6 +70,8 @@ function mapStateToProps(state) {
   };
 }
 
-// https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md
-// Using redux and react-router-v4 will cause problem when route changes.
-export default withRouter(connect(mapStateToProps, { hideSidebarAction: hideSidebar })(Sidebar));
+const mapDispatchToProps = {
+  hideSidebarAction: hideSidebar,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
