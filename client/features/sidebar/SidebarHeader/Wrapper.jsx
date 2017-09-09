@@ -5,5 +5,5 @@ export default styled.div`
   flex: 1;
   align-items: center;
   justify-content: flex-start;
-  padding: 20px 0 20px 70px;
+  padding: 23px 0 23px 70px;
 `;
