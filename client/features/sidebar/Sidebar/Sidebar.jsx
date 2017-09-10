@@ -5,10 +5,10 @@ import BoxShadow from 'common/components/BoxShadow';
 import PropTypes from 'prop-types';
 import { hideSidebar } from 'features/sidebar/sidebarActions';
 import SidebarHeader from 'features/sidebar/SidebarHeader';
+import GlobalOverlay from 'common/components/GlobalOverlay';
 import { isSidebarHidden } from '../sidebarSelectors';
 import SidebarTab from '../SidebarTab';
 import Wrapper from './Wrapper';
-import SidebarOverlay from '../SidebarOverlay';
 
 const sidebarItemList = [
   {
@@ -36,7 +36,7 @@ const sidebarItemList = [
 function Sidebar({ hidden, hideSidebarAction }) {
   return (
     <div>
-      <SidebarOverlay sidebarHidden={hidden} onClick={hideSidebarAction} />
+      {!hidden && <GlobalOverlay onClick={hideSidebarAction} />}
       <Wrapper sidebarHidden={hidden}>
         <BoxShadow offsetX={2} offsetY={2} blur={10} spread={4} shade={9}>
           <SidebarHeader />
@@ -62,6 +62,4 @@ const mapDispatchToProps = {
   hideSidebarAction: hideSidebar,
 };
 
-const Connect = connect(mapStateToProps, mapDispatchToProps)(Sidebar);
-
-export default Connect;
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

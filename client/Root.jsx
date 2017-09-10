@@ -7,7 +7,6 @@ import App from 'app/layout/App';
 import configureStore from 'app/store/configureStore';
 
 const store = configureStore();
-
 function Root() {
   return (
     <ThemeProvider theme={theme}>

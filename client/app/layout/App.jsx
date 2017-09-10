@@ -5,7 +5,7 @@ import PlayQueue from 'features/playQueue/PlayQueue';
 import Callback from 'common/components/Callback';
 import NetworkDetector from 'features/network/NetworkDetector';
 import GlobalOverlayLoader from 'features/globalOverlayLoader/GlobalOverlayLoader';
-import styled, { injectGlobal } from 'styled-components';
+import styled from 'styled-components';
 import Player from 'features/player/Player';
 import Sidebar from 'features/sidebar/Sidebar';
 import Navbar from 'common/components/Navbar';
@@ -17,6 +17,7 @@ import Routing from 'app/routing/Routing';
 import { Route, Switch } from 'react-router-dom';
 import { AUTH_CALLBACK_ROUTE } from 'common/constants/routeConsts';
 import 'app/css/global';
+import GlobalOverlay from 'common/components/GlobalOverlay';
 
 SC.initialize({
   client_id: CLIENT_ID,
@@ -25,8 +26,6 @@ SC.initialize({
 });
 
 const PageContentWrapper = styled.div`
-  overflow-y: scroll;
-  overflow-x: hidden;
   flex: 6;
   padding: 50px 20px 100px 100px;
   margin: 0 auto;
@@ -36,32 +35,20 @@ const PageContentWrapper = styled.div`
 const MainWrapper = styled.div`padding-top: 70px;`;
 
 class Main extends React.Component {
-  componentDidMount() {
-    // To stop scrolling while logging in.
-    const { loginInProgress } = this.props;
-    injectGlobal`
-      body {
-        /* disable scroll when the global overlay loader is active */
-        overflow-y: ${loginInProgress ? 'hidden' : 'scroll'};
-      }
-    `;
-  }
-
   render() {
     return (
-      <GlobalOverlayLoader>
-        <MainWrapper>
-          <Navbar />
-          <Sidebar />
-          <PageContentWrapper>
-            <Routing />
-            <Player />
-            <PlayQueue />
-          </PageContentWrapper>
-          <NetworkDetector />
-          <NotificationCenter />
-        </MainWrapper>
-      </GlobalOverlayLoader>
+      <MainWrapper>
+        <GlobalOverlayLoader />
+        <Navbar />
+        <Sidebar />
+        <PageContentWrapper>
+          <Routing />
+          <Player />
+          <PlayQueue />
+        </PageContentWrapper>
+        <NetworkDetector />
+        <NotificationCenter />
+      </MainWrapper>
     );
   }
 }
