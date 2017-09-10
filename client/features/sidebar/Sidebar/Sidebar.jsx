@@ -5,7 +5,8 @@ import BoxShadow from 'common/components/BoxShadow';
 import PropTypes from 'prop-types';
 import { hideSidebar } from 'features/sidebar/sidebarActions';
 import SidebarHeader from 'features/sidebar/SidebarHeader';
-import GlobalOverlay from 'common/components/GlobalOverlay';
+import SidebarOverlay from 'features/sidebar/SidebarOverlay';
+import { withRouter } from 'react-router';
 import { isSidebarHidden } from '../sidebarSelectors';
 import SidebarTab from '../SidebarTab';
 import Wrapper from './Wrapper';
@@ -36,11 +37,15 @@ const sidebarItemList = [
 function Sidebar({ hidden, hideSidebarAction }) {
   return (
     <div>
-      {!hidden && <GlobalOverlay onClick={hideSidebarAction} />}
+      <SidebarOverlay onClick={hideSidebarAction} hidden={hidden} />
       <Wrapper sidebarHidden={hidden}>
         <BoxShadow offsetX={2} offsetY={2} blur={10} spread={4} shade={9}>
           <SidebarHeader />
-          <ul>{sidebarItemList.map(item => <SidebarTab {...item} key={item.title} />)}</ul>
+          <ul>
+            {sidebarItemList.map(item => (
+              <SidebarTab {...item} key={item.title} onClick={hideSidebarAction} />
+            ))}
+          </ul>
         </BoxShadow>
       </Wrapper>
     </div>
@@ -62,4 +67,8 @@ const mapDispatchToProps = {
   hideSidebarAction: hideSidebar,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+/*
+There will be problem when using connect from redux
+because connect will block update of route change.
+*/
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Sidebar));

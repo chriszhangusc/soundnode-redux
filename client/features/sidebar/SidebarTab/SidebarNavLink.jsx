@@ -22,10 +22,15 @@ export default styled(NavLink).attrs({
     background-color: rgba(255, 255, 255, 0.3);
     text-decoration: none;
   }
-
+  
   &:hover {
     color: ${props => props.theme.colors.fontColor};
     background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+  }
+
+  &:focus {
+    color: ${props => props.theme.colors.fontColor};
     text-decoration: none;
   }
 

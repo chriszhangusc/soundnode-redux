@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 import Overlay from './Overlay';
 
 class GlobalOverlay extends React.Component {
@@ -12,17 +11,8 @@ class GlobalOverlay extends React.Component {
   }
 
   render() {
-    return (
-      <ReactCSSTransitionGroup
-        transitionName="overlay"
-        transitionAppear
-        transitionAppearTimeout={500}
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}
-      >
-        <Overlay key="overlay" {...this.props} />
-      </ReactCSSTransitionGroup>
-    );
+    // ReactCSSTransitionGroup must be mounted for it to take effect.
+    return <Overlay key="overlay" {...this.props} />;
   }
 }
 
