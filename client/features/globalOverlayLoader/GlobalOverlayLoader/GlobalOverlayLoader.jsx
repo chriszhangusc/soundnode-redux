@@ -1,43 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { injectGlobal } from 'styled-components';
-import { zIndexes } from 'app/css/theme';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
   isLoaderActive,
   getLoaderText,
 } from 'features/globalOverlayLoader/globalOverlayLoaderSelectors';
+import Spinner from './Spinner';
+import GlobalSpinnerOverlay from './GlobalSpinnerOverlay';
 
-import Loadable from './Loadable';
-
-const FixedOverlay = styled.div`
+const ContentWrapper = styled.div`
   position: fixed;
-  width: 100vw;
-  height: 100vh;
   top: 50%;
   left: 50%;
-  zIndex: ${props => props.theme.zIndexes[5]};
+  z-index: ${props => props.theme.zIndexes[5]};
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
 `;
 
-class GlobalOverlayLoader extends React.Component {
-  render() {
-    const { active, text } = this.props;
-    return (
-      active && (
-        <Loadable
-          active
-          spinner
-          text={text}
-          animate
-          zIndex={zIndexes[5]}
-        >
-          <FixedOverlay />
-        </Loadable>
-      )
-    );
-  }
+const Text = styled.div`color: ${props => props.theme.colors.fontColor};`;
+
+function GlobalOverlayLoader({ active, text }) {
+  return (
+    <div>
+      {active && (
+        <GlobalSpinnerOverlay>
+          <ContentWrapper>
+            <Spinner />
+            <Text>{text}</Text>
+          </ContentWrapper>
+        </GlobalSpinnerOverlay>
+      )}
+    </div>
+  );
 }
 
 GlobalOverlayLoader.defaultProps = {

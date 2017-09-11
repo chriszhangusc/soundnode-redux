@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import GlobalOverlay from 'common/components/GlobalOverlay';
 import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 
-function SidebarOverlay({ hidden, ...rest }) {
+function GlobalSpinnerOverlay({ hidden, children, ...rest }) {
   return (
     <ReactCSSTransitionGroup
       transitionName="overlay"
@@ -12,13 +12,17 @@ function SidebarOverlay({ hidden, ...rest }) {
       transitionEnterTimeout={500}
       transitionLeaveTimeout={500}
     >
-      {!hidden && <GlobalOverlay key="sidebar" {...rest} />}
+      {!hidden && (
+        <GlobalOverlay key="global-spinner" {...rest}>
+          {children}
+        </GlobalOverlay>
+      )}
     </ReactCSSTransitionGroup>
   );
 }
 
-SidebarOverlay.propTypes = {
+GlobalSpinnerOverlay.propTypes = {
   hidden: PropTypes.bool.isRequired,
 };
 
-export default SidebarOverlay;
+export default GlobalSpinnerOverlay;
