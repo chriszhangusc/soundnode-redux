@@ -23,6 +23,7 @@ function GlobalSpinnerOverlay({ hidden, children, ...rest }) {
 
 GlobalSpinnerOverlay.propTypes = {
   hidden: PropTypes.bool.isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default GlobalSpinnerOverlay;

@@ -22,16 +22,12 @@ const Text = styled.div`color: ${props => props.theme.colors.fontColor};`;
 
 function GlobalOverlayLoader({ active, text }) {
   return (
-    <div>
-      {active && (
-        <GlobalSpinnerOverlay>
-          <ContentWrapper>
-            <Spinner />
-            <Text>{text}</Text>
-          </ContentWrapper>
-        </GlobalSpinnerOverlay>
-      )}
-    </div>
+    <GlobalSpinnerOverlay hidden={!active}>
+      <ContentWrapper>
+        <Spinner />
+        <Text>{text}</Text>
+      </ContentWrapper>
+    </GlobalSpinnerOverlay>
   );
 }
 
@@ -42,7 +38,6 @@ GlobalOverlayLoader.defaultProps = {
 GlobalOverlayLoader.propTypes = {
   active: PropTypes.bool.isRequired,
   text: PropTypes.string,
-  // children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 function mapStateToProps(state) {
