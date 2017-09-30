@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { CSSTransitionGroup } from 'react-transition-group'; // ES6
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getNotifications } from '../notificationSelectors';
 import Notification from '../Notification';
 import './NotificationCenter.css';
@@ -10,17 +10,17 @@ import Wrapper from './Wrapper';
 function NotificationCenter({ notifications }) {
   return (
     <Wrapper>
-      <CSSTransitionGroup
+      <ReactCSSTransitionGroup
         transitionName="notification-transition"
         transitionAppear
         transitionAppearTimeout={500}
-        transitionEnterTimeout={300}
-        transitionLeaveTimeout={300}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}
       >
         {notifications.map(({ id, type, title, message }, idx) =>
           <Notification id={id} type={type} key={idx} title={title} message={message} />,
         )}
-      </CSSTransitionGroup>
+      </ReactCSSTransitionGroup>
     </Wrapper>
   );
 }

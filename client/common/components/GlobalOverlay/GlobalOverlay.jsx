@@ -11,7 +11,6 @@ class GlobalOverlay extends React.Component {
   }
 
   render() {
-    // ReactCSSTransitionGroup must be mounted for it to take effect.
     return <Overlay key="overlay" {...this.props} />;
   }
 }

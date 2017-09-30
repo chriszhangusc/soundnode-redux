@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import GlobalOverlay from 'common/components/GlobalOverlay';
-import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 function GlobalSpinnerOverlay({ hidden, children, ...rest }) {
   return (
@@ -23,7 +23,6 @@ function GlobalSpinnerOverlay({ hidden, children, ...rest }) {
 
 GlobalSpinnerOverlay.propTypes = {
   hidden: PropTypes.bool.isRequired,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 export default GlobalSpinnerOverlay;
