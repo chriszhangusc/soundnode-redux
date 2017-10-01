@@ -1,26 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { TransitionGroup } from 'react-transition-group';
+import FadeTransition from 'common/components/transitions/FadeTransition';
 import { getNotifications } from '../notificationSelectors';
 import Notification from '../Notification';
-import './NotificationCenter.css';
 import Wrapper from './Wrapper';
 
 function NotificationCenter({ notifications }) {
+  const notificationsItems = notifications.map(({ id, type, title, message }, idx) => (
+    <FadeTransition key={idx}>
+      <Notification id={id} type={type} key={idx} title={title} message={message} />
+    </FadeTransition>
+  ));
+
   return (
     <Wrapper>
-      <ReactCSSTransitionGroup
-        transitionName="notification-transition"
-        transitionAppear
-        transitionAppearTimeout={500}
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}
-      >
-        {notifications.map(({ id, type, title, message }, idx) =>
-          <Notification id={id} type={type} key={idx} title={title} message={message} />,
-        )}
-      </ReactCSSTransitionGroup>
+      <TransitionGroup>{notificationsItems}</TransitionGroup>
     </Wrapper>
   );
 }

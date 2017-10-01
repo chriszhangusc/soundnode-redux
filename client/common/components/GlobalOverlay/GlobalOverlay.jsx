@@ -11,7 +11,7 @@ class GlobalOverlay extends React.Component {
   }
 
   render() {
-    return <Overlay key="overlay" {...this.props} />;
+    return <Overlay {...this.props} />;
   }
 }
 
