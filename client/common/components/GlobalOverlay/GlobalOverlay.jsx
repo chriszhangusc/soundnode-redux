@@ -1,4 +1,6 @@
 import React from 'react';
+// import { TransitionGroup } from 'react-transition-group';
+import FadeTransition from 'common/components/transitions/FadeTransition';
 import Overlay from './Overlay';
 
 class GlobalOverlay extends React.Component {
@@ -11,7 +13,11 @@ class GlobalOverlay extends React.Component {
   }
 
   render() {
-    return <Overlay key="overlay" {...this.props} />;
+    return (
+      <FadeTransition in={!this.props.hidden}>
+        <Overlay key="overlay" {...this.props} />
+      </FadeTransition>
+    );
   }
 }
 
