@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import GlobalOverlay from 'common/components/GlobalOverlay';
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import FadeTransition from 'common/components/transitions/FadeTransition';
 import { TransitionGroup } from 'react-transition-group';
 
 function SidebarOverlay(props) {
-  return <GlobalOverlay key="sidebar" {...props} />;
+  return (
+    <TransitionGroup>
+      {!props.hidden &&
+        <FadeTransition>
+          <GlobalOverlay {...props} />
+        </FadeTransition>}
+    </TransitionGroup>
+  );
 }
 
 SidebarOverlay.propTypes = {
