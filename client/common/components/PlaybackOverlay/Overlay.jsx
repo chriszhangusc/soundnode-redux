@@ -13,7 +13,7 @@ export default styled.span`
   opacity: ${props => (props.active ? 1 : 0)};
   background: rgba(0, 0, 0, 0.8);
   text-align: center;
-  transition: all 200ms ease-in-out;
+  transition: opacity 200ms ease-in-out;
 
   &:hover {
     opacity: 1;

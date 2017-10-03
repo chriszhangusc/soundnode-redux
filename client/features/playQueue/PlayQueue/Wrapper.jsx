@@ -32,5 +32,5 @@ export default Fixed.extend`
   width: 300px;
   transform: translateX(${props => (props.playQueueHidden ? '300px' : '0')});
   background-color: ${props => props.theme.colors.bgSub};
-  transition: all 0.5s ease-in-out;
+  transition: transform 500ms ease-out;
 `;
