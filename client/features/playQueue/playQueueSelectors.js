@@ -26,15 +26,13 @@ export const getVisiblePlayQueue = createSelector(
   (state, playQueueName) => playQueueName && state[playQueueName],
 );
 
-/* Memoize Selectors By Reselect */
 export const getActivePlayQueue = createSelector(getPlayQueueState, state => state.activePlayQueue);
 
 export const getPlayQueueByMode = createSelector(
   isInShuffleMode,
   getShuffledPlayQueue,
   getActivePlayQueue,
-  (inShuffleMode, shufflePlayQueue, activePlayQueue) =>
-    inShuffleMode ? shufflePlayQueue : activePlayQueue,
+  (inShuffleMode, shufflePlayQueue, activePlayQueue) => (inShuffleMode ? shufflePlayQueue : activePlayQueue),
 );
 
 export function getPlayQueueByName(state, name) {

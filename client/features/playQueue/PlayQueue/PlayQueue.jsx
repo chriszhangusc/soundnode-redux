@@ -13,7 +13,7 @@ function PlayQueue(props) {
   return (
     <Wrapper playQueueHidden={playQueueHidden}>
       <PlayQueueHeader {...props} />
-      <ul className="playlist-list">
+      <ul>
         {playQueueTrackIds.map(
           (trackId, idx) =>
             trackId && <PlayQueueRow trackId={trackId} index={idx + 1} key={trackId.toString()} />,

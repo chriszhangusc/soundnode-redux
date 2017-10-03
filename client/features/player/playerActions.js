@@ -226,6 +226,7 @@ export function togglePlaybackState(trackId) {
       dispatch(togglePlay());
     } else {
       dispatch(switchActivePlayQueueIfNeeded());
+      // sync visible playlist with active play queue
       dispatch(updateActiveTrackIdAndPlay(trackId));
     }
   };

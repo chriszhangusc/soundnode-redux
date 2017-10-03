@@ -129,14 +129,24 @@ export function mergeVisiblePlayQueue(playQueue) {
   };
 }
 
+// Sync active play queue(playlist) with visible play queue
+export function syncActivePlayQueue() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const visiblePlayQueueName = getVisiblePlayQueueName(state);
+    dispatch(updateActivePlayQueueName(visiblePlayQueueName));
+  };
+}
+
 // Called when playing song through song cards list
 export function switchActivePlayQueueIfNeeded() {
   return (dispatch, getState) => {
     const state = getState();
     const visiblePlayQueueName = getVisiblePlayQueueName(state);
     const activePlayQueueName = getActivePlayQueueName(state);
+    // Sync active play queue with currently visible play queue.
+    dispatch(syncActivePlayQueue());
     if (activePlayQueueName !== visiblePlayQueueName) {
-      dispatch(updateActivePlayQueueName(visiblePlayQueueName));
       dispatch(updateShuffledPlayQueueIfNeeded());
       // Update shuffled playQueue
       // Reshuffle the new active playQueue if in shuffle mode
