@@ -20,6 +20,13 @@ export function updateActiveTrackId(state, { activeTrackId }) {
   };
 }
 
+// export function updatePlayStatus(state, { playStatus }) {
+//   return {
+//     ...state,
+//     playing: playStatus,
+//   };
+// }
+
 export function playSong(state) {
   return {
     ...state,
@@ -118,6 +125,9 @@ export default function playerReducer(state = initialState, action) {
 
     case actionTypes.PLAYER_SONG_PAUSE:
       return pauseSong(state);
+
+    // case actionTypes.PLAYER_PLAY_STATUS_UPDATE:
+    //   return updatePlayStatus(state, action.payload);
 
     case actionTypes.PLAYER_TIME_UPDATE:
       return updateCurrentTime(state, action.payload);
