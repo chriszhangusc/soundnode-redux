@@ -5,4 +5,4 @@ export const AUTH_CALLBACK_ROUTE = '/callback';
 export const FAVORITES_ROUTE = '/favorites';
 export const STREAM_ROUTE = '/stream';
 export const SEARCH_ROUTE = '/search';
-export const PLAY_QUEUES_ROUTE = '/playlists';
+export const PLAYLISTS_ROUTE = '/playlists';

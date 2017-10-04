@@ -10,7 +10,8 @@ import TrackProfile from 'features/trackProfile/TrackProfile';
 import Favorites from 'features/favorites/Favorites';
 import Stream from 'features/stream/Stream';
 import Search from 'features/search/Search';
-import Playlists from 'features/userPlaylists/UserPlaylists';
+import Playlists from 'features/playlists/Playlists';
+// import Playlists from 'features/playlists/Playlists';
 
 const defaultRedirect = <Redirect to={`${routes.CHARTS_ROUTE}/${DEFAULT_GENRE}`} />;
 
@@ -32,8 +33,8 @@ function Routing() {
       <Route exact path={`${routes.TRACK_PROFILE_ROUTE}/:trackId`} component={TrackProfile} />
       <Route exact path={`${routes.FAVORITES_ROUTE}`} component={withAuthRequired(Favorites)} />
       <Route exact path={`${routes.STREAM_ROUTE}`} component={withAuthRequired(Stream)} />
+      <Route exact path={`${routes.PLAYLISTS_ROUTE}`} component={withAuthRequired(Playlists)} />
       <Route exact path={`${routes.SEARCH_ROUTE}/:query`} component={Search} />
-      <Route exact path={`${routes.PLAY_QUEUES_ROUTE}`} component={withAuthRequired(Playlists)} />
       {defaultRedirect}
     </Switch>
   );

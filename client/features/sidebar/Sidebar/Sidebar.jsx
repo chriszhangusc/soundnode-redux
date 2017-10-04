@@ -23,7 +23,7 @@ const sidebarItemList = [
     title: 'Favorites',
   },
   {
-    to: routes.PLAY_QUEUES_ROUTE,
+    to: routes.PLAYLISTS_ROUTE,
     iconName: 'list',
     title: 'Playlists',
   },

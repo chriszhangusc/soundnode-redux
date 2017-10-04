@@ -5,33 +5,55 @@ import RouterLink from 'common/components/links/RouterLink';
 import { connect } from 'react-redux';
 import { getPlayQueueById, getUserByPlaylistId } from 'features/entities/entitiesSelectors';
 import Card from 'common/components/Card';
+import { truncateMaxWidth } from 'app/css/styleUtils';
+
+const PlaylistTitle = RouterLink.extend`
+  display: -webkit-box;
+  font-size: 1.05rem;
+  font-weight: bold;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 40px;
+  &:hover {
+    color: ${props => props.theme.colors.fontColor};
+  }
+`;
+
+const PlaylistSubtitle = RouterLink.extend`
+  margin-left: 10px;
+  color: ${props => props.theme.colors.fontColorSub};
+  line-height: 32px; /* Vertical align!! It should be equal to the height of avatar */
+  max-height: 32px;
+  font-size: 0.9rem;
+  ${truncateMaxWidth('160px')};
+  &:hover {
+    color: ${props => props.theme.colors.fontColor};
+  }
+`;
 
 function PlaylistCardDetails({ trackCount, duration, title, userAvatar, username }) {
   return (
     <Card.Column>
       <Card.Row>
-        <Card.Title to="#" title={title}>
+        <PlaylistTitle to="#" title={title}>
           {title}
-        </Card.Title>
+        </PlaylistTitle>
       </Card.Row>
       <Card.Row>
-        <Card.Subtitle>
-          <Card.InnerSpan>
-            {trackCount} songs
-          </Card.InnerSpan>
-          <Card.InnerSpan>
-            {duration}
-          </Card.InnerSpan>
-        </Card.Subtitle>
+        <PlaylistSubtitle>
+          <Card.InnerSpan>{trackCount} songs</Card.InnerSpan>
+          <Card.InnerSpan>{duration}</Card.InnerSpan>
+        </PlaylistSubtitle>
       </Card.Row>
-      <Card.Row>
+      {/* <Card.Row>
         <RouterLink to="#" title={username}>
           <UserImage src={userAvatar} size="small" />
         </RouterLink>
-        <Card.SubLink to="#" title={username}>
+        <RouterLink to="#" title={username}>
           {username}
-        </Card.SubLink>
-      </Card.Row>
+        </RouterLink>
+      </Card.Row> */}
     </Card.Column>
   );
 }

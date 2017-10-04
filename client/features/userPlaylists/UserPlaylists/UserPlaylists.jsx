@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import PlaylistCard from './PlaylistCard';
-import * as userPlaylistsActions from './userPlaylistsActions';
-import { getUserPlaylistIds } from './userPlaylistsSelectors';
+import PlaylistCard from 'features/userPlaylists/PlaylistCard';
+import * as userPlaylistsActions from 'features/userPlaylists/userPlaylistsActions';
+import { getUserPlaylistIds } from 'features/userPlaylists/userPlaylistsSelectors';
 
 const CardList = styled.div`
   display: flex;
