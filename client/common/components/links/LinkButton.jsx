@@ -3,7 +3,7 @@ import Link from './Link';
 const LinkButton = Link.extend`
   display: inline-block;
   border: 1px solid;
-  border-radius: .25em;
+  border-radius: 0.25em;
   padding: 3px 6px;
   color: ${props => props.theme.colors.fontColorSub};
   font-size: 0.75rem;
@@ -15,6 +15,11 @@ const LinkButton = Link.extend`
 
   &:hover {
     color: ${props => props.theme.colors.fontColor};
+  }
+
+  &:active,
+  &:focus {
+    color: ${props => props.theme.colors.fontColorSub};
   }
 `;
 

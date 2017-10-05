@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getCurrentTime } from 'features/player/playerSelectors';
-import { formatDuration } from 'common/utils/formatUtils';
+import { formatDurationCompact } from 'common/utils/formatUtils';
 import { connect } from 'react-redux';
 import Wrapper from './Wrapper';
 import Time from './Time';
@@ -34,8 +34,8 @@ PlayerTimeSection.propTypes = {
 function mapStateToProps(state, { playerTrack }) {
   const currentTimeInSec = getCurrentTime(state);
   return {
-    currentTime: formatDuration(currentTimeInSec, 'seconds'),
-    totalTime: formatDuration(playerTrack.duration),
+    currentTime: formatDurationCompact(currentTimeInSec, 'seconds'),
+    totalTime: formatDurationCompact(playerTrack.duration),
   };
 }
 

@@ -1,13 +1,7 @@
 import React from 'react';
 import { fetchMyPlaylists } from 'features/playlists/playlistsApi';
-import styled from 'styled-components';
 import Playlist from 'features/playlists/Playlist';
-
-const Wrapper = styled.div`
-  max-width: 1856px;
-  margin-left: auto;
-  margin-right: auto;
-`;
+import Wrapper from './Wrapper';
 
 class Playlists extends React.Component {
   constructor(props) {
@@ -28,7 +22,13 @@ class Playlists extends React.Component {
 
   render() {
     return (
-      <Wrapper>{this.state.playlists.map(playlist => <Playlist playlist={playlist} />)}</Wrapper>
+      <Wrapper>
+        {this.state.playlists.map(
+          playlist =>
+            playlist &&
+            playlist.tracks.length > 0 && <Playlist playlist={playlist} key={playlist.id} />,
+        )}
+      </Wrapper>
     );
   }
 }

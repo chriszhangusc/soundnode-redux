@@ -4,6 +4,7 @@ import TrackImage from 'common/components/images/TrackImage';
 import { getLargeVersion } from 'common/utils/imageUtils';
 import LinkButton from 'common/components/links/LinkButton';
 import Icon from 'common/components/icons/Icon';
+import { formatDurationCompact } from 'common/utils/formatUtils';
 
 const Title = styled.div`
   font-size: 2rem;
@@ -49,6 +50,7 @@ const HeaderWrapper = styled.div`
   flex: 1;
 `;
 
+// Need to handle empty playlist
 function Header({ playlist }) {
   return (
     <HeaderWrapper>
@@ -58,23 +60,37 @@ function Header({ playlist }) {
           <Title>{playlist.title}</Title>
         </Row>
         <Row>
-          <Subtitle>My Playlist</Subtitle>
+          <Subtitle>
+            {playlist.trackCount} song{playlist.trackCount > 1 && 's'} in{' '}
+            {formatDurationCompact(playlist.duration)}
+          </Subtitle>
         </Row>
         <Row>
-          <Subtitle>18 songs • 48:16</Subtitle>
+          <Subtitle>Created on {playlist.createdAt.slice(0, 11)}</Subtitle>
+        </Row>
+        <Row>
+          <Subtitle>{playlist.description}</Subtitle>
         </Row>
         <Row>
           <ActionsWrapper>
-            <LinkButton to="/">
-              <Icon iconName="bookmark" title="Add to Playlist" />ADD TO PLAYLIST
+            <LinkButton onClick={() => {}} title="Like Playlist">
+              <Icon iconName="heart" />LIKE
             </LinkButton>
 
-            <LinkButton href="#" target="_blank" title="Visit Track on SoundCloud">
+            <LinkButton onClick={() => {}} title="Add to Current Play Queue">
+              <Icon iconName="plus" />ADD TO PLAY QUEUE
+            </LinkButton>
+
+            <LinkButton
+              href={playlist.permalinkUrl}
+              target="_blank"
+              title="Visit Playlist on SoundCloud"
+            >
               <Icon iconName="external-link" />PERMALINK
             </LinkButton>
 
-            <LinkButton onClick={() => {}} title="Copy Permalink">
-              <Icon iconName="clipboard" title="Copy track link to clipboard" />COPY TRACK LINK
+            <LinkButton onClick={() => {}} title="Delete Playlist">
+              <Icon iconName="remove" />DELETE
             </LinkButton>
           </ActionsWrapper>
         </Row>

@@ -1,23 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import TrackImage from 'common/components/images/TrackImage';
-import { formatDuration } from 'common/utils/formatUtils';
-
-const TrackItem = styled.div`
-  padding: 8px 0;
-  display: flex;
-  cursor: pointer;
-  align-items: middle;
-  border-top: 1px solid ${props => props.theme.colors.separatorDark};
-  &:hover {
-    background: ${props => props.theme.colors.separatorDark};
-  }
-`;
-
-const TrackTitle = styled.span`
-  font-size: 0.95rem;
-  max-width: 100%;
-`;
+import TrackListRow from './TrackListRow';
 
 const TrackListHeaderWrapper = styled.div`
   padding-bottom: 10px;
@@ -51,6 +35,7 @@ const ShowMoreLessButton = styled.div`
   font-size: 1rem;
   padding: 10px 0;
   cursor: pointer;
+  border-top: 1px solid ${props => props.theme.colors.separatorDark};
   &:hover {
     background: ${props => props.theme.colors.separatorDark};
   }
@@ -69,29 +54,6 @@ const TrackListWrapper = styled.div`
   padding: 16px 16px 0 16px;
 `;
 
-function formatPlaybackCount(value) {
-  const thousand = 1000;
-  const million = 1000000;
-  const billion = 1000000000;
-  const trillion = 1000000000000;
-  if (value < thousand) {
-    return String(value);
-  }
-
-  if (value >= thousand && value <= 1000000) {
-    return `${(value / thousand).toFixed(1)}k`;
-  }
-
-  if (value >= million && value <= billion) {
-    return `${(value / million).toFixed(1)}M`;
-  }
-
-  if (value >= billion && value <= trillion) {
-    return `${(value / billion).toFixed(1)}B`;
-  }
-  return `${(value / trillion).toFixed(1)}T`;
-}
-
 class TrackList extends React.Component {
   constructor(props) {
     super(props);
@@ -107,37 +69,22 @@ class TrackList extends React.Component {
   };
 
   render() {
-    const { playlist } = this.props;
+    const { tracks } = this.props;
     return (
       <TrackListWrapper>
         <TrackListHeaderWrapper>
           <IdHeader>#</IdHeader>
           <TableHeader width="40%">Title</TableHeader>
           <TableHeader width="30%">Artist</TableHeader>
-          <TableHeader width="15%">Duration</TableHeader>
+          <TableHeader width="15%">Time</TableHeader>
           <TableHeader width="10%">Played</TableHeader>
         </TrackListHeaderWrapper>
-        <TrackListContentWrapper folded={this.state.folded} itemCount={playlist.tracks.length}>
-          {playlist.tracks.map((track, idx) => (
-            <TrackItem key={track.id}>
-              <Id>{idx + 1}</Id>
-              <TableCell width="40%">
-                <TrackImage src={track.artworkUrl} size="small" mr="10px" />
-                <TrackTitle>{track.title}</TrackTitle>
-              </TableCell>
-              <TableCell width="30%">
-                <TrackTitle>{track.user.username}</TrackTitle>
-              </TableCell>
-              <TableCell width="15%">
-                <TrackTitle>{formatDuration(track.duration)}</TrackTitle>
-              </TableCell>
-              <TableCell width="10%">
-                <TrackTitle>{formatPlaybackCount(track.playbackCount)}</TrackTitle>
-              </TableCell>
-            </TrackItem>
-          ))}
+
+        <TrackListContentWrapper folded={this.state.folded} itemCount={tracks.length}>
+          {tracks.map((track, idx) => <TrackListRow key={idx} track={track} id={idx + 1} />)}
         </TrackListContentWrapper>
-        {playlist.tracks.length >= 4 && (
+
+        {tracks.length >= 4 && (
           <ShowMoreLessButton onClick={this.handleShowMoreLessClick}>
             {this.state.folded ? 'Show More' : 'Show Less'}
           </ShowMoreLessButton>
@@ -146,5 +93,9 @@ class TrackList extends React.Component {
     );
   }
 }
+
+TrackList.propTypes = {
+  tracks: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default TrackList;

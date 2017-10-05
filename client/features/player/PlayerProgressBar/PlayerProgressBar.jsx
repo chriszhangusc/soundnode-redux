@@ -85,7 +85,7 @@ function mapStateToProps(state, { playerTrack }) {
   return {
     seeking: isPlayerSeeking(state),
     currentTime: getCurrentTime(state),
-    duration: playerTrack.duration / 1000.0, // Extract a formatDuration util. convertMsToSec.
+    duration: playerTrack.duration / 1000.0, // Extract a formatDurationCompact util. convertMsToSec.
   };
 }
 
