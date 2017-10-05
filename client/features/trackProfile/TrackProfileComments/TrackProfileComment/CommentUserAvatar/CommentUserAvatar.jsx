@@ -8,7 +8,7 @@ export default function CommentUserAvatar({ linkTo, userAvatarUrl }) {
   return (
     <Wrapper>
       <RouterLink to={linkTo}>
-        <UserImage src={userAvatarUrl} size="small" />
+        <UserImage src={userAvatarUrl} size="tiny" />
       </RouterLink>
     </Wrapper>
   );

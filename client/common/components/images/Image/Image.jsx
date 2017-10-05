@@ -29,8 +29,10 @@ const StyledImage = styled.img`
 // Size tiny small medium large
 function getWidthAndHeight(size) {
   switch (size) {
-    case 'small':
+    case 'tiny':
       return '32px';
+    case 'small':
+      return '100px';
     case 'medium':
       return '206px';
     case 'large':
@@ -94,7 +96,7 @@ Image.defaultProps = {
 
 Image.propTypes = {
   src: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['small', 'medium', 'large', 'fluid']),
+  size: PropTypes.oneOf(['tiny', 'small', 'medium', 'large', 'fluid']),
   // width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   // height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   loaded: PropTypes.bool,

@@ -7,6 +7,6 @@ export default Fixed.extend`
   height: 100%;
   background-color: ${props => props.theme.colors.bgSub};
   z-index: ${props => props.theme.zIndexes[5]};
-  transform: translateX(${props => (props.sidebarHidden ? '-300px' : '0')});
+  transform: translateX(${props => (props.sidebarHidden ? '-310px' : '0')});
   transition: transform 500ms ease-in;
 `;

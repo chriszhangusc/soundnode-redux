@@ -26,7 +26,7 @@ function PlayQueueRow({
 
   return (
     <Wrapper active={active} onClick={handlePlayQueueClick}>
-      <TrackImage src={artworkUrl} size="small" />
+      <TrackImage src={artworkUrl} size="tiny" />
       <ColumnTitleWrapper>
         <PlayQueueItemTitle>
           {title}

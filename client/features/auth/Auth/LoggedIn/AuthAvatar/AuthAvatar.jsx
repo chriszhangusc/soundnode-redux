@@ -7,7 +7,7 @@ import Wrapper from './Wrapper';
 function AuthAvatar({ me }) {
   return (
     <Wrapper>
-      <UserImage src={me.avatarUrl} linkTo={`${USER_PROFILE_ROUTE}/${me.id}`} size="small" />
+      <UserImage src={me.avatarUrl} linkTo={`${USER_PROFILE_ROUTE}/${me.id}`} size="tiny" />
     </Wrapper>
   );
 }

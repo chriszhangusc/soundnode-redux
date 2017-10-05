@@ -40,7 +40,7 @@ function TrackListRow({ track, id }) {
     <TrackItem key={track.id}>
       <Id>{id}</Id>
       <TableCell width="40%">
-        <TrackImage src={track.artworkUrl} size="small" mr="10px" />
+        <TrackImage src={track.artworkUrl} size="tiny" mr="10px" />
         <TrackTitle>{track.title}</TrackTitle>
       </TableCell>
       <TableCell width="30%">

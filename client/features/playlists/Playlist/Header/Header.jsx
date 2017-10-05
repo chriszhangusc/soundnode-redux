@@ -5,6 +5,7 @@ import { getLargeVersion } from 'common/utils/imageUtils';
 import LinkButton from 'common/components/links/LinkButton';
 import Icon from 'common/components/icons/Icon';
 import { formatDurationCompact } from 'common/utils/formatUtils';
+import PlaylistImage from 'common/components/images/PlaylistImage';
 
 const Title = styled.div`
   font-size: 2rem;
@@ -50,11 +51,18 @@ const HeaderWrapper = styled.div`
   flex: 1;
 `;
 
+function buildImageGrid(tracks) {
+  return tracks.map(track => getLargeVersion(track.artworkUrl)).slice(0, 4);
+}
+
 // Need to handle empty playlist
 function Header({ playlist }) {
+  const images = buildImageGrid(playlist.tracks);
+  console.log(images);
   return (
     <HeaderWrapper>
-      <TrackImage src={getLargeVersion(playlist.tracks[0].artworkUrl)} size="medium" />
+      {/* <TrackImage src={getLargeVersion(playlist.tracks[0].artworkUrl)} size="medium" /> */}
+      <PlaylistImage images={images} />
       <Column>
         <Row>
           <Title>{playlist.title}</Title>

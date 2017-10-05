@@ -48,7 +48,7 @@ function PlaylistCardDetails({ trackCount, duration, title, userAvatar, username
       </Card.Row>
       {/* <Card.Row>
         <RouterLink to="#" title={username}>
-          <UserImage src={userAvatar} size="small" />
+          <UserImage src={userAvatar} size="tiny" />
         </RouterLink>
         <RouterLink to="#" title={username}>
           {username}

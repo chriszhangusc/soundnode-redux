@@ -20,7 +20,7 @@ function SongCardDetails({ trackId, userId, userAvatar, title, username }) {
         </SongCardTitle>
       </Card.Row>
       <Card.Row>
-        <UserImage linkTo={userUrl} src={userAvatar} size="small" />
+        <UserImage linkTo={userUrl} src={userAvatar} size="tiny" />
         <SongCardSubTitle to={userUrl} title={username}>
           {username}
         </SongCardSubTitle>

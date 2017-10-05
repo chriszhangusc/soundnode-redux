@@ -13,7 +13,7 @@ TrackImage.defaultProps = {
 };
 
 TrackImage.propTypes = {
-  size: PropTypes.oneOf(['small', 'medium', 'large', 'fluid']),
+  size: PropTypes.oneOf(['tiny', 'small', 'medium', 'large', 'fluid']),
 };
 
 export default TrackImage;

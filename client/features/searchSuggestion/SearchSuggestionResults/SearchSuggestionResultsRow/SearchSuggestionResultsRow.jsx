@@ -11,8 +11,8 @@ import SuggestionSubtitle from './SuggestionSubtitle';
 
 function renderAvatarByType(type, avatarUrl) {
   return type === 'user'
-    ? <UserImage src={avatarUrl} size="small" />
-    : <TrackImage src={avatarUrl} size="small" />;
+    ? <UserImage src={avatarUrl} size="tiny" />
+    : <TrackImage src={avatarUrl} size="tiny" />;
 }
 
 // Clicking the link will also trigger onBlur of the search input which will cause the result to
