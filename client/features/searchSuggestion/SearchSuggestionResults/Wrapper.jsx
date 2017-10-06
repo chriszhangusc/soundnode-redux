@@ -7,7 +7,7 @@ export default styled.div`
   background-color: ${props => props.theme.colors.bgSub};
   z-index: ${props => props.theme.zIndexes[3]};
   display: block;
-  transition: all 0.5s linear;
+  transition: opacity 0.5s linear;
   box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.2);
   /* 
   box-shadow: ${props => !props.searchResultsHidden && '0 0 10px 8px rgba(0, 0, 0, 0.2)'};

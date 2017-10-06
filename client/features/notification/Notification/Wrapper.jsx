@@ -30,5 +30,5 @@ export default styled.div`
   line-height: 1.2em;
   margin-bottom: 15px;
   width: 300px;
-  transition: all .5s ease-in-out;
+  transition: opacity 500ms ease-in-out;
 `;

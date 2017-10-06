@@ -28,8 +28,9 @@ export default Fixed.extend`
   padding: 20px 0 0 0;
   overflow-x: hidden;
   overflow-y: scroll;
+  padding-bottom: 90px; /* Height of the player */
   width: 300px;
   transform: translateX(${props => (props.playQueueHidden ? '300px' : '0')});
   background-color: ${props => props.theme.colors.bgSub};
-  transition: all 0.5s ease-in-out;
+  transition: transform 500ms ease-out;
 `;

@@ -10,7 +10,6 @@ export default styled.input`
   border-radius: 5px;
   padding: 6px 10px 6px 30px;
   font-weight: 300;
-  transition: all 0.2s ease-in-out;
   background-color: #333333;
   height: 30px;
   width: 100%;

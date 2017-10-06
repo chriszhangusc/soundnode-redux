@@ -8,6 +8,7 @@ import * as types from './playQueueActionTypes';
 import {
   getActivePlayQueue,
   getVisiblePlayQueueName,
+  getVisiblePlayQueue,
   getActivePlayQueueName,
   isPlayQueueHidden,
 } from './playQueueSelectors';
@@ -24,21 +25,17 @@ export function showPlayQueue() {
   };
 }
 
-export const clearShufflePlayQueue = () => ({
-  type: types.PLAY_QUEUE_SHUFFLE_PLAY_QUEUE_CLEAR,
-});
-
-export const updateShuffledPlayQueue = shuffledPlayQueue => ({
-  type: types.PLAY_QUEUE_SHUFFLE_PLAY_QUEUE_UPDATE,
-  payload: {
-    shuffledPlayQueue,
-  },
-});
-
 export const updateVisiblePlayQueueName = visiblePlayQueueName => ({
   type: types.PLAY_QUEUE_VISIBLE_PLAY_QUEUE_NAME_CHANGE,
   payload: {
     visiblePlayQueueName,
+  },
+});
+
+export const updateActivePlayQueue = trackIds => ({
+  type: types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_UPDATE,
+  payload: {
+    trackIds,
   },
 });
 
@@ -93,7 +90,7 @@ export function removeTrackFromPlayQueueAndPlayer(trackId) {
 
 /* Thunks logic */
 
-// Shuffle the current active playQueue and update shuffled playQueue with it
+// Shuffle the current active play queue.
 export function shufflePlayQueue() {
   return (dispatch, getState) => {
     const state = getState();
@@ -102,19 +99,7 @@ export function shufflePlayQueue() {
     // Every time we reshuffle the playQueue, we need to move the current playing track to the
     // first position.
     const shuffled = shiftToFront(shuffle(activePlayQueue), playerTrackId);
-    dispatch(updateShuffledPlayQueue(shuffled));
-  };
-}
-
-export function updateShuffledPlayQueueIfNeeded() {
-  return (dispatch, getState) => {
-    const state = getState();
-    const inShuffleMode = isInShuffleMode(state);
-    const visiblePlayQueueName = getVisiblePlayQueueName(state);
-    const activePlayQueueName = getActivePlayQueueName(state);
-    if (inShuffleMode && visiblePlayQueueName === activePlayQueueName) {
-      dispatch(shufflePlayQueue());
-    }
+    dispatch(updateActivePlayQueue(shuffled));
   };
 }
 
@@ -125,21 +110,29 @@ export function mergeVisiblePlayQueue(playQueue) {
     const state = getState();
     const visiblePlayQueueName = getVisiblePlayQueueName(state);
     dispatch(mergePlayQueue(visiblePlayQueueName, trackIds));
-    dispatch(updateShuffledPlayQueueIfNeeded());
   };
 }
 
-// Called when playing song through song cards list
-export function switchActivePlayQueueIfNeeded() {
+// Sync active play queue(playlist) with visible play queue
+export function syncActivePlayQueue() {
   return (dispatch, getState) => {
     const state = getState();
     const visiblePlayQueueName = getVisiblePlayQueueName(state);
     const activePlayQueueName = getActivePlayQueueName(state);
-    if (activePlayQueueName !== visiblePlayQueueName) {
-      dispatch(updateActivePlayQueueName(visiblePlayQueueName));
-      dispatch(updateShuffledPlayQueueIfNeeded());
-      // Update shuffled playQueue
-      // Reshuffle the new active playQueue if in shuffle mode
+    const visiblePlayQueue = getVisiblePlayQueue(state);
+    const activePlayQueue = getActivePlayQueue(state);
+    const shuffleMode = isInShuffleMode(state);
+    // 1. When we fetched more tracks, the active and visible play queue would be out of sync,
+    //    thus reshuffle is needed.
+    // 2. When we switched to a new visible playlist, we need to shuffle the new active play queue.
+    const shuffleNeeded =
+      (activePlayQueue.length !== visiblePlayQueue.length ||
+        activePlayQueueName !== visiblePlayQueueName) &&
+      shuffleMode;
+    dispatch(updateActivePlayQueueName(visiblePlayQueueName));
+    dispatch(updateActivePlayQueue(visiblePlayQueue));
+    if (shuffleNeeded) {
+      dispatch(shufflePlayQueue());
     }
   };
 }

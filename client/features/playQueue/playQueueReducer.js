@@ -5,19 +5,9 @@ import * as types from './playQueueActionTypes';
 const initialState = {
   activePlayQueueName: undefined,
   visiblePlayQueueName: undefined,
-  visiblePlayQueue: [],
   activePlayQueue: [],
   hidden: true,
-  shuffledPlayQueue: [],
 };
-
-// not used??
-export function appendVisiblePlayQueue(state, { newPlayQueue }) {
-  return {
-    ...state,
-    visiblePlayQueue: [...state.visiblePlayQueue, ...newPlayQueue],
-  };
-}
 
 // #TODO: also need to handle play queue shuffle
 export function clearPlayQueue(state) {
@@ -31,21 +21,6 @@ export function updateVisiblePlayQueue(state, { visiblePlayQueue }) {
   return {
     ...state,
     [state.visiblePlayQueueName]: [...visiblePlayQueue],
-    visiblePlayQueue: [...visiblePlayQueue],
-  };
-}
-
-export function updateShuffledPlayQueue(state, { shuffledPlayQueue }) {
-  return {
-    ...state,
-    shuffledPlayQueue: [...shuffledPlayQueue],
-  };
-}
-
-export function clearShufflePlayQueue(state) {
-  return {
-    ...state,
-    shufflePlayQueue: [],
   };
 }
 
@@ -57,18 +32,16 @@ export function updateVisiblePlayQueueName(state, { visiblePlayQueueName }) {
 }
 
 export function updateActivePlayQueueName(state, { activePlayQueueName }) {
-  const newPlayQueue = state[activePlayQueueName];
   return {
     ...state,
     activePlayQueueName,
-    activePlayQueue: [...newPlayQueue],
   };
 }
 
-export function updatePlayQueue(state, { playQueueName, trackIds }) {
+export function updateActivePlayQueue(state, { trackIds }) {
   return {
     ...state,
-    [playQueueName]: [...trackIds],
+    activePlayQueue: [...trackIds],
   };
 }
 
@@ -88,6 +61,13 @@ export function mergePlayQueue(state, { playQueueName, trackIds }) {
     ...state,
     // There is order in merged array!!
     [playQueueName]: mergeArrays(curPlayQueue, trackIds),
+  };
+}
+
+export function updatePlayQueue(state, { playQueueName, trackIds }) {
+  return {
+    ...state,
+    [playQueueName]: [...trackIds],
   };
 }
 
@@ -136,13 +116,6 @@ export default function playQueueReducer(state = initialState, action) {
     case types.PLAY_QUEUE_TRACK_REMOVE:
       return removeTrackFromPlayQueue(state, action.payload);
 
-    case types.PLAY_QUEUE_SHUFFLE_PLAY_QUEUE_UPDATE:
-      return updateShuffledPlayQueue(state, action.payload);
-
-    case types.PLAY_QUEUE_SHUFFLE_PLAY_QUEUE_CLEAR:
-      return clearShufflePlayQueue(state);
-
-    // Need to handle shuffle mode!!
     case types.APPEND_TRACK_TO_PLAY_QUEUE:
       return appendToPlayQueue(state, action.payload);
 
@@ -154,6 +127,9 @@ export default function playQueueReducer(state = initialState, action) {
 
     case types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_NAME_CHANGE:
       return updateActivePlayQueueName(state, action.payload);
+
+    case types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_UPDATE:
+      return updateActivePlayQueue(state, action.payload);
 
     default:
       return state;

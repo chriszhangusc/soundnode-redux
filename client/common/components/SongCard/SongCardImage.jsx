@@ -15,6 +15,7 @@ function SongCardImage({ trackId, active, playing, artworkUrl, handleImageClick 
         active={active}
         onClick={() => {
           handleImageClick(trackId);
+          // Sync with currently active play queue
         }}
         playing={playing}
       />

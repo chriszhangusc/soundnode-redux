@@ -1,10 +1,10 @@
 import {
-  clearShufflePlaylist,
   shufflePlayQueue,
-  switchActivePlayQueueIfNeeded,
+  syncActivePlayQueue,
 } from 'features/playQueue/playQueueActions';
-import { getPlayQueueByMode } from 'features/playQueue/playQueueSelectors';
+import { getActivePlayQueue } from 'features/playQueue/playQueueSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
+import * as playModes from './playerConsts';
 import * as types from './playerActionTypes';
 import * as selectors from './playerSelectors';
 
@@ -153,37 +153,46 @@ export function updateActiveTrackIdAndPlay(newTrackId) {
   };
 }
 
+export function resetPrevSong() {
+  return (dispatch) => {
+    dispatch(pauseSong());
+    dispatch(resetTime());
+  };
+}
+
 // When we click on next or prev.
+// Too long
 export function playSongByAction(actionType) {
   return (dispatch, getState) => {
     const state = getState();
     const mode = selectors.getPlayerMode(state);
     let nextTrackId = null;
     const curTrackId = selectors.getActiveTrackId(state);
-    const activePlaylist = getPlayQueueByMode(state);
-    if (mode === types.REPEAT) {
+    const activePlaylist = getActivePlayQueue(state);
+    if (mode === playModes.REPEAT) {
       nextTrackId = curTrackId;
     } else {
       const idx = activePlaylist.indexOf(curTrackId);
-      let nextIdx = actionType === types.NEXT ? idx + 1 : idx - 1;
+      let nextIdx = actionType === playModes.NEXT ? idx + 1 : idx - 1;
       nextIdx = nextIdx >= activePlaylist.length ? (nextIdx = activePlaylist.length - 1) : nextIdx;
       nextIdx = nextIdx < 0 ? 0 : nextIdx;
       nextTrackId = activePlaylist[nextIdx];
     }
-
-    dispatch(updateActiveTrackIdAndPlay(nextTrackId));
+    dispatch(updateActiveTrackId(nextTrackId));
+    dispatch(resetPrevSong());
+    dispatch(playSong());
   };
 }
 
 export function playNextSong() {
   return (dispatch) => {
-    dispatch(playSongByAction(types.NEXT));
+    dispatch(playSongByAction(playModes.NEXT));
   };
 }
 
 export function playPrevSong() {
   return (dispatch) => {
-    dispatch(playSongByAction(types.PREV));
+    dispatch(playSongByAction(playModes.PREV));
   };
 }
 
@@ -206,12 +215,14 @@ export function togglePlayMode(newMode) {
     const currMode = selectors.getPlayerMode(state);
     if (currMode === newMode) {
       /* Toggle off current mode, set to default mode */
-      dispatch(changePlayMode(types.DEFAULT_MODE));
-      if (newMode === types.SHUFFLE) dispatch(clearShufflePlaylist());
+      dispatch(changePlayMode(playModes.DEFAULT_MODE));
+      if (newMode === playModes.SHUFFLE) {
+        dispatch(syncActivePlayQueue());
+      }
     } else {
       /* Toggle on new mode */
       dispatch(changePlayMode(newMode));
-      if (newMode === types.SHUFFLE) {
+      if (newMode === playModes.SHUFFLE) {
         dispatch(shufflePlayQueue());
       }
     }
@@ -222,18 +233,14 @@ export function togglePlaybackState(trackId) {
   return (dispatch, getState) => {
     const state = getState();
     const activeTrackId = selectors.getActiveTrackId(state);
+    // const shuffleMode = selectors.isInShuffleMode(state);
     if (trackId === activeTrackId) {
       dispatch(togglePlay());
     } else {
-      dispatch(switchActivePlayQueueIfNeeded());
-      dispatch(updateActiveTrackIdAndPlay(trackId));
+      dispatch(updateActiveTrackId(trackId));
+      dispatch(syncActivePlayQueue());
+      dispatch(resetPrevSong());
+      dispatch(playSong());
     }
   };
 }
-
-// export function togglePlaybackStateAndSwitchPlaylist() {
-//   return (dispatch) => {
-//     dispatch(togglePlaybackState());
-//     dispatch(switchPlaylistIfNeeded());
-//   };
-// }

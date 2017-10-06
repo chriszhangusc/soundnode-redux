@@ -11,7 +11,7 @@ import Routing from 'app/routing/Routing';
 
 const PageContentWrapper = styled.div`
   flex: 6;
-  padding: 50px 20px 100px 100px;
+  padding: 50px 20px 120px 100px;
   margin: 0 auto;
   min-height: 100vh;
 `;

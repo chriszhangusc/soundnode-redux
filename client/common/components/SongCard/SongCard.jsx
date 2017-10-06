@@ -8,7 +8,6 @@ import SongCardDetails from './SongCardDetails';
 import SongCardActions from './SongCardActions';
 import SongCardImage from './SongCardImage';
 
-// playlistName: The name of playlist this track belongs
 function SongCard({ track, active }) {
   if (track && track.streamable) {
     return (
