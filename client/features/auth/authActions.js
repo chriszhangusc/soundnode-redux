@@ -4,8 +4,8 @@ import {
   notificationWarning,
 } from 'features/notification/notificationActions';
 import {
-  activateOverlayLoader,
-  deactivateOverlayLoader,
+  showLoadingOverlay,
+  hideLoadingOverlay,
 } from 'features/globalOverlayLoader/globalOverlayLoaderActions';
 
 import { getOAuthToken, setOAuthToken, removeOAuthToken, isUnauthError } from './authUtils';
@@ -145,7 +145,7 @@ export function loadMe() {
       })
       .then(() => {
         dispatch(loginSucceed());
-        dispatch(deactivateOverlayLoader());
+        dispatch(hideLoadingOverlay());
         dispatch(notificationSuccess('Login Success'));
       })
       .catch((err) => {
@@ -158,7 +158,7 @@ export function loadMe() {
 export function doLogin() {
   return (dispatch) => {
     dispatch(startLogin());
-    dispatch(activateOverlayLoader('Authenticating...'));
+    dispatch(showLoadingOverlay('Authenticating...'));
     dispatch(doAuth()).then(() => dispatch(loadMe()));
   };
 }
@@ -171,7 +171,7 @@ export function loginIfNeeded() {
     // Check if we need to log the user in.
     if (token && !me) {
       dispatch(startLogin());
-      dispatch(activateOverlayLoader('Authenticating...'));
+      dispatch(showLoadingOverlay('Authenticating...'));
 
       dispatch(loadMe());
     }

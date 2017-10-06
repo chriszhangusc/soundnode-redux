@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import TrackImage from 'common/components/images/TrackImage';
 import { formatDurationCompact, formatNumberCompact } from 'common/utils/formatUtils';
 import { getUserByTrackId } from 'features/entities/entitiesSelectors';
+import RouterLink from 'common/components/links/RouterLink';
+import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 
 const TrackItem = styled.div`
   padding: 8px 0;
@@ -17,9 +19,17 @@ const TrackItem = styled.div`
   }
 `;
 
-const TrackTitle = styled.span`
+const TableItem = styled.span`
   font-size: 0.95rem;
   max-width: 100%;
+`;
+
+const TableItemLink = RouterLink.extend`
+  font-size: 0.95rem;
+  max-width: 100%;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const TableCell = styled.div`
@@ -38,22 +48,23 @@ const Id = styled.div`
 `;
 
 function TrackListRow({ track, trackArtist, id }) {
-  console.log(track);
   return (
     <TrackItem key={track.id}>
       <Id>{id}</Id>
       <TableCell width="40%">
         <TrackImage src={track.artworkUrl} size="tiny" mr="10px" />
-        <TrackTitle>{track.title}</TrackTitle>
+        <TableItemLink to={`${TRACK_PROFILE_ROUTE}/${track.id}`}>{track.title}</TableItemLink>
       </TableCell>
       <TableCell width="30%">
-        <TrackTitle>{trackArtist.username}</TrackTitle>
+        <TableItemLink to={`${USER_PROFILE_ROUTE}/${trackArtist.id}`}>
+          {trackArtist.username}
+        </TableItemLink>
       </TableCell>
       <TableCell width="15%">
-        <TrackTitle>{formatDurationCompact(track.duration)}</TrackTitle>
+        <TableItem>{formatDurationCompact(track.duration)}</TableItem>
       </TableCell>
       <TableCell width="10%">
-        <TrackTitle>{formatNumberCompact(track.playbackCount)}</TrackTitle>
+        <TableItem>{formatNumberCompact(track.playbackCount)}</TableItem>
       </TableCell>
     </TrackItem>
   );

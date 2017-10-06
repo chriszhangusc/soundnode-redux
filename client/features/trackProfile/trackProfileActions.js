@@ -1,5 +1,12 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeVisiblePlayQueue, updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
+import {
+  mergeVisiblePlayQueue,
+  updateVisiblePlayQueueName,
+} from 'features/playQueue/playQueueActions';
+import {
+  showLoadingOverlay,
+  hideLoadingOverlay,
+} from 'features/globalOverlayLoader/globalOverlayLoaderActions';
 import { fetchProfiledTrack, fetchTrackComments, fetchMoreComments } from './trackProfileApi';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import * as types from './trackProfileActionTypes';
@@ -83,17 +90,20 @@ export function receiveTrack(normalizedTrack) {
   };
 }
 
+// Initial loading method
 export function loadTrackProfileData(trackId) {
   return (dispatch) => {
     dispatch(updateVisiblePlayQueueName(`track-${trackId}`));
     dispatch(startFetchingProfiledTrack());
     dispatch(startFetchingComments());
+    dispatch(showLoadingOverlay());
     Promise.all([fetchProfiledTrack(trackId), fetchTrackComments(trackId)])
       .then((res) => {
         const normalizedTrack = res[0];
         const normalizedComments = res[1];
         dispatch(receiveTrack(normalizedTrack));
         dispatch(receiveComments(normalizedComments));
+        dispatch(hideLoadingOverlay());
       })
       .catch((err) => {
         dispatch(failedToFetchTrack());

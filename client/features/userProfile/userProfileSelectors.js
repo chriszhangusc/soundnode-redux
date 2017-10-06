@@ -6,6 +6,16 @@ const getState = state => state.userProfile;
 
 export const getProfiledUserId = createSelector(getState, state => state.userId);
 
+export const isUserFetching = createSelector(getState, state => state.userFetching);
+
+export const isUserTracksFetching = createSelector(getState, state => state.tracksFetching);
+
+export const isPageLoading = createSelector(
+  isUserFetching,
+  isUserTracksFetching,
+  (userFetching, tracksFetching) => userFetching && tracksFetching,
+);
+
 export const getProfiledUser = createSelector(
   getAllUsers,
   getProfiledUserId,
@@ -33,10 +43,6 @@ export const getUserFollowersCount = createSelector(
 
 export const getProfiledUserTrackIds = createSelector(getState, state => state.trackIds);
 
-export const isUserFetching = createSelector(getState, state => state.userFetching);
-
-export const isUserTracksFetching = createSelector(getState, state => state.tracksFetching);
-
-export const isPageLoading = createSelector(getState, state => state.pageLoading);
+// export const isPageLoading = createSelector(getState, state => state.pageLoading);
 
 export const getUserTracksNextHref = createSelector(getState, state => state.tracksNextHref);

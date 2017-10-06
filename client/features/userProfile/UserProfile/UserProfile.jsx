@@ -6,7 +6,6 @@ import { isPageLoading } from 'features/userProfile/userProfileSelectors';
 import UserProfileTracks from 'features/userProfile/UserProfileTracks';
 import UserProfileHeader from 'features/userProfile/UserProfileHeader';
 import PageTitle from 'common/components/PageTitle';
-import Spinner from 'common/components/Spinner';
 import { Box } from 'grid-styled';
 
 class UserProfile extends React.Component {
@@ -47,7 +46,7 @@ class UserProfile extends React.Component {
   render() {
     const { pageLoading } = this.props;
     if (pageLoading) {
-      return <Spinner />;
+      return null;
     }
     return (
       <Box>

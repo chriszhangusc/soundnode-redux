@@ -1,6 +1,6 @@
 import {
-  activateOverlayLoader,
-  deactivateOverlayLoader,
+  showLoadingOverlay,
+  hideLoadingOverlay,
 } from 'features/globalOverlayLoader/globalOverlayLoaderActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { PLAYLISTS_MERGE } from 'features/playlists/playlistsActionTypes';
@@ -17,7 +17,7 @@ export function mergePlaylists(playlistIds) {
 
 export function loadPlaylists() {
   return (dispatch) => {
-    dispatch(activateOverlayLoader());
+    dispatch(showLoadingOverlay());
     fetchMyPlaylists().then((normalized) => {
       // console.log(normalized);
       const { entities, result } = normalized;
@@ -26,7 +26,7 @@ export function loadPlaylists() {
       // Update playlists store
       dispatch(mergePlaylists(result));
       // Stop global spinner
-      dispatch(deactivateOverlayLoader());
+      dispatch(hideLoadingOverlay());
     });
   };
 }

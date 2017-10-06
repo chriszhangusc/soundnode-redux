@@ -1,11 +1,11 @@
-import { OVERLAY_LOADER_ACTIVATE, OVERLAY_LOADER_DEACTIVATE } from './globalOverlayLoaderActionTypes';
+import { LOADING_OVERLAY_SHOW, LOADING_OVERLAY_HIDE } from './globalOverlayLoaderActionTypes';
 
 const initialState = {
   active: false,
   text: '',
 };
 
-function activateOverlayLoader(state, { text }) {
+function showLoadingOverlay(state, { text }) {
   return {
     ...state,
     active: true,
@@ -13,7 +13,7 @@ function activateOverlayLoader(state, { text }) {
   };
 }
 
-function deactivateOverlayLoader(state) {
+function hideLoadingOverlay(state) {
   return {
     ...state,
     active: false,
@@ -23,10 +23,10 @@ function deactivateOverlayLoader(state) {
 
 export default function globalOverlayLoaderReducer(state = initialState, action) {
   switch (action.type) {
-    case OVERLAY_LOADER_ACTIVATE:
-      return activateOverlayLoader(state, action.payload);
-    case OVERLAY_LOADER_DEACTIVATE:
-      return deactivateOverlayLoader(state);
+    case LOADING_OVERLAY_SHOW:
+      return showLoadingOverlay(state, action.payload);
+    case LOADING_OVERLAY_HIDE:
+      return hideLoadingOverlay(state);
     default:
       return state;
   }

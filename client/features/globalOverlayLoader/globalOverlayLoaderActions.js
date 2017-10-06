@@ -1,16 +1,16 @@
-import { OVERLAY_LOADER_DEACTIVATE, OVERLAY_LOADER_ACTIVATE } from './globalOverlayLoaderActionTypes';
+import { LOADING_OVERLAY_HIDE, LOADING_OVERLAY_SHOW } from './globalOverlayLoaderActionTypes';
 
-export function activateOverlayLoader(text) {
+export function showLoadingOverlay(text) {
   return {
-    type: OVERLAY_LOADER_ACTIVATE,
+    type: LOADING_OVERLAY_SHOW,
     payload: {
       text,
     },
   };
 }
 
-export function deactivateOverlayLoader() {
+export function hideLoadingOverlay() {
   return {
-    type: OVERLAY_LOADER_DEACTIVATE,
+    type: LOADING_OVERLAY_HIDE,
   };
 }

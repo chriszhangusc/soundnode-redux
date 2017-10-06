@@ -48,7 +48,7 @@ class TrackProfile extends React.Component {
     const { pageLoading } = this.props;
     if (pageLoading) {
       // If comments or profiled track is fetching, show spinner
-      return <Spinner />;
+      return null;
     }
     return (
       <Box>

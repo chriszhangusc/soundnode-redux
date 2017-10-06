@@ -20,7 +20,7 @@ const ContentWrapper = styled.div`
 
 const Text = styled.div`color: ${props => props.theme.colors.fontColor};`;
 
-function GlobalOverlayLoader({ active, text }) {
+function LoadingOverlay({ active, text }) {
   return (
     <GlobalSpinnerOverlay hidden={!active}>
       <ContentWrapper>
@@ -31,11 +31,11 @@ function GlobalOverlayLoader({ active, text }) {
   );
 }
 
-GlobalOverlayLoader.defaultProps = {
+LoadingOverlay.defaultProps = {
   text: '',
 };
 
-GlobalOverlayLoader.propTypes = {
+LoadingOverlay.propTypes = {
   active: PropTypes.bool.isRequired,
   text: PropTypes.string,
 };
@@ -47,4 +47,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(GlobalOverlayLoader);
+export default connect(mapStateToProps)(LoadingOverlay);

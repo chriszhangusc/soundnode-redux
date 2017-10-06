@@ -1,5 +1,12 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeVisiblePlayQueue, updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
+import {
+  showLoadingOverlay,
+  hideLoadingOverlay,
+} from 'features/globalOverlayLoader/globalOverlayLoaderActions';
+import {
+  mergeVisiblePlayQueue,
+  updateVisiblePlayQueueName,
+} from 'features/playQueue/playQueueActions';
 import * as types from './userProfileActionTypes';
 import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelectors';
 import {
@@ -8,7 +15,7 @@ import {
   fetchMoreProfiledUserTracks,
 } from './userProfileApi';
 
-/* Action Creators*/
+/* Action Creators */
 export function startLoadingPage() {
   return {
     type: types.USER_PROFILE_PAGE_LOADING_START,
@@ -94,16 +101,15 @@ export function loadUserProfileData(userId) {
     dispatch(updateProfiledUserId(userId));
     dispatch(updateVisiblePlayQueueName(`user-${userId}`));
     // Right now the user fetching state does nothing... Consider removing it in the future
-    dispatch(startLoadingPage());
     dispatch(startFetchingUser());
     dispatch(startFetchingTracks());
+    dispatch(showLoadingOverlay());
     Promise.all([fetchProfiledUser(userId), fetchProfiledUserTracks(userId)]).then((res) => {
       const normalizedUser = res[0];
       const normalizedTracks = res[1];
       dispatch(receiveUser(normalizedUser));
       dispatch(receiveTracks(normalizedTracks));
-      // Stop page loading here
-      dispatch(stopLoadingPage());
+      dispatch(hideLoadingOverlay());
     });
   };
 }
