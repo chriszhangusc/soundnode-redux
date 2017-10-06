@@ -5,8 +5,7 @@ import { playlistArraySchema } from 'app/schema';
 
 export function fetchMyPlaylists() {
   const requestUrl = `${SC_API_V1}/me/playlists?limit=10&format=json`;
-  return makeRequest(requestUrl);
-  // .then(playlists =>
-  //   normalizeResponse(playlists, playlistArraySchema),
-  // );
+  return makeRequest(requestUrl).then(playlists =>
+    normalizeResponse(playlists, playlistArraySchema),
+  );
 }

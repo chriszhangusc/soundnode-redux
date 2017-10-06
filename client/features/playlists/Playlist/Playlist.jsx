@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { getPlaylistById, getTracksByPlaylistId } from 'features/entities/entitiesSelectors';
 import Header from './Header';
 import TrackList from './TrackList';
 
@@ -11,18 +13,22 @@ const PlaylistWrapper = styled.div`
   margin-bottom: 30px;
 `;
 
-function Playlist({ playlist }) {
+function Playlist({ playlist, playlistTracks }) {
   // Compute total duration of playlist
+
   return (
     <PlaylistWrapper>
-      <Header playlist={playlist} />
-      <TrackList tracks={playlist.tracks} />
+      <Header playlist={playlist} tracks={playlistTracks} />
+      {playlistTracks && playlistTracks.length > 0 && <TrackList tracks={playlistTracks} />}
     </PlaylistWrapper>
   );
 }
 
-Playlist.propTypes = {
-  playlist: PropTypes.object.isRequired,
-};
+function mapStateToProps(state, { playlistId }) {
+  return {
+    playlist: getPlaylistById(state, playlistId),
+    playlistTracks: getTracksByPlaylistId(state, playlistId),
+  };
+}
 
-export default Playlist;
+export default connect(mapStateToProps)(Playlist);

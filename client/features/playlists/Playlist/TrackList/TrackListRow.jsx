@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import TrackImage from 'common/components/images/TrackImage';
 import { formatDurationCompact, formatNumberCompact } from 'common/utils/formatUtils';
+import { getUserByTrackId } from 'features/entities/entitiesSelectors';
 
 const TrackItem = styled.div`
   padding: 8px 0;
@@ -35,7 +37,8 @@ const Id = styled.div`
   width: 30px;
 `;
 
-function TrackListRow({ track, id }) {
+function TrackListRow({ track, trackArtist, id }) {
+  console.log(track);
   return (
     <TrackItem key={track.id}>
       <Id>{id}</Id>
@@ -44,7 +47,7 @@ function TrackListRow({ track, id }) {
         <TrackTitle>{track.title}</TrackTitle>
       </TableCell>
       <TableCell width="30%">
-        <TrackTitle>{track.user.username}</TrackTitle>
+        <TrackTitle>{trackArtist.username}</TrackTitle>
       </TableCell>
       <TableCell width="15%">
         <TrackTitle>{formatDurationCompact(track.duration)}</TrackTitle>
@@ -61,4 +64,10 @@ TrackListRow.propTypes = {
   id: PropTypes.number.isRequired,
 };
 
-export default TrackListRow;
+function mapStateToProps(state, { track }) {
+  return {
+    trackArtist: getUserByTrackId(state, track.id),
+  };
+}
+
+export default connect(mapStateToProps)(TrackListRow);

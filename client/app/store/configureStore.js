@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from 'app/sagas/rootSaga';
 // import logger from 'redux-logger';
-import { persistStore, autoRehydrate } from 'redux-persist';
+// import { persistStore, autoRehydrate } from 'redux-persist';
 import rootReducer from '../reducers/rootReducer';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -17,14 +17,14 @@ function configureStore() {
         sagaMiddleware,
         // logger,
       ),
-      autoRehydrate(),
+      // autoRehydrate(),
       window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   );
-  persistStore(store, {
-    whitelist: [],
-    debounce: 2000,
-  });
+  // persistStore(store, {
+  //   whitelist: [],
+  //   debounce: 2000,
+  // });
   sagaMiddleware.run(rootSaga);
 
   return store;

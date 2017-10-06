@@ -56,9 +56,8 @@ function buildImageGrid(tracks) {
 }
 
 // Need to handle empty playlist
-function Header({ playlist }) {
-  const images = buildImageGrid(playlist.tracks);
-  console.log(images);
+function Header({ playlist, tracks }) {
+  const images = buildImageGrid(tracks);
   return (
     <HeaderWrapper>
       {/* <TrackImage src={getLargeVersion(playlist.tracks[0].artworkUrl)} size="medium" /> */}

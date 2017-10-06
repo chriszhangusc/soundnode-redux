@@ -13,6 +13,8 @@ export const getTracks = createSelector(getEntities, entities => entities.tracks
 
 export const getComments = createSelector(getEntities, entities => entities.comments);
 
+export const getPlaylistsEntities = createSelector(getEntities, entities => entities.playlists);
+
 /**
  * Returns user object by userId
  * @param {object} state Global state object
@@ -62,18 +64,23 @@ export function getUserByCommentId(state, commentId) {
 }
 
 /* For playlists */
-export function getPlayQueueById(state, playlistId) {
-  return playlistId && getEntities(state).playlists[String(playlistId)];
+export function getPlaylistById(state, playlistId) {
+  return playlistId && getPlaylistsEntities(state)[String(playlistId)];
 }
 
 export function getUserByPlaylistId(state, playlistId) {
-  const playlist = getPlayQueueById(state, playlistId);
+  const playlist = getPlaylistById(state, playlistId);
   const userId = playlist && playlist.userId;
   return getUserById(state, userId);
 }
 
 export function getTracksByPlaylistId(state, playlistId) {
-  const playlist = getPlayQueueById(state, playlistId);
+  const playlist = getPlaylistById(state, playlistId);
   const trackIds = playlist && playlist.tracks;
   return trackIds.map(trackId => getTrackById(state, trackId));
 }
+
+// export function isPlaylistEmpty(state, playlistId) {
+//   const tracks = getTracksByPlaylistId(state, playlistId);
+//   return !tracks || tracks.length === 0;
+// }
