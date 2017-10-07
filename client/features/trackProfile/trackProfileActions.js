@@ -6,7 +6,7 @@ import {
 import {
   showLoadingOverlay,
   hideLoadingOverlay,
-} from 'features/globalOverlayLoader/globalOverlayLoaderActions';
+} from 'features/loadingOverlay/loadingOverlayActions';
 import { fetchProfiledTrack, fetchTrackComments, fetchMoreComments } from './trackProfileApi';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import * as types from './trackProfileActionTypes';

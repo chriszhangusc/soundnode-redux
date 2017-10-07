@@ -1,6 +1,6 @@
 import React from 'react';
 import NetworkDetector from 'features/network/NetworkDetector';
-import GlobalOverlayLoader from 'features/globalOverlayLoader/GlobalOverlayLoader';
+import LoadingOverlay from 'features/loadingOverlay/LoadingOverlay';
 import styled from 'styled-components';
 import Player from 'features/player/Player';
 import Sidebar from 'features/sidebar/Sidebar';
@@ -21,7 +21,7 @@ const MainWrapper = styled.div`padding-top: 70px;`;
 function Main() {
   return (
     <MainWrapper>
-      <GlobalOverlayLoader />
+      <LoadingOverlay />
       <Navbar />
       <Sidebar />
       <PageContentWrapper>

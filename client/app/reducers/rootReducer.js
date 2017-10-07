@@ -14,7 +14,7 @@ import searchReducer from 'features/search/searchReducer';
 import playlistsReducer from 'features/playlists/playlistsReducer';
 import userPlaylistsReducer from 'features/userPlaylists/userPlaylistsReducer';
 import sidebarReducer from 'features/sidebar/sidebarReducer';
-import globalOverlayLoaderReducer from 'features/globalOverlayLoader/globalOverlayLoaderReducer';
+import loadingOverlayReducer from 'features/loadingOverlay/loadingOverlayReducer';
 
 const rootReducer = combineReducers({
   entities: entitiesReducer,
@@ -34,7 +34,7 @@ const rootReducer = combineReducers({
   playlists: playlistsReducer,
   userPlaylists: userPlaylistsReducer,
   sidebar: sidebarReducer,
-  globalOverlayLoader: globalOverlayLoaderReducer,
+  loadingOverlay: loadingOverlayReducer,
 });
 
 export default rootReducer;

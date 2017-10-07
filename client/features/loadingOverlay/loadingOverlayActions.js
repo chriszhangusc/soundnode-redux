@@ -1,4 +1,4 @@
-import { LOADING_OVERLAY_HIDE, LOADING_OVERLAY_SHOW } from './globalOverlayLoaderActionTypes';
+import { LOADING_OVERLAY_HIDE, LOADING_OVERLAY_SHOW } from './loadingOverlayActionTypes';
 
 export function showLoadingOverlay(text) {
   return {

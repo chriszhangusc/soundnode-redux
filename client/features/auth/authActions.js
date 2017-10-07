@@ -6,7 +6,7 @@ import {
 import {
   showLoadingOverlay,
   hideLoadingOverlay,
-} from 'features/globalOverlayLoader/globalOverlayLoaderActions';
+} from 'features/loadingOverlay/loadingOverlayActions';
 
 import { getOAuthToken, setOAuthToken, removeOAuthToken, isUnauthError } from './authUtils';
 

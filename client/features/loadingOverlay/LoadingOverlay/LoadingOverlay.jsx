@@ -5,9 +5,11 @@ import { connect } from 'react-redux';
 import {
   isLoaderActive,
   getLoaderText,
-} from 'features/globalOverlayLoader/globalOverlayLoaderSelectors';
+} from 'features/loadingOverlay/loadingOverlaySelectors';
+import GlobalOverlay from 'common/components/GlobalOverlay';
+import { TransitionGroup } from 'react-transition-group';
+import FadeTransition from 'common/components/transitions/FadeTransition';
 import Spinner from './Spinner';
-import GlobalSpinnerOverlay from './GlobalSpinnerOverlay';
 
 const ContentWrapper = styled.div`
   position: fixed;
@@ -21,14 +23,18 @@ const ContentWrapper = styled.div`
 const Text = styled.div`color: ${props => props.theme.colors.fontColor};`;
 
 function LoadingOverlay({ active, text }) {
-  return (
-    <GlobalSpinnerOverlay hidden={!active}>
-      <ContentWrapper>
-        <Spinner />
-        <Text>{text}</Text>
-      </ContentWrapper>
-    </GlobalSpinnerOverlay>
+  const overlay = (
+    <FadeTransition>
+      <GlobalOverlay key="loading-overlay">
+        <ContentWrapper>
+          <Spinner />
+          <Text>{text}</Text>
+        </ContentWrapper>
+      </GlobalOverlay>
+    </FadeTransition>
   );
+
+  return <TransitionGroup>{active && overlay}</TransitionGroup>;
 }
 
 LoadingOverlay.defaultProps = {

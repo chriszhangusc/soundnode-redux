@@ -2,7 +2,7 @@ import { mergeEntities } from 'features/entities/entitiesActions';
 import {
   showLoadingOverlay,
   hideLoadingOverlay,
-} from 'features/globalOverlayLoader/globalOverlayLoaderActions';
+} from 'features/loadingOverlay/loadingOverlayActions';
 import {
   mergeVisiblePlayQueue,
   updateVisiblePlayQueueName,

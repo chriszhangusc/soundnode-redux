@@ -1,7 +1,7 @@
 import {
   showLoadingOverlay,
   hideLoadingOverlay,
-} from 'features/globalOverlayLoader/globalOverlayLoaderActions';
+} from 'features/loadingOverlay/loadingOverlayActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { PLAYLISTS_MERGE } from 'features/playlists/playlistsActionTypes';
 import { fetchMyPlaylists } from './playlistsApi';

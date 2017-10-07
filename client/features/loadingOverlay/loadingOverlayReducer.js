@@ -1,4 +1,4 @@
-import { LOADING_OVERLAY_SHOW, LOADING_OVERLAY_HIDE } from './globalOverlayLoaderActionTypes';
+import { LOADING_OVERLAY_SHOW, LOADING_OVERLAY_HIDE } from './loadingOverlayActionTypes';
 
 const initialState = {
   active: false,
@@ -21,7 +21,7 @@ function hideLoadingOverlay(state) {
   };
 }
 
-export default function globalOverlayLoaderReducer(state = initialState, action) {
+export default function loadingOverlayReducer(state = initialState, action) {
   switch (action.type) {
     case LOADING_OVERLAY_SHOW:
       return showLoadingOverlay(state, action.payload);

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-export const getState = state => state.globalOverlayLoader;
+export const getState = state => state.loadingOverlay;
 
 export const isLoaderActive = createSelector(getState, state => state.active);
 
