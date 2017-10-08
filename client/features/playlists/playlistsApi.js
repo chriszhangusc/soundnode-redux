@@ -1,5 +1,5 @@
 import { SC_API_V1 } from 'common/constants/apiConsts';
-import { makeRequest } from 'common/utils/apiUtils';
+import { makeRequest, checkStatus } from 'common/utils/apiUtils';
 import { normalizeResponse } from 'common/utils/normalizeUtils';
 import { playlistArraySchema } from 'app/schema';
 
@@ -8,4 +8,9 @@ export function fetchMyPlaylists() {
   return makeRequest(requestUrl).then(playlists =>
     normalizeResponse(playlists, playlistArraySchema),
   );
+}
+
+export function deleteMyPlaylist(playlistId) {
+  const requestUrl = `${SC_API_V1}/playlists/${playlistId}`;
+  return fetch(requestUrl, { method: 'DELETE' }).then(checkStatus);
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import TrackImage from 'common/components/images/TrackImage';
+
 import { getLargeVersion } from 'common/utils/imageUtils';
-import LinkButton from 'common/components/links/LinkButton';
-import Icon from 'common/components/icons/Icon';
+
 import { formatDurationCompact } from 'common/utils/formatUtils';
 import PlaylistImage from 'common/components/images/PlaylistImage';
+import ActionList from './ActionList';
 
 const Title = styled.div`
   font-size: 2rem;
@@ -34,13 +34,6 @@ const Subtitle = styled.span`
   white-space: nowrap;
   font-size: 0.95rem;
   color: ${props => props.theme.colors.fontColorSub};
-`;
-
-const ActionsWrapper = styled.div`
-  display: flex;
-  position: absolute;
-  left: 0;
-  bottom: 0;
 `;
 
 const HeaderWrapper = styled.div`
@@ -79,27 +72,7 @@ function Header({ playlist, tracks }) {
           <Subtitle>{playlist.description}</Subtitle>
         </Row>
         <Row>
-          <ActionsWrapper>
-            <LinkButton onClick={() => {}} title="Like Playlist">
-              <Icon iconName="heart" />LIKE
-            </LinkButton>
-
-            <LinkButton onClick={() => {}} title="Add to Current Play Queue">
-              <Icon iconName="plus" />ADD TO PLAY QUEUE
-            </LinkButton>
-
-            <LinkButton
-              href={playlist.permalinkUrl}
-              target="_blank"
-              title="Visit Playlist on SoundCloud"
-            >
-              <Icon iconName="external-link" />PERMALINK
-            </LinkButton>
-
-            <LinkButton onClick={() => {}} title="Delete Playlist">
-              <Icon iconName="remove" />DELETE
-            </LinkButton>
-          </ActionsWrapper>
+          <ActionList playlist={playlist} />
         </Row>
       </Column>
     </HeaderWrapper>
