@@ -12,5 +12,5 @@ export function fetchMyPlaylists() {
 
 export function deleteMyPlaylist(playlistId) {
   const requestUrl = `${SC_API_V1}/playlists/${playlistId}`;
-  return fetch(requestUrl, { method: 'DELETE' }).then(checkStatus);
+  return makeRequest(requestUrl, { method: 'DELETE' });
 }
