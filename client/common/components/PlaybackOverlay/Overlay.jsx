@@ -8,6 +8,7 @@ export default styled.span`
   font-size: 1rem;
   height: 100%;
   width: 100%;
+  /* This is not right for replying on parent to be relative */
   position: absolute;
   top: 0;
   opacity: ${props => (props.active ? 1 : 0)};
