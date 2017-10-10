@@ -19,7 +19,7 @@ function updatePlaylists(state, { playlistIds }) {
   };
 }
 
-function removePlaylistFromPlaylists(state, { playlistId }) {
+function removePlaylist(state, { playlistId }) {
   return {
     ...state,
     playlistIds: state.playlistIds.filter(id => id !== playlistId),
@@ -41,7 +41,7 @@ export default function playlistsReducer(state = initialState, action) {
     case actionTypes.PLAYLISTS_STATE_RESET:
       return resetPlaylistsState();
     case actionTypes.PLAYLISTS_PLAYLIST_DELETE:
-      return removePlaylistFromPlaylists(state, action.payload);
+      return removePlaylist(state, action.payload);
     default:
       return state;
   }

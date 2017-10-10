@@ -13,7 +13,7 @@ import {
   notificationSuccess,
   notificationWarning,
 } from 'features/notification/notificationActions';
-import { fetchMyPlaylists, deleteMyPlaylist } from 'features/playlists/playlistsApi';
+import { fetchMyPlaylists, deleteSinglePlaylist } from 'features/playlists/playlistsApi';
 
 export function mergePlaylists(playlistIds) {
   return {
@@ -32,7 +32,6 @@ export function updatePlaylists(playlistIds) {
     },
   };
 }
-
 
 export function resetPlaylistsState() {
   return {
@@ -59,7 +58,7 @@ export function loadPlaylists() {
 export function deletePlaylist(playlistId) {
   return (dispatch) => {
     dispatch(showLoadingOverlay());
-    deleteMyPlaylist(playlistId)
+    deleteSinglePlaylist(playlistId)
       .then(() => {
         console.log('success');
         // Reload playlists page
@@ -81,4 +80,3 @@ export function deletePlaylist(playlistId) {
       });
   };
 }
-

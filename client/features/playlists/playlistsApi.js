@@ -1,5 +1,5 @@
 import { SC_API_V1 } from 'common/constants/apiConsts';
-import { makeRequest, checkStatus } from 'common/utils/apiUtils';
+import { makeRequest } from 'common/utils/apiUtils';
 import { normalizeResponse } from 'common/utils/normalizeUtils';
 import { playlistArraySchema } from 'app/schema';
 
@@ -10,7 +10,7 @@ export function fetchMyPlaylists() {
   );
 }
 
-export function deleteMyPlaylist(playlistId) {
+export function deleteSinglePlaylist(playlistId) {
   const requestUrl = `${SC_API_V1}/playlists/${playlistId}`;
   return makeRequest(requestUrl, { method: 'DELETE' });
 }
