@@ -35,28 +35,23 @@ const Circle = styled.circle`
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
   stroke-linecap: round;
-  stroke: ${props => props.theme.colors.fontColor};
+  stroke: ${props => props.theme.colors.themeColor};
 `;
 
 const Wrapper = styled.div`
-  margin: 0px auto 10px auto;
+  margin: 0 auto;
   width: 50px;
   max-height: 100%;
-  &:before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-  }
 `;
 
-function Spinner() {
+function CircleSpinner() {
   return (
     <Wrapper>
       <Svg viewBox="25 25 50 50">
-        <Circle cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10" />
+        <Circle cx="50" cy="50" r="10" fill="none" strokeWidth="2" strokeMiterlimit="10" />
       </Svg>
     </Wrapper>
   );
 }
 
-export default Spinner;
+export default CircleSpinner;

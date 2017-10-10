@@ -1,4 +1,5 @@
 import { getTracks } from 'features/entities/entitiesSelectors';
+import { getStreamUrl } from 'common/utils/apiUtils';
 import { createSelector } from 'reselect';
 import { SHUFFLE } from './playerConsts';
 
@@ -10,6 +11,8 @@ export const getActiveTrackId = createSelector(getPlayerState, state => state.ac
 export const isPlayQueueHidden = createSelector(getPlayerState, state => state.hidden);
 
 export const isPlayerPlaying = createSelector(getPlayerState, state => state.playing);
+
+export const isPlayerLoading = createSelector(getPlayerState, state => state.loading);
 
 export const isPlayerSeeking = createSelector(getPlayerState, state => state.seeking);
 
@@ -37,3 +40,8 @@ export function isTrackActive(state, trackId) {
 }
 
 export const isTrackPlaying = (state, id) => isTrackActive(state, id) && isPlayerPlaying(state);
+
+export const getPlayerStreamUrl = createSelector(
+  getCurrentPlayerTrack,
+  track => track && getStreamUrl(track),
+);

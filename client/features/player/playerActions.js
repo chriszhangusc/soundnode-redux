@@ -1,7 +1,4 @@
-import {
-  shufflePlayQueue,
-  syncActivePlayQueue,
-} from 'features/playQueue/playQueueActions';
+import { shufflePlayQueue, syncActivePlayQueue } from 'features/playQueue/playQueueActions';
 import { getActivePlayQueue } from 'features/playQueue/playQueueSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
 import * as playModes from './playerConsts';
@@ -19,6 +16,10 @@ export function endSeek() {
 
 export function playSong() {
   return { type: types.PLAYER_SONG_PLAY };
+}
+
+export function loadSong() {
+  return { type: types.PLAYER_SONG_LOAD };
 }
 
 export function pauseSong() {
@@ -180,7 +181,7 @@ export function playSongByAction(actionType) {
     }
     dispatch(updateActiveTrackId(nextTrackId));
     dispatch(resetPrevSong());
-    dispatch(playSong());
+    dispatch(loadSong());
   };
 }
 
@@ -240,7 +241,7 @@ export function togglePlaybackState(trackId) {
       dispatch(updateActiveTrackId(trackId));
       dispatch(syncActivePlayQueue());
       dispatch(resetPrevSong());
-      dispatch(playSong());
+      dispatch(loadSong());
     }
   };
 }

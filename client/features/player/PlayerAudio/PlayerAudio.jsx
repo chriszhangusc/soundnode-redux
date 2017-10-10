@@ -2,16 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { REPEAT } from 'features/player/playerConsts';
 import { connect } from 'react-redux';
-import { getStreamUrl } from 'common/utils/apiUtils';
-import * as playerActions from 'features/player/playerActions';
-
-import {
-  getCurrentTime,
-  getCurrentVolume,
-  getPlayerMode,
-  isPlayerPlaying,
-  isPlayerSeeking,
-} from 'features/player/playerSelectors';
+import * as actions from 'features/player/playerActions';
+import * as selectors from 'features/player/playerSelectors';
 
 class PlayerAudio extends Component {
   componentDidMount() {
@@ -45,14 +37,17 @@ class PlayerAudio extends Component {
 
   togglePlayIfNeeded = (audio) => {
     // This also covers change song and play logic
-    if (audio.paused === this.props.playing) {
-      if (audio.paused) {
+    // debugger;
+    if (audio.paused && this.props.loading) {
+      // Set a 1 second delay to make spinner more natural
+      setTimeout(() => {
         audio.play().then(() => {
-          console.log('Start playing');
+          this.props.playSong();
         });
-      } else {
-        audio.pause();
-      }
+      }, 1000);
+    } else if (!this.props.playing && !audio.paused) {
+      // When the signal is pause and the audio is playing, it means we need to pause the audio
+      audio.pause();
     }
   };
 
@@ -82,6 +77,7 @@ class PlayerAudio extends Component {
 }
 
 PlayerAudio.propTypes = {
+  loading: PropTypes.bool.isRequired,
   seeking: PropTypes.bool.isRequired,
   currentTime: PropTypes.number.isRequired,
   playing: PropTypes.bool.isRequired,
@@ -90,17 +86,19 @@ PlayerAudio.propTypes = {
   streamUrl: PropTypes.string.isRequired,
   updateTimeOnPlay: PropTypes.func.isRequired,
   playNextSong: PropTypes.func.isRequired,
+  playSong: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state, { playerTrack }) {
+function mapStateToProps(state) {
   return {
-    playing: isPlayerPlaying(state),
-    volume: getCurrentVolume(state),
-    mode: getPlayerMode(state),
-    streamUrl: getStreamUrl(playerTrack),
-    currentTime: getCurrentTime(state),
-    seeking: isPlayerSeeking(state),
+    playing: selectors.isPlayerPlaying(state),
+    loading: selectors.isPlayerLoading(state),
+    volume: selectors.getCurrentVolume(state),
+    mode: selectors.getPlayerMode(state),
+    streamUrl: selectors.getPlayerStreamUrl(state),
+    currentTime: selectors.getCurrentTime(state),
+    seeking: selectors.isPlayerSeeking(state),
   };
 }
 
-export default connect(mapStateToProps, playerActions)(PlayerAudio);
+export default connect(mapStateToProps, actions)(PlayerAudio);

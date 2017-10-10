@@ -5,6 +5,7 @@ import { DEFAULT_MODE } from './playerConsts';
 const initialState = {
   currentTime: 0,
   volume: 1.0,
+  loading: false, // Loading song into player
   playing: false,
   seeking: false,
   volumeSeeking: false,
@@ -24,6 +25,14 @@ export function playSong(state) {
   return {
     ...state,
     playing: true,
+    loading: false,
+  };
+}
+
+export function loadSong(state) {
+  return {
+    ...state,
+    loading: true,
   };
 }
 
@@ -31,6 +40,7 @@ export function pauseSong(state) {
   return {
     ...state,
     playing: false,
+    loading: false,
   };
 }
 
@@ -118,6 +128,9 @@ export default function playerReducer(state = initialState, action) {
 
     case actionTypes.PLAYER_SONG_PAUSE:
       return pauseSong(state);
+
+    case actionTypes.PLAYER_SONG_LOAD:
+      return loadSong(state);
 
     case actionTypes.PLAYER_TIME_UPDATE:
       return updateCurrentTime(state, action.payload);

@@ -1,6 +1,7 @@
 /* Player Action Types */
 export const PLAYER_SONG_PLAY = 'PLAYER_SONG_PLAY';
 export const PLAYER_SONG_PAUSE = 'PLAYER_SONG_PAUSE';
+export const PLAYER_SONG_LOAD = 'PLAYER_SONG_LOAD';
 export const PLAYER_TIME_UPDATE = 'PLAYER_TIME_UPDATE';
 export const PLAYER_SEEK_BEGIN = 'PLAYER_SEEK_BEGIN';
 export const PLAYER_SEEK_END = 'PLAYER_SEEK_END';

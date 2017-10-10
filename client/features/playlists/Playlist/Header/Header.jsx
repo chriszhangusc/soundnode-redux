@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getLargeVersion } from 'common/utils/imageUtils';
-import PlaybackOverlay from 'common/components/PlaybackOverlay';
 import { formatDurationCompact } from 'common/utils/formatUtils';
 import PlaylistImage from './PlaylistImage';
 import ActionList from './ActionList';

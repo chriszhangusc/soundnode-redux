@@ -4,17 +4,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TrackImage from 'common/components/images/TrackImage';
 import PlaybackOverlay from 'common/components/PlaybackOverlay';
-import { isTrackPlaying } from 'features/player/playerSelectors';
+import { isTrackPlaying, isPlayerLoading } from 'features/player/playerSelectors';
 import { togglePlaybackState } from 'features/player/playerActions';
 import { getLargeVersion } from 'common/utils/imageUtils';
 
-function SongCardImage({ trackId, active, playing, artworkUrl, handleImageClick }) {
+function SongCardImage({ trackId, active, playing, artworkUrl, loading, handleImageClick }) {
   return (
     <TrackImage src={artworkUrl} size="medium">
       <PlaybackOverlay
         active={active}
+        loading={loading}
         onClick={() => {
-          handleImageClick(trackId);
+          if (!loading) {
+            handleImageClick(trackId);
+          }
           // Sync with currently active play queue
         }}
         playing={playing}
@@ -27,6 +30,7 @@ function mapStateToProps(state, { track, active }) {
   const { id, artworkUrl } = track;
   return {
     active,
+    loading: isPlayerLoading(state),
     trackId: id,
     artworkUrl: getLargeVersion(artworkUrl),
     playing: isTrackPlaying(state, id),
