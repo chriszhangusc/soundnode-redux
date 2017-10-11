@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Spinner from 'common/components/Spinner';
+import Spinner from 'common/components/spinners/RectScale';
 import styled from 'styled-components';
 import { Box } from 'grid-styled';
 import { getDisplayName } from 'common/utils/hocUtils';

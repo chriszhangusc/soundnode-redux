@@ -1,5 +1,5 @@
 import { branch, renderComponent } from 'recompose';
-import Spinner from 'common/components/Spinner';
+import Spinner from 'common/components/spinners/RectScale';
 
 export function renderSpinnerUntil(isLoading) {
   return branch(

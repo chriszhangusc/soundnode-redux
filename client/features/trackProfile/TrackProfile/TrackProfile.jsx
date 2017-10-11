@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as trackProfileActions from 'features/trackProfile/trackProfileActions';
 import { isPageLoading } from 'features/trackProfile/trackProfileSelectors';
-import Spinner from 'common/components/Spinner';
 import { Box } from 'grid-styled';
 import TrackProfileComments from '../TrackProfileComments';
 import TrackProfileHeader from '../TrackProfileHeader';

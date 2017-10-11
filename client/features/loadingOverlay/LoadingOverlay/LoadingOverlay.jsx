@@ -2,14 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import {
-  isLoaderActive,
-  getLoaderText,
-} from 'features/loadingOverlay/loadingOverlaySelectors';
+import { isLoaderActive, getLoaderText } from 'features/loadingOverlay/loadingOverlaySelectors';
 import GlobalOverlay from 'common/components/GlobalOverlay';
 import { TransitionGroup } from 'react-transition-group';
 import FadeTransition from 'common/components/transitions/FadeTransition';
-import Spinner from './Spinner';
+import Spinner from 'common/components/spinners/RotateCircle';
 
 const ContentWrapper = styled.div`
   position: fixed;
