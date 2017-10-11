@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from 'common/components/icons/Icon';
 import { themeColor } from 'app/css/colors';
 import Spinner from 'common/components/spinners/CircleRotate';
+import PlayingIndicator from 'common/components/PlayingIndicator';
 import Overlay from './Overlay';
 
 function PlaybackOverlay({ playing, loading, active, onClick }) {
@@ -11,7 +12,7 @@ function PlaybackOverlay({ playing, loading, active, onClick }) {
       {loading ? (
         <Spinner small color={themeColor} />
       ) : (
-        <Icon iconName={playing ? 'pause' : 'play'} color={themeColor} iconSize="lg" />
+        playing ? <PlayingIndicator /> : <Icon iconName={playing ? 'pause' : 'play'} color={themeColor} iconSize="lg" />
       )}
     </Overlay>
   );
