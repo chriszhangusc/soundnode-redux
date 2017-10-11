@@ -6,7 +6,7 @@ import { isLoaderActive, getLoaderText } from 'features/loadingOverlay/loadingOv
 import GlobalOverlay from 'common/components/GlobalOverlay';
 import { TransitionGroup } from 'react-transition-group';
 import FadeTransition from 'common/components/transitions/FadeTransition';
-import Spinner from 'common/components/spinners/RotateCircle';
+import Spinner from 'common/components/spinners/CircleRotate';
 
 const ContentWrapper = styled.div`
   position: fixed;

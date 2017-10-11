@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   max-height: 100%;
 `;
 
-function RotateCircle({ small, color }) {
+function CircleRotate({ small, color }) {
   return (
     <Wrapper>
       <Svg viewBox="25 25 50 50">
@@ -62,4 +62,4 @@ function RotateCircle({ small, color }) {
   );
 }
 
-export default RotateCircle;
+export default CircleRotate;

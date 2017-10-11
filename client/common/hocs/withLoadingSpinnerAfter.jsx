@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Spinner from 'common/components/spinners/RectScale';
+import Spinner from 'common/components/spinners/RectsScale';
 import styled from 'styled-components';
 import { Box } from 'grid-styled';
 import { getDisplayName } from 'common/utils/hocUtils';
@@ -16,10 +16,11 @@ export default function withLoadingSpinnerAfter(WrappedComponent) {
     return (
       <Box>
         <WrappedComponent {...rest} />
-        {fetching &&
+        {fetching && (
           <SpinnerWrapper>
             <Spinner />
-          </SpinnerWrapper>}
+          </SpinnerWrapper>
+        )}
       </Box>
     );
   }

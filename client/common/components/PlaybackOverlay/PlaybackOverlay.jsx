@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'common/components/icons/Icon';
 import { themeColor } from 'app/css/colors';
-import Spinner from 'common/components/spinners/RotateCircle';
+import Spinner from 'common/components/spinners/CircleRotate';
 import Overlay from './Overlay';
 
 function PlaybackOverlay({ playing, loading, active, onClick }) {
