@@ -52,7 +52,7 @@ function Header({ playlist, tracks }) {
   return (
     <HeaderWrapper>
       {/* <TrackImage src={getLargeVersion(playlist.tracks[0].artworkUrl)} size="medium" /> */}
-      <PlaylistImage images={images} />
+      <PlaylistImage images={images} playlistId={playlist.id} />
       <Column>
         <Row>
           <Title>{playlist.title}</Title>

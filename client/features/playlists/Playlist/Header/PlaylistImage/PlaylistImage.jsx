@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import TrackImage from 'common/components/images/TrackImage';
 import { connect } from 'react-redux';
 import PlaybackOverlay from 'common/components/PlaybackOverlay';
+import { playPlaylist } from 'features/playlists/playlistsActions';
+import { isPlayerLoading, isPlayerPlaying } from 'features/player/playerSelectors';
+import { getActivePlayQueueName } from 'features/playQueue/playQueueSelectors';
 
 const Wrapper = styled.div`
   height: 200px;
@@ -29,10 +32,22 @@ function formatImages(images) {
   return imageGroup;
 }
 
-function PlaylistImage({ images }) {
+function PlaylistImage({
+  images,
+  playlistId,
+  handleImageClick,
+  loading,
+  playing,
+  activePlayQueueName,
+}) {
   const imageGroup = formatImages(images);
+  const playlistActive = activePlayQueueName === `playlist-${playlistId}`;
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={() => {
+        handleImageClick(playlistId);
+      }}
+    >
       <Row>
         <TrackImage src={imageGroup[0]} />
         <TrackImage src={imageGroup[1]} />
@@ -42,14 +57,27 @@ function PlaylistImage({ images }) {
         <TrackImage src={imageGroup[3]} />
       </Row>
       <PlaybackOverlay
-        active={false}
+        active={playlistActive}
         onClick={() => {
           console.log('Play current playlist');
         }}
-        playing={false}
+        loading={loading}
+        playing={playing}
       />
     </Wrapper>
   );
 }
 
-export default connect()(PlaylistImage);
+const actions = {
+  handleImageClick: playPlaylist,
+};
+
+function mapStateToProps(state) {
+  return {
+    activePlayQueueName: getActivePlayQueueName(state), // if current playlist is being played
+    loading: isPlayerLoading(state),
+    playing: isPlayerPlaying(state),
+  };
+}
+
+export default connect(mapStateToProps, actions)(PlaylistImage);

@@ -7,6 +7,7 @@ import { formatDurationCompact, formatNumberCompact } from 'common/utils/formatU
 import { getUserByTrackId } from 'features/entities/entitiesSelectors';
 import RouterLink from 'common/components/links/RouterLink';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
+import { isTrackActive } from 'features/player/playerSelectors';
 
 const TrackItem = styled.div`
   padding: 8px 0;
@@ -14,6 +15,7 @@ const TrackItem = styled.div`
   cursor: pointer;
   align-items: middle;
   border-top: 1px solid ${props => props.theme.colors.separatorDark};
+  background: ${props => props.active && props.theme.colors.separatorDark};
   &:hover {
     background: ${props => props.theme.colors.separatorDark};
   }
@@ -47,9 +49,9 @@ const Id = styled.div`
   width: 30px;
 `;
 
-function TrackListRow({ track, trackArtist, id }) {
+function TrackListRow({ track, trackArtist, id, active }) {
   return (
-    <TrackItem key={track.id}>
+    <TrackItem key={track.id} active={active}>
       <Id>{id}</Id>
       <TableCell width="40%">
         <TrackImage src={track.artworkUrl} size="tiny" mr="10px" />
@@ -78,6 +80,8 @@ TrackListRow.propTypes = {
 function mapStateToProps(state, { track }) {
   return {
     trackArtist: getUserByTrackId(state, track.id),
+    // Should also check if current playlist is active!!
+    active: isTrackActive(state, track.id),
   };
 }
 

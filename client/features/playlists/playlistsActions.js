@@ -14,6 +14,12 @@ import {
   notificationWarning,
 } from 'features/notification/notificationActions';
 import { fetchMyPlaylists, deleteSinglePlaylist } from 'features/playlists/playlistsApi';
+import { getPlaylistById } from 'features/entities/entitiesSelectors';
+import {
+  updateActivePlayQueue,
+  updateActivePlayQueueName,
+} from 'features/playQueue/playQueueActions';
+import { updateActiveTrackId, resetPrevSong, loadSong } from 'features/player/playerActions';
 
 export function mergePlaylists(playlistIds) {
   return {
@@ -78,5 +84,27 @@ export function deletePlaylist(playlistId) {
         dispatch(notificationWarning('Something went wrong!'));
         console.log(err);
       });
+  };
+}
+
+export function playPlaylist(playlistId) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const playlist = getPlaylistById(state, playlistId);
+    const trackIds = playlist.tracks;
+    dispatch(updateActivePlayQueueName(`playlist-${playlistId}`));
+    dispatch(updateActivePlayQueue(trackIds));
+    dispatch(updateActiveTrackId(trackIds[0]));
+    dispatch(resetPrevSong());
+    dispatch(loadSong());
+    // dispatch(updateActiveTrackId(trackId));
+    // dispatch(syncActivePlayQueue());
+    // dispatch(resetPrevSong());
+    // dispatch(loadSong());
+    // 1. Player load start
+
+    // 2. Update play queue with tracks of playlist
+
+    // 3. Play first track of playlist
   };
 }

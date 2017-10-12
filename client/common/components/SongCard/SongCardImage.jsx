@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TrackImage from 'common/components/images/TrackImage';
 import PlaybackOverlay from 'common/components/PlaybackOverlay';
@@ -37,13 +36,17 @@ function mapStateToProps(state, { track, active }) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    handleImageClick: bindActionCreators(togglePlaybackState, dispatch),
-  };
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     handleImageClick: bindActionCreators(togglePlaybackState, dispatch),
+//   };
+// }
 
-const Connected = connect(mapStateToProps, mapDispatchToProps)(SongCardImage);
+const actions = {
+  handleImageClick: togglePlaybackState,
+};
+
+const Connected = connect(mapStateToProps, actions)(SongCardImage);
 
 /* Prop type validation */
 
