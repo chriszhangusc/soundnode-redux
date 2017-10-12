@@ -38,6 +38,7 @@ class PlayerProgressBar extends React.Component {
     const { duration, updateTimeAndEndSeek } = this.props;
     const newTime = computeOffset(this.seekBar, duration, e);
     updateTimeAndEndSeek(newTime);
+    // this.props.loadSong();
   };
 
   handleProgressBarMouseDown = () => {
@@ -48,6 +49,7 @@ class PlayerProgressBar extends React.Component {
     const { duration, updateTimeAndEndSeek } = this.props;
     const newTime = computeOffset(this.seekBar, duration, e);
     updateTimeAndEndSeek(newTime);
+    // this.props.loadSong();
   };
 
   render() {
@@ -85,7 +87,8 @@ function mapStateToProps(state, { playerTrack }) {
   return {
     seeking: isPlayerSeeking(state),
     currentTime: getCurrentTime(state),
-    duration: playerTrack.duration / 1000.0, // Extract a formatDurationCompact util. convertMsToSec.
+    // Extract a formatDurationCompact util. convertMsToSec.
+    duration: playerTrack.duration / 1000.0,
   };
 }
 

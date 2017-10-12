@@ -12,7 +12,6 @@ import favoritesReducer from 'features/favorites/favoritesReducer';
 import streamReducer from 'features/stream/streamReducer';
 import searchReducer from 'features/search/searchReducer';
 import playlistsReducer from 'features/playlists/playlistsReducer';
-import userPlaylistsReducer from 'features/userPlaylists/userPlaylistsReducer';
 import sidebarReducer from 'features/sidebar/sidebarReducer';
 import loadingOverlayReducer from 'features/loadingOverlay/loadingOverlayReducer';
 
@@ -32,7 +31,6 @@ const rootReducer = combineReducers({
   stream: streamReducer,
   search: searchReducer,
   playlists: playlistsReducer,
-  userPlaylists: userPlaylistsReducer,
   sidebar: sidebarReducer,
   loadingOverlay: loadingOverlayReducer,
 });

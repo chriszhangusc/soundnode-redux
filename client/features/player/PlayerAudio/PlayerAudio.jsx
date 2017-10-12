@@ -36,18 +36,19 @@ class PlayerAudio extends Component {
   };
 
   togglePlayIfNeeded = (audio) => {
-    // This also covers change song and play logic
-    // debugger;
     if (audio.paused && this.props.loading) {
-      // Set a 1 second delay to make spinner more natural
+      // Set a little bit of delay to give some time for song to load.
       setTimeout(() => {
         audio.play().then(() => {
           this.props.playSong();
         });
-      }, 1000);
+      }, 500);
     } else if (!this.props.playing && !audio.paused) {
-      // When the signal is pause and the audio is playing, it means we need to pause the audio
+      // When the signal is pause and the audio is playing, it means we need to pause the audio.
       audio.pause();
+    } else if (audio.paused && this.props.playing) {
+      // Just when song is already loaded and just flipping paused audio on.
+      audio.play();
     }
   };
 
