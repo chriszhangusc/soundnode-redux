@@ -21,3 +21,5 @@ export const borderClean = darkGray;
 
 export const separatorDark = black;
 export const separatorClean = darkGray;
+
+export const disabled = darkGray;

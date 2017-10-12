@@ -11,22 +11,18 @@ function IconButton({
   tooltipDelayHide,
   tooltipPlacement,
   tooltipText,
+  disabled,
   ...iconProps
 }) {
-  const tooltip = (
-    <Tooltip id={`tooltip-${shortid.generate()}`}>
-      {tooltipText}
-    </Tooltip>
-  );
-
+  const tooltip = <Tooltip id={`tooltip-${shortid.generate()}`}>{tooltipText}</Tooltip>;
   const iconButton = (
-    <Wrapper onClick={onClick}>
-      <Icon {...iconProps} />
+    <Wrapper onClick={onClick} disabled={disabled}>
+      <Icon {...iconProps} disabled={disabled} />
     </Wrapper>
   );
 
-  return tooltipText
-    ? <OverlayTrigger
+  return tooltipText ? (
+    <OverlayTrigger
       delayShow={tooltipDelayShow}
       delayHide={tooltipDelayHide}
       placement={tooltipPlacement}
@@ -34,7 +30,9 @@ function IconButton({
     >
       {iconButton}
     </OverlayTrigger>
-    : iconButton;
+  ) : (
+    iconButton
+  );
 }
 
 IconButton.defaultProps = {

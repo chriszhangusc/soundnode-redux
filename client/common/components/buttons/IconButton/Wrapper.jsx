@@ -5,6 +5,6 @@ export default styled.button`
   border: none;
   outline: none;
   background-color: transparent;
-  cursor: pointer;
+  cursor: ${props => !props.disabled && 'pointer'};
   text-align: center;
 `;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import IconButton from 'common/components/buttons/IconButton';
 import { themeColor, fontColor } from 'app/css/colors';
 
-function PlayerButton({ active, ...rest }) {
+function PlayerButton({ active, disabled, ...rest }) {
   return (
     <IconButton
       iconSize="lg"
@@ -11,6 +11,7 @@ function PlayerButton({ active, ...rest }) {
       color={fontColor}
       active={active}
       activeColor={themeColor}
+      disabled={disabled}
       {...rest}
     />
   );
