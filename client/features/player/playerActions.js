@@ -1,6 +1,7 @@
 import { shufflePlayQueue, syncActivePlayQueue } from 'features/playQueue/playQueueActions';
 import { getActivePlayQueue } from 'features/playQueue/playQueueSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
+import { notificationWarning } from 'features/notification/notificationActions';
 import * as playModes from './playerConsts';
 import * as types from './playerActionTypes';
 import * as selectors from './playerSelectors';
@@ -243,5 +244,12 @@ export function togglePlaybackState(trackId) {
       dispatch(resetPrevSong());
       dispatch(loadSong());
     }
+  };
+}
+
+export function handleStreamError() {
+  return (dispatch) => {
+    dispatch(notificationWarning('Not Streamable'));
+    dispatch(playNextSong());
   };
 }

@@ -39,9 +39,15 @@ class PlayerAudio extends Component {
     if (audio.paused && this.props.loading) {
       // Set a little bit of delay to give some time for song to load.
       setTimeout(() => {
-        audio.play().then(() => {
-          this.props.playSong();
-        });
+        audio
+          .play()
+          .then(() => {
+            this.props.playSong();
+          })
+          .catch((err) => {
+            console.log('Track not playable');
+            this.props.handleStreamError();
+          });
       }, 500);
     } else if (!this.props.playing && !audio.paused) {
       // When the signal is pause and the audio is playing, it means we need to pause the audio.

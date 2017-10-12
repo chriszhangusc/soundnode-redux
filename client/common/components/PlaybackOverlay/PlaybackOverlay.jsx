@@ -7,13 +7,19 @@ import PlayingIndicator from 'common/components/PlayingIndicator';
 import Overlay from './Overlay';
 
 function PlaybackOverlay({ playing, loading, active, onClick }) {
+  let icon = null;
+
+  if (loading && active) {
+    icon = <Spinner small color={themeColor} />;
+  } else if (playing) {
+    icon = <PlayingIndicator />;
+  } else {
+    icon = <Icon iconName={playing ? 'pause' : 'play'} color={themeColor} iconSize="lg" />;
+  }
+
   return (
     <Overlay active={active} onClick={onClick}>
-      {loading ? (
-        <Spinner small color={themeColor} />
-      ) : (
-        playing ? <PlayingIndicator /> : <Icon iconName={playing ? 'pause' : 'play'} color={themeColor} iconSize="lg" />
-      )}
+      {icon}
     </Overlay>
   );
 }

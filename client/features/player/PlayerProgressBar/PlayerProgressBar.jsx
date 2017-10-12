@@ -23,8 +23,14 @@ class PlayerProgressBar extends React.Component {
     }
   }
 
-  handleSeekKnobMouseDown = () => {
+  handleMouseDown = () => {
     this.props.beginSeek();
+  };
+
+  handleMouseUp = (e) => {
+    const { duration, updateTimeAndEndSeek } = this.props;
+    const newTime = computeOffset(this.seekBar, duration, e);
+    updateTimeAndEndSeek(newTime);
   };
 
   // Can not use bind because it will fail when removing listener.
@@ -32,24 +38,6 @@ class PlayerProgressBar extends React.Component {
     const { duration, updateTimeOnSeek } = this.props;
     const newTime = computeOffset(this.seekBar, duration, e);
     updateTimeOnSeek(newTime);
-  };
-
-  handleSeekKnobMouseUp = (e) => {
-    const { duration, updateTimeAndEndSeek } = this.props;
-    const newTime = computeOffset(this.seekBar, duration, e);
-    updateTimeAndEndSeek(newTime);
-    // this.props.loadSong();
-  };
-
-  handleProgressBarMouseDown = () => {
-    this.props.beginSeek();
-  };
-
-  handleProgressBarMouseUp = (e) => {
-    const { duration, updateTimeAndEndSeek } = this.props;
-    const newTime = computeOffset(this.seekBar, duration, e);
-    updateTimeAndEndSeek(newTime);
-    // this.props.loadSong();
   };
 
   render() {
@@ -64,10 +52,10 @@ class PlayerProgressBar extends React.Component {
           minValue={0}
           maxValue={duration}
           currentValue={currentTime}
-          onProgressBarMouseDown={this.handleProgressBarMouseDown}
-          onProgressBarMouseUp={this.handleProgressBarMouseUp}
-          onSeekKnobMouseDown={this.handleSeekKnobMouseDown}
-          onSeekKnobMouseUp={this.handleSeekKnobMouseUp}
+          onProgressBarMouseDown={this.handleMouseDown}
+          onProgressBarMouseUp={this.handleMouseUp}
+          onSeekKnobMouseDown={this.handleMouseDown}
+          onSeekKnobMouseUp={this.handleMouseUp}
         />
       </Wrapper>
     );
