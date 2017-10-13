@@ -45,7 +45,8 @@ class PlayerAudio extends Component {
             this.props.playSong();
           })
           .catch((err) => {
-            console.log('Track not playable');
+            // console.log('Track not playable');
+            console.log(err);
             this.props.handleStreamError();
           });
       }, 500);

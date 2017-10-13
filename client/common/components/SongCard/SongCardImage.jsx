@@ -13,13 +13,13 @@ function SongCardImage({ trackId, active, playing, artworkUrl, loading, handleIm
       <PlaybackOverlay
         active={active}
         loading={loading}
+        playing={playing}
         onClick={() => {
           if (!loading) {
             handleImageClick(trackId);
           }
           // Sync with currently active play queue
         }}
-        playing={playing}
       />
     </TrackImage>
   );
@@ -35,12 +35,6 @@ function mapStateToProps(state, { track, active }) {
     playing: isTrackPlaying(state, id),
   };
 }
-
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     handleImageClick: bindActionCreators(togglePlaybackState, dispatch),
-//   };
-// }
 
 const actions = {
   handleImageClick: togglePlaybackState,

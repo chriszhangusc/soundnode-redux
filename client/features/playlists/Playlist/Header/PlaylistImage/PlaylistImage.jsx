@@ -36,12 +36,11 @@ function PlaylistImage({
   images,
   playlistId,
   handleImageClick,
-  loading,
-  playing,
-  activePlayQueueName,
+  playerLoading,
+  playlistPlaying,
+  playlistActive,
 }) {
   const imageGroup = formatImages(images);
-  const playlistActive = activePlayQueueName === `playlist-${playlistId}`;
   return (
     <Wrapper
       onClick={() => {
@@ -61,8 +60,8 @@ function PlaylistImage({
         onClick={() => {
           console.log('Play current playlist');
         }}
-        loading={loading}
-        playing={playing}
+        loading={playerLoading}
+        playing={playlistPlaying}
       />
     </Wrapper>
   );
@@ -72,11 +71,14 @@ const actions = {
   handleImageClick: playPlaylist,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { playlistId }) {
+  const activePlayQueueName = getActivePlayQueueName(state); // if current playlist is being played
+  const isPlaylistActive = activePlayQueueName === `playlist-${playlistId}`;
   return {
-    activePlayQueueName: getActivePlayQueueName(state), // if current playlist is being played
-    loading: isPlayerLoading(state),
-    playing: isPlayerPlaying(state),
+    playerLoading: isPlayerLoading(state),
+    // If current playlist is playing
+    playlistPlaying: isPlaylistActive && isPlayerPlaying(state),
+    playlistActive: isPlaylistActive,
   };
 }
 
