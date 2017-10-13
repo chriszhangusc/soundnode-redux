@@ -36,7 +36,8 @@ class PlayerAudio extends Component {
   };
 
   togglePlayIfNeeded = (audio) => {
-    if (audio.paused && this.props.loading) {
+    if (this.props.loading) {
+      // debugger;
       // Set a little bit of delay to give some time for song to load.
       setTimeout(() => {
         audio
@@ -51,9 +52,11 @@ class PlayerAudio extends Component {
           });
       }, 500);
     } else if (!this.props.playing && !audio.paused) {
+      // debugger;
       // When the signal is pause and the audio is playing, it means we need to pause the audio.
       audio.pause();
     } else if (audio.paused && this.props.playing) {
+      // debugger;
       // Just when song is already loaded and just flipping paused audio on.
       audio.play();
     }
