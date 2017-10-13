@@ -176,7 +176,7 @@ export function playSongByAction(actionType) {
     } else {
       const idx = activePlaylist.indexOf(curTrackId);
       let nextIdx = actionType === playModes.NEXT ? idx + 1 : idx - 1;
-      nextIdx = nextIdx >= activePlaylist.length ? (nextIdx = activePlaylist.length - 1) : nextIdx;
+      nextIdx = (nextIdx >= activePlaylist.length) ? (activePlaylist.length - 1) : nextIdx;
       nextIdx = nextIdx < 0 ? 0 : nextIdx;
       nextTrackId = activePlaylist[nextIdx];
     }
