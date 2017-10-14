@@ -13,7 +13,7 @@ const ActionsWrapper = styled.div`
 `;
 
 function ActionList(props) {
-  const { playlist, handleDeletePlaylist } = props;
+  const { playlist } = props;
   return (
     <ActionsWrapper>
       <LinkButton onClick={() => {}} title="Like Playlist">

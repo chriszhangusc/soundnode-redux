@@ -51,13 +51,9 @@ export function resetPlaylistsState() {
 }
 
 export function loadPlaylists() {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(showLoadingOverlay());
-    const state = getState();
-    const myId = getMyId(state);
-    console.log(myId);
-    fetchPlaylistByUserId(myId).then((normalized) => {
-      console.log(normalized);
+    fetchMyPlaylists().then((normalized) => {
       const { entities, result } = normalized;
       // Merge entities
       dispatch(mergeEntities(entities));
@@ -85,7 +81,7 @@ export function deletePlaylist(playlistId) {
         });
         // dispatch(loadPlaylists());
         dispatch(hideLoadingOverlay());
-        dispatch(notificationSuccess('Playlist deleted!'));
+        dispatch(notificationSuccess('Playlist will be deleted shortly'));
       })
       .catch((err) => {
         // notification warning

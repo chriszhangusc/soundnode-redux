@@ -1,34 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import TrackListHeader from './TrackListHeader';
 import TrackListRow from './TrackListRow';
 
-const TrackListHeaderWrapper = styled.div`
-  padding-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-`;
-
-const TableCell = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  width: ${props => props.width};
-`;
-
-const TableHeader = TableCell.extend`font-weight: 600;`;
-
-const Id = styled.div`
-  display: flex;
-  color: ${props => props.theme.colors.fontColorSub};
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-`;
-
-const IdHeader = Id.extend`color: ${props => props.theme.colors.fontColor};`;
-
-const ShowMoreLessButton = styled.div`
+const CollapseButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,7 +38,7 @@ class TrackList extends React.Component {
     };
   }
 
-  handleShowMoreLessClick = () => {
+  handleCollapseBtnClick = () => {
     this.setState({
       folded: !this.state.folded,
     });
@@ -72,23 +48,17 @@ class TrackList extends React.Component {
     const { tracks } = this.props;
     return (
       <TrackListWrapper>
-        <TrackListHeaderWrapper>
-          <IdHeader>#</IdHeader>
-          <TableHeader width="40%">Title</TableHeader>
-          <TableHeader width="30%">Artist</TableHeader>
-          <TableHeader width="15%">Time</TableHeader>
-          <TableHeader width="10%">Played</TableHeader>
-        </TrackListHeaderWrapper>
+        <TrackListHeader />
 
         <TrackListContentWrapper folded={this.state.folded} itemCount={tracks.length}>
           {tracks.map((track, idx) => <TrackListRow key={idx} track={track} id={idx + 1} />)}
         </TrackListContentWrapper>
 
-        {tracks.length >= 4 && (
-          <ShowMoreLessButton onClick={this.handleShowMoreLessClick}>
+        {tracks.length >= 4 &&
+          <CollapseButton onClick={this.handleCollapseBtnClick}>
             {this.state.folded ? 'Show More' : 'Show Less'}
-          </ShowMoreLessButton>
-        )}
+          </CollapseButton>}
+
       </TrackListWrapper>
     );
   }
