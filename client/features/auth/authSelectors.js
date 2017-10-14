@@ -6,7 +6,7 @@ export const getSession = createSelector(getAuthState, state => state.session);
 
 export const getMe = createSelector(getAuthState, state => state.me);
 
-export const getCurrentUserId = createSelector(getMe, me => me && me.id);
+export const getMyId = createSelector(getMe, me => me && me.id);
 
 export const isLoggedIn = createSelector(getSession, session => session);
 

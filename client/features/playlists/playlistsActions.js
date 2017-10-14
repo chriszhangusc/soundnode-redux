@@ -13,13 +13,18 @@ import {
   notificationSuccess,
   notificationWarning,
 } from 'features/notification/notificationActions';
-import { fetchMyPlaylists, deleteSinglePlaylist } from 'features/playlists/playlistsApi';
+import {
+  fetchMyPlaylists,
+  fetchPlaylistByUserId,
+  deleteSinglePlaylist,
+} from 'features/playlists/playlistsApi';
 import { getPlaylistById } from 'features/entities/entitiesSelectors';
 import {
   updateActivePlayQueue,
   updateActivePlayQueueName,
 } from 'features/playQueue/playQueueActions';
 import { updateActiveTrackId, resetPrevSong, loadSong } from 'features/player/playerActions';
+import { getMyId } from 'features/auth/authSelectors';
 
 export function mergePlaylists(playlistIds) {
   return {
@@ -46,10 +51,13 @@ export function resetPlaylistsState() {
 }
 
 export function loadPlaylists() {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(showLoadingOverlay());
-    fetchMyPlaylists().then((normalized) => {
-      // console.log(normalized);
+    const state = getState();
+    const myId = getMyId(state);
+    console.log(myId);
+    fetchPlaylistByUserId(myId).then((normalized) => {
+      console.log(normalized);
       const { entities, result } = normalized;
       // Merge entities
       dispatch(mergeEntities(entities));
