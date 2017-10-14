@@ -46,3 +46,4 @@ export function formatNumberCompact(value) {
   }
   return `${(value / trillion).toFixed(1)}T`;
 }
+

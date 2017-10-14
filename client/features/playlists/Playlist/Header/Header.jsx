@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getLargeVersion } from 'common/utils/imageUtils';
 import { formatDurationCompact } from 'common/utils/formatUtils';
-import PlaylistImage from './PlaylistImage';
+import pluralize from 'pluralize';
+import ProfileImage from './ProfileImage';
 import ActionList from './ActionList';
 
 const Title = styled.div`
@@ -42,24 +42,18 @@ const HeaderWrapper = styled.div`
   flex: 1;
 `;
 
-function buildImageGrid(tracks) {
-  return tracks.map(track => getLargeVersion(track.artworkUrl)).slice(0, 4);
-}
-
 // Need to handle empty playlist
-function Header({ playlist, tracks }) {
-  const images = buildImageGrid(tracks);
+function Header({ playlist }) {
   return (
     <HeaderWrapper>
-      {/* <TrackImage src={getLargeVersion(playlist.tracks[0].artworkUrl)} size="medium" /> */}
-      <PlaylistImage images={images} playlistId={playlist.id} />
+      <ProfileImage playlistId={playlist.id} />
       <Column>
         <Row>
           <Title>{playlist.title}</Title>
         </Row>
         <Row>
           <Subtitle>
-            {playlist.trackCount} song{playlist.trackCount > 1 && 's'} in{' '}
+            {`${playlist.trackCount} ${pluralize('track', playlist.trackCount)} in `}
             {formatDurationCompact(playlist.duration)}
           </Subtitle>
         </Row>

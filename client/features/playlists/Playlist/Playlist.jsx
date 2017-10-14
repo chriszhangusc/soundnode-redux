@@ -18,7 +18,7 @@ function Playlist({ playlist, playlistTracks }) {
 
   return (
     <PlaylistWrapper>
-      <Header playlist={playlist} tracks={playlistTracks} />
+      <Header playlist={playlist} />
       {playlistTracks && playlistTracks.length > 0 && <TrackList tracks={playlistTracks} />}
     </PlaylistWrapper>
   );
