@@ -20,12 +20,12 @@ function PlayQueueRow({
   index,
   handleTogglePlayback,
 }) {
-  const handlePlayQueueClick = () => {
+  const handleDoubleClick = () => {
     if (!active) handleTogglePlayback(trackId);
   };
 
   return (
-    <Wrapper active={active} onClick={handlePlayQueueClick}>
+    <Wrapper active={active} onDoubleClick={handleDoubleClick}>
       <TrackImage src={artworkUrl} size="tiny" />
       <ColumnTitleWrapper>
         <PlayQueueItemTitle>

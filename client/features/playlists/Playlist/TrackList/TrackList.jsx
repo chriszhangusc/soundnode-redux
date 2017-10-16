@@ -18,7 +18,7 @@ const CollapseButton = styled.div`
 `;
 
 const TrackListContentWrapper = styled.div`
-  max-height: ${props => (props.folded ? 147 : props.itemCount * 49)}px;
+  max-height: ${props => (props.collapsed ? 147 : props.itemCount * 49)}px;
   transition: max-height 1000ms ease-in-out;
   overflow: hidden;
 `;
@@ -34,13 +34,13 @@ class TrackList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      folded: true,
+      collapsed: true,
     };
   }
 
   handleCollapseBtnClick = () => {
     this.setState({
-      folded: !this.state.folded,
+      collapsed: !this.state.collapsed,
     });
   };
 
@@ -50,13 +50,13 @@ class TrackList extends React.Component {
       <TrackListWrapper>
         <TrackListHeader />
 
-        <TrackListContentWrapper folded={this.state.folded} itemCount={tracks.length}>
+        <TrackListContentWrapper collapsed={this.state.collapsed} itemCount={tracks.length}>
           {tracks.map((track, idx) => <TrackListRow key={idx} track={track} id={idx + 1} />)}
         </TrackListContentWrapper>
 
         {tracks.length >= 4 &&
           <CollapseButton onClick={this.handleCollapseBtnClick}>
-            {this.state.folded ? 'Show More' : 'Show Less'}
+            {this.state.collapsed ? 'Show More' : 'Show Less'}
           </CollapseButton>}
 
       </TrackListWrapper>
