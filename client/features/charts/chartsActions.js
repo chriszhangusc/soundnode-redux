@@ -1,12 +1,10 @@
-import { mergeVisiblePlayQueue } from 'features/playQueue/playQueueActions';
-import { getVisiblePlayQueue, getPlayQueueByName } from 'features/playQueue/playQueueSelectors';
 import { notificationWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
-import { isChartsFetching, getChartsNextHref } from './chartsSelectors';
+import { isChartsFetching, getChartsNextHref, getCurrentCharts } from './chartsSelectors';
 import * as actionTypes from './chartsActionTypes';
 
-export function changeGenre(genre) {
+export function updateGenre(genre) {
   return {
     type: actionTypes.CHARTS_GENRE_UPDATE,
     payload: {
@@ -48,11 +46,23 @@ export function resetChartsState() {
   };
 }
 
-export function receiveCharts(normalizedCharts) {
+// Merge trackIds to genre tracks
+export function mergeCharts(trackIds, genre) {
+  return {
+    type: actionTypes.CHARTS_MERGE,
+    payload: {
+      trackIds,
+      genre,
+    },
+  };
+}
+
+export function receiveCharts(normalizedCharts, genre) {
   return (dispatch) => {
     const { entities, result, nextHref } = normalizedCharts;
     dispatch(mergeEntities(entities));
-    dispatch(mergeVisiblePlayQueue(result));
+    // dispatch(mergeVisiblePlayQueue(result));
+    dispatch(mergeCharts(result, genre));
     dispatch(updateChartsNextHref(nextHref));
     dispatch(stopFetchingCharts());
   };
@@ -63,11 +73,11 @@ export function loadChartsPage(genre) {
   return async (dispatch, getState) => {
     // Using getState in conditional dispatch
     const state = getState();
-    if (!getPlayQueueByName(state, genre)) {
+    if (!state[genre]) {
       dispatch(startFetchingCharts());
       try {
         const normalizedCharts = await fetchCharts(genre);
-        dispatch(receiveCharts(normalizedCharts));
+        dispatch(receiveCharts(normalizedCharts, genre));
       } catch (err) {
         console.error(err);
         dispatch(failedToFetchCharts());
@@ -77,18 +87,17 @@ export function loadChartsPage(genre) {
   };
 }
 
-export function loadMoreCharts() {
+export function loadMoreCharts(genre) {
   return async (dispatch, getState) => {
     const state = getState();
     const chartsFetching = isChartsFetching(state);
     const curNextHref = getChartsNextHref(state);
-    const currentCharts = getVisiblePlayQueue(state);
-
+    const currentCharts = getCurrentCharts(state);
     if (!chartsFetching && currentCharts.length < 50 && curNextHref) {
       dispatch(startFetchingCharts());
       try {
         const normalizedCharts = await fetchMoreCharts(curNextHref);
-        dispatch(receiveCharts(normalizedCharts));
+        dispatch(receiveCharts(normalizedCharts, genre));
       } catch (err) {
         console.error(err);
         dispatch(failedToFetchCharts());

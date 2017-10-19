@@ -7,7 +7,7 @@ const initialState = {
   nextHref: undefined,
 };
 
-export function changeGenre(state, { genre }) {
+export function updateGenre(state, { genre }) {
   return {
     ...state,
     selectedGenre: genre,
@@ -41,6 +41,15 @@ export function resetChartsState(state) {
   };
 }
 
+// Merge tracks to currently selected genre charts
+export function mergeCharts(state, { trackIds, genre }) {
+  const old = state[genre];
+  return {
+    ...state,
+    [genre]: old ? [...old, ...trackIds] : [...trackIds],
+  };
+}
+
 export default function chartsReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.CHARTS_FETCH_START:
@@ -50,13 +59,16 @@ export default function chartsReducer(state = initialState, action) {
       return stopFetchingCharts(state);
 
     case actionTypes.CHARTS_GENRE_UPDATE:
-      return changeGenre(state, action.payload);
+      return updateGenre(state, action.payload);
 
     case actionTypes.CHARTS_NEXT_HREF_UPDATE:
       return updateNextHref(state, action.payload);
 
     case actionTypes.CHARTS_STATE_RESET:
       return resetChartsState(initialState);
+
+    case actionTypes.CHARTS_MERGE:
+      return mergeCharts(state, action.payload);
 
     default:
       return state;

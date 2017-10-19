@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadChartsPage, changeGenre, resetChartsState } from 'features/charts/chartsActions';
-import { updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
+import { loadChartsPage, updateGenre, resetChartsState } from 'features/charts/chartsActions';
 import PageTitle from 'common/components/PageTitle';
-import { getCurrentGenreTitle } from 'features/charts/chartsSelectors';
+import { getCurrentGenreTitle, getSelectedGenre } from 'features/charts/chartsSelectors';
 
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';
@@ -13,9 +12,8 @@ class Charts extends Component {
   static propTypes = {
     genreTitle: PropTypes.string,
     loadChartsPage: PropTypes.func.isRequired,
-    changeGenre: PropTypes.func.isRequired,
+    updateGenre: PropTypes.func.isRequired,
     resetChartsState: PropTypes.func.isRequired,
-    updateVisiblePlayQueueName: PropTypes.func.isRequired,
     match: PropTypes.shape({
       params: PropTypes.object,
     }).isRequired,
@@ -44,20 +42,19 @@ class Charts extends Component {
 
   onPageMountOrChange = ({ match }) => {
     const genre = match.params.genre;
-    this.props.updateVisiblePlayQueueName(genre);
-    this.props.changeGenre(genre);
+    this.props.updateGenre(genre);
     this.props.loadChartsPage(genre);
   };
 
   render() {
-    const { genreTitle } = this.props;
+    const { genreTitle, selectedGenre } = this.props;
     return (
       <div>
         <PageTitle>
           Top Charts - {genreTitle}
         </PageTitle>
         <ChartsGenreList />
-        <ChartsTracks />
+        <ChartsTracks selectedGenre={selectedGenre} />
       </div>
     );
   }
@@ -70,7 +67,7 @@ class Charts extends Component {
 // Charts.propTypes = {
 //   genreTitle: PropTypes.string,
 //   loadChartsPage: PropTypes.func.isRequired,
-//   changeGenre: PropTypes.func.isRequired,
+//   updateGenre: PropTypes.func.isRequired,
 //   resetChartsState: PropTypes.func.isRequired,
 //   updateVisiblePlayQueueName: PropTypes.func.isRequired,
 //   match: PropTypes.shape({
@@ -81,14 +78,14 @@ class Charts extends Component {
 function mapStateToProps(state) {
   return {
     genreTitle: getCurrentGenreTitle(state),
+    selectedGenre: getSelectedGenre(state),
   };
 }
 
 const actions = {
   loadChartsPage,
-  changeGenre,
+  updateGenre,
   resetChartsState,
-  updateVisiblePlayQueueName,
 };
 
 export default connect(mapStateToProps, actions)(Charts);

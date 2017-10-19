@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
-import { isFavoritesFetching, getFavoriteTrackIds } from 'features/favorites/favoritesSelectors';
+import { isFavoritesFetching, getFavoriteIds } from 'features/favorites/favoritesSelectors';
 import PageTitle from 'common/components/PageTitle';
 import * as favActions from 'features/favorites/favoritesActions';
 
@@ -34,7 +34,7 @@ Favorites.propTypes = {
 function mapStateToProps(state) {
   return {
     fetching: isFavoritesFetching(state),
-    trackIds: getFavoriteTrackIds(state),
+    trackIds: getFavoriteIds(state),
   };
 }
 
