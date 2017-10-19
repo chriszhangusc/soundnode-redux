@@ -1,4 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
+import { mergeActivePlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
 import * as types from './favoritesActionTypes';
 import { fetchMyFavorites, fetchFavoritesByNextHref } from './favoritesApi';
 import { getFavoritesNextHref, isFavoritesFetching } from './favoritesSelectors';
@@ -45,6 +46,8 @@ export function receiveFavorites(normalized) {
     dispatch(mergeEntities(entities));
     dispatch(updateFavoritesNextHref(nextHref));
     dispatch(mergeFavorites(result));
+    // Dynamically update the play queue if needed
+    dispatch(mergeActivePlayQueueIfNeeded(result, 'favorites'));
     dispatch(stopFetchingFavorites());
   };
 }

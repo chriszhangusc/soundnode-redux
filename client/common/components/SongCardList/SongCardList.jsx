@@ -24,6 +24,7 @@ SongCardList.defaultProps = {
 };
 
 SongCardList.propTypes = {
+  name: PropTypes.string.isRequired,
   trackIds: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 

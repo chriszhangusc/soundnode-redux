@@ -11,10 +11,10 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch, { selectedGenre }) {
+function mapDispatchToProps(dispatch, { selectedGenre, name }) {
   return {
     scrollFunc() {
-      dispatch(loadMoreCharts(selectedGenre));
+      dispatch(loadMoreCharts(selectedGenre, name));
     },
   };
 }

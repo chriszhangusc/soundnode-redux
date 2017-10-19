@@ -4,7 +4,11 @@ import { removePlayerActiveTrack } from 'features/player/playerActions';
 import { notificationSuccess } from 'features/notification/notificationActions';
 import { shiftToFront } from './playQueueUtils';
 import * as types from './playQueueActionTypes';
-import { getActivePlayQueue, isPlayQueueHidden } from './playQueueSelectors';
+import {
+  getActivePlayQueue,
+  isPlayQueueHidden,
+  getActivePlayQueueName,
+} from './playQueueSelectors';
 
 export function hidePlayQueue() {
   return {
@@ -81,8 +85,15 @@ export function shufflePlayQueue() {
 }
 
 // TODO: This function needs rewrite
-export function syncActivePlayQueue() {
+export function mergeActivePlayQueueIfNeeded(trackIds, playlistName) {
   return (dispatch, getState) => {
+    // debugger;
+    const state = getState();
+    const activePlayQueueName = getActivePlayQueueName(state);
+    if (playlistName === activePlayQueueName) {
+      dispatch(mergeActivePlayQueue(trackIds));
+    }
+
     // const state = getState();
     // const visiblePlayQueueName = getVisiblePlayQueueName(state);
     // const activePlayQueueName = getActivePlayQueueName(state);

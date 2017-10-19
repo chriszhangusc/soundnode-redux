@@ -19,7 +19,7 @@ class Favorites extends React.Component {
     return (
       <div>
         <PageTitle>Favorites</PageTitle>
-        <SongCardList title="Favorites" {...this.props} scrollFunc={this.props.loadMoreFavorites} />
+        <SongCardList title="Favorites" name="favorites" {...this.props} scrollFunc={this.props.loadMoreFavorites} />
       </div>
     );
   }

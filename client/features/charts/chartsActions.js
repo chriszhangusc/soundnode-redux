@@ -1,14 +1,8 @@
 import { notificationWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { getActivePlayQueueName } from 'features/playQueue/playQueueSelectors';
-import { updateActivePlayQueue, mergeActivePlayQueue } from 'features/playQueue/playQueueActions';
+import { mergeActivePlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
-import {
-  isChartsFetching,
-  getChartsNextHref,
-  getCurrentCharts,
-  getCurrentPlaylistName,
-} from './chartsSelectors';
+import { isChartsFetching, getChartsNextHref, getCurrentCharts } from './chartsSelectors';
 import * as actionTypes from './chartsActionTypes';
 
 export function updateGenre(genre) {
@@ -64,20 +58,13 @@ export function mergeCharts(trackIds, genre) {
   };
 }
 
-export function receiveCharts(normalizedCharts, genre) {
-  return (dispatch, getState) => {
+export function receiveCharts(normalizedCharts, genre, name) {
+  return (dispatch) => {
     const { entities, result, nextHref } = normalizedCharts;
-    const state = getState();
     dispatch(mergeEntities(entities));
     dispatch(mergeCharts(result, genre));
     dispatch(updateChartsNextHref(nextHref));
-
-    const currentPlaylistName = getCurrentPlaylistName(state);
-    const activePlayQueueName = getActivePlayQueueName(state);
-    // Update play queue if current track list is the active play queue.
-    if (currentPlaylistName === activePlayQueueName) {
-      dispatch(mergeActivePlayQueue(result));
-    }
+    dispatch(mergeActivePlayQueueIfNeeded(normalizedCharts.result, name));
     dispatch(stopFetchingCharts());
   };
 }
@@ -101,18 +88,19 @@ export function loadChartsPage(genre) {
   };
 }
 
-export function loadMoreCharts(genre) {
+export function loadMoreCharts(genre, name) {
   return async (dispatch, getState) => {
     const state = getState();
     const chartsFetching = isChartsFetching(state);
     const curNextHref = getChartsNextHref(state);
     const currentCharts = getCurrentCharts(state);
-
     if (!chartsFetching && currentCharts.length < 50 && curNextHref) {
       dispatch(startFetchingCharts());
       try {
         const normalizedCharts = await fetchMoreCharts(curNextHref);
-        dispatch(receiveCharts(normalizedCharts, genre));
+        // Check to see if we need to dynamically update the active play queue
+        // debugger;
+        dispatch(receiveCharts(normalizedCharts, genre, name));
       } catch (err) {
         console.error(err);
         dispatch(failedToFetchCharts());

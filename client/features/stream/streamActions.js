@@ -1,4 +1,6 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
+import { mergeActivePlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
+
 import * as types from './streamActionTypes';
 import { fetchStream, fetchMoreStream } from './streamApi';
 import { isStreamFetching, getStreamNextHref } from './streamSelectors';
@@ -45,6 +47,7 @@ export function receiveStream(normalized) {
     dispatch(mergeEntities(entities));
     dispatch(mergeStream(result));
     dispatch(updateStreamNextHref(nextHref));
+    dispatch(mergeActivePlayQueueIfNeeded(result, 'stream'));
     dispatch(stopFetchingStream());
   };
 }

@@ -33,7 +33,12 @@ class Stream extends React.Component {
     return (
       <div>
         <PageTitle>Stream</PageTitle>
-        <SongCardList fetching={fetching} trackIds={trackIds} scrollFunc={loadMoreStream} />
+        <SongCardList
+          fetching={fetching}
+          trackIds={trackIds}
+          scrollFunc={loadMoreStream}
+          name="stream"
+        />
       </div>
     );
   }
