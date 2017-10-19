@@ -61,7 +61,6 @@ export function receiveCharts(normalizedCharts, genre) {
   return (dispatch) => {
     const { entities, result, nextHref } = normalizedCharts;
     dispatch(mergeEntities(entities));
-    // dispatch(mergeVisiblePlayQueue(result));
     dispatch(mergeCharts(result, genre));
     dispatch(updateChartsNextHref(nextHref));
     dispatch(stopFetchingCharts());
@@ -72,8 +71,8 @@ export function receiveCharts(normalizedCharts, genre) {
 export function loadChartsPage(genre) {
   return async (dispatch, getState) => {
     // Using getState in conditional dispatch
-    const state = getState();
-    if (!state[genre]) {
+    const chartsState = getState().charts;
+    if (!chartsState[genre]) {
       dispatch(startFetchingCharts());
       try {
         const normalizedCharts = await fetchCharts(genre);

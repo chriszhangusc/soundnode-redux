@@ -152,6 +152,15 @@ export function resetPrevSong() {
   };
 }
 
+// Pause previous track, load new track into player, play new track.
+export function loadTrackAndPlay(trackId) {
+  return (dispatch) => {
+    dispatch(resetPrevSong());
+    dispatch(updateActiveTrackId(trackId));
+    dispatch(loadSong());
+  };
+}
+
 // When we click on next or prev.
 // #FIXME: Needs rewrite too long
 export function playSongByAction(actionType) {
@@ -170,9 +179,7 @@ export function playSongByAction(actionType) {
       nextIdx = nextIdx < 0 ? 0 : nextIdx;
       nextTrackId = activePlaylist[nextIdx];
     }
-    dispatch(updateActiveTrackId(nextTrackId));
-    dispatch(resetPrevSong());
-    dispatch(loadSong());
+    dispatch(loadTrackAndPlay(nextTrackId));
   };
 }
 
@@ -218,15 +225,6 @@ export function togglePlayMode(newMode) {
         dispatch(shufflePlayQueue());
       }
     }
-  };
-}
-
-// Pause previous track, load new track into player, play new track.
-export function loadTrackAndPlay(trackId) {
-  return (dispatch) => {
-    dispatch(resetPrevSong());
-    dispatch(updateActiveTrackId(trackId));
-    dispatch(loadSong());
   };
 }
 

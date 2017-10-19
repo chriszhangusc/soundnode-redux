@@ -32,13 +32,6 @@ export const updateActivePlayQueue = trackIds => ({
   },
 });
 
-export const updateActivePlayQueueName = activePlayQueueName => ({
-  type: types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_NAME_UPDATE,
-  payload: {
-    activePlayQueueName,
-  },
-});
-
 export function togglePlayQueue() {
   return (dispatch, getState) => {
     const state = getState();
@@ -89,24 +82,24 @@ export function shufflePlayQueue() {
 // TODO: This function needs rewrite
 export function syncActivePlayQueue() {
   return (dispatch, getState) => {
-    const state = getState();
-    const visiblePlayQueueName = getVisiblePlayQueueName(state);
-    const activePlayQueueName = getActivePlayQueueName(state);
-    const visiblePlayQueue = getVisiblePlayQueue(state);
-    const activePlayQueue = getActivePlayQueue(state);
-    const shuffleMode = isInShuffleMode(state);
-    // 1. When we fetched more tracks, the active and visible play queue would be out of sync,
-    //    thus reshuffle is needed.
-    // 2. When we switched to a new visible playlist, we need to shuffle the new active play queue.
-    const shuffleNeeded =
-      shuffleMode &&
-      (activePlayQueue.length !== visiblePlayQueue.length ||
-        activePlayQueueName !== visiblePlayQueueName);
-    dispatch(updateActivePlayQueueName(visiblePlayQueueName));
-    dispatch(updateActivePlayQueue(visiblePlayQueue));
-    if (shuffleNeeded) {
-      dispatch(shufflePlayQueue());
-    }
+    // const state = getState();
+    // const visiblePlayQueueName = getVisiblePlayQueueName(state);
+    // const activePlayQueueName = getActivePlayQueueName(state);
+    // const visiblePlayQueue = getVisiblePlayQueue(state);
+    // const activePlayQueue = getActivePlayQueue(state);
+    // const shuffleMode = isInShuffleMode(state);
+    // // 1. When we fetched more tracks, the active and visible play queue would be out of sync,
+    // //    thus reshuffle is needed.
+    // // 2. When we switched to a new visible playlist, we need to shuffle the new active play queue.
+    // const shuffleNeeded =
+    //   shuffleMode &&
+    //   (activePlayQueue.length !== visiblePlayQueue.length ||
+    //     activePlayQueueName !== visiblePlayQueueName);
+    // dispatch(updateActivePlayQueueName(visiblePlayQueueName));
+    // dispatch(updateActivePlayQueue(visiblePlayQueue));
+    // if (shuffleNeeded) {
+    //   dispatch(shufflePlayQueue());
+    // }
   };
 }
 
