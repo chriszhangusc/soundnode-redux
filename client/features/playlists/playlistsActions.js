@@ -22,7 +22,7 @@ import {
   updateActivePlayQueue,
   updateActivePlayQueueName,
 } from 'features/playQueue/playQueueActions';
-import { updateActiveTrackId, resetPrevSong, loadSong } from 'features/player/playerActions';
+import { loadTrackAndPlay } from 'features/player/playerActions';
 
 export function mergePlaylists(playlistIds) {
   return {
@@ -96,13 +96,6 @@ export function playPlaylist(playlistId, trackIdx = 0) {
     const trackIds = playlist.tracks;
     dispatch(updateActivePlayQueueName(`playlist-${playlistId}`));
     dispatch(updateActivePlayQueue(trackIds));
-    dispatch(updateActiveTrackId(trackIds[trackIdx]));
-    dispatch(resetPrevSong());
-    dispatch(loadSong());
-    // 1. Player load start
-
-    // 2. Update play queue with tracks of playlist
-
-    // 3. Play first track of playlist
+    dispatch(loadTrackAndPlay(trackIds[trackIdx]));
   };
 }

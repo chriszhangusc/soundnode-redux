@@ -7,7 +7,15 @@ import { isTrackPlaying, isPlayerLoading } from 'features/player/playerSelectors
 import { togglePlaybackState } from 'features/player/playerActions';
 import { getLargeVersion } from 'common/utils/imageUtils';
 
-function SongCardImage({ trackId, active, playing, artworkUrl, loading, handleImageClick }) {
+function SongCardImage({
+  trackId,
+  trackIds,
+  active,
+  playing,
+  artworkUrl,
+  loading,
+  handleImageClick,
+}) {
   return (
     <TrackImage src={artworkUrl} size="medium">
       <PlaybackOverlay
@@ -16,7 +24,7 @@ function SongCardImage({ trackId, active, playing, artworkUrl, loading, handleIm
         playing={playing}
         onClick={() => {
           if (!loading) {
-            handleImageClick(trackId);
+            handleImageClick(trackId, trackIds);
           }
           // Sync with currently active play queue
         }}

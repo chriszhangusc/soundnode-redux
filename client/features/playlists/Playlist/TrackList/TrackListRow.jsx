@@ -14,7 +14,6 @@ function TrackListRow({ track, trackArtist, playlistId, id, active, handleDouble
     <Table.Row
       active={active}
       onDoubleClick={() => {
-        console.log('Loading playlist and play current song');
         handleDoubleClick(playlistId, id - 1);
       }}
     >

@@ -1,4 +1,3 @@
-import { updateVisiblePlayQueueName, mergeVisiblePlayQueue } from 'features/playQueue/playQueueActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import * as types from './favoritesActionTypes';
 import { fetchMyFavorites, fetchFavoritesByNextHref } from './favoritesApi';
@@ -31,26 +30,33 @@ export function resetFavoritesState() {
   };
 }
 
+export function mergeFavorites(trackIds) {
+  return {
+    type: types.FAVORITES_MERGE,
+    payload: {
+      trackIds,
+    },
+  };
+}
+
 export function receiveFavorites(normalized) {
-  return (dispatch) => {
+  return dispatch => {
     const { entities, nextHref, result } = normalized;
     dispatch(mergeEntities(entities));
     dispatch(updateFavoritesNextHref(nextHref));
-    dispatch(mergeVisiblePlayQueue(result));
+    dispatch(mergeFavorites(result));
     dispatch(stopFetchingFavorites());
   };
 }
 
 export function loadFavorites() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(startFetchingFavorites());
-    dispatch(updateVisiblePlayQueueName('favorites'));
-
     fetchMyFavorites()
-      .then((normalized) => {
+      .then(normalized => {
         dispatch(receiveFavorites(normalized));
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       });
   };
@@ -64,10 +70,10 @@ export function loadMoreFavorites() {
     if (!fetching && curNextHref) {
       dispatch(startFetchingFavorites());
       fetchFavoritesByNextHref(curNextHref)
-        .then((normalized) => {
+        .then(normalized => {
           dispatch(receiveFavorites(normalized));
         })
-        .catch((err) => {
+        .catch(err => {
           console.error(err);
         });
     }

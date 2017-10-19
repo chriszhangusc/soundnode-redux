@@ -8,7 +8,7 @@ import * as actionTypes from './chartsActionTypes';
 
 export function changeGenre(genre) {
   return {
-    type: actionTypes.CHARTS_GENRE_CHANGE,
+    type: actionTypes.CHARTS_GENRE_UPDATE,
     payload: {
       genre,
     },

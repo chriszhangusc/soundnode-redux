@@ -9,7 +9,10 @@ import { Flex } from 'grid-styled';
 function SongCardList({ trackIds }) {
   return (
     <Flex wrap mb={30}>
-      {trackIds.map(trackId => trackId && <SongCard trackId={trackId} key={trackId.toString()} />)}
+      {trackIds.map(
+        trackId =>
+          trackId && <SongCard trackId={trackId} trackIds={trackIds} key={trackId.toString()} />,
+      )}
     </Flex>
   );
 }

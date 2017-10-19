@@ -122,10 +122,10 @@ export default function playQueueReducer(state = initialState, action) {
     case types.PLAY_QUEUE_CLEAR:
       return clearPlayQueue(state, action.payload);
 
-    case types.PLAY_QUEUE_VISIBLE_PLAY_QUEUE_NAME_CHANGE:
+    case types.PLAY_QUEUE_VISIBLE_PLAY_QUEUE_NAME_UPDATE:
       return updateVisiblePlayQueueName(state, action.payload);
 
-    case types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_NAME_CHANGE:
+    case types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_NAME_UPDATE:
       return updateActivePlayQueueName(state, action.payload);
 
     case types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_UPDATE:

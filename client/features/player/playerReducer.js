@@ -150,7 +150,7 @@ export default function playerReducer(state = initialState, action) {
     case actionTypes.PLAYER_VOLUME_SEEK_END:
       return endVolumeSeek(state);
 
-    case actionTypes.PLAYER_PLAY_MODE_CHANGE:
+    case actionTypes.PLAYER_PLAY_MODE_UPDATE:
       return updatePlayMode(state, action.payload);
 
     case actionTypes.PLAYER_MUTE:

@@ -1,4 +1,8 @@
-import { shufflePlayQueue, syncActivePlayQueue } from 'features/playQueue/playQueueActions';
+import {
+  shufflePlayQueue,
+  syncActivePlayQueue,
+  updateActivePlayQueue,
+} from 'features/playQueue/playQueueActions';
 import { getActivePlayQueue } from 'features/playQueue/playQueueSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
 import { notificationWarning } from 'features/notification/notificationActions';
@@ -78,7 +82,7 @@ export function updateVolume(volume) {
 
 export function changePlayMode(mode) {
   return {
-    type: types.PLAYER_PLAY_MODE_CHANGE,
+    type: types.PLAYER_PLAY_MODE_UPDATE,
     payload: {
       mode,
     },
@@ -108,20 +112,20 @@ export function updateTimeOnPlay(time) {
 }
 
 export function updateTimeOnSeek(time) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(updateTimeIfNeeded(time));
   };
 }
 
 export function updateTimeAndEndSeek(time) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(updateTimeIfNeeded(time));
     dispatch(endSeek());
   };
 }
 
 export function updateVolumeAndEndSeek(volume) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(updateVolume(volume));
     dispatch(endVolumeSeek());
   };
@@ -156,7 +160,7 @@ export function updateActiveTrackIdAndPlay(newTrackId) {
 }
 
 export function resetPrevSong() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(pauseSong());
     dispatch(resetTime());
   };
@@ -176,7 +180,7 @@ export function playSongByAction(actionType) {
     } else {
       const idx = activePlaylist.indexOf(curTrackId);
       let nextIdx = actionType === playModes.NEXT ? idx + 1 : idx - 1;
-      nextIdx = (nextIdx >= activePlaylist.length) ? (activePlaylist.length - 1) : nextIdx;
+      nextIdx = nextIdx >= activePlaylist.length ? activePlaylist.length - 1 : nextIdx;
       nextIdx = nextIdx < 0 ? 0 : nextIdx;
       nextTrackId = activePlaylist[nextIdx];
     }
@@ -187,13 +191,13 @@ export function playSongByAction(actionType) {
 }
 
 export function playNextSong() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(playSongByAction(playModes.NEXT));
   };
 }
 
 export function playPrevSong() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(playSongByAction(playModes.PREV));
   };
 }
@@ -231,24 +235,31 @@ export function togglePlayMode(newMode) {
   };
 }
 
-export function togglePlaybackState(trackId) {
+// Pause previous track, load new track into player, play new track.
+export function loadTrackAndPlay(trackId) {
+  return dispatch => {
+    dispatch(resetPrevSong());
+    dispatch(updateActiveTrackId(trackId));
+    dispatch(loadSong());
+  };
+}
+
+export function togglePlaybackState(trackId, trackIds) {
   return (dispatch, getState) => {
     const state = getState();
     const activeTrackId = selectors.getActiveTrackId(state);
-    // const shuffleMode = selectors.isInShuffleMode(state);
     if (trackId === activeTrackId) {
       dispatch(togglePlay());
     } else {
-      dispatch(updateActiveTrackId(trackId));
-      dispatch(syncActivePlayQueue());
-      dispatch(resetPrevSong());
-      dispatch(loadSong());
+      // Update play queue with trackIds
+      dispatch(updateActivePlayQueue(trackIds));
+      dispatch(loadTrackAndPlay(trackId));
     }
   };
 }
 
 export function handleStreamError() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(notificationWarning('Not Streamable'));
     dispatch(playNextSong());
   };

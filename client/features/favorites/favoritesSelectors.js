@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 export const getFavoritesState = state => state.favorites;
 
-export const getFavoritesIds = createSelector(getFavoritesState, state => state.favoritesIds);
+export const getFavoriteTrackIds = createSelector(getFavoritesState, state => state.trackIds);
 
 export const isFavoritesFetching = createSelector(getFavoritesState, state => state.fetching);
 

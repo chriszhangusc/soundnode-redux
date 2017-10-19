@@ -49,7 +49,7 @@ export default function chartsReducer(state = initialState, action) {
     case actionTypes.CHARTS_FETCH_STOP:
       return stopFetchingCharts(state);
 
-    case actionTypes.CHARTS_GENRE_CHANGE:
+    case actionTypes.CHARTS_GENRE_UPDATE:
       return changeGenre(state, action.payload);
 
     case actionTypes.CHARTS_NEXT_HREF_UPDATE:

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTrackById, getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { isTrackActive } from 'features/player/playerSelectors';
-import { togglePlaybackState } from 'features/player/playerActions';
+import { loadTrackAndPlay } from 'features/player/playerActions';
 import TrackImage from 'common/components/images/TrackImage';
 import ColumnTitleWrapper from 'common/components/layouts/ColumnTitleWrapper';
 import Wrapper from './Wrapper';
@@ -52,7 +52,7 @@ function mapStateToProps(state, { trackId }) {
 }
 
 const mapDispatchToProps = {
-  handleTogglePlayback: togglePlaybackState,
+  handleTogglePlayback: loadTrackAndPlay,
 };
 
 const Connected = connect(mapStateToProps, mapDispatchToProps)(PlayQueueRow);

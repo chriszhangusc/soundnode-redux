@@ -2,6 +2,7 @@ import * as types from './favoritesActionTypes.js';
 
 const initialState = {
   fetching: false,
+  trackIds: [],
   nextHref: undefined,
 };
 
@@ -32,6 +33,13 @@ export function updateFavoritesNextHref(state, { nextHref }) {
   };
 }
 
+export function mergeFavorites(state, { trackIds }) {
+  return {
+    ...state,
+    trackIds: [...state.trackIds, ...trackIds],
+  };
+}
+
 export default function favoritesReducer(state = initialState, action) {
   switch (action.type) {
     case types.FAVORITES_FETCH_START:
@@ -45,6 +53,9 @@ export default function favoritesReducer(state = initialState, action) {
 
     case types.FAVORITES_STATE_RESET:
       return resetFavoritesState(initialState);
+
+    case types.FAVORITES_MERGE:
+      return mergeFavorites(state, action.payload);
 
     default:
       return state;

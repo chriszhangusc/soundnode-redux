@@ -26,7 +26,7 @@ export function showPlayQueue() {
 }
 
 export const updateVisiblePlayQueueName = visiblePlayQueueName => ({
-  type: types.PLAY_QUEUE_VISIBLE_PLAY_QUEUE_NAME_CHANGE,
+  type: types.PLAY_QUEUE_VISIBLE_PLAY_QUEUE_NAME_UPDATE,
   payload: {
     visiblePlayQueueName,
   },
@@ -40,7 +40,7 @@ export const updateActivePlayQueue = trackIds => ({
 });
 
 export const updateActivePlayQueueName = activePlayQueueName => ({
-  type: types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_NAME_CHANGE,
+  type: types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_NAME_UPDATE,
   payload: {
     activePlayQueueName,
   },
