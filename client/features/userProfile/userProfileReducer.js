@@ -1,3 +1,4 @@
+import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './userProfileActionTypes';
 
 /* Reducer */
@@ -66,6 +67,14 @@ export function updateTracksNextHref(state, { nextHref }) {
   };
 }
 
+export function mergeUserTracks(state, { trackIds }) {
+  return {
+    ...state,
+    // mergeArrays removes duplicates while preserving the order.
+    trackIds: mergeArrays(state.trackIds, trackIds),
+  };
+}
+
 export function resetUserProfileState(initState) {
   return {
     ...initState,
@@ -100,6 +109,9 @@ export default function userReducer(state = initialState, action) {
 
     case types.USER_PROFILE_TRACKS_NEXT_HREF_UPDATE:
       return updateTracksNextHref(state, action.payload);
+
+    case types.USER_PROFILE_TRACKS_MERGE:
+      return mergeUserTracks(state, action.payload);
 
     default:
       return state;

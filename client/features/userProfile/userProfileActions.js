@@ -3,10 +3,6 @@ import {
   showLoadingOverlay,
   hideLoadingOverlay,
 } from 'features/loadingOverlay/loadingOverlayActions';
-import {
-  mergeVisiblePlayQueue,
-  updateVisiblePlayQueueName,
-} from 'features/playQueue/playQueueActions';
 import * as types from './userProfileActionTypes';
 import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelectors';
 import {
@@ -78,6 +74,15 @@ export function failedToFetchUserTracks() {
   };
 }
 
+export function mergeUserProfileTracks(trackIds) {
+  return {
+    type: types.USER_PROFILE_TRACKS_MERGE,
+    payload: {
+      trackIds,
+    },
+  };
+}
+
 export function receiveUser(normalizedUser) {
   return (dispatch) => {
     dispatch(mergeEntities(normalizedUser.entities));
@@ -88,9 +93,10 @@ export function receiveUser(normalizedUser) {
 
 export function receiveTracks(normalizedTracks) {
   return (dispatch) => {
-    dispatch(mergeEntities(normalizedTracks.entities));
-    dispatch(mergeVisiblePlayQueue(normalizedTracks.result));
-    dispatch(updateTracksNextHref(normalizedTracks.nextHref));
+    const { result, entities, nextHref } = normalizedTracks;
+    dispatch(mergeEntities(entities));
+    dispatch(mergeUserProfileTracks(result));
+    dispatch(updateTracksNextHref(nextHref));
     dispatch(stopFetchingTracks());
   };
 }
@@ -99,7 +105,6 @@ export function receiveTracks(normalizedTracks) {
 export function loadUserProfileData(userId) {
   return (dispatch) => {
     dispatch(updateProfiledUserId(userId));
-    dispatch(updateVisiblePlayQueueName(`user-${userId}`));
     // Right now the user fetching state does nothing... Consider removing it in the future
     dispatch(startFetchingUser());
     dispatch(startFetchingTracks());

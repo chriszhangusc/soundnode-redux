@@ -6,7 +6,6 @@ import { isPageLoading } from 'features/userProfile/userProfileSelectors';
 import UserProfileTracks from 'features/userProfile/UserProfileTracks';
 import UserProfileHeader from 'features/userProfile/UserProfileHeader';
 import PageTitle from 'common/components/PageTitle';
-import { Box } from 'grid-styled';
 
 class UserProfile extends React.Component {
   static propTypes = {
@@ -49,11 +48,11 @@ class UserProfile extends React.Component {
       return null;
     }
     return (
-      <Box>
+      <div>
         <UserProfileHeader />
         <PageTitle>Tracks</PageTitle>
         <UserProfileTracks />
-      </Box>
+      </div>
     );
   }
 }
