@@ -1,7 +1,14 @@
 import { notificationWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
+import { getActivePlayQueueName } from 'features/playQueue/playQueueSelectors';
+import { updateActivePlayQueue, mergeActivePlayQueue } from 'features/playQueue/playQueueActions';
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
-import { isChartsFetching, getChartsNextHref, getCurrentCharts } from './chartsSelectors';
+import {
+  isChartsFetching,
+  getChartsNextHref,
+  getCurrentCharts,
+  getCurrentPlaylistName,
+} from './chartsSelectors';
 import * as actionTypes from './chartsActionTypes';
 
 export function updateGenre(genre) {
@@ -58,11 +65,19 @@ export function mergeCharts(trackIds, genre) {
 }
 
 export function receiveCharts(normalizedCharts, genre) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const { entities, result, nextHref } = normalizedCharts;
+    const state = getState();
     dispatch(mergeEntities(entities));
     dispatch(mergeCharts(result, genre));
     dispatch(updateChartsNextHref(nextHref));
+
+    const currentPlaylistName = getCurrentPlaylistName(state);
+    const activePlayQueueName = getActivePlayQueueName(state);
+    // Update play queue if current track list is the active play queue.
+    if (currentPlaylistName === activePlayQueueName) {
+      dispatch(mergeActivePlayQueue(result));
+    }
     dispatch(stopFetchingCharts());
   };
 }
@@ -92,6 +107,7 @@ export function loadMoreCharts(genre) {
     const chartsFetching = isChartsFetching(state);
     const curNextHref = getChartsNextHref(state);
     const currentCharts = getCurrentCharts(state);
+
     if (!chartsFetching && currentCharts.length < 50 && curNextHref) {
       dispatch(startFetchingCharts());
       try {

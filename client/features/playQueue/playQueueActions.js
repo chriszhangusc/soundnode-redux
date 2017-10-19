@@ -1,17 +1,10 @@
-import { getActiveTrackId, isInShuffleMode } from 'features/player/playerSelectors';
+import { getActiveTrackId } from 'features/player/playerSelectors';
 import shuffle from 'lodash/shuffle';
 import { removePlayerActiveTrack } from 'features/player/playerActions';
 import { notificationSuccess } from 'features/notification/notificationActions';
 import { shiftToFront } from './playQueueUtils';
 import * as types from './playQueueActionTypes';
-
-import {
-  getActivePlayQueue,
-  getVisiblePlayQueueName,
-  getVisiblePlayQueue,
-  getActivePlayQueueName,
-  isPlayQueueHidden,
-} from './playQueueSelectors';
+import { getActivePlayQueue, isPlayQueueHidden } from './playQueueSelectors';
 
 export function hidePlayQueue() {
   return {
@@ -25,8 +18,16 @@ export function showPlayQueue() {
   };
 }
 
-export const updateActivePlayQueue = trackIds => ({
+export const updateActivePlayQueue = ({ trackIds, name }) => ({
   type: types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_UPDATE,
+  payload: {
+    trackIds,
+    name,
+  },
+});
+
+export const mergeActivePlayQueue = trackIds => ({
+  type: types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_MERGE,
   payload: {
     trackIds,
   },

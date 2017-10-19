@@ -6,12 +6,14 @@ import withFetchingOnScroll from 'common/hocs/withFetchingOnScroll';
 import { compose } from 'recompose';
 import { Flex } from 'grid-styled';
 
-function SongCardList({ trackIds }) {
+function SongCardList({ trackIds, name }) {
   return (
     <Flex wrap mb={30}>
       {trackIds.map(
         trackId =>
-          trackId && <SongCard trackId={trackId} trackIds={trackIds} key={trackId.toString()} />,
+          trackId && (
+            <SongCard trackId={trackId} trackIds={trackIds} name={name} key={trackId.toString()} />
+          ),
       )}
     </Flex>
   );

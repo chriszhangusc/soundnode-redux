@@ -10,6 +10,7 @@ import { getLargeVersion } from 'common/utils/imageUtils';
 function SongCardImage({
   trackId,
   trackIds,
+  name,
   active,
   playing,
   artworkUrl,
@@ -24,7 +25,7 @@ function SongCardImage({
         playing={playing}
         onClick={() => {
           if (!loading) {
-            handleImageClick(trackId, trackIds);
+            handleImageClick(trackId, { trackIds, name });
           }
           // Sync with currently active play queue
         }}

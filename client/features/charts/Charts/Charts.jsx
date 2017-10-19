@@ -54,7 +54,7 @@ class Charts extends Component {
           Top Charts - {genreTitle}
         </PageTitle>
         <ChartsGenreList />
-        <ChartsTracks selectedGenre={selectedGenre} />
+        <ChartsTracks selectedGenre={selectedGenre} name={`charts-${selectedGenre}`} />
       </div>
     );
   }

@@ -8,6 +8,8 @@ export const getSelectedGenre = createSelector(
   chartsState => chartsState.selectedGenre,
 );
 
+export const getCurrentPlaylistName = createSelector(getSelectedGenre, genre => `charts-${genre}`);
+
 export const isChartsFetching = createSelector(getChartsState, chartsState => chartsState.fetching);
 
 export const getCurrentGenreTitle = createSelector(getSelectedGenre, (selectedGenre) => {

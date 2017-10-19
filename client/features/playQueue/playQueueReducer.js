@@ -1,4 +1,5 @@
 import remove from 'lodash/remove';
+import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './playQueueActionTypes';
 
 const initialState = {
@@ -15,10 +16,18 @@ export function clearPlayQueue(state) {
   };
 }
 
-export function updateActivePlayQueue(state, { trackIds }) {
+export function mergeActivePlayQueue(state, { trackIds }) {
+  return {
+    ...state,
+    activePlayQueue: mergeArrays(state.activePlayQueue, trackIds),
+  };
+}
+
+export function updateActivePlayQueue(state, { trackIds, name }) {
   return {
     ...state,
     activePlayQueue: [...trackIds],
+    activePlayQueueName: name,
   };
 }
 
@@ -60,6 +69,9 @@ export default function playQueueReducer(state = initialState, action) {
 
     case types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_UPDATE:
       return updateActivePlayQueue(state, action.payload);
+
+    case types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_MERGE:
+      return mergeActivePlayQueue(state, action.payload);
 
     default:
       return state;

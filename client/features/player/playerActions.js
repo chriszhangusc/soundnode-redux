@@ -161,6 +161,31 @@ export function loadTrackAndPlay(trackId) {
   };
 }
 
+export function togglePlay() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const playing = selectors.isPlayerPlaying(state);
+    if (playing) {
+      dispatch(pauseSong());
+    } else {
+      dispatch(playSong());
+    }
+  };
+}
+
+export function togglePlaybackState(trackId, playQueue) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const activeTrackId = selectors.getActiveTrackId(state);
+    if (trackId === activeTrackId) {
+      dispatch(togglePlay());
+    } else {
+      dispatch(updateActivePlayQueue(playQueue));
+      dispatch(loadTrackAndPlay(trackId));
+    }
+  };
+}
+
 // When we click on next or prev.
 // #FIXME: Needs rewrite too long
 export function playSongByAction(actionType) {
@@ -195,18 +220,6 @@ export function playPrevSong() {
   };
 }
 
-export function togglePlay() {
-  return (dispatch, getState) => {
-    const state = getState();
-    const playing = selectors.isPlayerPlaying(state);
-    if (playing) {
-      dispatch(pauseSong());
-    } else {
-      dispatch(playSong());
-    }
-  };
-}
-
 // When we click mode icons on player.
 export function togglePlayMode(newMode) {
   return (dispatch, getState) => {
@@ -224,20 +237,6 @@ export function togglePlayMode(newMode) {
       if (newMode === playModes.SHUFFLE) {
         dispatch(shufflePlayQueue());
       }
-    }
-  };
-}
-
-export function togglePlaybackState(trackId, trackIds) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const activeTrackId = selectors.getActiveTrackId(state);
-    if (trackId === activeTrackId) {
-      dispatch(togglePlay());
-    } else {
-      // Update play queue with trackIds
-      dispatch(updateActivePlayQueue(trackIds));
-      dispatch(loadTrackAndPlay(trackId));
     }
   };
 }
