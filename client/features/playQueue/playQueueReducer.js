@@ -4,7 +4,6 @@ import * as types from './playQueueActionTypes';
 
 const initialState = {
   activePlayQueueName: undefined,
-  visiblePlayQueueName: undefined,
   activePlayQueue: [],
   hidden: true,
 };
@@ -14,20 +13,6 @@ export function clearPlayQueue(state) {
   return {
     ...state,
     activePlayQueue: [],
-  };
-}
-
-export function updateVisiblePlayQueue(state, { visiblePlayQueue }) {
-  return {
-    ...state,
-    [state.visiblePlayQueueName]: [...visiblePlayQueue],
-  };
-}
-
-export function updateVisiblePlayQueueName(state, { visiblePlayQueueName }) {
-  return {
-    ...state,
-    visiblePlayQueueName,
   };
 }
 
@@ -45,15 +30,15 @@ export function updateActivePlayQueue(state, { trackIds }) {
   };
 }
 
-export function appendToPlayQueue(state, { playQueueName, trackIds }) {
-  const newPlayQueue = state[playQueueName]
-    ? [...state[playQueueName], ...trackIds]
-    : [...trackIds];
-  return {
-    ...state,
-    [playQueueName]: newPlayQueue,
-  };
-}
+// export function appendToPlayQueue(state, { playQueueName, trackIds }) {
+//   const newPlayQueue = state[playQueueName]
+//     ? [...state[playQueueName], ...trackIds]
+//     : [...trackIds];
+//   return {
+//     ...state,
+//     [playQueueName]: newPlayQueue,
+//   };
+// }
 
 export function mergePlayQueue(state, { playQueueName, trackIds }) {
   const curPlayQueue = state[playQueueName] ? state[playQueueName] : [];
@@ -107,8 +92,8 @@ export default function playQueueReducer(state = initialState, action) {
     case types.PLAY_QUEUE_HIDE:
       return hidePlayQueue(state);
 
-    case types.PLAY_QUEUE_MERGE:
-      return mergePlayQueue(state, action.payload);
+    // case types.PLAY_QUEUE_MERGE:
+    //   return mergePlayQueue(state, action.payload);
 
     case types.PLAY_QUEUE_REMOVE:
       return removePlayQueue(state, action.payload);
@@ -116,14 +101,11 @@ export default function playQueueReducer(state = initialState, action) {
     case types.PLAY_QUEUE_TRACK_REMOVE:
       return removeTrackFromPlayQueue(state, action.payload);
 
-    case types.APPEND_TRACK_TO_PLAY_QUEUE:
-      return appendToPlayQueue(state, action.payload);
+    // case types.APPEND_TRACK_TO_PLAY_QUEUE:
+    //   return appendToPlayQueue(state, action.payload);
 
     case types.PLAY_QUEUE_CLEAR:
       return clearPlayQueue(state, action.payload);
-
-    case types.PLAY_QUEUE_VISIBLE_PLAY_QUEUE_NAME_UPDATE:
-      return updateVisiblePlayQueueName(state, action.payload);
 
     case types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_NAME_UPDATE:
       return updateActivePlayQueueName(state, action.payload);

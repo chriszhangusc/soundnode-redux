@@ -112,20 +112,20 @@ export function updateTimeOnPlay(time) {
 }
 
 export function updateTimeOnSeek(time) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(updateTimeIfNeeded(time));
   };
 }
 
 export function updateTimeAndEndSeek(time) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(updateTimeIfNeeded(time));
     dispatch(endSeek());
   };
 }
 
 export function updateVolumeAndEndSeek(volume) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(updateVolume(volume));
     dispatch(endVolumeSeek());
   };
@@ -145,29 +145,15 @@ export function toggleMute() {
   };
 }
 
-// Change to new song or just play paused current song.
-export function updateActiveTrackIdAndPlay(newTrackId) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const curTrackId = selectors.getCurrentPlayerTrack(state);
-    dispatch(pauseSong());
-    dispatch(resetTime());
-    if (curTrackId !== newTrackId) {
-      dispatch(updateActiveTrackId(newTrackId));
-    }
-    dispatch(playSong());
-  };
-}
-
 export function resetPrevSong() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(pauseSong());
     dispatch(resetTime());
   };
 }
 
 // When we click on next or prev.
-// Too long
+// #FIXME: Needs rewrite too long
 export function playSongByAction(actionType) {
   return (dispatch, getState) => {
     const state = getState();
@@ -191,13 +177,13 @@ export function playSongByAction(actionType) {
 }
 
 export function playNextSong() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(playSongByAction(playModes.NEXT));
   };
 }
 
 export function playPrevSong() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(playSongByAction(playModes.PREV));
   };
 }
@@ -237,7 +223,7 @@ export function togglePlayMode(newMode) {
 
 // Pause previous track, load new track into player, play new track.
 export function loadTrackAndPlay(trackId) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(resetPrevSong());
     dispatch(updateActiveTrackId(trackId));
     dispatch(loadSong());
@@ -259,7 +245,7 @@ export function togglePlaybackState(trackId, trackIds) {
 }
 
 export function handleStreamError() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(notificationWarning('Not Streamable'));
     dispatch(playNextSong());
   };

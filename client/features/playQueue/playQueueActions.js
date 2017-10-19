@@ -25,13 +25,6 @@ export function showPlayQueue() {
   };
 }
 
-export const updateVisiblePlayQueueName = visiblePlayQueueName => ({
-  type: types.PLAY_QUEUE_VISIBLE_PLAY_QUEUE_NAME_UPDATE,
-  payload: {
-    visiblePlayQueueName,
-  },
-});
-
 export const updateActivePlayQueue = trackIds => ({
   type: types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_UPDATE,
   payload: {
@@ -55,16 +48,6 @@ export function togglePlayQueue() {
     } else {
       dispatch(hidePlayQueue());
     }
-  };
-}
-
-export function mergePlayQueue(playQueueName, trackIds) {
-  return {
-    type: types.PLAY_QUEUE_MERGE,
-    payload: {
-      playQueueName,
-      trackIds,
-    },
   };
 }
 
@@ -103,18 +86,7 @@ export function shufflePlayQueue() {
   };
 }
 
-export function mergeVisiblePlayQueue(playQueue) {
-  return (dispatch, getState) => {
-    // playQueue could be a single trackId or an array of trackIds
-    const trackIds = [...playQueue];
-    const state = getState();
-    const visiblePlayQueueName = getVisiblePlayQueueName(state);
-    dispatch(mergePlayQueue(visiblePlayQueueName, trackIds));
-  };
-}
-
-// Sync active play queue(playlist) with visible play queue
-// TODO: Visible play queue and active play queue??
+// TODO: This function needs rewrite
 export function syncActivePlayQueue() {
   return (dispatch, getState) => {
     const state = getState();
