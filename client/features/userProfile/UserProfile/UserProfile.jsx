@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as userProfileActions from 'features/userProfile/userProfileActions';
-import { isPageLoading } from 'features/userProfile/userProfileSelectors';
+import { isPageLoading, getProfiledUserId } from 'features/userProfile/userProfileSelectors';
 import UserProfileTracks from 'features/userProfile/UserProfileTracks';
 import UserProfileHeader from 'features/userProfile/UserProfileHeader';
 import PageTitle from 'common/components/PageTitle';
@@ -43,7 +43,7 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    const { pageLoading } = this.props;
+    const { pageLoading, userId } = this.props;
     if (pageLoading) {
       return null;
     }
@@ -51,7 +51,7 @@ class UserProfile extends React.Component {
       <div>
         <UserProfileHeader />
         <PageTitle>Tracks</PageTitle>
-        <UserProfileTracks />
+        <UserProfileTracks name={`user-${userId}`} />
       </div>
     );
   }
@@ -60,6 +60,7 @@ class UserProfile extends React.Component {
 function mapStateToProps(state) {
   return {
     pageLoading: isPageLoading(state),
+    userId: getProfiledUserId(state),
   };
 }
 

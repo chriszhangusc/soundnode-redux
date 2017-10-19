@@ -3,8 +3,10 @@ import {
   showLoadingOverlay,
   hideLoadingOverlay,
 } from 'features/loadingOverlay/loadingOverlayActions';
+import { mergeActivePlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
+
 import * as types from './userProfileActionTypes';
-import { getUserTracksNextHref, isUserTracksFetching } from './userProfileSelectors';
+import { getUserTracksNextHref, isUserTracksFetching, getProfiledUserId } from './userProfileSelectors';
 import {
   fetchProfiledUser,
   fetchProfiledUserTracks,
@@ -92,10 +94,13 @@ export function receiveUser(normalizedUser) {
 }
 
 export function receiveTracks(normalizedTracks) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const { result, entities, nextHref } = normalizedTracks;
+    const state = getState();
+    const userId = getProfiledUserId(state);
     dispatch(mergeEntities(entities));
     dispatch(mergeUserProfileTracks(result));
+    dispatch(mergeActivePlayQueueIfNeeded(result, `user-${userId}`));
     dispatch(updateTracksNextHref(nextHref));
     dispatch(stopFetchingTracks());
   };

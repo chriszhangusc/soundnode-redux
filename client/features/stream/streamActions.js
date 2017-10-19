@@ -1,6 +1,5 @@
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { mergeActivePlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
-
 import * as types from './streamActionTypes';
 import { fetchStream, fetchMoreStream } from './streamApi';
 import { isStreamFetching, getStreamNextHref } from './streamSelectors';
