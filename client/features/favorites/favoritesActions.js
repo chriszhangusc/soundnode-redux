@@ -30,17 +30,17 @@ export function resetFavoritesState() {
   };
 }
 
-export function mergeFavorites(trackIds) {
+export function mergeFavorites(favoriteIds) {
   return {
     type: types.FAVORITES_MERGE,
     payload: {
-      trackIds,
+      favoriteIds,
     },
   };
 }
 
 export function receiveFavorites(normalized) {
-  return dispatch => {
+  return (dispatch) => {
     const { entities, nextHref, result } = normalized;
     dispatch(mergeEntities(entities));
     dispatch(updateFavoritesNextHref(nextHref));
@@ -50,13 +50,13 @@ export function receiveFavorites(normalized) {
 }
 
 export function loadFavorites() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(startFetchingFavorites());
     fetchMyFavorites()
-      .then(normalized => {
+      .then((normalized) => {
         dispatch(receiveFavorites(normalized));
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
   };
@@ -70,10 +70,10 @@ export function loadMoreFavorites() {
     if (!fetching && curNextHref) {
       dispatch(startFetchingFavorites());
       fetchFavoritesByNextHref(curNextHref)
-        .then(normalized => {
+        .then((normalized) => {
           dispatch(receiveFavorites(normalized));
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
         });
     }

@@ -1,9 +1,8 @@
-import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './streamActionTypes';
 
 const initialState = {
   fetching: false,
-  // streamIds: [],
+  streamIds: [],
   nextHref: undefined,
 };
 
@@ -21,12 +20,13 @@ export function stopFetchingStream(state) {
   };
 }
 
-// export function mergeStream(state, { streamIds }) {
-//   return {
-//     ...state,
-//     streamIds: mergeArrays(streamIds, state.streamIds),
-//   };
-// }
+export function mergeStream(state, { streamIds }) {
+  return {
+    ...state,
+    // streamIds: mergeArrays(streamIds, state.streamIds),
+    streamIds: [...state.streamIds, ...streamIds],
+  };
+}
 
 export function updateNextHref(state, { nextHref }) {
   return {
@@ -48,9 +48,9 @@ export default function streamReducer(state = initialState, action) {
 
     case types.STREAM_FETCH_STOP:
       return stopFetchingStream(state);
-    // case types.STREAM_MERGE:
-    //   return mergeStream(state, action.payload);
 
+    case types.STREAM_MERGE:
+      return mergeStream(state, action.payload);
 
     case types.STREAM_NEXT_HREF_UPDATE:
       return updateNextHref(state, action.payload);

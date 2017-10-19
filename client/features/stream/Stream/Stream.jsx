@@ -1,13 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateVisiblePlayQueueName } from 'features/playQueue/playQueueActions';
 import SongCardList from 'common/components/SongCardList';
 import PageTitle from 'common/components/PageTitle';
-import { getVisiblePlayQueue } from 'features/playQueue/playQueueSelectors';
-import { isStreamFetching } from 'features/stream/streamSelectors';
+import { isStreamFetching, getStreamIds } from 'features/stream/streamSelectors';
 import * as streamActions from 'features/stream/streamActions';
-import { Box } from 'grid-styled';
 
 class Stream extends React.Component {
   static propTypes = {
@@ -16,7 +13,6 @@ class Stream extends React.Component {
     loadStream: PropTypes.func.isRequired,
     loadMoreStream: PropTypes.func.isRequired,
     resetStreamState: PropTypes.func.isRequired,
-    updateVisiblePlayQueueName: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -25,7 +21,6 @@ class Stream extends React.Component {
   };
 
   componentDidMount() {
-    this.props.updateVisiblePlayQueueName('stream');
     this.props.loadStream();
   }
 
@@ -36,10 +31,10 @@ class Stream extends React.Component {
   render() {
     const { fetching, trackIds, loadMoreStream } = this.props;
     return (
-      <Box>
+      <div>
         <PageTitle>Stream</PageTitle>
         <SongCardList fetching={fetching} trackIds={trackIds} scrollFunc={loadMoreStream} />
-      </Box>
+      </div>
     );
   }
 }
@@ -47,13 +42,8 @@ class Stream extends React.Component {
 function mapStateToProps(state) {
   return {
     fetching: isStreamFetching(state),
-    trackIds: getVisiblePlayQueue(state),
+    trackIds: getStreamIds(state),
   };
 }
 
-const actions = {
-  ...streamActions,
-  updateVisiblePlayQueueName,
-};
-
-export default connect(mapStateToProps, actions)(Stream);
+export default connect(mapStateToProps, streamActions)(Stream);

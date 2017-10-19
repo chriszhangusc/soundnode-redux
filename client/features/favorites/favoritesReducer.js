@@ -2,7 +2,7 @@ import * as types from './favoritesActionTypes.js';
 
 const initialState = {
   fetching: false,
-  trackIds: [],
+  favoriteIds: [],
   nextHref: undefined,
 };
 
@@ -33,10 +33,10 @@ export function updateFavoritesNextHref(state, { nextHref }) {
   };
 }
 
-export function mergeFavorites(state, { trackIds }) {
+export function mergeFavorites(state, { favoriteIds }) {
   return {
     ...state,
-    trackIds: [...state.trackIds, ...trackIds],
+    favoriteIds: [...state.favoriteIds, ...favoriteIds],
   };
 }
 
