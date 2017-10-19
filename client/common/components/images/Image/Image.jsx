@@ -36,6 +36,8 @@ function getWidthAndHeight(size) {
     case 'medium':
       return '206px';
     case 'large':
+      return '300px';
+    case 'xlarge':
       return '350px';
     case 'fluid':
       return '100%';
