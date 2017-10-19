@@ -18,7 +18,7 @@ export const getVisiblePlayQueueName = createSelector(
 export const getVisiblePlayQueue = createSelector(
   getPlayQueueState,
   getVisiblePlayQueueName,
-  (state, playQueueName) => playQueueName && state[playQueueName],
+  (state, playQueueName) => playQueueName && (state[playQueueName] || []),
 );
 
 export const getActivePlayQueue = createSelector(getPlayQueueState, state => state.activePlayQueue);

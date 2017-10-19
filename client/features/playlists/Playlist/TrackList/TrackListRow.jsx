@@ -6,11 +6,18 @@ import { formatDurationCompact, formatNumberCompact } from 'common/utils/formatU
 import { getUserByTrackId } from 'features/entities/entitiesSelectors';
 import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import { isTrackActive } from 'features/player/playerSelectors';
+import { playPlaylist } from 'features/playlists/playlistsActions';
 import Table from './Table';
 
-function TrackListRow({ track, trackArtist, id, active }) {
+function TrackListRow({ track, trackArtist, playlistId, id, active, handleDoubleClick }) {
   return (
-    <Table.Row active={active}>
+    <Table.Row
+      active={active}
+      onDoubleClick={() => {
+        console.log('Loading playlist and play current song');
+        handleDoubleClick(playlistId, id - 1);
+      }}
+    >
       <Table.IdCell>{id}</Table.IdCell>
       <Table.Cell width="40%">
         <TrackImage src={track.artworkUrl} size="tiny" mr="10px" />
@@ -44,4 +51,8 @@ function mapStateToProps(state, { track }) {
   };
 }
 
-export default connect(mapStateToProps)(TrackListRow);
+const actions = {
+  handleDoubleClick: playPlaylist,
+};
+
+export default connect(mapStateToProps, actions)(TrackListRow);

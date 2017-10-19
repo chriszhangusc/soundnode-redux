@@ -15,7 +15,6 @@ import {
 } from 'features/notification/notificationActions';
 import {
   fetchMyPlaylists,
-  fetchPlaylistByUserId,
   deleteSinglePlaylist,
 } from 'features/playlists/playlistsApi';
 import { getPlaylistById } from 'features/entities/entitiesSelectors';
@@ -24,7 +23,6 @@ import {
   updateActivePlayQueueName,
 } from 'features/playQueue/playQueueActions';
 import { updateActiveTrackId, resetPrevSong, loadSong } from 'features/player/playerActions';
-import { getMyId } from 'features/auth/authSelectors';
 
 export function mergePlaylists(playlistIds) {
   return {
@@ -91,20 +89,16 @@ export function deletePlaylist(playlistId) {
   };
 }
 
-export function playPlaylist(playlistId) {
+export function playPlaylist(playlistId, trackIdx = 0) {
   return (dispatch, getState) => {
     const state = getState();
     const playlist = getPlaylistById(state, playlistId);
     const trackIds = playlist.tracks;
     dispatch(updateActivePlayQueueName(`playlist-${playlistId}`));
     dispatch(updateActivePlayQueue(trackIds));
-    dispatch(updateActiveTrackId(trackIds[0]));
+    dispatch(updateActiveTrackId(trackIds[trackIdx]));
     dispatch(resetPrevSong());
     dispatch(loadSong());
-    // dispatch(updateActiveTrackId(trackId));
-    // dispatch(syncActivePlayQueue());
-    // dispatch(resetPrevSong());
-    // dispatch(loadSong());
     // 1. Player load start
 
     // 2. Update play queue with tracks of playlist

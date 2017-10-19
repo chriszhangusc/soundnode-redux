@@ -19,7 +19,8 @@ function Playlist({ playlist, playlistTracks }) {
   return (
     <PlaylistWrapper>
       <Header playlist={playlist} />
-      {playlistTracks && playlistTracks.length > 0 && <TrackList tracks={playlistTracks} />}
+      {playlistTracks &&
+        playlistTracks.length > 0 && <TrackList tracks={playlistTracks} playlistId={playlist.id} />}
     </PlaylistWrapper>
   );
 }

@@ -114,6 +114,7 @@ export function mergeVisiblePlayQueue(playQueue) {
 }
 
 // Sync active play queue(playlist) with visible play queue
+// TODO: Visible play queue and active play queue??
 export function syncActivePlayQueue() {
   return (dispatch, getState) => {
     const state = getState();
@@ -126,9 +127,9 @@ export function syncActivePlayQueue() {
     //    thus reshuffle is needed.
     // 2. When we switched to a new visible playlist, we need to shuffle the new active play queue.
     const shuffleNeeded =
+      shuffleMode &&
       (activePlayQueue.length !== visiblePlayQueue.length ||
-        activePlayQueueName !== visiblePlayQueueName) &&
-      shuffleMode;
+        activePlayQueueName !== visiblePlayQueueName);
     dispatch(updateActivePlayQueueName(visiblePlayQueueName));
     dispatch(updateActivePlayQueue(visiblePlayQueue));
     if (shuffleNeeded) {

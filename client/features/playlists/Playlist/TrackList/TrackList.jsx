@@ -45,20 +45,22 @@ class TrackList extends React.Component {
   };
 
   render() {
-    const { tracks } = this.props;
+    const { tracks, playlistId } = this.props;
     return (
       <TrackListWrapper>
         <TrackListHeader />
 
         <TrackListContentWrapper collapsed={this.state.collapsed} itemCount={tracks.length}>
-          {tracks.map((track, idx) => <TrackListRow key={idx} track={track} id={idx + 1} />)}
+          {tracks.map((track, idx) => (
+            <TrackListRow key={idx} track={track} id={idx + 1} playlistId={playlistId} />
+          ))}
         </TrackListContentWrapper>
 
-        {tracks.length >= 4 &&
+        {tracks.length >= 5 && (
           <CollapseButton onClick={this.handleCollapseBtnClick}>
             {this.state.collapsed ? 'Show More' : 'Show Less'}
-          </CollapseButton>}
-
+          </CollapseButton>
+        )}
       </TrackListWrapper>
     );
   }

@@ -8,7 +8,6 @@ import 'normalize.css';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import theme from 'app/css/theme';
-
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 const store = configureStore();
