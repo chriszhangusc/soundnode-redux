@@ -146,7 +146,7 @@ export function loadMe() {
       .then(() => {
         dispatch(loginSucceed());
         dispatch(hideLoadingOverlay());
-        dispatch(notificationSuccess('Login Success'));
+        // dispatch(notificationSuccess('Login Success'));
       })
       .catch((err) => {
         console.error(err);
