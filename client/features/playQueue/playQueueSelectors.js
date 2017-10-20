@@ -6,12 +6,11 @@ export const getPlayQueueState = state => state.playQueue;
 
 export const isPlayQueueHidden = createSelector(getPlayQueueState, state => state.hidden);
 
-export const getActivePlayQueueName = createSelector(
-  getPlayQueueState,
-  state => state.activePlayQueueName,
-);
+export const getPlayQueueName = createSelector(getPlayQueueState, state => state.name);
 
-export const getActivePlayQueue = createSelector(getPlayQueueState, state => state.activePlayQueue);
+export const getPlayQueueTitle = createSelector(getPlayQueueState, state => state.title);
+
+export const getPlayQueue = createSelector(getPlayQueueState, state => state.playQueue);
 
 export const getShufflePlayQueue = createSelector(
   getPlayQueueState,
@@ -19,10 +18,8 @@ export const getShufflePlayQueue = createSelector(
 );
 
 export const getPlayQueueByMode = createSelector(
-  getActivePlayQueue,
+  getPlayQueue,
   getShufflePlayQueue,
   isInShuffleMode,
   (playQueue, shuffleQueue, shuffleMode) => (shuffleMode ? shuffleQueue : playQueue),
 );
-
-export const getPlayQueueTitle = createSelector(getPlayQueueState, state => state.title);

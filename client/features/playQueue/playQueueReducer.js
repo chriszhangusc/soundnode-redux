@@ -3,9 +3,9 @@ import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './playQueueActionTypes';
 
 const initialState = {
-  activePlayQueueName: undefined,
-  title: undefined,
-  activePlayQueue: [],
+  name: '',
+  title: '',
+  playQueue: [],
   shufflePlayQueue: [],
   hidden: true,
 };
@@ -14,7 +14,7 @@ const initialState = {
 export function clearPlayQueue(state) {
   return {
     ...state,
-    activePlayQueue: [],
+    playQueue: [],
   };
 }
 
@@ -32,26 +32,28 @@ export function updateShufflePlayQueue(state, { trackIds }) {
   };
 }
 
-export function updateActivePlayQueue(state, { trackIds, name }) {
+export function updatePlayQueue(state, { playlist }) {
+  const { trackIds, name, title } = playlist;
   return {
     ...state,
-    activePlayQueue: [...trackIds],
-    activePlayQueueName: name,
+    playQueue: [...trackIds],
+    name,
+    title,
   };
 }
 
-export function mergeActivePlayQueue(state, { trackIds }) {
+export function mergePlayQueue(state, { trackIds }) {
   return {
     ...state,
-    activePlayQueue: mergeArrays(state.activePlayQueue, trackIds),
+    playQueue: mergeArrays(state.playQueue, trackIds),
   };
 }
 
 export function removeTrackFromPlayQueue(state, { trackId }) {
-  const newActivePlayQueue = remove(state.activePlayQueue, item => item !== trackId);
+  const newActivePlayQueue = remove(state.playQueue, item => item !== trackId);
   return {
     ...state,
-    activePlayQueue: [...newActivePlayQueue],
+    playQueue: [...newActivePlayQueue],
   };
 }
 
@@ -76,13 +78,6 @@ export function clearShufflePlayQueue(state) {
   };
 }
 
-export function updatePlayQueueTitle(state, { title }) {
-  return {
-    ...state,
-    title,
-  };
-}
-
 export default function playQueueReducer(state = initialState, action) {
   switch (action.type) {
     case types.PLAY_QUEUE_SHOW:
@@ -97,23 +92,20 @@ export default function playQueueReducer(state = initialState, action) {
     case types.PLAY_QUEUE_CLEAR:
       return clearPlayQueue(state, action.payload);
 
-    case types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_UPDATE:
-      return updateActivePlayQueue(state, action.payload);
+    case types.PLAY_QUEUE_UPDATE:
+      return updatePlayQueue(state, action.payload);
 
-    case types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_MERGE:
-      return mergeActivePlayQueue(state, action.payload);
+    case types.PLAY_QUEUE_MERGE:
+      return mergePlayQueue(state, action.payload);
 
     case types.PLAY_QUEUE_SHUFFLE_QUEUE_MERGE:
       return mergeShufflePlayQueue(state, action.payload);
 
     case types.PLAY_QUEUE_SHUFFLE_QUEUE_UPDATE:
       return updateShufflePlayQueue(state, action.payload);
+
     case types.PLAY_QUEUE_SHUFFLE_QUEUE_CLEAR:
       return clearShufflePlayQueue(state);
-
-    case types.PLAY_QUEUE_TITLE_UPDATE:
-      return updatePlayQueueTitle(state, action.payload);
-
     default:
       return state;
   }

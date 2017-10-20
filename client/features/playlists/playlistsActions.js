@@ -15,7 +15,7 @@ import {
 } from 'features/notification/notificationActions';
 import { fetchMyPlaylists, deleteSinglePlaylist } from 'features/playlists/playlistsApi';
 import { getPlaylistById } from 'features/entities/entitiesSelectors';
-import { updateActivePlayQueue, updatePlayQueueTitle } from 'features/playQueue/playQueueActions';
+import { updatePlayQueue, updatePlayQueueTitle } from 'features/playQueue/playQueueActions';
 import { loadTrackAndPlay } from 'features/player/playerActions';
 
 export function mergePlaylists(playlistIds) {
@@ -88,7 +88,7 @@ export function playPlaylist(playlistId, trackIdx = 0) {
     const state = getState();
     const playlist = getPlaylistById(state, playlistId);
     const trackIds = playlist.tracks;
-    dispatch(updateActivePlayQueue({ name: `playlists-${playlistId}`, trackIds }));
+    dispatch(updatePlayQueue({ name: `playlists-${playlistId}`, trackIds }));
     dispatch(updatePlayQueueTitle(playlist.title));
     dispatch(loadTrackAndPlay(trackIds[trackIdx]));
   };

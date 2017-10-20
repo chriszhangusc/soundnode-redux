@@ -5,7 +5,7 @@ import { playPlaylist } from 'features/playlists/playlistsActions';
 import { isPlayerLoading, isPlayerPlaying } from 'features/player/playerSelectors';
 import { getLargeVersion } from 'common/utils/imageUtils';
 import { getTracksByPlaylistId } from 'features/entities/entitiesSelectors';
-import { getActivePlayQueueName } from 'features/playQueue/playQueueSelectors';
+import { getPlayQueueName } from 'features/playQueue/playQueueSelectors';
 import ImageGrid from 'common/components/images/ImageGrid';
 import styled from 'styled-components';
 
@@ -45,7 +45,7 @@ const actions = {
 
 function mapStateToProps(state, { playlistId }) {
   const tracks = getTracksByPlaylistId(state, playlistId);
-  const activePlayQueueName = getActivePlayQueueName(state); // if current playlist is being played
+  const activePlayQueueName = getPlayQueueName(state); // if current playlist is being played
   const isPlaylistActive = activePlayQueueName === `playlists-${playlistId}`;
 
   return {

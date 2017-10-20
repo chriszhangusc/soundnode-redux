@@ -8,11 +8,11 @@ import SongCardDetails from './SongCardDetails';
 import SongCardActions from './SongCardActions';
 import SongCardImage from './SongCardImage';
 
-function SongCard({ track, active, trackIds, name }) {
+function SongCard({ track, active, playlist }) {
   if (track && track.streamable) {
     return (
       <Card active={active}>
-        <SongCardImage track={track} active={active} trackIds={trackIds} name={name} />
+        <SongCardImage track={track} active={active} playlist={playlist} />
         <SongCardDetails track={track} />
         <SongCardActions track={track} />
       </Card>

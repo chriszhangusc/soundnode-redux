@@ -2,7 +2,7 @@ import { notificationWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { appendTracksToPlayQueue } from 'features/playQueue/playQueueActions';
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
-import { isChartsFetching, getChartsNextHref, getCurrentCharts } from './chartsSelectors';
+import { isChartsFetching, getChartsNextHref, getCurrentChartsTrackIds } from './chartsSelectors';
 import * as actionTypes from './chartsActionTypes';
 
 export function updateGenre(genre) {
@@ -93,7 +93,7 @@ export function loadMoreCharts(genre, name) {
     const state = getState();
     const chartsFetching = isChartsFetching(state);
     const curNextHref = getChartsNextHref(state);
-    const currentCharts = getCurrentCharts(state);
+    const currentCharts = getCurrentChartsTrackIds(state);
     if (!chartsFetching && currentCharts.length < 50 && curNextHref) {
       dispatch(startFetchingCharts());
       try {
