@@ -1,5 +1,5 @@
-import { getActiveTrackId } from 'features/player/playerSelectors';
 import shuffle from 'lodash/shuffle';
+import { getActiveTrackId, isInShuffleMode } from 'features/player/playerSelectors';
 import { removePlayerActiveTrack } from 'features/player/playerActions';
 import { notificationSuccess } from 'features/notification/notificationActions';
 import { shiftToFront } from './playQueueUtils';
@@ -102,12 +102,17 @@ export function shufflePlayQueue() {
   };
 }
 
-export function mergeActivePlayQueueIfNeeded(trackIds, playlistName) {
+export function appendTracksToPlayQueue(newTrackIds, playlistName) {
   return (dispatch, getState) => {
     const state = getState();
     const activePlayQueueName = getActivePlayQueueName(state);
+    // FIXME: Should we do this here?
     if (playlistName === activePlayQueueName) {
-      dispatch(mergeActivePlayQueue(trackIds));
+      dispatch(mergeActivePlayQueue(newTrackIds));
+      // Shuffle the newly added trackIds and append to the end of the queue.
+      if (isInShuffleMode(state)) {
+        dispatch(mergeShufflePlayQueue(shuffle(newTrackIds)));
+      }
     }
   };
 }

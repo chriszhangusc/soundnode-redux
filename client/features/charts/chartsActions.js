@@ -1,6 +1,6 @@
 import { notificationWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeActivePlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
+import { appendTracksToPlayQueue } from 'features/playQueue/playQueueActions';
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
 import { isChartsFetching, getChartsNextHref, getCurrentCharts } from './chartsSelectors';
 import * as actionTypes from './chartsActionTypes';
@@ -64,7 +64,7 @@ export function receiveCharts(normalizedCharts, genre, name) {
     dispatch(mergeEntities(entities));
     dispatch(mergeCharts(result, genre));
     dispatch(updateChartsNextHref(nextHref));
-    dispatch(mergeActivePlayQueueIfNeeded(normalizedCharts.result, name));
+    dispatch(appendTracksToPlayQueue(normalizedCharts.result, name));
     dispatch(stopFetchingCharts());
   };
 }
@@ -99,7 +99,6 @@ export function loadMoreCharts(genre, name) {
       try {
         const normalizedCharts = await fetchMoreCharts(curNextHref);
         // Check to see if we need to dynamically update the active play queue
-        // debugger;
         dispatch(receiveCharts(normalizedCharts, genre, name));
       } catch (err) {
         console.error(err);
