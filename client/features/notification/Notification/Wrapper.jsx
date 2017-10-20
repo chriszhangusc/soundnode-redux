@@ -8,6 +8,8 @@ const colorDanger = '#bd362f';
 
 export default styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: ${(props) => {
     switch (props.type) {
       case 'success':
@@ -23,12 +25,11 @@ export default styled.div`
     }
   }};
   box-sizing: border-box;
-  padding: 20px;
-  border-radius: 2px;
+  padding: 20px 15px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 1rem;
   line-height: 1.2em;
   margin-bottom: 15px;
-  width: 300px;
   transition: opacity 500ms ease-in-out;
 `;

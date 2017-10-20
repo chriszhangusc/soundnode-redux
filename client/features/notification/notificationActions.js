@@ -51,7 +51,7 @@ export function createNotification(notification) {
     dispatch(addNotification(notification));
     setTimeout(() => {
       dispatch(removeNotification(notification.id));
-    }, 5000);
+    }, 4000);
   };
 }
 

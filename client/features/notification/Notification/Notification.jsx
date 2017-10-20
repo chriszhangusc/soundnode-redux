@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FlexColumn from 'common/components/layouts/FlexColumn';
 import { connect } from 'react-redux';
 import { removeNotification } from '../notificationActions';
 import NotificationIcon from './NotificationIcon';
 import Wrapper from './Wrapper';
-import Header from './Header';
 import Message from './Message';
 
 class Notification extends React.Component {
@@ -25,7 +23,7 @@ class Notification extends React.Component {
   }
 
   render() {
-    const { type, title, message, handleOnClick } = this.props;
+    const { type, message, handleOnClick } = this.props;
     return (
       <Wrapper
         type={type}
@@ -34,21 +32,13 @@ class Notification extends React.Component {
         }}
       >
         <NotificationIcon iconName={this.getIconNameByType(type)} iconSize="2x" />
-        <FlexColumn>
-          <Header>
-            {title}
-          </Header>
-          <Message>
-            {message}
-          </Message>
-        </FlexColumn>
+        <Message>{message}</Message>
       </Wrapper>
     );
   }
 }
 
 Notification.propTypes = {
-  title: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['success', 'info', 'warning', 'danger']).isRequired,
   message: PropTypes.string.isRequired,
   handleOnClick: PropTypes.func.isRequired,
