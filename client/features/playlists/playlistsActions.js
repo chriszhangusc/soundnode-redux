@@ -83,13 +83,16 @@ export function deletePlaylist(playlistId) {
   };
 }
 
-export function playPlaylist(playlistId, trackIdx = 0) {
+export function playPlaylist(playlistId, start = 0) {
   return (dispatch, getState) => {
     const state = getState();
-    const playlist = getPlaylistById(state, playlistId);
-    const trackIds = playlist.tracks;
-    dispatch(updatePlayQueue({ name: `playlists-${playlistId}`, trackIds }));
-    dispatch(updatePlayQueueTitle(playlist.title));
-    dispatch(loadTrackAndPlay(trackIds[trackIdx]));
+    const { title, tracks } = getPlaylistById(state, playlistId);
+    const playlist = {
+      name: `playlists-${playlistId}`,
+      title,
+      trackIds: tracks,
+    };
+    dispatch(updatePlayQueue(playlist));
+    dispatch(loadTrackAndPlay(tracks[start]));
   };
 }

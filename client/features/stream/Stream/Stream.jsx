@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
 import PageTitle from 'common/components/PageTitle';
-import { isStreamFetching, getStreamIds } from 'features/stream/streamSelectors';
+import { isStreamFetching, getStreamIds, getStreamPlaylist } from 'features/stream/streamSelectors';
 import * as streamActions from 'features/stream/streamActions';
 
 class Stream extends React.Component {
@@ -29,15 +29,15 @@ class Stream extends React.Component {
   }
 
   render() {
-    const { fetching, trackIds, loadMoreStream } = this.props;
+    const { fetching, playlist, loadMoreStream } = this.props;
     return (
       <div>
         <PageTitle>Stream</PageTitle>
         <SongCardList
+          playlist={playlist}
+          trackIds={playlist.trackIds}
           fetching={fetching}
-          trackIds={trackIds}
           scrollFunc={loadMoreStream}
-          name="stream"
         />
       </div>
     );
@@ -47,7 +47,7 @@ class Stream extends React.Component {
 function mapStateToProps(state) {
   return {
     fetching: isStreamFetching(state),
-    trackIds: getStreamIds(state),
+    playlist: getStreamPlaylist(state),
   };
 }
 

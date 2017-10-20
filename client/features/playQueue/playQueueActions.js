@@ -101,7 +101,7 @@ export function shufflePlayQueue() {
   };
 }
 
-export function appendTracksToPlayQueue(newTrackIds, playlistName) {
+export function appendToPlayQueueIfNeeded(newTrackIds, playlistName) {
   return (dispatch, getState) => {
     const state = getState();
     const activePlayQueueName = getPlayQueueName(state);
@@ -117,7 +117,7 @@ export function appendTracksToPlayQueue(newTrackIds, playlistName) {
 }
 
 export function clearPlayQueue() {
-  return dispatch => {
+  return (dispatch) => {
     // Remove player track
     dispatch(removePlayerActiveTrack());
     dispatch({ type: types.PLAY_QUEUE_CLEAR });

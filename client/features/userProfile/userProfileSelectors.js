@@ -46,3 +46,22 @@ export const getProfiledUserTrackIds = createSelector(getState, state => state.t
 // export const isPageLoading = createSelector(getState, state => state.pageLoading);
 
 export const getUserTracksNextHref = createSelector(getState, state => state.tracksNextHref);
+
+export const getProfiledUserPlaylistName = createSelector(
+  getProfiledUserId,
+  userId => `user-${userId}`,
+);
+export const getProfiledUserPlaylistTitle = createSelector(
+  getUsername,
+  name => `Tracks by ${name}`,
+);
+export const getProfiledUserPlaylist = createSelector(
+  getProfiledUserPlaylistName,
+  getProfiledUserPlaylistTitle,
+  getProfiledUserTrackIds,
+  (name = '', title = '', trackIds = []) => ({
+    name,
+    title,
+    trackIds,
+  }),
+);

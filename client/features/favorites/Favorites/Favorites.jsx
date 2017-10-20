@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
-import { isFavoritesFetching, getFavoriteIds } from 'features/favorites/favoritesSelectors';
+import {
+  isFavoritesFetching,
+  getFavoritesIds,
+  getFavoritesPlaylist,
+} from 'features/favorites/favoritesSelectors';
 import PageTitle from 'common/components/PageTitle';
 import * as favActions from 'features/favorites/favoritesActions';
 
@@ -19,7 +23,12 @@ class Favorites extends React.Component {
     return (
       <div>
         <PageTitle>Favorites</PageTitle>
-        <SongCardList title="Favorites" name="favorites" {...this.props} scrollFunc={this.props.loadMoreFavorites} />
+        <SongCardList
+          playlist={this.props.playlist}
+          fetching={this.props.fetching}
+          trackIds={this.props.playlist.trackIds}
+          scrollFunc={this.props.loadMoreFavorites}
+        />
       </div>
     );
   }
@@ -34,7 +43,8 @@ Favorites.propTypes = {
 function mapStateToProps(state) {
   return {
     fetching: isFavoritesFetching(state),
-    trackIds: getFavoriteIds(state),
+    trackIds: getFavoritesIds(state),
+    playlist: getFavoritesPlaylist(state),
   };
 }
 

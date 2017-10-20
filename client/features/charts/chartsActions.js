@@ -1,6 +1,6 @@
 import { notificationWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { appendTracksToPlayQueue } from 'features/playQueue/playQueueActions';
+import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
 import { isChartsFetching, getChartsNextHref, getCurrentChartsTrackIds } from './chartsSelectors';
 import * as actionTypes from './chartsActionTypes';
@@ -64,7 +64,7 @@ export function receiveCharts(normalizedCharts, genre, name) {
     dispatch(mergeEntities(entities));
     dispatch(mergeCharts(result, genre));
     dispatch(updateChartsNextHref(nextHref));
-    dispatch(appendTracksToPlayQueue(normalizedCharts.result, name));
+    dispatch(appendToPlayQueueIfNeeded(normalizedCharts.result, name));
     dispatch(stopFetchingCharts());
   };
 }
