@@ -1,18 +1,33 @@
 import React from 'react';
-
+import Icon from 'common/components/icons/Icon';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { getPlayQueueTitle } from 'features/playQueue/playQueueSelectors';
 import Wrapper from './Wrapper';
-import TitleColumn from './TitleColumn';
+
 import ClearIcon from './ClearIcon';
 
-function PlayQueueHeader() {
+const NowPlayingTitle = styled.div`
+  padding: 10px 5px;
+  font-size: 1.1rem;
+  font-weight: 500;
+`;
+
+function PlayQueueHeader({ title }) {
   return (
     <Wrapper>
-      <TitleColumn>TRACKS</TitleColumn>
-      <TitleColumn>|</TitleColumn>
-      <TitleColumn>ARTIST</TitleColumn>
+      <NowPlayingTitle>
+        <Icon iconName="podcast" /> {`Now Playing: ${title}`}
+      </NowPlayingTitle>
       <ClearIcon />
     </Wrapper>
   );
 }
 
-export default PlayQueueHeader;
+function mapStateToProps(state) {
+  return {
+    title: getPlayQueueTitle(state),
+  };
+}
+
+export default connect(mapStateToProps)(PlayQueueHeader);

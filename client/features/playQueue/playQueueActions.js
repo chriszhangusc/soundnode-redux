@@ -22,6 +22,15 @@ export function showPlayQueue() {
   };
 }
 
+export function updatePlayQueueTitle(title) {
+  return {
+    type: types.PLAY_QUEUE_TITLE_UPDATE,
+    payload: {
+      title,
+    },
+  };
+}
+
 export const updateActivePlayQueue = ({ trackIds, name }) => ({
   type: types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_UPDATE,
   payload: {
@@ -118,7 +127,7 @@ export function appendTracksToPlayQueue(newTrackIds, playlistName) {
 }
 
 export function clearPlayQueue() {
-  return (dispatch) => {
+  return dispatch => {
     // Remove player track
     dispatch(removePlayerActiveTrack());
     dispatch({ type: types.PLAY_QUEUE_CLEAR });

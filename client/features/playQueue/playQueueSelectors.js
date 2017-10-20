@@ -24,3 +24,5 @@ export const getPlayQueueByMode = createSelector(
   isInShuffleMode,
   (playQueue, shuffleQueue, shuffleMode) => (shuffleMode ? shuffleQueue : playQueue),
 );
+
+export const getPlayQueueTitle = createSelector(getPlayQueueState, state => state.title);

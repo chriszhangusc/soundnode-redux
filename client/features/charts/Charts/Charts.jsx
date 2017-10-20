@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { loadChartsPage, updateGenre, resetChartsState } from 'features/charts/chartsActions';
 import PageTitle from 'common/components/PageTitle';
 import { getCurrentGenreTitle, getSelectedGenre } from 'features/charts/chartsSelectors';
-
 import ChartsTracks from '../ChartsTracks';
 import ChartsGenreList from '../ChartsGenreList';
 
@@ -50,9 +49,7 @@ class Charts extends Component {
     const { genreTitle, selectedGenre } = this.props;
     return (
       <div>
-        <PageTitle>
-          Top Charts - {genreTitle}
-        </PageTitle>
+        <PageTitle>Top Charts - {genreTitle}</PageTitle>
         <ChartsGenreList />
         <ChartsTracks selectedGenre={selectedGenre} name={`charts-${selectedGenre}`} />
       </div>

@@ -4,6 +4,7 @@ import * as types from './playQueueActionTypes';
 
 const initialState = {
   activePlayQueueName: undefined,
+  title: undefined,
   activePlayQueue: [],
   shufflePlayQueue: [],
   hidden: true,
@@ -75,6 +76,13 @@ export function clearShufflePlayQueue(state) {
   };
 }
 
+export function updatePlayQueueTitle(state, { title }) {
+  return {
+    ...state,
+    title,
+  };
+}
+
 export default function playQueueReducer(state = initialState, action) {
   switch (action.type) {
     case types.PLAY_QUEUE_SHOW:
@@ -102,6 +110,10 @@ export default function playQueueReducer(state = initialState, action) {
       return updateShufflePlayQueue(state, action.payload);
     case types.PLAY_QUEUE_SHUFFLE_QUEUE_CLEAR:
       return clearShufflePlayQueue(state);
+
+    case types.PLAY_QUEUE_TITLE_UPDATE:
+      return updatePlayQueueTitle(state, action.payload);
+
     default:
       return state;
   }

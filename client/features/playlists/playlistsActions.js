@@ -15,10 +15,7 @@ import {
 } from 'features/notification/notificationActions';
 import { fetchMyPlaylists, deleteSinglePlaylist } from 'features/playlists/playlistsApi';
 import { getPlaylistById } from 'features/entities/entitiesSelectors';
-import {
-  updateActivePlayQueue,
-  updateActivePlayQueueName,
-} from 'features/playQueue/playQueueActions';
+import { updateActivePlayQueue, updatePlayQueueTitle } from 'features/playQueue/playQueueActions';
 import { loadTrackAndPlay } from 'features/player/playerActions';
 
 export function mergePlaylists(playlistIds) {
@@ -46,9 +43,9 @@ export function resetPlaylistsState() {
 }
 
 export function loadPlaylists() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(showLoadingOverlay());
-    fetchMyPlaylists().then((normalized) => {
+    fetchMyPlaylists().then(normalized => {
       const { entities, result } = normalized;
       // Merge entities
       dispatch(mergeEntities(entities));
@@ -61,7 +58,7 @@ export function loadPlaylists() {
 }
 
 export function deletePlaylist(playlistId) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(showLoadingOverlay());
     deleteSinglePlaylist(playlistId)
       .then(() => {
@@ -78,7 +75,7 @@ export function deletePlaylist(playlistId) {
         dispatch(hideLoadingOverlay());
         dispatch(notificationSuccess('Playlist will be deleted shortly'));
       })
-      .catch((err) => {
+      .catch(err => {
         // notification warning
         dispatch(notificationWarning('Something went wrong!'));
         console.log(err);
@@ -92,6 +89,7 @@ export function playPlaylist(playlistId, trackIdx = 0) {
     const playlist = getPlaylistById(state, playlistId);
     const trackIds = playlist.tracks;
     dispatch(updateActivePlayQueue({ name: `playlists-${playlistId}`, trackIds }));
+    dispatch(updatePlayQueueTitle(playlist.title));
     dispatch(loadTrackAndPlay(trackIds[trackIdx]));
   };
 }
