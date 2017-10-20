@@ -1,9 +1,9 @@
 import {
   shufflePlayQueue,
-  syncActivePlayQueue,
   updateActivePlayQueue,
+  clearShuffleQueue,
 } from 'features/playQueue/playQueueActions';
-import { getActivePlayQueue } from 'features/playQueue/playQueueSelectors';
+import { getPlayQueueByMode } from 'features/playQueue/playQueueSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
 import { notificationWarning } from 'features/notification/notificationActions';
 import * as playModes from './playerConsts';
@@ -194,15 +194,15 @@ export function playSongByAction(actionType) {
     const mode = selectors.getPlayerMode(state);
     let nextTrackId = null;
     const curTrackId = selectors.getActiveTrackId(state);
-    const activePlaylist = getActivePlayQueue(state);
+    const playQueue = getPlayQueueByMode(state);
     if (mode === playModes.REPEAT) {
       nextTrackId = curTrackId;
     } else {
-      const idx = activePlaylist.indexOf(curTrackId);
+      const idx = playQueue.indexOf(curTrackId);
       let nextIdx = actionType === playModes.NEXT ? idx + 1 : idx - 1;
-      nextIdx = nextIdx >= activePlaylist.length ? activePlaylist.length - 1 : nextIdx;
+      nextIdx = nextIdx >= playQueue.length ? playQueue.length - 1 : nextIdx;
       nextIdx = nextIdx < 0 ? 0 : nextIdx;
-      nextTrackId = activePlaylist[nextIdx];
+      nextTrackId = playQueue[nextIdx];
     }
     dispatch(loadTrackAndPlay(nextTrackId));
   };
@@ -227,13 +227,19 @@ export function togglePlayMode(newMode) {
     const currMode = selectors.getPlayerMode(state);
     if (currMode === newMode) {
       /* Toggle off current mode, set to default mode */
-      dispatch(changePlayMode(playModes.DEFAULT_MODE));
-      if (newMode === playModes.SHUFFLE) {
-        dispatch(syncActivePlayQueue());
+
+      if (currMode === playModes.SHUFFLE) {
+        dispatch(clearShuffleQueue());
       }
+
+      dispatch(changePlayMode(playModes.DEFAULT_MODE));
+      // if (newMode === playModes.SHUFFLE) {
+      //   dispatch(syncActivePlayQueue());
+      // }
     } else {
       /* Toggle on new mode */
       dispatch(changePlayMode(newMode));
+      // Toggling on shuffle mode
       if (newMode === playModes.SHUFFLE) {
         dispatch(shufflePlayQueue());
       }

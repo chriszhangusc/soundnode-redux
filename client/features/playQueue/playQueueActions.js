@@ -37,6 +37,24 @@ export const mergeActivePlayQueue = trackIds => ({
   },
 });
 
+export const mergeShufflePlayQueue = trackIds => ({
+  type: types.PLAY_QUEUE_SHUFFLE_QUEUE_MERGE,
+  payload: {
+    trackIds,
+  },
+});
+
+export const updateShufflePlayQueue = trackIds => ({
+  type: types.PLAY_QUEUE_SHUFFLE_QUEUE_UPDATE,
+  payload: {
+    trackIds,
+  },
+});
+
+export const clearShuffleQueue = () => ({
+  type: types.PLAY_QUEUE_SHUFFLE_QUEUE_CLEAR,
+});
+
 export function togglePlayQueue() {
   return (dispatch, getState) => {
     const state = getState();
@@ -80,38 +98,17 @@ export function shufflePlayQueue() {
     // Every time we reshuffle the playQueue, we need to move the current playing track to the
     // first position.
     const shuffled = shiftToFront(shuffle(activePlayQueue), playerTrackId);
-    dispatch(updateActivePlayQueue(shuffled));
+    dispatch(updateShufflePlayQueue(shuffled));
   };
 }
 
-// TODO: This function needs rewrite
 export function mergeActivePlayQueueIfNeeded(trackIds, playlistName) {
   return (dispatch, getState) => {
-    // debugger;
     const state = getState();
     const activePlayQueueName = getActivePlayQueueName(state);
     if (playlistName === activePlayQueueName) {
       dispatch(mergeActivePlayQueue(trackIds));
     }
-
-    // const state = getState();
-    // const visiblePlayQueueName = getVisiblePlayQueueName(state);
-    // const activePlayQueueName = getActivePlayQueueName(state);
-    // const visiblePlayQueue = getVisiblePlayQueue(state);
-    // const activePlayQueue = getActivePlayQueue(state);
-    // const shuffleMode = isInShuffleMode(state);
-    // // 1. When we fetched more tracks, the active and visible play queue would be out of sync,
-    // //    thus reshuffle is needed.
-    // // 2. When we switched to a new visible playlist, we need to shuffle the new active play queue.
-    // const shuffleNeeded =
-    //   shuffleMode &&
-    //   (activePlayQueue.length !== visiblePlayQueue.length ||
-    //     activePlayQueueName !== visiblePlayQueueName);
-    // dispatch(updateActivePlayQueueName(visiblePlayQueueName));
-    // dispatch(updateActivePlayQueue(visiblePlayQueue));
-    // if (shuffleNeeded) {
-    //   dispatch(shufflePlayQueue());
-    // }
   };
 }
 

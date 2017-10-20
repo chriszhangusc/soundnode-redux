@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { clearPlayQueue } from 'features/playQueue/playQueueActions';
-import { getActivePlayQueue, isPlayQueueHidden } from 'features/playQueue/playQueueSelectors';
+import { getPlayQueueByMode, isPlayQueueHidden } from 'features/playQueue/playQueueSelectors';
 import PlayQueueRow from '../PlayQueueRow';
 import PlayQueueHeader from '../PlayQueueHeader';
 import Wrapper from './Wrapper';
@@ -34,7 +34,7 @@ PlayQueue.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    playQueueTrackIds: getActivePlayQueue(state),
+    playQueueTrackIds: getPlayQueueByMode(state),
     playQueueHidden: isPlayQueueHidden(state),
   };
 }

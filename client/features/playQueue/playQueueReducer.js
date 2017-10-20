@@ -5,6 +5,7 @@ import * as types from './playQueueActionTypes';
 const initialState = {
   activePlayQueueName: undefined,
   activePlayQueue: [],
+  shufflePlayQueue: [],
   hidden: true,
 };
 
@@ -16,10 +17,17 @@ export function clearPlayQueue(state) {
   };
 }
 
-export function mergeActivePlayQueue(state, { trackIds }) {
+export function mergeShufflePlayQueue(state, { trackIds }) {
   return {
     ...state,
-    activePlayQueue: mergeArrays(state.activePlayQueue, trackIds),
+    shufflePlayQueue: mergeArrays(state.shufflePlayQueue, trackIds),
+  };
+}
+
+export function updateShufflePlayQueue(state, { trackIds }) {
+  return {
+    ...state,
+    shufflePlayQueue: [...trackIds],
   };
 }
 
@@ -28,6 +36,13 @@ export function updateActivePlayQueue(state, { trackIds, name }) {
     ...state,
     activePlayQueue: [...trackIds],
     activePlayQueueName: name,
+  };
+}
+
+export function mergeActivePlayQueue(state, { trackIds }) {
+  return {
+    ...state,
+    activePlayQueue: mergeArrays(state.activePlayQueue, trackIds),
   };
 }
 
@@ -53,6 +68,13 @@ export function hidePlayQueue(state) {
   };
 }
 
+export function clearShufflePlayQueue(state) {
+  return {
+    ...state,
+    shufflePlayQueue: [],
+  };
+}
+
 export default function playQueueReducer(state = initialState, action) {
   switch (action.type) {
     case types.PLAY_QUEUE_SHOW:
@@ -73,6 +95,13 @@ export default function playQueueReducer(state = initialState, action) {
     case types.PLAY_QUEUE_ACTIVE_PLAY_QUEUE_MERGE:
       return mergeActivePlayQueue(state, action.payload);
 
+    case types.PLAY_QUEUE_SHUFFLE_QUEUE_MERGE:
+      return mergeShufflePlayQueue(state, action.payload);
+
+    case types.PLAY_QUEUE_SHUFFLE_QUEUE_UPDATE:
+      return updateShufflePlayQueue(state, action.payload);
+    case types.PLAY_QUEUE_SHUFFLE_QUEUE_CLEAR:
+      return clearShufflePlayQueue(state);
     default:
       return state;
   }
