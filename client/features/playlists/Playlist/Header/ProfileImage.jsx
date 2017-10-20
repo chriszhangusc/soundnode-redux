@@ -46,7 +46,7 @@ const actions = {
 function mapStateToProps(state, { playlistId }) {
   const tracks = getTracksByPlaylistId(state, playlistId);
   const activePlayQueueName = getActivePlayQueueName(state); // if current playlist is being played
-  const isPlaylistActive = activePlayQueueName === `playlist-${playlistId}`;
+  const isPlaylistActive = activePlayQueueName === `playlists-${playlistId}`;
 
   return {
     playerLoading: isPlayerLoading(state),

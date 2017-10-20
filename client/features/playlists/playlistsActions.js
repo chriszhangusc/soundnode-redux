@@ -13,10 +13,7 @@ import {
   notificationSuccess,
   notificationWarning,
 } from 'features/notification/notificationActions';
-import {
-  fetchMyPlaylists,
-  deleteSinglePlaylist,
-} from 'features/playlists/playlistsApi';
+import { fetchMyPlaylists, deleteSinglePlaylist } from 'features/playlists/playlistsApi';
 import { getPlaylistById } from 'features/entities/entitiesSelectors';
 import {
   updateActivePlayQueue,
@@ -94,8 +91,7 @@ export function playPlaylist(playlistId, trackIdx = 0) {
     const state = getState();
     const playlist = getPlaylistById(state, playlistId);
     const trackIds = playlist.tracks;
-    dispatch(updateActivePlayQueueName(`playlist-${playlistId}`));
-    dispatch(updateActivePlayQueue(trackIds));
+    dispatch(updateActivePlayQueue({ name: `playlists-${playlistId}`, trackIds }));
     dispatch(loadTrackAndPlay(trackIds[trackIdx]));
   };
 }
