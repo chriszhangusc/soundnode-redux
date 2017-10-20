@@ -6,4 +6,4 @@ To run it in development mode locally:
 2. cd redux-music and run command "yarn install"
 3. Start the proxy server by running command "yarn/npm run proxy"
 4. Start the app by running command "yarn/npm run dev"
-5. http://127.0.0.1:3000/ (localhost not working yet because of soundcloud app registration limit)
+5. In the browser(Chrome) go to: http://localhost:3000/
