@@ -28,6 +28,7 @@ export default styled.div`
   padding: 15px 15px;
   border-radius: 4px;
   cursor: pointer;
+  width: 250px;
   font-size: 1rem;
   line-height: 1.2em;
   margin-bottom: 15px;

@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { getFavoriteTrackIds, getReposts } from 'features/auth/authSelectors';
 import * as authActions from 'features/auth/authActions';
 import * as copyActions from 'features/copy/copyActions';
+import { addTrackToPlaylist } from 'features/playlists/playlistsApi';
 
 function SongCardActions({ trackId, liked, reposted, permalinkUrl, actions }) {
   const handleCopyClick = () => {
@@ -22,8 +23,9 @@ function SongCardActions({ trackId, liked, reposted, permalinkUrl, actions }) {
     toggleAction(trackId);
   };
 
-  const handlePlaylistClick = () => {
+  const handleAddToPlaylistClick = () => {
     console.log('Add to playlist feature not yet implemented');
+    addTrackToPlaylist(trackId);
   };
 
   const handleRepostClick = () => {
@@ -43,7 +45,7 @@ function SongCardActions({ trackId, liked, reposted, permalinkUrl, actions }) {
       <Card.IconButton
         tooltipText="Add to playlist"
         iconName="bookmark"
-        onClick={handlePlaylistClick}
+        onClick={handleAddToPlaylistClick}
       />
       <Card.IconButton
         tooltipText="Repost"
@@ -60,11 +62,6 @@ function SongCardActions({ trackId, liked, reposted, permalinkUrl, actions }) {
   );
 }
 
-const actions = {
-  ...authActions,
-  ...copyActions,
-};
-
 function mapStateToProps(state, { track }) {
   const { id, permalinkUrl } = track;
   const favoriteTrackIds = getFavoriteTrackIds(state);
@@ -76,6 +73,11 @@ function mapStateToProps(state, { track }) {
     reposted: reposts.includes(id),
   };
 }
+
+const actions = {
+  ...authActions,
+  ...copyActions,
+};
 
 function mapDispatchToProps(dispatch) {
   return {

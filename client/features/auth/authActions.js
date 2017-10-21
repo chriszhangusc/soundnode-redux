@@ -175,8 +175,7 @@ export function doLogin() {
   return dispatch => {
     dispatch(startLogin());
     dispatch(showLoadingOverlay('Authenticating...'));
-    dispatch(doAuth())
-      .then(() => dispatch(loadMe()));
+    dispatch(doAuth()).then(() => dispatch(loadMe()));
   };
 }
 
@@ -224,13 +223,13 @@ export function doUnlikeTrack(trackId) {
   return dispatch => {
     unlikeTrack(trackId)
       .then(() => {
-        dispatch(notificationSuccess('Track Removed From Your Favorites'));
+        dispatch(notificationSuccess('Track removed from favorites'));
         dispatch(syncFavorites());
       })
       .catch(err => {
         console.log('Failed to remove this track from favorites', err);
         if (isUnauthError(err)) {
-          dispatch(notificationWarning('Please Signin With SoundCloud'));
+          dispatch(notificationWarning('Please signin with SoundCloud'));
         } else {
           dispatch(notificationWarning('Failed To Remove Track From Favorites'));
         }
@@ -242,7 +241,7 @@ export function createRepost(trackId) {
   return dispatch => {
     repost(trackId)
       .then(() => {
-        dispatch(notificationSuccess('Track Successfully Reposted'));
+        dispatch(notificationSuccess('Track Repost Success'));
         dispatch(syncReposts());
       })
       .catch(err => {
@@ -260,7 +259,7 @@ export function removeRepost(trackId) {
   return dispatch => {
     deleteRepost(trackId)
       .then(() => {
-        dispatch(notificationSuccess('Track Removed From Reposts'));
+        dispatch(notificationSuccess('Track Removed from Reposts'));
         dispatch(syncReposts());
       })
       .catch(err => {
