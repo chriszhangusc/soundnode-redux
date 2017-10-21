@@ -55,7 +55,7 @@ export function checkStatus(response) {
 }
 
 // Transform json response
-export function parseJson(response) {
+export function parseJsonAndCamelize(response) {
   return response.json().then(json => camelizeKeys(json));
 }
 
@@ -66,5 +66,5 @@ export function makeRequest(requestUrl, fetchOptions) {
   console.log(finalUrl);
   return fetch(finalUrl, fetchOptions)
     .then(checkStatus)
-    .then(parseJson);
+    .then(parseJsonAndCamelize);
 }

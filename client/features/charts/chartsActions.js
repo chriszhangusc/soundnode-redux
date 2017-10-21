@@ -1,7 +1,7 @@
 import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
-import { fetchCharts, fetchMoreCharts } from './chartsApi';
+import { fetchCharts, fetchMoreCharts } from 'features/charts/chartsApi';
 import { isChartsFetching, getChartsNextHref, getCurrentChartsTrackIds } from './chartsSelectors';
 import * as actionTypes from './chartsActionTypes';
 
@@ -60,7 +60,7 @@ export function mergeCharts(trackIds, genre) {
 }
 
 export function receiveCharts(normalizedCharts, genre, name) {
-  return (dispatch) => {
+  return dispatch => {
     const { entities, result, nextHref } = normalizedCharts;
     dispatch(mergeEntities(entities));
     dispatch(mergeCharts(result, genre));

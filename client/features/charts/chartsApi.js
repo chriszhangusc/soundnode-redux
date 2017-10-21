@@ -13,12 +13,11 @@ function transform(response) {
 
 export function fetchCharts(genre, limit = 25) {
   const requestUrl = `${SC_API_V2}/charts?kind=top&genre=soundcloud:genres:${genre}&linked_partitioning=1&limit=${limit}&offset=0`;
-  return (
-    makeRequest(requestUrl)
-      // transform collection: [{score, track}] to collection: [track]
-      .then(transform)
-      .then(transformed => normalizeResponse(transformed, trackArraySchema))
-  );
+
+  // transform collection: [{score, track}] to collection: [track]
+  return makeRequest(requestUrl)
+    .then(transform)
+    .then(transformed => normalizeResponse(transformed, trackArraySchema));
 }
 
 export function fetchMoreCharts(nextHref) {

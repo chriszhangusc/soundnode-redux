@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { getFavoriteTrackIds, getReposts } from 'features/auth/authSelectors';
 import * as authActions from 'features/auth/authActions';
 import * as copyActions from 'features/copy/copyActions';
-import { addTrackToPlaylist } from 'features/playlists/playlistsApi';
+import { addTrackToPlaylist } from 'common/services/scApi';
 
 function SongCardActions({ trackId, liked, reposted, permalinkUrl, actions }) {
   const handleCopyClick = () => {
