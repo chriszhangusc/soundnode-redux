@@ -10,7 +10,7 @@ class Notification extends React.Component {
   getIconNameByType(type) {
     switch (type) {
       case 'success':
-        return 'check-circle';
+        return 'check';
       case 'warning':
         return 'exclamation-triangle';
       case 'info':

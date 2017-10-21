@@ -1,4 +1,4 @@
-import { notificationWarning } from 'features/notification/notificationActions';
+import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
 import { fetchCharts, fetchMoreCharts } from './chartsApi';
@@ -35,9 +35,10 @@ export function updateChartsNextHref(nextHref) {
   };
 }
 
-export function failedToFetchCharts() {
+export function failedToFetchCharts(err) {
   return {
     type: actionTypes.CHARTS_FETCH_FAIL,
+    error: err,
   };
 }
 
@@ -81,8 +82,8 @@ export function loadChartsPage(genre) {
         dispatch(receiveCharts(normalizedCharts, genre));
       } catch (err) {
         console.error(err);
-        dispatch(failedToFetchCharts());
-        dispatch(notificationWarning('Failed to fetch songs!'));
+        dispatch(failedToFetchCharts(err));
+        dispatch(defaultWarning());
       }
     }
   };
@@ -102,8 +103,8 @@ export function loadMoreCharts(genre, name) {
         dispatch(receiveCharts(normalizedCharts, genre, name));
       } catch (err) {
         console.error(err);
-        dispatch(failedToFetchCharts());
-        dispatch(notificationWarning('Failed to fetch more songs!'));
+        dispatch(failedToFetchCharts(err));
+        dispatch(defaultWarning());
       }
     }
   };

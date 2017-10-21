@@ -1,6 +1,7 @@
 import { put, call, takeLatest, all } from 'redux-saga/effects';
 import * as actions from 'features/searchSuggestion/searchSuggestionActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
+import { defaultWarning } from 'features/notification/notificationActions';
 import { SEARCH_SUGGESTION_START } from 'features/searchSuggestion/searchSuggestionActionTypes';
 import { fetchSearchSuggestionTracks, fetchSearchSuggestionUsers } from './searchSuggestionApi';
 
@@ -32,6 +33,7 @@ export function* doSearchSuggestion({ payload }) {
   } catch (err) {
     console.error(err);
     yield put(actions.failedToFetchSearchResults());
+    yield put(defaultWarning());
   } finally {
     yield put(actions.stopSearchSuggestion());
   }

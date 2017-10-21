@@ -1,3 +1,4 @@
+import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import {
   mergeVisiblePlayQueue,
@@ -108,6 +109,7 @@ export function loadTrackProfileData(trackId) {
       .catch((err) => {
         dispatch(failedToFetchTrack());
         dispatch(failedToFetchComments());
+        dispatch(defaultWarning());
         console.log(err);
       });
   };
@@ -127,6 +129,7 @@ export function loadMoreComments() {
         .catch((err) => {
           dispatch(failedToFetchComments());
           console.log(err);
+          dispatch(defaultWarning());
         });
     }
   };

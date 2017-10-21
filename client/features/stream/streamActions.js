@@ -1,3 +1,4 @@
+import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
 import * as types from './streamActionTypes';
@@ -63,6 +64,7 @@ export function loadStream() {
         })
         .catch((err) => {
           console.error(err);
+          dispatch(defaultWarning());
         });
     }
   };
@@ -81,6 +83,7 @@ export function loadMoreStream() {
         })
         .catch((err) => {
           console.error(err);
+          dispatch(defaultWarning());
         });
     }
   };

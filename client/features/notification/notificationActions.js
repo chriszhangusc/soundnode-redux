@@ -14,7 +14,6 @@ export function notificationWarningFactory(message) {
   return {
     id: shortid.generate(),
     type: 'warning',
-    title: 'Warning',
     message,
   };
 }
@@ -23,7 +22,6 @@ export function notificationInfoFactory(message) {
   return {
     id: shortid.generate(),
     type: 'info',
-    title: 'Info',
     message,
   };
 }
@@ -66,6 +64,12 @@ export function notificationWarning(message) {
   return (dispatch) => {
     const warning = notificationWarningFactory(message);
     dispatch(createNotification(warning));
+  };
+}
+
+export function defaultWarning() {
+  return (dispatch) => {
+    dispatch(notificationWarning('Something went wrong...'));
   };
 }
 

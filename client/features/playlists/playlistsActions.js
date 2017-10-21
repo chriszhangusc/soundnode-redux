@@ -9,13 +9,10 @@ import {
   PLAYLISTS_STATE_RESET,
   PLAYLISTS_PLAYLIST_DELETE,
 } from 'features/playlists/playlistsActionTypes';
-import {
-  notificationSuccess,
-  notificationWarning,
-} from 'features/notification/notificationActions';
+import { notificationSuccess, defaultWarning } from 'features/notification/notificationActions';
 import { fetchMyPlaylists, deleteSinglePlaylist } from 'features/playlists/playlistsApi';
 import { getPlaylistById } from 'features/entities/entitiesSelectors';
-import { updatePlayQueue, updatePlayQueueTitle } from 'features/playQueue/playQueueActions';
+import { updatePlayQueue } from 'features/playQueue/playQueueActions';
 import { loadTrackAndPlay } from 'features/player/playerActions';
 
 export function mergePlaylists(playlistIds) {
@@ -45,15 +42,21 @@ export function resetPlaylistsState() {
 export function loadPlaylists() {
   return dispatch => {
     dispatch(showLoadingOverlay());
-    fetchMyPlaylists().then(normalized => {
-      const { entities, result } = normalized;
-      // Merge entities
-      dispatch(mergeEntities(entities));
-      // Update playlists store
-      dispatch(updatePlaylists(result));
-      // Stop global spinner
-      dispatch(hideLoadingOverlay());
-    });
+    fetchMyPlaylists()
+      .then(normalized => {
+        const { entities, result } = normalized;
+        // Merge entities
+        dispatch(mergeEntities(entities));
+        // Update playlists store
+        dispatch(updatePlaylists(result));
+        // Stop global spinner
+        dispatch(hideLoadingOverlay());
+      })
+      .catch(err => {
+        // notification warning
+        dispatch(defaultWarning());
+        console.log(err);
+      });
   };
 }
 
@@ -77,7 +80,7 @@ export function deletePlaylist(playlistId) {
       })
       .catch(err => {
         // notification warning
-        dispatch(notificationWarning('Something went wrong!'));
+        dispatch(defaultWarning());
         console.log(err);
       });
   };

@@ -1,3 +1,4 @@
+import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { mergeVisiblePlayQueue } from 'features/playQueue/playQueueActions';
 import * as types from './searchActionTypes';
@@ -54,6 +55,7 @@ export function loadSearchResults(query) {
         })
         .catch((err) => {
           console.error(err);
+          dispatch(defaultWarning());
         });
     }
   };
@@ -66,9 +68,14 @@ export function loadMoreSearchResults() {
     const curNextHref = getSearchNextHref(state);
     if (!searching) {
       dispatch(startSearching());
-      fetchByNextHref(curNextHref).then((normalized) => {
-        dispatch(receiveSearchResults(normalized));
-      });
+      fetchByNextHref(curNextHref)
+        .then((normalized) => {
+          dispatch(receiveSearchResults(normalized));
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch(defaultWarning());
+        });
     }
   };
 }

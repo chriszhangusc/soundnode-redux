@@ -1,3 +1,4 @@
+import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import {
   showLoadingOverlay,
@@ -120,6 +121,9 @@ export function loadUserProfileData(userId) {
       dispatch(receiveUser(normalizedUser));
       dispatch(receiveTracks(normalizedTracks));
       dispatch(hideLoadingOverlay());
+    }).catch((err) => {
+      console.log(err);
+      dispatch(defaultWarning());
     });
   };
 }
@@ -139,6 +143,7 @@ export function loadMoreTracks() {
       } catch (err) {
         console.log(err);
         // dispatch(failedToFetchUserTracks());
+        dispatch(defaultWarning());
       }
     }
   };

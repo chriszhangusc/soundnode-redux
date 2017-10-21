@@ -1,3 +1,4 @@
+import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
 import * as types from './favoritesActionTypes';
@@ -61,6 +62,7 @@ export function loadFavorites() {
       })
       .catch((err) => {
         console.error(err);
+        dispatch(defaultWarning());
       });
   };
 }
@@ -78,6 +80,7 @@ export function loadMoreFavorites() {
         })
         .catch((err) => {
           console.error(err);
+          dispatch(defaultWarning());
         });
     }
   };
