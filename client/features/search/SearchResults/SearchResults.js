@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
-import { isSearching } from 'features/search/searchSelectors';
-import { getVisiblePlayQueue } from 'features/playQueue/playQueueSelectors';
+import { isSearching, getSearchTrackIds, getSearchPlaylist } from 'features/search/searchSelectors';
 import { loadMoreSearchResults } from 'features/search/searchActions';
 
 function mapStateToProps(state) {
   return {
     fetching: isSearching(state),
-    trackIds: getVisiblePlayQueue(state),
+    playlist: getSearchPlaylist(state),
+    trackIds: getSearchTrackIds(state),
   };
 }
 

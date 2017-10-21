@@ -1,11 +1,13 @@
+import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './searchActionTypes';
 
 /* Reducers */
 const initialState = {
   searchType: undefined,
   nextHref: undefined,
+  searchKey: undefined,
   searching: false,
-  // trackIds: [],
+  trackIds: [],
 };
 
 export function startSearching(state) {
@@ -35,6 +37,20 @@ export function updateNextHref(state, { nextHref }) {
   };
 }
 
+export function mergeTrackResults(state, { trackIds }) {
+  return {
+    ...state,
+    trackIds: mergeArrays(state.trackIds, trackIds),
+  };
+}
+
+export function updateSearchKey(state, { searchKey }) {
+  return {
+    ...state,
+    searchKey,
+  };
+}
+
 export default function searchSuggestionReducer(state = initialState, action) {
   switch (action.type) {
     case types.SEARCH_START:
@@ -48,6 +64,12 @@ export default function searchSuggestionReducer(state = initialState, action) {
 
     case types.SEARCH_STATE_RESET:
       return resetSearchState(initialState);
+
+    case types.SEARCH_TRACK_RESULTS_MERGE:
+      return mergeTrackResults(state, action.payload);
+
+    case types.SEARCH_KEY_UPDATE:
+      return updateSearchKey(state, action.payload);
 
     default:
       return state;

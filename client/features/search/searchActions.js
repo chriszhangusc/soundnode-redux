@@ -1,6 +1,5 @@
 import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
-import { mergeVisiblePlayQueue } from 'features/playQueue/playQueueActions';
 import * as types from './searchActionTypes';
 import { fetchSearchResults, fetchByNextHref } from './searchApi';
 import { isSearching, getSearchNextHref } from './searchSelectors';
@@ -32,12 +31,29 @@ export function resetSearchState() {
   };
 }
 
+export function updateSearchKey(searchKey) {
+  return {
+    type: types.SEARCH_KEY_UPDATE,
+    payload: {
+      searchKey,
+    },
+  };
+}
+
+export function mergeTrackResults(trackIds) {
+  return {
+    type: types.SEARCH_TRACK_RESULTS_MERGE,
+    payload: {
+      trackIds,
+    },
+  };
+}
+
 export function receiveSearchResults(normalizedResults) {
-  return (dispatch) => {
+  return dispatch => {
     const { entities, result, nextHref } = normalizedResults;
     dispatch(mergeEntities(entities));
-    // dispatch(mergeTrackResults(result));
-    dispatch(mergeVisiblePlayQueue(result));
+    dispatch(mergeTrackResults(result));
     dispatch(updateSearchNextHref(nextHref));
     dispatch(stopSearching());
   };
@@ -47,13 +63,14 @@ export function loadSearchResults(query) {
   return (dispatch, getState) => {
     const state = getState();
     const searching = isSearching(state);
+    dispatch(updateSearchKey(query));
     if (!searching) {
       dispatch(startSearching());
       fetchSearchResults(query)
-        .then((normalized) => {
+        .then(normalized => {
           dispatch(receiveSearchResults(normalized));
         })
-        .catch((err) => {
+        .catch(err => {
           console.error(err);
           dispatch(defaultWarning());
         });
@@ -69,10 +86,10 @@ export function loadMoreSearchResults() {
     if (!searching) {
       dispatch(startSearching());
       fetchByNextHref(curNextHref)
-        .then((normalized) => {
+        .then(normalized => {
           dispatch(receiveSearchResults(normalized));
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
           dispatch(defaultWarning());
         });
