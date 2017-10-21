@@ -1,8 +1,9 @@
 import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
+import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
 import * as types from './searchActionTypes';
 import { fetchSearchResults, fetchByNextHref } from './searchApi';
-import { isSearching, getSearchNextHref } from './searchSelectors';
+import { isSearching, getSearchNextHref, getSearchKey } from './searchSelectors';
 
 export function startSearching() {
   return {
@@ -49,11 +50,13 @@ export function mergeTrackResults(trackIds) {
   };
 }
 
-export function receiveSearchResults(normalizedResults) {
+export function receiveSearchResults(normalizedResults, searchKey) {
   return dispatch => {
     const { entities, result, nextHref } = normalizedResults;
     dispatch(mergeEntities(entities));
     dispatch(mergeTrackResults(result));
+    // Dynamically update the play queue if needed
+    dispatch(appendToPlayQueueIfNeeded(result, `search-${searchKey}`));
     dispatch(updateSearchNextHref(nextHref));
     dispatch(stopSearching());
   };
@@ -68,7 +71,7 @@ export function loadSearchResults(query) {
       dispatch(startSearching());
       fetchSearchResults(query)
         .then(normalized => {
-          dispatch(receiveSearchResults(normalized));
+          dispatch(receiveSearchResults(normalized, query));
         })
         .catch(err => {
           console.error(err);
@@ -83,11 +86,12 @@ export function loadMoreSearchResults() {
     const state = getState();
     const searching = isSearching(state);
     const curNextHref = getSearchNextHref(state);
+    const searchKey = getSearchKey(state);
     if (!searching) {
       dispatch(startSearching());
       fetchByNextHref(curNextHref)
         .then(normalized => {
-          dispatch(receiveSearchResults(normalized));
+          dispatch(receiveSearchResults(normalized, searchKey));
         })
         .catch(err => {
           console.log(err);
