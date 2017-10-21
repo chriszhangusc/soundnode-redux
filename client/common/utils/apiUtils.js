@@ -63,5 +63,8 @@ export function parseJson(response) {
 export function makeRequest(requestUrl, fetchOptions) {
   const proxyRequest = getProxyRequest(requestUrl);
   const finalUrl = appendTokenToUrl(proxyRequest);
-  return fetch(finalUrl, fetchOptions).then(checkStatus).then(parseJson);
+  console.log(finalUrl);
+  return fetch(finalUrl, fetchOptions)
+    .then(checkStatus)
+    .then(parseJson);
 }
