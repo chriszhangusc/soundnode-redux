@@ -1,6 +1,6 @@
 import shuffle from 'lodash/shuffle';
 import { getActiveTrackId, isInShuffleMode } from 'features/player/playerSelectors';
-import { removePlayerActiveTrack } from 'features/player/playerActions';
+import { removeActiveTrack } from 'features/player/playerActions';
 import { notificationSuccess } from 'features/notification/notificationActions';
 import { shiftToFront } from './playQueueUtils';
 import * as types from './playQueueActionTypes';
@@ -81,7 +81,7 @@ export function removeTrackFromPlayQueueAndPlayer(trackId) {
     dispatch(removeTrackFromPlayQueue(trackId));
     const activeTrackId = getActiveTrackId(state);
     if (activeTrackId === trackId) {
-      dispatch(removePlayerActiveTrack(trackId));
+      dispatch(removeActiveTrack(trackId));
     }
   };
 }
@@ -119,7 +119,7 @@ export function appendToPlayQueueIfNeeded(newTrackIds, playlistName) {
 export function clearPlayQueue() {
   return (dispatch) => {
     // Remove player track
-    dispatch(removePlayerActiveTrack());
+    dispatch(removeActiveTrack());
     dispatch({ type: types.PLAY_QUEUE_CLEAR });
     dispatch(hidePlayQueue());
     dispatch(notificationSuccess('Play Queue Cleared'));

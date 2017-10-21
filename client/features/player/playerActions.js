@@ -2,7 +2,6 @@ import {
   shufflePlayQueue,
   updatePlayQueue,
   clearShuffleQueue,
-  updatePlayQueueTitle,
 } from 'features/playQueue/playQueueActions';
 import { getPlayQueueByMode } from 'features/playQueue/playQueueSelectors';
 import { getLastVolume, setLastVolume } from 'common/utils/localStorageUtils';
@@ -57,7 +56,7 @@ export function updateActiveTrackId(trackId) {
   };
 }
 
-export function removePlayerActiveTrack() {
+export function removeActiveTrack() {
   return {
     type: types.PLAYER_ACTIVE_TRACK_REMOVE,
   };
@@ -81,7 +80,7 @@ export function updateVolume(volume) {
   };
 }
 
-export function changePlayMode(mode) {
+export function updatePlayMode(mode) {
   return {
     type: types.PLAYER_PLAY_MODE_UPDATE,
     payload: {
@@ -202,7 +201,15 @@ export function playSongByAction(actionType) {
     } else {
       const idx = playQueue.indexOf(curTrackId);
       let nextIdx = actionType === playModes.NEXT ? idx + 1 : idx - 1;
-      nextIdx = nextIdx >= playQueue.length ? playQueue.length - 1 : nextIdx;
+      // Last track
+      if (nextIdx >= playQueue.length) {
+        // Remove active track from player and stop playing
+        dispatch(removeActiveTrack());
+        // window.scrollTo(0, 0);
+        return;
+      }
+
+      // First track
       nextIdx = nextIdx < 0 ? 0 : nextIdx;
       nextTrackId = playQueue[nextIdx];
     }
@@ -222,6 +229,12 @@ export function playPrevSong() {
   };
 }
 
+export function deactivatePlayer() {
+  return dispatch => {
+    dispatch();
+  };
+}
+
 // When we click mode icons on player.
 export function togglePlayMode(newMode) {
   return (dispatch, getState) => {
@@ -229,18 +242,13 @@ export function togglePlayMode(newMode) {
     const currMode = selectors.getPlayerMode(state);
     if (currMode === newMode) {
       /* Toggle off current mode, set to default mode */
-
       if (currMode === playModes.SHUFFLE) {
         dispatch(clearShuffleQueue());
       }
-
-      dispatch(changePlayMode(playModes.DEFAULT_MODE));
-      // if (newMode === playModes.SHUFFLE) {
-      //   dispatch(syncActivePlayQueue());
-      // }
+      dispatch(updatePlayMode(playModes.DEFAULT_MODE));
     } else {
       /* Toggle on new mode */
-      dispatch(changePlayMode(newMode));
+      dispatch(updatePlayMode(newMode));
       // Toggling on shuffle mode
       if (newMode === playModes.SHUFFLE) {
         dispatch(shufflePlayQueue());

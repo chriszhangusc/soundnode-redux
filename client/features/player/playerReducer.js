@@ -112,6 +112,8 @@ export function removeActiveTrack(state) {
     ...state,
     playing: false,
     activeTrackId: null,
+    currentTime: 0,
+    duration: 0,
   };
 }
 
