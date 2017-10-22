@@ -8,6 +8,8 @@ import Navbar from 'common/components/Navbar';
 import NotificationCenter from 'features/notification/NotificationCenter';
 import PlayQueue from 'features/playQueue/PlayQueue';
 import Routing from 'app/routing/Routing';
+import ModalRoot from 'features/modals/ModalRoot';
+import Overlay from 'features/overlay/Overlay';
 
 const PageContentWrapper = styled.div`
   flex: 6;
@@ -31,6 +33,8 @@ function Main() {
       </PageContentWrapper>
       <NetworkDetector />
       <NotificationCenter />
+      <ModalRoot />
+      <Overlay />
     </MainWrapper>
   );
 }

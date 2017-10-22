@@ -36,19 +36,16 @@ const sidebarItemList = [
 
 function Sidebar({ hidden, hideSidebarAction }) {
   return (
-    <div>
-      <SidebarOverlay onClick={hideSidebarAction} hidden={hidden} />
-      <Wrapper sidebarHidden={hidden}>
-        <BoxShadow offsetX={2} offsetY={2} blur={10} spread={4} shade={9}>
-          <SidebarHeader />
-          <ul>
-            {sidebarItemList.map(item => (
-              <SidebarTab {...item} key={item.title} onClick={hideSidebarAction} />
-            ))}
-          </ul>
-        </BoxShadow>
-      </Wrapper>
-    </div>
+    <Wrapper sidebarHidden={hidden}>
+      <BoxShadow offsetX={2} offsetY={2} blur={10} spread={4} shade={9}>
+        <SidebarHeader />
+        <ul>
+          {sidebarItemList.map(item => (
+            <SidebarTab {...item} key={item.title} onClick={hideSidebarAction} />
+          ))}
+        </ul>
+      </BoxShadow>
+    </Wrapper>
   );
 }
 

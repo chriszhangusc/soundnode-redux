@@ -7,6 +7,7 @@ import { getFavoriteTrackIds, getReposts } from 'features/auth/authSelectors';
 import * as authActions from 'features/auth/authActions';
 import * as copyActions from 'features/copy/copyActions';
 import { addTrackToPlaylist } from 'common/services/scApi';
+import { showModal } from 'features/modals/modalsActions';
 
 function SongCardActions({ trackId, liked, reposted, permalinkUrl, actions }) {
   const handleCopyClick = () => {
@@ -25,7 +26,10 @@ function SongCardActions({ trackId, liked, reposted, permalinkUrl, actions }) {
 
   const handleAddToPlaylistClick = () => {
     console.log('Add to playlist feature not yet implemented');
-    addTrackToPlaylist(trackId);
+    // addTrackToPlaylist(trackId);
+    actions.showModal('ADD_TO_PLAYLIST', {
+      trackId,
+    });
   };
 
   const handleRepostClick = () => {
@@ -77,6 +81,7 @@ function mapStateToProps(state, { track }) {
 const actions = {
   ...authActions,
   ...copyActions,
+  showModal,
 };
 
 function mapDispatchToProps(dispatch) {
