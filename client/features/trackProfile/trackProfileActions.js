@@ -1,10 +1,6 @@
 import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import {
-  mergeVisiblePlayQueue,
-  updateVisiblePlayQueueName,
-} from 'features/playQueue/playQueueActions';
-import {
   showLoadingOverlay,
   hideLoadingOverlay,
 } from 'features/loadingOverlay/loadingOverlayActions';
@@ -85,8 +81,6 @@ export function receiveTrack(normalizedTrack) {
   return (dispatch) => {
     dispatch(mergeEntities(normalizedTrack.entities));
     dispatch(updateProfiledTrack(normalizedTrack.result));
-    // Update playlist
-    dispatch(mergeVisiblePlayQueue([normalizedTrack.result]));
     dispatch(stopFetchingProfiledTrack());
   };
 }
@@ -94,7 +88,6 @@ export function receiveTrack(normalizedTrack) {
 // Initial loading method
 export function loadTrackProfileData(trackId) {
   return (dispatch) => {
-    dispatch(updateVisiblePlayQueueName(`track-${trackId}`));
     dispatch(startFetchingProfiledTrack());
     dispatch(startFetchingComments());
     dispatch(showLoadingOverlay());

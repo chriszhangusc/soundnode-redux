@@ -19,6 +19,7 @@ const ContentWrapper = styled.div`
 
 const Text = styled.div`color: ${props => props.theme.colors.fontColor};`;
 
+// FIXME: Decouple global overlay from globalSpinner
 function LoadingOverlay({ active, text }) {
   const overlay = (
     <FadeTransition>

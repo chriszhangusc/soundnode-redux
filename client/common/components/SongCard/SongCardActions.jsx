@@ -9,7 +9,7 @@ import * as copyActions from 'features/copy/copyActions';
 import { addTrackToPlaylist } from 'common/services/scApi';
 import { showModal } from 'features/modals/modalsActions';
 
-function SongCardActions({ trackId, liked, reposted, permalinkUrl, actions }) {
+function SongCardActions({ trackId, track, liked, reposted, permalinkUrl, actions }) {
   const handleCopyClick = () => {
     actions.copyToClipboard(
       permalinkUrl,
@@ -28,7 +28,7 @@ function SongCardActions({ trackId, liked, reposted, permalinkUrl, actions }) {
     console.log('Add to playlist feature not yet implemented');
     // addTrackToPlaylist(trackId);
     actions.showModal('ADD_TO_PLAYLIST', {
-      trackId,
+      track,
     });
   };
 

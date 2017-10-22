@@ -1,13 +1,18 @@
 import SC from 'soundcloud';
 import { SC_API_V1 } from 'common/constants/apiConsts';
-// import { normalizeResponse } from 'common/utils/normalizeUtils';
 import { makeRequest } from 'common/utils/apiUtils';
+
+
+// FIXME: Not a good name
+export function fetchMyPlaylists() {
+  const requestUrl = `${SC_API_V1}/me/playlists?limit=10&format=json`;
+  return makeRequest(requestUrl);
+}
 
 export function removePlaylist(playlistId) {
   const requestUrl = `${SC_API_V1}/playlists/${playlistId}`;
   return makeRequest(requestUrl, { method: 'DELETE' });
 }
-
 
 export function addTrackToPlaylist(trackId, userId = 250047142, playlistId = 357317107) {
   const requestUrl = `${SC_API_V1}/users/${userId}/playlists/${playlistId}`;

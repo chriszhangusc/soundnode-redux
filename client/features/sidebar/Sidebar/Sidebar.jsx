@@ -5,7 +5,6 @@ import BoxShadow from 'common/components/BoxShadow';
 import PropTypes from 'prop-types';
 import { hideSidebar } from 'features/sidebar/sidebarActions';
 import SidebarHeader from 'features/sidebar/SidebarHeader';
-import SidebarOverlay from 'features/sidebar/SidebarOverlay';
 import { withRouter } from 'react-router';
 import { isSidebarHidden } from '../sidebarSelectors';
 import SidebarTab from '../SidebarTab';

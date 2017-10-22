@@ -12,7 +12,7 @@ function Overlay({ isActive, handleOverlayClick }) {
       <TransitionGroup>
         {isActive && (
           <FadeTransition>
-            <GlobalOverlay />
+            <GlobalOverlay key="global-overlay" />
           </FadeTransition>
         )}
       </TransitionGroup>
