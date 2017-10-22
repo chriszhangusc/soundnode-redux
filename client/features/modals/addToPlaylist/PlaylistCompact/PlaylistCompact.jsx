@@ -37,11 +37,12 @@ const ActionButtonWrapper = styled.div`
   right: 0;
 `;
 
-function PlaylistCompact({ track, playlist, onClick }) {
+function PlaylistCompact({ track, playlist, onClick, isAdded }) {
   const { title, tracks, trackCount } = playlist;
+  console.log('Playlist Render');
   return (
     <Wrapper>
-      <TrackImage src={tracks[0].artworkUrl} size="mini" />
+      <TrackImage src={tracks[0] && tracks[0].artworkUrl} size="mini" />
       <ColumnTitleWrapper>
         <PlaylistTitle>{title}</PlaylistTitle>
         <PlaylistSubtitle>
@@ -49,7 +50,11 @@ function PlaylistCompact({ track, playlist, onClick }) {
         </PlaylistSubtitle>
       </ColumnTitleWrapper>
       <ActionButtonWrapper>
-        <IconButton iconName="plus" iconSize="lg" onClick={onClick} />
+        <IconButton
+          iconName={isAdded ? 'check' : 'plus'}
+          iconSize="lg"
+          onClick={onClick}
+        />
       </ActionButtonWrapper>
     </Wrapper>
   );

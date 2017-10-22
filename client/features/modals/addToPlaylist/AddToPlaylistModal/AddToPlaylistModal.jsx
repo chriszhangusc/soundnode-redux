@@ -1,21 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getMyId } from 'features/auth/authSelectors';
 import styled from 'styled-components';
-import { fetchMyPlaylists } from 'common/services/scApi';
+import { fetchMyPlaylists, addTrackToPlaylist } from 'common/services/scApi';
 // import { normalizeResponse } from 'common/utils/normalizeUtils';
 // import { playlistArraySchema } from 'app/schema';
+import { centerFixed } from 'app/css/mixin';
 import PlaylistCompact from 'features/modals/addToPlaylist/PlaylistCompact';
 
 const Wrapper = styled.div`
-  width: 500px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: ${props => props.theme.zIndexes[5]};
-  background-color: #121314;
+  width: 550px;
+  max-height: 420px;
+  overflow-y: scroll;
+  ${centerFixed} z-index: ${props => props.theme.zIndexes[5]};
+  background-color: ${props => props.theme.colors.bgDark};
   opacity: 0.95;
   box-shadow: 0 0 12px 8px ${props => props.theme.colors.boxShadowColor};
   padding: 20px;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
 `;
@@ -62,19 +63,24 @@ class AddToPlaylistModal extends React.Component {
 
   componentDidMount() {
     // Fetch all playlists of current user
-    fetchMyPlaylists().then((playlists) => {
+    fetchMyPlaylists().then(playlists => {
       console.log(playlists);
-      this.setState({ playlists });
+      this.setState({ playlists: [...playlists] });
     });
   }
 
-  handleAddClick = (track, playlist, e) => {
-    e.preventDefault();
-    console.log('Adding', track.title, 'to', playlist.title);
+  handleAddClick = (track, currentUserId, playlist) => {
+    // console.log('Adding', track.title, 'to', playlist.title);
+    addTrackToPlaylist(track.id, currentUserId, playlist.id).then(() => {
+      // Refresh playlists
+      fetchMyPlaylists().then(playlists => {
+        this.setState({ playlists: [...playlists] });
+      });
+    });
   };
 
   render() {
-    const { track } = this.props;
+    const { track, currentUserId } = this.props;
     return (
       <Wrapper>
         <Row>
@@ -87,10 +93,11 @@ class AddToPlaylistModal extends React.Component {
         <Row>
           {this.state.playlists.map(playlist => (
             <PlaylistCompact
-              playlist={playlist}
+              playlist={{ ...playlist }}
               key={playlist.id}
+              isAdded={playlist.tracks.filter(t => t.id === track.id).length > 0}
               onClick={() => {
-                this.handleAddClick(track, playlist);
+                this.handleAddClick(track, currentUserId, playlist);
               }}
             />
           ))}
@@ -100,4 +107,10 @@ class AddToPlaylistModal extends React.Component {
   }
 }
 
-export default AddToPlaylistModal;
+function mapStateToProps(state) {
+  return {
+    currentUserId: getMyId(state),
+  };
+}
+
+export default connect(mapStateToProps)(AddToPlaylistModal);

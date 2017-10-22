@@ -4,7 +4,7 @@ import * as colors from './colors';
 export const fontSizes = ['0.8rem', '0.9rem', '0.95rem', '1rem', '1.25rem', '1.5rem', '2rem'];
 
 // 0 is default
-export const zIndexes = [0, 1, 2, 3, 4, 5];
+export const zIndexes = [0, 1, 2, 3, 4, 5, 6];
 
 export const darken = n => `rgba(0, 0, 0, ${n})`;
 

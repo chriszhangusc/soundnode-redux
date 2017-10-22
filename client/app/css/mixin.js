@@ -22,3 +22,10 @@ export const paddings = css`
   padding-bottom: ${props => props.pb};
   padding-left: ${props => props.pl};
 `;
+
+export const centerFixed = css`
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+`;

@@ -12,7 +12,7 @@ const ContentWrapper = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: ${props => props.theme.zIndexes[5]};
+  z-index: ${props => props.theme.zIndexes[6]};
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
 `;

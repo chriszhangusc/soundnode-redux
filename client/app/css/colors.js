@@ -11,6 +11,8 @@ export const transparentDark = 'rgba(0, 0, 0, 0.7)';
 
 export const bg = lighterBlack;
 export const bgSub = lightBlack;
+export const bgDark = '#121314';
+
 export const fontColor = lighterGray;
 export const fontColorSub = gray;
 export const themeColor = orange;
