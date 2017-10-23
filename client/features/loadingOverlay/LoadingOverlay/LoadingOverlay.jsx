@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { isLoaderActive, getLoaderText } from 'features/loadingOverlay/loadingOverlaySelectors';
 import Spinner from 'common/components/spinners/CircleRotate';
+import FadeTransition from 'common/components/transitions/FadeTransition';
+import { TransitionGroup } from 'react-transition-group';
 
 const ContentWrapper = styled.div`
   position: fixed;
@@ -17,15 +19,19 @@ const ContentWrapper = styled.div`
 const Text = styled.div`color: ${props => props.theme.colors.fontColor};`;
 
 // FIXME: Decouple global overlay from globalSpinner
-function LoadingOverlay({ active, text = 'Authenticating' }) {
-  const overlay = (
-    <ContentWrapper>
-      <Spinner />
-      <Text>{text}</Text>
-    </ContentWrapper>
+function LoadingOverlay({ isActive, text = 'Authenticating' }) {
+  return (
+    <TransitionGroup>
+      {isActive && (
+        <FadeTransition>
+          <ContentWrapper>
+            <Spinner />
+            <Text>{text}</Text>
+          </ContentWrapper>
+        </FadeTransition>
+      )}
+    </TransitionGroup>
   );
-
-  return active && overlay;
 }
 
 LoadingOverlay.defaultProps = {
@@ -33,13 +39,13 @@ LoadingOverlay.defaultProps = {
 };
 
 LoadingOverlay.propTypes = {
-  active: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool.isRequired,
   text: PropTypes.string,
 };
 
 function mapStateToProps(state) {
   return {
-    active: isLoaderActive(state),
+    isActive: isLoaderActive(state),
     text: getLoaderText(state),
   };
 }

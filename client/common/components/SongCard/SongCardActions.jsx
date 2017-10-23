@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Card from 'common/components/Card';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getFavoriteTrackIds, getReposts, isLoggedIn } from 'features/auth/authSelectors';
+import { getFavoriteTrackIds, getReposts, isAuthed } from 'features/auth/authSelectors';
 import * as authActions from 'features/auth/authActions';
 import * as copyActions from 'features/copy/copyActions';
 import { showModal } from 'features/modals/modalsActions';
@@ -83,7 +83,7 @@ function mapStateToProps(state, { track }) {
     permalinkUrl,
     liked: favoriteTrackIds.includes(id),
     reposted: reposts.includes(id),
-    authed: isLoggedIn(state),
+    authed: isAuthed(state),
   };
 }
 

@@ -8,7 +8,7 @@ export const getMe = createSelector(getAuthState, state => state.me);
 
 export const getMyId = createSelector(getMe, me => me && me.id);
 
-export const isLoggedIn = createSelector(getSession, session => session);
+export const isAuthed = getMe;
 
 export const getFavoriteTrackIds = createSelector(getAuthState, state => state.favoriteTracks);
 
