@@ -1,3 +1,6 @@
+import { normalizeResponse } from 'common/utils/normalizeUtils';
+import { playlistArraySchema } from 'app/schema';
+
 import {
   showLoadingOverlay,
   hideLoadingOverlay,
@@ -10,7 +13,7 @@ import {
   PLAYLISTS_PLAYLIST_DELETE,
 } from 'features/playlists/playlistsActionTypes';
 import { notificationSuccess, defaultWarning } from 'features/notification/notificationActions';
-import { fetchMyPlaylists, deleteSinglePlaylist } from 'features/playlists/playlistsApi';
+import { fetchMyPlaylists, deleteSinglePlaylist } from 'common/services/scApiService';
 import { getPlaylistById } from 'features/entities/entitiesSelectors';
 import { updatePlayQueue } from 'features/playQueue/playQueueActions';
 import { loadTrackAndPlay } from 'features/player/playerActions';
@@ -43,6 +46,7 @@ export function loadPlaylists() {
   return dispatch => {
     dispatch(showLoadingOverlay());
     fetchMyPlaylists()
+      .then(response => normalizeResponse(response, playlistArraySchema))
       .then(normalized => {
         const { entities, result } = normalized;
         // Merge entities

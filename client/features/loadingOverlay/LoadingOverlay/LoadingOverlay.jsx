@@ -19,10 +19,10 @@ const ContentWrapper = styled.div`
 const Text = styled.div`color: ${props => props.theme.colors.fontColor};`;
 
 // FIXME: Decouple global overlay from globalSpinner
-function LoadingOverlay({ isActive, text = 'Authenticating' }) {
+function LoadingOverlay({ active, text = 'Authenticating' }) {
   return (
     <TransitionGroup>
-      {isActive && (
+      {active && (
         <FadeTransition>
           <ContentWrapper>
             <Spinner />
@@ -39,13 +39,13 @@ LoadingOverlay.defaultProps = {
 };
 
 LoadingOverlay.propTypes = {
-  isActive: PropTypes.bool.isRequired,
+  active: PropTypes.bool.isRequired,
   text: PropTypes.string,
 };
 
 function mapStateToProps(state) {
   return {
-    isActive: isLoaderActive(state),
+    active: isLoaderActive(state),
     text: getLoaderText(state),
   };
 }

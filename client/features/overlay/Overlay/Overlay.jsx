@@ -6,11 +6,11 @@ import FadeTransition from 'common/components/transitions/FadeTransition';
 import { TransitionGroup } from 'react-transition-group';
 import { hideOverlay } from 'features/overlay/overlayActions';
 
-function Overlay({ isActive, handleOverlayClick }) {
+function Overlay({ active, handleOverlayClick }) {
   return (
     <div onClick={handleOverlayClick}>
       <TransitionGroup>
-        {isActive && (
+        {active && (
           <FadeTransition>
             <GlobalOverlay key="global-overlay" />
           </FadeTransition>
@@ -21,12 +21,12 @@ function Overlay({ isActive, handleOverlayClick }) {
 }
 
 Overlay.propTypes = {
-  isActive: PropTypes.bool.isRequired,
+  active: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    isActive: state.overlay.isActive,
+    active: state.overlay.active,
   };
 }
 

@@ -1,10 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import TrackImage from 'common/components/images/TrackImage';
 import ColumnTitleWrapper from 'common/components/layouts/ColumnTitleWrapper';
 import { truncateMaxWidth } from 'app/css/styleUtils';
 import styled from 'styled-components';
 import Icon from 'common/components/icons/Icon';
 import IconButton from 'common/components/buttons/IconButton';
+import { getTracksByPlaylistId } from 'features/entities/entitiesSelectors';
 
 const Wrapper = styled.li`
   display: flex;
@@ -37,27 +39,31 @@ const ActionButtonWrapper = styled.div`
   right: 0;
 `;
 
-function PlaylistCompact({ track, playlist, onClick, isAdded }) {
-  const { title, tracks, trackCount } = playlist;
+function PlaylistCompact({ track, playlistId, playlistTitle, playlistTracks, onClick, isAdded }) {
   console.log('Playlist Render');
   return (
     <Wrapper>
-      <TrackImage src={tracks[0] && tracks[0].artworkUrl} size="mini" />
+      <TrackImage
+        src={playlistTracks.length > 0 && playlistTracks[0] && playlistTracks[0].artworkUrl}
+        size="mini"
+      />
       <ColumnTitleWrapper>
-        <PlaylistTitle>{title}</PlaylistTitle>
+        <PlaylistTitle>{playlistTitle}</PlaylistTitle>
         <PlaylistSubtitle>
-          <Icon iconName="list" /> {trackCount}
+          <Icon iconName="list" /> {playlistTracks.length}
         </PlaylistSubtitle>
       </ColumnTitleWrapper>
       <ActionButtonWrapper>
-        <IconButton
-          iconName={isAdded ? 'check' : 'plus'}
-          iconSize="lg"
-          onClick={onClick}
-        />
+        <IconButton iconName={isAdded ? 'check' : 'plus'} iconSize="lg" onClick={onClick} />
       </ActionButtonWrapper>
     </Wrapper>
   );
 }
 
-export default PlaylistCompact;
+function mapStateToProps(state, { playlistId }) {
+  return {
+    playlistTracks: getTracksByPlaylistId(state, playlistId),
+  };
+}
+
+export default connect(mapStateToProps)(PlaylistCompact);

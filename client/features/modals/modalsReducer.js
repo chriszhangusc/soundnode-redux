@@ -1,8 +1,10 @@
 import * as types from 'features/modals/modalsActionTypes';
+import addToPlaylistReducer from 'features/modals/addToPlaylist/addToPlaylistReducer';
 
 const initialState = {
   modalType: null,
   modalProps: {},
+  ADD_TO_PLAYLIST: addToPlaylistReducer,
 };
 
 function showModal(state, { modalType, modalProps }) {

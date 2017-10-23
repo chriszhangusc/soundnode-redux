@@ -7,21 +7,21 @@ import {
 } from 'features/loadingOverlay/loadingOverlayActionTypes';
 
 const initialState = {
-  isActive: false,
+  active: false,
   for: null,
 };
 
 function showOverlay(state) {
   return {
     ...state,
-    isActive: true,
+    active: true,
   };
 }
 
 function hideOverlay(state) {
   return {
     ...state,
-    isActive: false,
+    active: false,
   };
 }
 
@@ -29,19 +29,19 @@ export default function Overlay(state = initialState, action) {
   switch (action.type) {
     case MODAL_SHOW:
       return {
-        isActive: true,
+        active: true,
         for: 'MODAL',
       };
 
     case SIDEBAR_SHOW:
       return {
-        isActive: true,
+        active: true,
         for: 'SIDEBAR',
       };
 
     case LOADING_OVERLAY_SHOW:
       return {
-        isActive: true,
+        active: true,
         for: 'LOADING_OVERLAY',
       };
 
