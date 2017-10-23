@@ -1,4 +1,4 @@
-import { MODAL_SHOW, MODAL_HIDE } from 'features/modals/modalsActionTypes';
+import { MODAL_SHOW, MODAL_HIDE } from 'features/modals/root/rootModalActionTypes';
 
 export function showModal(modalType, modalProps) {
   return {

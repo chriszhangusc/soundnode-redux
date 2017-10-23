@@ -42,10 +42,9 @@ export function resetPlaylistsState() {
   };
 }
 
-export function loadPlaylists() {
+export function fetchPlaylists() {
   return dispatch => {
-    dispatch(showLoadingOverlay());
-    fetchMyPlaylists()
+    return fetchMyPlaylists()
       .then(response => normalizeResponse(response, playlistArraySchema))
       .then(normalized => {
         const { entities, result } = normalized;
@@ -53,14 +52,22 @@ export function loadPlaylists() {
         dispatch(mergeEntities(entities));
         // Update playlists store
         dispatch(updatePlaylists(result));
-        // Stop global spinner
-        dispatch(hideLoadingOverlay());
       })
       .catch(err => {
         // notification warning
         dispatch(defaultWarning());
         console.log(err);
       });
+  };
+}
+
+// Bussiness logic for playlists
+export function loadPlaylists() {
+  return dispatch => {
+    dispatch(showLoadingOverlay());
+    dispatch(fetchPlaylists()).then(() => {
+      dispatch(hideLoadingOverlay());
+    });
   };
 }
 

@@ -1,13 +1,18 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getMyId } from 'features/auth/authSelectors';
 import styled from 'styled-components';
-import { addTrackToPlaylist, removeTrackFromPlaylist } from 'common/services/scApiService';
-import { fetchPlaylists } from 'features/modals/addToPlaylist/addToPlaylistActions';
+import {
+  updateFilterText,
+  addToPlaylist,
+} from 'features/modals/addToPlaylist/addToPlaylistActions';
+import { fetchPlaylists } from 'features/playlists/playlistsActions';
 import { centerFixed } from 'app/css/mixin';
 import PlaylistCompact from 'features/modals/addToPlaylist/PlaylistCompact';
 import { notificationSuccess } from 'features/notification/notificationActions';
 import { getPlaylists } from 'features/playlists/playlistsSelectors';
+import { getFilterText } from 'features/modals/addToPlaylist/addToPlaylistSelectors';
 
 const Wrapper = styled.div`
   width: 550px;
@@ -58,59 +63,38 @@ class AddToPlaylistModal extends React.Component {
     super(props);
     this.state = {
       /* initial state */
-      filterText: '',
       playlists: [],
     };
   }
 
   componentDidMount() {
-    this.props.loadPlaylists();
+    this.props.actions.fetchPlaylists();
   }
 
-  // refreshPlaylists = () => {
-  //   return fetchMyPlaylists().then(playlists => {
-  //     this.setState({ playlists: [...playlists] });
-  //   });
-  // };
-
-  handleAddClick = (track, currentUserId, playlist) => {
-    // console.log('Adding', track.title, 'to', playlist.title);
-    addTrackToPlaylist(track.id, currentUserId, playlist.id).then(() => {
-      // this.refreshPlaylists().then(() => {
-      //   this.props.createToastr('Track added to playlist');
-      // });
-      // just update the state here.
-      const updater = [...this.state.playlists];
-      updater.forEach(pl => {
-        if (pl.id === playlist.id) {
-          pl.tracks.push(track);
-        }
-      });
-      this.setState(updater);
-      this.props.createToastr('Track added to playlist');
-    });
+  handleAddClick = (trackId, playlistId) => {
+    this.props.actions.addToPlaylist(trackId, this.props.currentUserId, playlistId);
   };
 
-  handleRemoveClick = (track, currentUserId, playlist) => {
-    removeTrackFromPlaylist(track.id, currentUserId, playlist.id).then(() => {
-      const updater = [...this.state.playlists];
-      updater.forEach(pl => {
-        if (pl.id === playlist.id) {
-          pl.tracks = pl.tracks.filter(t => t.id !== track.id);
-        }
-      });
-      this.setState(updater);
-      this.props.createToastr('Track removed from playlist');
-    });
+  handleRemoveClick = (track, playlist) => {
+    // removeTrackFromPlaylist(track.id, currentUserId, playlist.id).then(() => {
+    //   const updater = [...this.state.playlists];
+    //   updater.forEach(pl => {
+    //     if (pl.id === playlist.id) {
+    //       pl.tracks = pl.tracks.filter(t => t.id !== track.id);
+    //     }
+    //   });
+    //   this.setState(updater);
+    //   this.props.actions.notificationSuccess('Track removed from playlist');
+    // });
   };
 
   handleFilterChange = e => {
     const filterText = e.target.value.toLowerCase();
-    this.setState({ filterText });
+    this.props.actions.updateFilterText(filterText);
   };
 
   render() {
-    const { track, currentUserId, playlists } = this.props;
+    const { track, currentUserId, playlists, filterText } = this.props;
     return (
       <Wrapper>
         <Row>
@@ -122,9 +106,9 @@ class AddToPlaylistModal extends React.Component {
         </Row>
         <Row>
           {playlists
-            .filter(pl => pl.title.toLowerCase().indexOf(this.state.filterText) !== -1)
+            .filter(pl => pl.title.toLowerCase().indexOf(filterText) !== -1)
             .map(playlist => {
-              const isAdded = playlist.tracks.filter(id => id === track.id).length > 0;
+              const isAdded = playlist.tracks.includes(track.id) > 0;
               return (
                 <PlaylistCompact
                   playlistId={playlist.id}
@@ -133,9 +117,9 @@ class AddToPlaylistModal extends React.Component {
                   isAdded={isAdded}
                   onClick={() => {
                     if (isAdded) {
-                      this.handleRemoveClick(track, currentUserId, playlist);
+                      this.handleRemoveClick(track.id, playlist.id);
                     } else {
-                      this.handleAddClick(track, currentUserId, playlist);
+                      this.handleAddClick(track.id, playlist.id);
                     }
                   }}
                 />
@@ -151,12 +135,21 @@ function mapStateToProps(state) {
   return {
     currentUserId: getMyId(state),
     playlists: getPlaylists(state),
+    filterText: getFilterText(state),
   };
 }
 
 const actions = {
-  createToastr: notificationSuccess,
-  loadPlaylists: fetchPlaylists,
+  updateFilterText,
+  notificationSuccess,
+  fetchPlaylists,
+  addToPlaylist,
 };
 
-export default connect(mapStateToProps, actions)(AddToPlaylistModal);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddToPlaylistModal);

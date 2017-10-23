@@ -1,6 +1,6 @@
 import { OVERLAY_SHOW, OVERLAY_HIDE } from 'features/overlay/overlayActionTypes';
 import { SIDEBAR_SHOW, SIDEBAR_HIDE } from 'features/sidebar/sidebarActionTypes';
-import { MODAL_SHOW, MODAL_HIDE } from 'features/modals/modalsActionTypes';
+import { MODAL_SHOW, MODAL_HIDE } from 'features/modals/root/rootModalActionTypes';
 import {
   LOADING_OVERLAY_SHOW,
   LOADING_OVERLAY_HIDE,

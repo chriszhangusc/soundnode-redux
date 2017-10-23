@@ -1,16 +1,15 @@
-import { UPDATE_PLAYLIST } from './addToPlaylistActionTypes';
+import { PLAYLIST_FILTER_TEXT_UPDATE } from './addToPlaylistActionTypes';
 
 const initialState = {
-  playlistIds: [],
   filterText: '',
 };
 
 export default function addToPlaylistReducer(state = initialState, action) {
   switch (action.type) {
-    case UPDATE_PLAYLIST:
+    case PLAYLIST_FILTER_TEXT_UPDATE:
       return {
         ...state,
-        playlistIds: action.payload.playlistIds,
+        filterText: action.payload.filterText,
       };
     default:
       return state;

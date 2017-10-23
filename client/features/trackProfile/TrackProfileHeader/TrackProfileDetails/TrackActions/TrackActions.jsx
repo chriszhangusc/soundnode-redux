@@ -6,7 +6,7 @@ import LinkButton from 'common/components/links/LinkButton';
 import { copyToClipboard } from 'features/copy/copyActions';
 import * as selectors from 'features/trackProfile/trackProfileSelectors';
 import Icon from 'common/components/icons/Icon';
-import { showModal } from 'features/modals/modalsActions';
+import { showModal } from 'features/modals/root/rootModalActions';
 import Wrapper from './Wrapper';
 
 function TrackActions({ track, permalink, downloadable, downloadUrl, actions }) {

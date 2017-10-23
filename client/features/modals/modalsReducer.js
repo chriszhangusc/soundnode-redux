@@ -1,31 +1,10 @@
-import * as types from 'features/modals/modalsActionTypes';
-import addToPlaylistReducer from 'features/modals/addToPlaylist/addToPlaylistReducer';
+import { combineReducers } from 'redux';
+import addToPlaylist from 'features/modals/addToPlaylist/addToPlaylistReducer';
+import root from 'features/modals/root/rootModalReducer';
 
-const initialState = {
-  modalType: null,
-  modalProps: {},
-  ADD_TO_PLAYLIST: addToPlaylistReducer,
-};
+const modalsReducer = combineReducers({
+  addToPlaylist,
+  root,
+});
 
-function showModal(state, { modalType, modalProps }) {
-  return {
-    ...state,
-    modalType,
-    modalProps: {
-      ...modalProps,
-    },
-  };
-}
-
-export default function modalsReducer(state = initialState, action) {
-  switch (action.type) {
-    case types.MODAL_SHOW:
-      return showModal(state, action.payload);
-
-    case types.MODAL_HIDE:
-      return initialState;
-
-    default:
-      return state;
-  }
-}
+export default modalsReducer;

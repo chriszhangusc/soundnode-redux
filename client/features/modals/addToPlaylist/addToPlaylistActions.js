@@ -1,25 +1,39 @@
-import { normalizeResponse } from 'common/utils/normalizeUtils';
-import { playlistArraySchema } from 'app/schema';
-import { mergeEntities } from 'features/entities/entitiesActions';
-import { notificationSuccess, defaultWarning } from 'features/notification/notificationActions';
-import { fetchMyPlaylists, deleteSinglePlaylist } from 'common/services/scApiService';
-import { updatePlaylists } from 'features/playlists/playlistsActions';
+import { PLAYLIST_FILTER_TEXT_UPDATE } from 'features/modals/addToPlaylist/addToPlaylistActionTypes';
+import { PLAYLIST_TRACK_ADD } from 'features/playlists/playlistsActionTypes';
+import { addTrackToPlaylist, removeTrackFromPlaylist } from 'common/services/scApiService';
 
-export function fetchPlaylists() {
+// addTrackToPlaylist(track.id, currentUserId, playlist.id).then(() => {
+//   const updater = [...this.state.playlists];
+//   updater.forEach(pl => {
+//     if (pl.id === playlist.id) {
+//       pl.tracks.push(track);
+//     }
+//   });
+//   this.setState(updater);
+//   this.props.actions.notificationSuccess('Track added to playlist');
+// });
+
+export function addToPlaylist(trackId, userId, playlistId) {
   return dispatch => {
-    fetchMyPlaylists()
-      .then(response => normalizeResponse(response, playlistArraySchema))
-      .then(normalized => {
-        const { entities, result } = normalized;
-        // Merge entities
-        dispatch(mergeEntities(entities));
-        // Update playlists store
-        dispatch(updatePlaylists(result));
-      })
-      .catch(err => {
-        // notification warning
-        dispatch(defaultWarning());
-        console.log(err);
+    addTrackToPlaylist(trackId, userId, playlistId).then(() => {
+      // Update item in state
+      dispatch({
+        type: PLAYLIST_TRACK_ADD,
+        payload: {
+          playlistId,
+          trackId,
+        },
       });
+      this.props.actions.notificationSuccess('Track added to playlist');
+    });
+  };
+}
+
+export function updateFilterText(text) {
+  return {
+    type: PLAYLIST_FILTER_TEXT_UPDATE,
+    payload: {
+      filterText: text,
+    },
   };
 }

@@ -1,6 +1,6 @@
 import { OVERLAY_SHOW, OVERLAY_HIDE } from 'features/overlay/overlayActionTypes';
 import { hideSidebar } from 'features/sidebar/sidebarActions';
-import { hideModal } from 'features/modals/modalsActions';
+import { hideModal } from 'features/modals/root/rootModalActions';
 
 export function showOverlay() {
   return {

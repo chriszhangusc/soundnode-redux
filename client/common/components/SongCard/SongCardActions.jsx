@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { getFavoriteTrackIds, getReposts, isAuthed } from 'features/auth/authSelectors';
 import * as authActions from 'features/auth/authActions';
 import * as copyActions from 'features/copy/copyActions';
-import { showModal } from 'features/modals/modalsActions';
+import { showModal } from 'features/modals/root/rootModalActions';
 import { authRequired } from 'features/notification/notificationActions';
 
 function SongCardActions({ authed, trackId, track, liked, reposted, permalinkUrl, actions }) {
