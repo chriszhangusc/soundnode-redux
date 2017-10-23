@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LinkButton from 'common/components/links/LinkButton';
 import { copyToClipboard } from 'features/copy/copyActions';
 import * as selectors from 'features/trackProfile/trackProfileSelectors';
 import Icon from 'common/components/icons/Icon';
+import { showModal } from 'features/modals/modalsActions';
 import Wrapper from './Wrapper';
 
-function TrackActions({ permalink, downloadable, downloadUrl, handleCopyClick }) {
+function TrackActions({ track, permalink, downloadable, downloadUrl, actions }) {
   return (
     <Wrapper>
       {downloadable && (
@@ -16,7 +18,14 @@ function TrackActions({ permalink, downloadable, downloadUrl, handleCopyClick })
         </LinkButton>
       )}
 
-      <LinkButton to="/">
+      <LinkButton
+        to="/"
+        onClick={() => {
+          actions.showModal('ADD_TO_PLAYLIST', {
+            track,
+          });
+        }}
+      >
         <Icon iconName="bookmark" title="Add to Playlist" />ADD TO PLAYLIST
       </LinkButton>
 
@@ -24,7 +33,7 @@ function TrackActions({ permalink, downloadable, downloadUrl, handleCopyClick })
         <Icon iconName="external-link" />PERMALINK
       </LinkButton>
 
-      <LinkButton onClick={() => handleCopyClick(permalink)} title="Copy Permalink">
+      <LinkButton onClick={() => actions.copyToClipboard(permalink)} title="Copy Permalink">
         <Icon iconName="clipboard" title="Copy track link to clipboard" />COPY TRACK LINK
       </LinkButton>
     </Wrapper>
@@ -35,7 +44,7 @@ TrackActions.propTypes = {
   downloadable: PropTypes.bool,
   permalink: PropTypes.string,
   downloadUrl: PropTypes.string,
-  handleCopyClick: PropTypes.func.isRequired,
+  actions: PropTypes.object,
 };
 
 TrackActions.defaultProps = {
@@ -46,10 +55,22 @@ TrackActions.defaultProps = {
 
 function mapStateToProps(state) {
   return {
+    track: selectors.getProfiledTrack(state),
     downloadable: selectors.isProfiledTrackDownloadable(state),
     downloadUrl: selectors.getProfiledTrackDownloadUrl(state),
     permalink: selectors.getProfiledTrackPermalink(state),
   };
 }
 
-export default connect(mapStateToProps, { handleCopyClick: copyToClipboard })(TrackActions);
+const actions = {
+  copyToClipboard,
+  showModal,
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrackActions);

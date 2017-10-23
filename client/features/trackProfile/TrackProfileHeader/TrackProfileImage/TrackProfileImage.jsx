@@ -4,7 +4,6 @@ import noop from 'lodash/noop';
 import { connect } from 'react-redux';
 import * as selectors from 'features/trackProfile/trackProfileSelectors';
 import * as playerActions from 'features/player/playerActions';
-
 import TrackImage from 'common/components/images/TrackImage';
 import PlaybackOverlay from 'common/components/PlaybackOverlay';
 import OverlayInfoBar from './OverlayInfoBar';
