@@ -2,11 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getMyId } from 'features/auth/authSelectors';
 import styled from 'styled-components';
-import { fetchMyPlaylists, addTrackToPlaylist } from 'common/services/scApi';
+import {
+  fetchMyPlaylists,
+  addTrackToPlaylist,
+  removeTrackFromPlaylist,
+} from 'common/services/scApi';
 // import { normalizeResponse } from 'common/utils/normalizeUtils';
 // import { playlistArraySchema } from 'app/schema';
 import { centerFixed } from 'app/css/mixin';
 import PlaylistCompact from 'features/modals/addToPlaylist/PlaylistCompact';
+import { notificationSuccess } from 'features/notification/notificationActions';
 
 const Wrapper = styled.div`
   width: 550px;
@@ -69,12 +74,25 @@ class AddToPlaylistModal extends React.Component {
     });
   }
 
+  refreshPlaylists = () => {
+    return fetchMyPlaylists().then(playlists => {
+      this.setState({ playlists: [...playlists] });
+    });
+  };
+
   handleAddClick = (track, currentUserId, playlist) => {
     // console.log('Adding', track.title, 'to', playlist.title);
     addTrackToPlaylist(track.id, currentUserId, playlist.id).then(() => {
-      // Refresh playlists
-      fetchMyPlaylists().then(playlists => {
-        this.setState({ playlists: [...playlists] });
+      this.refreshPlaylists().then(() => {
+        this.props.createToastr('Track added to playlist');
+      });
+    });
+  };
+
+  handleRemoveClick = (track, currentUserId, playlist) => {
+    removeTrackFromPlaylist(track.id, currentUserId, playlist.id).then(() => {
+      this.refreshPlaylists().then(() => {
+        this.props.createToastr('Track removed from playlist');
       });
     });
   };
@@ -91,16 +109,23 @@ class AddToPlaylistModal extends React.Component {
           <FilterInput placeholder="Filter playlists" />
         </Row>
         <Row>
-          {this.state.playlists.map(playlist => (
-            <PlaylistCompact
-              playlist={{ ...playlist }}
-              key={playlist.id}
-              isAdded={playlist.tracks.filter(t => t.id === track.id).length > 0}
-              onClick={() => {
-                this.handleAddClick(track, currentUserId, playlist);
-              }}
-            />
-          ))}
+          {this.state.playlists.map(playlist => {
+            const isAdded = playlist.tracks.filter(t => t.id === track.id).length > 0;
+            return (
+              <PlaylistCompact
+                playlist={{ ...playlist }}
+                key={playlist.id}
+                isAdded={isAdded}
+                onClick={() => {
+                  if (isAdded) {
+                    this.handleRemoveClick(track, currentUserId, playlist);
+                  } else {
+                    this.handleAddClick(track, currentUserId, playlist);
+                  }
+                }}
+              />
+            );
+          })}
         </Row>
       </Wrapper>
     );
@@ -113,4 +138,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(AddToPlaylistModal);
+const actions = {
+  createToastr: notificationSuccess,
+};
+
+export default connect(mapStateToProps, actions)(AddToPlaylistModal);

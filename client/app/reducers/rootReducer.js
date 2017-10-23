@@ -14,7 +14,6 @@ import searchReducer from 'features/search/searchReducer';
 import playlistsReducer from 'features/playlists/playlistsReducer';
 import sidebarReducer from 'features/sidebar/sidebarReducer';
 import loadingOverlayReducer from 'features/loadingOverlay/loadingOverlayReducer';
-import errorsReducer from 'features/errors/errorsReducer';
 import modalsReducer from 'features/modals/modalsReducer';
 import overlayReducer from 'features/overlay/overlayReducer';
 
@@ -36,7 +35,6 @@ const rootReducer = combineReducers({
   playlists: playlistsReducer,
   sidebar: sidebarReducer,
   loadingOverlay: loadingOverlayReducer,
-  errors: errorsReducer,
   modals: modalsReducer,
   overlay: overlayReducer,
 });

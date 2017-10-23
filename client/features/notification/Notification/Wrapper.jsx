@@ -25,7 +25,7 @@ export default styled.div`
     }
   }};
   box-sizing: border-box;
-  padding: 15px 15px;
+  padding: 15px;
   border-radius: 4px;
   cursor: pointer;
   width: 250px;
