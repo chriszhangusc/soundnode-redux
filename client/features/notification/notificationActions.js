@@ -73,6 +73,12 @@ export function defaultWarning() {
   };
 }
 
+export function authRequired() {
+  return (dispatch) => {
+    dispatch(notificationWarning('Please authenticate with soundcloud'));
+  };
+}
+
 export function notificationInfo(message) {
   return (dispatch) => {
     const info = notificationInfoFactory(message);

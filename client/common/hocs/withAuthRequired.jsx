@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { isAuthenticated } from 'features/auth/authUtils';
-import { notificationWarning } from 'features/notification/notificationActions';
+import { authRequired } from 'features/notification/notificationActions';
 import { getDisplayName } from 'common/utils/hocUtils';
 
 export default function withAuthRequired(WrappedComponent) {
   class EnhancedComponent extends Component {
     componentDidMount() {
       if (!isAuthenticated()) {
-        this.props.notificationWarning('Please Signin with SoundCloud First');
+        this.props.authRequired();
       }
     }
 
@@ -21,13 +21,13 @@ export default function withAuthRequired(WrappedComponent) {
   }
 
   EnhancedComponent.propTypes = {
-    notificationWarning: PropTypes.func.isRequired,
+    authRequired: PropTypes.func.isRequired,
   };
 
   EnhancedComponent.displayName = `withAuthReqired(${getDisplayName(WrappedComponent)})`;
 
   const actions = {
-    notificationWarning,
+    authRequired,
   };
 
   return connect(null, actions)(EnhancedComponent);

@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import Card from 'common/components/Card';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getFavoriteTrackIds, getReposts } from 'features/auth/authSelectors';
+import { getFavoriteTrackIds, getReposts, isLoggedIn } from 'features/auth/authSelectors';
 import * as authActions from 'features/auth/authActions';
 import * as copyActions from 'features/copy/copyActions';
 import { showModal } from 'features/modals/modalsActions';
+import { authRequired } from 'features/notification/notificationActions';
 
-function SongCardActions({ trackId, track, liked, reposted, permalinkUrl, actions }) {
+function SongCardActions({ authed, trackId, track, liked, reposted, permalinkUrl, actions }) {
   const handleCopyClick = () => {
     actions.copyToClipboard(
       permalinkUrl,
@@ -18,23 +19,31 @@ function SongCardActions({ trackId, track, liked, reposted, permalinkUrl, action
   };
 
   const handleLikeClick = () => {
-    const { doUnlikeTrack, doLikeTrack } = actions;
-    const toggleAction = liked ? doUnlikeTrack : doLikeTrack;
-    toggleAction(trackId);
+    if (!authed) {
+      actions.authRequired();
+    } else {
+      const toggleAction = liked ? actions.doUnlikeTrack : actions.doLikeTrack;
+      toggleAction(trackId);
+    }
   };
 
   const handleAddToPlaylistClick = () => {
-    console.log('Add to playlist feature not yet implemented');
-    // addTrackToPlaylist(trackId);
-    actions.showModal('ADD_TO_PLAYLIST', {
-      track,
-    });
+    if (!authed) {
+      actions.authRequired();
+    } else {
+      actions.showModal('ADD_TO_PLAYLIST', {
+        track,
+      });
+    }
   };
 
   const handleRepostClick = () => {
-    const { createRepost, removeRepost } = actions;
-    const toggleRepost = reposted ? removeRepost : createRepost;
-    toggleRepost(trackId);
+    if (!authed) {
+      actions.authRequired();
+    } else {
+      const toggleRepost = reposted ? actions.removeRepost : actions.createRepost;
+      toggleRepost(trackId);
+    }
   };
 
   return (
@@ -74,6 +83,7 @@ function mapStateToProps(state, { track }) {
     permalinkUrl,
     liked: favoriteTrackIds.includes(id),
     reposted: reposts.includes(id),
+    authed: isLoggedIn(state),
   };
 }
 
@@ -81,6 +91,7 @@ const actions = {
   ...authActions,
   ...copyActions,
   showModal,
+  authRequired,
 };
 
 function mapDispatchToProps(dispatch) {
