@@ -259,7 +259,7 @@ export function togglePlayMode(newMode) {
 
 export function handleStreamError() {
   return dispatch => {
-    dispatch(notificationWarning('Not Streamable'));
+    dispatch(notificationWarning('Track not streamable'));
     dispatch(playNextSong());
   };
 }

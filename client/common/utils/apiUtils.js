@@ -38,7 +38,7 @@ export function getProxyRequest(requestUrl) {
 }
 
 // If we have authed already, use oauth_token, otherwise use client_id
-export function appendTokenToUrl(requestUrl) {
+export function appendToken(requestUrl) {
   const token = getOAuthToken();
   return token
     ? setUrlParams(requestUrl, { oauth_token: token })
@@ -62,7 +62,7 @@ export function parseJsonAndCamelize(response) {
 // Check if the fetchUrl is v1 or v2 and convert them to point to our proxy server accordingly
 export function makeRequest(requestUrl, fetchOptions) {
   const proxyRequest = getProxyRequest(requestUrl);
-  const finalUrl = appendTokenToUrl(proxyRequest);
+  const finalUrl = appendToken(proxyRequest);
   console.log(finalUrl);
   return fetch(finalUrl, fetchOptions)
     .then(checkStatus)

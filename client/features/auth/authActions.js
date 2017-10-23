@@ -9,7 +9,7 @@ import {
   hideLoadingOverlay,
 } from 'features/loadingOverlay/loadingOverlayActions';
 
-import { getOAuthToken, setOAuthToken, removeOAuthToken, isUnauthError } from './authUtils';
+import { getOAuthToken, setOAuthToken, removeOAuthToken } from './authUtils';
 
 import * as actionTypes from './authActionTypes';
 
@@ -167,7 +167,7 @@ export function loadMe() {
       .catch(err => {
         console.error(err);
         dispatch(loginFailed(err));
-        dispatch(notificationWarning('Failed to login to SoundCloud'));
+        dispatch(notificationWarning('Failed to login to soundcloud'));
       });
 }
 
@@ -197,7 +197,7 @@ export function doLogout() {
   return dispatch => {
     removeOAuthToken();
     dispatch(logoutSucceed());
-    dispatch(notificationSuccess('Logout Success'));
+    dispatch(notificationSuccess('Logout success'));
   };
 }
 
@@ -205,16 +205,12 @@ export function doLikeTrack(trackId) {
   return dispatch => {
     likeTrack(trackId)
       .then(() => {
-        dispatch(notificationSuccess('Track Added To Your Favorites'));
+        dispatch(notificationSuccess('Track added to favorites'));
         dispatch(syncFavorites());
       })
       .catch(err => {
         console.log('Failed to like track: ', err);
-        if (isUnauthError(err)) {
-          dispatch(notificationWarning('Please Signin With SoundCloud'));
-        } else {
-          dispatch(notificationWarning('Failed To Add Track To Favorites'));
-        }
+        dispatch(defaultWarning());
       });
   };
 }
@@ -228,11 +224,7 @@ export function doUnlikeTrack(trackId) {
       })
       .catch(err => {
         console.log('Failed to remove this track from favorites', err);
-        if (isUnauthError(err)) {
-          dispatch(notificationWarning('Please signin with SoundCloud'));
-        } else {
-          dispatch(notificationWarning('Failed To Remove Track From Favorites'));
-        }
+        dispatch(defaultWarning());
       });
   };
 }
@@ -241,16 +233,12 @@ export function createRepost(trackId) {
   return dispatch => {
     repost(trackId)
       .then(() => {
-        dispatch(notificationSuccess('Track Repost Success'));
+        dispatch(notificationSuccess('Track added to reposts'));
         dispatch(syncReposts());
       })
       .catch(err => {
         console.log('Failed to create repost', err);
-        if (isUnauthError(err)) {
-          dispatch(notificationWarning('Please Signin with SoundCloud'));
-        } else {
-          dispatch(notificationWarning('Failed To Create Repost'));
-        }
+        dispatch(defaultWarning());
       });
   };
 }
@@ -259,16 +247,12 @@ export function removeRepost(trackId) {
   return dispatch => {
     deleteRepost(trackId)
       .then(() => {
-        dispatch(notificationSuccess('Track Removed from Reposts'));
+        dispatch(notificationSuccess('Track removed from reposts'));
         dispatch(syncReposts());
       })
       .catch(err => {
         console.log('Failed to remove repost', err);
-        if (isUnauthError(err)) {
-          dispatch(notificationWarning('Please Signin With SoundCloud'));
-        } else {
-          dispatch(notificationWarning('Failed To Remove Repost'));
-        }
+        dispatch(defaultWarning());
       });
   };
 }
