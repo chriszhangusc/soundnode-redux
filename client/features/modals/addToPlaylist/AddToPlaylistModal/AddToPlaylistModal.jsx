@@ -62,6 +62,7 @@ class AddToPlaylistModal extends React.Component {
     super(props);
     this.state = {
       /* initial state */
+      filterText: '',
       playlists: [],
     };
   }
@@ -97,6 +98,11 @@ class AddToPlaylistModal extends React.Component {
     });
   };
 
+  handleFilterChange = e => {
+    const filterText = e.target.value.toLowerCase();
+    this.setState({ filterText });
+  };
+
   render() {
     const { track, currentUserId } = this.props;
     return (
@@ -106,26 +112,28 @@ class AddToPlaylistModal extends React.Component {
           <TrackName>{track.title}</TrackName>
         </Row>
         <Row>
-          <FilterInput placeholder="Filter playlists" />
+          <FilterInput placeholder="Filter playlists" onChange={this.handleFilterChange} />
         </Row>
         <Row>
-          {this.state.playlists.map(playlist => {
-            const isAdded = playlist.tracks.filter(t => t.id === track.id).length > 0;
-            return (
-              <PlaylistCompact
-                playlist={{ ...playlist }}
-                key={playlist.id}
-                isAdded={isAdded}
-                onClick={() => {
-                  if (isAdded) {
-                    this.handleRemoveClick(track, currentUserId, playlist);
-                  } else {
-                    this.handleAddClick(track, currentUserId, playlist);
-                  }
-                }}
-              />
-            );
-          })}
+          {this.state.playlists
+            .filter(pl => pl.title.toLowerCase().indexOf(this.state.filterText) !== -1)
+            .map(playlist => {
+              const isAdded = playlist.tracks.filter(t => t.id === track.id).length > 0;
+              return (
+                <PlaylistCompact
+                  playlist={{ ...playlist }}
+                  key={playlist.id}
+                  isAdded={isAdded}
+                  onClick={() => {
+                    if (isAdded) {
+                      this.handleRemoveClick(track, currentUserId, playlist);
+                    } else {
+                      this.handleAddClick(track, currentUserId, playlist);
+                    }
+                  }}
+                />
+              );
+            })}
         </Row>
       </Wrapper>
     );
