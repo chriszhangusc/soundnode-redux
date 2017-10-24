@@ -39,8 +39,7 @@ const ActionButtonWrapper = styled.div`
   right: 0;
 `;
 
-function PlaylistCompact({ track, playlistId, playlistTitle, playlistTracks, onClick, isAdded }) {
-  console.log('Playlist Render');
+function PlaylistCompact({ playlistTitle, playlistTracks, onClick, isAdded }) {
   return (
     <Wrapper>
       <TrackImage

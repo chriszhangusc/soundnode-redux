@@ -43,27 +43,25 @@ export function resetPlaylistsState() {
 }
 
 export function fetchPlaylists() {
-  return dispatch => {
-    return fetchMyPlaylists()
+  return dispatch => fetchMyPlaylists()
       .then(response => normalizeResponse(response, playlistArraySchema))
-      .then(normalized => {
+      .then((normalized) => {
         const { entities, result } = normalized;
         // Merge entities
         dispatch(mergeEntities(entities));
         // Update playlists store
         dispatch(updatePlaylists(result));
       })
-      .catch(err => {
+      .catch((err) => {
         // notification warning
         dispatch(defaultWarning());
         console.log(err);
       });
-  };
 }
 
 // Bussiness logic for playlists
 export function loadPlaylists() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(showLoadingOverlay());
     dispatch(fetchPlaylists()).then(() => {
       dispatch(hideLoadingOverlay());
@@ -72,7 +70,7 @@ export function loadPlaylists() {
 }
 
 export function deletePlaylist(playlistId) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(showLoadingOverlay());
     deleteSinglePlaylist(playlistId)
       .then(() => {
@@ -89,7 +87,7 @@ export function deletePlaylist(playlistId) {
         dispatch(hideLoadingOverlay());
         dispatch(notificationSuccess('Playlist will be deleted shortly'));
       })
-      .catch(err => {
+      .catch((err) => {
         // notification warning
         dispatch(defaultWarning());
         console.log(err);

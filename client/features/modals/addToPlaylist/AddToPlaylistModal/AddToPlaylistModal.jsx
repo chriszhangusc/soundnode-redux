@@ -6,11 +6,11 @@ import styled from 'styled-components';
 import {
   updateFilterText,
   addToPlaylist,
+  removeFromPlaylist,
 } from 'features/modals/addToPlaylist/addToPlaylistActions';
 import { fetchPlaylists } from 'features/playlists/playlistsActions';
 import { centerFixed } from 'app/css/mixin';
 import PlaylistCompact from 'features/modals/addToPlaylist/PlaylistCompact';
-import { notificationSuccess } from 'features/notification/notificationActions';
 import { getPlaylists } from 'features/playlists/playlistsSelectors';
 import { getFilterText } from 'features/modals/addToPlaylist/addToPlaylistSelectors';
 
@@ -59,14 +59,6 @@ const FilterInput = styled.input`
 `;
 
 class AddToPlaylistModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      /* initial state */
-      playlists: [],
-    };
-  }
-
   componentDidMount() {
     this.props.actions.fetchPlaylists();
   }
@@ -75,26 +67,17 @@ class AddToPlaylistModal extends React.Component {
     this.props.actions.addToPlaylist(trackId, this.props.currentUserId, playlistId);
   };
 
-  handleRemoveClick = (track, playlist) => {
-    // removeTrackFromPlaylist(track.id, currentUserId, playlist.id).then(() => {
-    //   const updater = [...this.state.playlists];
-    //   updater.forEach(pl => {
-    //     if (pl.id === playlist.id) {
-    //       pl.tracks = pl.tracks.filter(t => t.id !== track.id);
-    //     }
-    //   });
-    //   this.setState(updater);
-    //   this.props.actions.notificationSuccess('Track removed from playlist');
-    // });
+  handleRemoveClick = (trackId, playlistId) => {
+    this.props.actions.removeFromPlaylist(trackId, this.props.currentUserId, playlistId);
   };
 
-  handleFilterChange = e => {
+  handleFilterChange = (e) => {
     const filterText = e.target.value.toLowerCase();
     this.props.actions.updateFilterText(filterText);
   };
 
   render() {
-    const { track, currentUserId, playlists, filterText } = this.props;
+    const { track, playlists, filterText } = this.props;
     return (
       <Wrapper>
         <Row>
@@ -107,7 +90,7 @@ class AddToPlaylistModal extends React.Component {
         <Row>
           {playlists
             .filter(pl => pl.title.toLowerCase().indexOf(filterText) !== -1)
-            .map(playlist => {
+            .map((playlist) => {
               const isAdded = playlist.tracks.includes(track.id) > 0;
               return (
                 <PlaylistCompact
@@ -141,9 +124,9 @@ function mapStateToProps(state) {
 
 const actions = {
   updateFilterText,
-  notificationSuccess,
   fetchPlaylists,
   addToPlaylist,
+  removeFromPlaylist,
 };
 
 function mapDispatchToProps(dispatch) {

@@ -1,31 +1,48 @@
 import { PLAYLIST_FILTER_TEXT_UPDATE } from 'features/modals/addToPlaylist/addToPlaylistActionTypes';
-import { PLAYLIST_TRACK_ADD } from 'features/playlists/playlistsActionTypes';
 import { addTrackToPlaylist, removeTrackFromPlaylist } from 'common/services/scApiService';
-
-// addTrackToPlaylist(track.id, currentUserId, playlist.id).then(() => {
-//   const updater = [...this.state.playlists];
-//   updater.forEach(pl => {
-//     if (pl.id === playlist.id) {
-//       pl.tracks.push(track);
-//     }
-//   });
-//   this.setState(updater);
-//   this.props.actions.notificationSuccess('Track added to playlist');
-// });
+import { defaultWarning, notificationSuccess } from 'features/notification/notificationActions';
+import {
+  PLAYLIST_TRACK_ADD,
+  PLAYLIST_TRACK_REMOVE,
+} from 'features/entities/playlists/playlistsActionTypes';
 
 export function addToPlaylist(trackId, userId, playlistId) {
-  return dispatch => {
-    addTrackToPlaylist(trackId, userId, playlistId).then(() => {
-      // Update item in state
-      dispatch({
-        type: PLAYLIST_TRACK_ADD,
-        payload: {
-          playlistId,
-          trackId,
-        },
+  return (dispatch) => {
+    addTrackToPlaylist(trackId, userId, playlistId)
+      .then(() => {
+        dispatch({
+          type: PLAYLIST_TRACK_ADD,
+          payload: {
+            playlistId,
+            trackId,
+          },
+        });
+        dispatch(notificationSuccess('Track added to playlist'));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(defaultWarning());
       });
-      this.props.actions.notificationSuccess('Track added to playlist');
-    });
+  };
+}
+
+export function removeFromPlaylist(trackId, userId, playlistId) {
+  return (dispatch) => {
+    removeTrackFromPlaylist(trackId, userId, playlistId)
+      .then(() => {
+        dispatch({
+          type: PLAYLIST_TRACK_REMOVE,
+          payload: {
+            playlistId,
+            trackId,
+          },
+        });
+        dispatch(notificationSuccess('Track removed from playlist'));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(defaultWarning());
+      });
   };
 }
 
