@@ -60,7 +60,7 @@ export function mergeCharts(trackIds, genre) {
 }
 
 export function receiveCharts(normalizedCharts, genre, name) {
-  return dispatch => {
+  return (dispatch) => {
     const { entities, result, nextHref } = normalizedCharts;
     dispatch(mergeEntities(entities));
     dispatch(mergeCharts(result, genre));
