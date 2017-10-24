@@ -5,7 +5,6 @@ import IconButton from 'common/components/buttons/IconButton';
 import { updateActiveTooltip } from 'features/playQueue/playQueueActions';
 import { getActiveTooltipId } from 'features/playQueue/playQueueSelectors';
 import Wrapper from './Wrapper';
-import ActionList from './ActionList';
 import DropdownList from './DropdownList';
 
 function PlayQueueTooltips({ index, trackId, tooltipActive, updateActiveTooltip }) {

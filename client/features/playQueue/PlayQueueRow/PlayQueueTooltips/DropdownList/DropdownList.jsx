@@ -1,8 +1,8 @@
 import React from 'react';
-import { compose } from 'recompose';
 import styled from 'styled-components';
 import onClickOutside from 'react-onclickoutside';
 
+import DropdownListItem from './DropdownListItem';
 // / ES6 Class and Module Syntax
 // import React, { Component } from 'react'
 // import onClickOutside from 'react-onclickoutside'
@@ -17,7 +17,6 @@ import onClickOutside from 'react-onclickoutside';
 
 const Wrapper = styled.div`
   width: 150px;
-  height: 200px;
   z-index: ${props => props.theme.zIndexes[4]};
   background: ${props => props.theme.colors.bg};
   position: absolute;
@@ -35,7 +34,14 @@ class DropdownList extends React.Component {
   };
 
   render() {
-    return <Wrapper />;
+    return (
+      <Wrapper>
+        <DropdownListItem iconName="retweet" text="Repost" />
+        <DropdownListItem iconName="external-link" text="Permalink" />
+        <DropdownListItem iconName="music" text="Track profile" />
+        <DropdownListItem iconName="plus" text="Add to playlist" />
+      </Wrapper>
+    );
   }
 }
 
