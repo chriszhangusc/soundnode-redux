@@ -12,7 +12,10 @@ import { fetchPlaylists } from 'features/playlists/playlistsActions';
 import { centerFixed } from 'app/css/mixin';
 import PlaylistCompact from 'features/modals/addToPlaylist/PlaylistCompact';
 import { getPlaylists } from 'features/playlists/playlistsSelectors';
-import { getFilterText } from 'features/modals/addToPlaylist/addToPlaylistSelectors';
+import {
+  getFilterText,
+  getRequestQueue,
+} from 'features/modals/addToPlaylist/addToPlaylistSelectors';
 
 const Wrapper = styled.div`
   width: 550px;
@@ -77,7 +80,7 @@ class AddToPlaylistModal extends React.Component {
   };
 
   render() {
-    const { track, playlists, filterText } = this.props;
+    const { track, playlists, filterText, requestQueue } = this.props;
     return (
       <Wrapper>
         <Row>
@@ -92,12 +95,14 @@ class AddToPlaylistModal extends React.Component {
             .filter(pl => pl.title.toLowerCase().indexOf(filterText) !== -1)
             .map((playlist) => {
               const isAdded = playlist.tracks.includes(track.id) > 0;
+              const requestInProgress = requestQueue.includes(playlist.id);
               return (
                 <PlaylistCompact
                   playlistId={playlist.id}
                   playlistTitle={playlist.title}
                   key={playlist.id}
                   isAdded={isAdded}
+                  requestInProgress={requestInProgress}
                   onClick={() => {
                     if (isAdded) {
                       this.handleRemoveClick(track.id, playlist.id);
@@ -119,6 +124,7 @@ function mapStateToProps(state) {
     currentUserId: getMyId(state),
     playlists: getPlaylists(state),
     filterText: getFilterText(state),
+    requestQueue: getRequestQueue(state),
   };
 }
 

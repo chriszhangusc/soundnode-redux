@@ -6,6 +6,7 @@ import { truncateMaxWidth } from 'app/css/styleUtils';
 import styled from 'styled-components';
 import Icon from 'common/components/icons/Icon';
 import IconButton from 'common/components/buttons/IconButton';
+import Spinner from 'common/components/spinners/HalfCircleRotate';
 import { getTracksByPlaylistId } from 'features/entities/entitiesSelectors';
 
 const Wrapper = styled.li`
@@ -34,12 +35,7 @@ const PlaylistSubtitle = PlaylistTitle.extend`
   font-size: 0.95rem;
 `;
 
-const ActionButtonWrapper = styled.div`
-  position: absolute;
-  right: 0;
-`;
-
-function PlaylistCompact({ playlistTitle, playlistTracks, onClick, isAdded }) {
+function PlaylistCompact({ playlistTitle, playlistTracks, onClick, isAdded, requestInProgress }) {
   return (
     <Wrapper>
       <TrackImage
@@ -52,9 +48,11 @@ function PlaylistCompact({ playlistTitle, playlistTracks, onClick, isAdded }) {
           <Icon iconName="list" /> {playlistTracks.length}
         </PlaylistSubtitle>
       </ColumnTitleWrapper>
-      <ActionButtonWrapper>
+      {requestInProgress ? (
+        <Spinner color="white" />
+      ) : (
         <IconButton iconName={isAdded ? 'check' : 'plus'} iconSize="lg" onClick={onClick} />
-      </ActionButtonWrapper>
+      )}
     </Wrapper>
   );
 }
