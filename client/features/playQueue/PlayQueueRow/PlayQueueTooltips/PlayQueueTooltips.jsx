@@ -3,20 +3,26 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import IconButton from 'common/components/buttons/IconButton';
 import { updateActiveTooltip } from 'features/playQueue/playQueueActions';
+import { getActiveTooltipId } from 'features/playQueue/playQueueSelectors';
 import Wrapper from './Wrapper';
 import ActionList from './ActionList';
 import DropdownList from './DropdownList';
 
 function PlayQueueTooltips({ index, trackId, tooltipActive, updateActiveTooltip }) {
+  console.log(tooltipActive);
   const handleTooltipClick = (e) => {
     e.preventDefault();
     updateActiveTooltip(index);
     console.log('Showing tooltip ', index);
   };
+
+  const handleTooltipClose = () => {
+    updateActiveTooltip(null);
+  };
   return (
     <Wrapper>
       <IconButton iconName="ellipsis-v" onClick={handleTooltipClick} />
-      {tooltipActive && <DropdownList />}
+      {tooltipActive && <DropdownList onClose={handleTooltipClose} />}
     </Wrapper>
   );
 }
@@ -26,9 +32,9 @@ PlayQueueTooltips.propTypes = {
   trackId: PropTypes.number.isRequired,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { index }) {
   return {
-    tooltipActivegetActiveTooltipId(state),
+    tooltipActive: getActiveTooltipId(state) === index,
   };
 }
 
