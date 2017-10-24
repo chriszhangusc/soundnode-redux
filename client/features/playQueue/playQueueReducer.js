@@ -8,6 +8,7 @@ const initialState = {
   playQueue: [],
   shufflePlayQueue: [],
   hidden: true,
+  activeTooltipId: null,
 };
 
 // #TODO: also need to handle play queue shuffle
@@ -78,6 +79,13 @@ export function clearShufflePlayQueue(state) {
   };
 }
 
+function updateActiveTooltip(state, { tooltipId }) {
+  return {
+    ...state,
+    activeTooltipId: tooltipId,
+  };
+}
+
 export default function playQueueReducer(state = initialState, action) {
   switch (action.type) {
     case types.PLAY_QUEUE_SHOW:
@@ -106,6 +114,9 @@ export default function playQueueReducer(state = initialState, action) {
 
     case types.PLAY_QUEUE_SHUFFLE_QUEUE_CLEAR:
       return clearShufflePlayQueue(state);
+
+    case types.PLAY_QUEUE_ACTIVE_TOOLTIP_UPDATE:
+      return updateActiveTooltip(state, action.payload);
     default:
       return state;
   }

@@ -47,7 +47,9 @@ function ActionList({ trackId, liked, reposted, actions }) {
   return (
     <Wrapper>
       <ActionListWrapper>
-        <ActionListItem onClick={handleRemoveFromPlayQueue} first>Remove</ActionListItem>
+        <ActionListItem onClick={handleRemoveFromPlayQueue} first>
+          Remove
+        </ActionListItem>
         <ActionListItem onClick={handleLike}>{liked ? 'Unlike' : 'Like'}</ActionListItem>
         <ActionListItem onClick={handleRepost}>
           {reposted ? 'Remove Repost' : 'Repost'}
@@ -78,15 +80,14 @@ function mapStateToProps(state, { trackId }) {
   };
 }
 
+const actions = {
+  ...authActions,
+  ...playQueueActions,
+};
+
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(
-      {
-        ...authActions,
-        ...playQueueActions,
-      },
-      dispatch,
-    ),
+    actions: bindActionCreators(actions, dispatch),
   };
 }
 

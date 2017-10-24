@@ -12,7 +12,6 @@ export default styled.li`
   border-bottom: ${props => (props.last ? 'none' : `1px solid ${props.theme.colors.separatorDark}`)};
   &:hover {
     cursor: pointer;
-    
     background: ${props => props.theme.colors.separatorDark};
   }
 `;

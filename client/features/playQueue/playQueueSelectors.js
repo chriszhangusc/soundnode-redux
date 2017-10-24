@@ -23,3 +23,5 @@ export const getPlayQueueByMode = createSelector(
   isInShuffleMode,
   (playQueue, shuffleQueue, shuffleMode) => (shuffleMode ? shuffleQueue : playQueue),
 );
+
+export const getActiveTooltipId = createSelector(getPlayQueueState, state => state.activeTooltipId);

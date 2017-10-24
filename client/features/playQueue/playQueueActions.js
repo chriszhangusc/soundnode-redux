@@ -4,11 +4,7 @@ import { removeActiveTrack } from 'features/player/playerActions';
 import { notificationSuccess } from 'features/notification/notificationActions';
 import { shiftToFront } from './playQueueUtils';
 import * as types from './playQueueActionTypes';
-import {
-  getPlayQueue,
-  isPlayQueueHidden,
-  getPlayQueueName,
-} from './playQueueSelectors';
+import { getPlayQueue, isPlayQueueHidden, getPlayQueueName } from './playQueueSelectors';
 
 export function hidePlayQueue() {
   return {
@@ -83,6 +79,15 @@ export function removeTrackFromPlayQueueAndPlayer(trackId) {
     if (activeTrackId === trackId) {
       dispatch(removeActiveTrack(trackId));
     }
+  };
+}
+
+export function updateActiveTooltip(tooltipId) {
+  return {
+    type: types.PLAY_QUEUE_ACTIVE_TOOLTIP_UPDATE,
+    payload: {
+      tooltipId,
+    },
   };
 }
 
