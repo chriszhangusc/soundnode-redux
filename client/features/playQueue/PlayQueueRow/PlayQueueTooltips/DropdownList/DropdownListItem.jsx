@@ -14,9 +14,9 @@ const Wrapper = styled.div`
   }
 `;
 
-function DropdownListItem({ iconName, text }) {
+function DropdownListItem({ type, iconName, text, onClick }) {
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <Icon iconName={iconName} mr="5px" /> {text}
     </Wrapper>
   );

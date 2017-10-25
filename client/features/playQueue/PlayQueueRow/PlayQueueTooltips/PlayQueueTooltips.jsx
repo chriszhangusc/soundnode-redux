@@ -21,7 +21,7 @@ function PlayQueueTooltips({ index, trackId, tooltipActive, updateActiveTooltip 
   return (
     <Wrapper>
       <IconButton iconName="ellipsis-v" onClick={handleTooltipClick} />
-      {tooltipActive && <DropdownList onClose={handleTooltipClose} />}
+      {tooltipActive && <DropdownList onClose={handleTooltipClose} trackId={trackId} />}
     </Wrapper>
   );
 }

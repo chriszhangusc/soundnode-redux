@@ -22,7 +22,6 @@ export function fetchMyRepostIds() {
   return makeRequest(`${SC_API_V1}/e1/me/track_reposts/ids`);
 }
 
-// #TODO: Modify make request method
 export function repost(trackId) {
   // Repost will get empty string as response, which will lead to json format error
   // when calling response.json()
