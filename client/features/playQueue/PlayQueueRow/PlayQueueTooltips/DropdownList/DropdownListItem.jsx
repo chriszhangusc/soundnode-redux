@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Icon from 'common/components/icons/Icon';
+import RouterLink from 'common/components/links/RouterLink';
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,12 +15,16 @@ const Wrapper = styled.div`
   }
 `;
 
-function DropdownListItem({ type, iconName, text, onClick }) {
-  return (
+function DropdownListItem({ to, iconName, text, onClick }) {
+  const wrapWithLink = component => (to ? <RouterLink to={to}>{component}</RouterLink> : component);
+
+  const component = (
     <Wrapper onClick={onClick}>
       <Icon iconName={iconName} mr="5px" /> {text}
     </Wrapper>
   );
+
+  return wrapWithLink(component);
 }
 
 export default DropdownListItem;

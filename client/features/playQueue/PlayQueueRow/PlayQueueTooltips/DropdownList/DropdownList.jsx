@@ -7,6 +7,7 @@ import { getReposts, isAuthed, getFavoriteTrackIds } from 'features/auth/authSel
 import * as authActions from 'features/auth/authActions';
 import * as copyActions from 'features/copy/copyActions';
 import { showModal } from 'features/modals/root/rootModalActions';
+import { USER_PROFILE_ROUTE, TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import DropdownListItem from './DropdownListItem';
 
 const Wrapper = styled.div`
@@ -76,7 +77,11 @@ class DropdownList extends React.Component {
           onClick={this.handleAddToPlaylistClick}
         />
         <DropdownListItem iconName="external-link" text="Permalink" />
-        <DropdownListItem iconName="music" text="Track profile" />
+        <DropdownListItem
+          iconName="music"
+          text="Track profile"
+          to={`${TRACK_PROFILE_ROUTE}/${trackId}`}
+        />
       </Wrapper>
     );
   }
