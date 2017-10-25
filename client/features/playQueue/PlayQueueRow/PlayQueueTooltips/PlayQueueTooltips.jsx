@@ -8,11 +8,9 @@ import Wrapper from './Wrapper';
 import DropdownList from './DropdownList';
 
 function PlayQueueTooltips({ index, trackId, tooltipActive, updateActiveTooltip }) {
-  console.log(tooltipActive);
   const handleTooltipClick = (e) => {
     e.preventDefault();
     updateActiveTooltip(index);
-    console.log('Showing tooltip ', index);
   };
 
   const handleTooltipClose = () => {
@@ -37,6 +35,8 @@ function mapStateToProps(state, { index }) {
   };
 }
 
-export default connect(mapStateToProps, {
+const actions = {
   updateActiveTooltip,
-})(PlayQueueTooltips);
+};
+
+export default connect(mapStateToProps, actions)(PlayQueueTooltips);
