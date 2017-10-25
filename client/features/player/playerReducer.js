@@ -1,4 +1,4 @@
-import * as actionTypes from './playerActionTypes';
+import * as types from './playerActionTypes';
 import { DEFAULT_MODE } from './playerConsts';
 
 /* Player Reducer */
@@ -119,46 +119,46 @@ export function removeActiveTrack(state) {
 
 export default function playerReducer(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.PLAYER_ACTIVE_TRACK_REMOVE:
+    case types.PLAYER_ACTIVE_TRACK_REMOVE:
       return removeActiveTrack(state);
 
-    case actionTypes.PLAYER_ACTIVE_TRACK_ID_UPDATE:
+    case types.PLAYER_ACTIVE_TRACK_ID_UPDATE:
       return updateActiveTrackId(state, action.payload);
 
-    case actionTypes.PLAYER_SONG_PLAY:
+    case types.PLAYER_SONG_PLAY:
       return playSong(state);
 
-    case actionTypes.PLAYER_SONG_PAUSE:
+    case types.PLAYER_SONG_PAUSE:
       return pauseSong(state);
 
-    case actionTypes.PLAYER_SONG_LOAD:
+    case types.PLAYER_SONG_LOAD:
       return loadSong(state);
 
-    case actionTypes.PLAYER_TIME_UPDATE:
+    case types.PLAYER_TIME_UPDATE:
       return updateCurrentTime(state, action.payload);
 
-    case actionTypes.PLAYER_SEEK_BEGIN:
+    case types.PLAYER_SEEK_BEGIN:
       return startSeek(state);
 
-    case actionTypes.PLAYER_SEEK_END:
+    case types.PLAYER_SEEK_END:
       return endSeek(state);
 
-    case actionTypes.PLAYER_VOLUME_UPDATE:
+    case types.PLAYER_VOLUME_UPDATE:
       return updateVolume(state, action.payload);
 
-    case actionTypes.PLAYER_VOLUME_SEEK_BEGIN:
+    case types.PLAYER_VOLUME_SEEK_BEGIN:
       return startVolumeSeek(state);
 
-    case actionTypes.PLAYER_VOLUME_SEEK_END:
+    case types.PLAYER_VOLUME_SEEK_END:
       return endVolumeSeek(state);
 
-    case actionTypes.PLAYER_PLAY_MODE_UPDATE:
+    case types.PLAYER_PLAY_MODE_UPDATE:
       return updatePlayMode(state, action.payload);
 
-    case actionTypes.PLAYER_MUTE:
+    case types.PLAYER_MUTE:
       return mute(state);
 
-    case actionTypes.PLAYER_TIME_RESET:
+    case types.PLAYER_TIME_RESET:
       return resetTime(state);
 
     default:

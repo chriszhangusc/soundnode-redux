@@ -11,7 +11,7 @@ import {
 
 import { getOAuthToken, setOAuthToken, removeOAuthToken } from './authUtils';
 
-import * as actionTypes from './authActionTypes';
+import * as types from './authActionTypes';
 
 import {
   fetchMe,
@@ -27,7 +27,7 @@ import { getMe } from './authSelectors';
 
 export function setReposts(reposts) {
   return {
-    type: actionTypes.AUTH_REPOSTS_SET,
+    type: types.AUTH_REPOSTS_SET,
     payload: {
       reposts,
     },
@@ -36,7 +36,7 @@ export function setReposts(reposts) {
 
 export function setFavorites(favorites) {
   return {
-    type: actionTypes.AUTH_FAVORITES_SET,
+    type: types.AUTH_FAVORITES_SET,
     payload: {
       favorites,
     },
@@ -45,7 +45,7 @@ export function setFavorites(favorites) {
 
 export function setMe(me) {
   return {
-    type: actionTypes.AUTH_USER_ME_SET,
+    type: types.AUTH_USER_ME_SET,
     payload: {
       me,
     },
@@ -54,27 +54,27 @@ export function setMe(me) {
 
 export function loginSucceed() {
   return {
-    type: actionTypes.AUTH_USER_LOGIN_SUCCEEDED,
+    type: types.AUTH_USER_LOGIN_SUCCEEDED,
   };
 }
 
 export function logoutSucceed() {
-  return { type: actionTypes.AUTH_USER_LOGOUT_SUCCEEDED };
+  return { type: types.AUTH_USER_LOGOUT_SUCCEEDED };
 }
 
 export function setSession(session) {
-  return { type: actionTypes.AUTH_SESSION_SET, payload: session };
+  return { type: types.AUTH_SESSION_SET, payload: session };
 }
 
 export function startLogin() {
   return {
-    type: actionTypes.AUTH_USER_LOGIN_STARTED,
+    type: types.AUTH_USER_LOGIN_STARTED,
   };
 }
 
 export function loginFailed(error) {
   return {
-    type: actionTypes.AUTH_USER_LOGIN_FAILED,
+    type: types.AUTH_USER_LOGIN_FAILED,
     error,
   };
 }
@@ -105,21 +105,21 @@ export function syncReposts() {
 
 export function addToFavorites(trackId) {
   return {
-    type: actionTypes.AUTH_FAVORITES_ADD,
+    type: types.AUTH_FAVORITES_ADD,
     payload: trackId,
   };
 }
 
 export function removeFromFavorites(trackId) {
   return {
-    type: actionTypes.AUTH_FAVORITES_REMOVE,
+    type: types.AUTH_FAVORITES_REMOVE,
     payload: trackId,
   };
 }
 
 export function addToReposts(trackId) {
   return {
-    type: actionTypes.AUTH_REPOSTS_ADD,
+    type: types.AUTH_REPOSTS_ADD,
     payload: {
       trackId,
     },
@@ -128,7 +128,7 @@ export function addToReposts(trackId) {
 
 export function removeFromReposts(trackId) {
   return {
-    type: actionTypes.AUTH_REPOSTS_REMOVE,
+    type: types.AUTH_REPOSTS_REMOVE,
     payload: {
       trackId,
     },

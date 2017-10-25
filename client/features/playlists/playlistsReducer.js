@@ -1,4 +1,4 @@
-import * as actionTypes from 'features/playlists/playlistsActionTypes';
+import * as types from 'features/playlists/playlistsActionTypes';
 
 /* Reducer */
 const initialState = {
@@ -34,13 +34,13 @@ function resetPlaylistsState() {
 
 export default function playlistsReducer(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.PLAYLISTS_MERGE:
+    case types.PLAYLISTS_MERGE:
       return mergePlaylists(state, action.payload);
-    case actionTypes.PLAYLISTS_UPDATE:
+    case types.PLAYLISTS_UPDATE:
       return updatePlaylists(state, action.payload);
-    case actionTypes.PLAYLISTS_STATE_RESET:
+    case types.PLAYLISTS_STATE_RESET:
       return resetPlaylistsState();
-    case actionTypes.PLAYLISTS_PLAYLIST_DELETE:
+    case types.PLAYLISTS_PLAYLIST_DELETE:
       return removePlaylist(state, action.payload);
     default:
       return state;

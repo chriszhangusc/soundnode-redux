@@ -3,11 +3,11 @@ import { mergeEntities } from 'features/entities/entitiesActions';
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
 import { fetchCharts, fetchMoreCharts } from 'features/charts/chartsApi';
 import { isChartsFetching, getChartsNextHref, getCurrentChartsTrackIds } from './chartsSelectors';
-import * as actionTypes from './chartsActionTypes';
+import * as types from './chartsActionTypes';
 
 export function updateGenre(genre) {
   return {
-    type: actionTypes.CHARTS_GENRE_UPDATE,
+    type: types.CHARTS_GENRE_UPDATE,
     payload: {
       genre,
     },
@@ -16,19 +16,19 @@ export function updateGenre(genre) {
 
 export function startFetchingCharts() {
   return {
-    type: actionTypes.CHARTS_FETCH_START,
+    type: types.CHARTS_FETCH_START,
   };
 }
 
 export function stopFetchingCharts() {
   return {
-    type: actionTypes.CHARTS_FETCH_STOP,
+    type: types.CHARTS_FETCH_STOP,
   };
 }
 
 export function updateChartsNextHref(nextHref) {
   return {
-    type: actionTypes.CHARTS_NEXT_HREF_UPDATE,
+    type: types.CHARTS_NEXT_HREF_UPDATE,
     payload: {
       nextHref,
     },
@@ -37,21 +37,21 @@ export function updateChartsNextHref(nextHref) {
 
 export function failedToFetchCharts(err) {
   return {
-    type: actionTypes.CHARTS_FETCH_FAIL,
+    type: types.CHARTS_FETCH_FAIL,
     error: err,
   };
 }
 
 export function resetChartsState() {
   return {
-    type: actionTypes.CHARTS_STATE_RESET,
+    type: types.CHARTS_STATE_RESET,
   };
 }
 
 // Merge trackIds to genre tracks
 export function mergeCharts(trackIds, genre) {
   return {
-    type: actionTypes.CHARTS_MERGE,
+    type: types.CHARTS_MERGE,
     payload: {
       trackIds,
       genre,

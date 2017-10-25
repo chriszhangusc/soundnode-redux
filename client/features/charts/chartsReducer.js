@@ -1,10 +1,11 @@
-import * as actionTypes from './chartsActionTypes';
+import { createReducer } from 'common/utils/reducerUtils';
+import * as types from './chartsActionTypes';
 
 /* Reducer */
 const initialState = {
   selectedGenre: '',
   fetching: false,
-  nextHref: undefined,
+  nextHref: null,
 };
 
 export function updateGenre(state, { genre }) {
@@ -50,27 +51,11 @@ export function mergeCharts(state, { trackIds, genre }) {
   };
 }
 
-export default function chartsReducer(state = initialState, action) {
-  switch (action.type) {
-    case actionTypes.CHARTS_FETCH_START:
-      return startFetchingCharts(state);
-
-    case actionTypes.CHARTS_FETCH_STOP:
-      return stopFetchingCharts(state);
-
-    case actionTypes.CHARTS_GENRE_UPDATE:
-      return updateGenre(state, action.payload);
-
-    case actionTypes.CHARTS_NEXT_HREF_UPDATE:
-      return updateNextHref(state, action.payload);
-
-    case actionTypes.CHARTS_STATE_RESET:
-      return resetChartsState(initialState);
-
-    case actionTypes.CHARTS_MERGE:
-      return mergeCharts(state, action.payload);
-
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.CHARTS_FETCH_START]: startFetchingCharts,
+  [types.CHARTS_FETCH_STOP]: stopFetchingCharts,
+  [types.CHARTS_GENRE_UPDATE]: updateGenre,
+  [types.CHARTS_NEXT_HREF_UPDATE]: updateNextHref,
+  [types.CHARTS_STATE_RESET]: resetChartsState,
+  [types.CHARTS_MERGE]: mergeCharts,
+});
