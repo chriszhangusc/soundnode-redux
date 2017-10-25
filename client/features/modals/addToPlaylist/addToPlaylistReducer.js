@@ -1,8 +1,5 @@
-import {
-  PLAYLIST_FILTER_TEXT_UPDATE,
-  PLAYLIST_REQUEST_QUEUE_ADD,
-  PLAYLIST_REQUEST_QUEUE_REMOVE,
-} from './addToPlaylistActionTypes';
+import { createReducer } from 'common/utils/reducerUtils';
+import * as types from './addToPlaylistActionTypes';
 
 const initialState = {
   filterText: '',
@@ -30,15 +27,8 @@ function removeFromRequestQueue(state, { playlistId }) {
   };
 }
 
-export default function addToPlaylistReducer(state = initialState, action) {
-  switch (action.type) {
-    case PLAYLIST_FILTER_TEXT_UPDATE:
-      return updateFilterText(state, action.payload);
-    case PLAYLIST_REQUEST_QUEUE_ADD:
-      return addToRequestQueue(state, action.payload);
-    case PLAYLIST_REQUEST_QUEUE_REMOVE:
-      return removeFromRequestQueue(state, action.payload);
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.PLAYLIST_FILTER_TEXT_UPDATE]: updateFilterText,
+  [types.PLAYLIST_REQUEST_QUEUE_ADD]: addToRequestQueue,
+  [types.PLAYLIST_REQUEST_QUEUE_REMOVE]: removeFromRequestQueue,
+});

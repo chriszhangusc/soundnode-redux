@@ -1,4 +1,5 @@
 import * as types from 'features/modals/root/rootModalActionTypes';
+import { createReducer } from 'common/utils/reducerUtils';
 
 const initialState = {
   modalType: null,
@@ -16,15 +17,13 @@ function showModal(state, action) {
   };
 }
 
-export default function rootModalReducer(state = initialState, action) {
-  switch (action.type) {
-    case types.MODAL_SHOW:
-      return showModal(state, action);
-
-    case types.MODAL_HIDE:
-      return initialState;
-
-    default:
-      return state;
-  }
+export function hideModal() {
+  return {
+    ...initialState,
+  };
 }
+
+export default createReducer(initialState, {
+  [types.MODAL_SHOW]: showModal,
+  [types.MODAL_HIDE]: hideModal,
+});
