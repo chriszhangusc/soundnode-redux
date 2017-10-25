@@ -32,7 +32,7 @@ function SongCardActions({ authed, trackId, track, liked, reposted, permalinkUrl
       actions.authRequired();
     } else {
       actions.showModal('ADD_TO_PLAYLIST', {
-        track,
+        trackId,
       });
     }
   };

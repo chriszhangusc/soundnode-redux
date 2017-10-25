@@ -6,6 +6,7 @@ import onClickOutside from 'react-onclickoutside';
 import { getReposts, isAuthed, getFavoriteTrackIds } from 'features/auth/authSelectors';
 import * as authActions from 'features/auth/authActions';
 import * as copyActions from 'features/copy/copyActions';
+import { showModal } from 'features/modals/root/rootModalActions';
 import DropdownListItem from './DropdownListItem';
 
 const Wrapper = styled.div`
@@ -44,6 +45,16 @@ class DropdownList extends React.Component {
     }
   };
 
+  handleAddToPlaylistClick = () => {
+    if (!this.props.authed) {
+      this.props.authRequired();
+    } else {
+      this.props.showModal('ADD_TO_PLAYLIST', {
+        trackId: this.props.trackId,
+      });
+    }
+  };
+
   render() {
     const { trackId, reposted, liked } = this.props;
     return (
@@ -59,9 +70,13 @@ class DropdownList extends React.Component {
           text={reposted ? 'Remove repost' : 'Add repost'}
           onClick={this.handleRepostClick}
         />
+        <DropdownListItem
+          iconName="bookmark"
+          text="Add to playlist"
+          onClick={this.handleAddToPlaylistClick}
+        />
         <DropdownListItem iconName="external-link" text="Permalink" />
         <DropdownListItem iconName="music" text="Track profile" />
-        <DropdownListItem iconName="plus" text="Add to playlist" />
       </Wrapper>
     );
   }
@@ -78,6 +93,7 @@ function mapStateToProps(state, { trackId }) {
 const actions = {
   ...authActions,
   ...copyActions,
+  showModal,
 };
 
 export default compose(connect(mapStateToProps, actions), onClickOutside)(DropdownList);

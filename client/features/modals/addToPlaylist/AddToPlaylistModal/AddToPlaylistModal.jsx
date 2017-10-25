@@ -16,6 +16,7 @@ import {
   getFilterText,
   getRequestQueue,
 } from 'features/modals/addToPlaylist/addToPlaylistSelectors';
+import { getTrackById } from 'features/entities/entitiesSelectors';
 
 const Wrapper = styled.div`
   width: 550px;
@@ -119,8 +120,9 @@ class AddToPlaylistModal extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { trackId }) {
   return {
+    track: getTrackById(state, trackId),
     currentUserId: getMyId(state),
     playlists: getPlaylists(state),
     filterText: getFilterText(state),
