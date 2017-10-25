@@ -52,13 +52,17 @@ class PlayerAudio extends Component {
           });
       }, 500);
     } else if (!this.props.playing && !audio.paused) {
-      // debugger;
       // When the signal is pause and the audio is playing, it means we need to pause the audio.
       audio.pause();
     } else if (audio.paused && this.props.playing) {
-      // debugger;
-      // Just when song is already loaded and just flipping paused audio on.
-      audio.play();
+      // When we click play button on a paused audio.
+      setTimeout(() => {
+        audio.play().catch((err) => {
+          // console.log('Track not playable');
+          console.log(err);
+          this.props.handleStreamError();
+        });
+      }, 500);
     }
   };
 
