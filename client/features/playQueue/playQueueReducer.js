@@ -1,3 +1,4 @@
+import { createReducer } from 'common/utils/reducerUtils';
 import remove from 'lodash/remove';
 import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './playQueueActionTypes';
@@ -86,38 +87,15 @@ function updateActiveTooltip(state, { tooltipId }) {
   };
 }
 
-export default function playQueueReducer(state = initialState, action) {
-  switch (action.type) {
-    case types.PLAY_QUEUE_SHOW:
-      return showPlayQueue(state);
-
-    case types.PLAY_QUEUE_HIDE:
-      return hidePlayQueue(state);
-
-    case types.PLAY_QUEUE_TRACK_REMOVE:
-      return removeTrackFromPlayQueue(state, action.payload);
-
-    case types.PLAY_QUEUE_CLEAR:
-      return clearPlayQueue(state, action.payload);
-
-    case types.PLAY_QUEUE_UPDATE:
-      return updatePlayQueue(state, action.payload);
-
-    case types.PLAY_QUEUE_MERGE:
-      return mergePlayQueue(state, action.payload);
-
-    case types.PLAY_QUEUE_SHUFFLE_QUEUE_MERGE:
-      return mergeShufflePlayQueue(state, action.payload);
-
-    case types.PLAY_QUEUE_SHUFFLE_QUEUE_UPDATE:
-      return updateShufflePlayQueue(state, action.payload);
-
-    case types.PLAY_QUEUE_SHUFFLE_QUEUE_CLEAR:
-      return clearShufflePlayQueue(state);
-
-    case types.PLAY_QUEUE_ACTIVE_TOOLTIP_UPDATE:
-      return updateActiveTooltip(state, action.payload);
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.PLAY_QUEUE_SHOW]: showPlayQueue,
+  [types.PLAY_QUEUE_HIDE]: hidePlayQueue,
+  [types.PLAY_QUEUE_TRACK_REMOVE]: removeTrackFromPlayQueue,
+  [types.PLAY_QUEUE_CLEAR]: clearPlayQueue,
+  [types.PLAY_QUEUE_UPDATE]: updatePlayQueue,
+  [types.PLAY_QUEUE_MERGE]: mergePlayQueue,
+  [types.PLAY_QUEUE_SHUFFLE_QUEUE_MERGE]: mergeShufflePlayQueue,
+  [types.PLAY_QUEUE_SHUFFLE_QUEUE_UPDATE]: updateShufflePlayQueue,
+  [types.PLAY_QUEUE_SHUFFLE_QUEUE_CLEAR]: clearShufflePlayQueue,
+  [types.PLAY_QUEUE_ACTIVE_TOOLTIP_UPDATE]: updateActiveTooltip,
+});

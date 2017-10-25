@@ -1,3 +1,4 @@
+import { createReducer } from 'common/utils/reducerUtils';
 import * as types from 'features/searchSuggestion/searchSuggestionActionTypes';
 
 /* Reducers */
@@ -66,36 +67,14 @@ export function updateSearchSuggestionQuery(state, { query }) {
   };
 }
 
-export default function searchSuggestionReducer(state = initialState, action) {
-  switch (action.type) {
-    case types.SEARCH_SUGGESTION_START:
-      return startSearchSuggestion(state);
-
-    case types.SEARCH_SUGGESTION_STOP:
-      return stopSearchSuggestion(state);
-
-    case types.SEARCH_SUGGESTION_FAIL:
-      return stopSearchSuggestion(state);
-
-    case types.SEARCH_SUGGESTION_USER_RESULTS_UPDATE:
-      return updateUserResults(state, action.payload);
-
-    case types.SEARCH_SUGGESTION_TRACK_RESULTS_UPDATE:
-      return updateTrackResults(state, action.payload);
-
-    case types.SEARCH_SUGGESTION_RESULTS_HIDE:
-      return hideSearchSuggestionResults(state);
-
-    case types.SEARCH_SUGGESTION_RESULTS_SHOW:
-      return showSearchSuggestionResults(state);
-
-    case types.SEARCH_SUGGESTION_RESULTS_CLEAR:
-      return clearSearchSuggestionResults(state);
-
-    case types.SEARCH_SUGGESTION_QUERY_UPDATE:
-      return updateSearchSuggestionQuery(state, action.payload);
-
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.SEARCH_SUGGESTION_START]: startSearchSuggestion,
+  [types.SEARCH_SUGGESTION_STOP]: stopSearchSuggestion,
+  [types.SEARCH_SUGGESTION_FAIL]: stopSearchSuggestion,
+  [types.SEARCH_SUGGESTION_USER_RESULTS_UPDATE]: updateUserResults,
+  [types.SEARCH_SUGGESTION_TRACK_RESULTS_UPDATE]: updateTrackResults,
+  [types.SEARCH_SUGGESTION_RESULTS_HIDE]: hideSearchSuggestionResults,
+  [types.SEARCH_SUGGESTION_RESULTS_SHOW]: showSearchSuggestionResults,
+  [types.SEARCH_SUGGESTION_RESULTS_CLEAR]: clearSearchSuggestionResults,
+  [types.SEARCH_SUGGESTION_QUERY_UPDATE]: updateSearchSuggestionQuery,
+});

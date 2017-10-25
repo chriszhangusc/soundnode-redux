@@ -1,3 +1,4 @@
+import { createReducer } from 'common/utils/reducerUtils';
 import * as types from 'features/playlists/playlistsActionTypes';
 
 /* Reducer */
@@ -32,17 +33,9 @@ function resetPlaylistsState() {
   };
 }
 
-export default function playlistsReducer(state = initialState, action) {
-  switch (action.type) {
-    case types.PLAYLISTS_MERGE:
-      return mergePlaylists(state, action.payload);
-    case types.PLAYLISTS_UPDATE:
-      return updatePlaylists(state, action.payload);
-    case types.PLAYLISTS_STATE_RESET:
-      return resetPlaylistsState();
-    case types.PLAYLISTS_PLAYLIST_DELETE:
-      return removePlaylist(state, action.payload);
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.PLAYLIST_MERGE]: mergePlaylists,
+  [types.PLAYLISTS_UPDATE]: updatePlaylists,
+  [types.PLAYLISTS_PLAYLIST_DELETE]: removePlaylist,
+  [types.PLAYLISTS_STATE_RESET]: resetPlaylistsState,
+});

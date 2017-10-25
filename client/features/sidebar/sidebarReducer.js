@@ -1,3 +1,4 @@
+import { createReducer } from 'common/utils/reducerUtils';
 import * as types from './sidebarActionTypes';
 
 /* Reducer */
@@ -19,15 +20,7 @@ function hideSidebar(state) {
   };
 }
 
-export default function sidebarReducer(state = initialState, action) {
-  switch (action.type) {
-
-    case types.SIDEBAR_SHOW:
-      return showSidebar(state);
-
-    case types.SIDEBAR_HIDE:
-      return hideSidebar(state);
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.SIDEBAR_SHOW]: showSidebar,
+  [types.SIDEBAR_HIDE]: hideSidebar,
+});

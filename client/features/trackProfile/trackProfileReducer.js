@@ -1,3 +1,4 @@
+import { createReducer } from 'common/utils/reducerUtils';
 import * as types from './trackProfileActionTypes';
 
 const initialState = {
@@ -57,39 +58,19 @@ export function updateCommentsNextHref(state, { commentsNextHref }) {
   };
 }
 
-export function resetTrackProfileState(initState) {
+export function resetTrackProfileState() {
   return {
-    ...initState,
+    ...initialState,
   };
 }
 
-export default function track(state = initialState, action) {
-  switch (action.type) {
-    case types.TRACK_PROFILE_TRACK_FETCH_START:
-      return startFetchingProfiledTrack(state);
-
-    case types.TRACK_PROFILE_TRACK_FETCH_STOP:
-      return stopFetchingProfiledTrack(state);
-
-    case types.TRACK_PROFILE_TRACK_UPDATE:
-      return updateProfiledTrack(state, action.payload);
-
-    case types.TRACK_PROFILE_COMMENTS_FETCH_START:
-      return startFetchingComments(state);
-
-    case types.TRACK_PROFILE_COMMENTS_FETCH_STOP:
-      return stopFetchingComments(state);
-
-    case types.TRACK_PROFILE_COMMENTS_APPEND:
-      return appendComments(state, action.payload);
-
-    case types.TRACK_PROFILE_COMMENTS_NEXT_HREF_UPDATE:
-      return updateCommentsNextHref(state, action.payload);
-
-    case types.TRACK_PROFILE_STATE_RESET:
-      return resetTrackProfileState(initialState);
-
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.TRACK_PROFILE_TRACK_FETCH_START]: startFetchingProfiledTrack,
+  [types.TRACK_PROFILE_TRACK_FETCH_STOP]: stopFetchingProfiledTrack,
+  [types.TRACK_PROFILE_TRACK_UPDATE]: updateProfiledTrack,
+  [types.TRACK_PROFILE_COMMENTS_FETCH_START]: startFetchingComments,
+  [types.TRACK_PROFILE_COMMENTS_FETCH_STOP]: stopFetchingComments,
+  [types.TRACK_PROFILE_COMMENTS_APPEND]: appendComments,
+  [types.TRACK_PROFILE_COMMENTS_NEXT_HREF_UPDATE]: updateCommentsNextHref,
+  [types.TRACK_PROFILE_STATE_RESET]: resetTrackProfileState,
+});

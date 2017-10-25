@@ -1,3 +1,4 @@
+import { createReducer } from 'common/utils/reducerUtils';
 import * as types from './playerActionTypes';
 import { DEFAULT_MODE } from './playerConsts';
 
@@ -117,51 +118,19 @@ export function removeActiveTrack(state) {
   };
 }
 
-export default function playerReducer(state = initialState, action) {
-  switch (action.type) {
-    case types.PLAYER_ACTIVE_TRACK_REMOVE:
-      return removeActiveTrack(state);
-
-    case types.PLAYER_ACTIVE_TRACK_ID_UPDATE:
-      return updateActiveTrackId(state, action.payload);
-
-    case types.PLAYER_SONG_PLAY:
-      return playSong(state);
-
-    case types.PLAYER_SONG_PAUSE:
-      return pauseSong(state);
-
-    case types.PLAYER_SONG_LOAD:
-      return loadSong(state);
-
-    case types.PLAYER_TIME_UPDATE:
-      return updateCurrentTime(state, action.payload);
-
-    case types.PLAYER_SEEK_BEGIN:
-      return startSeek(state);
-
-    case types.PLAYER_SEEK_END:
-      return endSeek(state);
-
-    case types.PLAYER_VOLUME_UPDATE:
-      return updateVolume(state, action.payload);
-
-    case types.PLAYER_VOLUME_SEEK_BEGIN:
-      return startVolumeSeek(state);
-
-    case types.PLAYER_VOLUME_SEEK_END:
-      return endVolumeSeek(state);
-
-    case types.PLAYER_PLAY_MODE_UPDATE:
-      return updatePlayMode(state, action.payload);
-
-    case types.PLAYER_MUTE:
-      return mute(state);
-
-    case types.PLAYER_TIME_RESET:
-      return resetTime(state);
-
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.PLAYER_ACTIVE_TRACK_REMOVE]: removeActiveTrack,
+  [types.PLAYER_ACTIVE_TRACK_REMOVE]: updateActiveTrackId,
+  [types.PLAYER_SONG_PLAY]: playSong,
+  [types.PLAYER_SONG_PAUSE]: pauseSong,
+  [types.PLAYER_SONG_LOAD]: loadSong,
+  [types.PLAYER_TIME_UPDATE]: updateCurrentTime,
+  [types.PLAYER_SEEK_BEGIN]: startSeek,
+  [types.PLAYER_SEEK_END]: endSeek,
+  [types.PLAYER_VOLUME_UPDATE]: updateVolume,
+  [types.PLAYER_VOLUME_SEEK_BEGIN]: startVolumeSeek,
+  [types.PLAYER_VOLUME_SEEK_END]: endVolumeSeek,
+  [types.PLAYER_PLAY_MODE_UPDATE]: updatePlayMode,
+  [types.PLAYER_MUTE]: mute,
+  [types.PLAYER_TIME_RESET]: resetTime,
+});

@@ -6,8 +6,7 @@ const initialState = {
   modalProps: {},
 };
 
-function showModal(state, action) {
-  const { modalType, modalProps } = action.payload;
+function showModal(state, { modalType, modalProps }) {
   return {
     ...state,
     modalType,

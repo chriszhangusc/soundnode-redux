@@ -7,7 +7,11 @@ import {
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
 
 import * as types from './userProfileActionTypes';
-import { getUserTracksNextHref, isUserTracksFetching, getProfiledUserId } from './userProfileSelectors';
+import {
+  getUserTracksNextHref,
+  isUserTracksFetching,
+  getProfiledUserId,
+} from './userProfileSelectors';
 import {
   fetchProfiledUser,
   fetchProfiledUserTracks,
@@ -115,16 +119,18 @@ export function loadUserProfileData(userId) {
     dispatch(startFetchingUser());
     dispatch(startFetchingTracks());
     dispatch(showLoadingOverlay());
-    Promise.all([fetchProfiledUser(userId), fetchProfiledUserTracks(userId)]).then((res) => {
-      const normalizedUser = res[0];
-      const normalizedTracks = res[1];
-      dispatch(receiveUser(normalizedUser));
-      dispatch(receiveTracks(normalizedTracks));
-      dispatch(hideLoadingOverlay());
-    }).catch((err) => {
-      console.log(err);
-      dispatch(defaultWarning());
-    });
+    Promise.all([fetchProfiledUser(userId), fetchProfiledUserTracks(userId)])
+      .then((res) => {
+        const normalizedUser = res[0];
+        const normalizedTracks = res[1];
+        dispatch(receiveUser(normalizedUser));
+        dispatch(receiveTracks(normalizedTracks));
+        dispatch(hideLoadingOverlay());
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(defaultWarning());
+      });
   };
 }
 

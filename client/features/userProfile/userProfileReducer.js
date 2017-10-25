@@ -1,3 +1,4 @@
+import { createReducer } from 'common/utils/reducerUtils';
 import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './userProfileActionTypes';
 
@@ -75,45 +76,21 @@ export function mergeUserTracks(state, { trackIds }) {
   };
 }
 
-export function resetUserProfileState(initState) {
+export function resetUserProfileState() {
   return {
-    ...initState,
+    ...initialState,
   };
 }
 
-export default function userReducer(state = initialState, action) {
-  switch (action.type) {
-    case types.USER_PROFILE_PAGE_LOADING_START:
-      return startLoadingPage(state);
-
-    case types.USER_PROFILE_PAGE_LOADING_STOP:
-      return stopLoadingPage(state);
-
-    case types.USER_PROFILE_STATE_RESET:
-      return resetUserProfileState(initialState);
-
-    case types.USER_PROFILE_USER_FETCH_START:
-      return startFetchingUser(state);
-
-    case types.USER_PROFILE_USER_FETCH_STOP:
-      return stopFetchingUser(state);
-
-    case types.USER_PROFILE_USER_UPDATE:
-      return updateProfiledUserId(state, action.payload);
-
-    case types.USER_PROFILE_TRACKS_FETCH_START:
-      return startFetchingTracks(state);
-
-    case types.USER_PROFILE_TRACKS_FETCH_STOP:
-      return stopFetchingTracks(state);
-
-    case types.USER_PROFILE_TRACKS_NEXT_HREF_UPDATE:
-      return updateTracksNextHref(state, action.payload);
-
-    case types.USER_PROFILE_TRACKS_MERGE:
-      return mergeUserTracks(state, action.payload);
-
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.USER_PROFILE_PAGE_LOADING_START]: startLoadingPage,
+  [types.USER_PROFILE_PAGE_LOADING_STOP]: stopLoadingPage,
+  [types.USER_PROFILE_STATE_RESET]: resetUserProfileState,
+  [types.USER_PROFILE_USER_FETCH_START]: startFetchingUser,
+  [types.USER_PROFILE_USER_FETCH_STOP]: stopFetchingUser,
+  [types.USER_PROFILE_USER_UPDATE]: updateProfiledUserId,
+  [types.USER_PROFILE_TRACKS_FETCH_START]: startFetchingTracks,
+  [types.USER_PROFILE_TRACKS_FETCH_STOP]: stopFetchingTracks,
+  [types.USER_PROFILE_TRACKS_NEXT_HREF_UPDATE]: updateTracksNextHref,
+  [types.USER_PROFILE_TRACKS_MERGE]: mergeUserTracks,
+});

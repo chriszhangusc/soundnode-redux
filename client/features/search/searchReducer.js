@@ -1,3 +1,4 @@
+import { createReducer } from 'common/utils/reducerUtils';
 import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './searchActionTypes';
 
@@ -51,27 +52,11 @@ export function updateSearchKey(state, { searchKey }) {
   };
 }
 
-export default function searchSuggestionReducer(state = initialState, action) {
-  switch (action.type) {
-    case types.SEARCH_START:
-      return startSearching(state);
-
-    case types.SEARCH_STOP:
-      return stopSearching(state);
-
-    case types.SEARCH_NEXT_HREF_UPDATE:
-      return updateNextHref(state, action.payload);
-
-    case types.SEARCH_STATE_RESET:
-      return resetSearchState(initialState);
-
-    case types.SEARCH_TRACK_RESULTS_MERGE:
-      return mergeTrackResults(state, action.payload);
-
-    case types.SEARCH_KEY_UPDATE:
-      return updateSearchKey(state, action.payload);
-
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.SEARCH_START]: startSearching,
+  [types.SEARCH_STOP]: stopSearching,
+  [types.SEARCH_NEXT_HREF_UPDATE]: updateNextHref,
+  [types.SEARCH_STATE_RESET]: resetSearchState,
+  [types.SEARCH_TRACK_RESULTS_MERGE]: mergeTrackResults,
+  [types.SEARCH_KEY_UPDATE]: updateSearchKey,
+});

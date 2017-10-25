@@ -1,4 +1,5 @@
-import * as TYPES from './notificationActionTypes';
+import { createReducer } from 'common/utils/reducerUtils';
+import * as types from './notificationActionTypes';
 
 /* Reducer */
 const initialState = {
@@ -20,13 +21,7 @@ export function removeNotification(state, { id }) {
   };
 }
 
-export default function notificationReducer(state = initialState, action) {
-  switch (action.type) {
-    case TYPES.NOTIFICATION_ADD:
-      return addNotification(state, action.payload);
-    case TYPES.NOTIFICATION_REMOVE:
-      return removeNotification(state, action.payload);
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.NOTIFICATION_ADD]: addNotification,
+  [types.NOTIFICATION_REMOVE]: removeNotification,
+});

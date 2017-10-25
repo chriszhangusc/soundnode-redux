@@ -1,9 +1,10 @@
+import { createReducer } from 'common/utils/reducerUtils';
 import * as types from './streamActionTypes';
 
 const initialState = {
   fetching: false,
   streamIds: [],
-  nextHref: undefined,
+  nextHref: null,
 };
 
 export function startFetchingStream(state) {
@@ -41,24 +42,10 @@ export function resetStreamState(initState) {
   };
 }
 
-export default function streamReducer(state = initialState, action) {
-  switch (action.type) {
-    case types.STREAM_FETCH_START:
-      return startFetchingStream(state);
-
-    case types.STREAM_FETCH_STOP:
-      return stopFetchingStream(state);
-
-    case types.STREAM_MERGE:
-      return mergeStream(state, action.payload);
-
-    case types.STREAM_NEXT_HREF_UPDATE:
-      return updateNextHref(state, action.payload);
-
-    case types.STREAM_STATE_RESET:
-      return resetStreamState(initialState);
-
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [types.STREAM_FETCH_START]: startFetchingStream,
+  [types.STREAM_FETCH_STOP]: stopFetchingStream,
+  [types.STREAM_MERGE]: mergeStream,
+  [types.STREAM_NEXT_HREF_UPDATE]: updateNextHref,
+  [types.STREAM_STATE_RESET]: resetStreamState,
+});
