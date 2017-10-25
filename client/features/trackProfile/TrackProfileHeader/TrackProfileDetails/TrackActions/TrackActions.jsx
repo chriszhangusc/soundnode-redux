@@ -22,7 +22,7 @@ function TrackActions({ track, permalink, downloadable, downloadUrl, actions }) 
         to="/"
         onClick={() => {
           actions.showModal('ADD_TO_PLAYLIST', {
-            track,
+            trackId: track.id,
           });
         }}
       >
