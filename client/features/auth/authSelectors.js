@@ -10,7 +10,7 @@ export const getMyId = createSelector(getMe, me => me && me.id);
 
 export const isAuthed = getMe;
 
-export const getFavoriteTrackIds = createSelector(getAuthState, state => state.favoriteTracks);
+export const getFavoriteTrackIds = createSelector(getAuthState, state => state.favorites);
 
 export const getReposts = createSelector(getAuthState, state => state.reposts);
 

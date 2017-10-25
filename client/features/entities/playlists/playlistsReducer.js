@@ -29,6 +29,8 @@ export default function playlistsReducer(state = {}, action) {
       return addToPlaylist(state, action.payload);
     case types.PLAYLIST_TRACK_REMOVE:
       return removeFromPlaylist(state, action.payload);
+
+    // FIXME: createReducer does not handle this...
     default:
       if (action.payload && action.payload.entities && action.payload.entities.playlists) {
         return merge({}, state, action.payload.entities.playlists);

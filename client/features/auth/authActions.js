@@ -27,7 +27,7 @@ import { getMe } from './authSelectors';
 
 export function setReposts(reposts) {
   return {
-    type: types.AUTH_REPOSTS_SET,
+    type: types.AUTH_REPOSTS_UPDATE,
     payload: {
       reposts,
     },
@@ -36,7 +36,7 @@ export function setReposts(reposts) {
 
 export function setFavorites(favorites) {
   return {
-    type: types.AUTH_FAVORITES_SET,
+    type: types.AUTH_FAVORITES_UPDATE,
     payload: {
       favorites,
     },
@@ -45,7 +45,7 @@ export function setFavorites(favorites) {
 
 export function setMe(me) {
   return {
-    type: types.AUTH_USER_ME_SET,
+    type: types.AUTH_USER_UPDATE,
     payload: {
       me,
     },
