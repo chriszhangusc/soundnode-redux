@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import styled from 'styled-components';
 import onClickOutside from 'react-onclickoutside';
-import { getReposts, isAuthed } from 'features/auth/authSelectors';
+import { getReposts, isAuthed, getFavoriteTrackIds } from 'features/auth/authSelectors';
 import * as authActions from 'features/auth/authActions';
 import * as copyActions from 'features/copy/copyActions';
 import DropdownListItem from './DropdownListItem';
@@ -26,6 +26,15 @@ class DropdownList extends React.Component {
     this.props.onClose();
   };
 
+  handleLikeClick = (e) => {
+    if (!this.props.authed) {
+      this.props.authRequired();
+    } else {
+      const toggleLike = this.props.liked ? this.props.doUnlikeTrack : this.props.doLikeTrack;
+      toggleLike(this.props.trackId);
+    }
+  };
+
   handleRepostClick = (e) => {
     if (!this.props.authed) {
       this.props.authRequired();
@@ -36,10 +45,16 @@ class DropdownList extends React.Component {
   };
 
   render() {
-    const { trackId, reposted } = this.props;
+    const { trackId, reposted, liked } = this.props;
     return (
       <Wrapper>
         <DropdownListItem
+          iconName="heart"
+          text={liked ? 'Unlike' : 'Like'}
+          onClick={this.handleLikeClick}
+        />
+        <DropdownListItem
+          type="button"
           iconName="retweet"
           text={reposted ? 'Remove repost' : 'Add repost'}
           onClick={this.handleRepostClick}
@@ -56,6 +71,7 @@ function mapStateToProps(state, { trackId }) {
   return {
     authed: isAuthed(state),
     reposted: getReposts(state).includes(trackId),
+    liked: getFavoriteTrackIds(state).includes(trackId),
   };
 }
 
