@@ -1,3 +1,4 @@
+import { createReducer } from 'common/utils/reducerUtils';
 import { LOADING_OVERLAY_SHOW, LOADING_OVERLAY_HIDE } from './loadingOverlayActionTypes';
 
 const initialState = {
@@ -21,13 +22,7 @@ function hideLoadingOverlay(state) {
   };
 }
 
-export default function loadingOverlayReducer(state = initialState, action) {
-  switch (action.type) {
-    case LOADING_OVERLAY_SHOW:
-      return showLoadingOverlay(state, action.payload);
-    case LOADING_OVERLAY_HIDE:
-      return hideLoadingOverlay(state);
-    default:
-      return state;
-  }
-}
+export default createReducer(initialState, {
+  [LOADING_OVERLAY_SHOW]: showLoadingOverlay,
+  [LOADING_OVERLAY_HIDE]: hideLoadingOverlay,
+});
