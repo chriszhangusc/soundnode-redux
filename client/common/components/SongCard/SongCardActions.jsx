@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { getFavoriteTrackIds, getReposts, isAuthed } from 'features/auth/authSelectors';
 import * as authActions from 'features/auth/authActions';
 import * as copyActions from 'features/copy/copyActions';
-import { showModal } from 'features/modals/root/rootModalActions';
+import { showAddToPlaylistModal } from 'features/modals/addToPlaylist/addToPlaylistActions';
 import { authRequired } from 'features/notification/notificationActions';
 
 function SongCardActions({ authed, trackId, track, liked, reposted, permalinkUrl, actions }) {
@@ -31,9 +31,7 @@ function SongCardActions({ authed, trackId, track, liked, reposted, permalinkUrl
     if (!authed) {
       actions.authRequired();
     } else {
-      actions.showModal('ADD_TO_PLAYLIST', {
-        trackId,
-      });
+      actions.showAddToPlaylistModal(trackId);
     }
   };
 
@@ -90,7 +88,7 @@ function mapStateToProps(state, { track }) {
 const actions = {
   ...authActions,
   ...copyActions,
-  showModal,
+  showAddToPlaylistModal,
   authRequired,
 };
 

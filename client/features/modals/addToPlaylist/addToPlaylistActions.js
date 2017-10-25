@@ -9,6 +9,17 @@ import {
   PLAYLIST_TRACK_ADD,
   PLAYLIST_TRACK_REMOVE,
 } from 'features/entities/playlists/playlistsActionTypes';
+import { showModal } from 'features/modals/root/rootModalActions';
+
+export function showAddToPlaylistModal(trackId) {
+  return (dispatch) => {
+    dispatch(
+      showModal('ADD_TO_PLAYLIST', {
+        trackId,
+      }),
+    );
+  };
+}
 
 export function startRequest(playlistId) {
   return {

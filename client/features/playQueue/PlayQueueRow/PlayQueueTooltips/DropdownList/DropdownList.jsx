@@ -6,7 +6,7 @@ import onClickOutside from 'react-onclickoutside';
 import { getReposts, isAuthed, getFavoriteTrackIds } from 'features/auth/authSelectors';
 import * as authActions from 'features/auth/authActions';
 import * as copyActions from 'features/copy/copyActions';
-import { showModal } from 'features/modals/root/rootModalActions';
+import { showAddToPlaylistModal } from 'features/modals/addToPlaylist/addToPlaylistActions';
 import { TRACK_PROFILE_ROUTE } from 'common/constants/routeConsts';
 import DropdownListItem from './DropdownListItem';
 
@@ -50,9 +50,7 @@ class DropdownList extends React.Component {
     if (!this.props.authed) {
       this.props.authRequired();
     } else {
-      this.props.showModal('ADD_TO_PLAYLIST', {
-        trackId: this.props.trackId,
-      });
+      this.props.showAddToPlaylistModal(this.props.trackId);
     }
   };
 
@@ -98,7 +96,7 @@ function mapStateToProps(state, { trackId }) {
 const actions = {
   ...authActions,
   ...copyActions,
-  showModal,
+  showAddToPlaylistModal,
 };
 
 export default compose(connect(mapStateToProps, actions), onClickOutside)(DropdownList);

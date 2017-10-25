@@ -6,7 +6,7 @@ import LinkButton from 'common/components/links/LinkButton';
 import { copyToClipboard } from 'features/copy/copyActions';
 import * as selectors from 'features/trackProfile/trackProfileSelectors';
 import Icon from 'common/components/icons/Icon';
-import { showModal } from 'features/modals/root/rootModalActions';
+import { showAddToPlaylistModal } from 'features/modals/addToPlaylist/addToPlaylistActions';
 import Wrapper from './Wrapper';
 
 function TrackActions({ track, permalink, downloadable, downloadUrl, actions }) {
@@ -21,9 +21,7 @@ function TrackActions({ track, permalink, downloadable, downloadUrl, actions }) 
       <LinkButton
         to="/"
         onClick={() => {
-          actions.showModal('ADD_TO_PLAYLIST', {
-            trackId: track.id,
-          });
+          actions.showAddToPlaylistModal(track.id);
         }}
       >
         <Icon iconName="bookmark" title="Add to Playlist" />ADD TO PLAYLIST
@@ -64,7 +62,7 @@ function mapStateToProps(state) {
 
 const actions = {
   copyToClipboard,
-  showModal,
+  showAddToPlaylistModal,
 };
 
 function mapDispatchToProps(dispatch) {
