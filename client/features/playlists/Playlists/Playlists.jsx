@@ -1,6 +1,8 @@
 import React from 'react';
 import Playlist from 'features/playlists/Playlist';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import withScrollToTopOnEnter from 'common/hocs/withScrollToTopOnEnter';
 import { loadPlaylists, resetPlaylistsState } from 'features/playlists/playlistsActions';
 import { getPlaylistIds } from 'features/playlists/playlistsSelectors';
 import Wrapper from './Wrapper';
@@ -35,4 +37,4 @@ const actions = {
   resetPlaylistsState,
 };
 
-export default connect(mapStateToProps, actions)(Playlists);
+export default compose(connect(mapStateToProps, actions), withScrollToTopOnEnter)(Playlists);
