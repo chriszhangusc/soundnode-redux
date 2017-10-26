@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import withScrollToTopOnEnter from 'common/hocs/withScrollToTopOnEnter';
 import * as searchActions from 'features/search/searchActions';
 import PropTypes from 'prop-types';
 import PageTitle from 'common/components/PageTitle';
@@ -50,4 +52,4 @@ Search.propTypes = {
   }).isRequired,
 };
 
-export default connect(null, searchActions)(Search);
+export default compose(connect(null, searchActions), withScrollToTopOnEnter)(Search);

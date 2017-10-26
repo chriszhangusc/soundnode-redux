@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import * as trackProfileActions from 'features/trackProfile/trackProfileActions';
 import { isPageLoading } from 'features/trackProfile/trackProfileSelectors';
-import { Box } from 'grid-styled';
+import withScrollToTopOnEnter from 'common/hocs/withScrollToTopOnEnter';
 import TrackProfileComments from '../TrackProfileComments';
 import TrackProfileHeader from '../TrackProfileHeader';
 
@@ -20,6 +21,7 @@ class TrackProfile extends React.Component {
   componentDidMount() {
     const { match } = this.props;
     const trackId = match.params.trackId;
+    window.scrollTo(0, 0);
     // Switch to track playlist
     this.props.loadTrackProfileData(trackId);
   }
@@ -50,10 +52,10 @@ class TrackProfile extends React.Component {
       return null;
     }
     return (
-      <Box>
+      <div>
         <TrackProfileHeader />
         <TrackProfileComments />
-      </Box>
+      </div>
     );
   }
 }
@@ -64,4 +66,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, trackProfileActions)(TrackProfile);
+export default compose(connect(mapStateToProps, trackProfileActions), withScrollToTopOnEnter)(
+  TrackProfile,
+);

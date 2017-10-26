@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Spinner from 'common/components/spinners/RectsScale';
 import styled from 'styled-components';
-import { Box } from 'grid-styled';
 import { getDisplayName } from 'common/utils/hocUtils';
 
 const SpinnerWrapper = styled.div`
@@ -14,14 +13,14 @@ const SpinnerWrapper = styled.div`
 export default function withLoadingSpinnerAfter(WrappedComponent) {
   function EnhancedComponent({ fetching, ...rest }) {
     return (
-      <Box>
+      <div>
         <WrappedComponent {...rest} />
         {fetching && (
           <SpinnerWrapper>
             <Spinner />
           </SpinnerWrapper>
         )}
-      </Box>
+      </div>
     );
   }
 

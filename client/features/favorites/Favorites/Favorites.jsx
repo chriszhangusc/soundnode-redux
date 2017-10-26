@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
+import { compose } from 'recompose';
+import withScrollToTopOnEnter from 'common/hocs/withScrollToTopOnEnter';
 import {
   isFavoritesFetching,
   getFavoritesIds,
@@ -48,4 +50,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, favActions)(Favorites);
+export default compose(connect(mapStateToProps, favActions), withScrollToTopOnEnter)(Favorites);

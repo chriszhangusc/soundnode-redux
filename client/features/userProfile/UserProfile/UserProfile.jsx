@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import withScrollToTopOnEnter from 'common/hocs/withScrollToTopOnEnter';
 import * as userProfileActions from 'features/userProfile/userProfileActions';
 import { isPageLoading, getProfiledUserId } from 'features/userProfile/userProfileSelectors';
 import UserProfileTracks from 'features/userProfile/UserProfileTracks';
@@ -73,4 +75,6 @@ function mapStateToProps(state) {
 //   pageLoading: PropTypes.bool.isRequired,
 // };
 
-export default connect(mapStateToProps, userProfileActions)(UserProfile);
+export default compose(connect(mapStateToProps, userProfileActions), withScrollToTopOnEnter)(
+  UserProfile,
+);

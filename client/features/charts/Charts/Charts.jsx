@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+import withScrollToTopOnEnter from 'common/hocs/withScrollToTopOnEnter';
 import { connect } from 'react-redux';
 import { loadChartsPage, updateGenre, resetChartsState } from 'features/charts/chartsActions';
 import PageTitle from 'common/components/PageTitle';
@@ -89,4 +91,4 @@ const actions = {
   resetChartsState,
 };
 
-export default connect(mapStateToProps, actions)(Charts);
+export default compose(connect(mapStateToProps, actions), withScrollToTopOnEnter)(Charts);

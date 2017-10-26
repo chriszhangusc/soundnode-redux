@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import withScrollToTopOnEnter from 'common/hocs/withScrollToTopOnEnter';
 import SongCardList from 'common/components/SongCardList';
 import PageTitle from 'common/components/PageTitle';
-import { isStreamFetching, getStreamIds, getStreamPlaylist } from 'features/stream/streamSelectors';
+import { isStreamFetching, getStreamPlaylist } from 'features/stream/streamSelectors';
 import * as streamActions from 'features/stream/streamActions';
 
 class Stream extends React.Component {
@@ -51,4 +53,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, streamActions)(Stream);
+export default compose(connect(mapStateToProps, streamActions), withScrollToTopOnEnter)(Stream);
