@@ -43,7 +43,7 @@ export function showOverlayForSidebar() {
 export function showOverlayForLoading() {
   return {
     active: true,
-    for: 'LOADING_OVERLAY',
+    for: 'LOADING',
   };
 }
 
