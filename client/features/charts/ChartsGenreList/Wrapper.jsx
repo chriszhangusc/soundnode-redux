@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default styled.div`
   overflow: hidden;
-  height: 105px;
+  height: 110px;
   transition: height 0.4s;
   margin-bottom: 20px;
   padding: 0 15px;
