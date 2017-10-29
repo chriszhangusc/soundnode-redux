@@ -82,10 +82,10 @@ export function loginFailed(error) {
 export function syncFavorites() {
   return dispatch =>
     fetchMyFavoritesIds()
-      .then(favorites => {
+      .then((favorites) => {
         dispatch(setFavorites(favorites));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         dispatch(defaultWarning());
       });
@@ -94,10 +94,10 @@ export function syncFavorites() {
 export function syncReposts() {
   return dispatch =>
     fetchMyRepostIds()
-      .then(reposts => {
+      .then((reposts) => {
         dispatch(setReposts(reposts));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         dispatch(defaultWarning());
       });
@@ -138,13 +138,13 @@ export function removeFromReposts(trackId) {
 export function doAuth() {
   return dispatch =>
     SC.connect()
-      .then(session => {
+      .then((session) => {
         // Initialize Session
         dispatch(setSession(session));
         // Set OAuthToken
         setOAuthToken(session.oauth_token);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         dispatch(defaultWarning());
       });
@@ -155,7 +155,7 @@ export function loadMe() {
   // return dispatch => ;
   return dispatch =>
     fetchMe()
-      .then(me => {
+      .then((me) => {
         dispatch(setMe(me));
         return Promise.all([dispatch(syncFavorites()), dispatch(syncReposts())]);
       })
@@ -164,7 +164,7 @@ export function loadMe() {
         dispatch(hideLoadingOverlay());
         // dispatch(notificationSuccess('Login Success'));
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         dispatch(loginFailed(err));
         dispatch(notificationWarning('Failed to login to soundcloud'));
@@ -172,7 +172,7 @@ export function loadMe() {
 }
 
 export function doLogin() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(startLogin());
     dispatch(showLoadingOverlay('Authenticating...'));
     dispatch(doAuth()).then(() => dispatch(loadMe()));
@@ -194,7 +194,7 @@ export function loginIfNeeded() {
 }
 
 export function doLogout() {
-  return dispatch => {
+  return (dispatch) => {
     removeOAuthToken();
     dispatch(logoutSucceed());
     dispatch(notificationSuccess('Logout success'));
@@ -202,13 +202,13 @@ export function doLogout() {
 }
 
 export function doLikeTrack(trackId) {
-  return dispatch => {
+  return (dispatch) => {
     likeTrack(trackId)
       .then(() => {
         dispatch(notificationSuccess('Track added to favorites'));
         dispatch(syncFavorites());
       })
-      .catch(err => {
+      .catch((err) => {
         console.log('Failed to like track: ', err);
         dispatch(defaultWarning());
       });
@@ -216,13 +216,13 @@ export function doLikeTrack(trackId) {
 }
 
 export function doUnlikeTrack(trackId) {
-  return dispatch => {
+  return (dispatch) => {
     unlikeTrack(trackId)
       .then(() => {
         dispatch(notificationSuccess('Track removed from favorites'));
         dispatch(syncFavorites());
       })
-      .catch(err => {
+      .catch((err) => {
         console.log('Failed to remove this track from favorites', err);
         dispatch(defaultWarning());
       });
@@ -230,13 +230,13 @@ export function doUnlikeTrack(trackId) {
 }
 
 export function createRepost(trackId) {
-  return dispatch => {
+  return (dispatch) => {
     repost(trackId)
       .then(() => {
         dispatch(notificationSuccess('Track added to reposts'));
         dispatch(syncReposts());
       })
-      .catch(err => {
+      .catch((err) => {
         console.log('Failed to create repost', err);
         dispatch(defaultWarning());
       });
@@ -244,13 +244,13 @@ export function createRepost(trackId) {
 }
 
 export function removeRepost(trackId) {
-  return dispatch => {
+  return (dispatch) => {
     deleteRepost(trackId)
       .then(() => {
         dispatch(notificationSuccess('Track removed from reposts'));
         dispatch(syncReposts());
       })
-      .catch(err => {
+      .catch((err) => {
         console.log('Failed to remove repost', err);
         dispatch(defaultWarning());
       });
