@@ -35,11 +35,6 @@ export function removeTrackFromPlaylist(trackId, userId, playlistId) {
         },
         body: JSON.stringify(data),
       });
-      // .then((res) => {
-      //   console.log(res);
-      //   res.json();
-      // })
-      // .then(json => console.log(json));
     });
   });
 }
@@ -65,11 +60,6 @@ export function addTrackToPlaylist(trackId, userId, playlistId) {
         },
         body: JSON.stringify(data),
       });
-      // .then((res) => {
-      //   console.log(res);
-      //   res.json();
-      // })
-      // .then(json => console.log(json));
     });
   });
 }

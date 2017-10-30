@@ -6,14 +6,14 @@ export const fontSizes = ['0.8rem', '0.9rem', '0.95rem', '1rem', '1.25rem', '1.5
 // 0 is default
 export const zIndexes = {
   notification: 6,
-  fullScreenLoadingOverlay: 4,
   modal: 5,
   sidebar: 5,
-  playQueueDropdownList: 4,
+  fullScreenLoadingOverlay: 5,
   fullScreenOverlay: 4,
   searchSuggestions: 3,
   player: 2,
   headerBar: 2,
+  playQueueDropdownList: 2,
   playQueue: 1,
 };
 

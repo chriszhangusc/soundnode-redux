@@ -24,7 +24,6 @@ function SongCardImage({
         playing={playing}
         onClick={() => {
           if (!loading) {
-            // console.log(playlist);
             handleImageClick(trackId, playlist);
           }
           // Sync with currently active play queue
