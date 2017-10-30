@@ -4,7 +4,18 @@ import * as colors from './colors';
 export const fontSizes = ['0.8rem', '0.9rem', '0.95rem', '1rem', '1.25rem', '1.5rem', '2rem'];
 
 // 0 is default
-export const zIndexes = [0, 1, 2, 3, 4, 5, 6];
+export const zIndexes = {
+  notification: 6,
+  fullScreenLoadingOverlay: 4,
+  modal: 5,
+  sidebar: 5,
+  playQueueDropdownList: 4,
+  fullScreenOverlay: 4,
+  searchSuggestions: 3,
+  player: 2,
+  headerBar: 2,
+  playQueue: 1,
+};
 
 export const darken = n => `rgba(0, 0, 0, ${n})`;
 

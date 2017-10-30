@@ -12,5 +12,5 @@ export default styled.div`
   display: flex;
   text-align: center;
   font-size: 1.2em;
-  z-index: ${props => props.theme.zIndexes[4]};
+  z-index: ${props => props.theme.zIndexes.fullScreenOverlay};
 `;

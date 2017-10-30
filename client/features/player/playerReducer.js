@@ -120,7 +120,7 @@ export function removeActiveTrack(state) {
 
 export default createReducer(initialState, {
   [types.PLAYER_ACTIVE_TRACK_REMOVE]: removeActiveTrack,
-  [types.PLAYER_ACTIVE_TRACK_REMOVE]: updateActiveTrackId,
+  [types.PLAYER_ACTIVE_TRACK_ID_UPDATE]: updateActiveTrackId,
   [types.PLAYER_SONG_PLAY]: playSong,
   [types.PLAYER_SONG_PAUSE]: pauseSong,
   [types.PLAYER_SONG_LOAD]: loadSong,

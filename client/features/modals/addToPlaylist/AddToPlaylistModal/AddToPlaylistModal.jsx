@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   width: 550px;
   max-height: 420px;
   overflow-y: scroll;
-  ${centerFixed} z-index: ${props => props.theme.zIndexes[5]};
+  ${centerFixed} z-index: ${props => props.theme.zIndexes.modal};
   background-color: ${props => props.theme.colors.bgDark};
   opacity: 0.95;
   box-shadow: 0 0 12px 8px ${props => props.theme.colors.boxShadowColor};

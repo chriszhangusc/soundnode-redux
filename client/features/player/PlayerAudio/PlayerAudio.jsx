@@ -36,8 +36,8 @@ class PlayerAudio extends Component {
   };
 
   togglePlayIfNeeded = (audio) => {
+    console.log(this.props.loading);
     if (this.props.loading) {
-      // debugger;
       // Set a little bit of delay to give some time for song to load.
       setTimeout(() => {
         audio

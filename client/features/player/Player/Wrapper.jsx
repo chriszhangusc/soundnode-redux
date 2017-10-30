@@ -5,5 +5,5 @@ export default Fixed.extend`
   bottom: 0;
   left: 0;
   background-color: ${props => props.theme.colors.bgSub};
-  z-index: ${props => props.theme.zIndexes[2]};
+  z-index: ${props => props.theme.zIndexes.player};
 `;

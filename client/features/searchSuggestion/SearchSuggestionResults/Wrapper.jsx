@@ -5,7 +5,7 @@ export default styled.div`
   position: absolute;
   top: 50px;
   background-color: ${props => props.theme.colors.bgSub};
-  z-index: ${props => props.theme.zIndexes[3]};
+  z-index: ${props => props.theme.zIndexes.searchSuggestions};
   display: block;
   transition: opacity 0.5s linear;
   box-shadow: 0 0 10px 8px rgba(0, 0, 0, 0.2);

@@ -12,7 +12,7 @@ import DropdownListItem from './DropdownListItem';
 
 const Wrapper = styled.div`
   width: 150px;
-  z-index: ${props => props.theme.zIndexes[4]};
+  z-index: ${props => props.theme.zIndexes.playQueueDropdownList};
   background: ${props => props.theme.colors.bg};
   position: absolute;
   box-shadow: 0 0 12px 8px ${props => props.theme.colors.boxShadowColor};

@@ -24,7 +24,7 @@ export default Fixed.extend`
     width: ${PLAY_QUEUE_WIDTH_DESKTOP_4K};
     transform: translateX(${props => (props.playQueueHidden ? PLAY_QUEUE_WIDTH_DESKTOP_4K : '0')});
   `};
-  z-index: ${props => props.theme.zIndexes[1]};
+  z-index: ${props => props.theme.zIndexes.playQueue};
   padding: 20px 0 0 0;
   overflow-x: hidden;
   overflow-y: scroll;
