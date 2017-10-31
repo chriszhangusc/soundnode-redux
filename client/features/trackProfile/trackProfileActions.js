@@ -4,7 +4,10 @@ import {
   showLoadingOverlay,
   hideLoadingOverlay,
 } from 'features/loadingOverlay/loadingOverlayActions';
-import { fetchProfiledTrack, fetchTrackComments, fetchMoreComments } from './trackProfileApi';
+import { fetchTrackById } from 'common/api/trackApi';
+import { normalizeTrack, normalizeComments } from 'common/utils/normalizeUtils';
+import { fetchCommentsByTrackId } from 'common/api/commentApi';
+import { makeRequest } from 'common/utils/apiUtils';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';
 import * as types from './trackProfileActionTypes';
 
@@ -91,10 +94,10 @@ export function loadTrackProfileData(trackId) {
     dispatch(startFetchingProfiledTrack());
     dispatch(startFetchingComments());
     dispatch(showLoadingOverlay());
-    Promise.all([fetchProfiledTrack(trackId), fetchTrackComments(trackId)])
+    Promise.all([fetchTrackById(trackId), fetchCommentsByTrackId(trackId, 20)])
       .then((res) => {
-        const normalizedTrack = res[0];
-        const normalizedComments = res[1];
+        const normalizedTrack = normalizeTrack(res[0]);
+        const normalizedComments = normalizeComments(res[1]);
         dispatch(receiveTrack(normalizedTrack));
         dispatch(receiveComments(normalizedComments));
         dispatch(hideLoadingOverlay());
@@ -115,7 +118,8 @@ export function loadMoreComments() {
     const commentsFetching = isCommentsFetching(state);
     if (!commentsFetching && commentsNextHref) {
       dispatch(startFetchingComments());
-      fetchMoreComments(commentsNextHref)
+      makeRequest(commentsNextHref)
+        .then(normalizeComments)
         .then((normalized) => {
           dispatch(receiveComments(normalized));
         })

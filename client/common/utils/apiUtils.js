@@ -32,7 +32,7 @@ export function getStreamUrl(track) {
 
 export function getProxyRequest(requestUrl) {
   if (!requestUrl) return requestUrl;
-  if (isSCV1Request(requestUrl)) return requestUrl.replace(`${SC_API_V1}`, getSCV1ProxyOrigin());
+  // if (isSCV1Request(requestUrl)) return requestUrl.replace(`${SC_API_V1}`, getSCV1ProxyOrigin());
   if (isSCV2Request(requestUrl)) return requestUrl.replace(`${SC_API_V2}`, getSCV2ProxyOrigin());
   return requestUrl;
 }
@@ -54,17 +54,51 @@ export function checkStatus(response) {
   return response;
 }
 
-// Transform json response
-export function parseJsonAndCamelize(response) {
-  return response.json().then(json => camelizeKeys(json));
+export function parseJson(response) {
+  // No content
+  if (response.status === 204 || response.status === 205) {
+    return null;
+  }
+  return response.json().then(camelizeKeys);
+}
+
+export function buildRequestUrl(url) {
+  return appendToken(getProxyRequest(url));
 }
 
 // Check if the fetchUrl is v1 or v2 and convert them to point to our proxy server accordingly
+// Do not use this function with put because soundcloud api will return 200 even if
+// there is no content and would 30+ seconds.
 export function makeRequest(requestUrl, fetchOptions) {
-  const proxyRequest = getProxyRequest(requestUrl);
-  const finalUrl = appendToken(proxyRequest);
+  const finalUrl = buildRequestUrl(requestUrl);
   console.log(finalUrl);
   return fetch(finalUrl, fetchOptions)
     .then(checkStatus)
-    .then(parseJsonAndCamelize);
+    .then(parseJson);
+}
+
+const defaultPutOptions = {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
+
+export function requestPut(requestUrl, data, options = defaultPutOptions) {
+  const finalUrl = buildRequestUrl(requestUrl);
+  return fetch(finalUrl, { ...options, body: JSON.stringify(data) });
+}
+
+const defaultGetOptions = { method: 'GET' };
+
+export function requestGet(requestUrl, options = defaultGetOptions) {
+  const finalUrl = buildRequestUrl(requestUrl);
+  return fetch(finalUrl, options);
+}
+
+const defaultDeleteOptions = { method: 'DELETE' };
+
+export function requestDelete(requestUrl, options = defaultDeleteOptions) {
+  const finalUrl = buildRequestUrl(requestUrl);
+  return fetch(finalUrl, options);
 }

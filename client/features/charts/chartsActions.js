@@ -1,7 +1,9 @@
 import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
-import { fetchCharts, fetchMoreCharts } from 'features/charts/chartsApi';
+import { makeRequest } from 'common/utils/apiUtils';
+import { fetchCharts } from 'common/api/trackApi';
+import { normalizeTracks } from 'common/utils/normalizeUtils';
 import { isChartsFetching, getChartsNextHref, getCurrentChartsTrackIds } from './chartsSelectors';
 import * as types from './chartsActionTypes';
 
@@ -70,21 +72,34 @@ export function receiveCharts(normalizedCharts, genre, name) {
   };
 }
 
+// https://api-v2.soundcloud.com/charts?kind=top&genre=soundcloud%3Agenres%3Aall-music&linked_partitioning=1&limit=25&offset=0&client_id=f9e1e2232182a46705c880554a1011af
+function transform(response) {
+  console.log(response);
+  return {
+    ...response,
+    collection: response.collection.map(item => item.track),
+  };
+}
+
+
 /* Side Effects */
 export function loadChartsPage(genre) {
-  return async (dispatch, getState) => {
+  return (dispatch, getState) => {
     // Using getState in conditional dispatch
     const chartsState = getState().charts;
     if (!chartsState[genre]) {
       dispatch(startFetchingCharts());
-      try {
-        const normalizedCharts = await fetchCharts(genre);
-        dispatch(receiveCharts(normalizedCharts, genre));
-      } catch (err) {
-        console.error(err);
-        dispatch(failedToFetchCharts(err));
-        dispatch(defaultWarning());
-      }
+      fetchCharts(genre)
+        .then(transform)
+        .then(normalizeTracks)
+        .then((normalized) => {
+          dispatch(receiveCharts(normalized, genre));
+        })
+        .catch((err) => {
+          console.error(err);
+          dispatch(failedToFetchCharts(err));
+          dispatch(defaultWarning());
+        });
     }
   };
 }
@@ -97,15 +112,17 @@ export function loadMoreCharts(genre, name) {
     const currentCharts = getCurrentChartsTrackIds(state);
     if (!chartsFetching && currentCharts.length < 50 && curNextHref) {
       dispatch(startFetchingCharts());
-      try {
-        const normalizedCharts = await fetchMoreCharts(curNextHref);
-        // Check to see if we need to dynamically update the active play queue
-        dispatch(receiveCharts(normalizedCharts, genre, name));
-      } catch (err) {
-        console.error(err);
-        dispatch(failedToFetchCharts(err));
-        dispatch(defaultWarning());
-      }
+      makeRequest(curNextHref)
+        .then(transform)
+        .then(normalizeTracks)
+        .then((normalized) => {
+          dispatch(receiveCharts(normalized, genre, name));
+        })
+        .catch((err) => {
+          console.error(err);
+          dispatch(failedToFetchCharts(err));
+          dispatch(defaultWarning());
+        });
     }
   };
 }

@@ -17,7 +17,7 @@ function renderAvatarByType(type, avatarUrl) {
 
 // Clicking the link will also trigger onBlur of the search input which will cause the result to
 // disappear before handling onClick event of the link,
-// So we have to put the routing logic to onMouseDown which trigger before onblur.
+// So we have to requestPut the routing logic to onMouseDown which trigger before onblur.
 function SearchSuggestionResultsRow({ type, avatarUrl, linkUrl, title, subtitle }) {
   return (
     <RouterLink to={linkUrl}>

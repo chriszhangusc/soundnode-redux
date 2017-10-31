@@ -49,15 +49,16 @@ const optionsV2 = {
 const proxyV1 = proxy(optionsV1);
 const proxyV2 = proxy(optionsV2);
 
-app.use('/sc/v1', proxyV1);
-app.use('/sc/v2', proxyV2);
-
 function logger(req, res, next) {
   console.log(new Date(), req.method, req.url);
   next();
 }
 
 app.use(logger);
+
+app.use('/sc/v1', proxyV1);
+app.use('/sc/v2', proxyV2);
+
 app.listen(port, () => {
   console.log('Server running at port:', port);
 });

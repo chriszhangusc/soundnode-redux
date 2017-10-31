@@ -1,6 +1,4 @@
-import { normalizeResponse } from 'common/utils/normalizeUtils';
-import { playlistArraySchema } from 'app/schema';
-
+import { normalizePlaylists } from 'common/utils/normalizeUtils';
 import {
   showLoadingOverlay,
   hideLoadingOverlay,
@@ -10,10 +8,9 @@ import {
   PLAYLISTS_MERGE,
   PLAYLISTS_UPDATE,
   PLAYLISTS_STATE_RESET,
-  PLAYLISTS_PLAYLIST_DELETE,
 } from 'features/playlists/playlistsActionTypes';
-import { notificationSuccess, defaultWarning } from 'features/notification/notificationActions';
-import { fetchMyPlaylists, deleteSinglePlaylist } from 'common/services/scApiService';
+import { defaultWarning } from 'features/notification/notificationActions';
+import { fetchMyPlaylists } from 'common/api/meApi';
 import { getPlaylistById } from 'features/entities/entitiesSelectors';
 import { updatePlayQueue } from 'features/playQueue/playQueueActions';
 import { loadTrackAndPlay } from 'features/player/playerActions';
@@ -43,8 +40,9 @@ export function resetPlaylistsState() {
 }
 
 export function fetchPlaylists() {
-  return dispatch => fetchMyPlaylists()
-      .then(response => normalizeResponse(response, playlistArraySchema))
+  return dispatch =>
+    fetchMyPlaylists()
+      .then(normalizePlaylists)
       .then((normalized) => {
         const { entities, result } = normalized;
         // Merge entities
@@ -69,31 +67,31 @@ export function loadPlaylists() {
   };
 }
 
-export function deletePlaylist(playlistId) {
-  return (dispatch) => {
-    dispatch(showLoadingOverlay());
-    deleteSinglePlaylist(playlistId)
-      .then(() => {
-        console.log('success');
-        // Reload playlists page
-        // Sound cloud will not perform instand deletion.
-        dispatch({
-          type: PLAYLISTS_PLAYLIST_DELETE,
-          payload: {
-            playlistId,
-          },
-        });
-        // dispatch(loadPlaylists());
-        dispatch(hideLoadingOverlay());
-        dispatch(notificationSuccess('Playlist will be deleted shortly'));
-      })
-      .catch((err) => {
-        // notification warning
-        dispatch(defaultWarning());
-        console.error(err);
-      });
-  };
-}
+// export function deletePlaylist(playlistId) {
+//   return (dispatch) => {
+//     dispatch(showLoadingOverlay());
+//     deleteSinglePlaylist(playlistId)
+//       .then(() => {
+//         console.log('success');
+//         // Reload playlists page
+//         // Sound cloud will not perform instand deletion.
+//         dispatch({
+//           type: PLAYLISTS_PLAYLIST_DELETE,
+//           payload: {
+//             playlistId,
+//           },
+//         });
+//         // dispatch(loadPlaylists());
+//         dispatch(hideLoadingOverlay());
+//         dispatch(notificationSuccess('Playlist will be deleted shortly'));
+//       })
+//       .catch((err) => {
+//         // notification warning
+//         dispatch(defaultWarning());
+//         console.error(err);
+//       });
+//   };
+// }
 
 export function playPlaylist(playlistId, start = 0) {
   return (dispatch, getState) => {

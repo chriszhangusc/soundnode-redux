@@ -1,9 +1,11 @@
 import { put, call, takeLatest, all } from 'redux-saga/effects';
+import { normalizeTracks, normalizeUsers } from 'common/utils/normalizeUtils';
 import * as actions from 'features/searchSuggestion/searchSuggestionActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { defaultWarning } from 'features/notification/notificationActions';
 import { SEARCH_SUGGESTION_START } from 'features/searchSuggestion/searchSuggestionActionTypes';
-import { fetchSearchSuggestionTracks, fetchSearchSuggestionUsers } from './searchSuggestionApi';
+import { searchTracks } from 'common/api/trackApi';
+import { searchUsers } from 'common/api/userApi';
 
 /* **************************************************************************** */
 /* ****************************** SUBROUTINES ********************************* */
@@ -21,10 +23,14 @@ export function* doSearchSuggestion({ payload }) {
   const finalKeyword = keyword.trim();
   yield put(actions.updateSearchSuggestionQuery(finalKeyword));
   try {
-    const [normalizedTracks, normalizedUsers] = yield all([
-      call(fetchSearchSuggestionTracks, finalKeyword),
-      call(fetchSearchSuggestionUsers, finalKeyword),
+    const [tracksResponse, usersResponse] = yield all([
+      call(searchTracks, finalKeyword),
+      call(searchUsers, finalKeyword),
     ]);
+
+    const normalizedTracks = normalizeTracks(tracksResponse);
+    const normalizedUsers = normalizeUsers(usersResponse);
+
     yield put(mergeEntities(normalizedTracks.entities));
     yield put(mergeEntities(normalizedUsers.entities));
     yield put(actions.updateTrackResults(normalizedTracks.result));

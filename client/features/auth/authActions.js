@@ -9,10 +9,6 @@ import {
   hideLoadingOverlay,
 } from 'features/loadingOverlay/loadingOverlayActions';
 
-import { getOAuthToken, setOAuthToken, removeOAuthToken } from './authUtils';
-
-import * as types from './authActionTypes';
-
 import {
   fetchMe,
   fetchMyFavoritesIds,
@@ -21,7 +17,11 @@ import {
   repost,
   deleteRepost,
   fetchMyRepostIds,
-} from './authApi';
+} from 'common/api/meApi';
+
+import { getOAuthToken, setOAuthToken, removeOAuthToken } from './authUtils';
+
+import * as types from './authActionTypes';
 
 import { getMe } from './authSelectors';
 

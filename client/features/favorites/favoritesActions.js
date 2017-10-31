@@ -1,9 +1,11 @@
 import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
-import * as types from './favoritesActionTypes';
-import { fetchMyFavorites, fetchFavoritesByNextHref } from './favoritesApi';
-import { getFavoritesNextHref, isFavoritesFetching } from './favoritesSelectors';
+import { normalizeTracks } from 'common/utils/normalizeUtils';
+import * as types from 'features/favorites/favoritesActionTypes';
+import { makeRequest } from 'common/utils/apiUtils';
+import { fetchMyFavorites } from 'common/api/meApi';
+import { getFavoritesNextHref, isFavoritesFetching } from 'features/favorites/favoritesSelectors';
 
 export function startFetchingFavorites() {
   return {
@@ -57,6 +59,7 @@ export function loadFavorites() {
   return (dispatch) => {
     dispatch(startFetchingFavorites());
     fetchMyFavorites()
+      .then(normalizeTracks)
       .then((normalized) => {
         dispatch(receiveFavorites(normalized));
       })
@@ -74,7 +77,8 @@ export function loadMoreFavorites() {
     const fetching = isFavoritesFetching(state);
     if (!fetching && curNextHref) {
       dispatch(startFetchingFavorites());
-      fetchFavoritesByNextHref(curNextHref)
+      makeRequest(curNextHref)
+        .then(normalizeTracks)
         .then((normalized) => {
           dispatch(receiveFavorites(normalized));
         })

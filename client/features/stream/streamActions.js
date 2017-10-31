@@ -1,8 +1,10 @@
 import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
+import { fetchMyStream } from 'common/api/meApi';
+import { normalizeTracks } from 'common/utils/normalizeUtils';
+import { makeRequest } from 'common/utils/apiUtils';
 import * as types from './streamActionTypes';
-import { fetchStream, fetchMoreStream } from './streamApi';
 import { isStreamFetching, getStreamNextHref } from './streamSelectors';
 
 export function startFetchingStream() {
@@ -52,13 +54,29 @@ export function receiveStream(normalized) {
   };
 }
 
+// Repsonse
+// {
+//   collection: [{ type: 'playlist-repost', ... }, { type: 'track-repost', ... }],
+//   nextHref: ...
+// }
+
+// FIXME: Currently only show tracks until we figure out a way to display playlist.
+function transform(response) {
+  return {
+    ...response,
+    collection: response.collection.map(item => item.track),
+  };
+}
+
 export function loadStream() {
   return (dispatch, getState) => {
     const state = getState();
     const streamFetching = isStreamFetching(state);
     if (!streamFetching) {
       dispatch(startFetchingStream());
-      fetchStream()
+      fetchMyStream()
+        .then(transform)
+        .then(normalizeTracks)
         .then((normalized) => {
           dispatch(receiveStream(normalized));
         })
@@ -77,7 +95,9 @@ export function loadMoreStream() {
     const curNextHref = getStreamNextHref(state);
     if (!streamFetching && curNextHref) {
       dispatch(startFetchingStream());
-      fetchMoreStream(curNextHref)
+      makeRequest(curNextHref)
+        .then(transform)
+        .then(normalizeTracks)
         .then((normalized) => {
           dispatch(receiveStream(normalized));
         })

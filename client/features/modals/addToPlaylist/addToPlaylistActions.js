@@ -3,7 +3,7 @@ import {
   PLAYLIST_REQUEST_QUEUE_ADD,
   PLAYLIST_REQUEST_QUEUE_REMOVE,
 } from 'features/modals/addToPlaylist/addToPlaylistActionTypes';
-import { addTrackToPlaylist, removeTrackFromPlaylist } from 'common/services/scApiService';
+import { addTrackToPlaylist, removeTrackFromPlaylist } from 'common/api/playlistApi';
 import { defaultWarning, notificationSuccess } from 'features/notification/notificationActions';
 import {
   PLAYLIST_TRACK_ADD,
@@ -52,13 +52,12 @@ export function addToPlaylist(trackId, userId, playlistId) {
           },
         });
         dispatch(notificationSuccess('Track added to playlist'));
+        dispatch(endRequest(playlistId));
       })
       .catch((err) => {
         console.error(err);
-        dispatch(defaultWarning());
-      })
-      .finally(() => {
         dispatch(endRequest(playlistId));
+        dispatch(defaultWarning());
       });
   };
 }
@@ -76,13 +75,12 @@ export function removeFromPlaylist(trackId, userId, playlistId) {
           },
         });
         dispatch(notificationSuccess('Track removed from playlist'));
+        dispatch(endRequest(playlistId));
       })
       .catch((err) => {
         console.error(err);
-        dispatch(defaultWarning());
-      })
-      .finally(() => {
         dispatch(endRequest(playlistId));
+        dispatch(defaultWarning());
       });
   };
 }

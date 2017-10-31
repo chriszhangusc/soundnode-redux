@@ -5,18 +5,16 @@ import {
   hideLoadingOverlay,
 } from 'features/loadingOverlay/loadingOverlayActions';
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
-
+import { normalizeUser, normalizeTracks } from 'common/utils/normalizeUtils';
+import { fetchUserById } from 'common/api/userApi';
+import { fetchTracksByUserId } from 'common/api/trackApi';
+import { makeRequest } from 'common/utils/apiUtils';
 import * as types from './userProfileActionTypes';
 import {
   getUserTracksNextHref,
   isUserTracksFetching,
   getProfiledUserId,
 } from './userProfileSelectors';
-import {
-  fetchProfiledUser,
-  fetchProfiledUserTracks,
-  fetchMoreProfiledUserTracks,
-} from './userProfileApi';
 
 /* Action Creators */
 export function startLoadingPage() {
@@ -119,10 +117,11 @@ export function loadUserProfileData(userId) {
     dispatch(startFetchingUser());
     dispatch(startFetchingTracks());
     dispatch(showLoadingOverlay());
-    Promise.all([fetchProfiledUser(userId), fetchProfiledUserTracks(userId)])
+    // FIXME: Fetch user first, if success, fetch user tracks
+    Promise.all([fetchUserById(userId), fetchTracksByUserId(userId)])
       .then((res) => {
-        const normalizedUser = res[0];
-        const normalizedTracks = res[1];
+        const normalizedUser = normalizeUser(res[0]);
+        const normalizedTracks = normalizeTracks(res[1]);
         dispatch(receiveUser(normalizedUser));
         dispatch(receiveTracks(normalizedTracks));
         dispatch(hideLoadingOverlay());
@@ -135,6 +134,7 @@ export function loadUserProfileData(userId) {
 }
 
 export function loadMoreTracks() {
+  // FIXME: Remove async await
   return async (dispatch, getState) => {
     const state = getState();
     const fetching = isUserTracksFetching(state);
@@ -144,7 +144,8 @@ export function loadMoreTracks() {
     if (!fetching && curNextHref) {
       try {
         dispatch(startFetchingTracks());
-        const normalizedTracks = await fetchMoreProfiledUserTracks(curNextHref);
+        const tracksResponse = await makeRequest(curNextHref);
+        const normalizedTracks = normalizeTracks(tracksResponse);
         dispatch(receiveTracks(normalizedTracks));
       } catch (err) {
         console.error(err);

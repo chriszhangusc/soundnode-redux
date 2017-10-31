@@ -1,9 +1,11 @@
 import { defaultWarning } from 'features/notification/notificationActions';
 import { mergeEntities } from 'features/entities/entitiesActions';
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
-import * as types from './searchActionTypes';
-import { fetchSearchResults, fetchByNextHref } from './searchApi';
-import { isSearching, getSearchNextHref, getSearchKey } from './searchSelectors';
+import { searchTracks } from 'common/api/trackApi';
+import { normalizeTracks } from 'common/utils/normalizeUtils';
+import { makeRequest } from 'common/utils/apiUtils';
+import * as types from 'features/search/searchActionTypes';
+import { isSearching, getSearchNextHref, getSearchKey } from 'features/search/searchSelectors';
 
 export function startSearching() {
   return {
@@ -51,7 +53,7 @@ export function mergeTrackResults(trackIds) {
 }
 
 export function receiveSearchResults(normalizedResults, searchKey) {
-  return dispatch => {
+  return (dispatch) => {
     const { entities, result, nextHref } = normalizedResults;
     dispatch(mergeEntities(entities));
     dispatch(mergeTrackResults(result));
@@ -69,11 +71,12 @@ export function loadSearchResults(query) {
     dispatch(updateSearchKey(query));
     if (!searching) {
       dispatch(startSearching());
-      fetchSearchResults(query)
-        .then(normalized => {
+      searchTracks(query, 20)
+        .then(normalizeTracks)
+        .then((normalized) => {
           dispatch(receiveSearchResults(normalized, query));
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
           dispatch(defaultWarning());
         });
@@ -89,11 +92,12 @@ export function loadMoreSearchResults() {
     const searchKey = getSearchKey(state);
     if (!searching) {
       dispatch(startSearching());
-      fetchByNextHref(curNextHref)
-        .then(normalized => {
+      makeRequest(curNextHref)
+        .then(normalizeTracks)
+        .then((normalized) => {
           dispatch(receiveSearchResults(normalized, searchKey));
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
           dispatch(defaultWarning());
         });

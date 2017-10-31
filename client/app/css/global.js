@@ -11,7 +11,7 @@ injectGlobal([
 
   html {
     font-family: 'Open Sans';
-    /* Always put font-size here so that we could apply rem */
+    /* Always requestPut font-size here so that we could apply rem */
     font-size: 14px;
   }
 
