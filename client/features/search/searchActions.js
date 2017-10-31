@@ -94,7 +94,7 @@ export function loadMoreSearchResults() {
           dispatch(receiveSearchResults(normalized, searchKey));
         })
         .catch(err => {
-          console.log(err);
+          console.error(err);
           dispatch(defaultWarning());
         });
     }

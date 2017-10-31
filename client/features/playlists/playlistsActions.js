@@ -55,7 +55,7 @@ export function fetchPlaylists() {
       .catch((err) => {
         // notification warning
         dispatch(defaultWarning());
-        console.log(err);
+        console.error(err);
       });
 }
 
@@ -90,7 +90,7 @@ export function deletePlaylist(playlistId) {
       .catch((err) => {
         // notification warning
         dispatch(defaultWarning());
-        console.log(err);
+        console.error(err);
       });
   };
 }

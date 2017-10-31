@@ -128,7 +128,7 @@ export function loadUserProfileData(userId) {
         dispatch(hideLoadingOverlay());
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         dispatch(defaultWarning());
       });
   };
@@ -147,7 +147,7 @@ export function loadMoreTracks() {
         const normalizedTracks = await fetchMoreProfiledUserTracks(curNextHref);
         dispatch(receiveTracks(normalizedTracks));
       } catch (err) {
-        console.log(err);
+        console.error(err);
         // dispatch(failedToFetchUserTracks());
         dispatch(defaultWarning());
       }

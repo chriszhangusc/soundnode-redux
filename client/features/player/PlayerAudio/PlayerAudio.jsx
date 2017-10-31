@@ -36,7 +36,6 @@ class PlayerAudio extends Component {
   };
 
   togglePlayIfNeeded = (audio) => {
-    console.log(this.props.loading);
     if (this.props.loading) {
       // Set a little bit of delay to give some time for song to load.
       setTimeout(() => {
@@ -47,7 +46,7 @@ class PlayerAudio extends Component {
           })
           .catch((err) => {
             // console.log('Track not playable');
-            console.log(err);
+            console.error(err);
             this.props.handleStreamError();
           });
       }, 500);
@@ -59,7 +58,7 @@ class PlayerAudio extends Component {
       setTimeout(() => {
         audio.play().catch((err) => {
           // console.log('Track not playable');
-          console.log(err);
+          console.error(err);
           this.props.handleStreamError();
         });
       }, 500);

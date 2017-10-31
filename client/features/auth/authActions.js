@@ -1,7 +1,7 @@
 import SC from 'soundcloud';
 import {
   notificationSuccess,
-  notificationWarning,
+  // notificationWarning,
   defaultWarning,
 } from 'features/notification/notificationActions';
 import {
@@ -68,7 +68,13 @@ export function setSession(session) {
 
 export function startLogin() {
   return {
-    type: types.AUTH_USER_LOGIN_STARTED,
+    type: types.AUTH_USER_LOGIN_START,
+  };
+}
+
+export function stopLogin() {
+  return {
+    type: types.AUTH_USER_LOGIN_STOP,
   };
 }
 
@@ -81,26 +87,16 @@ export function loginFailed(error) {
 
 export function syncFavorites() {
   return dispatch =>
-    fetchMyFavoritesIds()
-      .then((favorites) => {
-        dispatch(setFavorites(favorites));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(defaultWarning());
-      });
+    fetchMyFavoritesIds().then((favorites) => {
+      dispatch(setFavorites(favorites));
+    });
 }
 
 export function syncReposts() {
   return dispatch =>
-    fetchMyRepostIds()
-      .then((reposts) => {
-        dispatch(setReposts(reposts));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(defaultWarning());
-      });
+    fetchMyRepostIds().then((reposts) => {
+      dispatch(setReposts(reposts));
+    });
 }
 
 export function addToFavorites(trackId) {
@@ -137,22 +133,16 @@ export function removeFromReposts(trackId) {
 
 export function doAuth() {
   return dispatch =>
-    SC.connect()
-      .then((session) => {
-        // Initialize Session
-        dispatch(setSession(session));
-        // Set OAuthToken
-        setOAuthToken(session.oauth_token);
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(defaultWarning());
-      });
+    SC.connect().then((session) => {
+      // Initialize Session
+      dispatch(setSession(session));
+      // Set OAuthToken
+      setOAuthToken(session.oauth_token);
+    });
 }
 
 // Load everything about me, favorites, reposts...
 export function loadMe() {
-  // return dispatch => ;
   return dispatch =>
     fetchMe()
       .then((me) => {
@@ -162,20 +152,23 @@ export function loadMe() {
       .then(() => {
         dispatch(loginSucceed());
         dispatch(hideLoadingOverlay());
-        // dispatch(notificationSuccess('Login Success'));
-      })
-      .catch((err) => {
-        console.error(err);
-        dispatch(loginFailed(err));
-        dispatch(notificationWarning('Failed to login to soundcloud'));
+        dispatch(notificationSuccess('Login Success'));
       });
 }
 
+/* Bussiness Logic */
 export function doLogin() {
   return (dispatch) => {
     dispatch(startLogin());
     dispatch(showLoadingOverlay('Authenticating...'));
-    dispatch(doAuth()).then(() => dispatch(loadMe()));
+    dispatch(doAuth())
+      .then(() => dispatch(loadMe()))
+      .catch((err) => {
+        console.error(err);
+        dispatch(stopLogin());
+        dispatch(hideLoadingOverlay());
+        dispatch(defaultWarning());
+      });
   };
 }
 
@@ -209,7 +202,7 @@ export function doLikeTrack(trackId) {
         dispatch(syncFavorites());
       })
       .catch((err) => {
-        console.log('Failed to like track: ', err);
+        console.error(err);
         dispatch(defaultWarning());
       });
   };
@@ -223,7 +216,7 @@ export function doUnlikeTrack(trackId) {
         dispatch(syncFavorites());
       })
       .catch((err) => {
-        console.log('Failed to remove this track from favorites', err);
+        console.error(err);
         dispatch(defaultWarning());
       });
   };
@@ -237,7 +230,7 @@ export function createRepost(trackId) {
         dispatch(syncReposts());
       })
       .catch((err) => {
-        console.log('Failed to create repost', err);
+        console.error(err);
         dispatch(defaultWarning());
       });
   };
@@ -251,7 +244,7 @@ export function removeRepost(trackId) {
         dispatch(syncReposts());
       })
       .catch((err) => {
-        console.log('Failed to remove repost', err);
+        console.error(err);
         dispatch(defaultWarning());
       });
   };

@@ -103,7 +103,7 @@ export function loadTrackProfileData(trackId) {
         dispatch(failedToFetchTrack());
         dispatch(failedToFetchComments());
         dispatch(defaultWarning());
-        console.log(err);
+        console.error(err);
       });
   };
 }
@@ -121,7 +121,7 @@ export function loadMoreComments() {
         })
         .catch((err) => {
           dispatch(failedToFetchComments());
-          console.log(err);
+          console.error(err);
           dispatch(defaultWarning());
         });
     }

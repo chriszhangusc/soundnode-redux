@@ -98,8 +98,9 @@ export function resetState() {
 
 export default createReducer(initialState, {
   [types.AUTH_USER_UPDATE]: updateMe,
-  [types.AUTH_USER_LOGIN_STARTED]: startLogin,
+  [types.AUTH_USER_LOGIN_START]: startLogin,
   [types.AUTH_USER_LOGIN_SUCCEEDED]: stopLogin,
+  [types.AUTH_USER_LOGIN_STOP]: stopLogin,
   [types.AUTH_FAVORITES_UPDATE]: updateFavorites,
   [types.AUTH_FAVORITES_ADD]: addToFavorites,
   [types.AUTH_FAVORITES_REMOVE]: removeFromFavorites,

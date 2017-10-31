@@ -54,7 +54,7 @@ export function addToPlaylist(trackId, userId, playlistId) {
         dispatch(notificationSuccess('Track added to playlist'));
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         dispatch(defaultWarning());
       })
       .finally(() => {
@@ -78,7 +78,7 @@ export function removeFromPlaylist(trackId, userId, playlistId) {
         dispatch(notificationSuccess('Track removed from playlist'));
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         dispatch(defaultWarning());
       })
       .finally(() => {
