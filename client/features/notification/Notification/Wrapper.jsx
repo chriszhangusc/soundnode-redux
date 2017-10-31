@@ -8,7 +8,7 @@ const colorDanger = '#bd362f';
 
 export default styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: ${(props) => {
     switch (props.type) {
