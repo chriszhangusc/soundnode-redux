@@ -32,12 +32,6 @@ export function updateProfiledTrack(trackId) {
   };
 }
 
-export function failedToFetchTrack() {
-  return {
-    type: types.TRACK_PROFILE_TRACK_FAIL,
-  };
-}
-
 export function startFetchingComments() {
   return { type: types.TRACK_PROFILE_COMMENTS_FETCH_START };
 }
@@ -61,12 +55,6 @@ export function updateCommentsNextHref(commentsNextHref) {
     payload: {
       commentsNextHref,
     },
-  };
-}
-
-export function failedToFetchComments() {
-  return {
-    type: types.TRACK_PROFILE_COMMENTS_FAIL,
   };
 }
 
@@ -94,18 +82,20 @@ export function loadTrackProfileData(trackId) {
     dispatch(startFetchingProfiledTrack());
     dispatch(startFetchingComments());
     dispatch(showLoadingOverlay());
-    Promise.all([fetchTrackById(trackId), fetchCommentsByTrackId(trackId, 20)])
-      .then((res) => {
-        const normalizedTrack = normalizeTrack(res[0]);
-        const normalizedComments = normalizeComments(res[1]);
-        dispatch(receiveTrack(normalizedTrack));
-        dispatch(receiveComments(normalizedComments));
+    fetchTrackById(trackId)
+      .then((trackResponse) => {
+        dispatch(receiveTrack(normalizeTrack(trackResponse)));
+        return fetchCommentsByTrackId(trackId, 20);
+      })
+      .then((commentsResponse) => {
+        dispatch(receiveComments(normalizeComments(commentsResponse)));
         dispatch(hideLoadingOverlay());
       })
       .catch((err) => {
-        dispatch(failedToFetchTrack());
-        dispatch(failedToFetchComments());
         dispatch(defaultWarning());
+        dispatch(stopFetchingProfiledTrack());
+        dispatch(stopFetchingComments());
+        dispatch(hideLoadingOverlay());
         console.error(err);
       });
   };
@@ -124,7 +114,7 @@ export function loadMoreComments() {
           dispatch(receiveComments(normalized));
         })
         .catch((err) => {
-          dispatch(failedToFetchComments());
+          dispatch(stopFetchingComments());
           console.error(err);
           dispatch(defaultWarning());
         });

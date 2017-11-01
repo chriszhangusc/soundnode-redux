@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import SongCardList from 'common/components/SongCardList';
 import { isSearching, getSearchTrackIds, getSearchPlaylist } from 'features/search/searchSelectors';
-import { loadMoreSearchResults } from 'features/search/searchActions';
 
 function mapStateToProps(state) {
   return {
@@ -11,4 +10,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { scrollFunc: loadMoreSearchResults })(SongCardList);
+export default connect(mapStateToProps)(SongCardList);

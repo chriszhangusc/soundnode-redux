@@ -37,6 +37,7 @@ export function updateChartsNextHref(nextHref) {
   };
 }
 
+// For now only stop the spinner.
 export function failedToFetchCharts(err) {
   return {
     type: types.CHARTS_FETCH_FAIL,
@@ -81,15 +82,14 @@ function transform(response) {
   };
 }
 
-
 /* Side Effects */
 export function loadChartsPage(genre) {
   return (dispatch, getState) => {
-    // Using getState in conditional dispatch
-    const chartsState = getState().charts;
-    if (!chartsState[genre]) {
+    const state = getState();
+    const chartsFetching = isChartsFetching(state);
+    if (!chartsFetching && !state.charts[genre]) {
       dispatch(startFetchingCharts());
-      fetchCharts(genre)
+      fetchCharts(genre, 20)
         .then(transform)
         .then(normalizeTracks)
         .then((normalized) => {

@@ -27,6 +27,7 @@ class Stream extends React.Component {
   }
 
   componentWillUnmount() {
+    console.log('Unmount');
     this.props.resetStreamState();
   }
 

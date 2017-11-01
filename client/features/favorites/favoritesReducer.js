@@ -1,4 +1,5 @@
 import { createReducer } from 'common/utils/reducerUtils';
+import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './favoritesActionTypes';
 
 const initialState = {
@@ -14,9 +15,9 @@ export function startFetchingFavorites(state) {
   };
 }
 
-export function resetFavoritesState(state) {
+export function resetFavoritesState() {
   return {
-    ...state,
+    ...initialState,
   };
 }
 
@@ -37,7 +38,7 @@ export function updateFavoritesNextHref(state, { nextHref }) {
 export function mergeFavorites(state, { favoriteIds }) {
   return {
     ...state,
-    favoriteIds: [...state.favoriteIds, ...favoriteIds],
+    favoriteIds: mergeArrays(state.favoriteIds, favoriteIds),
   };
 }
 
@@ -45,6 +46,6 @@ export default createReducer(initialState, {
   [types.FAVORITES_FETCH_START]: startFetchingFavorites,
   [types.FAVORITES_NEXT_HREF_UPDATE]: updateFavoritesNextHref,
   [types.FAVORITES_FETCH_STOP]: stopFetchingFavorites,
-  [types.FAVORITES_STATE_RESET]: resetFavoritesState,
   [types.FAVORITES_MERGE]: mergeFavorites,
+  [types.FAVORITES_STATE_RESET]: resetFavoritesState,
 });

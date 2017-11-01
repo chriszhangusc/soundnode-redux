@@ -1,4 +1,5 @@
 import { createReducer } from 'common/utils/reducerUtils';
+import { mergeArrays } from 'common/utils/generalUtils';
 import * as types from './streamActionTypes';
 
 const initialState = {
@@ -24,8 +25,7 @@ export function stopFetchingStream(state) {
 export function mergeStream(state, { streamIds }) {
   return {
     ...state,
-    // streamIds: mergeArrays(streamIds, state.streamIds),
-    streamIds: [...state.streamIds, ...streamIds],
+    streamIds: mergeArrays(state.streamIds, streamIds),
   };
 }
 
@@ -36,9 +36,9 @@ export function updateNextHref(state, { nextHref }) {
   };
 }
 
-export function resetStreamState(initState) {
+export function resetStreamState() {
   return {
-    ...initState,
+    ...initialState,
   };
 }
 

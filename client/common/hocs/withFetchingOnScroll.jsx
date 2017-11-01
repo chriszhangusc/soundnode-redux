@@ -20,8 +20,9 @@ export default function withFetchingOnScroll(WrappedComponent) {
 
     onScroll = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        const { scrollFunc } = this.props;
-        scrollFunc();
+        if (this.props.scrollFunc) {
+          this.props.scrollFunc();
+        }
       }
     };
 
@@ -33,7 +34,7 @@ export default function withFetchingOnScroll(WrappedComponent) {
   EnhancedComponent.displayName = `WithFetchingOnScroll(${getDisplayName(WrappedComponent)})`;
 
   EnhancedComponent.propTypes = {
-    scrollFunc: PropTypes.func.isRequired,
+    scrollFunc: PropTypes.func,
   };
 
   return EnhancedComponent;

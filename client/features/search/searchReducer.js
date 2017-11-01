@@ -5,7 +5,6 @@ import * as types from './searchActionTypes';
 /* Reducers */
 const initialState = {
   searchType: undefined,
-  nextHref: undefined,
   searchKey: undefined,
   searching: false,
   trackIds: [],
@@ -25,16 +24,9 @@ export function stopSearching(state) {
   };
 }
 
-export function resetSearchState(initState) {
+export function resetSearchState() {
   return {
-    ...initState,
-  };
-}
-
-export function updateNextHref(state, { nextHref }) {
-  return {
-    ...state,
-    nextHref,
+    ...initialState,
   };
 }
 
@@ -55,7 +47,6 @@ export function updateSearchKey(state, { searchKey }) {
 export default createReducer(initialState, {
   [types.SEARCH_START]: startSearching,
   [types.SEARCH_STOP]: stopSearching,
-  [types.SEARCH_NEXT_HREF_UPDATE]: updateNextHref,
   [types.SEARCH_STATE_RESET]: resetSearchState,
   [types.SEARCH_TRACK_RESULTS_MERGE]: mergeTrackResults,
   [types.SEARCH_KEY_UPDATE]: updateSearchKey,

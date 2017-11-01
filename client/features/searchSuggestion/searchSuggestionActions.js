@@ -1,6 +1,6 @@
 import * as types from 'features/searchSuggestion/searchSuggestionActionTypes';
 
-export const SEARCH_SUGGESTION_LIMIT = 4;
+export const SEARCH_SUGGESTION_LIMIT = 5;
 
 // Trigger saga
 export function startSearchSuggestion(keyword) {

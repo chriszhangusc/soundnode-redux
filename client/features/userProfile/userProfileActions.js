@@ -117,41 +117,41 @@ export function loadUserProfileData(userId) {
     dispatch(startFetchingUser());
     dispatch(startFetchingTracks());
     dispatch(showLoadingOverlay());
-    // FIXME: Fetch user first, if success, fetch user tracks
-    Promise.all([fetchUserById(userId), fetchTracksByUserId(userId)])
-      .then((res) => {
-        const normalizedUser = normalizeUser(res[0]);
-        const normalizedTracks = normalizeTracks(res[1]);
-        dispatch(receiveUser(normalizedUser));
-        dispatch(receiveTracks(normalizedTracks));
+    fetchUserById(userId)
+      .then((userResponse) => {
+        dispatch(receiveUser(normalizeUser(userResponse)));
+        return fetchTracksByUserId(userId, 20);
+      })
+      .then((tracksResponse) => {
+        dispatch(receiveTracks(normalizeTracks(tracksResponse)));
         dispatch(hideLoadingOverlay());
       })
       .catch((err) => {
         console.error(err);
         dispatch(defaultWarning());
+        dispatch(hideLoadingOverlay());
       });
   };
 }
 
 export function loadMoreTracks() {
-  // FIXME: Remove async await
-  return async (dispatch, getState) => {
+  return (dispatch, getState) => {
     const state = getState();
     const fetching = isUserTracksFetching(state);
 
     // nextHref will be undefined if there is no more data to fetch
     const curNextHref = getUserTracksNextHref(state);
     if (!fetching && curNextHref) {
-      try {
-        dispatch(startFetchingTracks());
-        const tracksResponse = await makeRequest(curNextHref);
-        const normalizedTracks = normalizeTracks(tracksResponse);
-        dispatch(receiveTracks(normalizedTracks));
-      } catch (err) {
-        console.error(err);
-        // dispatch(failedToFetchUserTracks());
-        dispatch(defaultWarning());
-      }
+      dispatch(startFetchingTracks());
+      makeRequest(curNextHref)
+        .then((tracksResponse) => {
+          dispatch(receiveTracks(normalizeTracks(tracksResponse)));
+        })
+        .catch((err) => {
+          console.error(err);
+          dispatch(defaultWarning());
+          dispatch(stopFetchingTracks());
+        });
     }
   };
 }

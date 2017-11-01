@@ -17,9 +17,9 @@ class Favorites extends React.Component {
     this.props.loadFavorites();
   }
 
-  componentWillUnmount() {
-    this.props.resetFavoritesState();
-  }
+  // componentWillUnmount() {
+  //   this.props.resetFavoritesState();
+  // }
 
   render() {
     return (

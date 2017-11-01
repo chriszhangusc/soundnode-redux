@@ -24,8 +24,8 @@ export function* doSearchSuggestion({ payload }) {
   yield put(actions.updateSearchSuggestionQuery(finalKeyword));
   try {
     const [tracksResponse, usersResponse] = yield all([
-      call(searchTracks, finalKeyword),
-      call(searchUsers, finalKeyword),
+      call(searchTracks, finalKeyword, limit),
+      call(searchUsers, finalKeyword, limit),
     ]);
 
     const normalizedTracks = normalizeTracks(tracksResponse);

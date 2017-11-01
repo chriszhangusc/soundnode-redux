@@ -56,17 +56,22 @@ export function receiveFavorites(normalized) {
 }
 
 export function loadFavorites() {
-  return (dispatch) => {
-    dispatch(startFetchingFavorites());
-    fetchMyFavorites()
-      .then(normalizeTracks)
-      .then((normalized) => {
-        dispatch(receiveFavorites(normalized));
-      })
-      .catch((err) => {
-        console.error(err);
-        dispatch(defaultWarning());
-      });
+  return (dispatch, getState) => {
+    const state = getState();
+    const fetching = isFavoritesFetching(state);
+    if (!fetching) {
+      dispatch(startFetchingFavorites());
+      fetchMyFavorites()
+        .then(normalizeTracks)
+        .then((normalized) => {
+          dispatch(receiveFavorites(normalized));
+        })
+        .catch((err) => {
+          console.error(err);
+          dispatch(defaultWarning());
+          dispatch(stopFetchingFavorites());
+        });
+    }
   };
 }
 
@@ -85,6 +90,7 @@ export function loadMoreFavorites() {
         .catch((err) => {
           console.error(err);
           dispatch(defaultWarning());
+          dispatch(stopFetchingFavorites());
         });
     }
   };

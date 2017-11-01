@@ -58,4 +58,5 @@ export default createReducer(initialState, {
   [types.CHARTS_NEXT_HREF_UPDATE]: updateNextHref,
   [types.CHARTS_STATE_RESET]: resetChartsState,
   [types.CHARTS_MERGE]: mergeCharts,
+  [types.CHARTS_FETCH_FAIL]: stopFetchingCharts,
 });

@@ -1,6 +1,6 @@
 import SC from 'soundcloud';
 import { camelizeKeys } from 'humps';
-import { SC_API_V1, SC_API_V2 } from 'common/constants/apiConsts';
+import { SC_API_V2 } from 'common/constants/apiConsts';
 import { makeRequest } from 'common/utils/apiUtils';
 
 export function fetchCharts(genre, limit = 25) {
@@ -8,7 +8,7 @@ export function fetchCharts(genre, limit = 25) {
   return makeRequest(requestUrl);
 }
 
-export function searchTracks(query, limit) {
+export function searchTracks(query, limit = 20) {
   return SC.get('/tracks', {
     q: query,
     limit,

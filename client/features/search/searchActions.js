@@ -3,9 +3,8 @@ import { mergeEntities } from 'features/entities/entitiesActions';
 import { appendToPlayQueueIfNeeded } from 'features/playQueue/playQueueActions';
 import { searchTracks } from 'common/api/trackApi';
 import { normalizeTracks } from 'common/utils/normalizeUtils';
-import { makeRequest } from 'common/utils/apiUtils';
 import * as types from 'features/search/searchActionTypes';
-import { isSearching, getSearchNextHref, getSearchKey } from 'features/search/searchSelectors';
+import { isSearching } from 'features/search/searchSelectors';
 
 export function startSearching() {
   return {
@@ -52,14 +51,14 @@ export function mergeTrackResults(trackIds) {
   };
 }
 
-export function receiveSearchResults(normalizedResults, searchKey) {
+export function receiveSearchResults(normalizedResults, query) {
   return (dispatch) => {
-    const { entities, result, nextHref } = normalizedResults;
+    const { entities, result } = normalizedResults;
+    console.log(normalizedResults);
     dispatch(mergeEntities(entities));
     dispatch(mergeTrackResults(result));
     // Dynamically update the play queue if needed
-    dispatch(appendToPlayQueueIfNeeded(result, `search-${searchKey}`));
-    dispatch(updateSearchNextHref(nextHref));
+    dispatch(appendToPlayQueueIfNeeded(result, `search-${query}`));
     dispatch(stopSearching());
   };
 }
@@ -75,27 +74,6 @@ export function loadSearchResults(query) {
         .then(normalizeTracks)
         .then((normalized) => {
           dispatch(receiveSearchResults(normalized, query));
-        })
-        .catch((err) => {
-          console.error(err);
-          dispatch(defaultWarning());
-        });
-    }
-  };
-}
-
-export function loadMoreSearchResults() {
-  return (dispatch, getState) => {
-    const state = getState();
-    const searching = isSearching(state);
-    const curNextHref = getSearchNextHref(state);
-    const searchKey = getSearchKey(state);
-    if (!searching) {
-      dispatch(startSearching());
-      makeRequest(curNextHref)
-        .then(normalizeTracks)
-        .then((normalized) => {
-          dispatch(receiveSearchResults(normalized, searchKey));
         })
         .catch((err) => {
           console.error(err);
