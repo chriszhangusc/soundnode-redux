@@ -108,7 +108,7 @@ module.exports = {
   plugins: [
     // From doc: enable HMR globally
     // new webpack.HotModuleReplacementPlugin(),
-
+    new webpack.optimize.ModuleConcatenationPlugin(),
     // From doc: prints more readable module names in the browser console on HMR updates
     new webpack.NamedModulesPlugin(),
 

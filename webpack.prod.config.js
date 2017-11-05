@@ -1,8 +1,9 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HTMLWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const WebpackStrip = require('strip-loader');
 
 const PORT = process.env.PORT || 3000;
 
@@ -33,6 +34,10 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.js$/,
+        use: WebpackStrip.loader('debug', 'console.log')
+      },
+      {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -48,6 +53,7 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
     // // separate css code from bundle.js into style.css so that the browser
     // // can load javascript and css asynchrously
     // // Note in order to let the browser cache the content

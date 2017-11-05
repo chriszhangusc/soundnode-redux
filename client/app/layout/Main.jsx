@@ -26,11 +26,12 @@ function Main() {
       <LoadingOverlay />
       <Navbar />
       <Sidebar />
+      <Player />
+      <PlayQueue />
       <PageContentWrapper>
         <Routing />
-        <Player />
-        <PlayQueue />
       </PageContentWrapper>
+
       <NetworkDetector />
       <NotificationCenter />
       <RootModal />
