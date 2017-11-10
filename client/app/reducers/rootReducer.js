@@ -15,7 +15,6 @@ import playlistsReducer from 'features/playlists/playlistsReducer';
 import sidebarReducer from 'features/sidebar/sidebarReducer';
 import loadingOverlayReducer from 'features/loadingOverlay/loadingOverlayReducer';
 import modalsReducer from 'features/modals/modalsReducer';
-import overlayReducer from 'features/overlay/overlayReducer';
 
 const rootReducer = combineReducers({
   entities: entitiesReducer,
@@ -36,7 +35,6 @@ const rootReducer = combineReducers({
   sidebar: sidebarReducer,
   loadingOverlay: loadingOverlayReducer,
   modals: modalsReducer,
-  overlay: overlayReducer,
 });
 
 export default rootReducer;

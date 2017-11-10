@@ -19,7 +19,6 @@ function SongCardList({ playlist }) {
 }
 
 SongCardList.propTypes = {
-  trackIds: PropTypes.arrayOf(PropTypes.number),
   playlist: PropTypes.shape({
     name: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

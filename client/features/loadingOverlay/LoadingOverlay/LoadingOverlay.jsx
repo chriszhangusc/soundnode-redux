@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import GlobalOverlay from 'common/components/GlobalOverlay';
 import { isLoaderActive, getLoaderText } from 'features/loadingOverlay/loadingOverlaySelectors';
 import Spinner from 'common/components/spinners/CircleRotate';
-import FadeTransition from 'common/components/transitions/FadeTransition';
-import { TransitionGroup } from 'react-transition-group';
+import withFadeTransition from 'common/hocs/withFadeTransition';
+import { compose } from 'recompose';
 
 const ContentWrapper = styled.div`
   position: fixed;
@@ -16,21 +17,19 @@ const ContentWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Text = styled.div`color: ${props => props.theme.colors.fontColor};`;
+const Text = styled.div`
+  color: ${props => props.theme.colors.fontColor};
+  font-size: 1.1rem;
+`;
 
-// FIXME: Decouple global overlay from globalSpinner
-function LoadingOverlay({ active, text = 'Authenticating' }) {
+function LoadingOverlay({ text }) {
   return (
-    <TransitionGroup>
-      {active && (
-        <FadeTransition>
-          <ContentWrapper>
-            <Spinner />
-            <Text>{text}</Text>
-          </ContentWrapper>
-        </FadeTransition>
-      )}
-    </TransitionGroup>
+    <GlobalOverlay>
+      <ContentWrapper>
+        <Spinner />
+        <Text>{text}</Text>
+      </ContentWrapper>
+    </GlobalOverlay>
   );
 }
 
@@ -39,7 +38,6 @@ LoadingOverlay.defaultProps = {
 };
 
 LoadingOverlay.propTypes = {
-  active: PropTypes.bool.isRequired,
   text: PropTypes.string,
 };
 
@@ -50,4 +48,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(LoadingOverlay);
+export default compose(connect(mapStateToProps), withFadeTransition)(LoadingOverlay);
