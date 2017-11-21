@@ -1,5 +1,5 @@
 import SC from 'soundcloud';
-import { SC_API_V1, SC_API_V2 } from 'common/constants/apiConsts';
+import { SC_API_V1 } from 'common/constants/apiConsts';
 import { makeRequest, requestPut, requestDelete } from 'common/utils/apiUtils';
 
 export function removePlaylist(playlistId) {
