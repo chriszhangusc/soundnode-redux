@@ -11,11 +11,14 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "eslint": "3.x",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.11.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3"
+    "eslint-plugin-react": "^6.10.3",
+    "npm-run-all": "^4.1.2",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {
     "autoprefixer": "^6.7.7",
@@ -72,9 +75,11 @@
   },
   "scripts": {
     "start": "NODE_ENV=production node server/server.prod.js",
-    "build": "rm -rf ./dist/* && NODE_ENV=production webpack -p --progress --config webpack.prod.config.js",
-    "proxy": "NODE_ENV=development nodemon server/proxy.js",
-    "dev": "NODE_ENV=development webpack-dev-server --hot --progress --colors --config webpack.dev.config.js",
+    "clean": "rimraf ./dist/*",
+    "build": "npm run clean && NODE_ENV=production webpack -p --progress --config webpack.prod.config.js",
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:dev-server": "NODE_ENV=development webpack-dev-server --hot --progress --colors --config webpack.dev.config.js",
+    "dev:proxy": "NODE_ENV=development nodemon server/proxy.js",
     "heroku-postbuild": "npm run build"
   }
 }
