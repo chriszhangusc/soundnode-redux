@@ -1,7 +1,5 @@
 .DS_Store
 node_modules
 playground
-dist
-build
 *.log
 .vscode

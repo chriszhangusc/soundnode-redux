@@ -7,9 +7,37 @@ const WebpackStrip = require('strip-loader');
 
 const PORT = process.env.PORT || 3000;
 
+const VENDOR_LIBS = [
+  'copy-to-clipboard',
+  'humps',
+  'isomorphic-fetch',
+  'lodash',
+  'moment',
+  'normalizr',
+  'pluralize',
+  'react-onclickoutside',
+  'react-transition-group',
+  'react',
+  'prop-types',
+  'react-dom',
+  'react-bootstrap',
+  'react-redux',
+  'react-router',
+  'react-router-dom',
+  'redux-thunk',
+  'recompose',
+  'redux',
+  'redux-saga',
+  'reselect',
+  'shortid',
+  'soundcloud',
+  'styled-components',
+];
+
 module.exports = {
   entry: {
     main: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')],
+    vendors: VENDOR_LIBS,
   },
 
   output: {
@@ -35,7 +63,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: WebpackStrip.loader('debug', 'console.log')
+        use: WebpackStrip.loader('debug', 'console.log'),
       },
       {
         test: /\.css$/,
@@ -47,7 +75,7 @@ module.exports = {
 
       {
         test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
-        use: ['url-loader?limit=10000&name=images/[hash:12].[ext]'],
+        use: ['url-loader?limit=40000&name=images/[hash:12].[ext]', 'image-webpack-loader'],
       },
     ],
   },
@@ -81,7 +109,7 @@ module.exports = {
 
     // From doc: implicit vendor code splitting
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
+      names: ['vendor', 'manifest'],
       minChunks(module) {
         // this assumes your vendor imports exist in the node_modules directory
         return module.context && module.context.indexOf('node_modules') !== -1;

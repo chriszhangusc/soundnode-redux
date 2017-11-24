@@ -22,7 +22,7 @@ function logger(req, res, next) {
 app.use(logger);
 
 // Always serve the index.html page and let the client side do the heavy-lifting
-app.use((req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(distPath, 'index.html'));
 });
 
