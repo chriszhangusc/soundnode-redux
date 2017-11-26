@@ -40,29 +40,31 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[chunkhash].bundle.js',
-    publicPath: '/dist/',
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].[hash].bundle.js',
+    publicPath: '/',
   },
 
-  // devServer: {
-  //   // enable HMR on the server
-  //   // hot: true,
-  //   // Serve the static files under public folder
-  //   contentBase: path.resolve(__dirname, 'public'),
+  devServer: {
+    // enable HMR on the server
+    // hot: true,
 
-  //   // match the output publicPath
-  //   // will create folder in memory
-  //   // on server there will be a server-root/dist folder
-  //   publicPath: '/dist/',
-  //   port: PORT,
-  //   compress: true,
+    // Serve the files generated in dist folder(in memory)
+    contentBase: path.join(__dirname, 'dist'),
 
-  //   // Opens new browser window when we run devserer for the first time
-  //   open: true,
-  //   host: 'localhost',
-  //   historyApiFallback: true,
-  // },
+    // 1.Match the output publicPath
+    // will create folder in memory
+    // on server there will be a server-root/dist folder
+    // 2. Do not remove publicPath
+    publicPath: '/',
+    port: PORT,
+    compress: true,
+
+    // Opens new browser window when we run devserer for the first time
+    open: true,
+    host: 'localhost',
+    historyApiFallback: true,
+  },
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
   // In every other case use resolve.root.
   resolve: {
@@ -99,8 +101,13 @@ module.exports = {
     // From doc: enable HMR globally
     // new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
+
     // From doc: prints more readable module names in the browser console on HMR updates
     new webpack.NamedModulesPlugin(),
+
+    new HTMLWebpackPlugin({
+      template: path.join(__dirname, 'public', 'index.html'),
+    }),
 
     new webpack.optimize.CommonsChunkPlugin({
       name: ['vendor', 'manifest'],

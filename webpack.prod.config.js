@@ -43,6 +43,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[chunkhash].min.js',
+    // Matching app.use('/dist', express.static(distPath)); in server.prod.js
     publicPath: '/',
   },
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
@@ -89,10 +90,7 @@ module.exports = {
       filename: 'style-[contenthash:10].css',
     }),
 
-    new HTMLWebpackPlugin({
-      template: path.join(__dirname, 'public', 'index-template.html'),
-      filename: 'index.html',
-    }),
+    new HTMLWebpackPlugin({ template: path.join(__dirname, 'public', 'index.html') }),
 
     // DefinePlugin makes it possible for us to use env variables in src code
     // Running webpack -p will include this plugin
@@ -103,9 +101,9 @@ module.exports = {
     }),
 
     // ProvidePlugin: automatically load modules.
-    new webpack.ProvidePlugin({
-      React: 'react',
-    }),
+    // new webpack.ProvidePlugin({
+    //   React: 'react',
+    // }),
 
     // From doc: implicit vendor code splitting
     new webpack.optimize.CommonsChunkPlugin({

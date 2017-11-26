@@ -13,14 +13,6 @@ const distPath = path.join(__dirname, '..', 'dist');
 // Here we have to match publicPath in webpack production config file.
 app.use(express.static(distPath));
 
-// Simple logger
-function logger(req, res, next) {
-  console.log(new Date(), req.method, req.url);
-  next();
-}
-
-app.use(logger);
-
 // Always serve the index.html page and let the client side do the heavy-lifting
 app.get('*', (req, res) => {
   res.sendFile(path.join(distPath, 'index.html'));
