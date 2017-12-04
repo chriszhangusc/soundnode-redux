@@ -15,16 +15,19 @@ function configureStore() {
       applyMiddleware(
         thunk,
         sagaMiddleware,
-        // logger,
       ),
-      // autoRehydrate(),
       window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   );
-  // persistStore(store, {
-  //   whitelist: [],
-  //   debounce: 2000,
-  // });
+
+  if (process.env.NODE_ENV !== 'production') {
+    if (module.hot) {
+      module.hot.accept('../reducers/rootReducer', () => {
+        store.replaceReducer(rootReducer);
+      });
+    }
+  }
+
   sagaMiddleware.run(rootSaga);
 
   return store;

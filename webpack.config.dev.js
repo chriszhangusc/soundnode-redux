@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 const PORT = process.env.PORT || 3000;
@@ -35,7 +35,7 @@ const VENDOR_LIBS = [
 
 module.exports = {
   entry: {
-    main: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')],
+    main: ['babel-polyfill', 'react-hot-loader/patch', path.join(__dirname, 'client', 'index.jsx')],
     vendor: VENDOR_LIBS,
   },
 
