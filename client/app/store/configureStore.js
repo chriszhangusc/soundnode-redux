@@ -12,20 +12,17 @@ function configureStore() {
   const store = createStore(
     rootReducer,
     compose(
-      applyMiddleware(
-        thunk,
-        sagaMiddleware,
-      ),
+      applyMiddleware(thunk, sagaMiddleware),
       window.devToolsExtension ? window.devToolsExtension() : f => f,
     ),
   );
 
-  if (process.env.NODE_ENV !== 'production') {
-    if (module.hot) {
-      module.hot.accept('../reducers/rootReducer', () => {
-        store.replaceReducer(rootReducer);
-      });
-    }
+  if (process.env.NODE_ENV !== 'production' && module.hot) {
+    module.hot.accept('../reducers/rootReducer', () => {
+      // eslint-disable-next-line
+      const nextReducer = require('../reducers/rootReducer').default;
+      store.replaceReducer(nextReducer);
+    });
   }
 
   sagaMiddleware.run(rootSaga);
