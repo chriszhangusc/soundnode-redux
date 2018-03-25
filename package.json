@@ -51,7 +51,7 @@
     "lodash": "^4.16.1",
     "moment": "^2.18.1",
     "normalize.css": "^6.0.0",
-    "normalizr": "^2.2.1",
+    "normalizr": "3.2.4",
     "pluralize": "^7.0.0",
     "prop-types": "^15.5.4",
     "react": "^16.0.0",

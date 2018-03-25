@@ -4662,11 +4662,9 @@ normalize.css@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-6.0.0.tgz#22188c2707c911fb3ad3c1aac0677ff68661bea8"
 
-normalizr@^2.2.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/normalizr/-/normalizr-2.3.1.tgz#ac12d771ce1fe6a43094c3d828caada4ed9a4540"
-  dependencies:
-    lodash "^4.17.2"
+normalizr@3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/normalizr/-/normalizr-3.2.4.tgz#16aafc540ca99dc1060ceaa1933556322eac4429"
 
 npm-run-all@^4.1.2:
   version "4.1.2"
