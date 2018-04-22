@@ -3,16 +3,16 @@
 This is a web-based single page application built with react redux styled-components and more, it is powered by the amazing [soundcloud api](https://developers.soundcloud.com/docs/api/guide). Inspired by one of my favorite music client on macOS: [SoundNode](http://www.soundnodeapp.com/).
 
 ## Overview
-[![soundnode-redux.png](https://s1.postimg.org/3vug7t265b/preview.png)](https://redux-music.herokuapp.com)
+[![soundnode-redux.png](https://s1.postimg.cc/3vug7t265b/preview.png)](https://redux-music.herokuapp.com)
 
 ### Player
-[![preview1.png](https://s19.postimg.org/qmte7kodf/preview1.png)](https://postimg.org/image/v8pifx9wf/)
+[![preview1.png](https://s19.postimg.cc/qmte7kodf/preview1.png)](https://postimg.cc/image/v8pifx9wf/)
 
 ### Playlists
-[![playlists_preview.png](https://s19.postimg.org/9nkfslnj7/playlists_preview.png)](https://postimg.org/image/fbqqjhrvj/)
+[![playlists_preview.png](https://s19.postimg.cc/9nkfslnj7/playlists_preview.png)](https://postimg.cc/image/fbqqjhrvj/)
 
 ### Search Suggestions
-[![search_suggestions.png](https://s19.postimg.org/6ur88e7pf/search_suggestions.png)](https://postimg.org/image/qclvoc4n3/)
+[![search_suggestions.png](https://s19.postimg.cc/6ur88e7pf/search_suggestions.png)](https://postimg.cc/image/qclvoc4n3/)
 
 ## Getting Started
 
