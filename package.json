@@ -42,9 +42,12 @@
     "webpack-dev-server": "2.5.0"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "copy-to-clipboard": "3.0.5",
     "express": "4.15.3",
+    "express-graphql": "^0.6.12",
     "font-awesome": "4.7.0",
+    "graphql": "^0.13.2",
     "grid-styled": "2.0.0-10",
     "humps": "1.1.0",
     "isomorphic-fetch": "2.2.1",
@@ -78,6 +81,7 @@
     "build": "npm run clean && NODE_ENV=production webpack -p --progress --config webpack.config.prod.js",
     "dev": "npm-run-all --parallel dev:*",
     "dev:server": "NODE_ENV=development webpack-dev-server --hot --progress --config webpack.config.dev.js",
-    "dev:proxy": "NODE_ENV=development nodemon server/proxy.js"
+    "dev:proxy": "NODE_ENV=development nodemon server/proxy.js",
+    "graphql": "nodemon ./server/graphql/server"
   }
 }
