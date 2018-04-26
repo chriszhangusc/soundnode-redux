@@ -16,7 +16,9 @@ class TrackProfileImage extends React.Component {
   };
 
   render() {
-    const { artworkUrl, playing, active, liked, playbackCount, likesCount } = this.props;
+    const {
+      artworkUrl, playing, active, liked, playbackCount, likesCount,
+    } = this.props;
 
     return (
       <TrackImage src={artworkUrl} size="large">
