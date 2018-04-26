@@ -12,9 +12,6 @@ const TrackType = new GraphQLObjectType({
     created_at: {
       type: GraphQLString,
     },
-    title: {
-      type: GraphQLString,
-    },
     user_id: {
       type: GraphQLInt,
     },
@@ -27,6 +24,30 @@ const TrackType = new GraphQLObjectType({
           .get(`${BASE_V1}/users/${parentValue.user_id}?client_id=${CLIENT_ID}`)
           .then(res => res.data);
       },
+    },
+    title: {
+      type: GraphQLString,
+    },
+    permalink_url: {
+      type: GraphQLString,
+    },
+    purchase_url: {
+      type: GraphQLString,
+    },
+    artwork_url: {
+      type: GraphQLString,
+    },
+    description: {
+      type: GraphQLString,
+    },
+    duration: {
+      type: GraphQLInt,
+    },
+    genre: {
+      type: GraphQLString,
+    },
+    stream_url: {
+      type: GraphQLString,
     },
   }),
 });
