@@ -1,25 +1,23 @@
 // TODO: Group with normalizr?
 
-import { Schema, arrayOf } from 'normalizr';
+import { schema } from 'normalizr';
 
-export const userSchema = new Schema('users');
-export const commentSchema = new Schema('comments');
-export const trackSchema = new Schema('tracks');
-export const playlistSchema = new Schema('playlists');
+export const userSchema = new schema.Entity('users');
 
-export const trackArraySchema = arrayOf(trackSchema);
-export const userArraySchema = arrayOf(userSchema);
-export const commentArraySchema = arrayOf(commentSchema);
-export const playlistArraySchema = arrayOf(playlistSchema);
-
-trackSchema.define({
+export const commentSchema = new schema.Entity('comments', {
   user: userSchema,
 });
 
-// Same reason as above
-commentSchema.define({
+export const trackSchema = new schema.Entity('tracks', {
   user: userSchema,
 });
+
+export const playlistSchema = new schema.Entity('playlists');
+
+export const trackArraySchema = new schema.Array(trackSchema);
+export const userArraySchema = new schema.Array(userSchema);
+export const commentArraySchema = new schema.Array(commentSchema);
+export const playlistArraySchema = new schema.Array(playlistSchema);
 
 playlistSchema.define({
   user: userSchema,
