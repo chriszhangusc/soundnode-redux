@@ -1,5 +1,8 @@
 const axios = require('axios');
-const { GraphQLObjectType, GraphQLString, GraphQLInt } = require('graphql');
+const {
+  GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList,
+} = require('graphql');
+const CommentType = require('./comment');
 const UserType = require('./user');
 const { BASE_V1, CLIENT_ID } = require('../consts');
 
@@ -48,6 +51,15 @@ const TrackType = new GraphQLObjectType({
     },
     stream_url: {
       type: GraphQLString,
+    },
+    comments: {
+      type: new GraphQLList(CommentType),
+
+      resolve(parentValue) {
+        return axios
+          .get(`${BASE_V1}/tracks/${parentValue.id}/comments?client_id=${CLIENT_ID}`)
+          .then(resp => resp.data);
+      },
     },
   }),
 });
