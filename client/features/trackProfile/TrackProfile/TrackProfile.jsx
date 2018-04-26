@@ -5,8 +5,26 @@ import { compose } from 'recompose';
 import * as trackProfileActions from 'features/trackProfile/trackProfileActions';
 import { isPageLoading } from 'features/trackProfile/trackProfileSelectors';
 import withScrollToTopOnEnter from 'common/hocs/withScrollToTopOnEnter';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 import TrackProfileComments from '../TrackProfileComments';
 import TrackProfileHeader from '../TrackProfileHeader';
+
+const QUERY = gql`
+  query {
+    track(id: 338900157) {
+      id
+      title
+      created_at
+      user_id
+      user {
+        id
+        username
+        avatar_url
+      }
+    }
+  }
+`;
 
 class TrackProfile extends React.Component {
   static propTypes = {
@@ -52,10 +70,21 @@ class TrackProfile extends React.Component {
       return null;
     }
     return (
-      <div>
-        <TrackProfileHeader />
-        <TrackProfileComments />
-      </div>
+      <Query query={QUERY}>
+        {(data, loading) => {
+          if (loading) {
+            return null;
+          }
+          console.log(data.track);
+
+          return (
+            <div>
+              <TrackProfileHeader />
+              <TrackProfileComments />
+            </div>
+          );
+        }}
+      </Query>
     );
   }
 }
