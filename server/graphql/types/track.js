@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const axios = require('axios');
 const {
   GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList,
@@ -22,7 +23,6 @@ const TrackType = new GraphQLObjectType({
       type: UserType,
 
       resolve(parentValue) {
-        console.log(parentValue.user_id);
         return axios
           .get(`${BASE_V1}/users/${parentValue.user_id}?client_id=${CLIENT_ID}`)
           .then(res => res.data);
@@ -52,13 +52,20 @@ const TrackType = new GraphQLObjectType({
     stream_url: {
       type: GraphQLString,
     },
+    comment_count: {
+      type: GraphQLInt,
+    },
     comments: {
       type: new GraphQLList(CommentType),
 
       resolve(parentValue) {
         return axios
-          .get(`${BASE_V1}/tracks/${parentValue.id}/comments?client_id=${CLIENT_ID}`)
-          .then(resp => resp.data);
+          .get(
+            `${BASE_V1}/tracks/${
+              parentValue.id
+            }/comments?limit=20&linked_partitioning=1&offset=0&client_id=${CLIENT_ID}`,
+          )
+          .then(resp => _.get(resp, 'data.collection', []));
       },
     },
   }),

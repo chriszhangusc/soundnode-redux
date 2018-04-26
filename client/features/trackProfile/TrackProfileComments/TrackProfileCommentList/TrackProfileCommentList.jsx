@@ -10,15 +10,14 @@ import { loadMoreComments } from 'features/trackProfile/trackProfileActions';
 
 import TrackProfileComment from '../TrackProfileComment';
 
-const CommentList = styled.ul`
-`;
+const CommentList = styled.ul``;
 
-function TrackProfileCommentList({ commentIds }) {
+function TrackProfileCommentList({ comments }) {
   return (
     <CommentList>
-      {commentIds.map(commentId => (
-        <li key={commentId.toString()}>
-          <TrackProfileComment commentId={commentId} />
+      {comments.map(comment => (
+        <li key={comment.id}>
+          <TrackProfileComment comment={comment} />
         </li>
       ))}
     </CommentList>

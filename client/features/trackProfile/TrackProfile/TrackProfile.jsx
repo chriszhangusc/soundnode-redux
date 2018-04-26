@@ -6,8 +6,10 @@ import * as trackProfileActions from 'features/trackProfile/trackProfileActions'
 import withScrollToTopOnEnter from 'common/hocs/withScrollToTopOnEnter';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import RowLayout from 'common/components/layouts/RowLayout';
 import TrackProfileComments from '../TrackProfileComments';
-import TrackProfileHeader from '../TrackProfileHeader';
+import TrackProfileDetails from '../TrackProfileDetails';
+import TrackProfileImage from '../TrackProfileImage';
 
 const GET_TRACK_DETAILS = gql`
   query getTrackDetails($trackId: Int!) {
@@ -21,9 +23,27 @@ const GET_TRACK_DETAILS = gql`
         username
         avatar_url
       }
+      comments {
+        id
+        user_id
+        body
+        created_at
+        user {
+          username
+          avatar_url
+        }
+      }
     }
   }
 `;
+
+// const GET_TRACK_COMMENTS = gql`
+//   query getTrackComments($trackId: Int!, $limit: Int!, $offset: Int!) {
+//     track(id: $trackId) {
+//       comments()
+//     }
+//   }
+// `;
 
 class TrackProfile extends Component {
   static propTypes = {
@@ -73,11 +93,18 @@ class TrackProfile extends Component {
           }
 
           console.log(data);
+          console.log(data.track.comments);
 
           return (
             <Fragment>
-              <TrackProfileHeader />
-              <TrackProfileComments />
+              <RowLayout>
+                <TrackProfileImage />
+                <TrackProfileDetails />
+              </RowLayout>
+              <TrackProfileComments
+                commentCount={data.track.comment_count}
+                comments={data.track.comments}
+              />
             </Fragment>
           );
         }}
