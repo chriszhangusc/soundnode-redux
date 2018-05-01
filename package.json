@@ -85,7 +85,7 @@
     "clean": "rimraf ./dist/*",
     "build": "npm run clean && NODE_ENV=production webpack -p --progress --config webpack.config.prod.js",
     "dev": "npm-run-all --parallel dev:*",
-    "dev:server": "NODE_ENV=development webpack-dev-server --hot --progress --config webpack.config.dev.js",
+    "dev:server": "NODE_ENV=development webpack-dev-server --progress --config webpack.config.dev.js",
     "dev:proxy": "NODE_ENV=development nodemon server/proxy.js",
     "graphql": "nodemon ./server/graphql/server"
   }

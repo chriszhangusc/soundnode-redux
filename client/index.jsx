@@ -10,7 +10,6 @@ import { ThemeProvider } from 'styled-components';
 import theme from 'app/css/theme';
 import 'font-awesome/css/font-awesome.min.css';
 import ApolloClient from 'apollo-boost';
-import gql from 'graphql-tag';
 import { ApolloProvider } from 'react-apollo';
 
 const client = new ApolloClient({ uri: 'http://localhost:4444/graphql' });

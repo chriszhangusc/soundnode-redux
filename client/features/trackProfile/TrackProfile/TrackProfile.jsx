@@ -37,14 +37,6 @@ const GET_TRACK_DETAILS = gql`
   }
 `;
 
-// const GET_TRACK_COMMENTS = gql`
-//   query getTrackComments($trackId: Int!, $limit: Int!, $offset: Int!) {
-//     track(id: $trackId) {
-//       comments()
-//     }
-//   }
-// `;
-
 class TrackProfile extends Component {
   static propTypes = {
     match: PropTypes.shape({
@@ -92,9 +84,6 @@ class TrackProfile extends Component {
             return null;
           }
 
-          console.log(data);
-          console.log(data.track.comments);
-
           return (
             <Fragment>
               <RowLayout>
@@ -104,6 +93,7 @@ class TrackProfile extends Component {
               <TrackProfileComments
                 commentCount={data.track.comment_count}
                 comments={data.track.comments}
+                trackId={trackId}
               />
             </Fragment>
           );

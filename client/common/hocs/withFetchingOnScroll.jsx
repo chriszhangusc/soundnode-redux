@@ -34,7 +34,7 @@ export default function withFetchingOnScroll(WrappedComponent) {
   EnhancedComponent.displayName = `WithFetchingOnScroll(${getDisplayName(WrappedComponent)})`;
 
   EnhancedComponent.propTypes = {
-    scrollFunc: PropTypes.func,
+    scrollFunc: PropTypes.func.isRequired,
   };
 
   return EnhancedComponent;

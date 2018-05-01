@@ -5,11 +5,11 @@ import { getProfiledTrackCommentCount } from 'features/trackProfile/trackProfile
 import Heading from 'common/components/Heading';
 import TrackProfileCommentList from './TrackProfileCommentList';
 
-function TrackProfileComments({ commentCount, comments }) {
+function TrackProfileComments({ trackId, commentCount, comments }) {
   return (
     <Fragment>
       <Heading>{`Comments: (${commentCount})`}</Heading>
-      <TrackProfileCommentList comments={comments} />
+      <TrackProfileCommentList comments={comments} trackId={trackId} />
     </Fragment>
   );
 }
