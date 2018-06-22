@@ -20,10 +20,9 @@ Here is a production demo running on [heroku](https://redux-music.herokuapp.com)
 
 To run it in dev mode locally:
 1. git clone https://github.com/MiniPekka/redux-music.git
-2. cd redux-music and run command "yarn install"
-3. Start the proxy server by running command "yarn run proxy"
-4. Start the app by running command "yarn run dev"
-5. In the browser(Only tested in Chrome) go to: http://localhost:3000/
+2. cd redux-music and run command "yarn/npm install"
+3. Start the app by running command "yarn/npm run dev"
+4. In the browser(Only tested in Chrome) go to: http://localhost:3000/
 
 ## Features
 - Top 50 for a wide range of genres
