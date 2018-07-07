@@ -8,18 +8,14 @@ import TrackUsername from './TrackUsername';
 import TrackDescription from './TrackDescription';
 import TrackActions from './TrackActions';
 
-function TrackProfileDetails({ title, username, description, userRoute }) {
+function TrackProfileDetails({
+  title, username, description, userRoute,
+}) {
   return (
     <ColumnLayout width="800px">
-      <Heading>
-        {title}
-      </Heading>
-      <TrackUsername to={userRoute}>
-        {username}
-      </TrackUsername>
-      <TrackDescription>
-        {description}
-      </TrackDescription>
+      <Heading>{title}</Heading>
+      <TrackUsername to={userRoute}>{username}</TrackUsername>
+      <TrackDescription>{description}</TrackDescription>
       <TrackActions />
     </ColumnLayout>
   );
@@ -38,7 +34,6 @@ TrackProfileDetails.propTypes = {
   username: PropTypes.string,
   description: PropTypes.string,
 };
-
 
 function mapStateToProps(state) {
   return {

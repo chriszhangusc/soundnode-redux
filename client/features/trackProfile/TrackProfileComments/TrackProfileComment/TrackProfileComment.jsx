@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { USER_PROFILE_ROUTE } from 'common/constants/routeConsts';
-import { connect } from 'react-redux';
-import { getCommentById, getUserByCommentId } from 'features/entities/entitiesSelectors';
 import { getSmallVersion } from 'common/utils/imageUtils';
 import CommentUserAvatar from './CommentUserAvatar';
 import CommentUsername from './CommentUsername';
@@ -12,43 +10,41 @@ import CommentHeaderWrapper from './CommentHeaderWrapper';
 import CommentTimestamp from './CommentTimestamp';
 import CommentBody from './CommentBody';
 
-function TrackProfileComment({ commentBody, userId, username, commentTimestamp, userAvatarUrl }) {
-  const userLink = `${USER_PROFILE_ROUTE}/${userId}`;
+function TrackProfileComment({ comment }) {
+  const { body, user, created_at } = comment;
+
+  const { id, avatar_url, username } = user;
+
+  const userLink = `${USER_PROFILE_ROUTE}/${id}`;
 
   return (
     <Wrapper>
-      <CommentUserAvatar linkTo={userLink} userAvatarUrl={userAvatarUrl} />
+      <CommentUserAvatar linkTo={userLink} userAvatarUrl={getSmallVersion(avatar_url)} />
       <CommentDetailWrapper>
         <CommentHeaderWrapper>
-          <CommentUsername to={userLink}>
-            {username}
-          </CommentUsername>
-          <CommentTimestamp>
-            {commentTimestamp}
-          </CommentTimestamp>
+          <CommentUsername to={userLink}>{username}</CommentUsername>
+          <CommentTimestamp>{created_at.replace('+0000', '')}</CommentTimestamp>
         </CommentHeaderWrapper>
-        <CommentBody>
-          {commentBody}
-        </CommentBody>
+        <CommentBody>{body}</CommentBody>
       </CommentDetailWrapper>
     </Wrapper>
   );
 }
 
-function mapStateToProps(state, { commentId }) {
-  const comment = getCommentById(state, commentId);
-  const { body, createdAt } = comment;
-  const commentUser = getUserByCommentId(state, commentId);
-  const { username, id, avatarUrl } = commentUser;
-  return {
-    comment,
-    userAvatarUrl: getSmallVersion(avatarUrl),
-    username,
-    commentBody: body,
-    commentTimestamp: createdAt.replace('+0000', ''),
-    userId: id,
-  };
-}
+// function mapStateToProps(state, { commentId }) {
+//   const comment = getCommentById(state, commentId);
+//   const { body, createdAt } = comment;
+//   const commentUser = getUserByCommentId(state, commentId);
+//   const { username, id, avatarUrl } = commentUser;
+//   return {
+//     comment,
+//     userAvatarUrl: getSmallVersion(avatarUrl),
+//     username,
+//     commentBody: body,
+//     commentTimestamp: createdAt.replace('+0000', ''),
+//     userId: id,
+//   };
+// }
 
 TrackProfileComment.defaultProps = {
   userAvatarUrl: '',
@@ -66,4 +62,4 @@ TrackProfileComment.propTypes = {
   userId: PropTypes.number,
 };
 
-export default connect(mapStateToProps)(TrackProfileComment);
+export default TrackProfileComment;

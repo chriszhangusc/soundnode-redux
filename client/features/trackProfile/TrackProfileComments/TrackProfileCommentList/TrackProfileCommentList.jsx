@@ -1,55 +1,86 @@
 import React from 'react';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import InfinityScroll from 'common/components/InfinityScroll';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { getCommentIds, isCommentsFetching } from 'features/trackProfile/trackProfileSelectors';
-import withFetchingOnScroll from 'common/hocs/withFetchingOnScroll';
-import withLoadingSpinnerAfter from 'common/hocs/withLoadingSpinnerAfter';
-import { loadMoreComments } from 'features/trackProfile/trackProfileActions';
-
+import Spinner from 'common/components/spinners/RectsScale';
 import TrackProfileComment from '../TrackProfileComment';
 
-const CommentList = styled.ul`
+const GET_TRACK_COMMENTS = gql`
+  query getTrackComments($trackId: Int!, $limit: Int!, $offset: Int!) {
+    comments(trackId: $trackId, limit: $limit, offset: $offset) {
+      id
+      body
+      created_at
+      user {
+        avatar_url
+        username
+      }
+    }
+  }
 `;
 
-function TrackProfileCommentList({ commentIds }) {
+const SpinnerWrapper = styled.div`
+  padding: 20px 0;
+  margin: 0px auto;
+  width: 100%;
+`;
+
+function handleFetch(fetchMore, data) {
+  return () => {
+    fetchMore({
+      variables: {
+        offset: data.comments.length,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+
+        return Object.assign({}, prev, {
+          comments: [...prev.comments, ...fetchMoreResult.comments],
+        });
+      },
+    });
+  };
+}
+
+function TrackProfileCommentList({ trackId }) {
   return (
-    <CommentList>
-      {commentIds.map(commentId => (
-        <li key={commentId.toString()}>
-          <TrackProfileComment commentId={commentId} />
-        </li>
-      ))}
-    </CommentList>
+    <Query
+      query={GET_TRACK_COMMENTS}
+      variables={{ trackId, limit: 20, offset: 0 }}
+      notifyOnNetworkStatusChange
+    >
+      {({ data, loading, fetchMore }) => {
+        if (_.isEmpty(data)) {
+          return null;
+        }
+        console.log('loading: ', loading);
+        return (
+          <InfinityScroll onScroll={handleFetch(fetchMore, data)}>
+            <ul>
+              {data.comments.map(comment => (
+                <li key={comment.id}>
+                  <TrackProfileComment comment={comment} />
+                </li>
+              ))}
+            </ul>
+
+            {loading && (
+              <SpinnerWrapper>
+                <Spinner />
+              </SpinnerWrapper>
+            )}
+          </InfinityScroll>
+        );
+      }}
+    </Query>
   );
 }
 
 TrackProfileCommentList.propTypes = {
-  commentIds: PropTypes.arrayOf(PropTypes.number),
+  trackId: PropTypes.number.isRequired,
 };
 
-TrackProfileCommentList.defaultProps = {
-  commentIds: [],
-};
-
-function mapStateToProps(state) {
-  return {
-    fetching: isCommentsFetching(state),
-    commentIds: getCommentIds(state),
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    scrollFunc() {
-      dispatch(loadMoreComments());
-    },
-  };
-}
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withFetchingOnScroll,
-  withLoadingSpinnerAfter,
-)(TrackProfileCommentList);
+export default TrackProfileCommentList;

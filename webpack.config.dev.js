@@ -35,7 +35,7 @@ const VENDOR_LIBS = [
 
 module.exports = {
   entry: {
-    main: ['babel-polyfill', 'react-hot-loader/patch', path.join(__dirname, 'client', 'index.jsx')],
+    main: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')],
     vendor: VENDOR_LIBS,
   },
 

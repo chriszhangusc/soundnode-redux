@@ -1,27 +1,54 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import * as trackProfileActions from 'features/trackProfile/trackProfileActions';
-import { isPageLoading } from 'features/trackProfile/trackProfileSelectors';
 import withScrollToTopOnEnter from 'common/hocs/withScrollToTopOnEnter';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import RowLayout from 'common/components/layouts/RowLayout';
 import TrackProfileComments from '../TrackProfileComments';
-import TrackProfileHeader from '../TrackProfileHeader';
+import TrackProfileDetails from '../TrackProfileDetails';
+import TrackProfileImage from '../TrackProfileImage';
 
-class TrackProfile extends React.Component {
+const GET_TRACK_DETAILS = gql`
+  query getTrackDetails($trackId: Int!) {
+    track(id: $trackId) {
+      id
+      title
+      created_at
+      user_id
+      user {
+        id
+        username
+        avatar_url
+      }
+      comments {
+        id
+        user_id
+        body
+        created_at
+        user {
+          username
+          avatar_url
+        }
+      }
+    }
+  }
+`;
+
+class TrackProfile extends Component {
   static propTypes = {
     match: PropTypes.shape({
       params: PropTypes.object,
     }).isRequired,
     resetTrackProfileState: PropTypes.func.isRequired,
     loadTrackProfileData: PropTypes.func.isRequired,
-    pageLoading: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
     const { match } = this.props;
     const trackId = match.params.trackId;
-    window.scrollTo(0, 0);
     // Switch to track playlist
     this.props.loadTrackProfileData(trackId);
   }
@@ -46,26 +73,33 @@ class TrackProfile extends React.Component {
   }
 
   render() {
-    const { pageLoading } = this.props;
-    if (pageLoading) {
-      // If comments or profiled track is fetching, show spinner
-      return null;
-    }
+    const { match } = this.props;
+    const trackId = Number(match.params.trackId);
+
     return (
-      <div>
-        <TrackProfileHeader />
-        <TrackProfileComments />
-      </div>
+      <Query query={GET_TRACK_DETAILS} variables={{ trackId }}>
+        {({ data, loading }) => {
+          if (loading) {
+            return null;
+          }
+
+          return (
+            <Fragment>
+              <RowLayout>
+                <TrackProfileImage />
+                <TrackProfileDetails />
+              </RowLayout>
+              <TrackProfileComments
+                commentCount={data.track.comment_count}
+                comments={data.track.comments}
+                trackId={trackId}
+              />
+            </Fragment>
+          );
+        }}
+      </Query>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    pageLoading: isPageLoading(state),
-  };
-}
-
-export default compose(connect(mapStateToProps, trackProfileActions), withScrollToTopOnEnter)(
-  TrackProfile,
-);
+export default compose(connect(null, trackProfileActions), withScrollToTopOnEnter)(TrackProfile);

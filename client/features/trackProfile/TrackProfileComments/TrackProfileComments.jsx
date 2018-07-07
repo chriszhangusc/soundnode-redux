@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfiledTrackCommentCount } from 'features/trackProfile/trackProfileSelectors';
 import Heading from 'common/components/Heading';
 import TrackProfileCommentList from './TrackProfileCommentList';
 
-function TrackProfileComments({ commentCount }) {
+function TrackProfileComments({ trackId, commentCount, comments }) {
   return (
-    <div>
+    <Fragment>
       <Heading>{`Comments: (${commentCount})`}</Heading>
-      <TrackProfileCommentList />
-    </div>
+      <TrackProfileCommentList comments={comments} trackId={trackId} />
+    </Fragment>
   );
 }
 

@@ -6,31 +6,27 @@ import ReactDOM from 'react-dom';
 import configureStore from 'app/store/configureStore';
 import App from 'app/layout/App';
 import { ThemeProvider } from 'styled-components';
-import { AppContainer } from 'react-hot-loader';
 import theme from 'app/css/theme';
 import 'font-awesome/css/font-awesome.min.css';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+import { BrowserRouter } from 'react-router-dom';
+
+const client = new ApolloClient({ uri: 'http://localhost:4444/graphql' });
 
 const store = configureStore();
 
-function render(Component) {
-  ReactDOM.render(
-    <AppContainer>
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <Component />
-        </Provider>
-      </ThemeProvider>
-    </AppContainer>,
-    document.getElementById('app'),
-  );
-}
-
-render(App);
-
-if (module.hot) {
-  module.hot.accept('app/layout/App', () => {
-    // eslint-disable-next-line
-    const NextApp = require('app/layout/App').default;
-    render(NextApp);
-  });
-}
+// Use provider to provide our store down to the dom tree
+// so that it can be shared among all components.
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </ThemeProvider>
+  </ApolloProvider>,
+  document.getElementById('app'),
+);
