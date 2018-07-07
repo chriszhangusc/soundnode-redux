@@ -49,7 +49,6 @@ class TrackProfile extends Component {
   componentDidMount() {
     const { match } = this.props;
     const trackId = match.params.trackId;
-    window.scrollTo(0, 0);
     // Switch to track playlist
     this.props.loadTrackProfileData(trackId);
   }
@@ -75,7 +74,7 @@ class TrackProfile extends Component {
 
   render() {
     const { match } = this.props;
-    const trackId = match.params.trackId;
+    const trackId = Number(match.params.trackId);
 
     return (
       <Query query={GET_TRACK_DETAILS} variables={{ trackId }}>
