@@ -3,39 +3,10 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-const WebpackStrip = require('strip-loader');
-
-const VENDOR_LIBS = [
-  'copy-to-clipboard',
-  'humps',
-  'isomorphic-fetch',
-  'lodash',
-  'moment',
-  'normalizr',
-  'pluralize',
-  'react-onclickoutside',
-  'react-transition-group',
-  'react',
-  'prop-types',
-  'react-dom',
-  'react-bootstrap',
-  'react-redux',
-  'react-router',
-  'react-router-dom',
-  'redux-thunk',
-  'recompose',
-  'redux',
-  'redux-saga',
-  'reselect',
-  'shortid',
-  'soundcloud',
-  'styled-components',
-];
 
 module.exports = {
   entry: {
     main: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')],
-    vendors: VENDOR_LIBS,
   },
 
   output: {
@@ -61,10 +32,6 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.js$/,
-        use: WebpackStrip.loader('debug', 'console.log'),
-      },
-      {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -80,7 +47,6 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.ModuleConcatenationPlugin(),
     // // separate css code from bundle.js into style.css so that the browser
     // // can load javascript and css asynchrously
     // // Note in order to let the browser cache the content
@@ -95,20 +61,6 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-
-    // ProvidePlugin: automatically load modules.
-    // new webpack.ProvidePlugin({
-    //   React: 'react',
-    // }),
-
-    // From doc: implicit vendor code splitting
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest'],
-      minChunks(module) {
-        // this assumes your vendor imports exist in the node_modules directory
-        return module.context && module.context.indexOf('node_modules') !== -1;
       },
     }),
 
