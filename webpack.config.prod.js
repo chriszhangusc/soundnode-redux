@@ -1,10 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
+  mode: 'production',
+
   entry: {
     main: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')],
   },
@@ -33,12 +34,22 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader'],
-        }),
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [autoprefixer],
+            },
+          },
+        ],
       },
-
       {
         test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
         use: ['url-loader?limit=40000&name=images/[hash:12].[ext]', 'image-webpack-loader'],
@@ -47,13 +58,6 @@ module.exports = {
   },
 
   plugins: [
-    // // separate css code from bundle.js into style.css so that the browser
-    // // can load javascript and css asynchrously
-    // // Note in order to let the browser cache the content
-    new ExtractTextPlugin({
-      filename: 'style-[contenthash:10].css',
-    }),
-
     new HTMLWebpackPlugin({ template: path.join(__dirname, 'public', 'index.html') }),
 
     // DefinePlugin makes it possible for us to use env variables in src code
