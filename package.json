@@ -87,6 +87,8 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:server": "NODE_ENV=development webpack-dev-server --progress --config webpack.config.dev.js",
     "dev:proxy": "NODE_ENV=development nodemon server/proxy.js",
-    "graphql": "nodemon ./server/graphql/server"
+    "graphql": "nodemon ./server/graphql/server",
+    "lint": "eslint . --cache && echo \"eslint: no lint errors\"",
+    "lint:fix": "eslint . --cache --fix && echo \"eslint: no lint errors\""
   }
 }
