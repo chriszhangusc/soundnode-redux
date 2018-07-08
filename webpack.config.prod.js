@@ -5,8 +5,6 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const WebpackStrip = require('strip-loader');
 
-const PORT = process.env.PORT || 3000;
-
 const VENDOR_LIBS = [
   'copy-to-clipboard',
   'humps',

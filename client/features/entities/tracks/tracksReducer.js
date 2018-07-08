@@ -1,4 +1,4 @@
-import * as types from 'features/entities/tracks/tracksActionTypes';
+
 import merge from 'lodash/merge';
 
 export default function tracksReducer(state = {}, action) {

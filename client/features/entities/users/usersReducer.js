@@ -1,4 +1,4 @@
-import * as types from 'features/entities/users/usersActionTypes';
+
 import merge from 'lodash/merge';
 
 export default function usersReducer(state = {}, action) {
