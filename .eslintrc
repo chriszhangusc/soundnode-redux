@@ -20,6 +20,7 @@
     "react/prop-types": 0,
     "function-paren-newline": 0,
     "prefer-destructuring": 0,
-    "new-cap": 0
+    "new-cap": 0,
+    "import/prefer-default-export": 0
   }
 }

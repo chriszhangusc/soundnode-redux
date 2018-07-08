@@ -12,7 +12,7 @@ export const getCurrentPlaylistName = createSelector(getSelectedGenre, genre => 
 
 export const isChartsFetching = createSelector(getChartsState, chartsState => chartsState.fetching);
 
-export const getCurrentGenreTitle = createSelector(getSelectedGenre, selectedGenre => {
+export const getCurrentGenreTitle = createSelector(getSelectedGenre, (selectedGenre) => {
   const genreObj = genreListData && genreListData.find(g => g.link === selectedGenre);
   return genreObj && genreObj.title;
 });

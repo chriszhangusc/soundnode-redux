@@ -4,10 +4,10 @@ import { css } from 'styled-components';
 
 // For future reference
 export const borderProps = props => css`
-  ${props.borderBottom && `border-bottom: ${props.borderWidth || '1px'} solid ${color.border}`};
-  ${props.borderTop && `border-top: ${props.borderWidth || '1px'} solid ${color.border}`};
-  ${props.borderLeft && `border-left: ${props.borderWidth || '1px'} solid ${color.border}`};
-  ${props.borderRight && `border-right: ${props.borderWidth || '1px'} solid ${color.border}`};
+  ${props.borderBottom && `border-bottom: ${props.borderWidth || '1px'} solid ${props.color.border}`};
+  ${props.borderTop && `border-top: ${props.borderWidth || '1px'} solid ${props.color.border}`};
+  ${props.borderLeft && `border-left: ${props.borderWidth || '1px'} solid ${props.color.border}`};
+  ${props.borderRight && `border-right: ${props.borderWidth || '1px'} solid ${props.color.border}`};
 `;
 
 export const marginProps = props => css`
