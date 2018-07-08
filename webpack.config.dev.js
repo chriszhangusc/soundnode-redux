@@ -1,42 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 const PORT = process.env.PORT || 3000;
 
-const VENDOR_LIBS = [
-  'copy-to-clipboard',
-  'humps',
-  'isomorphic-fetch',
-  'lodash',
-  'moment',
-  'normalizr',
-  'pluralize',
-  'react-onclickoutside',
-  'react-transition-group',
-  'react',
-  'prop-types',
-  'react-dom',
-  'react-bootstrap',
-  'react-redux',
-  'react-router',
-  'react-router-dom',
-  'redux-thunk',
-  'recompose',
-  'redux',
-  'redux-saga',
-  'reselect',
-  'shortid',
-  'soundcloud',
-  'styled-components',
-];
-
 module.exports = {
+  mode: 'development',
   entry: {
     main: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')],
-    vendor: VENDOR_LIBS,
   },
 
   output: {
@@ -116,19 +88,8 @@ module.exports = {
   },
 
   plugins: [
-    // From doc: enable HMR globally
-    // new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-
-    // From doc: prints more readable module names in the browser console on HMR updates
-    new webpack.NamedModulesPlugin(),
-
     new HTMLWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html'),
-    }),
-
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['vendor', 'manifest'],
     }),
 
     // DefinePlugin makes it possible for us to use env variables in src code
