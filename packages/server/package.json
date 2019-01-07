@@ -1,0 +1,27 @@
+{
+  "name": "@soundnode-redux/server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:proxy": "nodemon ./src/proxy",
+    "dev:server": "nodemon ./src/graphql/server"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "lodash": "^4.17.11",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  },
+  "keywords": [],
+  "author": "Chris Zhang",
+  "license": "ISC"
+}
