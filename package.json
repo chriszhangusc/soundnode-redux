@@ -19,7 +19,8 @@
     "lerna": "^3.8.5",
     "prettier": "^1.15.3",
     "rimraf": "^2.6.3",
-    "eslint-config-prettier": "^3.3.0"
+    "eslint-config-prettier": "^3.3.0",
+    "dotenv": "^6.2.0"
   },
   "scripts": {
     "reinstall": "lerna clean --yes && lerna bootstrap",
