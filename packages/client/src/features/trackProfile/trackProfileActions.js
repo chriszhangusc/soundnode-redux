@@ -5,7 +5,10 @@ import {
   hideLoadingOverlay,
 } from '@soundnode-redux/client/src/features/loadingOverlay/loadingOverlayActions';
 import { fetchTrackById } from '@soundnode-redux/client/src/common/api/trackApi';
-import { normalizeTrack, normalizeComments } from '@soundnode-redux/client/src/common/utils/normalizeUtils';
+import {
+  normalizeTrack,
+  normalizeComments,
+} from '@soundnode-redux/client/src/common/utils/normalizeUtils';
 import { fetchCommentsByTrackId } from '@soundnode-redux/client/src/common/api/commentApi';
 import { makeRequest } from '@soundnode-redux/client/src/common/utils/apiUtils';
 import { getCommentsNextHref, isCommentsFetching } from './trackProfileSelectors';

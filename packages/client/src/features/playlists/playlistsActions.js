@@ -40,21 +40,20 @@ export function resetPlaylistsState() {
 }
 
 export function fetchPlaylists() {
-  return dispatch =>
-    fetchMyPlaylists()
-      .then(normalizePlaylists)
-      .then((normalized) => {
-        const { entities, result } = normalized;
-        // Merge entities
-        dispatch(mergeEntities(entities));
-        // Update playlists store
-        dispatch(updatePlaylists(result));
-      })
-      .catch((err) => {
-        // notification warning
-        dispatch(defaultWarning());
-        console.error(err);
-      });
+  return dispatch => fetchMyPlaylists()
+    .then(normalizePlaylists)
+    .then((normalized) => {
+      const { entities, result } = normalized;
+      // Merge entities
+      dispatch(mergeEntities(entities));
+      // Update playlists store
+      dispatch(updatePlaylists(result));
+    })
+    .catch((err) => {
+      // notification warning
+      dispatch(defaultWarning());
+      console.error(err);
+    });
 }
 
 // Bussiness logic for playlists

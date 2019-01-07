@@ -18,7 +18,8 @@
     "npm-run-all": "^4.1.5",
     "lerna": "^3.8.5",
     "prettier": "^1.15.3",
-    "rimraf": "^2.6.3"
+    "rimraf": "^2.6.3",
+    "eslint-config-prettier": "^3.3.0"
   },
   "scripts": {
     "reinstall": "lerna clean --yes && lerna bootstrap",
@@ -30,7 +31,7 @@
     "dev:proxy": "NODE_ENV=development lerna exec --scope @soundnode-redux/server yarn dev:proxy",
     "dev:server": "NODE_ENV=development lerna exec --scope @soundnode-redux/server yarn dev:server",
     "graphql": "nodemon ./server/graphql/server",
-    "lint": "eslint . --cache && echo \"eslint: no lint errors\"",
-    "lint:fix": "eslint . --cache --fix && echo \"eslint: no lint errors\""
+    "lint:client": "lerna exec --scope @soundnode-redux/client yarn lint",
+    "lint:cilent:fix": "lerna exec --scope @soundnode-redux/client yarn lint:fix"
   }
 }

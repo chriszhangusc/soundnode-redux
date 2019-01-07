@@ -6,7 +6,9 @@ import RowLayout from '@soundnode-redux/client/src/common/components/layouts/Row
 import UserProfileAvatar from './UserProfileAvatar';
 import UserProfileDetails from './UserProfileDetails';
 
-function UserProfileHeader({ avatarUrl, permalinkUrl, username, followersCount, description }) {
+function UserProfileHeader({
+  avatarUrl, permalinkUrl, username, followersCount, description,
+}) {
   return (
     <RowLayout>
       <UserProfileAvatar avatarUrl={avatarUrl} permalinkUrl={permalinkUrl} />

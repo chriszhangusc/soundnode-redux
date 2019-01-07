@@ -1,6 +1,10 @@
 import SC from 'soundcloud';
 import { SC_API_V1 } from '@soundnode-redux/client/src/common/constants/apiConsts';
-import { makeRequest, requestPut, requestDelete } from '@soundnode-redux/client/src/common/utils/apiUtils';
+import {
+  makeRequest,
+  requestPut,
+  requestDelete,
+} from '@soundnode-redux/client/src/common/utils/apiUtils';
 
 export function removePlaylist(playlistId) {
   const requestUrl = `${SC_API_V1}/playlists/${playlistId}`;
@@ -24,8 +28,7 @@ export function addTrackToPlaylist(trackId, userId, playlistId) {
       const putUrl = `${SC_API_V1}/playlists/${playlistId}`;
 
       return requestPut(putUrl, data);
-    }),
-  );
+    }));
 }
 
 export function removeTrackFromPlaylist(trackId, userId, playlistId) {
@@ -47,6 +50,5 @@ export function removeTrackFromPlaylist(trackId, userId, playlistId) {
       const putUrl = `${SC_API_V1}/playlists/${playlistId}`;
 
       return requestPut(putUrl, data);
-    }),
-  );
+    }));
 }

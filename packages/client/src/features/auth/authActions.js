@@ -87,14 +87,14 @@ export function loginFailed(error) {
 
 export function syncFavorites() {
   return dispatch =>
-    fetchMyFavoritesIds().then((favorites) => {
+    fetchMyFavoritesIds().then(favorites => {
       dispatch(setFavorites(favorites));
     });
 }
 
 export function syncReposts() {
   return dispatch =>
-    fetchMyRepostIds().then((reposts) => {
+    fetchMyRepostIds().then(reposts => {
       dispatch(setReposts(reposts));
     });
 }
@@ -133,7 +133,7 @@ export function removeFromReposts(trackId) {
 
 export function doAuth() {
   return dispatch =>
-    SC.connect().then((session) => {
+    SC.connect().then(session => {
       // Initialize Session
       dispatch(setSession(session));
       // Set OAuthToken
@@ -145,7 +145,7 @@ export function doAuth() {
 export function loadMe() {
   return dispatch =>
     fetchMe()
-      .then((me) => {
+      .then(me => {
         dispatch(setMe(me));
         return Promise.all([dispatch(syncFavorites()), dispatch(syncReposts())]);
       })
@@ -158,12 +158,12 @@ export function loadMe() {
 
 /* Bussiness Logic */
 export function doLogin() {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(startLogin());
     dispatch(showLoadingOverlay('Authenticating...'));
     dispatch(doAuth())
       .then(() => dispatch(loadMe()))
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
         dispatch(stopLogin());
         dispatch(hideLoadingOverlay());
@@ -187,7 +187,7 @@ export function loginIfNeeded() {
 }
 
 export function doLogout() {
-  return (dispatch) => {
+  return dispatch => {
     removeOAuthToken();
     dispatch(logoutSucceed());
     dispatch(notificationSuccess('Logout success'));
@@ -195,13 +195,13 @@ export function doLogout() {
 }
 
 export function doLikeTrack(trackId) {
-  return (dispatch) => {
+  return dispatch => {
     likeTrack(trackId)
       .then(() => {
         dispatch(notificationSuccess('Track added to favorites'));
         dispatch(syncFavorites());
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
         dispatch(defaultWarning());
       });
@@ -209,13 +209,13 @@ export function doLikeTrack(trackId) {
 }
 
 export function doUnlikeTrack(trackId) {
-  return (dispatch) => {
+  return dispatch => {
     unlikeTrack(trackId)
       .then(() => {
         dispatch(notificationSuccess('Track removed from favorites'));
         dispatch(syncFavorites());
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
         dispatch(defaultWarning());
       });
@@ -223,13 +223,13 @@ export function doUnlikeTrack(trackId) {
 }
 
 export function createRepost(trackId) {
-  return (dispatch) => {
+  return dispatch => {
     repost(trackId)
       .then(() => {
         dispatch(notificationSuccess('Track added to reposts'));
         dispatch(syncReposts());
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
         dispatch(defaultWarning());
       });
@@ -237,13 +237,13 @@ export function createRepost(trackId) {
 }
 
 export function removeRepost(trackId) {
-  return (dispatch) => {
+  return dispatch => {
     deleteRepost(trackId)
       .then(() => {
         dispatch(notificationSuccess('Track removed from reposts'));
         dispatch(syncReposts());
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
         dispatch(defaultWarning());
       });

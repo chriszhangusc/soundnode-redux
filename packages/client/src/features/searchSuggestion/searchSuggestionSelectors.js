@@ -15,12 +15,14 @@ export const isSearchSuggestionResultsHidden = createSelector(
   state => state.hidden,
 );
 
-export const getSearchSuggestionUserIds = createSelector(getSearchSuggestionState, state =>
-  state.userIds.slice(0, resultLimit),
+export const getSearchSuggestionUserIds = createSelector(
+  getSearchSuggestionState,
+  state => state.userIds.slice(0, resultLimit),
 );
 
-export const getSearchSuggestionTrackIds = createSelector(getSearchSuggestionState, state =>
-  state.trackIds.slice(0, resultLimit),
+export const getSearchSuggestionTrackIds = createSelector(
+  getSearchSuggestionState,
+  state => state.trackIds.slice(0, resultLimit),
 );
 
 export const getSearchSuggestionQuery = createSelector(

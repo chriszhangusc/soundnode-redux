@@ -3,8 +3,14 @@ import {
   PLAYLIST_REQUEST_QUEUE_ADD,
   PLAYLIST_REQUEST_QUEUE_REMOVE,
 } from '@soundnode-redux/client/src/features/modals/addToPlaylist/addToPlaylistActionTypes';
-import { addTrackToPlaylist, removeTrackFromPlaylist } from '@soundnode-redux/client/src/common/api/playlistApi';
-import { defaultWarning, notificationSuccess } from '@soundnode-redux/client/src/features/notification/notificationActions';
+import {
+  addTrackToPlaylist,
+  removeTrackFromPlaylist,
+} from '@soundnode-redux/client/src/common/api/playlistApi';
+import {
+  defaultWarning,
+  notificationSuccess,
+} from '@soundnode-redux/client/src/features/notification/notificationActions';
 import {
   PLAYLIST_TRACK_ADD,
   PLAYLIST_TRACK_REMOVE,
@@ -13,11 +19,9 @@ import { showModal } from '@soundnode-redux/client/src/features/modals/root/root
 
 export function showAddToPlaylistModal(trackId) {
   return (dispatch) => {
-    dispatch(
-      showModal('ADD_TO_PLAYLIST', {
-        trackId,
-      }),
-    );
+    dispatch(showModal('ADD_TO_PLAYLIST', {
+      trackId,
+    }));
   };
 }
 

@@ -4,11 +4,20 @@ import { getLargeVersion } from '@soundnode-redux/client/src/common/utils/imageU
 
 const getState = state => state.userProfile;
 
-export const getProfiledUserId = createSelector(getState, state => state.userId);
+export const getProfiledUserId = createSelector(
+  getState,
+  state => state.userId,
+);
 
-export const isUserFetching = createSelector(getState, state => state.userFetching);
+export const isUserFetching = createSelector(
+  getState,
+  state => state.userFetching,
+);
 
-export const isUserTracksFetching = createSelector(getState, state => state.tracksFetching);
+export const isUserTracksFetching = createSelector(
+  getState,
+  state => state.tracksFetching,
+);
 
 export const isPageLoading = createSelector(
   isUserFetching,
@@ -32,20 +41,32 @@ export const getUserPermalinkUrl = createSelector(
   user => user && user.permalinkUrl,
 );
 
-export const getUsername = createSelector(getProfiledUser, user => user && user.username);
+export const getUsername = createSelector(
+  getProfiledUser,
+  user => user && user.username,
+);
 
-export const getUserDescription = createSelector(getProfiledUser, user => user && user.description);
+export const getUserDescription = createSelector(
+  getProfiledUser,
+  user => user && user.description,
+);
 
 export const getUserFollowersCount = createSelector(
   getProfiledUser,
   user => user && user.followersCount && user.followersCount.toLocaleString(),
 );
 
-export const getProfiledUserTrackIds = createSelector(getState, state => state.trackIds);
+export const getProfiledUserTrackIds = createSelector(
+  getState,
+  state => state.trackIds,
+);
 
 // export const isPageLoading = createSelector(getState, state => state.pageLoading);
 
-export const getUserTracksNextHref = createSelector(getState, state => state.tracksNextHref);
+export const getUserTracksNextHref = createSelector(
+  getState,
+  state => state.tracksNextHref,
+);
 
 export const getProfiledUserPlaylistName = createSelector(
   getProfiledUserId,
