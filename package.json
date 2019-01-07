@@ -28,9 +28,7 @@
     "build": "npm run clean && NODE_ENV=production webpack -p --progress --config webpack.config.prod.js",
     "dev": "lerna run dev",
     "dev:client": "lerna exec --scope @soundnode-redux/client yarn dev",
-    "dev:proxy": "NODE_ENV=development lerna exec --scope @soundnode-redux/server yarn dev:proxy",
-    "dev:server": "NODE_ENV=development lerna exec --scope @soundnode-redux/server yarn dev:server",
-    "graphql": "nodemon ./server/graphql/server",
+    "dev:server": "NODE_ENV=development lerna exec --scope @soundnode-redux/server yarn dev",
     "lint:client": "lerna exec --scope @soundnode-redux/client yarn lint",
     "lint:cilent:fix": "lerna exec --scope @soundnode-redux/client yarn lint:fix"
   }

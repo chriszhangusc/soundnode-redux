@@ -5,5 +5,3 @@ export const CLIENT_ID = isDev
   : 'RgnaiRGxy8TgqHhWe1DLdTXxMRrA04Z9';
 
 export const REDIRECT_URI = `${HOST}/callback`;
-
-// console.log(CLIENT_ID, REDIRECT_URI);

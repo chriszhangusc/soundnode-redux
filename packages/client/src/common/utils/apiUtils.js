@@ -71,7 +71,6 @@ export function buildRequestUrl(url) {
 // there is no content and would 30+ seconds.
 export function makeRequest(requestUrl, fetchOptions) {
   const finalUrl = buildRequestUrl(requestUrl);
-  console.log(finalUrl);
   return fetch(finalUrl, fetchOptions)
     .then(checkStatus)
     .then(parseJson);

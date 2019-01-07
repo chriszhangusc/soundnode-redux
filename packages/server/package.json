@@ -5,18 +5,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm-run-all --parallel dev:*",
-    "dev:proxy": "nodemon ./src/proxy",
-    "dev:server": "nodemon ./src/graphql/server"
+    "dev": "nodemon src/server.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "express-graphql": "^0.7.1",
+    "apollo-server-express": "^2.3.1",
     "graphql": "^14.0.2",
-    "graphql-tag": "^2.10.0"
+    "graphql-tag": "^2.10.0",
+    "http-proxy-middleware": "^0.19.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

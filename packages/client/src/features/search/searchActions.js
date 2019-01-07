@@ -54,7 +54,6 @@ export function mergeTrackResults(trackIds) {
 export function receiveSearchResults(normalizedResults, query) {
   return (dispatch) => {
     const { entities, result } = normalizedResults;
-    console.log(normalizedResults);
     dispatch(mergeEntities(entities));
     dispatch(mergeTrackResults(result));
     // Dynamically update the play queue if needed
