@@ -2,10 +2,10 @@
   "name": "@soundnode-redux/server",
   "version": "1.0.0",
   "private": true,
-  "description": "",
-  "main": "index.js",
+  "description": "SoundnodeRedux Server",
+  "main": "./src/server.js",
   "scripts": {
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon ./src/server.js"
   },
   "dependencies": {
     "axios": "^0.18.0",

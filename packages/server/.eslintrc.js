@@ -7,5 +7,6 @@ module.exports = {
     'prefer-destructuring': 'off',
     'no-underscore-dangle': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'import/prefer-default-export': 'off',
   },
 };
