@@ -56,7 +56,6 @@ function TrackProfileCommentList({ trackId }) {
         if (_.isEmpty(data)) {
           return null;
         }
-        console.log('loading: ', loading);
         return (
           <InfinityScroll onScroll={handleFetch(fetchMore, data)}>
             <ul>

@@ -12,8 +12,6 @@ export default function withScrollDisabled(WrappedComponent) {
     }
 
     render() {
-      // Sometimes props will be empty...
-      // console.log(this.props);
       return <WrappedComponent {...this.props} />;
     }
   }
