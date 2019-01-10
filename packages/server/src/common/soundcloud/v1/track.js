@@ -1,13 +1,18 @@
 const axios = require('axios');
+const { camelizeKeys } = require('humps');
 const { CLIENT_ID } = require('@soundnode-redux/server/src/common/env');
 const { BASE_V1 } = require('../consts');
 
+// TODO: CLIENT_ID should be passed in by the client
+/**
+ * Get track by id
+ * @param {Number} trackId
+ */
 function getTrackById(trackId) {
-  console.log(`${BASE_V1}/tracks/${trackId}?client_id=${CLIENT_ID}`);
-
   return axios
     .get(`${BASE_V1}/tracks/${trackId}?client_id=${CLIENT_ID}`)
-    .then(response => console.log(response) || response);
+    .then(response => response.data)
+    .then(data => camelizeKeys(data));
 }
 
 module.exports = {
