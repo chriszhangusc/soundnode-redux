@@ -1,17 +1,13 @@
 // const _ = require('lodash');
 // const axios = require('axios');
-const {
-  GraphQLObjectType,
-  GraphQLNonNull,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLID,
-} = require('graphql');
+import {
+  GraphQLObjectType, GraphQLNonNull, GraphQLString, GraphQLInt, GraphQLID,
+} from 'graphql';
 // const { BASE_V1, CLIENT_ID } = require('@soundnode-redux/server/src/consts');
 // const CommentType = require('./comment');
 // const UserType = require('./user');
 
-const Track = new GraphQLObjectType({
+export const Track = new GraphQLObjectType({
   name: 'Track',
   fields: () => ({
     id: {
@@ -74,7 +70,3 @@ const Track = new GraphQLObjectType({
     // },
   }),
 });
-
-module.exports = {
-  Track,
-};

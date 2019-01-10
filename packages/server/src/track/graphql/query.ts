@@ -1,8 +1,8 @@
-const { GraphQLNonNull, GraphQLID } = require('graphql');
-const { getTrackById } = require('../service');
-const { Track } = require('./type');
+import { GraphQLNonNull, GraphQLID } from 'graphql';
+import { getTrackById } from '../service';
+import { Track } from './type';
 
-module.exports = {
+export default {
   track: {
     type: Track,
     args: {
@@ -10,7 +10,7 @@ module.exports = {
         type: new GraphQLNonNull(GraphQLID),
       },
     },
-    async resolve(parentValue, args) {
+    async resolve(parentValue: any, args: any) {
       const result = await getTrackById(args.id);
 
       return result;

@@ -1,8 +1,8 @@
-const { ApolloServer } = require('apollo-server-express');
-const { GraphQLSchema, GraphQLObjectType } = require('graphql');
-const track = require('@soundnode-redux/server/src/track');
-const user = require('@soundnode-redux/server/src/user');
-const comment = require('@soundnode-redux/server/src/comment');
+import { ApolloServer } from 'apollo-server-express';
+import { GraphQLSchema, GraphQLObjectType } from 'graphql';
+import * as track from '@soundnode-redux/server/src/track';
+import * as user from '@soundnode-redux/server/src/user';
+import * as comment from '@soundnode-redux/server/src/comment';
 
 function getSchema() {
   return new GraphQLSchema({
@@ -10,8 +10,8 @@ function getSchema() {
       name: 'Query',
       fields: {
         ...track.getGraphQLQuery(),
-        ...user.getGraphQLQuery(),
-        ...comment.getGraphQLQuery(),
+        // ...user.getGraphQLQuery(),
+        // ...comment.getGraphQLQuery(),
       },
     }),
     // mutation: new GraphQLObjectType({
@@ -23,7 +23,7 @@ function getSchema() {
   });
 }
 
-function configureGraphQL(app) {
+export default function configureGraphQL(app: any) {
   const schema = getSchema();
 
   const server = new ApolloServer({
@@ -33,5 +33,3 @@ function configureGraphQL(app) {
 
   server.applyMiddleware({ app, path: '/graphql' });
 }
-
-module.exports = configureGraphQL;

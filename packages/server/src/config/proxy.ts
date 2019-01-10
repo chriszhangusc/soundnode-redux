@@ -1,6 +1,6 @@
-const proxy = require('http-proxy-middleware');
+import proxy from 'http-proxy-middleware';
 
-function configureProxy(app) {
+export default function configureProxy(app: any) {
   // proxy middleware options
   const optionsV1 = {
     target: 'https://api.soundcloud.com',
@@ -26,5 +26,3 @@ function configureProxy(app) {
   app.use('/sc/v1', proxyV1);
   app.use('/sc/v2', proxyV2);
 }
-
-module.exports = configureProxy;

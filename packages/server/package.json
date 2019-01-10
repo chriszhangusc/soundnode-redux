@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "SoundnodeRedux Server",
-  "main": "./src/server.js",
+  "main": "./src/server.ts",
   "scripts": {
-    "dev": "nodemon ./src/server.js"
+    "start": "ts-node --inspect -- src/server.ts",
+    "dev": "nodemon"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -19,7 +20,14 @@
     "humps": "^2.0.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.18.9",
+    "@types/express": "^4.16.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2",
+    "dotenv": "^6.2.0",
+    "@types/http-proxy-middleware": "^0.19.1",
+    "@types/dotenv": "^6.1.0",
+    "@types/humps": "^1.1.2"
   },
   "keywords": [],
   "author": "Chris Zhang",

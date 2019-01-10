@@ -1,10 +1,11 @@
-const queries = require('./graphql/query');
+// const queries = require('./graphql/query');
+import queries from './graphql/query';
 // import mutations from './graphql/mutation';
 
 /**
  * Setup GraphQL query fields for current module
  */
-function getGraphQLQuery() {
+export function getGraphQLQuery() {
   return {
     ...queries,
   };
@@ -18,7 +19,3 @@ function getGraphQLQuery() {
 //     ...mutations,
 //   };
 // }
-
-module.exports = {
-  getGraphQLQuery,
-};
