@@ -1,7 +1,7 @@
 import { GraphQLNonNull, GraphQLInt } from 'graphql';
 import { User } from './type';
 
-module.exports = {
+export default {
   user: {
     type: User,
     args: {
