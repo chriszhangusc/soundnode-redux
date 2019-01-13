@@ -4,7 +4,7 @@ const HOST_DEV = 'http://localhost:3000';
 const HOST_PROD = 'https://redux-music.herokuapp.com';
 
 // Proxy server urls
-const API_PROXY_DEV = 'http://localhost:3001';
+const API_PROXY_DEV = 'http://localhost:4444';
 const API_PROXY_PROD = 'https://soundcloud-api-proxy.herokuapp.com';
 
 

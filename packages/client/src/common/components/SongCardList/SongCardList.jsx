@@ -8,6 +8,7 @@ import { Flex } from 'grid-styled';
 
 function SongCardList({ playlist }) {
   const { trackIds } = playlist;
+
   return (
     <Flex wrap mb={30}>
       {trackIds.map(
