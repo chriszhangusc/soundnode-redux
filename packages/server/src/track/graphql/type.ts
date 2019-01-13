@@ -1,60 +1,51 @@
-// const _ = require('lodash');
-// const axios = require('axios');
 import {
-  GraphQLObjectType, GraphQLNonNull, GraphQLString, GraphQLInt, GraphQLID,
+  GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLString,
+  GraphQLInt,
+  GraphQLBoolean,
 } from 'graphql';
-// const { BASE_V1, CLIENT_ID } = require('@soundnode-redux/server/src/consts');
-// const CommentType = require('./comment');
-// const UserType = require('./user');
+import { User } from '@soundnode-redux/server/src/user/graphql/type';
 
 export const Track = new GraphQLObjectType({
   name: 'Track',
   fields: () => ({
     id: {
-      type: new GraphQLNonNull(GraphQLID),
+      type: new GraphQLNonNull(GraphQLInt),
     },
     createdAt: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    userId: {
-      type: new GraphQLNonNull(GraphQLInt),
-    },
     title: {
       type: GraphQLString,
     },
-    // user: {
-    //   type: UserType,
-
-    //   resolve(parentValue) {
-    //     return axios
-    //       .get(`${BASE_V1}/users/${parentValue.user_id}?client_id=${CLIENT_ID}`)
-    //       .then(res => res.data);
-    //   },
-    // },
-    // permalink_url: {
-    //   type: GraphQLString,
-    // },
-    // purchase_url: {
-    //   type: GraphQLString,
-    // },
-    // artwork_url: {
-    //   type: GraphQLString,
-    // },
-    // description: {
-    //   type: GraphQLString,
-    // },
-    // duration: {
-    //   type: GraphQLInt,
-    // },
-    // genre: {
-    //   type: GraphQLString,
-    // },
-    // stream_url: {
-    //   type: GraphQLString,
-    // },
-    // comment_count: {
-    //   type: GraphQLInt,
-    // },
+    description: {
+      type: GraphQLString,
+    },
+    streamable: {
+      type: GraphQLBoolean,
+    },
+    artworkUrl: {
+      type: GraphQLString,
+    },
+    permalinkUrl: {
+      type: GraphQLString,
+    },
+    user: {
+      type: new GraphQLNonNull(User),
+    },
+    duration: {
+      type: GraphQLInt,
+    },
+    genre: {
+      type: GraphQLString,
+    },
+    streamUrl: {
+      type: GraphQLString,
+    },
+    commentCount: {
+      type: GraphQLInt,
+    },
     // comments: {
     //   type: new GraphQLList(CommentType),
 

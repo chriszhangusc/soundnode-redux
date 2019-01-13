@@ -10,7 +10,7 @@ function getSchema() {
       name: 'Query',
       fields: {
         ...track.getGraphQLQuery(),
-        // ...user.getGraphQLQuery(),
+        ...user.getGraphQLQuery(),
         // ...comment.getGraphQLQuery(),
       },
     }),

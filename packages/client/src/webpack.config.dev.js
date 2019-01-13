@@ -33,7 +33,7 @@ module.exports = {
     compress: true,
 
     // Opens new browser window when we run devserer for the first time
-    open: true,
+    open: false,
     host: 'localhost',
     historyApiFallback: true,
   },
