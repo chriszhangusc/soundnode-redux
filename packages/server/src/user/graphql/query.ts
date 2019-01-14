@@ -10,7 +10,7 @@ export default {
         type: new GraphQLNonNull(GraphQLInt),
       },
     },
-    resolve: (parent, args) => {
+    resolve: (_, args) => {
       const { id } = args;
 
       return userService.getUserById(id);

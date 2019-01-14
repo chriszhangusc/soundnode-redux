@@ -1,8 +1,13 @@
 import {
-  GraphQLNonNull, GraphQLID, GraphQLList, GraphQLString, GraphQLInt,
+  GraphQLNonNull,
+  GraphQLID,
+  GraphQLList,
+  GraphQLString,
+  GraphQLInt,
+  GraphQLObjectType,
 } from 'graphql';
 import * as trackService from '../service';
-import { Track } from './type';
+import { Track, ChartConnection } from './type';
 
 export default {
   track: {
@@ -18,9 +23,8 @@ export default {
     },
   },
   charts: {
-    type: new GraphQLList(Track),
+    type: ChartConnection,
     args: {
-      // TODO: Should use enum
       genre: {
         type: new GraphQLNonNull(GraphQLString),
         default: 'all-music',
@@ -36,10 +40,15 @@ export default {
     },
     resolve: async (_, args) => {
       const { genre, offset, limit } = args;
+      const { charts, hasNext, offsetNext } = await trackService.getCharts(genre, offset, limit);
 
-      const charts = await trackService.getCharts(genre, offset, limit);
-
-      return charts;
+      return {
+        nodes: charts,
+        pageInfo: {
+          hasNext,
+          offsetNext,
+        },
+      };
     },
   },
 };

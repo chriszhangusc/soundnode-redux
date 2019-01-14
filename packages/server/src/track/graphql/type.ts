@@ -4,6 +4,7 @@ import {
   GraphQLString,
   GraphQLInt,
   GraphQLBoolean,
+  GraphQLList,
 } from 'graphql';
 import { User } from '@soundnode-redux/server/src/user/graphql/type';
 
@@ -60,4 +61,28 @@ export const Track = new GraphQLObjectType({
     //   },
     // },
   }),
+});
+
+const PageInfo = new GraphQLObjectType({
+  name: 'PageInfo',
+  fields: {
+    offsetNext: {
+      type: GraphQLInt,
+    },
+    hasNext: {
+      type: new GraphQLNonNull(GraphQLBoolean),
+    },
+  },
+});
+
+export const ChartConnection = new GraphQLObjectType({
+  name: 'ChartConnection',
+  fields: {
+    nodes: {
+      type: new GraphQLList(Track),
+    },
+    pageInfo: {
+      type: PageInfo,
+    },
+  },
 });
