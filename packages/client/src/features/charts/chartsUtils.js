@@ -6,5 +6,11 @@ export function validateGenre(genre) {
 }
 
 export function getGenreTitle(genreCompact) {
-  return genreListData.filter(itme => itme.link === genreCompact).title;
+  const result = genreListData.filter(itme => itme.link === genreCompact);
+
+  if (result.length > 0) {
+    return result[0].title;
+  }
+
+  return '';
 }

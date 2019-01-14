@@ -6,6 +6,7 @@ export const FETCH_CHARTS = gql`
       nodes {
         id
         title
+        streamable
         artworkUrl
         permalinkUrl
         user {

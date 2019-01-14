@@ -27,7 +27,7 @@ class InfiniteScroll extends React.Component {
 
 InfiniteScroll.propTypes = {
   onBottomReached: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default InfiniteScroll;
