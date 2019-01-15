@@ -23,10 +23,14 @@ module.exports = {
     alias: {
       assets: path.join(__dirname, 'public'),
     },
-    extensions: ['*', '.js', '.jsx', 'stage-0'],
+    extensions: ['*', '.ts', '.tsx', '.js', '.jsx', 'stage-0'],
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+      },
       {
         test: /\.jsx?$/,
         use: ['babel-loader'],

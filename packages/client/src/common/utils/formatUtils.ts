@@ -1,11 +1,11 @@
-import moment from 'moment';
+import * as moment from 'moment';
 
-export const formatTitle = (title) => {
+export const formatTitle = (title: string) => {
   const res = title.split(' - ');
   return res.length === 1 ? res[0] : res[1];
 };
 
-export function formatDurationCompact(duration, unit) {
+export function formatDurationCompact(duration: number, unit: any) {
   // Convert duration to moment duration.
   const momentDuration = unit ? moment.duration(duration, unit) : moment.duration(duration);
   const durationStr = moment.utc(momentDuration.as('milliseconds')).format('HH:mm:ss');
@@ -16,15 +16,16 @@ export function formatDurationCompact(duration, unit) {
   return durationStr;
 }
 
-export function formatDuration(duration) {
+export function formatDuration(duration: number) {
   const momentDuration = moment.duration(duration);
   const durationStr = moment.utc(momentDuration.as('milliseconds')).format('HH:mm:ss');
   const parts = durationStr.split(':');
   return `${parts[0]}hours${parts[1]}minutes${parts[0]}seconds`;
 }
 
+// TODO: Find a library to replace this function
 // Format long big numbers to compact version: 32.3M, 43.3K
-export function formatNumberCompact(value) {
+export function formatNumberCompact(value: number) {
   const thenThousand = 10000;
   const million = 1000000;
   const billion = 1000000000;
