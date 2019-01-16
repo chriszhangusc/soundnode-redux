@@ -5,49 +5,35 @@ const autoprefixer = require('autoprefixer');
 
 const PORT = process.env.PORT || 3000;
 
+const srcDir = path.join(__dirname, 'src');
+
 module.exports = {
   mode: 'development',
   entry: {
-    main: ['babel-polyfill', path.join(__dirname, 'index.jsx')],
+    main: ['@babel/polyfill', path.join(srcDir, 'index.jsx')],
   },
 
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(srcDir, 'dist'),
     filename: '[name].[hash].bundle.js',
     publicPath: '/',
   },
 
-  devServer: {
-    // enable HMR on the server
-    // hot: true,
-
-    // Serve the files generated in dist folder(in memory)
-    contentBase: path.join(__dirname, 'dist'),
-
-    // 1.Match the output publicPath
-    // will create folder in memory
-    // on server there will be a server-root/dist folder
-    // 2. Do not remove publicPath
-    publicPath: '/',
-    port: PORT,
-    compress: true,
-
-    // Opens new browser window when we run devserer for the first time
-    open: true,
-    host: 'localhost',
-    historyApiFallback: true,
-  },
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
   // In every other case use resolve.root.
   resolve: {
-    modules: [path.join(__dirname, 'client'), 'node_modules'],
+    modules: [path.join(srcDir, 'client'), 'node_modules'],
     alias: {
-      assets: path.join(__dirname, 'public'),
+      assets: path.join(srcDir, 'public'),
     },
-    extensions: ['*', '.js', '.jsx', 'stage-0'],
+    extensions: ['*', '.ts', '.tsx', '.js', '.jsx', 'stage-0'],
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+      },
       {
         test: /\.jsx?$/,
         use: {
@@ -88,7 +74,7 @@ module.exports = {
 
   plugins: [
     new HTMLWebpackPlugin({
-      template: path.join(__dirname, 'public', 'index.html'),
+      template: path.join(srcDir, 'public', 'index.html'),
     }),
 
     // DefinePlugin makes it possible for us to use env variables in src code

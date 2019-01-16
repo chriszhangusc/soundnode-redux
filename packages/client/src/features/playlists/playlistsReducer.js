@@ -34,7 +34,7 @@ function resetPlaylistsState() {
 }
 
 export default createReducer(initialState, {
-  [types.PLAYLIST_MERGE]: mergePlaylists,
+  [types.PLAYLISTS_MERGE]: mergePlaylists,
   [types.PLAYLISTS_UPDATE]: updatePlaylists,
   [types.PLAYLISTS_PLAYLIST_DELETE]: removePlaylist,
   [types.PLAYLISTS_STATE_RESET]: resetPlaylistsState,

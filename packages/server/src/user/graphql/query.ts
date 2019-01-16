@@ -1,4 +1,5 @@
 import { GraphQLNonNull, GraphQLInt } from 'graphql';
+import * as userService from '../service';
 import { User } from './type';
 
 export default {
@@ -9,9 +10,10 @@ export default {
         type: new GraphQLNonNull(GraphQLInt),
       },
     },
-    resolve(parentValue: any, args: any): any {
-      // return axios.get(`${BASE_V1}/users/${args.id}?client_id=${CLIENT_ID}`).then(res => res.data);
-      return null;
+    resolve: (_, args) => {
+      const { id } = args;
+
+      return userService.getUserById(id);
     },
   },
 };

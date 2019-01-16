@@ -45,6 +45,7 @@ export async function getCharts(
   offset: number,
   limit: number,
   clientId: string = 'ZsXqrJ5fvCT0kw8AbbJARqxuRVYqAVEX',
+  // clientId: string = 'AdBAY9M0wHTRovngU9Ht4Z63XezL9saK',
 ): Promise<IChartsResponse> {
   return axios
     .get(

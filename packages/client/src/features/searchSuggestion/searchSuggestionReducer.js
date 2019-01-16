@@ -70,7 +70,7 @@ export function updateSearchSuggestionQuery(state, { query }) {
 export default createReducer(initialState, {
   [types.SEARCH_SUGGESTION_START]: startSearchSuggestion,
   [types.SEARCH_SUGGESTION_STOP]: stopSearchSuggestion,
-  [types.SEARCH_SUGGESTION_FAIL]: stopSearchSuggestion,
+  [types.SEARCH_SUGGESTION_REQUEST_FAIL]: stopSearchSuggestion,
   [types.SEARCH_SUGGESTION_USER_RESULTS_UPDATE]: updateUserResults,
   [types.SEARCH_SUGGESTION_TRACK_RESULTS_UPDATE]: updateTrackResults,
   [types.SEARCH_SUGGESTION_RESULTS_HIDE]: hideSearchSuggestionResults,

@@ -15,21 +15,21 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "npm-run-all": "^4.1.5",
+    "eslint-config-prettier": "^3.3.0",
     "lerna": "^3.8.5",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.15.3",
-    "rimraf": "^2.6.3",
-    "eslint-config-prettier": "^3.3.0"
+    "rimraf": "^2.6.3"
   },
   "scripts": {
     "reinstall": "lerna clean --yes && lerna bootstrap",
-    "start": "NODE_ENV=production node server/server.prod.js",
-    "clean": "rimraf ./dist/*",
-    "build": "npm run clean && NODE_ENV=production webpack -p --progress --config webpack.config.prod.js",
-    "dev": "lerna run dev",
-    "dev:client": "lerna exec --scope @soundnode-redux/client yarn dev",
-    "dev:server": "NODE_ENV=development lerna exec --scope @soundnode-redux/server yarn dev",
-    "lint:client": "lerna exec --scope @soundnode-redux/client yarn lint",
-    "lint:cilent:fix": "lerna exec --scope @soundnode-redux/client yarn lint:fix"
+    "add:client": "lerna add --scope=@soundnode-redux/client",
+    "add:server": "lerna add --scope=@soundnode-redux/server",
+    "exec:client": "lerna exec --scope @soundnode-redux/client",
+    "exec:server": "lerna exec --scope @soundnode-redux/server",
+    "dev:client": "yarn exec:client yarn dev",
+    "dev:server": "NODE_ENV=development yarn exec:server yarn dev",
+    "lint:client": "yarn exec:client yarn lint",
+    "lint:cilent:fix": "yarn exec:client yarn lint:fix"
   }
 }
