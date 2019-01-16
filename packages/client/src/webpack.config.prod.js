@@ -7,7 +7,7 @@ module.exports = {
   mode: 'production',
 
   entry: {
-    main: ['babel-polyfill', path.join(__dirname, 'client', 'index.jsx')],
+    main: path.join(__dirname, 'client', 'index.jsx'),
   },
 
   output: {

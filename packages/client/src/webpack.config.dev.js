@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 module.exports = {
   mode: 'development',
   entry: {
-    main: ['babel-polyfill', path.join(__dirname, 'index.jsx')],
+    main: path.join(__dirname, 'index.jsx'),
   },
 
   output: {
