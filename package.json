@@ -23,13 +23,11 @@
   },
   "scripts": {
     "reinstall": "lerna clean --yes && lerna bootstrap",
-    "start": "NODE_ENV=production node server/server.prod.js",
-    "build": "npm run clean && NODE_ENV=production webpack -p --progress --config webpack.config.prod.js",
     "@client": "lerna exec --scope @soundnode-redux/client",
     "@server": "lerna exec --scope @soundnode-redux/server",
     "dev:client": "yarn @client yarn dev",
     "dev:server": "NODE_ENV=development yarn @server yarn dev",
-    "lint:client": "lerna exec --scope @soundnode-redux/client yarn lint",
-    "lint:cilent:fix": "lerna exec --scope @soundnode-redux/client yarn lint:fix"
+    "lint:client": "yarn @client yarn lint",
+    "lint:cilent:fix": "yarn @client yarn lint:fix"
   }
 }

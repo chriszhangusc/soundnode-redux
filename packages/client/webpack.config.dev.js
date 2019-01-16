@@ -5,14 +5,16 @@ const autoprefixer = require('autoprefixer');
 
 const PORT = process.env.PORT || 3000;
 
+const srcDir = path.join(__dirname, 'src');
+
 module.exports = {
   mode: 'development',
   entry: {
-    main: path.join(__dirname, 'index.jsx'),
+    main: path.join(srcDir, 'index.jsx'),
   },
 
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(srcDir, 'dist'),
     filename: '[name].[hash].bundle.js',
     publicPath: '/',
   },
@@ -40,9 +42,9 @@ module.exports = {
   // Use resolve.moduleDirectories only for package managers with a depth dependency structure.
   // In every other case use resolve.root.
   resolve: {
-    modules: [path.join(__dirname, 'client'), 'node_modules'],
+    modules: [path.join(srcDir, 'client'), 'node_modules'],
     alias: {
-      assets: path.join(__dirname, 'public'),
+      assets: path.join(srcDir, 'public'),
     },
     extensions: ['*', '.ts', '.tsx', '.js', '.jsx', 'stage-0'],
   },
@@ -92,7 +94,7 @@ module.exports = {
 
   plugins: [
     new HTMLWebpackPlugin({
-      template: path.join(__dirname, 'public', 'index.html'),
+      template: path.join(srcDir, 'public', 'index.html'),
     }),
 
     // DefinePlugin makes it possible for us to use env variables in src code
