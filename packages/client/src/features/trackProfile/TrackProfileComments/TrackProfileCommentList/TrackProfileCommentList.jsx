@@ -3,7 +3,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import InfinityScroll from '@soundnode-redux/client/src/common/components/InfinityScroll';
+import InfiniteScroll from '@soundnode-redux/client/src/common/components/InfiniteScroll';
 import styled from 'styled-components';
 import Spinner from '@soundnode-redux/client/src/common/components/spinners/RectsScale';
 import TrackProfileComment from '../TrackProfileComment';
@@ -57,7 +57,7 @@ function TrackProfileCommentList({ trackId }) {
           return null;
         }
         return (
-          <InfinityScroll onScroll={handleFetch(fetchMore, data)}>
+          <InfiniteScroll onBottomReached={handleFetch(fetchMore, data)}>
             <ul>
               {data.comments.map(comment => (
                 <li key={comment.id}>
@@ -71,7 +71,7 @@ function TrackProfileCommentList({ trackId }) {
                 <Spinner />
               </SpinnerWrapper>
             )}
-          </InfinityScroll>
+          </InfiniteScroll>
         );
       }}
     </Query>
