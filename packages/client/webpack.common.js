@@ -26,7 +26,7 @@ module.exports = {
     alias: {
       assets: path.join(srcDir, 'public'),
     },
-    extensions: ['*', '.ts', '.tsx', '.js', '.jsx', 'stage-0'],
+    extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
   },
   module: {
     rules: [
