@@ -31,5 +31,10 @@
     "dev:server": "NODE_ENV=development yarn exec:server yarn dev",
     "lint:client": "yarn exec:client yarn lint",
     "lint:cilent:fix": "yarn exec:client yarn lint:fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
