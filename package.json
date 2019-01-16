@@ -23,11 +23,13 @@
   },
   "scripts": {
     "reinstall": "lerna clean --yes && lerna bootstrap",
-    "@client": "lerna exec --scope @soundnode-redux/client",
-    "@server": "lerna exec --scope @soundnode-redux/server",
-    "dev:client": "yarn @client yarn dev",
-    "dev:server": "NODE_ENV=development yarn @server yarn dev",
-    "lint:client": "yarn @client yarn lint",
-    "lint:cilent:fix": "yarn @client yarn lint:fix"
+    "add:client": "lerna add --scope=@soundnode-redux/client",
+    "add:server": "lerna add --scope=@soundnode-redux/server",
+    "exec:client": "lerna exec --scope @soundnode-redux/client",
+    "exec:server": "lerna exec --scope @soundnode-redux/server",
+    "dev:client": "yarn exec:client yarn dev",
+    "dev:server": "NODE_ENV=development yarn exec:server yarn dev",
+    "lint:client": "yarn exec:client yarn lint",
+    "lint:cilent:fix": "yarn exec:client yarn lint:fix"
   }
 }
