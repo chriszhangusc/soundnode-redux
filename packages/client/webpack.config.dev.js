@@ -10,7 +10,7 @@ const srcDir = path.join(__dirname, 'src');
 module.exports = {
   mode: 'development',
   entry: {
-    main: path.join(srcDir, 'index.jsx'),
+    main: ['@babel/polyfill', path.join(srcDir, 'index.jsx')],
   },
 
   output: {
