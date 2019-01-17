@@ -1,6 +1,7 @@
+import styled from 'styled-components';
 import RouterLink from '@soundnode-redux/client/src/common/components/links/RouterLink';
 
-export default RouterLink.extend`
+export default styled(RouterLink)`
   display: block;
   line-height: 35px;
   text-align: center;

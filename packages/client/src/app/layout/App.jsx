@@ -4,7 +4,7 @@ import Callback from '@soundnode-redux/client/src/common/components/Callback';
 import { CLIENT_ID, REDIRECT_URI } from '@soundnode-redux/client/src/common/constants/authConsts';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AUTH_CALLBACK_ROUTE } from '@soundnode-redux/client/src/common/constants/routeConsts';
-import '@soundnode-redux/client/src/app/css/global';
+import GlobalStyles from '@soundnode-redux/client/src/common/components/GlobalStyles';
 import Main from './Main';
 
 SC.initialize({
@@ -15,12 +15,15 @@ SC.initialize({
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path={AUTH_CALLBACK_ROUTE} component={Callback} />
-        <Route component={Main} />
-      </Switch>
-    </BrowserRouter>
+    <React.Fragment>
+      <GlobalStyles />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path={AUTH_CALLBACK_ROUTE} component={Callback} />
+          <Route component={Main} />
+        </Switch>
+      </BrowserRouter>
+    </React.Fragment>
   );
 }
 

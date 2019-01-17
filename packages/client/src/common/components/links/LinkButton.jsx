@@ -1,6 +1,7 @@
+import styled from 'styled-components';
 import Link from './Link';
 
-const LinkButton = Link.extend`
+const LinkButton = styled(Link)`
   display: inline-block;
   border: 1px solid;
   border-radius: 0.25em;
