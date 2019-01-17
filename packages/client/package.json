@@ -19,7 +19,6 @@
     "font-awesome": "4.7.0",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.1",
-    "grid-styled": "2.0.0-10",
     "humps": "1.1.0",
     "isomorphic-fetch": "2.2.1",
     "lodash": "^4.17.11",
@@ -45,7 +44,7 @@
     "reselect": "3.0.1",
     "shortid": "2.2.8",
     "soundcloud": "3.1.2",
-    "styled-components": "2.1.1"
+    "styled-components": "3.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
