@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { formatNumberCompact } from '@soundnode-redux/client/src/common/utils/formatUtils';
 import TrackImage from '@soundnode-redux/client/src/common/components/images/TrackImage';
 import PlaybackOverlay from '@soundnode-redux/client/src/common/components/PlaybackOverlay';
 import OverlayInfoBar from './OverlayInfoBar';
@@ -33,8 +34,8 @@ function TrackProfileImage({
         }}
       />
       <OverlayInfoBar>
-        <OverlayIconInfo name="play" info={String(playbackCount)} />
-        <OverlayIconInfo name="heart" active={liked} info={String(likesCount)} />
+        <OverlayIconInfo name="play" info={formatNumberCompact(playbackCount)} />
+        <OverlayIconInfo name="heart" active={liked} info={formatNumberCompact(likesCount)} />
       </OverlayInfoBar>
     </TrackImage>
   );
