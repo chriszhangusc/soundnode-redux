@@ -1,9 +1,8 @@
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import { fontColor, bg } from '@soundnode-redux/client/src/app/css/colors';
 
-// Global CSS
-injectGlobal([
-  `
+// Global CSS Component
+const GlobalStyles = createGlobalStyle`
   * {
     padding: 0;
     margin: 0;
@@ -36,5 +35,6 @@ injectGlobal([
   .container-fluid {
     padding: 0;
   }
-`,
-]);
+`;
+
+export default GlobalStyles;

@@ -30,7 +30,7 @@ const PlaylistTitle = styled.span`
   margin-top: 5px;
 `;
 
-const PlaylistSubtitle = PlaylistTitle.extend`
+const PlaylistSubtitle = styled(PlaylistTitle)`
   color: ${props => props.theme.colors.fontColorSub};
   font-size: 0.95rem;
 `;

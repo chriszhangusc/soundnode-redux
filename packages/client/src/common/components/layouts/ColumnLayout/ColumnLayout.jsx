@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FlexColumn from '@soundnode-redux/client/src/common/components/layouts/FlexColumn';
 
-const Section = styled.section`margin-bottom: 10px;`;
+const Section = styled.section`
+  margin-bottom: 10px;
+`;
 
-const Wrapper = FlexColumn.extend`
+const Wrapper = styled(FlexColumn)`
   position: relative;
   justify-content: flex-start;
   align-items: left;
@@ -16,11 +18,9 @@ const Wrapper = FlexColumn.extend`
 function ColumnLayout({ children, width, height }) {
   return (
     <Wrapper width={width} height={height}>
-      {React.Children.toArray(children).map(child =>
-        <Section key={child.key}>
-          {child}
-        </Section>,
-      )}
+      {React.Children.toArray(children).map(child => (
+        <Section key={child.key}>{child}</Section>
+      ))}
     </Wrapper>
   );
 }

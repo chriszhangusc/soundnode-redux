@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import Fixed from '@soundnode-redux/client/src/common/components/Fixed';
 import { media } from '@soundnode-redux/client/src/app/css/styleUtils';
 
@@ -5,7 +6,7 @@ const PLAY_QUEUE_WIDTH_DESKTOP = '300px';
 const PLAY_QUEUE_WIDTH_DESKTOP_LG = '400px';
 const PLAY_QUEUE_WIDTH_DESKTOP_4K = '500px';
 
-export default Fixed.extend`
+export default styled(Fixed)`
   top: 70px;
   right: 0;
   bottom: 0;

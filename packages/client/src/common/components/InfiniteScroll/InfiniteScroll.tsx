@@ -1,7 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-class InfiniteScroll extends React.Component {
+interface Props {
+  children: React.ReactNode;
+  onBottomReached(): void;
+}
+
+class InfiniteScroll extends React.Component<Props> {
   componentDidMount() {
     window.addEventListener('scroll', this.onScroll, false);
   }
@@ -24,10 +28,5 @@ class InfiniteScroll extends React.Component {
     return children;
   }
 }
-
-InfiniteScroll.propTypes = {
-  onBottomReached: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
-};
 
 export default InfiniteScroll;

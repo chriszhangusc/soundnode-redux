@@ -1,6 +1,7 @@
+import styled from 'styled-components';
 import Fixed from '@soundnode-redux/client/src/common/components/Fixed';
 
-export default Fixed.extend`
+export default styled(Fixed)`
   top: 0;
   left: 0;
   width: 100%;

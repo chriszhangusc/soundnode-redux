@@ -1,8 +1,6 @@
-export const TOP_COUNT = 50;
-// Number of items to fetch each time.
 export const DEFAULT_GENRE = 'all-music';
 
-export const genreListData = [
+export const GENRE_LIST = [
   {
     link: 'all-music',
     title: 'All Music',

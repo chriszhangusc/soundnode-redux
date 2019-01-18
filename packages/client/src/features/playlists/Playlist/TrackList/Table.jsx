@@ -26,7 +26,9 @@ const Cell = styled.div`
   width: ${props => props.width};
 `;
 
-const HeaderCell = Cell.extend`font-weight: 600;`;
+const HeaderCell = styled(Cell)`
+  font-weight: 600;
+`;
 
 const IdCell = styled.div`
   display: flex;
@@ -36,7 +38,7 @@ const IdCell = styled.div`
   width: 30px;
 `;
 
-const HeaderIdCell = IdCell.extend`
+const HeaderIdCell = styled(IdCell)`
   color: ${props => props.theme.colors.fontColor};
 `;
 
@@ -45,7 +47,7 @@ const Text = styled.span`
   max-width: 100%;
 `;
 
-const Link = RouterLink.extend`
+const Link = styled(RouterLink)`
   font-size: 0.95rem;
   max-width: 100%;
   &:hover {

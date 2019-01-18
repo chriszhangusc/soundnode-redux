@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import UserImage from '@soundnode-redux/client/src/common/components/images/UserImage';
 import {
   USER_PROFILE_ROUTE,
@@ -9,7 +10,7 @@ import Card from '@soundnode-redux/client/src/common/components/Card';
 import RouterLink from '@soundnode-redux/client/src/common/components/links/RouterLink';
 import { truncateMaxWidth } from '@soundnode-redux/client/src/app/css/styleUtils';
 
-const Title = RouterLink.extend`
+const Title = styled(RouterLink)`
   display: -webkit-box;
   font-size: 1.05rem;
   font-weight: bold;
@@ -22,7 +23,7 @@ const Title = RouterLink.extend`
   }
 `;
 
-const Subtitle = RouterLink.extend`
+const Subtitle = styled(RouterLink)`
   margin-left: 10px;
   color: ${props => props.theme.colors.fontColorSub};
   line-height: 32px; /* Vertical align!! It should be equal to the height of avatar */

@@ -1,21 +1,27 @@
 import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import SongCard from '@soundnode-redux/client/src/common/components/SongCard';
 import withLoadingSpinnerAfter from '@soundnode-redux/client/src/common/hocs/withLoadingSpinnerAfter';
 import withFetchingOnScroll from '@soundnode-redux/client/src/common/hocs/withFetchingOnScroll';
 import { compose } from 'recompose';
-import { Flex } from 'grid-styled';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+`;
 
 function SongCardList({ playlist }) {
   const { trackIds } = playlist;
 
   return (
-    <Flex wrap mb={30}>
+    <Wrapper>
       {trackIds.map(
         trackId =>
           trackId && <SongCard trackId={trackId} playlist={playlist} key={trackId.toString()} />,
       )}
-    </Flex>
+    </Wrapper>
   );
 }
 
@@ -27,4 +33,7 @@ SongCardList.propTypes = {
   }).isRequired,
 };
 
-export default compose(withLoadingSpinnerAfter, withFetchingOnScroll)(SongCardList);
+export default compose(
+  withLoadingSpinnerAfter,
+  withFetchingOnScroll,
+)(SongCardList);
