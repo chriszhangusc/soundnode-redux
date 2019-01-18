@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { genreListData } from './chartsConsts';
+import { GENRE_LIST } from './chartsConsts';
 
 const getChartsState = state => state.charts;
 
@@ -8,14 +8,23 @@ export const getSelectedGenre = createSelector(
   chartsState => chartsState.selectedGenre,
 );
 
-export const getCurrentPlaylistName = createSelector(getSelectedGenre, genre => `charts-${genre}`);
+export const getCurrentPlaylistName = createSelector(
+  getSelectedGenre,
+  genre => `charts-${genre}`,
+);
 
-export const isChartsFetching = createSelector(getChartsState, chartsState => chartsState.fetching);
+export const isChartsFetching = createSelector(
+  getChartsState,
+  chartsState => chartsState.fetching,
+);
 
-export const getCurrentGenreTitle = createSelector(getSelectedGenre, (selectedGenre) => {
-  const genreObj = genreListData && genreListData.find(g => g.link === selectedGenre);
-  return genreObj && genreObj.title;
-});
+export const getCurrentGenreTitle = createSelector(
+  getSelectedGenre,
+  selectedGenre => {
+    const genreObj = GENRE_LIST && GENRE_LIST.find(g => g.link === selectedGenre);
+    return genreObj && genreObj.title;
+  },
+);
 
 export const getChartsNextHref = createSelector(
   getChartsState,
