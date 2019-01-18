@@ -44,6 +44,12 @@ export const Track = new GraphQLObjectType({
     streamUrl: {
       type: GraphQLString,
     },
+    playbackCount: {
+      type: GraphQLInt,
+    },
+    likesCount: {
+      type: GraphQLInt,
+    },
     commentCount: {
       type: GraphQLInt,
     },
