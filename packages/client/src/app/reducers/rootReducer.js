@@ -4,7 +4,6 @@ import entitiesReducer from '@soundnode-redux/client/src/features/entities/entit
 import playerReducer from '@soundnode-redux/client/src/features/player/playerReducer';
 import playQueueReducer from '@soundnode-redux/client/src/features/playQueue/playQueueReducer';
 import userProfileReducer from '@soundnode-redux/client/src/features/userProfile/userProfileReducer';
-import trackProfileReducer from '@soundnode-redux/client/src/features/trackProfile/trackProfileReducer';
 import searchSuggestionReducer from '@soundnode-redux/client/src/features/searchSuggestion/searchSuggestionReducer';
 import authReducer from '@soundnode-redux/client/src/features/auth/authReducer';
 import notificationReducer from '@soundnode-redux/client/src/features/notification/notificationReducer';
@@ -23,8 +22,6 @@ const rootReducer = combineReducers({
   player: playerReducer,
   // Single user profile page
   userProfile: userProfileReducer,
-  trackProfile: trackProfileReducer,
-  // Single track profile page
   searchSuggestion: searchSuggestionReducer,
   auth: authReducer,
   notification: notificationReducer,
