@@ -2,6 +2,7 @@ import * as React from 'react';
 import { formatNumberCompact } from '@soundnode-redux/client/src/common/utils/formatUtils';
 import TrackImage from '@soundnode-redux/client/src/common/components/images/TrackImage';
 import PlaybackOverlay from '@soundnode-redux/client/src/common/components/PlaybackOverlay';
+import { getLargeVersion } from '@soundnode-redux/client/src/common/utils/imageUtils';
 import OverlayInfoBar from './OverlayInfoBar';
 import OverlayIconInfo from './OverlayIconInfo';
 
@@ -22,10 +23,8 @@ function TrackProfileImage({
   playbackCount = 0,
   likesCount = 0,
 }: Props) {
-  console.log({ artworkUrl, playing, active, playbackCount, likesCount });
-
   return (
-    <TrackImage src={artworkUrl} size="large">
+    <TrackImage src={getLargeVersion(artworkUrl)} size="large">
       <PlaybackOverlay
         playing={playing}
         active={active}
