@@ -1,11 +1,4 @@
-import {
-  GraphQLNonNull,
-  GraphQLID,
-  GraphQLList,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLObjectType,
-} from 'graphql';
+import { GraphQLNonNull, GraphQLID, GraphQLString, GraphQLInt } from 'graphql';
 import * as trackService from '../service';
 import { Track, ChartConnection } from './type';
 
@@ -19,6 +12,7 @@ export default {
     },
     resolve: async (_: any, args: any) => {
       const result = await trackService.getTrackById(args.id);
+      console.log(result);
       return result;
     },
   },

@@ -3,7 +3,7 @@ import * as trackApi from '@soundnode-redux/server/src/common/soundcloud/v1/trac
 import * as trackApiV2 from '@soundnode-redux/server/src/common/soundcloud/v2/track';
 
 export async function getTrackById(trackId: number) {
-  return trackApiV2.getTrackById(trackId);
+  return trackApi.getTrackById(trackId);
 }
 
 export async function getCharts(genre: string, offset: number, limit: number) {

@@ -1,3 +1,4 @@
+import { isNumber } from 'lodash';
 import {
   GraphQLObjectType,
   GraphQLNonNull,
@@ -49,6 +50,17 @@ export const Track = new GraphQLObjectType({
     },
     likesCount: {
       type: GraphQLInt,
+      resolve: parent => {
+        if (isNumber(parent.likesCount)) {
+          return parent.likesCount;
+        }
+
+        if (isNumber(parent.favoritingsCount)) {
+          return parent.favoritingsCount;
+        }
+
+        return null;
+      },
     },
     commentCount: {
       type: GraphQLInt,

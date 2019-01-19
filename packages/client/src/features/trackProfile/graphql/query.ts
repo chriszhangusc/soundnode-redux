@@ -14,6 +14,7 @@ export const GET_TRACK = gql`
       likesCount
       user {
         id
+        username
       }
       duration
       genre

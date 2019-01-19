@@ -1,34 +1,40 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Heading from '@soundnode-redux/client/src/common/components/Heading';
+import RouterLink from '@soundnode-redux/client/src/common/components/links/RouterLink';
 import ColumnLayout from '@soundnode-redux/client/src/common/components/layouts/ColumnLayout';
-import TrackUsername from './TrackUsername';
-import TrackDescription from './TrackDescription';
 import TrackActions from './TrackActions';
 
-function TrackProfileDetails({ title, username, description, userRoute }) {
+interface Props {
+  title?: string;
+  username?: string;
+  description?: string;
+  userRoute?: string;
+}
+
+const Description = styled.p`
+  max-height: 190px;
+  overflow: scroll;
+  white-space: pre-wrap;
+  font-size: 0.9rem;
+  color: ${props => props.theme.colors.fontColorSub};
+`;
+
+const Username = styled(RouterLink)`
+  font-size: 1.5rem;
+`;
+
+function TrackProfileDetails(props: Props) {
+  console.log(props);
+  const { title = '', username = '', description = '', userRoute = '' } = props;
   return (
     <ColumnLayout width="800px">
       <Heading>{title}</Heading>
-      <TrackUsername to={userRoute}>{username}</TrackUsername>
-      <TrackDescription>{description}</TrackDescription>
-      <TrackActions />
+      <Username to={userRoute}>{username}</Username>
+      <Description>{description}</Description>
+      {/* <TrackActions /> */}
     </ColumnLayout>
   );
 }
-
-// TrackProfileDetails.defaultProps = {
-//   userRoute: '',
-//   title: '',
-//   username: '',
-//   description: '',
-// };
-
-// TrackProfileDetails.propTypes = {
-//   userRoute: PropTypes.string,
-//   title: PropTypes.string,
-//   username: PropTypes.string,
-//   description: PropTypes.string,
-// };
 
 export default TrackProfileDetails;
