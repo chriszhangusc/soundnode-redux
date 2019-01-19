@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import chartsReducer from '@soundnode-redux/client/src/features/charts/chartsReducer';
 import entitiesReducer from '@soundnode-redux/client/src/features/entities/entitiesReducer';
 import playerReducer from '@soundnode-redux/client/src/features/player/playerReducer';
 import playQueueReducer from '@soundnode-redux/client/src/features/playQueue/playQueueReducer';
@@ -17,7 +16,6 @@ import modalsReducer from '@soundnode-redux/client/src/features/modals/modalsRed
 
 const rootReducer = combineReducers({
   entities: entitiesReducer,
-  charts: chartsReducer,
   playQueue: playQueueReducer,
   player: playerReducer,
   // Single user profile page
