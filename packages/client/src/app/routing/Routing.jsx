@@ -1,8 +1,8 @@
 import React from 'react';
-import { validateGenre } from '@soundnode-redux/client/src/features/charts/chartsUtils';
-import { DEFAULT_GENRE } from '@soundnode-redux/client/src/features/charts/chartsConsts';
+import { validateGenre } from '@soundnode-redux/client/src/features/charts/utils';
+import { DEFAULT_GENRE } from '@soundnode-redux/client/src/features/charts/consts';
 import * as routes from '@soundnode-redux/client/src/common/constants/routeConsts';
-import Charts from '@soundnode-redux/client/src/features/charts/Charts';
+import ChartsPage from '@soundnode-redux/client/src/features/charts/ChartsPage';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import withAuthRequired from '@soundnode-redux/client/src/common/hocs/withAuthRequired';
 import UserProfile from '@soundnode-redux/client/src/features/userProfile/UserProfile';
@@ -25,7 +25,7 @@ function Routing() {
           const { match } = routeProps;
           const genreFromUrl = match.params.genre;
           const valid = validateGenre(genreFromUrl);
-          return valid ? <Charts {...routeProps} /> : defaultRedirect;
+          return valid ? <ChartsPage {...routeProps} /> : defaultRedirect;
         }}
       />
       <Route exact path={`${routes.USER_PROFILE_ROUTE}/:userId`} component={UserProfile} />

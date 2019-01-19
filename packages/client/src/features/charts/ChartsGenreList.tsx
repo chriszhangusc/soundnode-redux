@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { GENRE_LIST } from '@soundnode-redux/client/src/features/charts/chartsConsts';
+import { GENRE_LIST } from '@soundnode-redux/client/src/features/charts/consts';
 import RouterLink from '@soundnode-redux/client/src/common/components/links/RouterLink';
 
 const GenreLinkButton = styled(RouterLink)`

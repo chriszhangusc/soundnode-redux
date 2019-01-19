@@ -9,9 +9,9 @@ import Spinner from '@soundnode-redux/client/src/common/components/spinners/Rect
 import PageTitle from '@soundnode-redux/client/src/common/components/PageTitle';
 import { mergeObjects } from '@soundnode-redux/client/src/common/utils/generalUtils';
 
-import ChartsGenreList from '../ChartsGenreList';
-import { FETCH_CHARTS } from '../graphql/query';
-import { getGenreTitle } from '../chartsUtils';
+import ChartsGenreList from './ChartsGenreList';
+import { FETCH_CHARTS } from './graphql/query';
+import { getGenreTitle } from './utils';
 
 const LIMIT = 20;
 
@@ -32,7 +32,7 @@ interface MatchParam {
 
 export interface Props extends RouteComponentProps<MatchParam> {}
 
-function Charts(props: Props) {
+function ChartsPage(props: Props) {
   const {
     match: {
       params: { genre },
@@ -95,4 +95,4 @@ function Charts(props: Props) {
   );
 }
 
-export default Charts;
+export default ChartsPage;

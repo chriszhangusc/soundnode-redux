@@ -1,4 +1,4 @@
-import { GENRE_LIST } from './chartsConsts';
+import { GENRE_LIST } from './consts';
 
 // invalid genre like this: http://localhost:3000/top50/All-Music/adfasdfasdfasdf
 export function validateGenre(genre) {
