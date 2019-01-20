@@ -25,4 +25,7 @@ SidebarToggleButton.propTypes = {
   toggleSidebar: PropTypes.func.isRequired,
 };
 
-export default connect(null, sidebarActions)(SidebarToggleButton);
+export default connect(
+  null,
+  sidebarActions,
+)(SidebarToggleButton);

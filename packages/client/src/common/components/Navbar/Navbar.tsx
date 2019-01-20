@@ -3,9 +3,17 @@ import styled from 'styled-components';
 import SearchSuggestion from '@soundnode-redux/client/src/features/searchSuggestion/SearchSuggestion';
 import Auth from '@soundnode-redux/client/src/features/auth/Auth';
 import BoxShadow from '@soundnode-redux/client/src/common/components/BoxShadow';
+import Fixed from '@soundnode-redux/client/src/common/components/Fixed';
+import RouterLink from '@soundnode-redux/client/src/common/components/links/RouterLink';
 import SidebarToggleButton from './SidebarToggleButton';
-import NavBrand from './NavBrand';
-import NavWrapper from './NavWrapper';
+
+const NavWrapper = styled(Fixed)`
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: ${props => props.theme.zIndexes.headerBar};
+  background-color: ${props => props.theme.colors.bgSub};
+`;
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -25,6 +33,10 @@ const SuggestionWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   flex: 1;
+`;
+
+const NavBrand = styled(RouterLink)`
+  font-size: 1.25rem;
 `;
 
 function Navbar() {
