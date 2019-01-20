@@ -12,7 +12,6 @@ export default {
     },
     resolve: async (_: any, args: any) => {
       const result = await trackService.getTrackById(args.id);
-      console.log(result);
       return result;
     },
   },
@@ -34,15 +33,9 @@ export default {
     },
     resolve: async (_, args) => {
       const { genre, offset, limit } = args;
-      const { charts, hasNext, offsetNext } = await trackService.getCharts(genre, offset, limit);
+      const result = await trackService.getCharts(genre, offset, limit);
 
-      return {
-        nodes: charts,
-        pageInfo: {
-          hasNext,
-          offsetNext,
-        },
-      };
+      return result;
     },
   },
 };

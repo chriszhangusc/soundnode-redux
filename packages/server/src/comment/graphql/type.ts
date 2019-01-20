@@ -1,8 +1,9 @@
 import { GraphQLObjectType, GraphQLString, GraphQLInt } from 'graphql';
+import { createConnectionType } from '@soundnode-redux/server/src/common/graphql/type';
 
 export const Comment = new GraphQLObjectType({
   name: 'Comment',
-  fields: () => ({
+  fields: {
     id: {
       type: GraphQLInt,
     },
@@ -27,5 +28,7 @@ export const Comment = new GraphQLObjectType({
     trackId: {
       type: GraphQLInt,
     },
-  }),
+  },
 });
+
+export const CommentConnection = createConnectionType('CommentConnection', Comment);
