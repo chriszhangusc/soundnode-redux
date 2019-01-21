@@ -13,6 +13,7 @@ import playlistsReducer from '@soundnode-redux/client/src/features/playlists/pla
 import sidebarReducer from '@soundnode-redux/client/src/features/sidebar/sidebarReducer';
 import loadingOverlayReducer from '@soundnode-redux/client/src/features/loadingOverlay/loadingOverlayReducer';
 import modalsReducer from '@soundnode-redux/client/src/features/modals/modalsReducer';
+import uiReducer from '@soundnode-redux/client/src/redux/ui/uiReducer';
 
 const rootReducer = combineReducers({
   entities: entitiesReducer,
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   sidebar: sidebarReducer,
   loadingOverlay: loadingOverlayReducer,
   modals: modalsReducer,
+  ui: uiReducer,
 });
 
 export default rootReducer;

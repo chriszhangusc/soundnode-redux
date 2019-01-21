@@ -74,6 +74,8 @@
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "@types/react-router": "^4.4.3",
+    "@types/react-router-dom": "^4.3.1",
+    "@types/redux": "^3.6.0",
     "autoprefixer": "6.7.7",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.0",

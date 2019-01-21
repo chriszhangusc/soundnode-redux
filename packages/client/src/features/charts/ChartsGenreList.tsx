@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { withRouter } from 'react-router';
 import { GENRE_LIST } from '@soundnode-redux/client/src/features/charts/consts';
 import RouterLink from '@soundnode-redux/client/src/common/components/links/RouterLink';
 
