@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-interface Props {
+type Props = {
   children: React.ReactNode;
-}
+};
 
 const Column = styled.span`
   flex-grow: 1;

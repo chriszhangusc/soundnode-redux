@@ -5,12 +5,12 @@ import RouterLink from '@soundnode-redux/client/src/common/components/links/Rout
 import ColumnLayout from '@soundnode-redux/client/src/common/components/layouts/ColumnLayout';
 import TrackActions from './TrackActions';
 
-interface Props {
+type Props = {
   title?: string;
   username?: string;
   description?: string;
   userRoute?: string;
-}
+};
 
 const Description = styled.p`
   max-height: 190px;

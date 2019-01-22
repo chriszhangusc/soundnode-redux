@@ -6,14 +6,14 @@ import { getLargeVersion } from '@soundnode-redux/client/src/common/utils/imageU
 import OverlayInfoBar from './OverlayInfoBar';
 import OverlayIconInfo from './OverlayIconInfo';
 
-interface Props {
+type Props = {
   artworkUrl?: string;
   playing?: boolean;
   active?: boolean;
   liked?: boolean;
   playbackCount?: number;
   likesCount?: number;
-}
+};
 
 function TrackProfileImage({
   artworkUrl = null,

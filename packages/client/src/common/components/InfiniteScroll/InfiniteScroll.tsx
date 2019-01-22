@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-interface Props {
+type Props = {
   children: React.ReactNode;
   onBottomReached(): void;
-}
+};
 
 class InfiniteScroll extends React.Component<Props> {
   componentDidMount() {

@@ -50,10 +50,10 @@ const NavBrand = styled(RouterLink)`
   font-size: 1.25rem;
 `;
 
-interface Props extends RouteComponentProps {
+type Props = RouteComponentProps & {
   loading: boolean;
   dispatch: any;
-}
+};
 
 function Navbar({ loading, dispatch, location }: Props) {
   useEffect(

@@ -8,11 +8,11 @@ import TrackProfileDetails from './TrackProfileDetails';
 import TrackProfileImage from './TrackProfileImage';
 import { GET_TRACK } from './graphql/query';
 
-interface MatchParam {
+type MatchParam = {
   trackId: string;
-}
+};
 
-export interface Props extends RouteComponentProps<MatchParam> {}
+export type Props = RouteComponentProps<MatchParam>;
 
 function formatUserRoute(userId) {
   return `/users/${userId}`;

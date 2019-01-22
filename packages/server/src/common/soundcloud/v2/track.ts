@@ -13,7 +13,7 @@ export function getTrackById(trackId: number, clientId: string = CLIENT_ID) {
     .then(camelizeData);
 }
 
-interface IChartsTrack {
+type ChartsTrack = {
   artworkUrl: string;
   createdAt: string;
   description?: string;
@@ -21,21 +21,21 @@ interface IChartsTrack {
   genre: string;
   id: number;
   // TODO: There are way more to add
-}
+};
 
-interface IChartsCollectionItem {
-  track: IChartsTrack;
+type ChartsCollectionItem = {
+  track: ChartsTrack;
   score: number;
-}
+};
 
-interface IChartsResponse {
+type IChartsResponse = {
   genre: string;
   kind: string;
   lastUpdated: string;
-  collection: IChartsCollectionItem[];
+  collection: ChartsCollectionItem[];
   queryUrn: string;
   nextHref: string;
-}
+};
 
 /**
  * Get top charts by genre

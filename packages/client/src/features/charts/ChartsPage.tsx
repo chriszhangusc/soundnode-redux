@@ -26,11 +26,11 @@ const SpinnerWrapper = styled.div`
   justify-content: center;
 `;
 
-interface MatchParam {
+type MatchParam = {
   genre: string;
-}
+};
 
-export interface Props extends RouteComponentProps<MatchParam> {}
+export type Props = RouteComponentProps<MatchParam>;
 
 function ChartsPage(props: Props) {
   const {
