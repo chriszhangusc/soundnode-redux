@@ -1,32 +1,25 @@
-import * as React from 'react';
+import { ReactNodeArray } from 'react';
+import useScroll from '@soundnode-redux/client/src/common/hooks/useScroll';
 
 type Props = {
-  children: React.ReactNode;
-  onBottomReached(): void;
+  children: JSX.Element;
+  onBottomReached: () => void;
 };
 
-class InfiniteScroll extends React.Component<Props> {
-  componentDidMount() {
-    window.addEventListener('scroll', this.onScroll, false);
-  }
+function InfiniteScroll(props: Props) {
+  const { children } = props;
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll, false);
-  }
-
-  onScroll = () => {
-    const { onBottomReached } = this.props;
+  const onScroll = () => {
+    const { onBottomReached } = props;
 
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       onBottomReached();
     }
   };
 
-  render() {
-    const { children } = this.props;
-
-    return children;
-  }
+  useScroll(onScroll);
+  console.log({ children });
+  return children;
 }
 
 export default InfiniteScroll;

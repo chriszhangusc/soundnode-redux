@@ -48,36 +48,36 @@ function ChartsPage(props: Props) {
   return (
     <Query query={FETCH_CHARTS} variables={variables} notifyOnNetworkStatusChange>
       {({ loading, data, fetchMore }) => (
-        <React.Fragment>
-          <PageTitle>Top Charts - {getGenreTitle(genre)}</PageTitle>
-          <ChartsGenreList />
-          <InfiniteScroll
-            onBottomReached={() => {
-              const hasNext = get(data, 'charts.pageInfo.hasNext');
+        <InfiniteScroll
+          onBottomReached={() => {
+            const hasNext = get(data, 'charts.pageInfo.hasNext');
 
-              if (!loading && hasNext) {
-                fetchMore({
-                  variables: { offset: data.charts.pageInfo.offsetNext },
-                  updateQuery: (prev, { fetchMoreResult }) => {
-                    if (!fetchMoreResult) return prev;
+            if (!loading && hasNext) {
+              fetchMore({
+                variables: { offset: data.charts.pageInfo.offsetNext },
+                updateQuery: (prev, { fetchMoreResult }) => {
+                  if (!fetchMoreResult) return prev;
 
-                    return Object.assign({}, prev, {
-                      charts: {
-                        ...fetchMoreResult.charts,
-                        // NOTE: The results returned by soundcloud api
-                        // sometimes contains duplicates
-                        nodes: mergeObjects(
-                          prev.charts.nodes,
-                          fetchMoreResult.charts.nodes,
-                          (obj: any) => obj.id,
-                        ),
-                      },
-                    });
-                  },
-                });
-              }
-            }}
-          >
+                  return Object.assign({}, prev, {
+                    charts: {
+                      ...fetchMoreResult.charts,
+                      // NOTE: The results returned by soundcloud api
+                      // sometimes contains duplicates
+                      nodes: mergeObjects(
+                        prev.charts.nodes,
+                        fetchMoreResult.charts.nodes,
+                        (obj: any) => obj.id,
+                      ),
+                    },
+                  });
+                },
+              });
+            }
+          }}
+        >
+          <React.Fragment>
+            <PageTitle>Top Charts - {getGenreTitle(genre)}</PageTitle>
+            <ChartsGenreList />
             <ChartsListWrapper>
               {get(data, 'charts.nodes', []).map(track => (
                 <SongCard track={track} key={String(track.id)} />
@@ -88,8 +88,8 @@ function ChartsPage(props: Props) {
                 <Spinner />
               </SpinnerWrapper>
             )}
-          </InfiniteScroll>
-        </React.Fragment>
+          </React.Fragment>
+        </InfiniteScroll>
       )}
     </Query>
   );
