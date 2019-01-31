@@ -11,40 +11,25 @@ import CommentTimestamp from './CommentTimestamp';
 import CommentBody from './CommentBody';
 
 function TrackProfileComment({ comment }) {
-  const { body, user, created_at } = comment;
+  const { body, user, createdAt } = comment;
 
-  const { id, avatar_url, username } = user;
+  const { id, avatarUrl, username } = user;
 
   const userLink = `${USER_PROFILE_ROUTE}/${id}`;
 
   return (
     <Wrapper>
-      <CommentUserAvatar linkTo={userLink} userAvatarUrl={getSmallVersion(avatar_url)} />
+      <CommentUserAvatar linkTo={userLink} userAvatarUrl={getSmallVersion(avatarUrl)} />
       <CommentDetailWrapper>
         <CommentHeaderWrapper>
           <CommentUsername to={userLink}>{username}</CommentUsername>
-          <CommentTimestamp>{created_at.replace('+0000', '')}</CommentTimestamp>
+          <CommentTimestamp>{createdAt.replace('+0000', '')}</CommentTimestamp>
         </CommentHeaderWrapper>
         <CommentBody>{body}</CommentBody>
       </CommentDetailWrapper>
     </Wrapper>
   );
 }
-
-// function mapStateToProps(state, { commentId }) {
-//   const comment = getCommentById(state, commentId);
-//   const { body, createdAt } = comment;
-//   const commentUser = getUserByCommentId(state, commentId);
-//   const { username, id, avatarUrl } = commentUser;
-//   return {
-//     comment,
-//     userAvatarUrl: getSmallVersion(avatarUrl),
-//     username,
-//     commentBody: body,
-//     commentTimestamp: createdAt.replace('+0000', ''),
-//     userId: id,
-//   };
-// }
 
 TrackProfileComment.defaultProps = {
   userAvatarUrl: '',

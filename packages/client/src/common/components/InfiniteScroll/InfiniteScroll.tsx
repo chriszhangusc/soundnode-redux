@@ -1,4 +1,3 @@
-import { ReactNodeArray } from 'react';
 import useScroll from '@soundnode-redux/client/src/common/hooks/useScroll';
 
 type Props = {
@@ -18,7 +17,7 @@ function InfiniteScroll(props: Props) {
   };
 
   useScroll(onScroll);
-  console.log({ children });
+
   return children;
 }
 

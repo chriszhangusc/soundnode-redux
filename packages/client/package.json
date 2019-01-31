@@ -96,6 +96,7 @@
     "pretty-quick": "^1.8.1",
     "source-map-loader": "^0.2.4",
     "style-loader": "0.21.0",
+    "tslint": "^5.12.1",
     "typescript": "^3.2.2",
     "url-loader": "1.0.1",
     "webpack": "^4.15.1",

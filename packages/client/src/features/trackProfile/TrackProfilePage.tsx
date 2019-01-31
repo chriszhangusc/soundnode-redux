@@ -3,10 +3,12 @@ import { get } from 'lodash';
 import { RouteComponentProps } from 'react-router';
 import { Query } from 'react-apollo';
 import RowLayout from '@soundnode-redux/client/src/common/components/layouts/RowLayout';
+import { mergeObjects } from '@soundnode-redux/client/src/common/utils/generalUtils';
 import TrackProfileComments from './TrackProfileComments';
 import TrackProfileDetails from './TrackProfileDetails';
 import TrackProfileImage from './TrackProfileImage';
-import { GET_TRACK } from './graphql/query';
+import { GET_TRACK, GET_COMMENTS } from './graphql/query';
+import InfiniteScroll from '../../common/components/InfiniteScroll';
 
 type MatchParam = {
   trackId: string;
@@ -56,11 +58,55 @@ function TrackProfilePage({ match }: Props) {
                 userRoute={userRoute}
               />
             </RowLayout>
-            {/* <TrackProfileComments
-              commentCount={data.track.comment_count}
-              comments={data.track.comments}
-              trackId={trackId}
-            /> */}
+            <Query
+              query={GET_COMMENTS}
+              variables={{
+                trackId: track.id,
+                offset: 0,
+                limit: 10,
+              }}
+            >
+              {({ data, loading, fetchMore }) => {
+                const comments = get(data, 'trackComments.nodes') || [];
+
+                return (
+                  <InfiniteScroll
+                    onBottomReached={() => {
+                      const hasNext = get(data, 'trackComments.pageInfo.hasNext');
+                      const offsetNext = get(data, 'trackComments.pageInfo.offsetNext');
+
+                      if (!loading && hasNext) {
+                        fetchMore({
+                          variables: { offset: offsetNext },
+                          updateQuery: (prev, { fetchMoreResult }) => {
+                            if (!fetchMoreResult) return prev;
+
+                            return Object.assign({}, prev, {
+                              trackComments: {
+                                ...fetchMoreResult.trackComments,
+                                // NOTE: The results returned by soundcloud api
+                                // sometimes contains duplicates
+                                nodes: mergeObjects(
+                                  prev.trackComments.nodes,
+                                  fetchMoreResult.trackComments.nodes,
+                                  (obj: any) => obj.id,
+                                ),
+                              },
+                            });
+                          },
+                        });
+                      }
+                    }}
+                  >
+                    <TrackProfileComments
+                      commentCount={track.commentCount}
+                      comments={comments}
+                      trackId={trackId}
+                    />
+                  </InfiniteScroll>
+                );
+              }}
+            </Query>
           </React.Fragment>
         );
       }}

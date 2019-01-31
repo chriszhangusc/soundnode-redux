@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import * as routes from '@soundnode-redux/client/src/common/constants/routeConsts';
 import BoxShadow from '@soundnode-redux/client/src/common/components/BoxShadow';
 import Fixed from '@soundnode-redux/client/src/common/components/Fixed';
-import PropTypes from 'prop-types';
 import { hideSidebar } from '@soundnode-redux/client/src/features/sidebar/sidebarActions';
 import SidebarHeader from '@soundnode-redux/client/src/features/sidebar/SidebarHeader';
 import SidebarOverlay from '@soundnode-redux/client/src/features/sidebar/SidebarOverlay';
