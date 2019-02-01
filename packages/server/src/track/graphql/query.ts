@@ -1,11 +1,4 @@
-import {
-  GraphQLNonNull,
-  GraphQLID,
-  GraphQLList,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLObjectType,
-} from 'graphql';
+import { GraphQLNonNull, GraphQLID, GraphQLString, GraphQLInt } from 'graphql';
 import * as trackService from '../service';
 import { Track, ChartConnection } from './type';
 
@@ -40,15 +33,9 @@ export default {
     },
     resolve: async (_, args) => {
       const { genre, offset, limit } = args;
-      const { charts, hasNext, offsetNext } = await trackService.getCharts(genre, offset, limit);
+      const result = await trackService.getCharts(genre, offset, limit);
 
-      return {
-        nodes: charts,
-        pageInfo: {
-          hasNext,
-          offsetNext,
-        },
-      };
+      return result;
     },
   },
 };

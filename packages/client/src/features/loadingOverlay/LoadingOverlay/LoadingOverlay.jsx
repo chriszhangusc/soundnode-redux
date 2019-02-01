@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import GlobalOverlay from '@soundnode-redux/client/src/common/components/GlobalOverlay';
-import { isLoaderActive, getLoaderText } from '@soundnode-redux/client/src/features/loadingOverlay/loadingOverlaySelectors';
+import {
+  isLoaderActive,
+  getLoaderText,
+} from '@soundnode-redux/client/src/features/loadingOverlay/loadingOverlaySelectors';
 import Spinner from '@soundnode-redux/client/src/common/components/spinners/CircleRotate';
 import withFadeTransition from '@soundnode-redux/client/src/common/hocs/withFadeTransition';
 import { compose } from 'recompose';
@@ -13,7 +16,6 @@ const ContentWrapper = styled.div`
   top: 50%;
   left: 50%;
   z-index: ${props => props.theme.zIndexes.fullScreenLoadingOverlay};
-  /* bring your own prefixes */
   transform: translate(-50%, -50%);
 `;
 
@@ -48,4 +50,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default compose(connect(mapStateToProps), withFadeTransition)(LoadingOverlay);
+export default compose(
+  connect(mapStateToProps),
+  withFadeTransition,
+)(LoadingOverlay);

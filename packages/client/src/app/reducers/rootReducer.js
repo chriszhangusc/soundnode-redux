@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import chartsReducer from '@soundnode-redux/client/src/features/charts/chartsReducer';
 import entitiesReducer from '@soundnode-redux/client/src/features/entities/entitiesReducer';
 import playerReducer from '@soundnode-redux/client/src/features/player/playerReducer';
 import playQueueReducer from '@soundnode-redux/client/src/features/playQueue/playQueueReducer';
 import userProfileReducer from '@soundnode-redux/client/src/features/userProfile/userProfileReducer';
-import trackProfileReducer from '@soundnode-redux/client/src/features/trackProfile/trackProfileReducer';
 import searchSuggestionReducer from '@soundnode-redux/client/src/features/searchSuggestion/searchSuggestionReducer';
 import authReducer from '@soundnode-redux/client/src/features/auth/authReducer';
 import notificationReducer from '@soundnode-redux/client/src/features/notification/notificationReducer';
@@ -15,16 +13,14 @@ import playlistsReducer from '@soundnode-redux/client/src/features/playlists/pla
 import sidebarReducer from '@soundnode-redux/client/src/features/sidebar/sidebarReducer';
 import loadingOverlayReducer from '@soundnode-redux/client/src/features/loadingOverlay/loadingOverlayReducer';
 import modalsReducer from '@soundnode-redux/client/src/features/modals/modalsReducer';
+import uiReducer from '@soundnode-redux/client/src/redux/ui/uiReducer';
 
 const rootReducer = combineReducers({
   entities: entitiesReducer,
-  charts: chartsReducer,
   playQueue: playQueueReducer,
   player: playerReducer,
   // Single user profile page
   userProfile: userProfileReducer,
-  trackProfile: trackProfileReducer,
-  // Single track profile page
   searchSuggestion: searchSuggestionReducer,
   auth: authReducer,
   notification: notificationReducer,
@@ -35,6 +31,7 @@ const rootReducer = combineReducers({
   sidebar: sidebarReducer,
   loadingOverlay: loadingOverlayReducer,
   modals: modalsReducer,
+  ui: uiReducer,
 });
 
 export default rootReducer;

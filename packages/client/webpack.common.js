@@ -31,11 +31,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
-      },
-      {
-        test: /\.jsx?$/,
+        test: /\.(ts|js)x?$/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -91,6 +87,4 @@ module.exports = {
       },
     }),
   ],
-
-  devtool: 'source-map',
 };

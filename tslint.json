@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "no-console": {
+      "severity": "warning",
+      "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+    },
+    "no-unused-variable": [true, { "ignore-pattern": "^_" }],
+    "no-return-await": true,
+    "no-debugger": true,
+    "no-duplicate-imports": true
+  }
+}

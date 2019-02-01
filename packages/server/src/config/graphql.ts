@@ -11,7 +11,7 @@ function getSchema() {
       fields: {
         ...track.getGraphQLQuery(),
         ...user.getGraphQLQuery(),
-        // ...comment.getGraphQLQuery(),
+        ...comment.getGraphQLQuery(),
       },
     }),
     // mutation: new GraphQLObjectType({

@@ -17,7 +17,9 @@ const PageContentWrapper = styled.div`
   min-height: 100vh;
 `;
 
-const MainWrapper = styled.div`padding-top: 70px;`;
+const MainWrapper = styled.div`
+  padding-top: 70px;
+`;
 
 function Main() {
   return (
