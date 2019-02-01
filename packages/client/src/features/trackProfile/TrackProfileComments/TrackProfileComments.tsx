@@ -1,13 +1,24 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Heading from '@soundnode-redux/client/src/common/components/Heading';
-import TrackProfileCommentList from './TrackProfileCommentList';
+import TrackProfileComment from './TrackProfileComment';
 
-function TrackProfileComments({ trackId, commentCount, comments }) {
+type Props = {
+  commentCount: number;
+  comments: Array<any>;
+};
+
+function TrackProfileComments({ commentCount, comments }: Props) {
   return (
     <Fragment>
       <Heading>{`Comments: (${commentCount})`}</Heading>
-      <TrackProfileCommentList comments={comments} />
+      <ul>
+        {comments.map(comment => (
+          <li key={comment.id}>
+            <TrackProfileComment comment={comment} />
+          </li>
+        ))}
+      </ul>
     </Fragment>
   );
 }

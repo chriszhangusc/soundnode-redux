@@ -29,8 +29,8 @@ function TrackProfilePage({ match }: Props) {
         if (loading) {
           return null;
         }
+
         const track = get(data, 'track');
-        console.log(track);
         const artworkUrl = get(track, 'artworkUrl');
         // TODO: playing: get from global state
         // TODO: active: get from global state
@@ -98,11 +98,7 @@ function TrackProfilePage({ match }: Props) {
                       }
                     }}
                   >
-                    <TrackProfileComments
-                      commentCount={track.commentCount}
-                      comments={comments}
-                      trackId={trackId}
-                    />
+                    <TrackProfileComments commentCount={track.commentCount} comments={comments} />
                   </InfiniteScroll>
                 );
               }}
