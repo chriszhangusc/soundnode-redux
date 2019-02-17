@@ -14,10 +14,7 @@ import {
   isPlayerLoading,
   getActiveTrackId,
 } from '@soundnode-redux/client/src/features/player/playerSelectors';
-import {
-  loadTrackAndPlay,
-  togglePlaybackState,
-} from '@soundnode-redux/client/src/features/player/playerActions';
+import { togglePlaybackState } from '@soundnode-redux/client/src/features/player/playerActions';
 
 import ChartsGenreList from './ChartsGenreList';
 import { FETCH_CHARTS } from './graphql/query';
@@ -36,11 +33,15 @@ const SpinnerWrapper = styled.div`
   justify-content: center;
 `;
 
-type MatchParam = {
+interface MatchParam {
   genre: string;
-};
+}
 
-export type Props = RouteComponentProps<MatchParam>;
+export type Props = RouteComponentProps<MatchParam> & {
+  playing: boolean;
+  dispatch: any;
+  activeTrackId: number;
+};
 
 function ChartsPage(props: Props) {
   const {
@@ -49,7 +50,6 @@ function ChartsPage(props: Props) {
     },
     playing,
     activeTrackId,
-    loading,
     dispatch,
   } = props;
 
