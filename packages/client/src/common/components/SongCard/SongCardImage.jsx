@@ -4,20 +4,10 @@ import TrackImage from '@soundnode-redux/client/src/common/components/images/Tra
 import PlaybackOverlay from '@soundnode-redux/client/src/common/components/PlaybackOverlay';
 import { getLargeVersion } from '@soundnode-redux/client/src/common/utils/imageUtils';
 
-function SongCardImage({ src }) {
+function SongCardImage({ src, active, loading, playing, onToggle }) {
   return (
     <TrackImage src={getLargeVersion(src)} size="medium">
-      <PlaybackOverlay
-        active={false}
-        loading={false}
-        playing={false}
-        // onClick={() => {
-        //   if (!loading) {
-        //     handleImageClick(trackId, playlist);
-        //   }
-        //   // Sync with currently active play queue
-        // }}
-      />
+      <PlaybackOverlay active={active} loading={loading} playing={playing} onClick={onToggle} />
     </TrackImage>
   );
 }
