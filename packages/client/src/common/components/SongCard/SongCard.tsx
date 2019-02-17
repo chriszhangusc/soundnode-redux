@@ -6,13 +6,19 @@ import SongCardActions from './SongCardActions';
 import SongCardImage from './SongCardImage';
 import { getLargeVersion } from '../../utils/imageUtils';
 
-function SongCard({ track }) {
+function SongCard({ track, active, loading, playing, onToggle }) {
   if (track && track.streamable) {
     const { artworkUrl } = track;
 
     return (
       <Card>
-        <SongCardImage src={getLargeVersion(artworkUrl)} />
+        <SongCardImage
+          src={getLargeVersion(artworkUrl)}
+          active={active}
+          loading={loading}
+          playing={playing}
+          onToggle={onToggle}
+        />
         <SongCardDetails track={track} />
         <SongCardActions track={track} />
       </Card>

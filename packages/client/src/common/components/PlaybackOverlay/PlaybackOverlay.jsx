@@ -1,10 +1,28 @@
 import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Icon from '@soundnode-redux/client/src/common/components/icons/Icon';
+import PauseIcon from '@material-ui/icons/Pause';
+import PlayIcon from '@material-ui/icons/PlayArrow';
 import { themeColor } from '@soundnode-redux/client/src/app/css/colors';
 import Spinner from '@soundnode-redux/client/src/common/components/spinners/CircleRotate';
 import PlayingIndicator from './PlayingIndicator';
 import Overlay from './Overlay';
+
+// styled.div`
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   height: 100%;
+//   background-color: ${props => props.theme.colors.themeColor};
+//   cursor: pointer;
+// `;
+const StyledPlayIcon = styled(PlayIcon)`
+  color: ${props => props.theme.colors.themeColor};
+`;
+
+const StyledPauseIcon = styled(PauseIcon)`
+  color: ${props => props.theme.colors.themeColor};
+`;
 
 function PlaybackOverlay({ playing, loading, active, onClick }) {
   let icon = null;
@@ -14,7 +32,7 @@ function PlaybackOverlay({ playing, loading, active, onClick }) {
   } else if (playing) {
     icon = <PlayingIndicator />;
   } else {
-    icon = <Icon iconName={playing ? 'pause' : 'play'} color={themeColor} iconSize="lg" />;
+    icon = playing ? <StyledPauseIcon /> : <StyledPlayIcon />;
   }
 
   return (
