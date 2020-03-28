@@ -44,7 +44,7 @@ export async function getCharts(
   genre: string,
   offset: number,
   limit: number,
-): Promise<IChartsResponse> {
+): Promise<ChartsResponse> {
   return axios
     .get(
       `${BASE_V2}/charts?kind=top&genre=soundcloud:genres:${genre}&linked_partitioning=1&limit=${limit}&offset=${offset}&client_id=${CLIENT_ID}`,

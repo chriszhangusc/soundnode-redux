@@ -1,4 +1,3 @@
-import url from 'url';
 import * as trackApi from '@soundnode-redux/server/src/common/soundcloud/v1/track';
 import * as trackApiV2 from '@soundnode-redux/server/src/common/soundcloud/v2/track';
 import { getPaginatedResult } from '../common/helpers/repository';
