@@ -8,9 +8,9 @@ import { camelizeData, parseResponse } from '../utilities';
  * Get user by id
  * @param {Number} userId
  */
-export function getUserById(userId: number, clientId: string = CLIENT_ID) {
+export function getUserById(userId: number) {
   return axios
-    .get(`${BASE_V1}/users/${userId}?client_id=${clientId}`)
+    .get(`${BASE_V1}/users/${userId}?client_id=${CLIENT_ID}`)
     .then(parseResponse)
     .then(camelizeData);
 }

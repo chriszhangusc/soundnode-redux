@@ -13,7 +13,7 @@ export function getTrackById(trackId: number, clientId: string = CLIENT_ID) {
     .then(camelizeData);
 }
 
-type ChartsTrack = {
+interface ChartsTrack {
   artworkUrl: string;
   createdAt: string;
   description?: string;
@@ -21,21 +21,21 @@ type ChartsTrack = {
   genre: string;
   id: number;
   // TODO: There are way more to add
-};
+}
 
-type ChartsCollectionItem = {
+interface ChartsCollectionItem {
   track: ChartsTrack;
   score: number;
-};
+}
 
-type IChartsResponse = {
+interface ChartsResponse {
   genre: string;
   kind: string;
   lastUpdated: string;
   collection: ChartsCollectionItem[];
   queryUrn: string;
   nextHref: string;
-};
+}
 
 /**
  * Get top charts by genre
@@ -44,12 +44,10 @@ export async function getCharts(
   genre: string,
   offset: number,
   limit: number,
-  clientId: string = 'ZsXqrJ5fvCT0kw8AbbJARqxuRVYqAVEX',
-  // clientId: string = 'AdBAY9M0wHTRovngU9Ht4Z63XezL9saK',
 ): Promise<IChartsResponse> {
   return axios
     .get(
-      `${BASE_V2}/charts?kind=top&genre=soundcloud:genres:${genre}&linked_partitioning=1&limit=${limit}&offset=${offset}&client_id=${clientId}`,
+      `${BASE_V2}/charts?kind=top&genre=soundcloud:genres:${genre}&linked_partitioning=1&limit=${limit}&offset=${offset}&client_id=${CLIENT_ID}`,
     )
     .then(parseResponse)
     .then(camelizeData);

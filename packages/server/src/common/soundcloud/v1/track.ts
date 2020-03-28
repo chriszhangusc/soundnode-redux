@@ -8,9 +8,9 @@ import { camelizeData, parseResponse } from '../utilities';
  * Get track by id
  * @param {Number} trackId
  */
-export function getTrackById(trackId: number, clientId: string = CLIENT_ID) {
+export function getTrackById(trackId: number) {
   return axios
-    .get(`${BASE_V1}/tracks/${trackId}?client_id=${clientId}`)
+    .get(`${BASE_V1}/tracks/${trackId}?client_id=${CLIENT_ID}`)
     .then(parseResponse)
     .then(camelizeData);
 }
