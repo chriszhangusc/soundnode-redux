@@ -1,8 +1,8 @@
 import { ApolloServer } from 'apollo-server-express';
 import { GraphQLSchema, GraphQLObjectType } from 'graphql';
-import * as track from '@soundnode-redux/server/src/track';
-import * as user from '@soundnode-redux/server/src/user';
-import * as comment from '@soundnode-redux/server/src/comment';
+import * as track from '../track';
+import * as user from '../user';
+import * as comment from '../comment';
 
 function getSchema() {
   return new GraphQLSchema({

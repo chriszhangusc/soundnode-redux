@@ -6,8 +6,8 @@ import {
   GraphQLInt,
   GraphQLBoolean,
 } from 'graphql';
-import { User } from '@soundnode-redux/server/src/user/graphql/type';
-import { createConnectionType } from '@soundnode-redux/server/src/common/graphql/type';
+import { User } from '../../user/graphql/type';
+import { createConnectionType } from '../../common/graphql/type';
 
 export const Track = new GraphQLObjectType({
   name: 'Track',

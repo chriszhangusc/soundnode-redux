@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CLIENT_ID } from '@soundnode-redux/server/src/common/env';
+import { CLIENT_ID } from '../../../common/env';
 import { BASE_V1 } from '../consts';
 import { camelizeData, parseResponse } from '../utilities';
 

@@ -1,5 +1,5 @@
-import * as trackApi from '@soundnode-redux/server/src/common/soundcloud/v1/track';
-import * as trackApiV2 from '@soundnode-redux/server/src/common/soundcloud/v2/track';
+import * as trackApi from '../common/soundcloud/v1/track';
+import * as trackApiV2 from '../common/soundcloud/v2/track';
 import { getPaginatedResult } from '../common/helpers/repository';
 
 export async function getTrackById(trackId: number) {

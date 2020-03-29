@@ -5,7 +5,7 @@
   "description": "SoundnodeRedux Server",
   "main": "./src/server.ts",
   "scripts": {
-    "start": "ts-node --inspect -- src/server.ts",
+    "start": "ts-node src/server.ts",
     "dev": "nodemon"
   },
   "dependencies": {
@@ -28,7 +28,7 @@
     "husky": "^1.3.1",
     "nodemon": "^1.18.9",
     "pretty-quick": "^1.8.1",
-    "ts-node": "^7.0.1",
+    "ts-node": "^8.8.1",
     "typescript": "^3.2.2"
   },
   "keywords": [],
