@@ -1,7 +1,7 @@
 FROM node:lts AS build
 COPY . /home/app/
 WORKDIR /home/app
-RUN yarn install
+RUN yarn install --frozen-lockfile
 RUN yarn build
 
 FROM nginx:latest

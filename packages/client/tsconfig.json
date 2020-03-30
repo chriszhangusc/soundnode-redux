@@ -9,9 +9,9 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "es7"],
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@soundnode-redux/client/src/*": ["src/*"]
+      "@soundnode-redux/client/*": ["./*"]
     }
   },
   "include": ["./src/**/*"]

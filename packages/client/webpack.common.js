@@ -9,7 +9,7 @@ module.exports = {
   },
 
   output: {
-    path: path.join(srcDir, 'dist'),
+    path: path.join(__dirname, 'dist'),
     filename: '[name].[hash].bundle.js',
     publicPath: '/',
   },
@@ -20,6 +20,7 @@ module.exports = {
     modules: [path.join(srcDir, 'client'), 'node_modules'],
     alias: {
       assets: path.join(srcDir, 'public'),
+      '@soundnode-redux/client': __dirname,
     },
     extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx'],
   },
