@@ -1,11 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-
-dotenv.config();
 import configureProxy from './config/proxy';
 import configureGraphQL from './config/graphql';
 
+dotenv.config();
 
 // This has to come before others
 

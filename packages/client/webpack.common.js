@@ -19,7 +19,7 @@ module.exports = {
   resolve: {
     modules: [path.join(srcDir, 'client'), 'node_modules'],
     alias: {
-      assets: path.join(srcDir, 'public'),
+      assets: path.join(__dirname, 'public'),
       '@soundnode-redux/client': __dirname,
     },
     extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx'],
