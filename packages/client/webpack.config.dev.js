@@ -14,7 +14,7 @@ module.exports = merge(common, {
     // hot: true,
 
     // Serve the files generated in dist folder(in memory)
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'build'),
 
     // 1.Match the output publicPath
     // will create folder in memory
@@ -31,7 +31,7 @@ module.exports = merge(common, {
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: path.join('./src', 'public', 'index.html'),
+      template: path.join(__dirname, 'public', 'index.html'),
     }),
 
     // DefinePlugin makes it possible for us to use env variables in src code

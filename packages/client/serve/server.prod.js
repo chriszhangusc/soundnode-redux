@@ -6,9 +6,9 @@ const path = require('path');
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
-const distPath = path.join(__dirname, '..', 'dist');
+const distPath = path.join(__dirname, '..', 'build');
 
 // Here we have to match publicPath in webpack production config file.
 app.use(express.static(distPath));

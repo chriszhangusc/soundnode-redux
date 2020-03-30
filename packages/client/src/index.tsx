@@ -15,7 +15,13 @@ import configureStore from '@soundnode-redux/client/src/app/store/configureStore
 import App from '@soundnode-redux/client/src/app/layout/App';
 import theme from '@soundnode-redux/client/src/app/css/theme';
 
-const client = new ApolloClient({ uri: 'http://localhost:4444/graphql' });
+const isProduction = process.env.NODE_ENV === 'production';
+
+const HOST = isProduction
+  ? 'https://soundnode-redux-server.herokuapp.com'
+  : 'http://localhost:4444';
+
+const client = new ApolloClient({ uri: `${HOST}/graphql` });
 
 const store = configureStore();
 
