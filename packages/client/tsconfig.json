@@ -8,7 +8,11 @@
     "target": "es5",
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
-    "lib": ["dom", "es7"]
+    "lib": ["dom", "es7"],
+    "baseUrl": "./",
+    "paths": {
+      "@soundnode-redux/client/src/*": ["src/*"]
+    }
   },
   "include": ["./src/**/*"]
 }

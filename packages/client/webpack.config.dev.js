@@ -1,6 +1,11 @@
 const merge = require('webpack-merge');
 const path = require('path');
 const common = require('./webpack.common.js');
+const webpack = require('webpack');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+
+const PORT = process.env.PORT || 3000;
 
 module.exports = merge(common, {
   mode: 'development',
@@ -24,5 +29,24 @@ module.exports = merge(common, {
     host: 'localhost',
     historyApiFallback: true,
   },
+  plugins: [
+    new HTMLWebpackPlugin({
+      template: path.join('./src', 'public', 'index.html'),
+    }),
+
+    // DefinePlugin makes it possible for us to use env variables in src code
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
+      PORT,
+    }),
+
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: [autoprefixer()],
+      },
+    }),
+  ],
   devtool: 'source-map',
 });
