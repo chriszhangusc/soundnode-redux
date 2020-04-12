@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { GENRE_LIST } from '@soundnode-redux/client/src/features/charts/consts';
 import RouterLink from '@soundnode-redux/client/src/common/components/links/RouterLink';
@@ -16,13 +16,13 @@ const GenreLinkButton = styled(RouterLink)`
   font-size: 0.75rem;
   transition: color 200ms ease-in;
   &:hover {
-    color: ${props => props.theme.colors.fontColorSub};
+    color: ${(props) => props.theme.colors.fontColorSub};
   }
 `;
 
 const GenreListTitle = styled.h3`
   font-size: 1rem;
-  color: ${props => props.theme.colors.fontColorSub};
+  color: ${(props) => props.theme.colors.fontColorSub};
 `;
 
 const GenreListWrapper = styled.div`
@@ -40,7 +40,7 @@ const Wrapper = styled.div`
 `;
 
 function ChartsGenreList() {
-  const genreList = GENRE_LIST.map(genre => (
+  const genreList = GENRE_LIST.map((genre) => (
     <GenreLinkButton key={genre.link} to={`/charts/${genre.link}`}>
       {genre.title}
     </GenreLinkButton>

@@ -31,8 +31,6 @@ const muiTheme = createMuiTheme({
   },
 });
 
-// Use provider to provide our store down to the dom tree
-// so that it can be shared among all components.
 ReactDOM.render(
   <ApolloProvider client={client}>
     <MuiThemeProvider theme={muiTheme}>

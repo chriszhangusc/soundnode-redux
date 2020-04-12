@@ -1,5 +1,8 @@
 import shuffle from 'lodash/shuffle';
-import { getActiveTrackId, isInShuffleMode } from '@soundnode-redux/client/src/features/player/playerSelectors';
+import {
+  getActiveTrackId,
+  isInShuffleMode,
+} from '@soundnode-redux/client/src/features/player/playerSelectors';
 import { removeActiveTrack } from '@soundnode-redux/client/src/features/player/playerActions';
 import { notificationSuccess } from '@soundnode-redux/client/src/features/notification/notificationActions';
 import { shiftToFront } from './playQueueUtils';
@@ -18,28 +21,28 @@ export function showPlayQueue() {
   };
 }
 
-export const updatePlayQueue = playlist => ({
+export const updatePlayQueue = (playlist) => ({
   type: types.PLAY_QUEUE_UPDATE,
   payload: {
     playlist,
   },
 });
 
-export const mergePlayQueue = trackIds => ({
+export const mergePlayQueue = (trackIds) => ({
   type: types.PLAY_QUEUE_MERGE,
   payload: {
     trackIds,
   },
 });
 
-export const mergeShufflePlayQueue = trackIds => ({
+export const mergeShufflePlayQueue = (trackIds) => ({
   type: types.PLAY_QUEUE_SHUFFLE_QUEUE_MERGE,
   payload: {
     trackIds,
   },
 });
 
-export const updateShufflePlayQueue = trackIds => ({
+export const updateShufflePlayQueue = (trackIds) => ({
   type: types.PLAY_QUEUE_SHUFFLE_QUEUE_UPDATE,
   payload: {
     trackIds,

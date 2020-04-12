@@ -1,8 +1,15 @@
-FROM node:lts AS build
+FROM node:lts
+
 WORKDIR /app
-COPY . .
+
+COPY package.json .
+
 RUN yarn install --frozen-lockfile
+
+COPY . .
+
 RUN yarn build
+
 CMD [ "yarn", "start" ]
 
 
