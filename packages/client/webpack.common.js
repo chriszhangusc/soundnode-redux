@@ -10,7 +10,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'build'),
-    filename: '[name].[hash].bundle.js',
+    filename: 'bundle.js',
     publicPath: '/',
   },
 
@@ -53,7 +53,14 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
-        use: ['url-loader?limit=40000&name=images/[hash:12].[ext]', 'image-webpack-loader'],
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
       },
     ],
   },
