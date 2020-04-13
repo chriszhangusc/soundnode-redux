@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { get } from 'lodash';
 import styled from 'styled-components';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import { RouteComponentProps } from 'react-router';
 import InfiniteScroll from '@soundnode-redux/client/src/common/components/InfiniteScroll';
 import SongCard from '@soundnode-redux/client/src/common/components/SongCard';
@@ -59,72 +59,73 @@ function ChartsPage(props: Props) {
     limit: LIMIT,
   };
 
+  const { data, loading, fetchMore } = useQuery(FETCH_CHARTS, {
+    variables,
+    notifyOnNetworkStatusChange: true,
+  });
+
   return (
-    <Query query={FETCH_CHARTS} variables={variables} notifyOnNetworkStatusChange>
-      {({ loading, data, fetchMore }) => (
-        <InfiniteScroll
-          onBottomReached={() => {
-            const hasNext = get(data, 'charts.pageInfo.hasNext');
+    <InfiniteScroll
+      onBottomReached={() => {
+        const hasNext = get(data, 'charts.pageInfo.hasNext');
 
-            if (!loading && hasNext) {
-              fetchMore({
-                variables: { offset: data.charts.pageInfo.offsetNext },
-                updateQuery: (prev, { fetchMoreResult }) => {
-                  if (!fetchMoreResult) return prev;
+        if (!loading && hasNext) {
+          fetchMore({
+            variables: { offset: data.charts.pageInfo.offsetNext },
+            updateQuery: (prev, { fetchMoreResult }) => {
+              if (!fetchMoreResult) return prev;
 
-                  return Object.assign({}, prev, {
-                    charts: {
-                      ...fetchMoreResult.charts,
-                      // NOTE: The results returned by soundcloud api
-                      // sometimes contains duplicates
-                      nodes: mergeObjects(
-                        prev.charts.nodes,
-                        fetchMoreResult.charts.nodes,
-                        (obj: any) => obj.id,
-                      ),
-                    },
-                  });
+              return Object.assign({}, prev, {
+                charts: {
+                  ...fetchMoreResult.charts,
+                  // NOTE: The results returned by soundcloud api
+                  // sometimes contains duplicates
+                  nodes: mergeObjects(
+                    prev.charts.nodes,
+                    fetchMoreResult.charts.nodes,
+                    (obj: any) => obj.id,
+                  ),
                 },
               });
-            }
-          }}
-        >
-          <React.Fragment>
-            <PageTitle>Top Charts - {getGenreTitle(genre)}</PageTitle>
-            <ChartsGenreList />
-            <ChartsListWrapper>
-              {get(data, 'charts.nodes', []).map(track => {
-                const active = track.id === activeTrackId;
+            },
+          });
+        }
+      }}
+    >
+      <React.Fragment>
+        <PageTitle>Top Charts - {getGenreTitle(genre)}</PageTitle>
+        <ChartsGenreList />
+        <ChartsListWrapper>
+          {get(data, 'charts.nodes', []).map((track) => {
+            const active = track.id === activeTrackId;
 
-                return (
-                  <SongCard
-                    track={track}
-                    key={String(track.id)}
-                    active={active}
-                    loading={active && loading}
-                    playing={active && playing}
-                    onToggle={() => {
-                      if (!active && !playing) {
-                        dispatch(togglePlaybackState(track.id));
-                      }
-                    }}
-                  />
-                );
-              })}
-            </ChartsListWrapper>
-            {loading && (
-              <SpinnerWrapper>
-                <Spinner />
-              </SpinnerWrapper>
-            )}
-          </React.Fragment>
-        </InfiniteScroll>
-      )}
-    </Query>
+            return (
+              <SongCard
+                track={track}
+                key={String(track.id)}
+                active={active}
+                loading={active && loading}
+                playing={active && playing}
+                onToggle={() => {
+                  if (!active && !playing) {
+                    dispatch(togglePlaybackState(track.id));
+                  }
+                }}
+              />
+            );
+          })}
+        </ChartsListWrapper>
+        {loading && (
+          <SpinnerWrapper>
+            <Spinner />
+          </SpinnerWrapper>
+        )}
+      </React.Fragment>
+    </InfiniteScroll>
   );
 }
 
-const mapState = state => ({
+const mapState = (state) => ({
   playing: isPlayerPlaying(state),
   activeTrackId: getActiveTrackId(state),
   loading: isPlayerLoading(state),

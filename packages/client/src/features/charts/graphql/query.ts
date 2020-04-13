@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 export const FETCH_CHARTS = gql`
   query FetchCharts($genre: String!, $offset: Int, $limit: Int) {

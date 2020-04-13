@@ -4,8 +4,7 @@ import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import 'font-awesome/css/font-awesome.min.css';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { BrowserRouter } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { MuiThemeProvider } from '@material-ui/core';
@@ -21,7 +20,12 @@ const HOST = isProduction
   ? 'https://soundnode-redux-server.herokuapp.com'
   : 'http://localhost:4444';
 
-const client = new ApolloClient({ uri: `${HOST}/graphql` });
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: `${HOST}/graphql`,
+  }),
+});
 
 const store = configureStore();
 
