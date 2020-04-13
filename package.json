@@ -28,11 +28,13 @@
     "lint-staged": "^10.0.10"
   },
   "scripts": {
-    "reinstall": "lerna clean --yes && lerna bootstrap",
+    "bootstrap": "lerna clean --yes && lerna bootstrap",
     "add:client": "lerna add --scope=@soundnode-redux/client",
     "add:server": "lerna add --scope=@soundnode-redux/server",
     "exec:client": "lerna exec --scope @soundnode-redux/client",
     "exec:server": "lerna exec --scope @soundnode-redux/server",
+    "build:client": "yarn exec:client yarn build",
+    "start:client": "yarn exec:client yarn start",
     "dev:client": "yarn exec:client yarn dev",
     "dev:server": "NODE_ENV=development yarn exec:server yarn dev",
     "lint:client": "yarn exec:client yarn lint",
