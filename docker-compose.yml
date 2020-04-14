@@ -6,4 +6,4 @@ services:
       context: .
       dockerfile: ./packages/client/Dockerfile
     ports:
-      - 9000:80
+      - 3000:80
