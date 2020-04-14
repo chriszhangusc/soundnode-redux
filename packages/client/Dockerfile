@@ -14,11 +14,12 @@ RUN yarn install --pure-lock-file
 
 COPY packages/client ./packages/client
 
+ENV NODE_ENV=production
+ENV HOST=http://localhost:5000
+
 RUN yarn build:client
 
 FROM nginx:1.16.0-alpine as server
-
-ENV NODE_ENV=production
 
 COPY --from=builder /app/packages/client/build /usr/share/nginx/html
 

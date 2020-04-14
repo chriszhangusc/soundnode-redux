@@ -1,5 +1,6 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
+const webpack = require('webpack');
 
 const srcDir = path.join(__dirname, 'src');
 
@@ -65,4 +66,6 @@ module.exports = {
       },
     ],
   },
+
+  plugins: [new webpack.EnvironmentPlugin(['NODE_ENV', 'HOST'])],
 };

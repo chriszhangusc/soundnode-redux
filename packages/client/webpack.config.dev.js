@@ -34,14 +34,6 @@ module.exports = merge(common, {
       template: path.join(__dirname, 'public', 'index.html'),
     }),
 
-    // DefinePlugin makes it possible for us to use env variables in src code
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-      },
-      PORT,
-    }),
-
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: [autoprefixer()],
