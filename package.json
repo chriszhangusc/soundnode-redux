@@ -5,10 +5,6 @@
   "main": "index.js",
   "author": "MiniPekka",
   "license": "ISC",
-  "engines": {
-    "node": ">=8.0.0",
-    "npm": "5.5.1"
-  },
   "private": true,
   "workspaces": [
     "packages/*"

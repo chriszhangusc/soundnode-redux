@@ -1,15 +1,25 @@
-FROM node:lts
+FROM mhart/alpine-node:12 as builder
+
+RUN npm i -g lerna
 
 WORKDIR /app
 
 COPY package.json .
+COPY yarn.lock .
+COPY lerna.json .
 
-RUN yarn install --frozen-lockfile
+COPY packages/client/package.json ./packages/client/package.json
 
-COPY . .
+RUN yarn install --pure-lock-file
 
-RUN yarn build
+COPY packages/client ./packages/client
 
-CMD [ "yarn", "start" ]
+RUN yarn build:client
 
+FROM nginx:1.16.0-alpine as server
 
+ENV NODE_ENV=production
+
+COPY --from=builder /app/packages/client/build /usr/share/nginx/html
+
+COPY packages/client/nginx.conf /etc/nginx/conf.d/default.conf
