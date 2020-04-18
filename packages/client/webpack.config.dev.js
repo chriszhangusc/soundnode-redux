@@ -3,7 +3,6 @@ const path = require('path');
 const common = require('./webpack.common.js');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const autoprefixer = require('autoprefixer');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -35,12 +34,6 @@ module.exports = merge(common, {
   plugins: [
     new HTMLWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html'),
-    }),
-
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: [autoprefixer()],
-      },
     }),
   ],
   devtool: 'source-map',

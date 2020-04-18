@@ -1,5 +1,4 @@
 const path = require('path');
-const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 
 const srcDir = path.join(__dirname, 'src');
@@ -7,6 +6,14 @@ const srcDir = path.join(__dirname, 'src');
 module.exports = {
   entry: {
     main: ['@babel/polyfill', path.join(srcDir, 'index.tsx')],
+  },
+
+  externals: {
+    'styled-components': {
+      commonjs: 'styled-components',
+      commonjs2: 'styled-components',
+      amd: 'styled-components',
+    },
   },
 
   output: {
@@ -36,21 +43,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [autoprefixer],
-            },
-          },
-        ],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(jpe?g|png|ttf|eot|svg|woff(2)?)(\S+)?$/,
