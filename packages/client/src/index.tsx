@@ -14,12 +14,12 @@ import configureStore from '@soundnode-redux/client/src/app/store/configureStore
 import App from '@soundnode-redux/client/src/app/layout/App';
 import theme from '@soundnode-redux/client/src/app/css/theme';
 
-const host = process.env.HOST || 'http://localhost:4444';
+const API_HOST = process.env.HOST;
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
-    uri: `${host}/graphql`,
+    uri: `${API_HOST}/graphql`,
   }),
 });
 

@@ -4,8 +4,11 @@ const common = require('./webpack.common.js');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const dotenv = require('dotenv');
 
-const PORT = process.env.PORT || 3000;
+dotenv.config();
+
+const PORT = process.env.PORT;
 
 module.exports = merge(common, {
   mode: 'development',
@@ -21,7 +24,7 @@ module.exports = merge(common, {
     // on server there will be a server-root/dist folder
     // 2. Do not remove publicPath
     publicPath: '/',
-    port: 3000,
+    port: PORT,
     compress: true,
 
     // Opens new browser window when we run devserer for the first time
