@@ -8,17 +8,9 @@ module.exports = {
     main: ['@babel/polyfill', path.join(srcDir, 'index.tsx')],
   },
 
-  externals: {
-    'styled-components': {
-      commonjs: 'styled-components',
-      commonjs2: 'styled-components',
-      amd: 'styled-components',
-    },
-  },
-
   output: {
     path: path.join(__dirname, 'build'),
-    filename: 'bundle.js',
+    filename: '[contenthash].js',
     publicPath: '/',
   },
 
