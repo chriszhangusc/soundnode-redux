@@ -28,6 +28,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'no-underscore-dangle': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'import/extensions': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
   },

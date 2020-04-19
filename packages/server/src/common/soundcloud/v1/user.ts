@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CLIENT_ID } from '../../../common/env';
+import { CLIENT_ID_V1 } from '../../../common/env';
 import { BASE_V1 } from '../consts';
 import { camelizeData, parseResponse } from '../utilities';
 
@@ -10,7 +10,7 @@ import { camelizeData, parseResponse } from '../utilities';
  */
 export function getUserById(userId: number) {
   return axios
-    .get(`${BASE_V1}/users/${userId}?client_id=${CLIENT_ID}`)
+    .get(`${BASE_V1}/users/${userId}?client_id=${CLIENT_ID_V1}`)
     .then(parseResponse)
     .then(camelizeData);
 }

@@ -4,7 +4,10 @@ import {
   clearShuffleQueue,
 } from '@soundnode-redux/client/src/features/playQueue/playQueueActions';
 import { getPlayQueueByMode } from '@soundnode-redux/client/src/features/playQueue/playQueueSelectors';
-import { getLastVolume, setLastVolume } from '@soundnode-redux/client/src/common/utils/localStorageUtils';
+import {
+  getLastVolume,
+  setLastVolume,
+} from '@soundnode-redux/client/src/common/utils/localStorageUtils';
 import { notificationWarning } from '@soundnode-redux/client/src/features/notification/notificationActions';
 import * as playModes from './playerConsts';
 import * as types from './playerActionTypes';
@@ -181,7 +184,7 @@ export function togglePlaybackState(trackId, playlist) {
       dispatch(togglePlay());
     } else {
       // update play queue title
-      dispatch(updatePlayQueue(playlist));
+      // dispatch(updatePlayQueue(playlist));
       dispatch(loadTrackAndPlay(trackId));
     }
   };

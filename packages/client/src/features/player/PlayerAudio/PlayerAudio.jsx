@@ -75,6 +75,7 @@ class PlayerAudio extends Component {
 
   render() {
     const { streamUrl, mode } = this.props;
+
     return (
       <audio
         id="audio"
@@ -109,7 +110,6 @@ function mapStateToProps(state) {
     loading: selectors.isPlayerLoading(state),
     volume: selectors.getCurrentVolume(state),
     mode: selectors.getPlayerMode(state),
-    streamUrl: selectors.getPlayerStreamUrl(state),
     currentTime: selectors.getCurrentTime(state),
     seeking: selectors.isPlayerSeeking(state),
   };

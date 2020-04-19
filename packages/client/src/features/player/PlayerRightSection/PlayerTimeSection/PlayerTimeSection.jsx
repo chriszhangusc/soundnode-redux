@@ -10,13 +10,9 @@ import Separator from './Separator';
 function PlayerTimeSection({ currentTime, totalTime }) {
   return (
     <Wrapper>
-      <Time>
-        {currentTime}
-      </Time>
+      <Time>{currentTime}</Time>
       <Separator>/</Separator>
-      <Time>
-        {totalTime}
-      </Time>
+      <Time>{totalTime}</Time>
     </Wrapper>
   );
 }

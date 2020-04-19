@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 
-const port = process.env.PORT || 4444;
+const port = process.env.PORT;
 
 app.use(cors());
 configureProxy(app);

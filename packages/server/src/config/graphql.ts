@@ -29,6 +29,12 @@ export default function configureGraphQL(app: any) {
   const server = new ApolloServer({
     schema,
     // context: {},
+    formatError: (err) => {
+      if (process.env.NODE_ENV === 'development') {
+        console.error(err);
+      }
+      return err;
+    },
   });
 
   server.applyMiddleware({ app, path: '/graphql' });

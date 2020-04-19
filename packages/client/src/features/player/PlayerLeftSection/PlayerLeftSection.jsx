@@ -40,14 +40,14 @@ PlayerLeftSection.propTypes = {
 
 function mapStateToProps(state, { playerTrack }) {
   const trackId = playerTrack.id;
-  const artist = getUserByTrackId(state, trackId);
-  const userId = artist.id;
+  const { user } = playerTrack;
+
   return {
     artworkUrl: getLargeVersion(playerTrack.artworkUrl),
     trackTitle: playerTrack.title,
-    artistName: formatTitle(artist.username),
+    artistName: formatTitle(user.username),
     trackUrl: `/track/${trackId}`,
-    artistUrl: `/artist/${userId}`,
+    artistUrl: `/artist/${user.id}`,
   };
 }
 

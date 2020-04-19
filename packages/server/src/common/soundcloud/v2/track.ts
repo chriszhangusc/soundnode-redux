@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { BASE_V2 } from '../consts';
 import { camelizeData, parseResponse } from '../utilities';
-import { CLIENT_ID } from '../../env';
+import { CLIENT_ID_V2 } from '../../env';
 /**
  * Get track by id
  * @param {Number} trackId
  */
-export function getTrackById(trackId: number, clientId: string = CLIENT_ID) {
+export function getTrackById(trackId: number) {
   return axios
-    .get(`${BASE_V2}/tracks/${trackId}?client_id=${clientId}`)
+    .get(`${BASE_V2}/tracks/${trackId}?client_id=${CLIENT_ID_V2}`)
     .then(parseResponse)
     .then(camelizeData);
 }
@@ -47,7 +47,7 @@ export async function getCharts(
 ): Promise<ChartsResponse> {
   return axios
     .get(
-      `${BASE_V2}/charts?kind=top&genre=soundcloud:genres:${genre}&linked_partitioning=1&limit=${limit}&offset=${offset}&client_id=${CLIENT_ID}`,
+      `${BASE_V2}/charts?kind=top&genre=soundcloud:genres:${genre}&linked_partitioning=1&limit=${limit}&offset=${offset}&client_id=${CLIENT_ID_V2}`,
     )
     .then(parseResponse)
     .then(camelizeData);
