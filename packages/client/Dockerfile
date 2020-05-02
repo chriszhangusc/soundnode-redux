@@ -1,8 +1,10 @@
-FROM mhart/alpine-node:12 as builder
+FROM mhart/alpine-node:12 as base
 
 RUN npm i -g lerna
 
 WORKDIR /app
+
+FROM base as builder
 
 COPY package.json .
 COPY yarn.lock .

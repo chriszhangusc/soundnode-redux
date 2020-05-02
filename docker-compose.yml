@@ -2,14 +2,38 @@ version: '3.7'
 
 services:
   server:
+    environment:
+      - PORT=5000
+      - NODE_ENV=development
     build:
       context: .
+      target: base
       dockerfile: ./packages/server/Dockerfile
     ports:
       - 5000:5000
+    working_dir: /app
+    volumes:
+      - ./packages/server:/app/packages/server
+      - ./lerna.json:/app/lerna.json
+      - ./package.json:/app/package.json
+      - ./yarn.lock:/app/yarn.lock
+    command: sh -c "yarn bootstrap && yarn dev:server"
   client:
+    # env_file: ./packages/client/.env
+    environment:
+      - HOST=http://localhost:5000
+      - PORT=3000
+      - NODE_ENV=development
     build:
       context: .
+      target: base
       dockerfile: ./packages/client/Dockerfile
     ports:
-      - 3000:80
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./packages/client:/app/packages/client
+      - ./lerna.json:/app/lerna.json
+      - ./package.json:/app/package.json
+      - ./yarn.lock:/app/yarn.lock
+    command: sh -c "yarn bootstrap && yarn dev:client"

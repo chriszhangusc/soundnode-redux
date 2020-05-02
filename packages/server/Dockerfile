@@ -1,15 +1,14 @@
-FROM mhart/alpine-node:12
-
-ENV PORT=5000
+FROM mhart/alpine-node:12 as base
 
 RUN npm i -g lerna
 
-WORKDIR /home/node/app
+FROM base
+
+WORKDIR /app
 
 COPY package.json .
 COPY yarn.lock .
 COPY lerna.json .
-
 COPY packages/server/package.json ./packages/server/package.json
 
 RUN yarn install --pure-lock-file

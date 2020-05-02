@@ -9,7 +9,6 @@ dotenv.config();
 // This has to come before others
 
 const app = express();
-
 const port = process.env.PORT;
 
 app.use(cors());
